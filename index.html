@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion">
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -96,7 +96,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Muse',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -171,13 +171,27 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -187,23 +201,40 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
             标签
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule" rel="section">
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
             
-            日程
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
           </a>
         </li>
-      
-
       
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
   
 </nav>
 
@@ -216,108 +247,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/06/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-06T13:52:42+08:00" content="2016-11-06">
-              2016-11-06
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
       
 
@@ -382,6 +311,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/01/[Java]Java 接口和抽象类区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/[Java]Java 接口和抽象类区别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -403,15 +339,15 @@
       
         
           
-            <p>参考<a href="http://blog.csdn.net/xw13106209/article/details/6923556" target="_blank" rel="external">http://blog.csdn.net/xw13106209/article/details/6923556</a></p>
-<h2 id="面向接口编程"><a href="#面向接口编程" class="headerlink" title="面向接口编程"></a>面向接口编程</h2><p>OOP面向对象的编程，如果要提高程序的复用率，增加程序的可维护性，可扩展性，就必须是面向接口的编程，面向抽象的编程，<strong>正确地使用接口、抽象类这些有用的抽象类型作为你结构层次上的顶层</strong>。</p>
-<h2 id="Java接口和抽象类"><a href="#Java接口和抽象类" class="headerlink" title="Java接口和抽象类"></a>Java接口和抽象类</h2><p>1、<strong>[最大区别]</strong> Java接口和Java抽象类最大的一个区别，就在于Java抽象类既可以有没有具体实现的抽象方法，也可以提供某些方法的部分实现；而Java接口只能定义方法，不能有方法的实现 </p>
-<p>2、<strong>[抽象类优势]</strong> Java的抽象类非常有用，如果向一个抽象类里加入一个新的具体方法时，那么它所有的子类都一下子都得到了这个新方法，而如果向Java接口中加入一个新方法，所有实现这个接口的类都无法成功通过编译了，因为你必须让每一个类都再实现这个方法才行，这显然是Java接口的缺点</p>
-<p>3、<strong>[接口优势]</strong> 一个抽象类的实现只能由具体子类给出，但是由于Java的单继承特性，一个具体子类继承了抽象类，<strong>这个子类的类型就比较单一</strong>；在这一点，Java接口的优势就出来了，任何一个实现了Java接口的的类都可以具有这个接口的类型，而且一个类可以实现多个Java接口，<strong>类型就比较多</strong>；Java接口是定义混合类型的理想工具，混合类表示一个类不仅仅具有某个主类型的行为，而且具有其他次要行为</p>
-<p>4、★★★<strong>[总结]</strong> 抽象类的优势是抽象类中既可以有具体的实现方法，也可以有没有具体实现的抽象方法，继承的子类都可以拥有抽象类实现的方法，缺点是由于Java的单继承性，实现抽象类的子类类型比较单一；一个类可以实现多个接口，因此一个类就可以拥有多个类型，缺点是接口中只能定义方法的类型，实现接口必须实现接口的全部方法</p>
-<p>5、<strong>[缺省适配模式]</strong> 声明类型的工作仍然由Java接口承担，但是同时给出一个Java抽象类，且实现了这个Java接口；而其他同属于这个抽象类型的具体类可以选择实现这个Java接口，也可以选择继承这个抽象类；<strong>在层次结构中，Java接口在最上面，然后紧跟着抽象类</strong>，这下两个优点都能发挥到极致</p>
+          参考http://blog.csdn.net/xw13106209/article/details/6923556
+面向接口编程OOP面向对象的编程，如果要提高程序的复用率，增加程序的可维护性，可扩展性，就必须是面向接口的编程，面向抽象的编程，正确地使用接口、抽象类这些有用的抽象类型作为你结构层次上
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/01/[Java]Java 接口和抽象类区别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -501,6 +437,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/17/[SSM]Shiro笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/[SSM]Shiro笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -522,570 +465,14 @@
       
         
           
-            <h2 id="术语（Terminology）"><a href="#术语（Terminology）" class="headerlink" title="术语（Terminology）"></a>术语（Terminology）</h2><p>Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法<br>Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求<br>Cipher：执行加密或解密的算法，依赖一个key<br>Credential（证书）：验证主体身份的信息<br>Cryptography（密码学）：密码学保护信息不被不比希望让他看的人的看到<br>Hash：数据经过hash方法得到的结果不可逆<br>Permission：描述原始的功能，定义应用程序能够做的一些操作<br>Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……<br>Realm（领域）：可以访问应用程序的安全数据，例如用户、角色和权限的组件。可以当做安全的DAO，将应用程序数据翻译成Shiro能够理解的格式，这样Shiro可以提供简洁的API，不管有多少数据源或者应用程序<br><strong>Role：权限的集合，并取一个独一无二的名字</strong><br>Session：主体与软件交互过程中的有状态数据环境，当用户使用应用程序时可以在Session中增加/读取/删除数据，当用户退出应用程序，Session终止<br>Subject：应用程序用户，但他不一定但指一个人，它也可以代表调用你应用程序的外部进程，或者一个间断执行操作的守护系统账户，它可以抽象表示为操作应用程序的主体</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Apache Shiro是一个强大易用的Java安全框架，提供鉴权、授权、加密、会话管理的综合解决方法。在实践中达到管理应用程序安全的作用，而减少与应用程序的耦合</p>
-<p>Shiro可以在任何环境中运行，从最简单的命令行应用程序到企业级web程序和集群应用程序</p>
-<h2 id="Shiro快速入门（j2se）"><a href="#Shiro快速入门（j2se）" class="headerlink" title="Shiro快速入门（j2se）"></a>Shiro快速入门（j2se）</h2><p>官方地址：<a href="http://shiro.apache.org/10-minute-tutorial.html" target="_blank" rel="external">http://shiro.apache.org/10-minute-tutorial.html</a></p>
-<h3 id="Shiro-API"><a href="#Shiro-API" class="headerlink" title="Shiro API"></a>Shiro API</h3><pre><code>import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+          术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法，依赖一个keyCredential（证书）：验证主体身份的信息Cr
+          ...
 
-public class Quickstart {
-
-    private static final transient Logger log = LoggerFactory.getLogger(Quickstart.class);
-
-    public static void main(String[] args) {
-
-        /*
-        * 创建Shiro SecurityManager，同时设置realms、users、roles、permissions，
-        * 最简单的方式是创建一个.ini，通过它返回一个SecurityManager实例。ini文件见下一节
-        */
-        Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;);
-        SecurityManager securityManager = factory.getInstance();
-
-        // 设置 SecurityManager 为一个静态实例，可以被 JVM 访问到
-        SecurityUtils.setSecurityManager(securityManager);
-
-        // 设置Shiro环境完毕，看下它的操作★★★★★
-
-        // 获得当前操作的用户，此时currentUser为空，用户还未登录
-        Subject currentUser = SecurityUtils.getSubject();
-
-        // 用Session存储数据（web或EJB容器不需要！！！）
-        Session session = currentUser.getSession();
-        session.setAttribute(&quot;someKey&quot;, &quot;aValue&quot;);
-        String value = (String) session.getAttribute(&quot;someKey&quot;);
-        if (value.equals(&quot;aValue&quot;)) {
-            log.info(&quot;Retrieved the correct value! [&quot; + value + &quot;]&quot;);
-        }
-
-        // 用户登录，校验角色和权限
-        if (!currentUser.isAuthenticated()) {
-            //获得用户名和密码
-            UsernamePasswordToken token = new UsernamePasswordToken(&quot;lonestarr&quot;, &quot;vespa&quot;);
-            token.setRememberMe(true);
-            try {
-                currentUser.login(token);
-            } catch (UnknownAccountException uae) {
-                log.info(&quot;There is no user with username of &quot; + token.getPrincipal());
-            } catch (IncorrectCredentialsException ice) {
-                log.info(&quot;Password for account &quot; + token.getPrincipal() + &quot; was incorrect!&quot;);
-            } catch (LockedAccountException lae) {
-                log.info(&quot;The account for username &quot; + token.getPrincipal() + &quot; is locked.  &quot; +
-                        &quot;Please contact your administrator to unlock it.&quot;);
-            }
-            // 捕捉更多的异常，可以是用户自定义
-            catch (AuthenticationException ae) {
-                //unexpected condition?  error?
-            }
-        }
-
-        // 查看用户标识
-        log.info(&quot;User [&quot; + currentUser.getPrincipal() + &quot;] logged in successfully.&quot;);
-
-        // 测试用户是否具备角色
-        if (currentUser.hasRole(&quot;schwartz&quot;)) {
-            log.info(&quot;May the Schwartz be with you!&quot;);
-        } else {
-            log.info(&quot;Hello, mere mortal.&quot;);
-        }
-
-        // 测试用户是否具备某个权限
-        if (currentUser.isPermitted(&quot;lightsaber:weild&quot;)) {
-            log.info(&quot;You may use a lightsaber ring.  Use it wisely.&quot;);
-        } else {
-            log.info(&quot;Sorry, lightsaber rings are for schwartz masters only.&quot;);
-        }
-
-        // 测试用户是否具备某个权限
-        if (currentUser.isPermitted(&quot;winnebago:drive:eagle5&quot;)) {
-            log.info(&quot;You are permitted to &apos;drive&apos; the winnebago with license plate (id) &apos;eagle5&apos;.  &quot; +
-                    &quot;Here are the keys - have fun!&quot;);
-        } else {
-            log.info(&quot;Sorry, you aren&apos;t allowed to drive the &apos;eagle5&apos; winnebago!&quot;);
-        }
-
-        // 注销用户
-        currentUser.logout();
-
-        System.exit(0);
-    }
-}
-</code></pre><h3 id="shiro-ini"><a href="#shiro-ini" class="headerlink" title="shiro.ini"></a>shiro.ini</h3><pre>
-# 用户和他们分配的角色
-[users]
-# 用户'root'的密码是'secret'，包含'admin'的角色
-root = secret, admin
-# 用户'guest'的密码是'guest'，包含'guest'的角色
-guest = guest, guest
-# 用户'presidentskroob'的密码是'12345'，包含'president'的角色
-presidentskroob = 12345, president
-# 用户'darkhelmet'的密码是'ludicrousspeed'，包含角色'darklord'和schwartz'
-darkhelmet = ludicrousspeed, darklord, schwartz
-# 用户'lonestarr'的密码是'vespa'，包含角色'goodguy'和'schwartz'
-lonestarr = vespa, goodguy, schwartz
-
-# 角色和他们分配的权限
-[roles]
-# 'admin'的角色拥有所有权限，用通配符'*'表示
-admin = *
-# 角色'schwartz'拥有lightsaber下的任意权限
-schwartz = lightsaber:*
-# 角色'goodguy'允许'drive' (action) the winnebago (type) with
-# license plate 'eagle5' (instance specific id)
-goodguy = winnebago:drive:eagle5
-</pre>
-
-<h2 id="Web应用程序整合"><a href="#Web应用程序整合" class="headerlink" title="Web应用程序整合"></a>Web应用程序整合</h2><p>官方文档：<a href="http://shiro.apache.org/webapp-tutorial.html" target="_blank" rel="external">http://shiro.apache.org/webapp-tutorial.html</a></p>
-<h3 id="开启Shiro环境"><a href="#开启Shiro环境" class="headerlink" title="开启Shiro环境"></a>开启Shiro环境</h3><p>Shiro可以用多重方式配置，取决于你使用的web应用程序框架，如Spring，Guice等，这里采用Shiro默认，最简单的方式：基于INI文件的配置</p>
-<h4 id="添加-shiro-ini-文件"><a href="#添加-shiro-ini-文件" class="headerlink" title="添加 shiro.ini 文件"></a>添加 shiro.ini 文件</h4><p>位置：src/main/webapp/WEB-INF/shiro.ini</p>
-<pre><code>[main]
-cacheManager = org.apache.shiro.cache.MemoryConstrainedCacheManager
-securityManager.cacheManager = $cacheManager
-</code></pre><p>这个INI文件只简单包含main部分，和一些最小配置</p>
-<ul>
-<li>定义 cacheManager 的实例</li>
-<li>在 Shiro securityManager 上配置新的cacheManager的实例</li>
-</ul>
-<h4 id="在web-xml文件中支持Shiro"><a href="#在web-xml文件中支持Shiro" class="headerlink" title="在web.xml文件中支持Shiro"></a>在web.xml文件中支持Shiro</h4><p>加载shiro.ini文件启动新的Shiro环境，使Web应用程序支持Shiro环境</p>
-<pre><code>&lt;listener&gt;
-    &lt;listener-class&gt;org.apache.shiro.web.env.EnvironmentLoaderListener&lt;/listener-class&gt;
-&lt;/listener&gt;
-
-&lt;filter&gt;
-    &lt;filter-name&gt;ShiroFilter&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.apache.shiro.web.servlet.ShiroFilter&lt;/filter-class&gt;
-&lt;/filter&gt;
-
-&lt;filter-mapping&gt;
-    &lt;filter-name&gt;ShiroFilter&lt;/filter-name&gt;
-    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
-    &lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
-    &lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
-    &lt;dispatcher&gt;ERROR&lt;/dispatcher&gt;
-&lt;/filter-mapping&gt;
-</code></pre><ul>
-<li>定义一个 ServletContextListener，应用程序启动时启动Shiro环境（包括Shiro SecurityManager）。<strong>监听器默认寻找 WEB-INF/shiro.ini 文件</strong> 作为 Shiro 的配置文件</li>
-<li>过滤器拦截所有请求，所以Shiro在请求达到应用程序之前，能够执行必要的身份验证和访问控制操作</li>
-<li>&lt;filter-mapping&gt;声明确保所有请求类型都能被ShiroFilter拦截，一般filter-mapping声明不需要指定dispatcher元素，但是Shiro需要定义它们，这样可以过滤所有不同的请求类型</li>
-</ul>
-<h4 id="运行webapp"><a href="#运行webapp" class="headerlink" title="运行webapp"></a>运行webapp</h4><pre><code>mvn tomcat:run
-</code></pre><p>这些输出指明Shiro确定在你的webapp中运行</p>
-<pre><code>15:41:22.296 [main] INFO  o.a.shiro.web.env.EnvironmentLoader - Starting Shiro environment initialization.
-15:41:22.733 [main] INFO  o.a.shiro.web.env.EnvironmentLoader - Shiro environment initialized in 435 ms.
-</code></pre><h3 id="连接到用户仓库"><a href="#连接到用户仓库" class="headerlink" title="连接到用户仓库"></a>连接到用户仓库</h3><h4 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h4><ul>
-<li>在我们登录、退出、执行访问控制等其他安全相关的操作之前，我们需要用户！所有我们会设置Shiro去访问用户仓库</li>
-<li>用户仓库会有多种形式：MySQL数据库、MongoDB、LDAP、活动目录、简单文件、其他私有数据仓库，Shiro通过 <strong>Realm</strong> 来操作这些</li>
-<li>Realm扮演Shiro与安全数据之间的桥梁，也可以说是连接器。当用户执行鉴权（登录）或授权（访问控制），Shiro从应用程序配置的所有Realm中寻找数据</li>
-<li>Realm 是一个安全DAO，封装了连接细节，Shiro需要数据时通过Realm可以直接获取。Realm可以配置多个，但至少要有一个</li>
-<li><strong>默认为iniRealm</strong></li>
-</ul>
-<h4 id="ini"><a href="#ini" class="headerlink" title="ini"></a>ini</h4><p>简单配置了两个用户，用户名密码分别为admin：admin，guest：guest</p>
-<pre><code>[users]
-admin=admin
-guest=guest
-</code></pre><h3 id="Shiro登录-退出与访问控制"><a href="#Shiro登录-退出与访问控制" class="headerlink" title="Shiro登录/退出与访问控制"></a>Shiro登录/退出与访问控制</h3><h4 id="ini文件，添加访问控制"><a href="#ini文件，添加访问控制" class="headerlink" title="ini文件，添加访问控制"></a>ini文件，添加访问控制</h4><pre><code>[main]
-# 对于Shiro任何默认过滤器都有一个loginUrl属性，authc过滤器会跳转到登录页面
-shiro.loginUrl = /login.jsp
-
-# 用户
-[users]
-admin = admin
-guest = guest
-
-# 过滤请求，路径相对于应用程序路径[HttpServletRequest.getContextPath()]
-[urls]
-# 匹配到请求/login.jsp，开启authc过滤器，跳转到loginUrl页面
-/login.jsp = authc
-# 匹配到请求/logout，开启logout过滤器，跳转到首页
-/logout = logout
-# 匹配到请求/admin/**，开启authc过滤器，跳转到loginUrl页面
-/admin/** = authc
-</code></pre><h4 id="登录页面"><a href="#登录页面" class="headerlink" title="登录页面"></a>登录页面</h4><p>Shiro会默认读取username、password、rememberMe</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Apache Shiro Tutorial Webapp : Login&lt;/title&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;!-- Add some nice styling and functionality.  We&apos;ll just use Twitter Bootstrap --&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css&quot;&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css&quot;&gt;
-    &lt;style&gt;
-        body{padding-top:20px;}
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;div class=&quot;row&quot;&gt;
-            &lt;div class=&quot;col-md-4 col-md-offset-4&quot;&gt;
-                &lt;div class=&quot;panel panel-default&quot;&gt;
-                    &lt;div class=&quot;panel-heading&quot;&gt;
-                        &lt;h3 class=&quot;panel-title&quot;&gt;Please sign in&lt;/h3&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;panel-body&quot;&gt;
-                        &lt;form name=&quot;loginform&quot; action=&quot;&quot; method=&quot;POST&quot; accept-charset=&quot;UTF-8&quot; role=&quot;form&quot;&gt;
-                            &lt;fieldset&gt;
-                                &lt;div class=&quot;form-group&quot;&gt;
-                                    &lt;input class=&quot;form-control&quot; placeholder=&quot;Username or Email&quot; name=&quot;username&quot; type=&quot;text&quot;&gt;
-                                &lt;/div&gt;
-                                &lt;div class=&quot;form-group&quot;&gt;
-                                    &lt;input class=&quot;form-control&quot; placeholder=&quot;Password&quot; name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot;&gt;
-                                &lt;/div&gt;
-                                &lt;div class=&quot;checkbox&quot;&gt;
-                                    &lt;label&gt;
-                                        &lt;input name=&quot;rememberMe&quot; type=&quot;checkbox&quot; value=&quot;true&quot;&gt; Remember Me
-                                    &lt;/label&gt;
-                                &lt;/div&gt;
-                                &lt;input class=&quot;btn btn-lg btn-success btn-block&quot; type=&quot;submit&quot; value=&quot;Login&quot;&gt;
-                            &lt;/fieldset&gt;
-                        &lt;/form&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;!-- jQuery (necessary for Bootstrap&apos;s JavaScript plugins) --&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
-    &lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;
-    &lt;!-- WARNING: Respond.js doesn&apos;t work if you view the page via file:// --&gt;
-    &lt;!--[if lt IE 9]&gt;
-    &lt;script src=&quot;https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js&quot;&gt;&lt;/script&gt;
-    &lt;![endif]--&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre><h4 id="登录验证页面"><a href="#登录验证页面" class="headerlink" title="登录验证页面"></a>登录验证页面</h4><p>如果用户/密码正确，跳转到主页面，否则继续跳转到登录页</p>
-<pre><code>public class LoginServlet extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter(&quot;username&quot;);
-        String password = request.getParameter(&quot;password&quot;);
-
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        try{
-            subject.login(token);
-        }catch (Exception e){
-            request.getRequestDispatcher(&quot;/login.jsp&quot;).forward(request,response);
-            return;
-        }
-        request.getRequestDispatcher(&quot;/WEB-INF/main.jsp&quot;).forward(request,response);
-    }
-}
-</code></pre><h3 id="基于角色的权限控制★★★★★"><a href="#基于角色的权限控制★★★★★" class="headerlink" title="基于角色的权限控制★★★★★"></a>基于角色的权限控制★★★★★</h3><pre><code>[main]
-# 认证页面
-shiro.loginUrl = /login.jsp
-# 用户没有权限时跳转页面
-perms.unauthorizedUrl = /unauthorizedUrl.jsp
-roles.unauthorizedUrl = /unauthorizedUrl.jspgi
-
-[users]
-# admin的密码是admin，拥有admin角色，包含admin下的所有权限
-admin = admin,admin
-# guest的密码是guest，拥有user角色，包含user下的所有权限
-guest = guest,user
-# qm的密码是qm，不拥有任何角色，即没有任何权限
-qm = qm
-
-[roles]
-# admin拥有的权限
-admin = admin:*,user:*
-# user拥有的权限
-user = user:*
-
-[urls]
-/login.jsp = annon
-/logout = logout
-
-# /admin/**路径只有拥有admin角色的用户才能访问
-/admin/** = authc,roles[admin]
-# 访问/user/list.jsp必须拥有user:list权限，所以拥有admin或者user的角色都可以访问
-/user/list.jsp = authc,perms[user:list]
-# 访问/user/** 只要认证用户都可以访问
-/user/** = authc
-</code></pre><p>当用户访问一个url时，Shiro从上到下扫描权限，如果有一个匹配则不继续往下进行扫描，所以优先级很重要。对于特殊的访问权限，放在上面</p>
-<h2 id="Shiro细节"><a href="#Shiro细节" class="headerlink" title="Shiro细节"></a>Shiro细节</h2><h3 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h3><h4 id="认证身份流程"><a href="#认证身份流程" class="headerlink" title="认证身份流程"></a>认证身份流程</h4><p><img src="http://i.imgur.com/aXcmnp3.png" alt=""></p>
-<p>流程如下：<br>1、首先调用 Subject.login(token)进行登录，其会自动委托给 Security Manager，调用之前必<br>须通过 SecurityUtils. setSecurityManager()设置；<br>2、SecurityManager 负责真正的身份验证逻辑；它会委托给 Authenticator 进行身份验证；<br>3、 Authenticator 才是真正的身份验证者， Shiro API 中核心的身份认证入口点， 此处可以自<br>定义插入自己的实现；<br>4、Authenticator 可能会委托给相应的 AuthenticationStrategy 进行多 Realm 身份验证，默认<br>ModularRealmAuthenticator 会调用 AuthenticationStrategy 进行多 Realm 身份验证；<br>5、Authenticator 会把相应的 token 传入 Realm，从 Realm 获取身份验证信息，如果没有返<br>回/抛出异常表示身份验证失败了。此处可以配置多个 Realm，将按照相应的顺序及策略进行访问。</p>
-<h4 id="自定义realm"><a href="#自定义realm" class="headerlink" title="自定义realm"></a>自定义realm</h4><p>登录操作</p>
-<pre><code>public class realm_test {
-    public static void main(String[] args){
-        // 设置SecurityManager
-        SecurityManager securityManager = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;).getInstance();
-        SecurityUtils.setSecurityManager(securityManager);
-
-        //获取主体
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(&quot;admin&quot;,&quot;admin&quot;);
-        try{
-            //登录操作，登录不成功会抛出异常
-            subject.login(token);
-            //输出认证的用户名
-            System.out.println(subject.getPrincipal());
-        }catch (UnknownAccountException e){
-            System.out.println(&quot;用户名不存在&quot;);
-        }catch (IncorrectCredentialsException e){
-            System.out.println(&quot;用户名密码错误&quot;);
-        }
-    }
-}
-</code></pre><p>自定义realm</p>
-<pre><code>public class MyRealm implements Realm{
-
-    //模拟数据库，放入一些用户名和密码
-    private static Map&lt;String,String&gt; DB = new HashMap&lt;String,String&gt;();
-    static {
-        DB.put(&quot;admin&quot;,&quot;admin&quot;);
-        DB.put(&quot;qm&quot;,&quot;qm&quot;);
-    }
-
-    @Override
-    //Realm的名称
-    public String getName() {
-        return &quot;MyRealm&quot;;
-    }
-
-    @Override
-    //该realm支持哪些token
-    public boolean supports(AuthenticationToken authenticationToken) {
-        return authenticationToken instanceof UsernamePasswordToken;
-    }
-
-    @Override
-    //执行subject.login操作调用的方法
-    public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        //获取token中的用户和密码
-        String username = authenticationToken.getPrincipal().toString();
-        String password = new String((char[])authenticationToken.getCredentials());
-
-        //验证失败
-        if(!DB.containsKey(username)) throw new UnknownAccountException(&quot;用户名不存在&quot;);
-        if(!password.equals(DB.get(username))) throw new IncorrectCredentialsException(&quot;用户名密码错误&quot;);
-        //System.out.println(username + &quot; &quot; + password);
-
-        //验证成功返回一个AuthenticationInfo
-        return new SimpleAuthenticationInfo(username, password,getName());
-    }
-}
-</code></pre><p>配置使用自定义realm</p>
-<pre><code>[main]
-#创建一个MyRealm实例，这句话等同于&lt;bean id = &quot;myRealm&quot; class = &quot;MyRealm&quot;/&gt;
-myRealm = MyRealm
-#依赖注入，在securityManager中传入自定义realm的实例
-securityManager.realms = $myRealm
-</code></pre><h4 id="多-Realm-配置"><a href="#多-Realm-配置" class="headerlink" title="多 Realm 配置"></a>多 Realm 配置</h4><pre><code>#声明一个 realm 
-myRealm1=com.github.zhangkaitao.shiro.chapter2.realm.MyRealm1 
-myRealm2=com.github.zhangkaitao.shiro.chapter2.realm.MyRealm2 
-#指定 securityManager 的 realms 实现
-securityManager.realms=$myRealm1,$myRealm2 
-</code></pre><p>securityManager 会按照 realms 指定的顺序进行身份认证。此处我们使用 <strong>显示指定顺序的方式</strong> 指定了 Realm 的顺序，如果删除”securityManager.realms=$myRealm1,$myRealm2”，那<br>么 securityManager 会<strong>按照 realm 声明的顺序进行使用</strong>（即无需设置 realms 属性，其会自动<br>发 现），当我们显示指定 realm 后 ， 他没有指定 realm 将被忽 略， 如”securityManager.realms=$myRealm1”，那么 myRealm2 不会被自动设置进去。</p>
-<h4 id="Shiro-默认提供的-Realm"><a href="#Shiro-默认提供的-Realm" class="headerlink" title="Shiro 默认提供的 Realm"></a>Shiro 默认提供的 Realm</h4><p><img src="http://i.imgur.com/URoDJuv.png" alt=""></p>
-<p>以后一般继承 <strong>AuthorizingRealm</strong> （授权）即可； 其继承了 AuthenticatingRealm （即身份验证） ，而且也间接继承了 CachingRealm（带有缓存实现）。其中主要默认实现如下：</p>
-<ul>
-<li>org.apache.shiro.realm.text.IniRealm： [users]部分指定用户名/密码及其角色； [roles]部分指定角色即权限信息；</li>
-<li>org.apache.shiro.realm.text.PropertiesRealm：user.username=password,role1,role2 指定用户名/密码及其角色；role.role1=permission1,permission2 指定角色及权限信息；</li>
-<li>org.apache.shiro.realm.jdbc.JdbcRealm：通过 sql 查询相应的信息，如 “select password from users where username =?”获取用户密码，”select password, password_salt from users where username =?”获取用户密码及盐；”select role_name from user_roles where username =?”<br>获取用户角色；”selectpermission from roles_permissions where role_name =?”获取角色对应的权限信息；也可以调用相应的 api 进行自定义 sql；</li>
-</ul>
-<h4 id="jdbcRealm使用"><a href="#jdbcRealm使用" class="headerlink" title="jdbcRealm使用"></a>jdbcRealm使用</h4><p>1、依赖</p>
-<pre><code>&lt;dependency&gt; 
-    &lt;groupId&gt;mysql&lt;/groupId&gt; 
-    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; 
-    &lt;version&gt;5.1.25&lt;/version&gt; 
-&lt;/dependency&gt; 
-&lt;dependency&gt; 
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt; 
-    &lt;artifactId&gt;druid&lt;/artifactId&gt; 
-    &lt;version&gt;0.2.23&lt;/version&gt; 
-&lt;/dependency&gt; 
-</code></pre><p>2、配置数据库</p>
-<p>查看jdbcReaml源代码，发现其中固定了一个sql语句，要求数据库中有一个users表，并且有username、password两个字段</p>
-<p><img src="http://i.imgur.com/b2Degfn.png" alt=""></p>
-<p>3、配置</p>
-<pre><code>[main]
-# 数据源
-dataSource = com.alibaba.druid.pool.DruidDataSource
-dataSource.driverClassName = com.mysql.jdbc.Driver
-dataSource.url = jdbc:mysql://localhost:3306/jdbcRealm
-dataSource.username = root
-dataSource.password = root
-
-#创建一个jdbcRealm实例，并且注入数据源
-jdbcRealm = org.apache.shiro.realm.jdbc.JdbcRealm
-jdbcRealm.dataSource = $dataSource
-securityManager.realms = $jdbcRealm
-</code></pre><p>4、验证</p>
-<pre><code>public class realm_test {
-    public static void main(String[] args){
-        // 设置SecurityManager
-        SecurityManager securityManager = new IniSecurityManagerFactory(&quot;classpath:shiro.ini&quot;).getInstance();
-        SecurityUtils.setSecurityManager(securityManager);
-
-        //获取主体
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(&quot;admin&quot;,&quot;admin&quot;);
-        try{
-            //登录操作，登录不成功会抛出异常
-            subject.login(token);
-            //输出认证的用户名
-            System.out.println(subject.getPrincipal());
-        }catch (UnknownAccountException e){
-            System.out.println(&quot;用户名不存在&quot;);
-        }catch (IncorrectCredentialsException e){
-            System.out.println(&quot;用户名密码错误&quot;);
-        }
-    }
-}
-</code></pre><h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><h4 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h4><p>角色代表了权限的集合，赋予用户角色，这样用户就可以拥有一组权限，赋予权限比较方便</p>
-<ul>
-<li>隐式角色：通过 <strong>判断用户是否有某个角色</strong> 来判断用户有没有操作权限，颗粒度是以角色为单位进行访问控制的，颗粒度较粗，如果应用中允许CTO、技术总监、开发工程师使用打印机，假设某天不允许开发工程师使用打印机了，就需要在相关代码的判断逻辑中移除技术总监角色，造成多处代码的修改</li>
-<li>显示角色：程序中 <strong>通过权限</strong> 控制谁能访问某个资源。假设哪个角色不能访问某个资源，只需要从角色的权限集合中移除即可，颗粒度是以资源/实例为单位的，颗粒度较细</li>
-</ul>
-<h4 id="基于角色的访问控制（隐式角色）"><a href="#基于角色的访问控制（隐式角色）" class="headerlink" title="基于角色的访问控制（隐式角色）"></a>基于角色的访问控制（隐式角色）</h4><p>判断用户是否有某个角色来进行权限控制，颗粒度较大，很多地方对角色进行判断，如果有一天不需要了就要<strong>修改代码</strong>，在判断这个角色的地方把它删除</p>
-<p><strong>ini配置文件：</strong></p>
-<pre><code>[users]
-admin = admin,r1,r2
-</code></pre><p><strong>Shiro 提供了 hasRole/hasRole 用于判断用户是否拥有某个角色/某些权限</strong></p>
-<pre><code>//判断是否拥有角色 r1
-System.out.println(subject.hasRole(&quot;r1&quot;));
-//必须同时拥有r1和r2才会true，否则返回false
-System.out.println(subject.hasAllRoles(Arrays.asList(&quot;r1&quot;,&quot;r2&quot;)));
-//返回boolean[]数组，相当于判断是否拥有每个角色
-System.out.println(Arrays.toString(subject.hasRoles(Arrays.asList(&quot;r1&quot;,&quot;r3&quot;))));
-</code></pre><p><strong>Shiro 提供的 checkRole/checkRoles 和 hasRole/hasAllRoles 不同的地方是它在判断为假的情<br>况下会抛出 UnauthorizedException 异常</strong></p>
-<pre><code>subject().checkRole(&quot;role1&quot;); 
-</code></pre><h4 id="基于资源的访问控制（显示角色）"><a href="#基于资源的访问控制（显示角色）" class="headerlink" title="基于资源的访问控制（显示角色）"></a>基于资源的访问控制（显示角色）</h4><p><strong>ini配置文件</strong></p>
-<pre><code>[users]
-admin = admin,r1
-
-[roles]
-r1=user:create,user:update
-r2:user:create,user:delete
-</code></pre><p><strong>测试</strong></p>
-<pre><code>System.out.println(subject.isPermitted(&quot;user:create&quot;));
-System.out.println(subject.isPermittedAll(&quot;user:create&quot;,&quot;user:update&quot;));
-</code></pre><p><strong>checkPermission/checkPermissions</strong>会在失败的情况下抛出 UnauthorizedException 异常</p>
-<p><strong>规则</strong></p>
-<p>基于资源的访问控制（显示角色），也可以叫基于权限的访问控制，这种方式的一般规则是”资源标识符：操作”，即是资源级别的粒度；这种方式的好处就是如果要修改基本都是一个资源级别的修改，不会对其他模块代码产生影响，粒度小。但是实现起来可能稍微复杂点，需要维护”用户——角色，角色——权限（资源：操作）”之间的关系</p>
-<h4 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h4><p>规则：”资源标识符：操作：对象实例ID”，即对哪个资源的哪个实例可以进行什么操作。其默认支持通配符权限字符串，”:”表示资源/操作/实例的分割；”,”表示操作的分割；”*”表示任意资源/操作/实例。</p>
-<p>1、单个资源单个权限</p>
-<pre><code>#ini文件
-role1 = system:user:update
-#测试
-subject().checkPermissions(&quot;system:user:update&quot;); 
-</code></pre><p>2、单个资源多个权限</p>
-<pre><code>#ini文件
-role41=system:user:update,system:user:delete
-#测试
-subject().checkPermissions(&quot;system:user:update&quot;, &quot;system:user:delete&quot;);
-</code></pre><p>3、单个资源全部权限</p>
-<pre><code>#ini文件
-role52=system:user:* 
-</code></pre><p>4、所有资源全部权限</p>
-<pre><code>#ini文件
-role61=*:view
-#测试
-subject().checkPermissions(&quot;user:view&quot;); 
-</code></pre><p>5、实例级别的权限</p>
-<p>《跟我我学Shiro》26页</p>
-<h4 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h4><p><img src="http://i.imgur.com/S7tKDiy.png" alt=""></p>
-<p>流程如下：<br>1、首先调用 Subject.isPermitted<em>/hasRole</em>接口，其会委托给 SecurityManager，而SecurityManager 接着会委托给 Authorizer；<br>2、Authorizer 是真正的授权者，如果我们调用如 isPermitted(“user:view”)，其首先会通过PermissionResolver 把字符串转换成相应的 Permission 实例；<br>3、在进行授权之前，其会调用相应的 Realm 获取 Subject 相应的角色/权限用于匹配传入的角色/权限；<br>4、Authorizer 会判断 Realm 的角色/权限是否和传入的匹配，如果有多个 Realm，会委托给ModularRealmAuthorizer 进行循环判断，如果匹配如 isPermitted<em>/hasRole</em>会返回 true，否<br>则返回 false 表示授权失败。</p>
-<h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>AuthenticatingRealm中的成员变量CredentialsMatcher进行密码验证服务，Shiro 提供了 redentialsMatcher 的散列实现 HashedCredentialsMatcher，它用于密码验证，且可以提供自己的盐</p>
-<p>realm认证</p>
-<pre><code>//判断认证
-@Override
-protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-    //返回AuthenticationInfo后在AuthenticatingRealm的assertCredentialsMatch方法中还需要进行验证
-    //数据库取出的用户名和密码
-    String username = &quot;admin&quot;;
-    String password = &quot;b433ce675b32a824e24d762ca0fa1ba9&quot;;//数据库密码md5(&quot;admin&quot;,&quot;&quot;user)
-    String salt = &quot;user&quot;;
-
-    SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
-    simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(salt));
-    return simpleAuthenticationInfo;
-}
-</code></pre><p>设置密码匹配规则</p>
-<pre><code>staticRealm = StaticRealm
-hashedCredentialsMatcher = org.apache.shiro.authc.credential.HashedCredentialsMatcher
-hashedCredentialsMatcher.hashAlgorithmName = md5
-staticRealm.credentialsMatcher = $hashedCredentialsMatcher
-securityManager.realms = $staticRealm
-</code></pre><h3 id="Realm及相关对象★★★★★"><a href="#Realm及相关对象★★★★★" class="headerlink" title="Realm及相关对象★★★★★"></a>Realm及相关对象★★★★★</h3><p><img src="http://i.imgur.com/0Nrv45E.png" alt=""></p>
-<ul>
-<li>用户——角色之间是多对多关系，角色——权限之间是多对多关系，用户和权限之间通过角色建立关系</li>
-<li>在系统中验证时通过权限验证，角色只是权限集合，即显示角色</li>
-</ul>
-<h2 id="权限-1"><a href="#权限-1" class="headerlink" title="权限"></a>权限</h2><p><a href="http://www.360doc.com/content/14/0529/10/11298474_381933566.shtml#" target="_blank" rel="external">http://www.360doc.com/content/14/0529/10/11298474_381933566.shtml#</a></p>
-<h3 id="权限概述"><a href="#权限概述" class="headerlink" title="权限概述"></a>权限概述</h3><p>有一个论坛，注册的用户分为<strong>normal用户，manager用户</strong>，对论坛的帖子的操作有：<strong>添加，删除，更新，查看，回复</strong>。我们规定：</p>
-<ul>
-<li>normal用户只能：添加，查看，回复</li>
-<li>manager用户可以：删除，更新</li>
-</ul>
-<p>normal，manager对应的是<strong>角色（role）</strong>，添加，删除，更新等对应的是<strong>权限（permission）</strong></p>
-<p><strong>权限是应用程序的一些基本操作，角色是权限的集合</strong></p>
-<p>我们采用下面的逻辑创建权限表结构（不是绝对的，根据需要修改）</p>
-<p><strong><em>用户与角色关系：多对多</em></strong><br>一个用户可以有多种角色（normal,manager,admin等等）<br>一个角色可以有多个用户（user1,user2,user3等等）</p>
-<p><strong><em>角色与权限关系：多对多</em></strong><br>一个角色可以有多个权限（save,update,delete,query等等）<br>一个权限可以属于多个角色</p>
-<p><img src="http://i.imgur.com/O5fa7S2.png" alt=""></p>
-<h3 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h3><p>我们创建五张表：</p>
-<p>tb_user用户表：设置了3个用户</p>
-<pre><code>-------------------------------
-id + user_name   + password
----+----------------+----------
-1  +   tom          +  000000
-2  +   jack         +  000000
-3  +   rose         +  000000
--------------------------------
-</code></pre><p>tb_role角色表：设置3个角色</p>
-<pre><code>--------------
-id + role_name 
----+----------
-1  + admin
-2  + manager
-3  + normal
---------------
-</code></pre><p><strong>tb_user_role用户角色表</strong>：tom是admin和normal角色，jack是manager和normal角色，rose是normal角色</p>
-<pre><code>---------------------
-user_id    +  role_id
------------+---------
-1          +     1
-1          +     3
-2          +     2
-2          +     3
-3          +     3
----------------------
-</code></pre><p>tb_permission权限表：</p>
-<pre><code>+----+-----------------+
-| id | permission_name |
-+----+-----------------+
-|  1 | add             |
-|  2 | query           |
-|  3 | delete          |
-|  4 | modify          |
-+----+-----------------+      
-</code></pre><p>tb_role_permission角色权限表：admin角色可以查看、添加、删除、修改，manager角色可以查看添加、删除，normal角色可以查看</p>
-<pre><code>+---------+---------------+
-| role_id | premission_id |
-+---------+---------------+
-|       1 |             1 |
-|       1 |             2 |
-|       1 |             3 |
-|       1 |             4 |
-|       2 |             1 |
-|       2 |             2 |
-|       2 |             3 |
-|       3 |             2 |
-+---------+---------------+
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/17/[SSM]Shiro笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1175,6 +562,13 @@ user_id    +  role_id
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/13/[Java]JDK源码阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/[Java]JDK源码阅读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1196,94 +590,15 @@ user_id    +  role_id
       
         
           
-            <h2 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h2><p>//类加载根目录<br>String parent = getClass().getClassLoader().getResource(“”).getPath();</p>
-<h3 id="BufferedOutputStream"><a href="#BufferedOutputStream" class="headerlink" title="BufferedOutputStream"></a>BufferedOutputStream</h3><p>要介绍BufferedOutputStream，我们先了解一下OutputStream类<br>抽象类OutputStream类有三个write方法</p>
-<pre><code>public abstract void write(int b)
-public void write(byte b[])
-public void write(byte b[], int off, int len)
-</code></pre><p>由上面我们可以看出第一个write方法是让子类覆盖的，而第二个人write（byte b[]）方法源代码如下</p>
-<pre><code>public void write(byte b[]) throws IOException {
-    write(b, 0, b.length);
-}
-</code></pre><p>所以可见最后处理还是调用第三个方法write(byte b[],int off,int len)，该方法源码如下：</p>
-<pre><code>public void write(byte b[], int off, int len) throws IOException {
-    if (b == null) {
-        throw new NullPointerException();
-    } else if ((off &lt; 0) || (off &gt; b.length) || (len &lt; 0) ||
-               ((off + len) &gt; b.length) || ((off + len) &lt; 0)) {
-        throw new IndexOutOfBoundsException();
-    } else if (len == 0) {
-        return;
-    }
-    for (int i = 0 ; i &lt; len ; i++) {
-    //注意这儿，这儿其实调用前面的抽象方法write（int b）,同时还发生了自动转型
-        write(b[off + i]);
-    }
-}
-</code></pre><p>我们先不看抽象方法是如何实现的，<strong>也就是说OutputStream也具有缓存器功能，我们可以将要写入到流中的数据写到一个byte[] buf数组中，然后调用write(byte b[])或者write(byte b[], int off, int len)也可以</strong>，那为什么还要BufferedInputStream类干什么呢，他们有什么区别呢。同时我们知道BufferedInputStream类中还有一个flush()方法，在OutputStream流中没有flush()方法，这又是为什么呢？flush()是不是必须的呢，接下来看一下BufferedOutputStream类；</p>
-<p>首先，BufferedOutput将OutputStream类对象作为一个构造方法的参数的。<br>首先看一下 BufferedOutputStream 类源代码</p>
-<pre><code>public class BufferedOutputStream extends FilterOutputStream {
+          文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath();
+BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类
+          ...
 
-    //这儿定义了一个byte[]数组，用来充当缓存器  
-    protected byte buf[]; 
-    //这个变量是重点，他就是用来记录当前缓存器中的字节数量的
-    protected int count; 
-    //我们初始化创建一个对象的时候给了这个buf这个数组8192个字节.
-    public BufferedOutputStream(OutputStream out) {
-        this(out, 8192);
-    }
-
-    public BufferedOutputStream(OutputStream out, int size) {
-        super(out);
-        if (size &lt;= 0) {
-            throw new IllegalArgumentException(&quot;Buffer size &lt;= 0&quot;);
-        }
-      // 这儿创建一个给定大小的数组对象来充当缓存器
-        buf = new byte[size];
-    }
-
-    public synchronized void write(int b) throws IOException {
-        if (count &gt;= buf.length) {
-            flushBuffer();
-        }
-        buf[count++] = (byte)b;
-    }
-
-    //该方法是重点    
-    public synchronized void write(byte b[], int off, int len) throws IOException {
-        //如果传进来的数组长度大于buf 数组的长度，则直接调用OutputStream对象的write方法。
-        if (len &gt;= buf.length) {
-
-            flushBuffer();
-            out.write(b, off, len);
-            return;
-        }
-        //验证BufferedOutputStream 类中buf剩下的空间能否装得下传进来的数组。如果不能则先将当前buf数组中数据写入底层io流中
-        if (len &gt; buf.length - count) {
-            flushBuffer();
-        }
-        //该处是重点，如果在当前BufferedOutputStream 类中buf数组没有满，则将传进来的数组复制到当前类对象buf数组中，同时更新count的值。
-        System.arraycopy(b, off, buf, count, len);
-        count += len;
-   //调用flushBuffer方法也就是将不满8192个字节数组中的数据发送出去。同时将count置零。
-    private void flushBuffer() throws IOException {
-        if (count &gt; 0) {
-            out.write(buf, 0, count);
-            count = 0;
-        }
-    }
-
-    //强制将buf数据中未满8192个字节的数据写入底层io中。
-    public synchronized void flush() throws IOException {
-        flushBuffer();
-        out.flush();
-    }
-}
-</code></pre><p>结论： </p>
-<p>OutputStream的缓存器（数组）与BufferedOutputStream中类的缓存器（数组）本质是一样的，只是BufferedOutputStream类中将要写入到底层io流中的数据先 <strong>凑个整</strong>，然后再一起写入底层io流中，这样就大大<strong>节省了io操作</strong>，大大提高了io利用率，写一次io是很费资源的。这样也出现了一个问题，假设向硬盘中写入一个文件，文件最后数据比默认值8192个字节小，则BufferOutputStream就不会将这些数据写入底层io流中，造成文件缺失，因此就<strong>需要在close()前调用flush（）方法，强制将还没有装满buf数组的数据写入底层io中</strong>。同时也可以看出节点流是不用flush()方法的，而一般的处理流都会采用固定buf这种方式的，比如常用的PrintWriter里面其实操作的就是一个BufferedWriter对象，因此也需要调用flush（）方法来刷新，因为默认是不刷新的。</p>
-<p>引用：<a href="http://m.blog.csdn.net/article/details?id=51355523" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=51355523</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/13/[Java]JDK源码阅读/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1373,6 +688,13 @@ public void write(byte b[], int off, int len)
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/11/[Java]基于Token的身份验证/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/[Java]基于Token的身份验证/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1394,94 +716,15 @@ public void write(byte b[], int off, int len)
       
         
           
-            <h2 id="为什么要身份验证"><a href="#为什么要身份验证" class="headerlink" title="为什么要身份验证"></a>为什么要身份验证</h2><p>可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！</p>
-<p>但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求访问其他服务器接口的时候，还得再验证一下，<font color="red"><strong>否则的话用户就可以跳过登录页面，直接访问其他服务器接口，登录就失去了意义</strong></font></p>
-<h2 id="传统身份验证方法"><a href="#传统身份验证方法" class="headerlink" title="传统身份验证方法"></a>传统身份验证方法</h2><p>Cookie+Session的存在主要是为了解决HTTP这一无状态协议下服务器如何识别用户的问题。当用户请求登录的时候，如果验证通过，<font color="red"><strong>在服务端创建一个session</strong></font>，session中记录一下登录的用户信息，<font color="red"><strong>然后把这个session的 sessionid 号发送给客户端</strong></font>，客户端收到以后把这个 sessionid 号存储在 Cookie 里，<font color="red"><strong>下次这个用户再向服务端发送请求的时候带着这个 Cookie</strong></font> ，这样服务端会根据 Cookie 里的sessionid恢复session，<font color="red"><strong>看看session中是否存有用户信息</strong></font>，如果是，说明用户已经通过了身份验证，就把用户请求的数据返回给客户端</p>
-<p>上面说的就是 Session，我们需要在服务端存储为登录的用户生成的 Session ，这些 Session 可能会存储在内存，磁盘，或者数据库里。我们可能需要在服务端创建一个守护程序定期的去清理过期的 Session</p>
-<h2 id="基于-Token-的身份验证方法"><a href="#基于-Token-的身份验证方法" class="headerlink" title="基于 Token 的身份验证方法"></a>基于 Token 的身份验证方法</h2><p>使用基于 Token 的身份验证方法，<strong>在服务端不需要存储用户的登录记录</strong>。大概的流程是这样的：</p>
-<p>1、客户端使用用户名和密码请求登录<br>2、服务端收到请求，去验证用户名与密码<br>3、验证成功后，服务端会签发一个 Token，再把这个 Token 发送给客户端<br>4、客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage 里<br>5、客户端每次向服务端请求资源的时候需要带着服务端签发的 Token<br>6、服务端收到请求，然后去验证客户端请求里面带着的 Token，如果验证成功，就向客户端返回请求的数据</p>
-<p>比起传统的身份验证方法，Token 扩展性更强，也更安全点，非常适合用在 Web 应用或者移动应用上</p>
-<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>实施 Token 验证的方法挺多的，还有一些标准方法，比如 JWT，读作：jot，表示：JSON Web Tokens 。JWT 标准的 Token 有三个部分：</p>
-<ul>
-<li>header</li>
-<li>payload</li>
-<li>signature</li>
-</ul>
-<p><strong>中间用点分隔开</strong>，并且都会使用 Base64 编码，所以真正的 Token 看起来像这样：</p>
-<pre>
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9<font color="red" style="font-weight:bold">.</font>eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ<font color="red" style="font-weight:bold">.</font>SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc
-</pre>
+          为什么要身份验证可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！
+但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不
+          ...
 
-<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p><strong>header</strong> 部分主要是两部分内容，一个是 Token 的类型，另一个是使用的算法，比如下面类型就是 JWT，使用的算法是 HS256。</p>
-<pre><code>{
-    &quot;typ&quot;: &quot;JWT&quot;,
-    &quot;alg&quot;: &quot;HS256&quot;
-}
-</code></pre><p>上面的内容要用 Base64 的形式编码一下，所以就变成这样：</p>
-<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-</code></pre><h3 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h3><p>Payload 里面是 Token 的具体内容，这些内容里面有一些是标准字段，你也可以添加其它需要的内容。下面是标准字段：</p>
-<ul>
-<li>iss：Issuer，发行者</li>
-<li>sub：Subject，主题</li>
-<li>aud：Audience，观众</li>
-<li>exp：Expiration time，过期时间</li>
-<li>nbf：Not before</li>
-<li>iat：Issued at，发行时间</li>
-<li>jti：JWT ID</li>
-</ul>
-<p>比如下面这个 Payload ，用到了 iss 发行人，还有 exp 过期时间。另外还有两个自定义的字段，一个是 name ，还有一个是 admin 。</p>
-<pre><code>{
-    &quot;iss&quot;: &quot;ninghao.net&quot;,
-    &quot;exp&quot;: &quot;1438955445&quot;,
-    &quot;name&quot;: &quot;wanghao&quot;,
-    &quot;admin&quot;: true
-}
-</code></pre><p>使用 Base64 编码以后就变成了这个样子：</p>
-<pre><code>eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ
-</code></pre><h3 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h3><p>JWT 的最后一部分是 Signature ，这部分内容有三个部分，先是用 Base64 编码的 header.payload ，再用加密算法加密一下，加密的时候要放进去一个 Secret ，这个相当于是一个密码，<strong>这个密码秘密地存储在服务端</strong>。</p>
-<ul>
-<li>header</li>
-<li>payload</li>
-<li>secret</li>
-</ul>
-<pre><code>var encodedString = base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload); 
-HMACSHA256(encodedString, &apos;secret&apos;);
-</code></pre><p>处理完成以后看起来像这样：</p>
-<pre><code>SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc
-</code></pre><p>最后这个在服务端生成并且要发送给客户端的 Token 看起来像这样：</p>
-<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ.SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc
-</code></pre><p>客户端收到这个 Token 以后把它存储下来，下回向服务端发送请求的时候就带着这个 Token 。服务端收到这个 Token ，然后进行验证，通过以后就会返回给客户端想要的资源</p>
-<h2 id="JWT库下载"><a href="#JWT库下载" class="headerlink" title="JWT库下载"></a>JWT库下载</h2><p>官网下载<br><a href="https://jwt.io/#libraries-io" target="_blank" rel="external">https://jwt.io/#libraries-io</a></p>
-<h3 id="JJWT"><a href="#JJWT" class="headerlink" title="JJWT"></a>JJWT</h3><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
-    &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
-    &lt;version&gt;0.7.0&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h4 id="生成token"><a href="#生成token" class="headerlink" title="生成token"></a>生成token</h4><pre><code>import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.impl.crypto.MacProvider;
-import java.security.Key;
-
-// We need a signing key, so we&apos;ll create one just for this example. Usually the key would be read from your application configuration instead.
-Key key = MacProvider.generateKey();
-
-String compactJws = Jwts.builder()
-  .setSubject(&quot;Joe&quot;)
-  .signWith(SignatureAlgorithm.HS512, key)
-  .compact();
-</code></pre><h4 id="校验token"><a href="#校验token" class="headerlink" title="校验token"></a>校验token</h4><p>1、判断JWT是否有效<br>2、JWT中个数据是否正确，比如判断Subject是否为Joe</p>
-<pre><code>try {
-
-    Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws);    
-    //OK, we can trust this JWT
-
-} catch (SignatureException e) {
-
-    //don&apos;t trust the JWT!
-}
-</code></pre><h2 id="参考文件"><a href="#参考文件" class="headerlink" title="参考文件"></a>参考文件</h2><p>基于 Token 的身份验证(<a href="http://ninghao.net/blog/2834" target="_blank" rel="external">http://ninghao.net/blog/2834</a>)</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/11/[Java]基于Token的身份验证/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1571,6 +814,13 @@ String compactJws = Jwts.builder()
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/11/[网络安全]运输层/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/[网络安全]运输层/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1592,104 +842,18 @@ String compactJws = Jwts.builder()
       
         
           
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="运输层服务"><a href="#运输层服务" class="headerlink" title="运输层服务"></a>运输层服务</h3><pre><code>计算机网络最基本的问题:
+          概述运输层服务计算机网络最基本的问题:
 ● 两个实体怎样才能在一种会丢失或损坏数据的介质上可靠得通信
 ● 控制运输层实体的传输速率以避免网络中的拥塞，或从拥塞中恢复出来
 
-运输层协议为运行在不同主机上的应用进程之间提供了逻辑通信（Logic Communication）。通过逻辑，运行不同进程的主机好像直接相连一样，实际上这些主机也许位于地球的两侧，通过很多路由器及都中不同类型的链路相连
+运输层协议为运行在不同主机上的应用进程之间提供了逻辑通信（Logic Communication）。通过逻辑，运行不同进程的主机
+          ...
 
-运输层协议实在端系统中而不是在网络路由器中实现的。
-    1、在发送方，运输层将接收到的来自发送应用程序的报文分成较小的块，并为每块加上一个运输层首部。在发送方端系统中，运输层将这些报文段传递给网络层，网络层再将其分装成网络层分组，并向目的地发送。
-    2、在接收方，网络层从数据报中提取出运输层报文段，并将该报文段向上交给运输层。运输层则处理接受到的报文段，使得接受方应用程序可应用该报文段中的数据
-
-运输层TCP和UDP的分组称为报文段，网络层分组称为数据报
-
-网络层协议叫ip，全程是网际协议，IP为主机之间提供了逻辑通信，IP的服务模型是尽力而为交付服务。他不确保报文段的交付，不保证报文段的按序交付，更不保证报文段中的数据完整性。所以IP成为不可靠服务。
-
-★★★
-UDP提供的服务：进程间数据交付、差错检测（运输层最低限度的两个服务，也是UDP仅有的两个服务）
-TCP提供附加服务：提供可靠数据传输（流量控制，序号，确认，定时器等技术）、拥塞控制
-</code></pre><h3 id="多路复用与多路分解"><a href="#多路复用与多路分解" class="headerlink" title="多路复用与多路分解"></a>多路复用与多路分解</h3><pre><code>接收主机中的运输层并没有直接将数据交付给进程，而是通过一个中间的套接字来传递。接收主机上可能有多个套接字，每个套接字都有唯一的标识符。在运输层报文段设置几个字段，接收端检查这些字段并标识出接收套接字。
-
-1、从源主机发送报文段
-    ● 将运输层报文段中的数据交付到正确的套接字的工作称为多路分解
-    ● 从源主机的不同套接字中收集数据块，并为每个数据块分装上首部信息从而生成报文段，然后将报文段传递到网络的工作称为多路复用
-
-2、目的主机接受报文段
-    ● 报文段达到目的主机，根据报文段上的端口号定位到相应进程的套接字（多路分解）
-    ● 运输层收集套接字输出的数据形成运输层报文段（多路复用）
-
-运输层多路复用的要求：
-    ❶ 套接字有唯一标识符
-    ❷ 每个报文段有特殊字段（源端口、目的端口）来指示该报文段要交付的套接字
-
-● UDP套接字由一个包含目的IP地址和目的端口号的二元组来标识，如果两个UDP报文段有不同的源IP地址或源端口号，但具有相同的目的IP地址和目的端口号，那么这两个报文段将通过相同的目的套接字定向到相同的目的进程
-
-● TCP套接字由一个四元组（源IP地址、源端口号、目的IP地址、目的端口号）来标识，两个不同源IP地址或或源端口号的TCP报文会被定向到两个不同的套接字
-</code></pre><h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><pre><code>UDP只是做了运输协议能够做的最少工作，除了多路复用/多路分解功能及一些轻型差错检测，它几乎没有对IP增加别的东西
-
-问题：有些应用程序更适合用UDP，而不是提供可靠数据传输服务的TCP？
-答：
-    ● 应用层能更好地控制要发送的数据和发送时间。应用层将数据交给UDP，UDP就会在数据上附上多路复用/多路分解所需的源端口号和目的端口号，及两个其他字段，并立即将其传递给网络层。而TCP有一个拥塞控制机制，当链路非常拥塞时，遏制运输层TCP发送方，同时TCP会重新发送报文段知道目的主机收到此报文并加以确认，而不管可靠交付时间需要多长。实时应用通常要求最快的发送速率，能容忍一些数据丢失
-    ● 无需连接确立。TCP在数据传输之前需要经过三次握手，UDP却不需要任何准备即可进行数据传输
-    ● 无连接状态。TCP需要在端系统中维护连接状态，连接状态包括接受和发送缓存、拥塞控制参数、序号与确认好的参数。UDP不维护连接状态
-    ● 分组首部开销小。每个TCP报文段都有20字节的首部开销，而UDP仅有8个字节的开销
-
-★★★
-UDP应用可以实现可靠数据传输，通过在应用程序自身中建立可靠性机制（例如增加确认和重传机制来实现）。这会增加开发人员的工作，但应用程序可以进行可靠通信，而无需受制于TCP拥塞控制机制引起的传输速率约束。
-</code></pre><h3 id="UDP报文结构"><a href="#UDP报文结构" class="headerlink" title="UDP报文结构"></a>UDP报文结构</h3><p><img src="http://img.blog.csdn.net/20160406154258808" alt="UDP报文结构"></p>
-<pre><code>UDP首部只有四个字段，每个字段由两个字节组成[源端口号、目的端口号、长度、校验和]，共8个字节，应用层数据占用UDP报文段的数据字段。
-    ● 源端口和目的端口是执行多路复用/多路分解的必备条件
-    ● 接受主机使用校验和来检查报文段是否存在差错
-    ● 长度字段包括首部在内的UDP报文长度，字节为单位
-</code></pre><h2 id="可靠数据传输的原理"><a href="#可靠数据传输的原理" class="headerlink" title="可靠数据传输的原理"></a>可靠数据传输的原理</h2><h3 id="构建可靠数据传输协议"><a href="#构建可靠数据传输协议" class="headerlink" title="构建可靠数据传输协议"></a>构建可靠数据传输协议</h3><p><img src="http://img.blog.csdn.net/20160406161249976" alt="这里写图片描述"></p>
-<pre><code>1、完全可靠信道上的可靠数据传输：rdt1.0
-    最简单的情况，底层信道是完全可靠的。
-    图3.9显示了rdt1.0发送方和接收方的有限状态机。初始状态用虚线表示。
-    ● rdt的发送方通过rdt_send(data)从高层接收数据，产生一个包含该数据的分组（make_pkt(data)）,并且将数据发送到信道中。状态回到等待状态。
-    ● 接收方，rdt通过rdt_rcv(packet)事件从底层信道接收一个分组，从分组中取出数据(经extract(packet,data)动作)，并将数据上传给高层（通过deliver_data(data)动作）
-</code></pre><p><img src="http://img.blog.csdn.net/20160407072723981" alt="这里写图片描述"></p>
-<pre><code>2、具有比特差错信道上的可靠数据传输：rdt2.0
-    考虑你自己是怎样通过电话口述一条长消息：报文接受者听到、明白每句话都会说OK；如果听到依据含糊不清的话，他可能要求你重复那句话。这种口述消息协议使用了肯定确认（OK），否定确认（请重复一遍）。这些控制报文使得接收方可以让发送方知道哪些内容被正确接受，哪些内容有误需要重传。计算机网络中，基于这种重传机制的可靠数据传输协议称为自动重传请求（ARQ）协议。
-    ARQ协议处理比特差错：
-        ● 差错检测
-        ● 接收方反馈：肯定确认（ACK），否定确认（NAK）
-        ● 重传
-    当rdt_send(data)事件发生时，发送方将产生一个包含待发送数据的分组(sndpkt)，然后经由udp_send(pkt)发送该分组，状态跳转到等待接收方的ACK或NAK分组。如果收到数据包且收到一个ACK，则发送方知道最近传输的分组已被正确接收，状态跳转到等待上层数据状态。如果收到一个NAK分组，该协议重传最后一个分组并等待接收方的响应。
-    如果发送一个数据包出现差错，则发送方将会一直重传该数据包，直到接收到ACK。这种行为也成为停等协议
-    接收方当分组到达时，接收方根据分组是否受损回答ACK或NAK
-
-    缺陷：如果ACK或NAK分组受损，发送方无法知道是否正确接收了上一块发送的数据（如果发送数据包后没收到ACK或NAK，则状态一直停留在等待ACK或NAK中）
-    解决方法：当发送方收到含糊不清的ACK或NAK分组时，只需重新发送当前数据分组即可。但这会引入冗余分组，会造成接收方无法判断接收到的分组是新的还是一次重传。
-</code></pre><p><img src="http://img.blog.csdn.net/20160407105631251" alt="这里写图片描述">   <img src="http://img.blog.csdn.net/20160407105648095" alt="这里写图片描述"> </p>
-<pre><code>rdt2.1解决了这个问题，在数据分组中添加一个序号字段，对于停等协议，1比特序号就足够了，前后接受的序号相同则代表是重传分组。
-发送方初始状态处于等待来自上层的调用0状态。当事件rdt_send(data)发生时，生成一个序号为0的数据包，向信道发送数据，状态跳转到等待序号为0的数据的ACK或NAK。如果正确接收到一个数据包，但数据包受损或是NAK，则继续等待，直到接收到的数据包没有损坏而且是ACK，说明0号数据包已经被正常接收，状态跳转到等待发送数据包1的状态。之后同理。
-在接收方，初始状态为等待数据包0的状态。如果收到的数据包破损，则向发送方发送一个NAK。或者你现在想收到序号为0的数据包，但发送过来一个序号为1的数据包，说明发送方重发了数据包1，则发送一个ACK。因为是重发，所以不需要提取数据包中的数据。如果正确接收到序号为0的分组，则提取出数据，传送给上层，并想发送方发送一个ACK，告知已经成功接收数据包0，状态跳转到等待接收序号为1的数据包。之后同理。
-</code></pre><p><img src="http://img.blog.csdn.net/20160407110607754" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160407110946553" alt="这里写图片描述">   </p>
-<pre><code>rdt2.2接收到受损的分组，发送一个对上次正确接受的分组的ACK。发送方接收到对同一个分组的两个ACK（冗余ACK），就知道接收方没有正确接收到跟在被确人两次的分组后面的分组。
-当发送方处于等待来自上层的调用0的状态时，rdt_send(data)事件发生，生成一个序号为0的数据包，通过udt_send(sndpkt)将数据发送到信道。状态跳转到等待序号为0的数据包的ACK。如果接收到为受损的ACK数据包，状态跳转到等待发送序号为1的数据包的状态。如果收到受损的数据包，或数据包的序号不为0（确认的是之前的序号，则当前发送的数据包接收方没有正确被接收），则继续处于等待序号为0的数据包的ACK。之后同理。
-在接收方，注意到初始化时oncethru = 0，如果发送方第一个数据包出现错误，则接收方一直将处于等待来自下层的0这个状态，不用发累计确认ACK。当接收到的数据包没有受损，而且刚好是等待的序号为0的分组，接收方提取出分组的数据，传递给上层，然后向发送方发送序号为0的ACK，通知发送方已经成功接受序号为0的分组，状态跳转到等待序号为1的数据包这个状态。如果之前的情况，向发送方发送序号为0的ACK出现损坏，则发送方会再次发送一个序号为0的数据包。这种情况下接收方会重新发送之前的确认包，告知发送方数据包已经接受，防止重复接受，接收方也就不需要提取数据包的消息。除了重发的情况，如果接受到破损数据，也将重新发送之前的确认包，接收方就知道确认包之后的数据没有被正确接受。之后又同理。
-</code></pre><p> <img src="http://img.blog.csdn.net/20160407224831968" alt="这里写图片描述"> </p>
-<pre><code>3.具有比特差错的丢包信道上的可靠数据传输：rdt 3.0 
-    rdt2.2已经解决了发生丢包后该做些什么，通过检验和、序号、ACK分组和重传等方式。现在需要解决的问题是怎样检测丢包。
-    我们让发送方负责检测和恢复丢包。假定发送方传输一个数据分组，该分组丢失或该分组的ACK丢失，这样发送方收不到来自接收方的响应。如果发送方愿意等待足够长的时间以便确认分组已丢失，则只需重传该数据分组即可。
-    从发送方的观点来看，重传是一种万能灵药。发送方不知道是一个数据分组丢失、一个ACK丢失，还是该分组或ACK只是过度时延，所有的情况采取的动作都是同样的：重传。为了实现基于时间的重传机制，需要一个倒计数定时器，在一个给定的时间过期后，可中断发送方。
-    状态图：初始状态为等待来自上层的调用0状态，当事件rdt_send(data)发生时，生成一个序号为0的数据包，发送到信道，同时启动定时器，状态跳转到等待数据包0的ACK。如果正确无差错的ACK，则数据包0成功被接收，停止计时器，状态跳转到等待上次调用发送序号为1的数据包。若在等待ACK 0的时候，收到受损数据包，或者收到序列为1的ACK（说明当前发送的数据包没有成功接收），需要重传数据包，但先不发送，等到计数器超时后再发送（因为是基于定时器的重发机制），并且重新开启定时器，状态仍为等待ACK 0.在等待来自上层的调用1的时候，此时已经完成数据的接收，但为什么会收到回复？因为如果超时时间过短，会出现过早超时的情形，发送方间隔发送两个相同的数据包，同时连个数据包都得到了回应ACK，会选择接收第一个ACK，第二个则忽略。
-</code></pre><p><img src="http://img.blog.csdn.net/20160407231948479" alt="这里写图片描述"></p>
-<h3 id="流水线可靠数据传输"><a href="#流水线可靠数据传输" class="headerlink" title="流水线可靠数据传输"></a>流水线可靠数据传输</h3><pre><code>允许发送方发送多个分组而无需等待确认，这种技术称为流水线。
-● 必须增加序号范围，每个传输的分组必须有一个唯一的序号
-● 协议的发送方和接收方必须缓存多个分组
-● 所需序号范围和对缓冲的要求取决于数据传输协议处理丢失、损坏及过度延时分组的方式，解决流水线的差错恢复有两种基本的方法：回退N步和选择重传
-</code></pre><h3 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h3><p><img src="http://img.blog.csdn.net/20160408103441813" alt="这里写图片描述"></p>
-<pre><code>[0，base-1]内的序号对应于已经发送并确认过的分组，[base，nextseqnum-1]内的序号对应于已经发送，但未被确认的分组。[nextseqnum，base+N-1]内的序号可用于那些要被立即发送的分组，其数据来自上层。
-那些已经被发送但还未被确认的分组的序号范围可以看成是一个在序号范围内长度为N的窗口，并且随着协议的运行，该窗口在序好空间向前滑动，因此N常被称为窗口长度，GBN协议被称为滑动窗口协议
-</code></pre><p><img src="http://img.blog.csdn.net/20160408110239599" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160408110310178" alt="这里写图片描述"></p>
-<pre><code>GBN发送方必须响应以下三种类型的事件：
-● 上层的调用。当上层调用rdt_send()，发送方首先检查发送窗口是否已满。如果未满则创建一个分组将其发送，变量也响应的更新。如果窗口已满，发送方将数据返回给上层，通知上次该窗口已满，然后上层可能会过一会再试 
-●
-●
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/11/[网络安全]运输层/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1779,6 +943,13 @@ UDP应用可以实现可靠数据传输，通过在应用程序自身中建立�
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/08/数据结构与算法]算法4笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/数据结构与算法]算法4笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1800,49 +971,22 @@ UDP应用可以实现可靠数据传输，通过在应用程序自身中建立�
       
         
           
-            <h2 id="算法与数据结构课程介绍"><a href="#算法与数据结构课程介绍" class="headerlink" title="算法与数据结构课程介绍"></a>算法与数据结构课程介绍</h2><ul>
-<li>算法是解决问题的方法</li>
-<li>数据结构是存储数据的方法</li>
-</ul>
-<h3 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h3><p><img src="http://i.imgur.com/GDFtowZ.png" alt=""></p>
-<p>第一部分内容：</p>
-<ul>
-<li>基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）</li>
-<li>排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序radix sorts）</li>
-<li>查找（二叉排序树BST、binary search trees，红黑二叉排序树，red-black BST、哈希表hash table）</li>
-</ul>
-<p>第二部分内容：</p>
-<ul>
-<li>图算法（BFS、DFS、Prim、Kruskal、Dijkstra）</li>
-<li>字符串（KMP、regular expressions，TST、Huffman、LZW）</li>
-<li>高级算法（B-tree、suffix array，maxflow）</li>
-</ul>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>算法4 1.1 1.2</p>
-<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><ul>
-<li>递归总有一个最简单的情况——方法的第一条语句总是一个包含return的条件语句</li>
-<li>递归调用总是去尝试解决一个<strong><em>规模更小的子问题</em></strong>，这样递归才能收敛到最简单的情况</li>
-<li>递归调用的父问题和尝试解决的子问题之间<strong><em>不应该有交集</em></strong>，比如两个子问题各自操作的数组部分是不同的</li>
-</ul>
-<h2 id="欧几里德算法"><a href="#欧几里德算法" class="headerlink" title="欧几里德算法"></a>欧几里德算法</h2><h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p>计算两个<strong><em>非负整数</em></strong> p和q的最大公约数：若q是0，则最大公约数是p；否则p除以q得到余数r，p和q的最大公约数即为q和r的最大公约数</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>保证p和q为非负，<strong><em>p和q的大小无要求</em></strong></p>
-<pre><code>public static int gcd(int p, int q){
-    if(q == 0) return p;
-    return gcd(q, p%q);
-}
-</code></pre><h2 id="判断一个数是否是素数"><a href="#判断一个数是否是素数" class="headerlink" title="判断一个数是否是素数"></a>判断一个数是否是素数</h2><ul>
-<li>如果一个数只能被除了1和本身的数整除，那个这个数就是素数</li>
-<li>遍历从2开始，不大于N的平方根，<strong><em>注意是&lt;=</em></strong></li>
-<li>2是最小的素数，小于2的数字肯定不是素数</li>
-</ul>
-<pre><code>public static boolean isPrime(int N){
-    if(N &lt; 2) return false;
-    for(int i = 2; i*i &lt;= N; i++)
-        if(N % i == 0) return false;
-    return true;
-}
-</code></pre><p>##</p>
+          算法与数据结构课程介绍
+算法是解决问题的方法
+数据结构是存储数据的方法
 
-          
+课程内容
+第一部分内容：
+
+基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
+排序方法（快排quicksort、归并mergesort、堆排序heaps
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/08/数据结构与算法]算法4笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1932,6 +1076,13 @@ UDP应用可以实现可靠数据传输，通过在应用程序自身中建立�
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/[SSM]IDEA在编辑时提示could not autowire/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1953,31 +1104,16 @@ UDP应用可以实现可靠数据传输，通过在应用程序自身中建立�
       
         
           
-            <p>在开发中我在applicationContext-dao.xml中加入了mapper扫描器</p>
-<pre><code>&lt;!--mapper扫描器--&gt;  
-&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;  
-    &lt;!--扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开--&gt;  
-    &lt;property name=&quot;basePackage&quot; value=&quot;com.qianlv.ssmdemo.mapper&quot; /&gt;  
-    &lt;!--这里不用sqlSessionFactory是因为如果用会导致上面配置的dataSource失效--&gt;  
-    &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot; /&gt;  
-&lt;/bean&gt;  
-</code></pre><p>但是在编辑一个Service中注入mapper会提示could not autowire，但是可以正常执行的。</p>
-<pre><code>public class ItemsServiceImpl implements com.qianlv.ssmdemo.service.ItemsService{  
+          在开发中我在applicationContext-dao.xml中加入了mapper扫描器
+&lt;!--mapper扫描器--&gt;  
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt
+          ...
 
-    @Autowired  
-    ItemsMapperCustom itemsMapperCustom;  
-
-    public List&lt;ItemsCustom&gt; findItemsList(ItemsQueryVo itemsQueryVo) throws Exception {  
-        return itemsMapperCustom.findItemsList(itemsQueryVo);  
-    }  
-
-}  
-</code></pre><p>我们需要改一下IDEA的设置</p>
-<p><img src="http://i.imgur.com/lATPEQG.png" alt=""></p>
-<p>将最右边的Serverity改为Warning</p>
-<p>参考：<a href="http://blog.csdn.net/xlxxybz1314/article/details/51404700" target="_blank" rel="external">http://blog.csdn.net/xlxxybz1314/article/details/51404700</a></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2067,6 +1203,13 @@ UDP应用可以实现可靠数据传输，通过在应用程序自身中建立�
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -2088,479 +1231,145 @@ UDP应用可以实现可靠数据传输，通过在应用程序自身中建立�
       
         
           
-            <h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+          导入依赖&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+         xmlns:xs
+          ...
 
-    &lt;groupId&gt;cn.apeius&lt;/groupId&gt;
-    &lt;artifactId&gt;Demo&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
 
-    &lt;!--集中管理依赖版本号--&gt;
-    &lt;properties&gt;
-        &lt;junit.version&gt;4.10&lt;/junit.version&gt;
-        &lt;spring.version&gt;4.1.3.RELEASE&lt;/spring.version&gt;
-        &lt;mybatis.version&gt;3.2.8&lt;/mybatis.version&gt;
-        &lt;mybatis.spring.version&gt;1.2.2&lt;/mybatis.spring.version&gt;
-        &lt;mybatis.paginator.version&gt;1.2.15&lt;/mybatis.paginator.version&gt;
-        &lt;mysql.version&gt;5.1.32&lt;/mysql.version&gt;
-        &lt;slf4j.version&gt;1.6.4&lt;/slf4j.version&gt;
-        &lt;jackson.version&gt;2.4.2&lt;/jackson.version&gt;
-        &lt;druid.version&gt;1.0.9&lt;/druid.version&gt;
-        &lt;httpclient.version&gt;4.3.5&lt;/httpclient.version&gt;
-        &lt;jstl.version&gt;1.2&lt;/jstl.version&gt;
-        &lt;servlet-api.version&gt;2.5&lt;/servlet-api.version&gt;
-        &lt;jsp-api.version&gt;2.0&lt;/jsp-api.version&gt;
-        &lt;joda-time.version&gt;2.5&lt;/joda-time.version&gt;
-        &lt;commons-lang3.version&gt;3.3.2&lt;/commons-lang3.version&gt;
-        &lt;commons-io.version&gt;1.3.2&lt;/commons-io.version&gt;
-    &lt;/properties&gt;
-    &lt;dependencies&gt;
+    <div>
+      
+    </div>
 
-        &lt;!--单元测试--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;junit&lt;/groupId&gt;
-            &lt;artifactId&gt;junit&lt;/artifactId&gt;
-            &lt;version&gt;${junit.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+    <div>
+      
+    </div>
 
-        &lt;!--Spring--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-            &lt;version&gt;${spring.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
-            &lt;version&gt;${spring.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
-            &lt;version&gt;${spring.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-            &lt;version&gt;${spring.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
-            &lt;version&gt;${spring.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+    <footer class="post-footer">
+      
 
-        &lt;!--Mybatis--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-            &lt;version&gt;${mybatis.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
-            &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
-        &lt;/dependency&gt;
+      
 
-        &lt;!--分页插件--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
-            &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
-            &lt;version&gt;3.7.5&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.github.jsqlparser&lt;/groupId&gt;
-            &lt;artifactId&gt;jsqlparser&lt;/artifactId&gt;
-            &lt;version&gt;0.9.1&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--连接池--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;c3p0&lt;/groupId&gt;
-            &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
-            &lt;version&gt;0.9.1.2&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--Mysql--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;mysql&lt;/groupId&gt;
-            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-            &lt;version&gt;${mysql.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--日志--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
-            &lt;version&gt;${slf4j.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--Jackson Json处理工具包--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
-            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
-            &lt;version&gt;${jackson.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--连接池--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-            &lt;artifactId&gt;druid&lt;/artifactId&gt;
-            &lt;version&gt;${druid.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--httpclient--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
-            &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
-            &lt;version&gt;${httpclient.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--JSP相关--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;jstl&lt;/groupId&gt;
-            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-            &lt;version&gt;${jstl.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
-            &lt;version&gt;${servlet-api.version}&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-            &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
-            &lt;version&gt;${jsp-api.version}&lt;/version&gt;
-            &lt;scope&gt;provided&lt;/scope&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--时间操作组件--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;joda-time&lt;/groupId&gt;
-            &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
-            &lt;version&gt;${joda-time.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--Apache工具组件--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
-            &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
-            &lt;version&gt;${commons-lang3.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
-            &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
-            &lt;version&gt;${commons-io.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-
-        &lt;!--文件上传--&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
-            &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
-            &lt;version&gt;1.3.1&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre><h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p><a href="https://github.com/rhapsody1290/SSM" target="_blank" rel="external">https://github.com/rhapsody1290/SSM</a></p>
-<h2 id="查询用户列表"><a href="#查询用户列表" class="headerlink" title="查询用户列表"></a>查询用户列表</h2><h3 id="定义EasyUIPage"><a href="#定义EasyUIPage" class="headerlink" title="定义EasyUIPage"></a>定义EasyUIPage</h3><p>封装对应的easyUi需要的数据</p>
-<pre><code>public class EasyUIPage {
-    private Long total;
-    private List&lt;?&gt; rows;
-
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
-    }
-
-    public List&lt;?&gt; getRows() {
-        return rows;
-    }
-
-    public void setRows(List&lt;?&gt; rows) {
-        this.rows = rows;
-    }
-
-}
-</code></pre><h3 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h3><pre><code>@RequestMapping(value = &quot;list&quot;)
-@ResponseBody
-public EasyUIPage queryAll(
-        @RequestParam(value = &quot;page&quot;, defaultValue = &quot;1&quot;) Integer pageNum,
-        @RequestParam(value = &quot;rows&quot;, defaultValue = &quot;5&quot;) Integer pageSize) {
-    EasyUIPage esayUIPage = userService.queryAllUser(pageNum,pageSize);
-    return esayUIPage;
-}
-</code></pre><h3 id="编写userservice"><a href="#编写userservice" class="headerlink" title="编写userservice"></a>编写userservice</h3><pre><code>@Override
-public EasyUIPage queryAllUser(Integer pageNum, Integer pageSize) {
-    PageHelper.startPage(pageNum, pageSize);
-    List&lt;User&gt; users = userMapper.queryAllUser();
-
-    PageInfo&lt;User&gt; pageInfo = new PageInfo&lt;User&gt;(users);
-
-    EasyUIPage easyUIPage = new EasyUIPage();
-    //easyUIPage.setRows(users);
-    easyUIPage.setRows(pageInfo.getList());
-    easyUIPage.setTotal(pageInfo.getTotal());
-    return easyUIPage;
-}
-</code></pre><h3 id="编写userMapper"><a href="#编写userMapper" class="headerlink" title="编写userMapper"></a>编写userMapper</h3><pre><code>public List&lt;User&gt; queryAllUser();
-</code></pre><h3 id="userMapper对应的xml"><a href="#userMapper对应的xml" class="headerlink" title="userMapper对应的xml"></a>userMapper对应的xml</h3><pre><code>&lt;select id=&quot;queryAllUser&quot; resultType=&quot;User&quot;&gt;
-    select * from tb_user
-&lt;/select&gt;
-</code></pre><h2 id="页面跳转合并★★★★★★"><a href="#页面跳转合并★★★★★★" class="headerlink" title="页面跳转合并★★★★★★"></a>页面跳转合并★★★★★★</h2><pre><code>//页面跳转合并
-@RequestMapping(value = &quot;/page/{pageName}&quot;)
-public String toPage(@PathVariable(&quot;pageName&quot;) String pageName){
-    return pageName;
-}
-</code></pre><h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><h3 id="日期格式转换"><a href="#日期格式转换" class="headerlink" title="日期格式转换"></a>日期格式转换</h3><p>SpringMVC默认不支持字符串转换成Date格式，可以采用SpringMVC自带的转换器，还有一种简单的方法：</p>
-<pre><code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
-private Date birthday;
-</code></pre><p>需要导入依赖：</p>
-<pre><code>&lt;!--时间操作组件--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;joda-time&lt;/groupId&gt;
-    &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
-    &lt;version&gt;${joda-time.version}&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h3 id="添加失败"><a href="#添加失败" class="headerlink" title="添加失败"></a>添加失败</h3><p>使用try-catch</p>
-<pre><code>@RequestMapping(value = &quot;/save&quot;)
-@ResponseBody
-public Map&lt;String, String&gt; save(User user){
-    Map&lt;String,String&gt; map = new HashMap&lt;String, String&gt;();
-    try{
-        Integer num = userService.addUser(user);
-        if(num &gt; 0){
-            map.put(&quot;status&quot;,&quot;200&quot;);
-        }else{
-            map.put(&quot;status&quot;,&quot;500&quot;);
-        }
-    }catch (Exception e){
-        map.put(&quot;status&quot;,&quot;500&quot;);
-    }
-    return map;
-}
-</code></pre><h2 id="导出excel"><a href="#导出excel" class="headerlink" title="导出excel"></a>导出excel</h2><p>视图除了可以是html、jsp、json等常见视图之外，还可以是excel，其他</p>
-<h3 id="poi依赖"><a href="#poi依赖" class="headerlink" title="poi依赖"></a>poi依赖</h3><pre><code>&lt;!--操作excel--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
-    &lt;artifactId&gt;poi&lt;/artifactId&gt;
-    &lt;version&gt;3.10.1&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h3 id="导入编写好的Excel视图"><a href="#导入编写好的Excel视图" class="headerlink" title="导入编写好的Excel视图"></a>导入编写好的Excel视图</h3><p>UserExcelView、Constants两个Java文件</p>
-<h3 id="声明excel视图"><a href="#声明excel视图" class="headerlink" title="声明excel视图"></a>声明excel视图</h3><pre><code>&lt;bean name=&quot;userExcel&quot; class=&quot;cn.apeius.usermanage.view.UserExcelView&quot;/&gt;
-</code></pre><h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><pre><code>@RequestMapping(value = &quot;export/excel&quot;)
-public ModelAndView export(@RequestParam(value = &quot;page&quot;, defaultValue = &quot;1&quot;) Integer pageNow,
-                           @RequestParam(value = &quot;rows&quot;, defaultValue = &quot;5&quot;) Integer pageSize){
-    //1、查询需要导出的数据
-    EasyUIPage page = this.userService.queryAllUsers(pageNow,pageSize);
-    //2、传递数据
-    ModelAndView mv = new ModelAndView();
-    mv.addObject(&quot;userList&quot;,page.getRows());
-    mv.setViewName(&quot;userExcel&quot;);//定义到自定义的excel视图
-    return mv;
-}
-</code></pre><h3 id="bean视图解析器"><a href="#bean视图解析器" class="headerlink" title="bean视图解析器"></a>bean视图解析器</h3><p>数字越小优先级越高</p>
-<pre><code>&lt;!--定义视图解析器--&gt;
-&lt;bean class = &quot;org.springframework.web.servlet.view.BeanNameViewResolver&quot;&gt;
-    &lt;property name=&quot;order&quot; value=&quot;1&quot;/&gt;
-&lt;/bean&gt;
-</code></pre><h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><h3 id="控制器-1"><a href="#控制器-1" class="headerlink" title="控制器"></a>控制器</h3><pre><code>@ResponseBody
-@RequestMapping(value = &quot;/delete&quot;)
-//springmvc会自动把逗号切割，变成一个数组
-public Map&lt;String,String&gt; deleteById(@RequestParam(value = &quot;ids&quot;) Long[] ids){
-    Integer num = this.userService.deleteUserByIds(ids);
-    Map&lt;String,String&gt; map = new HashMap&lt;String, String&gt;();
-    if(num &gt; 0){
-        map.put(&quot;status&quot;,&quot;200&quot;);
-    }else{
-        map.put(&quot;status&quot;,&quot;208&quot;);
-    }
-    return map;
-}
-</code></pre><h3 id="sql语句"><a href="#sql语句" class="headerlink" title="sql语句"></a>sql语句</h3><pre><code>&lt;delete id=&quot;deleteUserByIds&quot;&gt;
-    delete from tb_user where id in
-    &lt;foreach collection=&quot;ids&quot; item=&quot;id&quot; open=&quot;(&quot; close=&quot;)&quot; separator=&quot;,&quot;&gt;
-        #{id}
-    &lt;/foreach&gt;
-&lt;/delete&gt;
-</code></pre><h2 id="通用mapper"><a href="#通用mapper" class="headerlink" title="通用mapper"></a>通用mapper</h2><p>通用的增删改查操作</p>
-<h3 id="导入依赖-1"><a href="#导入依赖-1" class="headerlink" title="导入依赖"></a>导入依赖</h3><pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;com.github.abel533&lt;/groupId&gt;
-    &lt;artifactId&gt;mapper&lt;/artifactId&gt;
-    &lt;version&gt;2.3.4&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h3 id="Mybatis配置文件方式"><a href="#Mybatis配置文件方式" class="headerlink" title="Mybatis配置文件方式"></a>Mybatis配置文件方式</h3><p>在mybatis-config.xml中添加如下配置:</p>
-<pre><code>&lt;plugin interceptor=&quot;com.github.abel533.mapperhelper.MapperInterceptor&quot;&gt;
-    &lt;!--主键自增方法，默认值为MYSQL，详细说明请看文档--&gt;
-    &lt;property name=&quot;IDENTITY&quot; value=&quot;MYSQL&quot;/&gt;
-    &lt;!--通用mapper接口，多个通用接口用逗号隔开--&gt;
-    &lt;property name=&quot;mappers&quot; value=&quot;com.github.abel533.mapper.Mapper&quot;/&gt;
-&lt;/plugin&gt;
-</code></pre><h3 id="通用mapper使用"><a href="#通用mapper使用" class="headerlink" title="通用mapper使用"></a>通用mapper使用</h3><h4 id="继承通用的Mapper-必须指定泛型"><a href="#继承通用的Mapper-必须指定泛型" class="headerlink" title="继承通用的Mapper,必须指定泛型"></a>继承通用的Mapper<t>,必须指定泛型<t></t></t></h4><pre><code>public interface UserInfoMapper extends Mapper&lt;UserInfo&gt; {
-  //其他必须手写的接口...
-
-}
-</code></pre><h4 id="泛型-实体类-的类型必须符合要求★★★★★"><a href="#泛型-实体类-的类型必须符合要求★★★★★" class="headerlink" title="泛型(实体类)的类型必须符合要求★★★★★"></a>泛型(实体类)<t>的类型必须符合要求★★★★★</t></h4><ol>
-<li>表名默认使用类名,驼峰转下划线(只对大写字母进行处理),如UserInfo默认对应的表名为user_info。</li>
-<li>表名可以使用<strong><em>@Table(name = “tableName”)</em></strong>进行指定,对不符合第一条默认规则的可以通过这种方式指定表名.</li>
-<li>字段默认和@Column一样,都会作为表字段,表字段默认为Java对象的Field名字驼峰转下划线形式.</li>
-<li>可以使用<strong><em>@Column(name = “fieldName”)</em></strong>指定不符合第3条规则的字段名</li>
-<li><strong><em>使用@Transient注解可以忽略字段,添加该注解的字段不会作为表字段使用（关联查询）</em></strong></li>
-<li><strong><em>建议一定是有一个@Id注解作为主键的字段,可以有多个@Id注解的字段作为联合主键.</em></strong></li>
-</ol>
-<h4 id="通用mapper使用-1"><a href="#通用mapper使用-1" class="headerlink" title="通用mapper使用"></a>通用mapper使用</h4><pre><code>public class UserMapperTest {
-
-    private UserMapper mapper;
-
-    @Before
-    public void setUp() throws Exception {
-        ApplicationContext ac = new ClassPathXmlApplicationContext(
-                new String[]{&quot;applicationContext.xml&quot;,&quot;applicationContext-mybatis.xml&quot;,&quot;applicationContext-tx.xml&quot;});
-        mapper = ac.getBean(UserMapper.class);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-    }
-
-    @Test
-    public void testSelectOne() throws Exception {
-        //创建User对象，设置的属性作为查询的约束
-        User user = new User();
-        user.setId(1L);
-        //使用selectOne必须保证结果唯一，如果结果太多则会报错
-        System.out.println(mapper.selectOne(user));
-    }
-
-    @Test
-    public void testSelect() throws Exception {
-        User record = new User();
-        //可以设置属性增加约束
-
-        List&lt;User&gt; users = mapper.select(record);
-        for(User user : users)
-            System.out.println(user);
-    }
-
-    @Test
-    public void testSelectCount() throws Exception {
-        User record = new User();
-        int count = mapper.selectCount(record);
-        System.out.println(count);
-    }
-
-    @Test
-    public void testSelectByPrimaryKey() throws Exception {
-        //参数表示主键的值
-        System.out.println(mapper.selectByPrimaryKey(1L));
-    }
-
-    @Test
-    public void testInsert() throws Exception {
-        User record = new User();
-        record.setUserName(&quot;踩雷&quot;);
-        record.setName(&quot;bajie&quot;);
-        record.setPassword(&quot;123456&quot;);
-        record.setBirthday(new Date());
-        mapper.insert(record);
-    }
-
-    @Test
-    public void testInsertSelective() throws Exception {
-        //与testInsert的区别：只添加设置值得字段，其余让数据库默认，推荐！！！
-        User record = new User();
-        record.setUserName(&quot;李璇&quot;);
-        record.setName(&quot;bajie&quot;);
-        record.setPassword(&quot;123456&quot;);
-        record.setBirthday(new Date());
-        mapper.insert(record);
-    }
-
-    @Test
-    public void testDelete() throws Exception {
-        User record = new User();
-        record.setName(&quot;xxxx&quot;);
-        mapper.delete(record);
-    }
-
-    @Test
-    public void testDeleteByPrimaryKey() throws Exception {
-        mapper.deleteByPrimaryKey(66L);
-    }
-
-    @Test
-    public void testUpdateByPrimaryKey() throws Exception {
-        User record = new User();
-        record.setId(66L);
-        record.setName(&quot;踩雷&quot;);
-        mapper.updateByPrimaryKey(record);
-    }
-
-    @Test
-    public void testUpdateByPrimaryKeySelective() throws Exception {
-        //只更新设置的值，推荐！！！！！！！
-        User record = new User();
-        record.setId(66L);
-        record.setName(&quot;踩雷&quot;);
-        mapper.updateByPrimaryKeySelective(record);
-    }
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-    @Test
-    public void testExampleBasic(){
-        //进行复杂查询
-        Example example = new Example(User.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andGreaterThanOrEqualTo(&quot;age&quot;,30);
-        //添加and条件，密码为123456
-        criteria.andEqualTo(&quot;password&quot;,&quot;123456&quot;);
-        List&lt;User&gt; users = mapper.selectByExample(example);
-        for(User u : users)
-            System.out.println(u);
-    }
+    
+      
 
-    @Test
-    //SELECT AGE,NAME,UPDATED,USER_NAME USERNAME,BIRTHDAY,ID,CREATED,SEX,PASSWORD FROM tb_user
-    // WHERE ( AGE &gt;= ? and NAME like ? ) or ( PASSWORD = ? and ID in(?,?) )
-    public void testExampleOr(){
-        //进行复杂查询，or
-        Example example = new Example(User.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andGreaterThanOrEqualTo(&quot;age&quot;,30);
-        criteria.andLike(&quot;name&quot;,&quot;%xx%&quot;);
+  
+  
 
-        Example.Criteria criteria12 = example.createCriteria();
-        //添加and条件，密码为123456
-        criteria12.andEqualTo(&quot;password&quot;,&quot;123456&quot;);
-        List&lt;Object&gt; ids = new ArrayList&lt;Object&gt;();
-        ids.add(&quot;1&quot;);
-        ids.add(&quot;2&quot;);
-        criteria12.andIn(&quot;id&quot;,ids);
+  
+  
+  
 
-        //多个criteria之间是or的关系
-        example.or(criteria12);
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
-        List&lt;User&gt; users = mapper.selectByExample(example);
-        for(User u : users)
-            System.out.println(u);
-    }
+    
+      <header class="post-header">
 
-    @Test
-    public void testExampleSort(){
-        Example example = new Example(User.class);
-        example.setOrderByClause(&quot;age desc,id desc&quot;);
-        List&lt;User&gt; users = mapper.selectByExample(example);
-    }
-}
-</code></pre>
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/30/[Java]list转string[]/" itemprop="url">
+                  list转string[]
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-30T00:00:00+08:00" content="2016-09-30">
+              2016-09-30
+            </time>
+          </span>
+
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/30/[Java]list转string[]/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/30/[Java]list转string[]/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          方法一：单个元素转换//ArrayList
+ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+array.add(&quot;aaa&quot;);
+array.add(&quot;bbb&quot;);
+array.add
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/30/[Java]list转string[]/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2650,6 +1459,13 @@ public Map&lt;String,String&gt; deleteById(@RequestParam(value = &quot;ids&quot;
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/30/[Java]Java泛型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/30/[Java]Java泛型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -2671,119 +1487,18 @@ public Map&lt;String,String&gt; deleteById(@RequestParam(value = &quot;ids&quot;
       
         
           
-            <h2 id="泛型的基本应用"><a href="#泛型的基本应用" class="headerlink" title="泛型的基本应用"></a>泛型的基本应用</h2><ul>
-<li>Jdk1.5的集合类希望你在定义集合时，<strong><em>明确表示你要向集合中装哪种类型的数据</em></strong>，无法加入指定类型以外的数据</li>
-<li>如下例子，如果不给定参数类型，可以在集合类中加入任意类型的数据，但在取元素时必须由程序员强行转换数据类型，编译器不会报错，出现问题由程序员负责</li>
-</ul>
-<pre><code>ArrayList collection1 = new ArrayList();
-collection1.add(1);
-collection1.add(1L);
-collection1.add(&quot;abc&quot;);
-</code></pre><ul>
-<li>在指定参数后，泛型的基本用法如下，对不是给定类型的数据，编译会报错。另一个好处是取出数据后，不用对数据进行强制转换。</li>
-</ul>
-<pre><code>ArrayList&lt;String&gt; collection2 = new ArrayList&lt;String&gt;();
-//collection2.add(1);
-//collection2.add(1L);
-collection2.add(&quot;abc&quot;);
-String string = collection2.get(0);
-</code></pre><ul>
-<li><strong>泛型是提供给javac编译器使用的</strong>，可以限定集合中的输入类型，让编译器挡住源程序中的非法输入，编译器编译带类型说明的集合时会<strong>去除掉”类型”信息</strong>，使程序运行效率不受影响，对于参数化的泛型类型，getClass()方法的返回值和原始类型完全一样</li>
-</ul>
-<pre><code>ArrayList&lt;Integer&gt; collection3 = new ArrayList&lt;Integer&gt;();
-    System.out.println(collection1.getClass() == collection2.getClass());//True
-    System.out.println(collection2.getClass() == collection3.getClass());//True
-</code></pre><ul>
-<li>由于编译生成的字节码会去掉泛型的类型信息，只要能跳过编译器，就可以往某个泛型集合中加入其它类型的数据，例如，用<strong>反射</strong>得到集合，再调用其add方法即可</li>
-</ul>
-<pre><code>ArrayList&lt;Integer&gt; collection3 = new ArrayList&lt;Integer&gt;();
-collection3.getClass().getMethod(&quot;add&quot;,Object.class).invoke(collection3, &quot;abc&quot;);
-System.out.println(collection3.get(0));//abc
-</code></pre><p>collection3的参数类型是Integer，但用反射的方法跳过编译器，还是能够加入String类型的数据</p>
-<h2 id="泛型的优点"><a href="#泛型的优点" class="headerlink" title="泛型的优点"></a>泛型的优点</h2><ol>
-<li>提高了我们程序的使用性.不需要在自己去做强转</li>
-<li>将原来在运行阶段处理的问题，放到了编译阶段</li>
-<li>提高安全性</li>
-</ol>
-<h2 id="泛型的术语"><a href="#泛型的术语" class="headerlink" title="泛型的术语"></a>泛型的术语</h2><p>ArrayList<e>类定义和ArrayList<integer>类引用中涉及如下术语：</integer></e></p>
-<ul>
-<li>整个称为 ArrayList<e>泛型类型</e></li>
-<li>ArrayList<e>中的E称为类型变量或<strong>类型参数</strong></e></li>
-<li>整个ArrayList<integer>称为<strong>参数化的类型</strong></integer></li>
-<li>ArrayList<integer>中的Integer称为类型参数的实际类型参数或实际类型参数</integer></li>
-<li>ArrayList<integer>中的&lt;&gt;念typeof</integer></li>
-<li>ArrayList称为<strong>原始类型</strong></li>
-</ul>
-<h3 id="参数化类型与原始类型的兼容性"><a href="#参数化类型与原始类型的兼容性" class="headerlink" title="参数化类型与原始类型的兼容性"></a>参数化类型与原始类型的兼容性</h3><ul>
-<li><p>参数化类型可以引用一个原始类型，编译报告警告，例如</p>
-<pre><code>Collection&lt;String&gt; c = new Vector();
-</code></pre></li>
-<li><p>原始类型可以引用一个参数化类型的对象，编译报告警告，例如</p>
-<pre><code>Collection c = new Vector&lt;String&gt;();
-</code></pre></li>
-</ul>
-<h3 id="参数化类型不考虑类型参数的继承关系"><a href="#参数化类型不考虑类型参数的继承关系" class="headerlink" title="参数化类型不考虑类型参数的继承关系"></a>参数化类型不考虑类型参数的继承关系</h3><p>不要认为String和Object有继承关系就不会报错</p>
-<ul>
-<li>Vector<string> v = new Vector<object>();//错误</object></string></li>
-<li>Vector<object> v = new Vector<string>();//错误</string></object></li>
-</ul>
-<p><strong>思考</strong>，下面的代码会报错误吗？</p>
-<pre><code>Vector v1 = new Vector&lt;String&gt;();
-Vector&lt;Object&gt; v = v1;
-</code></pre><p>答：不会，第一个语句，原始类型可以引用一个参数化类型的对象，第二个语句，参数化类型可以引用一个原始类型的对象，所以不会报错。</p>
-<h2 id="泛型的声明"><a href="#泛型的声明" class="headerlink" title="泛型的声明"></a>泛型的声明</h2><p>泛型可以声明在类上，可以声明在方法上，可以声明在接口上。声明在类上的泛型，在整个类的范围内都可以使用。声明在方法上的泛型，只能在方法上使用。</p>
-<p><strong><em>什么时候在方法上声明泛型？</em></strong></p>
-<p>类上已经声明了泛型，但是在方法上我们不使用类上的泛型，而是自定义的一个，那么就可以在方法上声明，注意：在方法上声明时，泛型要定义在方法的返回值前面。</p>
-<h2 id="泛型中使用？通配符"><a href="#泛型中使用？通配符" class="headerlink" title="泛型中使用？通配符"></a>泛型中使用？通配符</h2><p>定义一个printCollection函数，参数是一个集合，类型参数是？通配符，这样可以将任何类型参数的集合作为参数传入，如ArrayList<integer></integer></p>
-<pre><code>public static void printCollection(Collection&lt;?&gt; collection){
-    //System.out.println(collection.add(&quot;abc&quot;));//错误，因为它不知道自己未来匹配就一定是String
-    System.out.println(collection.size());//没错，此方法与类型参数无关
-    for(Object object : collection){
-        System.out.println(object);
-    }
-}
-</code></pre><p>总结：使用<code>？</code>通配符可以引用其它各种参数化的类型，<code>？</code>通配符定义的变量主要用作引用，可以调用与参数化 <strong>无关</strong> 的方法，不能调用与参数化有关的方法</p>
-<h2 id="泛型中的-通配符的扩展"><a href="#泛型中的-通配符的扩展" class="headerlink" title="泛型中的 ? 通配符的扩展"></a>泛型中的 ? 通配符的扩展</h2><ul>
-<li>&lt;? extends E&gt; 它是用来限定是E类型或是E的子类型.</li>
-<li>&lt;? super E&gt;  只能是E类型或E的父类型.</li>
-</ul>
-<h3 id="限定通配符的上边界"><a href="#限定通配符的上边界" class="headerlink" title="限定通配符的上边界"></a>限定通配符的上边界</h3><ul>
-<li>正确：Vector&lt;? extends Number&gt; x = new Vector<integer>(); </integer></li>
-<li>错误：Vector&lt;? extends Number&gt; x = new Vector<string>();</string></li>
-</ul>
-<h3 id="限定通配符的下边界"><a href="#限定通配符的下边界" class="headerlink" title="限定通配符的下边界"></a>限定通配符的下边界</h3><ul>
-<li>正确：Vector&lt;? super Number&gt; x = new Vector<number>();</number></li>
-<li>错误：Vector&lt;? super Number&gt; x = new Vector<byte>();</byte></li>
-</ul>
-<h2 id="泛型集合的综合应用案例-——-遍历HashMap"><a href="#泛型集合的综合应用案例-——-遍历HashMap" class="headerlink" title="泛型集合的综合应用案例 —— 遍历HashMap"></a>泛型集合的综合应用案例 —— 遍历HashMap</h2><h3 id="HashMap结构"><a href="#HashMap结构" class="headerlink" title="HashMap结构"></a>HashMap结构</h3><p><img src="http://i.imgur.com/jGg7vdC.png" alt=""></p>
-<p>遍历的方式：</p>
-<ul>
-<li>单独取出所有键</li>
-<li>单独取出所有的值</li>
-<li>键和值作为一个组合体，放在一个类中，这个类是Map.Entry</li>
-</ul>
-<h3 id="迭代Entry的方式遍历HashMap"><a href="#迭代Entry的方式遍历HashMap" class="headerlink" title="迭代Entry的方式遍历HashMap"></a>迭代Entry的方式遍历HashMap</h3><p>1、HashMap是不能直接迭代的，需要将它转换成Set集合，API如下：</p>
-<pre><code>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()  
-</code></pre><p>2、Set的类型参数时Map.Entry，遍历</p>
-<pre><code>HashMap&lt;String,Integer&gt; hm = new HashMap&lt;String,Integer&gt;();
-hm.put(&quot;zxx&quot;,19);
-hm.put(&quot;lis&quot;,18);
-//Set中放的东西是Entry,Entry也指定泛型
-Set&lt;Map.Entry&lt;String,Integer&gt;&gt; mes = hm.entrySet();
-for(Map.Entry&lt;String,Integer&gt; me : mes) {
-    System.out.println(me.getKey()+&quot; &quot;+me.getValue());
-}
-</code></pre><h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>　　在返回值前加上<code>&lt;T&gt;</code>表示新定义一个类型，返回<code>x+y</code>有错误，因为不确定T类型是否有<code>+</code>这个方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T&gt;<span class="function">T <span class="title">add</span><span class="params">(T x, T y)</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>再来一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j )</span></span>&#123;</div><div class="line">		T tmp = a[i];</div><div class="line">		a[i] = a[j];</div><div class="line">		a[j] = tmp;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">swap(<span class="keyword">new</span> String[]&#123;<span class="string">"abc"</span>,<span class="string">"xyz"</span>,<span class="string">"asd"</span>&#125;,<span class="number">1</span>,<span class="number">2</span>);<span class="comment">//正确</span></div><div class="line"><span class="comment">//swap(new int[]&#123;1,2,3,4,5&#125;,1,2);//报错</span></div></pre></td></tr></table></figure>
-<p>　　<strong>泛型的实际类型只能是引用类型，不能是基本类型</strong>。<code>T</code>不能被基本类型替换。在案例<code>add(1，2)</code>中会自动装箱，而在swap案例中，数组本身就是Object，不会装箱。<br>　　除了在应用泛型时可以使用extends限定符，在定义泛型时也可以使用extends限定符,可以用来指定多个边界，如<br>　　<code>&lt; V extends Serializable &amp; cloneable &gt; void method(){}</code>，必须实现Serializable 和cloneable两个接口<br>　　普通方法、构造方法和静态方法中都可以使用泛型。<br>　　也可以用类型变量表示异常，称为参数化的异常，可以用于方法的throws列表中，但是不能用于catch子句中。<br>例：用下面的代码说明对异常如何采用泛型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Exception&gt; sayHello() <span class="keyword">throws</span> T</div><div class="line">&#123;</div><div class="line">    <span class="keyword">try</span>&#123;</div><div class="line"> </div><div class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">        <span class="keyword">throw</span> (T)e;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line">　　在泛型中可以同时有多个类型参数，在定义它们的尖括号中用逗号分，例如：</div><div class="line">```Java</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K,V&gt; <span class="function">V <span class="title">getValue</span><span class="params">(K key)</span> </span>&#123; <span class="keyword">return</span> map.get(key); &#125;</div></pre></td></tr></table></figure></p>
-<p>　　我们在开发中，如果在类上已经声明了泛型，但是我们在方法上不使用类上声明的泛型，我们可以自己在方法上声明泛型。这个在方法上声明的泛型，只能在方法内使用。<br>　　如果声明在方法上，必须声明在方法的返回值前面。<br>　　泛型声明在类上，那么这个泛型可以在整个类内使用.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo9</span> </span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></div><div class="line">    &#123;</div><div class="line">        Student&lt;String&gt; s=<span class="keyword">new</span> Student&lt;String&gt;();</div><div class="line">        s.a=<span class="string">"hello"</span>;</div><div class="line">        System.out.println(s.print());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在类上定义泛型</span></div><div class="line"><span class="comment">//如果将泛型定义在类上，那么这个泛型可以在整个类内使用.</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>&lt;<span class="title">T</span>&gt;  </span></div><div class="line">&#123;</div><div class="line">    T a;  <span class="comment">//泛型做为成员属性</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(a);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(T t)</span></span>&#123; <span class="comment">//泛型作用在方法.</span></div><div class="line">        System.out.println(t);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>##通过反射获取泛型的实际参数类型<br>　　<code>Vector&lt;Date&gt; v1 = new Vector&lt;Date&gt;();</code>通过获取v1的字节码来获取Vector的实际参数类型是<strong>不可能</strong>，因为编译器在编译后会去掉类型信息。但在已知框架中的确有这个应用，它是怎么实现的呢？<br>　　通过变量是无法知道它的参数类型的，但是当把这个变量交给一个方法去使用的时候，方法可以获得它的参数列表，并且是泛型的形式。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">		<span class="comment">//Vector&lt;Date&gt; v1 = new Vector&lt;Date&gt;();</span></div><div class="line">		Method applyMethod = GenericTest.class.getMethod(<span class="string">"applyVector"</span>, Vector.class);</div><div class="line">		Type[] types = applyMethod.getGenericParameterTypes();</div><div class="line">		ParameterizedType pType = (ParameterizedType)types[<span class="number">0</span>];</div><div class="line">		System.out.println(pType.getRawType());</div><div class="line">		System.out.println(pType.getActualTypeArguments()[<span class="number">0</span>]);</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">applyVector</span><span class="params">(Vector&lt;Date&gt; v1)</span></span>&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>结果：<br>　　class java.util.Vector<br>　　class java.util.Date
-　　</p>
+          泛型的基本应用
+Jdk1.5的集合类希望你在定义集合时，明确表示你要向集合中装哪种类型的数据，无法加入指定类型以外的数据
+如下例子，如果不给定参数类型，可以在集合类中加入任意类型的数据，但在取元素时必须由程序员强行转换数据类型，编译器不会报错，出现问题由程序员负责
 
-          
+ArrayList collec
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/30/[Java]Java泛型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -2814,7 +1529,7 @@ for(Map.Entry&lt;String,Integer&gt; me : mes) {
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2855,17 +1570,17 @@ for(Map.Entry&lt;String,Integer&gt; me : mes) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories">
                 <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -2923,7 +1638,7 @@ for(Map.Entry&lt;String,Integer&gt; me : mes) {
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Mist
   </a>
 </div>
 
@@ -3000,15 +1715,162 @@ for(Map.Entry&lt;String,Integer&gt; me : mes) {
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
+
+
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 
