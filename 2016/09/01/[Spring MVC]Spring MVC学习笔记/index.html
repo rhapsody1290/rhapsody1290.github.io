@@ -1,0 +1,2607 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaEE,Spring MVC," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Spring MVC简介
+SpringMVC是一个基于MVC设计理念的web框架
+Spring MVC通过一套MVC注解，让POJO成为处理请求的控制器，无需实现任何接口，同时SpringMVC还支持REST风格的URL请求
+Spring MVC在框架设计、扩展性、灵活性等方面全面超越Struts、WebWork等MVC框架，成为MVC的领跑者
+Spring MVC框架围绕DispatcherSe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring MVC学习笔记">
+<meta property="og:url" content="http://yoursite.com/2016/09/01/[Spring MVC]Spring MVC学习笔记/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="Spring MVC简介
+SpringMVC是一个基于MVC设计理念的web框架
+Spring MVC通过一套MVC注解，让POJO成为处理请求的控制器，无需实现任何接口，同时SpringMVC还支持REST风格的URL请求
+Spring MVC在框架设计、扩展性、灵活性等方面全面超越Struts、WebWork等MVC框架，成为MVC的领跑者
+Spring MVC框架围绕DispatcherSe">
+<meta property="og:image" content="http://i.imgur.com/8Eb6auw.png">
+<meta property="og:image" content="http://i.imgur.com/1hiYmrm.png">
+<meta property="og:image" content="http://i.imgur.com/GRSWFil.png">
+<meta property="og:image" content="http://i.imgur.com/APZ3QF7.png">
+<meta property="og:image" content="http://i.imgur.com/LDhruoO.png">
+<meta property="og:image" content="http://i.imgur.com/u6Gq5bU.png">
+<meta property="og:image" content="http://i.imgur.com/BFUifSh.png">
+<meta property="og:image" content="http://i.imgur.com/eJ5uWnl.png">
+<meta property="og:image" content="http://i.imgur.com/1T6Betq.png">
+<meta property="og:image" content="http://i.imgur.com/z7vVxv6.png">
+<meta property="og:image" content="http://i.imgur.com/6ge6LQ1.png">
+<meta property="og:updated_time" content="2016-10-21T03:41:49.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring MVC学习笔记">
+<meta name="twitter:description" content="Spring MVC简介
+SpringMVC是一个基于MVC设计理念的web框架
+Spring MVC通过一套MVC注解，让POJO成为处理请求的控制器，无需实现任何接口，同时SpringMVC还支持REST风格的URL请求
+Spring MVC在框架设计、扩展性、灵活性等方面全面超越Struts、WebWork等MVC框架，成为MVC的领跑者
+Spring MVC框架围绕DispatcherSe">
+<meta name="twitter:image" content="http://i.imgur.com/8Eb6auw.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/09/01/[Spring MVC]Spring MVC学习笔记/"/>
+
+
+  <title> Spring MVC学习笔记 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring MVC学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T00:00:00+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring MVC</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Spring-MVC简介"><a href="#Spring-MVC简介" class="headerlink" title="Spring MVC简介"></a>Spring MVC简介</h2><ul>
+<li><strong><em>SpringMVC是一个基于MVC设计理念的web框架</em></strong></li>
+<li>Spring MVC通过一套MVC注解，让POJO成为处理请求的控制器，无需实现任何接口，同时SpringMVC还支持REST风格的URL请求</li>
+<li>Spring MVC在框架设计、扩展性、灵活性等方面全面超越Struts、WebWork等MVC框架，成为MVC的领跑者</li>
+<li>Spring MVC框架围绕DispatcherServlet这个核心展开，DispatcherServlet是Spring MVC框架的总导演、总策划，他负责截获请求并将其分派给相应地处理器处理</li>
+</ul>
+<h2 id="Spring-MVC-整体架构"><a href="#Spring-MVC-整体架构" class="headerlink" title="Spring MVC 整体架构"></a>Spring MVC 整体架构</h2><p><img src="http://i.imgur.com/8Eb6auw.png" alt=""></p>
+<p>1、用户发起请求到控制器 DispatcherServlet (请求分派)<br>2、DispatcherServlet 去 handlerMapping 查找 Handler 对应的 Handler（Handler可以理解成struts中的 action）<br>3、HandlerMapper 返回 HandlerExecutorChain 执行链（包含两部分内容：Handler,拦截器集合）<br>4、DispatcherServlet 调用 HandlerAdapter<br>5、HandlerAdapter 调用 Handler<br>6、Handler 处理具体的业务逻辑<br>7、Handler 处理完业务逻辑之后，返回 ModelAndView 给 HandlerAdapter，其中的 View 是视图名称，Modal 是数据模型<br>8、HandlerAdapter 将 ModelAndView 返回给 DispatcherServlet<br>9、DispatcherServlet 通过 ModelAndView 中的视图名称在视图解析器中查找视图<br>10、视图解析器返回真正的 View 视图对象<br>11、渲染视图<br>12、返回用户响应</p>
+<h2 id="Spring-MVC快速入门★★★★★★"><a href="#Spring-MVC快速入门★★★★★★" class="headerlink" title="Spring MVC快速入门★★★★★★"></a>Spring MVC快速入门★★★★★★</h2><h3 id="github"><a href="#github" class="headerlink" title="github"></a>github</h3><p><a href="https://github.com/rhapsody1290/SpringMVC_study" target="_blank" rel="external">https://github.com/rhapsody1290/SpringMVC_study</a></p>
+<h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;cn.apeius&lt;/groupId&gt;
+    &lt;artifactId&gt;Demo&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+
+    &lt;!-- 全局属性配置,定义变量 --&gt;
+    &lt;properties&gt;
+        &lt;!--用来定义war包名称--&gt;
+        &lt;project.build.name&gt;tools&lt;/project.build.name&gt;
+        &lt;!--用来定义资源文件的编码格式  --&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;!-- spring版本号 --&gt;
+        &lt;spring.version&gt;4.0.2.RELEASE&lt;/spring.version&gt;
+        &lt;!-- mybatis版本号 --&gt;
+        &lt;mybatis.version&gt;3.2.8&lt;/mybatis.version&gt;
+        &lt;!-- log4j日志文件管理包版本 --&gt;
+        &lt;slf4j.version&gt;1.7.7&lt;/slf4j.version&gt;
+        &lt;log4j.version&gt;1.2.16&lt;/log4j.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!--Spring MVC--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--日志依赖--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;${slf4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- JSTL标签类 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;jstl&lt;/groupId&gt;
+            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+            &lt;version&gt;1.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--JSP相关--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;3.0.1&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+            &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+            &lt;version&gt;2.2.1&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><h3 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h3><ul>
+<li>Spring MVC自带一个<font color="red"><strong><em>Dispatcher Servlet</em></strong></font>，要是用这个servlet，需要把它配置到<strong><em>部署描述符（web.xml文件）</em></strong></li>
+<li>load-on-startup 元素是可选的，如果它存在，则在<strong><em>应用程序启动时</em></strong> 装载该servlet，并调用它的init方法；若它不存在，则在该servlet<strong><em>第一次请求</em></strong> 时进行加载</li>
+<li>★ DispatcherServlet将使用Spring MVC的诸多默认组件，在初始化时它会寻找WEB-INF目录下的配置文件，其命名规则为<strong><em>servletName-servlet.xml</em></strong></li>
+<li>url-pattern为/时，拦截所有请求，包括静态资源，此时需要设置annotation-driven和resources</li>
+</ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;
+         version=&quot;3.1&quot;&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;welcome-file-list&gt;
+        &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+    &lt;/welcome-file-list&gt;
+&lt;/web-app&gt;
+</code></pre><h3 id="spring-mvc的配置"><a href="#spring-mvc的配置" class="headerlink" title="spring-mvc的配置"></a>spring-mvc的配置</h3><h4 id="添加springmvc-servlet-xml"><a href="#添加springmvc-servlet-xml" class="headerlink" title="添加springmvc-servlet.xml"></a>添加springmvc-servlet.xml</h4><ul>
+<li>spring-mvc 会默认去WEB-INF的目录下寻找${serlvet-name}-serlvet.xml的文件</li>
+<li>所以我们把serlvetmvc的配置文件添加到web-inf的目录下，并且名字与 web.xml 中的servlet-name 相同</li>
+<li>可以把配置文件放在应用程序的任意目录，用servlet定义的init-param元素，以便DispatcherServlet加载到该文件</li>
+</ul>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;param-value&gt;/WEB-INF/config/springmvc-servlet.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+</code></pre><h4 id="自定义Handler（controller）★★★★★★"><a href="#自定义Handler（controller）★★★★★★" class="headerlink" title="自定义Handler（controller）★★★★★★"></a>自定义Handler（controller）★★★★★★</h4><ul>
+<li>在Spring2.5版本前，开发一个控制器的唯一方法是<strong><em>实现org.springframework.web.servlet.mvc.Controller接口</em></strong>，这个接口公开了一个handleRequest方法</li>
+<li>其实现类可以访问请求的HttpServletRequest和HttpServletResponse</li>
+<li>还必须返回包含<font color="red"><strong><em>视图路径</em></strong> </font>或<font color="blue"><strong><em>视图路径和模的ModelAndView对象</em></strong></font></li>
+<li>Controller接口的实现类只能处理一个单一动作（Action）（<strong><em>一个Action对应一个Controller的实现类。调用其handleRequest方法</em></strong>），而一个基于注解的控制器可以同时支持多个请求处理的动作，并且无需实现任何接口</li>
+</ul>
+<pre><code>public class Hello implements Controller{
+
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        //设置试图名称
+        mv.setViewName(&quot;hello&quot;);
+        mv.addObject(&quot;msg&quot;,&quot;这是第一个springmvc程序&quot;);
+        return mv;
+
+        /*也可以直接
+        return new ModelAndView(&quot;hello&quot;,&quot;msg&quot;,&quot;这是第一个springmvc程序&quot;);
+        */
+    }
+}
+</code></pre><h4 id="在springmvc-servlet-xml-中配置Handler"><a href="#在springmvc-servlet-xml-中配置Handler" class="headerlink" title="在springmvc-servlet.xml 中配置Handler"></a>在springmvc-servlet.xml 中配置Handler</h4><ul>
+<li>当DispatcherServlet收到/hello.do的请求时，自动构建控制器Hello，并调用其handleRequest方法，返回ModelAndView</li>
+</ul>
+<pre><code>&lt;!--配置自定义Handler，name表示对应的访问路径--&gt;
+&lt;bean name=&quot;/hello.do&quot; class=&quot;cn.apeius.springmvc.controller.Hello&quot;/&gt;
+</code></pre><h4 id="配置HandlerMapping（非必须，需要注释）"><a href="#配置HandlerMapping（非必须，需要注释）" class="headerlink" title="配置HandlerMapping（非必须，需要注释）"></a>配置HandlerMapping（非必须，需要注释）</h4><pre><code>&lt;!--配置handlerMapping--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;/&gt;
+</code></pre><h4 id="配置handlerAdapter（非必须，需要注释）"><a href="#配置handlerAdapter（非必须，需要注释）" class="headerlink" title="配置handlerAdapter（非必须，需要注释）"></a>配置handlerAdapter（非必须，需要注释）</h4><pre><code>&lt;!--配置handlerAdapter--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;/&gt;
+</code></pre><h4 id="配置视图解析器"><a href="#配置视图解析器" class="headerlink" title="配置视图解析器"></a>配置视图解析器</h4><ul>
+<li>视图解析器<font color="red"><strong><em>可以不设置</em></strong></font>，但需填入完整路径，如 /WEB-INF/views/hello.jsp</li>
+<li>视图解析器负责解析视图</li>
+<li>可以通过在配置文件中定义一个ViewResolver来配置视图解析器</li>
+<li>视图解析器配置有<strong><em>前缀</em></strong> 和<strong><em>后缀</em></strong> 两个属性，这样一来<strong><em>view路径将缩短</em></strong>，如只需填hello</li>
+</ul>
+<pre><code>&lt;!--配置试图解析器
+Example: prefix=&quot;/WEB-INF/jsp/&quot;, suffix=&quot;.jsp&quot;, viewname=&quot;test&quot; -&gt; &quot;/WEB-INF/jsp/test.jsp--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="定义视图"><a href="#定义视图" class="headerlink" title="定义视图"></a>定义视图</h4><p><strong><em> 文件路径在/WEB-INF/views/hello.jsp</em></strong></p>
+<p><img src="http://i.imgur.com/1hiYmrm.png" alt=""></p>
+<p><strong><em>hello.jsp中可以使用ModelAndView中的对象</em></strong></p>
+<pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;hello&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+      &lt;font color=&quot;red&quot;&gt;${msg}&lt;/font&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h2 id="分析第一个案例的执行过程"><a href="#分析第一个案例的执行过程" class="headerlink" title="分析第一个案例的执行过程"></a>分析第一个案例的执行过程</h2><h3 id="方法一：看日志"><a href="#方法一：看日志" class="headerlink" title="方法一：看日志"></a>方法一：看日志</h3><p><strong><em>导入日志</em></strong></p>
+<p>log4j.properties</p>
+<pre><code>log4j.rootLogger=DEBUG,A1
+log4j.logger.org.mybatis=DEBUG
+log4j.appender.A1=org.apache.log4j.ConsoleAppender
+log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+log4j.appender.A1.layout.ConversionPattern=%-d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%c]-[%p] %m%n
+</code></pre><p><strong><em>在web.xml中配置servlet 服务器开启的时候启动</em></strong></p>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+</code></pre><h3 id="方法二：看源码"><a href="#方法二：看源码" class="headerlink" title="方法二：看源码"></a>方法二：看源码</h3><p>在DispatcherServlet的doDispatch方法中打断点</p>
+<h2 id="精简之后的配置"><a href="#精简之后的配置" class="headerlink" title="精简之后的配置"></a>精简之后的配置</h2><p>springmvc-servlet.xml</p>
+<pre><code>&lt;!--配置自定义Handler，name表示对应的访问路径--&gt;
+&lt;bean name=&quot;/hello.do&quot; class=&quot;cn.apeius.springmvc.controller.Hello&quot;/&gt;
+
+&lt;!--配置试图解析器
+Example: prefix=&quot;/WEB-INF/jsp/&quot;, suffix=&quot;.jsp&quot;, viewname=&quot;test&quot; -&gt; &quot;/WEB-INF/jsp/test.jsp--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+    &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;
+    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="第一个注解程序★★★★★★"><a href="#第一个注解程序★★★★★★" class="headerlink" title="第一个注解程序★★★★★★"></a>第一个注解程序★★★★★★</h2><p>基于注解的控制器有以下几个优点：</p>
+<ul>
+<li><font color="red"><strong><em>一个控制器类可以处理多个动作</em></strong></font>，而一个实现了Controller接口的控制器<strong><em>只能处理一个动作</em></strong>。<strong><em>这就允许将相关的操作都写在同一个控制器内</em></strong>，从而减少应用程序中类的数量</li>
+<li>基于注解的控制器的<font color="red"><strong><em>请求映射不需要存储在配置文件中</em></strong> </font>，使用RequestMapping注释类型，可以对一个方法进行请求处理</li>
+</ul>
+<h3 id="创建注解的步骤"><a href="#创建注解的步骤" class="headerlink" title="创建注解的步骤"></a>创建注解的步骤</h3><p><strong><em>1、书写一个类，需要在类上面加上@Controller</em></strong></p>
+<ul>
+<li>用于指示Spring类的实例是一个控制器</li>
+<li>Spring使用<strong><em>扫描机制</em></strong> 来找到应用程序中所有<strong><em>基于注解的控制器类</em></strong></li>
+</ul>
+<p><strong><em>2、@RequestMapping映射一个请求与请求处理方法。一个采用@RequestMapping注释的方法将成为一个请求处理方法，访问相应的URL请求时调用。@RequestMapping使用后面有详解</em></strong></p>
+<pre><code>@Controller
+public class AnnotationHello {
+
+    @RequestMapping(value = &quot;/show1&quot;)//可以省略后缀
+    public ModelAndView test1(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(&quot;hello&quot;);
+        mv.addObject(&quot;msg&quot;,&quot;这是第一个注解程序&quot;);
+        return mv;
+    }
+}
+</code></pre><p><strong><em>3、在springmvc的配置文件中，去配置扫描包，使@Controller生效，和spring配置扫描包的方式一样</em></strong></p>
+<ul>
+<li>为了保证Spring能找到你的控制器，需要在Spring MVC的配置文件中声明spring-context<pre><code>xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+</code></pre></li>
+<li>在<component-scan>元素中指定控制器类的基本包<pre><code>&lt;context:component-scan base-package=&quot;cn.apeius.springmvc.controller&quot;/&gt;
+</code></pre></component-scan></li>
+</ul>
+<p><strong><em>4、测试</em></strong></p>
+<pre><code>http://localhost:8080/SpringMVC_study/show1.do
+</code></pre><h3 id="推荐使用的HandlerMapper和HandlerAdapter（什么意思？？）"><a href="#推荐使用的HandlerMapper和HandlerAdapter（什么意思？？）" class="headerlink" title="推荐使用的HandlerMapper和HandlerAdapter（什么意思？？）"></a>推荐使用的HandlerMapper和HandlerAdapter（什么意思？？）</h3><p><img src="http://i.imgur.com/GRSWFil.png" alt=""></p>
+<h3 id="使用注解驱动替换推荐的配置（什么意思？？）"><a href="#使用注解驱动替换推荐的配置（什么意思？？）" class="headerlink" title="使用注解驱动替换推荐的配置（什么意思？？）"></a>使用注解驱动替换推荐的配置（什么意思？？）</h3><ul>
+<li>url-pattern为/时，拦截所有请求，包括静态资源，此时需要在springmvc-config.xml中设置annotation-driven和resources元素</li>
+<li>annotation-driven 相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，配置一些messageconverter，即解决了@Controller注解的使用前提配置</li>
+<li>resource 元素则指示Spring MVC哪些静态资源需要单独处理（不通过DispatcherServlet）；如果没有annotation-driven，resource元素会阻止任意控制器被调用；若不使用resources，则不需要annotation-driven</li>
+</ul>
+<pre><code>&lt;!--配置注解驱动，会默认加载HandlerMapping，HandlerAdapter--&gt;
+&lt;mvc:annotation-driven/&gt;
+&lt;!-- 确保/css目录下所有文件可见--&gt;
+&lt;mvc:resources mapping=&quot;/css/**&quot; location=&quot;/css/&quot;/&gt;
+&lt;!--允许显示所有的.html文件--&gt;
+&lt;mvc:resources mapping=&quot;/*.html&quot; location=&quot;/&quot;/&gt;
+</code></pre><ul>
+<li>或者使用mvc:default-servlet-handler，过滤掉所有的静态资源</li>
+</ul>
+<pre><code>&lt;!--过滤掉所有的静态资源，把静态资直接交给tomcat去处理--&gt;
+&lt;mvc:default-servlet-handler/&gt;
+</code></pre><h2 id="使用RequestMapping映射请求★★★★★★"><a href="#使用RequestMapping映射请求★★★★★★" class="headerlink" title="使用RequestMapping映射请求★★★★★★"></a>使用RequestMapping映射请求★★★★★★</h2><ul>
+<li>在SpringMVC中的众多Controller以及每个Controller的众多方法，请求是如何映射到具体的处理方法上？这个就是靠@RequestMapping完成的，<strong><em>他完成了一个请求与请求处理方法的映射</em></strong></li>
+<li><font color="red">@RequestMapping既可以定义在类上也可以定义在方法上，请求映射的规则是：</font><pre><code>类上面的@RequestMapping.value + 方法上面的@RequestMapping.value
+</code></pre></li>
+</ul>
+<p>举个例子：<br>—— 控制器：</p>
+<pre><code>@Controller
+@RequestMapping(&quot;test&quot;)
+public class AnnotationHello {
+
+    @RequestMapping(&quot;show1&quot;)//可以省略后缀
+    public ModelAndView test1(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName(&quot;hello&quot;);
+        mv.addObject(&quot;msg&quot;,&quot;这是第一个注解程序&quot;);
+        return mv;
+    }
+}
+</code></pre><p>—— 访问URL：</p>
+<pre><code>http://localhost:8080/SpringMVC_study/test/show1.do
+</code></pre><h3 id="五种映射"><a href="#五种映射" class="headerlink" title="五种映射"></a>五种映射</h3><h4 id="标准URL映射"><a href="#标准URL映射" class="headerlink" title="标准URL映射"></a>标准URL映射</h4><ul>
+<li><p>标准URL映射是最简单的一种映射，例如：</p>
+<p>  @RequestMapping(“hello”)或<br>  @RequestMapping（”/hello”）或<br>  @RequestMapping(“value=”/hello””)</p>
+</li>
+<li><p>请求URL：</p>
+<pre><code>http://localhost:8080/web应用名/hello.do
+</code></pre></li>
+<li><p>value是RequestMapping的注释的默认属性，因此若只有唯一的属性，则可以省略属性名字，即以下两个标注含义相同：</p>
+<pre><code>@RequestMapping(&quot;show1&quot;)
+@RequestMapping(value = &quot;show1&quot;)
+</code></pre></li>
+<li><p>但如果有超过一个属性时，就必须写入value属性名称</p>
+</li>
+</ul>
+<h4 id="Ant风格的URL映射（通配符）"><a href="#Ant风格的URL映射（通配符）" class="headerlink" title="Ant风格的URL映射（通配符）"></a>Ant风格的URL映射（通配符）</h4><p><img src="http://i.imgur.com/APZ3QF7.png" alt=""></p>
+<p>举例1：</p>
+<pre><code>@RequestMapping(&quot;/test/*/show2&quot;)
+public ModelAndView test2(){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;/test/*/show2&quot;);
+    return mv;
+}
+</code></pre><p>能匹配：</p>
+<pre><code>/test/a/show2.do
+/test/abc/show2.do
+/test/show2.do 匹配不到
+</code></pre><p>举例2：</p>
+<pre><code>@RequestMapping(&quot;/test/**/show3&quot;)
+public ModelAndView test3(){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;/test/**/show3&quot;);
+    return mv;
+}
+</code></pre><p>能匹配：</p>
+<pre><code>http://localhost:8080/web应用名/test/a/show3.do
+http://localhost:8080/web应用名/test/b/a/d/show3.do
+</code></pre><h4 id="占位符映射"><a href="#占位符映射" class="headerlink" title="占位符映射"></a>占位符映射</h4><ul>
+<li>Url中可以通过一个或多个{xxxx}占位符映射,通过@PathVariable(“xxx”)绑定到方法的入参中</li>
+<li>占位符映射让传递参数多了一种方式</li>
+</ul>
+<p>例如： </p>
+<pre><code>@RequestMapping(&quot;/test/{itemId}/{itemName}&quot;)
+public ModelAndView test4(@PathVariable(&quot;itemId&quot;) String itemId, @PathVariable(&quot;itemName&quot;) String itemName){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;itemId:&quot; + itemId + &quot; &quot; + &quot;itemName:&quot; + itemName);
+    return mv;
+}
+</code></pre><p>URL:</p>
+<pre><code>http://localhost:8080/SpringMVC_study/test/2011/iphone6s.do
+</code></pre><p>结果：</p>
+<pre><code>itemId:2011 itemName:iphone6s
+</code></pre><h4 id="限制请求方法映射"><a href="#限制请求方法映射" class="headerlink" title="限制请求方法映射"></a>限制请求方法映射</h4><p><strong><em>若无指定method属性，则请求处理方法可以处理任意HTTP方法</em></strong></p>
+<p><strong><em>只允许get请求访问</em></strong></p>
+<pre><code>@RequestMapping(value = &quot;test5&quot;, method = RequestMethod.GET)
+public ModelAndView test5(){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;限制只有get请求才能进入&quot;);
+    return mv;
+}
+</code></pre><p><strong><em>只允post和get方法</em></strong></p>
+<pre><code>@RequestMapping(value = &quot;test5&quot;, method = {RequestMethod.GET,RequestMethod.POST})
+public ModelAndView test5(){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;限制只有get、post请求才能进入&quot;);
+    return mv;
+}
+</code></pre><h4 id="限制参数映射"><a href="#限制参数映射" class="headerlink" title="限制参数映射"></a>限制参数映射</h4><pre><code>@RequestMapping(value = &quot;/test6&quot;,params = &quot;userId&quot;)
+public ModelAndView test6(@RequestParam(value=&quot;userId&quot;) String userId){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;限定请求参数，必须要有Userid这个信息；userid：&quot; + userId);
+    return mv;
+}
+</code></pre><ul>
+<li>请求中必须带userId参数</li>
+<li>参数的规则如下<ul>
+<li>params=”userId”请求参数中必须包含userId</li>
+<li>params=”!userId”请求参数中不能包含userId</li>
+<li>params=”userId!=1”请求参数必须包含userId，但其值不能为1</li>
+<li>params=”{“userId”,”name”}”必须包含userId和name参数</li>
+</ul>
+</li>
+</ul>
+<p>请求URL</p>
+<pre><code>http://localhost:8080/SpringMVC_study/test6.do?userId=2
+</code></pre><h2 id="请求响应处理方法的数据绑定"><a href="#请求响应处理方法的数据绑定" class="headerlink" title="请求响应处理方法的数据绑定"></a>请求响应处理方法的数据绑定</h2><ul>
+<li>一个请求URL与请求响应方法一一对应</li>
+<li>数据绑定是将<strong><em>用户输入</em></strong> 与<strong><em>领域模型</em></strong> 相互绑定<ul>
+<li>类型总为<strong><em>String</em></strong> 的HTTP请求参数，可用于填充<strong><em>不同类型</em></strong>的对象属性</li>
+<li>数据绑定使得form bean变成多余</li>
+</ul>
+</li>
+</ul>
+<h3 id="绑定servlet内置对象"><a href="#绑定servlet内置对象" class="headerlink" title="绑定servlet内置对象"></a>绑定servlet内置对象</h3><p>非常简单，只需在参数中加入需要使用的内置对象，常用的有HttpServletRequest、HttpServletResponse、HttpSession</p>
+<pre><code>@RequestMapping(value = &quot;/test7&quot;)
+public ModelAndView test7(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;Servlet中的对象&quot;);
+    System.out.println(request);
+    System.out.println(response);
+    System.out.println(session);
+    return mv;
+}
+</code></pre><h3 id="PathVariable获取占位符中的参数"><a href="#PathVariable获取占位符中的参数" class="headerlink" title="@PathVariable获取占位符中的参数"></a>@PathVariable获取占位符中的参数</h3><ul>
+<li>通过@PathVariable可以绑定占位符参数到方法参数中</li>
+<li>路径变量的类型可以不是字符串</li>
+<li><strong><em>可以使用多个路径变量</em></strong></li>
+</ul>
+<pre><code>@RequestMapping(&quot;/test/{itemId}/{itemName}&quot;)
+public ModelAndView test4(@PathVariable(&quot;itemId&quot;) String itemId, @PathVariable(&quot;itemName&quot;) String itemName){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;itemId:&quot; + itemId + &quot; &quot; + &quot;itemName:&quot; + itemName);
+    return mv;
+}
+</code></pre><ul>
+<li>特殊说明：不要省略@PathVariable中的参数</li>
+</ul>
+<p><img src="http://i.imgur.com/LDhruoO.png" alt=""></p>
+<h3 id="RequestParam-★★★★★"><a href="#RequestParam-★★★★★" class="headerlink" title="@RequestParam ★★★★★"></a>@RequestParam ★★★★★</h3><ul>
+<li>将请求参数传入到方法中，如<a href="http://localhost:8080/SpringMVC_study/test8?userId=qm" target="_blank" rel="external">http://localhost:8080/SpringMVC_study/test8?userId=qm</a></li>
+<li>@RequestParam 注解的参数类型不一定是字符串，可以是整型等其他</li>
+</ul>
+<pre><font color="red">/**
+ * required：必须要有这个参数
+ * defautlValue：默认值，如果defaultValue设置了值，那么required失效
+ * @param userId
+ * @return
+ */</font>
+@RequestMapping(value = "/test8")
+public ModelAndView test8(@RequestParam(value = "userId",required = true,defaultValue = "10") String userId){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("hello");
+    mv.addObject("msg","userId：" + userId);
+    return mv;
+}
+</pre>
+
+<h3 id="CookieValue"><a href="#CookieValue" class="headerlink" title="@CookieValue"></a>@CookieValue</h3><p>在Spring MVC中通过@CookieValue可以轻松获取cookie的值</p>
+<p><strong><em>Servlet中如何获取指定的cookie值</em></strong></p>
+<pre><code>Cookie[] cookies = request.getCookies();
+//对数组进行遍历，根据cookie中的name 来找到对应的cookie
+for(Cookie cookie : cookies){
+    if(&quot;abc&quot;.equals(cookie.getName()))
+        cookie.getValue();//获取cookie中的值
+}
+</code></pre><p><strong><em>使用@CookieValue</em></strong></p>
+<pre><code>@RequestMapping(value = &quot;/test9&quot;)
+public ModelAndView test9(@CookieValue(&quot;JSESSIONID&quot;) String JSESSIONID){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,&quot;JESSIONID：&quot; + JSESSIONID);
+    return mv;
+}
+</code></pre><h3 id="POJO对象绑定参数"><a href="#POJO对象绑定参数" class="headerlink" title="POJO对象绑定参数"></a>POJO对象绑定参数</h3><p>SpringMVC会将请求过来的 <strong><em>参数名</em></strong> 和POJO实体中的 <strong><em>属性名</em></strong> 进行匹配，如果名称一致，将把值填充到对象中</p>
+<pre><code>@RequestMapping(value = &quot;/test10&quot;)
+public ModelAndView test10(User user){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;hello&quot;);
+    mv.addObject(&quot;msg&quot;,user);
+    return mv;
+}
+</code></pre><p>User.java</p>
+<pre><code>public class User {
+
+    private String userName;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public String toString(){
+        return userName + &quot; &quot; + password;
+    }
+}
+</code></pre><h3 id="自定义复合对象类型"><a href="#自定义复合对象类型" class="headerlink" title="自定义复合对象类型"></a>自定义复合对象类型</h3><p>User对象中有ContactInfo属性，Controller中的代码和第3点说的一致，但是，在表单代码中，需要使用<font color="red"><strong><em>“属性名(对象类型的属性).属性名”</em></strong></font>来命名input的name</p>
+<p>Model代码：</p>
+<pre><code>public class ContactInfo {
+    private String tel;
+    private String address;
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+}
+
+public class User {
+    private String firstName;
+    private String lastName;
+    private ContactInfo contactInfo;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public ContactInfo getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+}
+</code></pre><p>Controller代码：</p>
+<pre>
+@RequestMapping("saysth.do")
+public void test(User user) {
+    System.out.println(user.getFirstName());
+    System.out.println(user.getLastName());
+    System.out.println(<font color="red">user.getContactInfo().getTel()</font>);
+    System.out.println(<font color="red">user.getContactInfo().getAddress()</font>);
+}
+</pre>
+
+<p>表单代码：</p>
+<pre>
+&lt;form action="saysth.do" method="post">
+&lt;input name="firstName" value="张" />&lt;br>
+&lt;input name="lastName" value="三" />&lt;br>
+&lt;input name=<font color="red">"contactInfo.tel"</font> value="13809908909" />&lt;br>
+&lt;input name=<font color="red">"contactInfo.address"</font> value="北京海淀" />&lt;br>
+&lt;input type="submit" value="Save" />
+&lt;/form>
+</pre>
+
+
+<h3 id="Java的基本数据类型绑定"><a href="#Java的基本数据类型绑定" class="headerlink" title="Java的基本数据类型绑定"></a>Java的基本数据类型绑定</h3><ul>
+<li>表单中input的name值和Controller的<font color="red"><strong><em>参数变量名保持一致</em></strong></font>，就能完成数据绑定，如果<strong><em>不一致可以使用@RequestParam注解</em></strong></li>
+<li>如果Controller方法参数中定义的是基本数据类型，但是从页面提交过来的<strong><em>数据为null或者””的话，会出现数据转换的异常</em></strong>。也就是必须保证表单传递过来的数据不能为null或””，所以，在开发过程中，对可能为空的数据，最好将参数数据类型定义成<font color="red"><strong><em>包装类型</em></strong></font></li>
+<li><font color="red"><strong><em>Java的基本数据类型数组可以自动转换</em></strong></font>，如String[] interests，但是用户自定义User[] users不行，需要将User[]包装到一个UserForm中，通List操作</li>
+</ul>
+<p>表单代码</p>
+<pre><code>&lt;form action=&quot;/demos/demo1.action&quot; method=&quot;post&quot;&gt;
+    &lt;div&gt;姓名:&lt;/div&gt;
+    &lt;div&gt;&lt;input name=&quot;name&quot; value=&quot;张三&quot;/&gt;&lt;/div&gt;
+    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;年龄:&lt;/div&gt;
+    &lt;div&gt;&lt;input name=&quot;age&quot; value=&quot;20&quot;/&gt;&lt;/div&gt;
+    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;收入:&lt;/div&gt;
+    &lt;div&gt;&lt;input name=&quot;income&quot; value=&quot;100000&quot;/&gt;&lt;/div&gt;
+    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;结婚:&lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;isMarried&quot; value=&quot;true&quot; checked=&quot;checked&quot;/&gt;是
+    &lt;input type=&quot;radio&quot; name=&quot;isMarried&quot; value=&quot;false&quot;/&gt;否&lt;/div&gt;
+    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;兴趣:&lt;/div&gt;
+    &lt;div&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;interests&quot; value=&quot;听歌&quot; checked=&quot;checked&quot;/&gt;听歌
+    &lt;input type=&quot;checkbox&quot; name=&quot;interests&quot; value=&quot;书法&quot; checked=&quot;checked&quot;/&gt;书法
+    &lt;input type=&quot;checkbox&quot; name=&quot;interests&quot; value=&quot;看电影&quot; checked=&quot;checked&quot;/&gt;看电影
+    &lt;/div&gt;
+    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;input type=&quot;submit&quot; value=&quot;提交表单&quot;/&gt;&lt;/div&gt;
+&lt;/form&gt;
+</code></pre><p>测试：</p>
+<p><img src="http://i.imgur.com/u6Gq5bU.png" alt=""></p>
+<h3 id="集合List绑定"><a href="#集合List绑定" class="headerlink" title="集合List绑定"></a>集合List绑定</h3><ul>
+<li>如果方法需要接受的list集合，不能够直接在方法中书写List，List的绑定，需要 <strong><em>将List对象包装到一个类中</em></strong> 才能绑定<font color="red">（<strong><em>如果List中的类型是Java自带的，则可以自动转换</em></strong></font>，如List &lt;Object&gt;，List<string>，而List &lt;User&gt;不行）</string></li>
+<li>与”自定义复合对象类型”数据绑定类似，但是UserForm对象的属性被定义成List，而不是普通自定义对象，所以在表单中需要指定List的下标</li>
+<li>Spring会创建一个以最大下标值为size的List对象，List中的对象，只有在表单中对应有下标的那些才会有值，否则会为null</li>
+</ul>
+<p>表单</p>
+<pre><code>&lt;form action=&quot;/SpringMVC_study/test11.do&quot;&gt;
+        用户1：&lt;input type=&quot;text&quot; name=&quot;users[0].userName&quot;/&gt;&lt;br/&gt;
+        用户2：&lt;input type=&quot;text&quot; name=&quot;users[1].userName&quot;/&gt;&lt;br/&gt;
+        用户3：&lt;input type=&quot;text&quot; name=&quot;users[2].userName&quot;/&gt;&lt;br/&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;测试&quot;/&gt;
+&lt;/form&gt;
+</code></pre><p>将List对象包装到一个类中</p>
+<pre>
+public class UserForm {
+
+    <font color="red">private List<user> users;</user></font>
+
+    public List<user> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<user> users) {
+        this.users = users;
+    }
+}
+</user></user></pre>
+
+<p>Action</p>
+<pre>
+@RequestMapping(value = "/test11")
+public ModelAndView test11(<font color="red">UserForm userForm</font>){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("hello");
+    mv.addObject("msg","List集合");
+
+    for(User user : userForm.getUsers()){
+        System.out.println(user);
+    }
+
+    return mv;
+}
+</pre>
+
+<h3 id="集合Set绑定"><a href="#集合Set绑定" class="headerlink" title="集合Set绑定"></a>集合Set绑定</h3><p>Set和List类似，也需要绑定在对象上，而不能直接写在Controller方法的参数中。但是，绑定Set数据时，<strong><em>必须先在Set对象中add相应的数量的模型对象</em></strong></p>
+<p>Model代码：</p>
+<pre>
+public class User {
+    private String firstName;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+}
+
+public class UserSetForm {
+
+    <font color="red">private Set<user> users = new HashSet<user>();</user></user></font>
+
+    public UserSetForm() {
+        <font color="red">users.add(new User());
+        users.add(new User());
+        users.add(new User());</font>
+    }
+
+    public Set<user> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<user> users) {
+        this.users = users;
+    }
+
+}
+</user></user></pre>
+
+<p>Controller代码：</p>
+<pre><code>@RequestMapping(&quot;saysth.do&quot;)
+public void test(UserSetForm userForm) {
+    for (User user : userForm.getUsers()) {
+        System.out.println(user.getFirstName() + &quot; - &quot; + user.getLastName());
+    }
+}
+</code></pre><p>表单代码：</p>
+<pre>
+&lt;form action="saysth.do" method="post">
+    &lt;table>
+        &lt;thead>
+            &lt;tr>
+            &lt;th>First Name&lt;/th>
+            &lt;th>Last Name&lt;/th>
+            &lt;/tr>
+        &lt;/thead>
+        &lt;tfoot>
+            &lt;tr>
+            &lt;td colspan="2">&lt;input type="submit" value="Save" />&lt;/td>
+            &lt;/tr>
+        &lt;/tfoot>
+        &lt;tbody>
+            &lt;tr>
+            <font color="red">&lt;td>&lt;input name="users[0].firstName" value="aaa" />&lt;/td>
+            &lt;td>&lt;input name="users[0].lastName" value="bbb" />&lt;/td></font>
+            &lt;/tr>
+            &lt;tr>
+            <font color="red">&lt;td>&lt;input name="users[1].firstName" value="ccc" />&lt;/td>
+            &lt;td>&lt;input name="users[1].lastName" value="ddd" />&lt;/td></font>
+            &lt;/tr>
+            &lt;tr>
+            <font color="red">&lt;td>&lt;input name="users[2].firstName" value="eee" />&lt;/td>
+            &lt;td>&lt;input name="users[2].lastName" value="fff" />&lt;/td></font>
+            &lt;/tr>
+        &lt;/tbody>
+    &lt;/table>
+&lt;/form>
+</pre>
+
+<h3 id="Map绑定"><a href="#Map绑定" class="headerlink" title="Map绑定"></a>Map绑定</h3><p>Map最为灵活，它也需要绑定在对象上，而不能直接写在Controller方法的参数中</p>
+<p>Model代码：</p>
+<pre>
+public class User {
+    private String firstName;
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+}
+
+public class UserMapForm {
+    <font color="red">private Map<string, user=""> users;</string,></font>
+
+    public Map<string, user=""> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Map<string, user=""> users) {
+        this.users = users;
+    }
+
+}
+</string,></string,></pre>
+
+<p>Controller代码：</p>
+<pre><code>@RequestMapping(&quot;saysth.do&quot;)
+public void test(UserMapForm userForm) {
+    for (Map.Entry&lt;String, User&gt; entry : userForm.getUsers().entrySet()) {
+        System.out.println(entry.getKey() + &quot;: &quot; + entry.getValue().getFirstName() + &quot; - &quot; +
+        entry.getValue().getLastName());
+    }
+}
+</code></pre><p>表单代码：</p>
+<pre>
+&lt;form action="saysth.do" method="post">
+    &lt;table>
+    &lt;thead>
+        &lt;tr>
+            &lt;th>First Name&lt;/th>
+            &lt;th>Last Name&lt;/th>
+        &lt;/tr>
+    &lt;/thead>
+    &lt;tfoot>
+        &lt;tr>
+            &lt;td colspan="2">&lt;input type="submit" value="Save" />&lt;/td>
+        &lt;/tr>
+    &lt;/tfoot>
+    &lt;tbody>
+        &lt;tr><font color="red">
+            &lt;td>&lt;input name="users['x'].firstName" value="aaa" />&lt;/td>
+            &lt;td>&lt;input name="users['x'].lastName" value="bbb" />&lt;/td></font>
+        &lt;/tr>
+        &lt;tr><font color="red">
+            &lt;td>&lt;input name="users['y'].firstName" value="ccc" />&lt;/td>
+            &lt;td>&lt;input name="users['y'].lastName" value="ddd" />&lt;/td></font>
+        &lt;/tr>
+        &lt;tr><font color="red">
+            &lt;td>&lt;input name="users['z'].firstName" value="eee" />&lt;/td>
+            &lt;td>&lt;input name="users['z'].lastName" value="fff" />&lt;/td></font>
+        &lt;/tr>
+    &lt;/tbody>
+    &lt;/table>
+&lt;/form>
+</pre>
+
+<h2 id="数据绑定与表单标签库结合（表单不清空）★★★★★"><a href="#数据绑定与表单标签库结合（表单不清空）★★★★★" class="headerlink" title="数据绑定与表单标签库结合（表单不清空）★★★★★"></a>数据绑定与表单标签库结合（表单不清空）★★★★★</h2><ul>
+<li>数据绑定可以将<strong><em>用户表单输入</em></strong> 绑定到一个<strong><em>领域模型</em></strong>，可以自动将HTTP请求参数默认的<strong><em>字符串</em></strong> 类型转化成<strong><em>不同类型</em></strong> 的对象属性，<font color="red"><strong><em>因此不再需要FORM类</em></strong></font></li>
+<li>数据绑定还有另外一个好处：当输入验证失败时，它会重新生成一个HTML表单。手工编写HTML代码时，必须<strong><em>记着用户之前输入的值</em></strong>，重新填充输入字段。有了Spring的数据绑定和表单标签后，它们会替你完成这些工作</li>
+</ul>
+<p>第一步： 访问displayCustomerForm.do时创建一个领域对象并初始化属性，<strong><em>作为表单的默认显示</em></strong>，并添加到Model中，然后跳转到显示表单页面SignUpForm.jsp</p>
+<pre>
+@RequestMapping(value = "displayCustomerForm", method = RequestMethod.GET)
+public String displayCustomerForm(ModelMap model) {
+    Customer customer = new Customer();
+    customer.setName("qm");
+    customer.setAge(2333);
+    <font color="red">model.addAttribute("customer", customer);</font>
+    return "SignUpForm";
+}
+</pre>
+
+<p>第二步：使用表单标签库</p>
+<ul>
+<li>commandName定义了模型的名称，其对象属性将用于填充所生成的表单</li>
+<li>input标签中个path属性，将这个输入字段绑定到commandName指定对象的一个属性</li>
+<li>errors标签可以显示一个特定的字段错误（path=”name”）或所有字段错误（path=”*”）</li>
+</ul>
+<pre>
+&lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+&lt;form:form <font color="red">commandName="product"</font> action="product_save" method="post">
+    &lt;fieldset>
+        &lt;legend>Add a product&lt;/legend>
+        &lt;p class="errorLine">
+            <font color="red">&lt;form:errors path="name" cssClass="error"/></font>
+        &lt;/p>
+        &lt;p>
+            &lt;label for="name">*Product Name: &lt;/label>
+            <font color="red">&lt;form:input id="name" path="name" tabindex="1"/></font>
+        &lt;/p>
+        &lt;p>
+            &lt;label for="description">Description: &lt;/label>
+            &lt;form:input id="description" path="description" tabindex="2"/>
+        &lt;/p>
+        &lt;p class="errorLine">
+            &lt;form:errors path="price" cssClass="error"/>
+        &lt;/p>
+        &lt;p>
+            &lt;label for="price">*Price: &lt;/label>
+            &lt;form:input id="price" path="price" tabindex="3"/>
+        &lt;/p>
+        &lt;p class="errorLine">
+            &lt;form:errors path="productionDate" cssClass="error"/>
+        &lt;/p>
+        &lt;p>
+            &lt;label for="productionDate">*Production Date: &lt;/label>
+            &lt;form:input id="productionDate" path="productionDate" tabindex="4"/>
+        &lt;/p>
+        &lt;p id="buttons">
+            &lt;input id="reset" type="reset" tabindex="5">
+            &lt;input id="submit" type="submit" tabindex="6" 
+                value="Add Product">
+        &lt;/p>
+    &lt;/fieldset>
+&lt;/form:form>
+</pre>
+
+<h2 id="转换器和格式化（麻烦，建议使用joda-time，参考ssm整合部分）"><a href="#转换器和格式化（麻烦，建议使用joda-time，参考ssm整合部分）" class="headerlink" title="转换器和格式化（麻烦，建议使用joda-time，参考ssm整合部分）"></a>转换器和格式化（麻烦，建议使用joda-time，参考ssm整合部分）</h2><p>1、实现一种对象类型转换成另一种对象类型<br>2、Converter是通用元件，可以在应用程序的任意层中使用<br>3、Formatter则是专门为Web层设计的</p>
+<h3 id="Converter"><a href="#Converter" class="headerlink" title="Converter"></a>Converter</h3><p>通过转换器，实现将输入的日期字符串转换成Date类型</p>
+<ul>
+<li>实现Converter接口，源数据类型和目标数据类型可以自由指定</li>
+</ul>
+<pre>
+public class StringToDateConvert <font color="red">implements Converter<string,date> </string,date></font>{
+    private String datePattern;
+
+    public StringToDateConvert(String datePattern){
+        this.datePattern = datePattern;
+    }
+
+    <font color="red">public Date convert(String s)</font> {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+        dateFormat.setLenient(false);
+        try {
+            return dateFormat.parse(s);
+        } catch (ParseException e) {
+            throw new RuntimeException("格式错误");
+        }
+    }
+}
+</pre>
+
+<ul>
+<li>Spring MVC配置文件中编写一个conversionService bean，Bean的类必须为org.springframework.context.support.ConversionServiceFactoryBean，同时配置converters属性，它将列出程序中所有订制的Converter</li>
+</ul>
+<pre><code>&lt;bean id = &quot;conversionService&quot; class=&quot;org.springframework.context.support.ConversionServiceFactoryBean&quot;&gt;
+    &lt;property name=&quot;converters&quot;&gt;
+        &lt;set&gt;
+            &lt;bean class=&quot;cn.apeius.convert.StringToDateConvert&quot;&gt;
+                &lt;constructor-arg name=&quot;datePattern&quot; value=&quot;yyyy-MM-dd&quot;/&gt;
+            &lt;/bean&gt;
+        &lt;/set&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><ul>
+<li>给annotation-driven元素的conversion-service赋值bean名称，本例中是conversionService</li>
+</ul>
+<pre><code>&lt;mvc:annotation-driven conversion-service=&quot;conversionService&quot;/&gt;
+</code></pre><ul>
+<li>表单输入</li>
+</ul>
+<pre><code>&lt;form action=&quot;/SpringMVC_study/test22.do&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;用户登录&lt;/legend&gt;
+        &lt;p&gt;
+            &lt;label&gt;出生日期：&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;birthday&quot;/&gt;
+        &lt;/p&gt;
+        &lt;p id = &quot;buttons&quot;&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;测试&quot;/&gt;
+        &lt;/p&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre><ul>
+<li>字符串日期自动转换</li>
+</ul>
+<pre><code>@RequestMapping(value = &quot;/test22&quot;)
+    public ModelAndView test22(@RequestParam(&quot;birthday&quot;) Date birthday){
+        return new ModelAndView(&quot;hello&quot;,&quot;msg&quot;,birthday);
+}
+</code></pre><h3 id="Formatter"><a href="#Formatter" class="headerlink" title="Formatter"></a>Formatter</h3><p>1、Formatter的源类型必须是一个String，适合在Web层转换表单中用户的输入<br>2、Converter源类型可以是任意类型，可以在任意层中使用</p>
+<p>以下案例为将一个表单输入的String日期转换成Date：</p>
+<ul>
+<li>编写一个实现org.springframework.format.Formatter接口的Java类</li>
+</ul>
+<pre>
+public class DateFormatter <font color="red">implements Formatter<date></date></font>{
+    private String datePattern;
+    private SimpleDateFormat simpleDateFormat;
+
+    public DateFormatter(String datePattern){
+        this.datePattern = datePattern;
+        simpleDateFormat = new SimpleDateFormat(datePattern);
+        simpleDateFormat.setLenient(false);
+    }
+
+    /*利用Locale将String解析成目标类型（Date）*/
+    public Date <font color="red">parse(String text, Locale locale)</font> throws ParseException {
+        return simpleDateFormat.parse(text);
+    }
+
+    /*利用Locale将目标类型转换成String*/
+    public String <font color="red">print(Date date, Locale locale)</font> {
+        return simpleDateFormat.format(date);
+    }
+
+}
+</pre>
+
+<ul>
+<li>配置conversionService bean，bean的类名必须为org.springframework.format.support.FormattingConversionServiceFactoryBean，注入属性formatters，它将列出程序中所有订制的Formatter</li>
+</ul>
+<pre><code>&lt;!--配置conversionService bean--&gt;
+&lt;bean id = &quot;conversionService&quot;
+      class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+    &lt;property name=&quot;formatters&quot;&gt;
+        &lt;set&gt;
+            &lt;bean class=&quot;cn.apeius.formatter.Date，它将列出程序中所有订制的Converter&quot;&gt;
+                &lt;constructor-arg name=&quot;datePattern&quot; value=&quot;yyyy-MM-dd&quot;/&gt;
+            &lt;/bean&gt;
+        &lt;/set&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><ul>
+<li>给annotation-driven元素的conversion-service赋值bean名称，本例中是conversionService</li>
+</ul>
+<pre><code>&lt;mvc:annotation-driven
+    conversion-service=&quot;conversionService&quot;/&gt;
+</code></pre><ul>
+<li>测试同Converter</li>
+</ul>
+<h3 id="用Registrar注册Formatter"><a href="#用Registrar注册Formatter" class="headerlink" title="用Registrar注册Formatter"></a>用Registrar注册Formatter</h3><p>注册Formatter的另一种方法是使用Registrar：</p>
+<ul>
+<li>创建一个实现org.springframework.format.FormatterRegistrar接口的Java类</li>
+</ul>
+<pre><code>public class MyFormatterRegistrar implements FormatterRegistrar{
+
+    private  String datePattern;
+
+    public MyFormatterRegistrar(String datePattern){
+        this.datePattern = datePattern;
+    }
+    public void registerFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new DateFormatter(datePattern));
+        //注册更多的Formatter
+    }
+}
+</code></pre><ul>
+<li>在配置文件中注册Registrar</li>
+</ul>
+<pre><code>&lt;!--配置conversionService bean--&gt;
+&lt;bean id = &quot;conversionService&quot;
+      class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+    &lt;property name=&quot;formatterRegistrars&quot;&gt;
+        &lt;set&gt;
+            &lt;bean class=&quot;cn.apeius.formatter.MyFormatterRegistrar&quot;&gt;
+                &lt;constructor-arg name=&quot;datePattern&quot; value=&quot;yyyy-MM-dd&quot;/&gt;
+            &lt;/bean&gt;
+        &lt;/set&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><ul>
+<li>给annotation-driven元素的conversion-service赋值bean名称，本例中是conversionService</li>
+</ul>
+<h3 id="选择Convert还是Formatter"><a href="#选择Convert还是Formatter" class="headerlink" title="选择Convert还是Formatter"></a>选择Convert还是Formatter</h3><ul>
+<li>Converter是一般工具，<strong><em>可以将一种类型转换成另一种类型</em></strong>，Converter既可用在Web层，也可用在其他层中</li>
+<li>Formatter只能将String转换成另一种类型，Formatter适用于web层，将表单属性进行类型转换</li>
+<li>因此在Spring MVC程序中，选择Formatter比选择Converter更合适</li>
+</ul>
+<h2 id="使用joda-time注解对日期格式转换"><a href="#使用joda-time注解对日期格式转换" class="headerlink" title="使用joda-time注解对日期格式转换"></a>使用joda-time注解对日期格式转换</h2><p>SpringMVC默认不支持字符串转换成Date格式，可以采用SpringMVC自带的转换器，还有一种简单的方法：</p>
+<p>注解可以加载javaBean上:</p>
+<pre><code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+private Date birthday;
+</code></pre><p>注解接在方法参数上：</p>
+<pre><code>public void test(@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;) @RequestParam(&quot;date&quot;) Date date){
+    System.out.println(date);
+}
+</code></pre><p>需要导入依赖：</p>
+<pre><code>&lt;!--时间操作组件--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;joda-time&lt;/groupId&gt;
+    &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+    &lt;version&gt;${joda-time.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h2 id="应用-Autowired和-Service进行依赖注入"><a href="#应用-Autowired和-Service进行依赖注入" class="headerlink" title="应用@Autowired和@Service进行依赖注入"></a>应用@Autowired和@Service进行依赖注入</h2><ul>
+<li><p>将依赖注入到Spring MVC控制器的最简单方法是通过<strong><em>注解@Autowired到字段或方法</em></strong></p>
+<pre><code>@Autowired
+private ProductService productService;
+</code></pre></li>
+<li><p>能被作为依赖注入的类必须<strong><em>声明@Service</em></strong>，</p>
+<pre><code>@Service
+public class ProductServiceImpl implements ProductService {
+</code></pre></li>
+<li><p>在配置文件中还需添加一个<component-scan>元素来<strong><em>扫描依赖基本包</em></strong></component-scan></p>
+<pre><code>&lt;context:component-scan base-package=&quot;cn.apeius.product5.service&quot;/&gt;
+</code></pre></li>
+</ul>
+<h2 id="验证器Validator（JSR-spring5-0不通过）！！！"><a href="#验证器Validator（JSR-spring5-0不通过）！！！" class="headerlink" title="验证器Validator（JSR spring5.0不通过）！！！"></a>验证器Validator（JSR spring5.0不通过）！！！</h2><p>如果一个程序中既有Formatter，又有Validator（验证器），那么在调用Controller期间，将会有一个或者多个<font color="red"><strong><em>Formatter</em></strong> </font>试图将字符串转成domain对象中个属性值，一旦转换成功，<font color="red"><strong><em>验证器</em></strong> </font>就会介入</p>
+<h3 id="Spring验证器"><a href="#Spring验证器" class="headerlink" title="Spring验证器"></a>Spring验证器</h3><h4 id="验证的Product对象"><a href="#验证的Product对象" class="headerlink" title="验证的Product对象"></a>验证的Product对象</h4><pre><code>public class Product implements Serializable {
+    private static final long serialVersionUID = 748392348L;
+    private String name;
+    private String description;
+    private Float price;
+    private Date productionDate;
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public Float getPrice() {
+        return price;
+    }
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+    public Date getProductionDate() {
+        return productionDate;
+    }
+    public void setProductionDate(Date productionDate) {
+        this.productionDate = productionDate;
+    }
+
+}
+</code></pre><h4 id="实现Validator接口"><a href="#实现Validator接口" class="headerlink" title="实现Validator接口"></a>实现Validator接口</h4><pre>
+<font color="red">/*需要实现接口中supports和validate两个方法*/</font>
+public class ProductValidator implements Validator {
+
+    <font color="red">/*如果验证器可以处理指定的Class，supports方法将返回true*/</font>
+    public boolean supports(Class<?> klass) {
+        return Product.class.isAssignableFrom(klass);
+    }
+
+    <font color="red">/*validate方法验证目标对象，并将错误填入Errors对象*/</font>
+    public void validate(Object target, Errors errors) {
+        Product product = (Product) target;
+        <font color="blue">/*
+        1、给Errors对象添加错误最容易的方法是调用Errors对象的一个reject或rejectValue方法，
+        大多时候只传入一个错误码，Spring会在属性文件中查找错误码，获得相应的错误信息
+            void reject(String errorcode)
+            void rejectValue(String field, String errorCode)
+        2、使用ValidationUtils类
+            if(firstName == null || firstName.isEmpty()) errors.rejectValue("price","xxx")
+            等效于 ValidationUtils.rejectIfEmpty("price");
+        */</font>
+        ValidationUtils.rejectIfEmpty(errors, "name", "productname.required");
+        ValidationUtils.rejectIfEmpty(errors, "price", "price.required");
+        ValidationUtils.rejectIfEmpty(errors, "productionDate", "productiondate.required");
+
+        Float price = product.getPrice();
+        if (price != null && price < 0) {
+            errors.rejectValue("price", "price.negative");
+        }
+
+        Date productionDate = product.getProductionDate();
+        if (productionDate != null) {
+            // The hour,minute,second components of productionDate are 0
+            if (productionDate.after(new Date())) {
+                errors.rejectValue("productionDate", "productiondate.invalid");
+            }
+        }
+    }
+}
+</pre>
+
+<h4 id="错误信息属性文件"><a href="#错误信息属性文件" class="headerlink" title="错误信息属性文件"></a>错误信息属性文件</h4><p>若想要从某个属性文件获取错误消息，则要通过声明messageSource bean告诉spring去那里查找这个文件</p>
+<p><strong><em>messageSource bean</em></strong></p>
+<pre><code>&lt;bean id=&quot;messageSource&quot; class=&quot;org.springframework.context.support.ReloadableResourceBundleMessageSource&quot;&gt;
+    &lt;property name=&quot;basename&quot; value=&quot;/WEB-INF/resource/messages&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><p><strong><em>messages.properties</em></strong></p>
+<pre><code>productname.required.product.name=Please enter a product name
+price.required=Please enter a price
+productiondate.required=Please enter a production date
+productiondate.invalid=Invalid production date. Please ensure the production date is not later than today.
+price.negative=price should be positive
+</code></pre><h4 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h4><pre>
+@Controller
+public class ProductController {
+
+    private static final Log logger = LogFactory
+            .getLog(ProductController.class);
+
+    @RequestMapping(value = "/product_input")
+    public String inputProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "ProductForm";
+    }
+
+    @RequestMapping(value = "/product_save")
+    public String saveProduct(@ModelAttribute Product product,
+            <font color="red">BindingResult bindingResult</font>, Model model) {<font color="red">//BindingResult继承Errors接口</font>        
+        logger.info("product_save");
+        <font color="red">/*实例化Vaildator类，调用其validate方法*/</font>
+        ProductValidator productValidator = new ProductValidator();
+        productValidator.validate(product, bindingResult);
+
+        <font color="red">/*检验该验证器是否生成错误消息，需在BindingResult中调用hasErrors方法*/</font>
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            logger.info("Code:" + fieldError.getCode() + ", field:"
+                    + fieldError.getField());
+
+            return "ProductForm";
+        }
+
+        // save product here
+
+        model.addAttribute("product", product);
+        return "ProductDetails";
+    }
+}
+</pre>
+
+<h3 id="JSR-303验证"><a href="#JSR-303验证" class="headerlink" title="JSR 303验证"></a>JSR 303验证</h3><p>Hibernate Validator 是 Bean Validation 的参考实现。 Hibernate Validator 提供了 JSR 303 规范中所有内置 constraint 的实现，除此之外还有一些附加的 constraint。</p>
+<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><pre><code>&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+    &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;
+    &lt;version&gt;5.2.4.Final&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h4 id="Product类"><a href="#Product类" class="headerlink" title="Product类"></a>Product类</h4><p>Prodcut类中的name和productionDate字段用JSR 303标注类型进行标注</p>
+<pre><code>public class Product implements Serializable {
+    private static final long serialVersionUID = 78L;
+
+    @Size(min=1, max=10)
+    private String name;
+
+    private String description;
+    private Float price;
+
+    @Past
+    private Date productionDate;
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public Float getPrice() {
+        return price;
+    }
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+    public Date getProductionDate() {
+        return productionDate;
+    }
+    public void setProductionDate(Date productionDate) {
+        this.productionDate = productionDate;
+    }
+
+} 
+</code></pre><h2 id="Spring-MVC-和-Struts2的区别"><a href="#Spring-MVC-和-Struts2的区别" class="headerlink" title="Spring MVC 和 Struts2的区别"></a>Spring MVC 和 Struts2的区别</h2><ul>
+<li>Struts2的入口是filter，Spring MVC的入口是Servlet，两者的实现机制不同</li>
+<li>Struts2是基于类设计的，参数绑定到类的属性，所有的方法都可以使用；Spring MVC是基于方法设计的，参数绑定到方法的形参，并且只有一个方法可以使用</li>
+<li>Struts2必须是多例的（Struts2传递到的参数绑定到类的属性，如果是单例会导致不同用户数据的冲突），Spring MVC默认是单例的，所以Spring MVC的性能比Struts2好</li>
+</ul>
+<h2 id="jsp-和-jstl-视图解析器"><a href="#jsp-和-jstl-视图解析器" class="headerlink" title="jsp 和 jstl 视图解析器"></a>jsp 和 jstl 视图解析器</h2><p>userList.jsp</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+         pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table border=&quot;1px&quot; width=&quot;100%&quot; cellspacing=&quot;0&quot;&gt;
+    &lt;tr&gt;
+        &lt;td&gt; 用户名&lt;/td&gt;
+        &lt;td&gt; 密码&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;c:forEach items=&quot;${userList}&quot; var=&quot;user&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt; ${user.userName} &lt;/td&gt;
+            &lt;td&gt; ${user.password} &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/c:forEach&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>controller代码</p>
+<pre><code>@RequestMapping(value=&quot;/test12&quot;)
+public ModelAndView test12(){
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;userList&quot;);
+    List&lt;User&gt; userList = new ArrayList&lt;User&gt;();
+    for(int i = 0 ; i &lt; 3 ; i ++){
+        User user = new User();
+        user.setUserName(&quot;user_name&quot;+i);
+        user.setPassword(&quot;123456&quot;);
+        userList.add(user);
+    }
+    mv.addObject(&quot;userList&quot;, userList);
+    return mv;
+}
+</code></pre><h2 id="使用ResponseBody输出JSON"><a href="#使用ResponseBody输出JSON" class="headerlink" title="使用ResponseBody输出JSON"></a>使用ResponseBody输出JSON</h2><ul>
+<li>在实际开发过程中json是最为常用的一种方式，所以Spring MVC提供了一种更为简便的方式输出数据，即使用@ResponseBody注解</li>
+<li>需引入Jackson:Json处理工具包</li>
+</ul>
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><p>导入依赖</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.4.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>返回json数组</p>
+<pre><code>@RequestMapping(value=&quot;/test13&quot;)
+@ResponseBody
+public List&lt;User&gt; test13(){
+    List&lt;User&gt; userList = new ArrayList&lt;User&gt;();
+
+    for(int i = 0 ; i &lt; 3 ; i ++){
+        User user = new User();
+        user.setUserName(&quot;user_name&quot;+i);
+        user.setPassword(&quot;123456&quot;);
+        userList.add(user);
+    }
+
+    return userList;
+}
+</code></pre><p>返回单个json对象</p>
+<pre><code>@RequestMapping(value=&quot;/test14&quot;)
+@ResponseBody
+public User test14(){
+    User user = new User();
+    user.setUserName(&quot;user_name&quot;);
+    user.setPassword(&quot;123456&quot;);
+    return user;
+}
+</code></pre><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="http://i.imgur.com/BFUifSh.png" alt=""></p>
+<h3 id="忽略某个JaveBean的属性"><a href="#忽略某个JaveBean的属性" class="headerlink" title="忽略某个JaveBean的属性"></a>忽略某个JaveBean的属性</h3><pre><code>// 密码
+@JsonIgnore
+private String password;
+</code></pre><h2 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h2><p>使用@RequestBody可以将请求的json字符串转化POJO对象</p>
+<p><strong><em>传递json对象</em></strong></p>
+<pre><code>@RequestMapping(value=&quot;/test15&quot;)
+@ResponseStatus(value= HttpStatus.OK)
+public void test15(@RequestBody User user){
+    System.out.println(user);
+}
+</code></pre><p><strong><em>传递json数组</em></strong></p>
+<pre><code>@RequestMapping(value=&quot;/test16&quot;)
+@ResponseStatus(value= HttpStatus.OK)
+public void test16(@RequestBody List&lt;User&gt; users){
+    for(User user : users){
+        System.out.println(user);
+    }
+}
+</code></pre><h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+    &lt;version&gt;1.3.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="定义文件上传解析器"><a href="#定义文件上传解析器" class="headerlink" title="定义文件上传解析器"></a>定义文件上传解析器</h3><p>在springmvc的配置文件中，去定义文件上传的解析器</p>
+<pre><code>&lt;!-- 定义文件上传解析器 --&gt;
+&lt;bean id=&quot;multipartResolver&quot; class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;
+    &lt;!-- 设定默认编码 --&gt;
+    &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot;&gt;&lt;/property&gt;
+    &lt;!-- 设定文件上传的最大值5MB，5*1024*1024 --&gt;
+    &lt;property name=&quot;maxUploadSize&quot; value=&quot;5242880&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><h3 id="客户端编程"><a href="#客户端编程" class="headerlink" title="客户端编程"></a>客户端编程</h3><pre><code>&lt;form method=&quot;post&quot; action=&quot;/SpringMVC_study/upload&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    &lt;p&gt;&lt;input type=&quot;file&quot; name=&quot;file&quot;/&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;提交&quot;/&gt;&lt;/p&gt;
+&lt;/form&gt;
+</code></pre><p>如果想要上传多个文件，在input元素中加入multiple属性：</p>
+<pre><code>&lt;input type=&quot;file&quot; name=&quot;file&quot; multiple/&gt;
+</code></pre><h3 id="MultipartFile接口"><a href="#MultipartFile接口" class="headerlink" title="MultipartFile接口"></a>MultipartFile接口</h3><p>上传到Spring MVC程序的文件会被包在一个MultipartFile对象中，具有以下方法：</p>
+<pre><code>byte[] getBytes() #以字节数组形式返回文件的内容
+String getContentType() # 返回文件的内容类型
+InputStream getInputStream() # 返回一个InputStream，从中读取文件的内容
+String getName() # 以多部分的形式返回参数的名称
+String getOriginalFilename() # 返回客户端本地驱动器中个初始文件名
+String getSize() # 以字为单位，返回文件的大小
+boolean isEmpty() # 表示被上传的文件是否为空
+void transferTo(File destination) # 将上传的文件保存到目标目录下
+</code></pre><h3 id="利用注解上传单文件"><a href="#利用注解上传单文件" class="headerlink" title="利用注解上传单文件"></a>利用注解上传单文件</h3><pre><code>@RequestMapping(value=&quot;/upload&quot;)
+public String upload(@RequestParam(&quot;file&quot;) MultipartFile multipartFile)
+        throws Exception {
+    if (multipartFile != null) {
+        // multipartFile.getOriginalFilename() 获取文件的原始名称
+        multipartFile.transferTo(new File(&quot;d:\\tmp\\&quot; + multipartFile.getOriginalFilename()));
+    }
+    return &quot;redirect:/success.html&quot;;
+
+}
+</code></pre><h3 id="利用注解上传多文件"><a href="#利用注解上传多文件" class="headerlink" title="利用注解上传多文件"></a>利用注解上传多文件</h3><pre><code>@RequestMapping(value=&quot;/uploadMultipartFile&quot;)
+public String uploadMultipartFile(@RequestParam(&quot;files&quot;) MultipartFile[] multipartFiles)
+        throws Exception {
+    for(MultipartFile multipartFile : multipartFiles){
+        if (multipartFile != null) {
+            // multipartFile.getOriginalFilename() 获取文件的原始名称
+            multipartFile.transferTo(new File(&quot;d:\\tmp\\&quot; + multipartFile.getOriginalFilename()));
+        }
+    }
+
+    return &quot;redirect:/success.html&quot;;
+
+}
+</code></pre><h3 id="利用domain类上传文件★★★★★"><a href="#利用domain类上传文件★★★★★" class="headerlink" title="利用domain类上传文件★★★★★"></a>利用domain类上传文件★★★★★</h3><p>Product类中加入了新的属性 List<multipartfile> images：</multipartfile></p>
+<pre>
+public class Product implements Serializable {
+    private static final long serialVersionUID = 74458L;
+
+    @NotNull
+    @Size(min=1, max=10)
+    private String name;
+
+    private String description;
+    private Float price;
+    <font color="red">private List&lt;MultipartFile> images;</font>
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public Float getPrice() {
+        return price;
+    }
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+    public List&lt;MultipartFile> getImages() {
+        return images;
+    }
+    public void setImages(List&lt;MultipartFile> images) {
+        this.images = images;
+    }
+}
+</pre>
+
+<p>控制器：</p>
+<pre><code>@RequestMapping(value = &quot;/product_save&quot;)
+public String saveProduct(HttpServletRequest servletRequest,
+        @ModelAttribute Product product, BindingResult bindingResult,
+        Model model) {
+
+    List&lt;MultipartFile&gt; files = product.getImages();
+
+    List&lt;String&gt; fileNames = new ArrayList&lt;String&gt;();
+
+    if (null != files &amp;&amp; files.size() &gt; 0) {
+        for (MultipartFile multipartFile : files) {
+
+            String fileName = multipartFile.getOriginalFilename();
+            fileNames.add(fileName);
+
+            File imageFile = new File(servletRequest.getServletContext()
+                    .getRealPath(&quot;/image&quot;), fileName);
+            try {
+                multipartFile.transferTo(imageFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // save product here
+    model.addAttribute(&quot;product&quot;, product);
+    return &quot;ProductDetails&quot;;
+}
+</code></pre><h3 id="进度条"><a href="#进度条" class="headerlink" title="进度条"></a>进度条</h3><ul>
+<li>HTML5 input元素的change事件，当input元素的值发生改变时，就会被触发</li>
+<li>HTML5 在XMLHttpRequest对象中添加的progress事件，当异步使用XMLHttpRequest对象上传文件时，就会持续地触发progress对象，直到上传进度完成或取消。通过监听progress事件，可以监控文件上传操作的进度</li>
+</ul>
+<h4 id="UploadFile的domain类"><a href="#UploadFile的domain类" class="headerlink" title="UploadFile的domain类"></a>UploadFile的domain类</h4><p>UploadFile类中包含一个MultipartFile属性，代表一个文件</p>
+<pre><code>public class UploadedFile implements Serializable {
+
+    private static final long serialVersionUID = 72348L;    
+    private MultipartFile multipartFile;
+
+    public MultipartFile getMultipartFile() {
+        return multipartFile;
+    }
+
+    public void setMultipartFile(MultipartFile multipartFile) {
+        this.multipartFile = multipartFile;
+    }
+}
+</code></pre><h4 id="Html5FileUploadController类"><a href="#Html5FileUploadController类" class="headerlink" title="Html5FileUploadController类"></a>Html5FileUploadController类</h4><pre>
+@Controller
+public class Html5FileUploadController {
+
+    private static final Log logger = LogFactory
+            .getLog(Html5FileUploadController.class);
+
+    @RequestMapping(value = "/html5")
+    public String inputProduct() {
+        return "Html5";
+    }
+
+    @RequestMapping(value = "/file_upload")
+    public void saveFile(HttpServletRequest servletRequest,
+            <font color="red">@ModelAttribute UploadedFile uploadedFile,</font>
+            BindingResult bindingResult, Model model) {
+
+        MultipartFile multipartFile = uploadedFile.getMultipartFile();
+        String fileName = multipartFile.getOriginalFilename();
+        try {
+            File file = new File(servletRequest.getSession().getServletContext().getRealPath("/file"), fileName);
+            multipartFile.transferTo(file);
+            System.out.println(file.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</pre>
+
+<h4 id="html5-jsp"><a href="#html5-jsp" class="headerlink" title="html5.jsp"></a>html5.jsp</h4><p>html5.jsp的用户界面主要包含了一个名为progressBar的div元素，一个表单和另一个名为debug的div元素。progressBar用于展示上传进度，debug用于展示调试信息，表单中有一个类型为file的input元素的一个按钮，有一些注意点：</p>
+<ul>
+<li>标识为files的input元素，它有一个multiple属性，用于支持多文件选择</li>
+<li>这个按钮不是一个提交按钮，单击它不会提交表单，脚本是利用XMLHttpRequest对象来完成上传的</li>
+</ul>
+<pre>
+&lt;!DOCTYPE HTML>
+&lt;html>
+&lt;head>
+&lt;script>
+    <font color="red">/*①
+    * JavaScript代码执行的第一个件事是分配四个变量：
+    * totalFileLength，totalUploaded，fileCount，filesUploaded。
+    * totalFileLength表示要上传的文件总长度，totalUploaded表示目前已经上传的字节数，
+    * fileCount表示上传的文件数量，filesUploaded表示已经上传的文件数量
+    */</font>
+    var totalFileLength, totalUploaded, fileCount, filesUploaded;
+
+    function debug(s) {
+        var debug = document.getElementById('debug');
+        if (debug) {
+            debug.innerHTML = debug.innerHTML + '&lt;br/>' + s;
+        }
+    }
+
+    <font color="red">/*②
+    * 启动时将files input元素的change事件映射到onFileSelect函数，
+    * 从本地目录选择了不同的文件，就会触发change事件；
+    * 将按钮的click事件映射到startUpload函数，点击就执行上传操作
+    */</font>
+    window.onload = function() {
+        document.getElementById('files').addEventListener(
+                'change', onFileSelect, false);
+        document.getElementById('uploadButton').
+                addEventListener('click', startUpload, false);
+    }
+
+    <font color="red">/*③
+    * 每当用户选择本地目录不同文件时就会调用该函数，计算fileCount和totalFileLength    
+    */</font>
+    function onFileSelect(e) {
+        var files = e.target.files; // FileList object
+        var output = [];
+        fileCount = files.length;
+        totalFileLength = 0;
+        for (var i=0; i&lt;fileCount; i++) {
+            var file = files[i];
+            output.push(file.name, ' (',
+                  file.size, ' bytes, ',
+                  file.lastModifiedDate.toLocaleDateString(), ')'
+            );
+            output.push('&lt;br/>');
+            debug('add ' + file.size);
+            totalFileLength += file.size;
+        }
+        document.getElementById('selectedFiles').innerHTML = 
+            output.join('');
+        debug('totalFileLength:' + totalFileLength);
+    }
+
+    <font color="red">/*④
+    * 当用户调用Upload按钮时，就会调用startUpload函数，初始化totalUploaded和filesUploaded，
+    * 随之调用uploadNext函数，上传下一个文件
+    */</font>
+    function startUpload() {
+        totalUploaded = filesUploaded = 0;
+        uploadNext();
+    }
+
+    <font color="red">/*⑤★★★★★
+    * 首先创建一个XMLHttpRequest和FormData对象，并将接下来要上传的文件添加到它的后面，
+    * 随后，uploadNext函数将XMLHttpRequest对象的progress事件添加到onUploadProgress函数，
+    * 并将load事件和error事件分别添加到onUploadComplete和onUploadFailed
+    * 接下来打开一个服务器连接，并发出FormData
+    * 在上传期间，会重复得调用onUploadProgress函数，让它有机会更新进度条
+    */</font>
+    function uploadNext() {
+        var xhr = new XMLHttpRequest();
+        var fd = new FormData();
+        var file = document.getElementById('files').
+                files[filesUploaded];
+        fd.append("multipartFile", file);
+        xhr.upload.addEventListener(
+                "progress", onUploadProgress, false);
+        xhr.addEventListener("load", onUploadComplete, false);
+        xhr.addEventListener("error", onUploadFailed, false);
+        xhr.open("POST", "file_upload");
+        debug('uploading ' + file.name);
+        xhr.send(fd);
+    }
+
+    <font color="red">/*⑥
+    * 在上传期间，会重复得调用onUploadProgress函数，让它有机会更新进度条
+    * 更新包括计算已经上传的总字节数比率，与选择文件的总字节数，得到上传比率
+    * 更新div元素的宽度
+    */</font>
+    function onUploadProgress(e) {
+        if (e.lengthComputable) {
+            var percentComplete = parseInt(
+                    (e.loaded + totalUploaded) * 100 
+                    / totalFileLength);
+            var bar = document.getElementById('bar');
+            bar.style.width = percentComplete + '%';
+            bar.innerHTML = percentComplete + ' % complete';
+        } else {
+            debug('unable to compute');
+        }
+    }
+
+    <font color="red">/*⑦
+    * 上传完成时，调用onUploadComplete函数，这个事件处理函数会增加totalUploaded，
+    * 即已经上传的文件容量，并添加filesUploaded
+    * 如果所有文件已经上传完毕，弹出文件已经成功完成的提示
+    * 否则再次调用uploadNext
+    */</font>
+    function onUploadComplete(e) {
+        totalUploaded += document.getElementById('files').
+                files[filesUploaded].size;
+        filesUploaded++;
+        debug('complete ' + filesUploaded + " of " + fileCount);
+        debug('totalUploaded: ' + totalUploaded);        
+        if (filesUploaded &lt; fileCount) {
+            uploadNext();
+        } else {
+            var bar = document.getElementById('bar');
+            bar.style.width = '100%';
+            bar.innerHTML = '100% complete';
+            alert('Finished uploading file(s)');
+        }
+    }
+
+    function onUploadFailed(e) {
+        alert("Error uploading file");
+    }   
+
+&lt;/script>
+&lt;/head>
+&lt;body>
+&lt;h1>Multiple file uploads with progress bar&lt;/h1>
+&lt;div id='progressBar' style='height:20px;border:2px solid green'>
+    &lt;div id='bar' 
+            style='height:100%;background:#33dd33;width:0%'>
+    &lt;/div>
+&lt;/div>
+&lt;form>
+    &lt;input type="file" id="files" multiple/>
+    &lt;br/>
+    &lt;output id="selectedFiles">&lt;/output>
+    &lt;input id="uploadButton" type="button" value="Upload"/>
+&lt;/form>
+&lt;div id='debug' 
+    style='height:100px;border:2px solid green;overflow:auto'>
+&lt;/div>
+&lt;/body>
+&lt;/html>
+</pre>
+
+<p><img src="http://i.imgur.com/eJ5uWnl.png" alt=""></p>
+<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><ul>
+<li>只要把图片或者HTML这样的静态资源放在<strong><em>应用程序的目录下，或者放在应用程序目录的子目录下，而不是放在WEB-INF下</em></strong>，Servlet、JSP容器就会将该资源发送到浏览器，在浏览器中打开正确的URL即可下载</li>
+<li>有时候静态资源是<strong><em>保存在应用程序目录外</em></strong>，或者<strong><em>保存在某一个数据库</em></strong>，或者<strong><em>有时候需要控制它的访问权限，方式其他网站交叉引用它</em></strong>，必须通过编程发送资源到浏览器</li>
+</ul>
+<h3 id="文件下载概览"><a href="#文件下载概览" class="headerlink" title="文件下载概览"></a>文件下载概览</h3><ol>
+<li>对请求处理方法使用void返回类型（如果不需要页面跳转的话），并在方法中添加HttpServletResponse参数</li>
+<li>将响应的内容类型设为文件的内容类型，例如 response.setContentType(“application/pdf”)，如果不清楚内容类型，希望浏览器始终显示Save as对话框，则将它设为application/octet-stream</li>
+<li>添加一个名为Content-Disposition的HTTP响应标题，并赋值attachment; filename=fileName，这里的fileName是默认文件名，应该出现在File Download对话框中</li>
+<li>将文件发送到浏览器</li>
+</ol>
+<h3 id="范例1：隐藏资源"><a href="#范例1：隐藏资源" class="headerlink" title="范例1：隐藏资源"></a>范例1：隐藏资源</h3><pre>
+@RequestMapping(value="/resource_download")
+public String downloadResource(HttpSession session, HttpServletRequest request,
+        <font color="red">HttpServletResponse response</font>) {
+
+    <font color="red">/*
+    * 判断用户是否登录
+    */</font>
+    if (session == null || 
+            session.getAttribute("loggedIn") == null) {
+        return "LoginForm";
+    }
+
+    <font color="red">/*
+    * 判断文件是否存在，并将文件发送到浏览器
+    */</font>
+    String dataDirectory = request.getSession().
+            getServletContext().getRealPath("/WEB-INF/data");
+    File file = new File(dataDirectory, "secret.pdf");
+
+    if (file.exists()) {
+        <font color="red">response.setContentType("application/pdf");
+        response.addHeader("Content-Disposition", 
+                "attachment; filename=secret.pdf");</font>        
+        <font color="blue">byte[] buffer = new byte[1024];
+        int len = 0;
+        FileInputStream fis = null;
+        OutputStream os = null;
+        // if using Java 7, use try-with-resources
+        try {
+            fis = new FileInputStream(file);
+            os = response.getOutputStream();
+            while((len = fis.read(buffer)) != -1){
+                os.write(buffer, 0, len);
+            }
+        } catch (IOException ex) {
+            // do something, 
+            // probably forward to an Error page
+        } finally {
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                }
+            }
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                }
+            }
+        }</font>
+    }
+    return null;
+}
+</pre>
+
+<h3 id="范例2：防止交叉引用"><a href="#范例2：防止交叉引用" class="headerlink" title="范例2：防止交叉引用"></a>范例2：防止交叉引用</h3><ul>
+<li>通过编程控制，是的只有当<strong><em>refer标题中包含你的域名时</em></strong> 才发出资源，这样可以防盗链</li>
+<li>但还是有办法下载到这些资源，但是绝对不会像以前那么容易得到</li>
+</ul>
+<p>ImageController.java</p>
+<ul>
+<li>如果直接在浏览器访问<a href="http://localhost:8080/SpringMVC_study/image_get/1返回404" target="_blank" rel="external">http://localhost:8080/SpringMVC_study/image_get/1返回404</a> not found</li>
+<li>若加入注解 @RequestHeader String referer，直接访问，会导致调用getImage函数失败，根本无法进入函数体，也不进行refer是否为空的判断</li>
+<li>通过images.html的超链接跳转，能访问到图片</li>
+</ul>
+<pre>
+@Controller
+public class ImageController {
+
+    private static final Log logger = LogFactory.getLog(ImageController.class);
+
+    @RequestMapping(value="/image_get/{id}", method = RequestMethod.GET)
+    public void getImage(@PathVariable String id,
+            HttpServletRequest request, 
+            HttpServletResponse response,
+            <font color="red">@RequestHeader String referer</font>) {
+        <font color="red">if (referer != null) {</font>
+            String imageDirectory = request.getSession().getServletContext().
+                    getRealPath("/WEB-INF/image");
+            File file = new File(imageDirectory, 
+                    id + ".jpg");
+            if (file.exists()) {
+                response.setContentType("image/jpg");
+                byte[] buffer = new byte[1024];
+                int len = -1;
+                FileInputStream fis = null;
+                OutputStream os = null;
+                // if you're using Java 7, use try-with-resources
+                try {
+                    fis = new FileInputStream(file);
+                    os = response.getOutputStream();
+                    while ((len = fis.read(buffer)) != -1) {
+                        os.write(buffer, 0, len);
+                    }
+                } catch (IOException ex) {
+                    // do something here
+                } finally {
+                    if (os != null) {
+                        try {
+                            os.close();
+                        } catch (IOException e) {
+
+                        }
+                    }
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</pre>
+
+<p>images.html</p>
+<pre><code>&lt;a href=&quot;image_get/1&quot;&gt;图片1&lt;/a&gt;
+</code></pre><h2 id="重定向与转发的区别"><a href="#重定向与转发的区别" class="headerlink" title="重定向与转发的区别"></a>重定向与转发的区别</h2><ul>
+<li>重定向发生在浏览器，由浏览器重新发出http请求，转发发生web服务器，请求在web服务器转发  </li>
+<li>重定向可以到外部网站，重定向只能访问WEB应用个资源  </li>
+</ul>
+<h2 id="方法的返回值为string"><a href="#方法的返回值为string" class="headerlink" title="方法的返回值为string"></a>方法的返回值为string</h2><ul>
+<li>如果方法的返回值是string类型，那么此时表示返回值是视图名称viewname</li>
+<li>当进行转发时，没有数据的传递，不需要去书写ModelAndView，直接书写返回值是String</li>
+</ul>
+<h2 id="重定向的实现"><a href="#重定向的实现" class="headerlink" title="重定向的实现"></a>重定向的实现</h2><ul>
+<li>在转发地址前加上redirect：完成重定向，<font color="red"><strong><em>不需要加应用名</em></strong></font>，直接写URI</li>
+<li>转发到外部网站，例 <code>return &quot;redirect:http://www.baidu.com&quot;;</code></li>
+</ul>
+<p>不带参数传递：</p>
+<pre><code>@RequestMapping(value = &quot;test19&quot;)
+public String test19(){
+    System.out.println(&quot;19&quot;);
+    return &quot;redirect:/success.html&quot;;
+}
+</code></pre><p>参数传递：</p>
+<pre>
+<font color="red">/*
+* 1、重定向发生在浏览器，不能直接访问WEB-INF中的文件，书写的URL以/开头
+* 2、需要传递的参数会自动拼接在url，本例中http://localhost:8080/SpringMVC_study/login.html?name=zhangsan
+*/</font>
+@RequestMapping(value = "/test23")
+public ModelAndView test23(){
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("redirect:/login.html");
+    modelAndView.addObject("name","zhangsan");
+    return modelAndView;
+}
+</pre>
+
+<h3 id="数据传递"><a href="#数据传递" class="headerlink" title="数据传递"></a>数据传递</h3><ul>
+<li>使用重定向的一个不便是<strong><em>无法轻松传值给目标页面</em></strong>，而采用转发可以将属性添加到Model，使得目标视图可以轻松访问。重定向经过客户端，<strong><em>Model中的一切都会在重定向时丢失</em></strong></li>
+<li>Spring 3.1版本以及更高版本可以通过Flash属性提供一种<strong><em>重定向传值的方法</em></strong></li>
+<li>使用Flash属性，必须在Spring MVC配置中有一个<code>&lt;mvc:annotation-driven/&gt;</code>，并且在方法上添加一个参数类型org.springframework.web.servlet.mvc.support.RedirectAttributes</li>
+<li>使用方法：redirectAttributes.addFlashAttribute(“message”, “The product was successfully added.”);可以在转发页面访问到这个属性</li>
+</ul>
+<h2 id="转发的实现★★★★★★"><a href="#转发的实现★★★★★★" class="headerlink" title="转发的实现★★★★★★"></a>转发的实现★★★★★★</h2><ul>
+<li><strong><em>Spring MVC中默认是转发</em></strong>，但返回的值默认是试图名称</li>
+<li><strong><em>如需要实现请求方法间跳转、页面跳转</em></strong>，在试图名称之前添加forward: 要访问的路径</li>
+</ul>
+<pre><code>@RequestMapping(value = &quot;/test24&quot;)
+public ModelAndView test24(){
+    System.out.println(24);
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;forward:/test25&quot;);
+    return mv;
+}
+
+@RequestMapping(value = &quot;/test25&quot;)
+public ModelAndView test25(){
+    System.out.println(25);
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName(&quot;forward:/login.html&quot;);
+    return mv;
+}
+</code></pre><h3 id="数据传递-1"><a href="#数据传递-1" class="headerlink" title="数据传递"></a>数据传递</h3><ul>
+<li>在每次调用请求方法时，都会创建Model类型的一个实例</li>
+<li>若打算使用该实例，在请求方法参数中加入org.springframework.ui.Model参数，Spring MVC会在每一个请求方法被调用时创建一个<strong><em>Model</em></strong>实例，用于增加需要显示在视图中的属性</li>
+<li>调用model.addAttribute来添加属性</li>
+</ul>
+<h2 id="其他注解"><a href="#其他注解" class="headerlink" title="其他注解"></a>其他注解</h2><h3 id="ModelAttribute"><a href="#ModelAttribute" class="headerlink" title="ModelAttribute"></a>ModelAttribute</h3><p>每次调用请求响应方法时都会<strong><em>创建Model类的一个实例</em></strong>，可以<strong><em>在方法中添加一个Model类型的参数</em></strong>，也可以在方法中<strong><em>添加ModelAttribute注解类型</em></strong><font color="red"> <strong>来访问Model实例</strong></font></p>
+<h4 id="不加ModelAttribute"><a href="#不加ModelAttribute" class="headerlink" title="不加ModelAttribute"></a>不加ModelAttribute</h4><p>先看一个没有使用@ModelAttribute的Controller方法：</p>
+<pre><code>@RequestMapping(&quot;/save&quot;)  
+public String save(User user) {  
+    user.setUsername(&quot;U love me&quot;);  
+    userService.save(user);  
+    return &quot;result&quot;;  
+}  
+</code></pre><p>等价于：</p>
+<pre><code>@RequestMapping(&quot;/save&quot;)  
+public String save(Model model,int id,String username) {  
+    User user=new User();  
+    //这里是通过反射从request里面拿值再set到user  
+    user.setId(id);  
+    user.setUsername(username);  
+    model.addAttribute(&quot;user&quot;,user);  
+
+    user.setUsername(&quot;U love me&quot;);  
+    userService.save(user);  
+    return &quot;result&quot;;  
+}  
+</code></pre><ul>
+<li>其中User包含id和username两个私有属性,含有公共setter和getter方法</li>
+<li>执行此方法时会将key为”user”(注意:这里即使参数名称是user1，key一样还是”user”)，value为user的对象加入到model</li>
+</ul>
+<h4 id="用途一："><a href="#用途一：" class="headerlink" title="用途一："></a>用途一：</h4><ul>
+<li>带ModelAttribute注解的参数会将对象添加到Model中</li>
+<li><font color="red"><strong><em>与不加ModelAttribute的区别：</em></strong></font>带ModelAttribute注解会先从model去获取key为”user”的对象，如果获取不到会通过反射实例化一个User对象，再从request里面拿值set到这个对象，然后把这个User对象添加到model(其中key为”user”).<br>使用了@ModelAttribute可修改这个key，不一定是”user”，此情况下，<strong><em>用与不用@ModelAttribute没有区别</em></strong></li>
+</ul>
+<pre>
+<font color="red">/*
+本例中将用newOrder键值将Order实例添加到Model对象中；
+如果为定义键值，则键值将使用对象类型的名字，即用键值order将Order实例添加到Model中*/</font>
+public String summitOrder(@ModelAttribute("newOrder") Order order){
+
+}
+</pre>
+
+<h4 id="用途二："><a href="#用途二：" class="headerlink" title="用途二："></a>用途二：</h4><ul>
+<li>标注一个<font color="red"><strong><em>非请求的处理方法</em></strong></font>，Spring MVC会每次在调用<strong><em>请求处理方法之前</em></strong> 调用带@ModelAttribute注解的方法</li>
+<li>@ModelAttribute注解的方法可以<strong><em>返回一个对象或一个void类型</em></strong>，如果返回一个对象，则返回对象会自动加到Model中，如未指定键值，键值为对象类型的名字</li>
+<li>若返回类型为void，若需要将对象放入Model中，则必须添加一个Model类型的参数，并自行将实例添加到Model中</li>
+</ul>
+<pre><code>@ModelAttribute
+public String test23(){
+    return new String(&quot;qm&quot;);
+}
+
+@RequestMapping
+public String test24(Model model){
+    Map&lt;String, Object&gt; map = model.asMap();
+    for(Map.Entry&lt;String,Object&gt; entry:map.entrySet()){
+        System.out.println(entry.getKey() + &quot; &quot; + entry.getValue());
+    }
+    return &quot;forward:/WEB-INF/views/hello.jsp&quot;;
+}
+</code></pre><h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><p>在这个全球化的时代，编写能够支持<strong><em>不同语言的国家和地区的应用程序</em></strong> 越来越重要</p>
+<h3 id="国际化应用程序的方式"><a href="#国际化应用程序的方式" class="headerlink" title="国际化应用程序的方式"></a>国际化应用程序的方式</h3><p>国际化应用程序的具体方式取决于有多少静态数据<strong><em>需要以不同的语言显示出来</em></strong>，这里有两种方式：</p>
+<ol>
+<li>如果大量数据是静态的，就要针对每一个语言区域单独创建一个资源版本</li>
+<li>如果静态数据有限，可以将文本元素，<strong><em>如元件标签和错误消息隔离成为文本</em></strong>，每个文本文件保存着一个语言区域的译文，随后应用程序会自动获取每一个元素</li>
+</ol>
+<h3 id="语言区域-Locale"><a href="#语言区域-Locale" class="headerlink" title="语言区域 Locale"></a>语言区域 Locale</h3><p>java.util.Locale类表示一个语言区域，一个Locale对象包含3个主要原件：language、country、variant</p>
+<ul>
+<li>language是最主要的部分</li>
+<li>语言本身不能区分一个语言区域，比如讲英语的国家很多，但不同国家讲的英语有区别</li>
+<li>variant是一个特定于供应商或特定于浏览器的代号，例如用WIN代表Windows</li>
+</ul>
+<h4 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h4><pre><code>Locale(String language)
+Locale(String language, String country)
+Locale(String language, String country, String variant)
+</code></pre><p>创建一个中国所用的中文Locale对象</p>
+<pre><code>Locale locale = new Locale(&quot;zh&quot;,&quot;CN&quot;);
+</code></pre><p>利用Locale类的静态方法来创建Local对象</p>
+<pre><code>Locale locale = Locale.CHINA;
+</code></pre><p>利用getDefault方法返回计算机的语言区域</p>
+<pre><code>Locale locale = Locale.getDefault();
+</code></pre><h4 id="ResourceBundle读取属性文件"><a href="#ResourceBundle读取属性文件" class="headerlink" title="ResourceBundle读取属性文件"></a>ResourceBundle读取属性文件</h4><p>区域属性文件值</p>
+<p>国际化和本地化应用程序时，需要具备以下条件：</p>
+<pre><code>1. 将文本文件隔离成属性文件
+2. 选择和读取正确的属性文件
+</code></pre><p>1、将文本文件隔离成属性文件，可以利用如下工具：<a href="http://javawind.net/tools/native2ascii.jsp?action=transform" target="_blank" rel="external">http://javawind.net/tools/native2ascii.jsp?action=transform</a> ，给出以下两个语言区域属性文件，文件的格式为：</p>
+<pre><code>basename_languageCode_countryCode
+</code></pre><p>MyResources_en_US.properties</p>
+<pre><code>greetings=hello
+</code></pre><p>MyResources_zh_CN.properties</p>
+<pre><code>greetings=\u4f60\u597d
+</code></pre><p>2、使用ResourceBundle类来读取属性文件中的值</p>
+<pre><code>ResourceBundle resourceBundle = ResourceBundle.getBundle(&quot;MyResources&quot;, Locale.SIMPLIFIED_CHINESE);
+System.out.println(resourceBundle.getString(&quot;greetings&quot;));//你好
+
+resourceBundle = ResourceBundle.getBundle(&quot;MyResources&quot;, Locale.US);
+System.out.println(resourceBundle.getString(&quot;greetings&quot;));//hello
+</code></pre><p>3、在Spring MVC中，不直接使用ResourceBundle，而是利用messageSourceBean告诉Spring MVC要将属性文件保存在哪里</p>
+<h3 id="国际化Spring-MVC应用程序"><a href="#国际化Spring-MVC应用程序" class="headerlink" title="国际化Spring MVC应用程序"></a>国际化Spring MVC应用程序</h3><p>在Spring MVC中，不直接使用ResourceBundle，而是利用messageSource bean告诉Spring MVC要将属性文件保存在哪里</p>
+<h4 id="配置-messageSource-bean"><a href="#配置-messageSource-bean" class="headerlink" title="配置 messageSource bean"></a>配置 messageSource bean</h4><font color="red"><strong><em>利用messageSource bean告诉Spring MVC要将属性文件保存在哪里</em></strong></font>
+
+<pre>
+&lt;bean id="messageSource"
+    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <font color="red">//用两个基准名设置basenames的属性</font>
+    &lt;property name="basenames" >
+        &lt;list>
+            &lt;value>/WEB-INF/resource/messages&lt;/value>
+            &lt;value>/WEB-INF/resource/labels&lt;/value>
+        &lt;/list>
+    &lt;/property>
+&lt;/bean>
+</pre>
+
+<p><img src="http://i.imgur.com/1T6Betq.png" alt=""></p>
+<p>说明，上面定义的bean的类class有两种实现方式：</p>
+<ul>
+<li>一种是ReloadableResourceBundleMessageSource，提供了定时刷新功能，<strong><em>允许在不重启系统的情况下</em></strong>，更新资源的信息；<strong><em>它在应用程序目录下搜索这些属性文件</em></strong>，即WEB目录下搜索</li>
+<li>另一种是ResourceBundleMessageSource，它是不能重新加载的，如果在任意属性文件中修改了某一个属性的key或者value，那么要使修改生效，<strong><em>就必须重启JVM</em></strong>；属性文件必须放在<strong><em>类路径</em></strong> 下，即src目录下</li>
+</ul>
+<p>还有一个说明，如果只有一组属性文件，则可以用basename属性代替basenames，像下面这样：</p>
+<pre><code>&lt;bean id=&quot;messageSource&quot; class=&quot;org.springframework.context.support.ReloadableResourceBundleMessageSource&quot;&gt;
+    &lt;property name=&quot;basename&quot; value=&quot;resource/messages&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="配置-语言区域解析器bean"><a href="#配置-语言区域解析器bean" class="headerlink" title="配置 语言区域解析器bean"></a>配置 语言区域解析器bean</h4><p>在Spring MVC中选择语言区域，可以使用语言区域解析器bean，它有几个实现，其中AcceptHeaderLocaleResolver是其中最容易使用的一个</p>
+<pre><code>&lt;bean id=&quot;localeResolver&quot;
+      class=&quot;org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver&quot;&gt;
+&lt;/bean&gt;
+</code></pre><h4 id="使用message标签"><a href="#使用message标签" class="headerlink" title="使用message标签"></a>使用message标签</h4><p>使用message标签，要在使用该标签的JSP页面声明这个taglib指令：</p>
+<pre><code>&lt;%@ taglib prefix=&quot;spring&quot; uri=&quot;http://www.springframework.org/tags&quot; %&gt;
+</code></pre><p>使用message标签：</p>
+<pre><code>&lt;label for=&quot;description&quot;&gt;&lt;spring:message code=&quot;label.description&quot;/&gt;: &lt;/label&gt;
+</code></pre><h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><ul>
+<li>HandlerExecutionChain是一个执行链，从HandlerMapping返回给DispatcherServlet</li>
+<li>其中包含Handler对象和Interceptor（拦截器）对象</li>
+<li>SpringMVC的拦截器定义了三个方法<ul>
+<li>preHandler：调用handler之前执行</li>
+<li>postHandler：调用handler之后执行</li>
+<li>afterCompletion：视图渲染完之后执行</li>
+</ul>
+</li>
+</ul>
+<h3 id="拦截器执行过程"><a href="#拦截器执行过程" class="headerlink" title="拦截器执行过程"></a>拦截器执行过程</h3><p><img src="http://i.imgur.com/z7vVxv6.png" alt=""></p>
+<ul>
+<li>在执行Handler前会经过多个拦截器</li>
+<li>每个拦截器的前置方法会按照拦截器的顺序依次执行</li>
+<li>每个拦截器的后置方法会从后向前执行</li>
+<li>每个拦截器的afterCompletion方法会从后往前执行</li>
+</ul>
+<h3 id="编写自定义拦截器"><a href="#编写自定义拦截器" class="headerlink" title="编写自定义拦截器"></a>编写自定义拦截器</h3><pre>
+public class MyInterceptor implements HandlerInterceptor {
+
+    <font color="red">//前置方法，如果返回值是false，后面的拦截器不会执行；如果返回true，执行后面的拦截器</font>
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("前置方法");
+        return true;
+    }
+
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println("后置方法");
+    }
+
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("完成方法");
+    }
+}
+</pre>
+
+<h3 id="配置拦截器"><a href="#配置拦截器" class="headerlink" title="配置拦截器"></a>配置拦截器</h3><pre><code>&lt;mvc:interceptors&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;!--配置连接器的路径，/**表示表示拦截所有的请求--&gt;
+        &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+        &lt;!--拦截器的路径--&gt;
+        &lt;bean class=&quot;cn.apeius.springmvc.interceptor.MyInterceptor&quot;&gt;&lt;/bean&gt;
+    &lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre><h3 id="配置多个拦截器"><a href="#配置多个拦截器" class="headerlink" title="配置多个拦截器"></a>配置多个拦截器</h3><pre><code>&lt;mvc:interceptors&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;!--配置连接器的路径，/**表示表示拦截所有的请求--&gt;
+        &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+        &lt;!--拦截器的路径--&gt;
+        &lt;bean class=&quot;cn.apeius.springmvc.interceptor.MyInterceptor1&quot;&gt;&lt;/bean&gt;
+    &lt;/mvc:interceptor&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;!--配置连接器的路径，/**表示表示拦截所有的请求--&gt;
+        &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+        &lt;!--拦截器的路径--&gt;
+        &lt;bean class=&quot;cn.apeius.springmvc.interceptor.MyInterceptor2&quot;&gt;&lt;/bean&gt;
+    &lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre><p>若配置1，2，3，4多个拦截器，如果3的前置方法返回false，则：</p>
+<ul>
+<li>拦截器4的所有方法都不会执行</li>
+<li>拦截器1，2的完成方法仍会去执行</li>
+<li>1，2，3的后置方法不会执行</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><img src="http://i.imgur.com/6ge6LQ1.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaEE/" rel="tag">#JavaEE</a>
+          
+            <a href="/tags/Spring-MVC/" rel="tag">#Spring MVC</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/22/[Java]Java分层思想——Struts+Hibernate+接口编程的方式/" rel="next" title="Java分层思想——Struts+Hibernate+接口编程的方式">
+                <i class="fa fa-chevron-left"></i> Java分层思想——Struts+Hibernate+接口编程的方式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/06/[网络安全]IP地址与整数转换/" rel="prev" title="IP地址与整数转换">
+                IP地址与整数转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-MVC简介"><span class="nav-number">1.</span> <span class="nav-text">Spring MVC简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-MVC-整体架构"><span class="nav-number">2.</span> <span class="nav-text">Spring MVC 整体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-MVC快速入门★★★★★★"><span class="nav-number">3.</span> <span class="nav-text">Spring MVC快速入门★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#github"><span class="nav-number">3.1.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入依赖"><span class="nav-number">3.2.</span> <span class="nav-text">导入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-xml"><span class="nav-number">3.3.</span> <span class="nav-text">web.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-mvc的配置"><span class="nav-number">3.4.</span> <span class="nav-text">spring-mvc的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加springmvc-servlet-xml"><span class="nav-number">3.4.1.</span> <span class="nav-text">添加springmvc-servlet.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义Handler（controller）★★★★★★"><span class="nav-number">3.4.2.</span> <span class="nav-text">自定义Handler（controller）★★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在springmvc-servlet-xml-中配置Handler"><span class="nav-number">3.4.3.</span> <span class="nav-text">在springmvc-servlet.xml 中配置Handler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置HandlerMapping（非必须，需要注释）"><span class="nav-number">3.4.4.</span> <span class="nav-text">配置HandlerMapping（非必须，需要注释）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置handlerAdapter（非必须，需要注释）"><span class="nav-number">3.4.5.</span> <span class="nav-text">配置handlerAdapter（非必须，需要注释）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置视图解析器"><span class="nav-number">3.4.6.</span> <span class="nav-text">配置视图解析器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义视图"><span class="nav-number">3.4.7.</span> <span class="nav-text">定义视图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析第一个案例的执行过程"><span class="nav-number">4.</span> <span class="nav-text">分析第一个案例的执行过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：看日志"><span class="nav-number">4.1.</span> <span class="nav-text">方法一：看日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：看源码"><span class="nav-number">4.2.</span> <span class="nav-text">方法二：看源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精简之后的配置"><span class="nav-number">5.</span> <span class="nav-text">精简之后的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个注解程序★★★★★★"><span class="nav-number">6.</span> <span class="nav-text">第一个注解程序★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建注解的步骤"><span class="nav-number">6.1.</span> <span class="nav-text">创建注解的步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推荐使用的HandlerMapper和HandlerAdapter（什么意思？？）"><span class="nav-number">6.2.</span> <span class="nav-text">推荐使用的HandlerMapper和HandlerAdapter（什么意思？？）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用注解驱动替换推荐的配置（什么意思？？）"><span class="nav-number">6.3.</span> <span class="nav-text">使用注解驱动替换推荐的配置（什么意思？？）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用RequestMapping映射请求★★★★★★"><span class="nav-number">7.</span> <span class="nav-text">使用RequestMapping映射请求★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种映射"><span class="nav-number">7.1.</span> <span class="nav-text">五种映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标准URL映射"><span class="nav-number">7.1.1.</span> <span class="nav-text">标准URL映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ant风格的URL映射（通配符）"><span class="nav-number">7.1.2.</span> <span class="nav-text">Ant风格的URL映射（通配符）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#占位符映射"><span class="nav-number">7.1.3.</span> <span class="nav-text">占位符映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限制请求方法映射"><span class="nav-number">7.1.4.</span> <span class="nav-text">限制请求方法映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限制参数映射"><span class="nav-number">7.1.5.</span> <span class="nav-text">限制参数映射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求响应处理方法的数据绑定"><span class="nav-number">8.</span> <span class="nav-text">请求响应处理方法的数据绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定servlet内置对象"><span class="nav-number">8.1.</span> <span class="nav-text">绑定servlet内置对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PathVariable获取占位符中的参数"><span class="nav-number">8.2.</span> <span class="nav-text">@PathVariable获取占位符中的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RequestParam-★★★★★"><span class="nav-number">8.3.</span> <span class="nav-text">@RequestParam ★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CookieValue"><span class="nav-number">8.4.</span> <span class="nav-text">@CookieValue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POJO对象绑定参数"><span class="nav-number">8.5.</span> <span class="nav-text">POJO对象绑定参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义复合对象类型"><span class="nav-number">8.6.</span> <span class="nav-text">自定义复合对象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java的基本数据类型绑定"><span class="nav-number">8.7.</span> <span class="nav-text">Java的基本数据类型绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合List绑定"><span class="nav-number">8.8.</span> <span class="nav-text">集合List绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合Set绑定"><span class="nav-number">8.9.</span> <span class="nav-text">集合Set绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map绑定"><span class="nav-number">8.10.</span> <span class="nav-text">Map绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据绑定与表单标签库结合（表单不清空）★★★★★"><span class="nav-number">9.</span> <span class="nav-text">数据绑定与表单标签库结合（表单不清空）★★★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换器和格式化（麻烦，建议使用joda-time，参考ssm整合部分）"><span class="nav-number">10.</span> <span class="nav-text">转换器和格式化（麻烦，建议使用joda-time，参考ssm整合部分）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Converter"><span class="nav-number">10.1.</span> <span class="nav-text">Converter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Formatter"><span class="nav-number">10.2.</span> <span class="nav-text">Formatter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用Registrar注册Formatter"><span class="nav-number">10.3.</span> <span class="nav-text">用Registrar注册Formatter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择Convert还是Formatter"><span class="nav-number">10.4.</span> <span class="nav-text">选择Convert还是Formatter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用joda-time注解对日期格式转换"><span class="nav-number">11.</span> <span class="nav-text">使用joda-time注解对日期格式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-Autowired和-Service进行依赖注入"><span class="nav-number">12.</span> <span class="nav-text">应用@Autowired和@Service进行依赖注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证器Validator（JSR-spring5-0不通过）！！！"><span class="nav-number">13.</span> <span class="nav-text">验证器Validator（JSR spring5.0不通过）！！！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring验证器"><span class="nav-number">13.1.</span> <span class="nav-text">Spring验证器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证的Product对象"><span class="nav-number">13.1.1.</span> <span class="nav-text">验证的Product对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Validator接口"><span class="nav-number">13.1.2.</span> <span class="nav-text">实现Validator接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误信息属性文件"><span class="nav-number">13.1.3.</span> <span class="nav-text">错误信息属性文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller类"><span class="nav-number">13.1.4.</span> <span class="nav-text">Controller类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSR-303验证"><span class="nav-number">13.2.</span> <span class="nav-text">JSR 303验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖"><span class="nav-number">13.2.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Product类"><span class="nav-number">13.2.2.</span> <span class="nav-text">Product类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-MVC-和-Struts2的区别"><span class="nav-number">14.</span> <span class="nav-text">Spring MVC 和 Struts2的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsp-和-jstl-视图解析器"><span class="nav-number">15.</span> <span class="nav-text">jsp 和 jstl 视图解析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ResponseBody输出JSON"><span class="nav-number">16.</span> <span class="nav-text">使用ResponseBody输出JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用步骤"><span class="nav-number">16.1.</span> <span class="nav-text">使用步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">16.2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略某个JaveBean的属性"><span class="nav-number">16.3.</span> <span class="nav-text">忽略某个JaveBean的属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RequestBody"><span class="nav-number">17.</span> <span class="nav-text">@RequestBody</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件上传"><span class="nav-number">18.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加依赖"><span class="nav-number">18.1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义文件上传解析器"><span class="nav-number">18.2.</span> <span class="nav-text">定义文件上传解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端编程"><span class="nav-number">18.3.</span> <span class="nav-text">客户端编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MultipartFile接口"><span class="nav-number">18.4.</span> <span class="nav-text">MultipartFile接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用注解上传单文件"><span class="nav-number">18.5.</span> <span class="nav-text">利用注解上传单文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用注解上传多文件"><span class="nav-number">18.6.</span> <span class="nav-text">利用注解上传多文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用domain类上传文件★★★★★"><span class="nav-number">18.7.</span> <span class="nav-text">利用domain类上传文件★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进度条"><span class="nav-number">18.8.</span> <span class="nav-text">进度条</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UploadFile的domain类"><span class="nav-number">18.8.1.</span> <span class="nav-text">UploadFile的domain类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Html5FileUploadController类"><span class="nav-number">18.8.2.</span> <span class="nav-text">Html5FileUploadController类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#html5-jsp"><span class="nav-number">18.8.3.</span> <span class="nav-text">html5.jsp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件下载"><span class="nav-number">19.</span> <span class="nav-text">文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件下载概览"><span class="nav-number">19.1.</span> <span class="nav-text">文件下载概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范例1：隐藏资源"><span class="nav-number">19.2.</span> <span class="nav-text">范例1：隐藏资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范例2：防止交叉引用"><span class="nav-number">19.3.</span> <span class="nav-text">范例2：防止交叉引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向与转发的区别"><span class="nav-number">20.</span> <span class="nav-text">重定向与转发的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法的返回值为string"><span class="nav-number">21.</span> <span class="nav-text">方法的返回值为string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向的实现"><span class="nav-number">22.</span> <span class="nav-text">重定向的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传递"><span class="nav-number">22.1.</span> <span class="nav-text">数据传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转发的实现★★★★★★"><span class="nav-number">23.</span> <span class="nav-text">转发的实现★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据传递-1"><span class="nav-number">23.1.</span> <span class="nav-text">数据传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他注解"><span class="nav-number">24.</span> <span class="nav-text">其他注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ModelAttribute"><span class="nav-number">24.1.</span> <span class="nav-text">ModelAttribute</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不加ModelAttribute"><span class="nav-number">24.1.1.</span> <span class="nav-text">不加ModelAttribute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用途一："><span class="nav-number">24.1.2.</span> <span class="nav-text">用途一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用途二："><span class="nav-number">24.1.3.</span> <span class="nav-text">用途二：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#国际化"><span class="nav-number">25.</span> <span class="nav-text">国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化应用程序的方式"><span class="nav-number">25.1.</span> <span class="nav-text">国际化应用程序的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语言区域-Locale"><span class="nav-number">25.2.</span> <span class="nav-text">语言区域 Locale</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造器"><span class="nav-number">25.2.1.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResourceBundle读取属性文件"><span class="nav-number">25.2.2.</span> <span class="nav-text">ResourceBundle读取属性文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国际化Spring-MVC应用程序"><span class="nav-number">25.3.</span> <span class="nav-text">国际化Spring MVC应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-messageSource-bean"><span class="nav-number">25.3.1.</span> <span class="nav-text">配置 messageSource bean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-语言区域解析器bean"><span class="nav-number">25.3.2.</span> <span class="nav-text">配置 语言区域解析器bean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用message标签"><span class="nav-number">25.3.3.</span> <span class="nav-text">使用message标签</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拦截器"><span class="nav-number">26.</span> <span class="nav-text">拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器执行过程"><span class="nav-number">26.1.</span> <span class="nav-text">拦截器执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写自定义拦截器"><span class="nav-number">26.2.</span> <span class="nav-text">编写自定义拦截器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置拦截器"><span class="nav-number">26.3.</span> <span class="nav-text">配置拦截器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置多个拦截器"><span class="nav-number">26.4.</span> <span class="nav-text">配置多个拦截器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">27.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

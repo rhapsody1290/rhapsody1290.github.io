@@ -1,0 +1,1069 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaEE,SSM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="导入依赖&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;
+         xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC-Spring-Mybatis整合">
+<meta property="og:url" content="http://yoursite.com/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="导入依赖&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;
+         xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;">
+<meta property="og:updated_time" content="2016-10-19T06:36:26.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMVC-Spring-Mybatis整合">
+<meta name="twitter:description" content="导入依赖&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;project xmlns=&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;
+         xmlns:xsi=&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/"/>
+
+
+  <title> SpringMVC-Spring-Mybatis整合 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SpringMVC-Spring-Mybatis整合
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-07T12:52:00+08:00" content="2016-10-07">
+              2016-10-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/SSM/" itemprop="url" rel="index">
+                    <span itemprop="name">SSM</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;cn.apeius&lt;/groupId&gt;
+    &lt;artifactId&gt;Demo&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;!--集中管理依赖版本号--&gt;
+    &lt;properties&gt;
+        &lt;junit.version&gt;4.10&lt;/junit.version&gt;
+        &lt;spring.version&gt;4.1.3.RELEASE&lt;/spring.version&gt;
+        &lt;mybatis.version&gt;3.2.8&lt;/mybatis.version&gt;
+        &lt;mybatis.spring.version&gt;1.2.2&lt;/mybatis.spring.version&gt;
+        &lt;mybatis.paginator.version&gt;1.2.15&lt;/mybatis.paginator.version&gt;
+        &lt;mysql.version&gt;5.1.32&lt;/mysql.version&gt;
+        &lt;slf4j.version&gt;1.6.4&lt;/slf4j.version&gt;
+        &lt;jackson.version&gt;2.4.2&lt;/jackson.version&gt;
+        &lt;druid.version&gt;1.0.9&lt;/druid.version&gt;
+        &lt;httpclient.version&gt;4.3.5&lt;/httpclient.version&gt;
+        &lt;jstl.version&gt;1.2&lt;/jstl.version&gt;
+        &lt;servlet-api.version&gt;2.5&lt;/servlet-api.version&gt;
+        &lt;jsp-api.version&gt;2.0&lt;/jsp-api.version&gt;
+        &lt;joda-time.version&gt;2.5&lt;/joda-time.version&gt;
+        &lt;commons-lang3.version&gt;3.3.2&lt;/commons-lang3.version&gt;
+        &lt;commons-io.version&gt;1.3.2&lt;/commons-io.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+
+        &lt;!--单元测试--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;${junit.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--Spring--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+            &lt;version&gt;${spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--Mybatis--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+            &lt;version&gt;${mybatis.spring.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--分页插件--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+            &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+            &lt;version&gt;3.7.5&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.github.jsqlparser&lt;/groupId&gt;
+            &lt;artifactId&gt;jsqlparser&lt;/artifactId&gt;
+            &lt;version&gt;0.9.1&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--连接池--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;c3p0&lt;/groupId&gt;
+            &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+            &lt;version&gt;0.9.1.2&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--Mysql--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;${mysql.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--日志--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+            &lt;version&gt;${slf4j.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--Jackson Json处理工具包--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+            &lt;version&gt;${jackson.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--连接池--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid&lt;/artifactId&gt;
+            &lt;version&gt;${druid.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--httpclient--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
+            &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
+            &lt;version&gt;${httpclient.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--JSP相关--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;jstl&lt;/groupId&gt;
+            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+            &lt;version&gt;${jstl.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;${servlet-api.version}&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
+            &lt;version&gt;${jsp-api.version}&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--时间操作组件--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;joda-time&lt;/groupId&gt;
+            &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+            &lt;version&gt;${joda-time.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--Apache工具组件--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+            &lt;version&gt;${commons-lang3.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-io&lt;/artifactId&gt;
+            &lt;version&gt;${commons-io.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--文件上传--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+            &lt;version&gt;1.3.1&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><h2 id="github"><a href="#github" class="headerlink" title="github"></a>github</h2><p><a href="https://github.com/rhapsody1290/SSM" target="_blank" rel="external">https://github.com/rhapsody1290/SSM</a></p>
+<h2 id="查询用户列表"><a href="#查询用户列表" class="headerlink" title="查询用户列表"></a>查询用户列表</h2><h3 id="定义EasyUIPage"><a href="#定义EasyUIPage" class="headerlink" title="定义EasyUIPage"></a>定义EasyUIPage</h3><p>封装对应的easyUi需要的数据</p>
+<pre><code>public class EasyUIPage {
+    private Long total;
+    private List&lt;?&gt; rows;
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    public List&lt;?&gt; getRows() {
+        return rows;
+    }
+
+    public void setRows(List&lt;?&gt; rows) {
+        this.rows = rows;
+    }
+
+}
+</code></pre><h3 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h3><pre><code>@RequestMapping(value = &quot;list&quot;)
+@ResponseBody
+public EasyUIPage queryAll(
+        @RequestParam(value = &quot;page&quot;, defaultValue = &quot;1&quot;) Integer pageNum,
+        @RequestParam(value = &quot;rows&quot;, defaultValue = &quot;5&quot;) Integer pageSize) {
+    EasyUIPage esayUIPage = userService.queryAllUser(pageNum,pageSize);
+    return esayUIPage;
+}
+</code></pre><h3 id="编写userservice"><a href="#编写userservice" class="headerlink" title="编写userservice"></a>编写userservice</h3><pre><code>@Override
+public EasyUIPage queryAllUser(Integer pageNum, Integer pageSize) {
+    PageHelper.startPage(pageNum, pageSize);
+    List&lt;User&gt; users = userMapper.queryAllUser();
+
+    PageInfo&lt;User&gt; pageInfo = new PageInfo&lt;User&gt;(users);
+
+    EasyUIPage easyUIPage = new EasyUIPage();
+    //easyUIPage.setRows(users);
+    easyUIPage.setRows(pageInfo.getList());
+    easyUIPage.setTotal(pageInfo.getTotal());
+    return easyUIPage;
+}
+</code></pre><h3 id="编写userMapper"><a href="#编写userMapper" class="headerlink" title="编写userMapper"></a>编写userMapper</h3><pre><code>public List&lt;User&gt; queryAllUser();
+</code></pre><h3 id="userMapper对应的xml"><a href="#userMapper对应的xml" class="headerlink" title="userMapper对应的xml"></a>userMapper对应的xml</h3><pre><code>&lt;select id=&quot;queryAllUser&quot; resultType=&quot;User&quot;&gt;
+    select * from tb_user
+&lt;/select&gt;
+</code></pre><h2 id="页面跳转合并★★★★★★"><a href="#页面跳转合并★★★★★★" class="headerlink" title="页面跳转合并★★★★★★"></a>页面跳转合并★★★★★★</h2><pre><code>//页面跳转合并
+@RequestMapping(value = &quot;/page/{pageName}&quot;)
+public String toPage(@PathVariable(&quot;pageName&quot;) String pageName){
+    return pageName;
+}
+</code></pre><h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><h3 id="日期格式转换"><a href="#日期格式转换" class="headerlink" title="日期格式转换"></a>日期格式转换</h3><p>SpringMVC默认不支持字符串转换成Date格式，可以采用SpringMVC自带的转换器，还有一种简单的方法：</p>
+<pre><code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+private Date birthday;
+</code></pre><p>需要导入依赖：</p>
+<pre><code>&lt;!--时间操作组件--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;joda-time&lt;/groupId&gt;
+    &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+    &lt;version&gt;${joda-time.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="添加失败"><a href="#添加失败" class="headerlink" title="添加失败"></a>添加失败</h3><p>使用try-catch</p>
+<pre><code>@RequestMapping(value = &quot;/save&quot;)
+@ResponseBody
+public Map&lt;String, String&gt; save(User user){
+    Map&lt;String,String&gt; map = new HashMap&lt;String, String&gt;();
+    try{
+        Integer num = userService.addUser(user);
+        if(num &gt; 0){
+            map.put(&quot;status&quot;,&quot;200&quot;);
+        }else{
+            map.put(&quot;status&quot;,&quot;500&quot;);
+        }
+    }catch (Exception e){
+        map.put(&quot;status&quot;,&quot;500&quot;);
+    }
+    return map;
+}
+</code></pre><h2 id="导出excel"><a href="#导出excel" class="headerlink" title="导出excel"></a>导出excel</h2><p>视图除了可以是html、jsp、json等常见视图之外，还可以是excel，其他</p>
+<h3 id="poi依赖"><a href="#poi依赖" class="headerlink" title="poi依赖"></a>poi依赖</h3><pre><code>&lt;!--操作excel--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+    &lt;artifactId&gt;poi&lt;/artifactId&gt;
+    &lt;version&gt;3.10.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="导入编写好的Excel视图"><a href="#导入编写好的Excel视图" class="headerlink" title="导入编写好的Excel视图"></a>导入编写好的Excel视图</h3><p>UserExcelView、Constants两个Java文件</p>
+<h3 id="声明excel视图"><a href="#声明excel视图" class="headerlink" title="声明excel视图"></a>声明excel视图</h3><pre><code>&lt;bean name=&quot;userExcel&quot; class=&quot;cn.apeius.usermanage.view.UserExcelView&quot;/&gt;
+</code></pre><h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><pre><code>@RequestMapping(value = &quot;export/excel&quot;)
+public ModelAndView export(@RequestParam(value = &quot;page&quot;, defaultValue = &quot;1&quot;) Integer pageNow,
+                           @RequestParam(value = &quot;rows&quot;, defaultValue = &quot;5&quot;) Integer pageSize){
+    //1、查询需要导出的数据
+    EasyUIPage page = this.userService.queryAllUsers(pageNow,pageSize);
+    //2、传递数据
+    ModelAndView mv = new ModelAndView();
+    mv.addObject(&quot;userList&quot;,page.getRows());
+    mv.setViewName(&quot;userExcel&quot;);//定义到自定义的excel视图
+    return mv;
+}
+</code></pre><h3 id="bean视图解析器"><a href="#bean视图解析器" class="headerlink" title="bean视图解析器"></a>bean视图解析器</h3><p>数字越小优先级越高</p>
+<pre><code>&lt;!--定义视图解析器--&gt;
+&lt;bean class = &quot;org.springframework.web.servlet.view.BeanNameViewResolver&quot;&gt;
+    &lt;property name=&quot;order&quot; value=&quot;1&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><h3 id="控制器-1"><a href="#控制器-1" class="headerlink" title="控制器"></a>控制器</h3><pre><code>@ResponseBody
+@RequestMapping(value = &quot;/delete&quot;)
+//springmvc会自动把逗号切割，变成一个数组
+public Map&lt;String,String&gt; deleteById(@RequestParam(value = &quot;ids&quot;) Long[] ids){
+    Integer num = this.userService.deleteUserByIds(ids);
+    Map&lt;String,String&gt; map = new HashMap&lt;String, String&gt;();
+    if(num &gt; 0){
+        map.put(&quot;status&quot;,&quot;200&quot;);
+    }else{
+        map.put(&quot;status&quot;,&quot;208&quot;);
+    }
+    return map;
+}
+</code></pre><h3 id="sql语句"><a href="#sql语句" class="headerlink" title="sql语句"></a>sql语句</h3><pre><code>&lt;delete id=&quot;deleteUserByIds&quot;&gt;
+    delete from tb_user where id in
+    &lt;foreach collection=&quot;ids&quot; item=&quot;id&quot; open=&quot;(&quot; close=&quot;)&quot; separator=&quot;,&quot;&gt;
+        #{id}
+    &lt;/foreach&gt;
+&lt;/delete&gt;
+</code></pre><h2 id="通用mapper"><a href="#通用mapper" class="headerlink" title="通用mapper"></a>通用mapper</h2><p>通用的增删改查操作</p>
+<h3 id="导入依赖-1"><a href="#导入依赖-1" class="headerlink" title="导入依赖"></a>导入依赖</h3><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.github.abel533&lt;/groupId&gt;
+    &lt;artifactId&gt;mapper&lt;/artifactId&gt;
+    &lt;version&gt;2.3.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h3 id="Mybatis配置文件方式"><a href="#Mybatis配置文件方式" class="headerlink" title="Mybatis配置文件方式"></a>Mybatis配置文件方式</h3><p>在mybatis-config.xml中添加如下配置:</p>
+<pre><code>&lt;plugin interceptor=&quot;com.github.abel533.mapperhelper.MapperInterceptor&quot;&gt;
+    &lt;!--主键自增方法，默认值为MYSQL，详细说明请看文档--&gt;
+    &lt;property name=&quot;IDENTITY&quot; value=&quot;MYSQL&quot;/&gt;
+    &lt;!--通用mapper接口，多个通用接口用逗号隔开--&gt;
+    &lt;property name=&quot;mappers&quot; value=&quot;com.github.abel533.mapper.Mapper&quot;/&gt;
+&lt;/plugin&gt;
+</code></pre><h3 id="通用mapper使用"><a href="#通用mapper使用" class="headerlink" title="通用mapper使用"></a>通用mapper使用</h3><h4 id="继承通用的Mapper-必须指定泛型"><a href="#继承通用的Mapper-必须指定泛型" class="headerlink" title="继承通用的Mapper,必须指定泛型"></a>继承通用的Mapper<t>,必须指定泛型<t></t></t></h4><pre><code>public interface UserInfoMapper extends Mapper&lt;UserInfo&gt; {
+  //其他必须手写的接口...
+
+}
+</code></pre><h4 id="泛型-实体类-的类型必须符合要求★★★★★"><a href="#泛型-实体类-的类型必须符合要求★★★★★" class="headerlink" title="泛型(实体类)的类型必须符合要求★★★★★"></a>泛型(实体类)<t>的类型必须符合要求★★★★★</t></h4><ol>
+<li>表名默认使用类名,驼峰转下划线(只对大写字母进行处理),如UserInfo默认对应的表名为user_info。</li>
+<li>表名可以使用<strong><em>@Table(name = “tableName”)</em></strong>进行指定,对不符合第一条默认规则的可以通过这种方式指定表名.</li>
+<li>字段默认和@Column一样,都会作为表字段,表字段默认为Java对象的Field名字驼峰转下划线形式.</li>
+<li>可以使用<strong><em>@Column(name = “fieldName”)</em></strong>指定不符合第3条规则的字段名</li>
+<li><strong><em>使用@Transient注解可以忽略字段,添加该注解的字段不会作为表字段使用（关联查询）</em></strong></li>
+<li><strong><em>建议一定是有一个@Id注解作为主键的字段,可以有多个@Id注解的字段作为联合主键.</em></strong></li>
+</ol>
+<h4 id="通用mapper使用-1"><a href="#通用mapper使用-1" class="headerlink" title="通用mapper使用"></a>通用mapper使用</h4><pre><code>public class UserMapperTest {
+
+    private UserMapper mapper;
+
+    @Before
+    public void setUp() throws Exception {
+        ApplicationContext ac = new ClassPathXmlApplicationContext(
+                new String[]{&quot;applicationContext.xml&quot;,&quot;applicationContext-mybatis.xml&quot;,&quot;applicationContext-tx.xml&quot;});
+        mapper = ac.getBean(UserMapper.class);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
+    }
+
+    @Test
+    public void testSelectOne() throws Exception {
+        //创建User对象，设置的属性作为查询的约束
+        User user = new User();
+        user.setId(1L);
+        //使用selectOne必须保证结果唯一，如果结果太多则会报错
+        System.out.println(mapper.selectOne(user));
+    }
+
+    @Test
+    public void testSelect() throws Exception {
+        User record = new User();
+        //可以设置属性增加约束
+
+        List&lt;User&gt; users = mapper.select(record);
+        for(User user : users)
+            System.out.println(user);
+    }
+
+    @Test
+    public void testSelectCount() throws Exception {
+        User record = new User();
+        int count = mapper.selectCount(record);
+        System.out.println(count);
+    }
+
+    @Test
+    public void testSelectByPrimaryKey() throws Exception {
+        //参数表示主键的值
+        System.out.println(mapper.selectByPrimaryKey(1L));
+    }
+
+    @Test
+    public void testInsert() throws Exception {
+        User record = new User();
+        record.setUserName(&quot;踩雷&quot;);
+        record.setName(&quot;bajie&quot;);
+        record.setPassword(&quot;123456&quot;);
+        record.setBirthday(new Date());
+        mapper.insert(record);
+    }
+
+    @Test
+    public void testInsertSelective() throws Exception {
+        //与testInsert的区别：只添加设置值得字段，其余让数据库默认，推荐！！！
+        User record = new User();
+        record.setUserName(&quot;李璇&quot;);
+        record.setName(&quot;bajie&quot;);
+        record.setPassword(&quot;123456&quot;);
+        record.setBirthday(new Date());
+        mapper.insert(record);
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        User record = new User();
+        record.setName(&quot;xxxx&quot;);
+        mapper.delete(record);
+    }
+
+    @Test
+    public void testDeleteByPrimaryKey() throws Exception {
+        mapper.deleteByPrimaryKey(66L);
+    }
+
+    @Test
+    public void testUpdateByPrimaryKey() throws Exception {
+        User record = new User();
+        record.setId(66L);
+        record.setName(&quot;踩雷&quot;);
+        mapper.updateByPrimaryKey(record);
+    }
+
+    @Test
+    public void testUpdateByPrimaryKeySelective() throws Exception {
+        //只更新设置的值，推荐！！！！！！！
+        User record = new User();
+        record.setId(66L);
+        record.setName(&quot;踩雷&quot;);
+        mapper.updateByPrimaryKeySelective(record);
+    }
+
+
+    @Test
+    public void testExampleBasic(){
+        //进行复杂查询
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andGreaterThanOrEqualTo(&quot;age&quot;,30);
+        //添加and条件，密码为123456
+        criteria.andEqualTo(&quot;password&quot;,&quot;123456&quot;);
+        List&lt;User&gt; users = mapper.selectByExample(example);
+        for(User u : users)
+            System.out.println(u);
+    }
+
+    @Test
+    //SELECT AGE,NAME,UPDATED,USER_NAME USERNAME,BIRTHDAY,ID,CREATED,SEX,PASSWORD FROM tb_user
+    // WHERE ( AGE &gt;= ? and NAME like ? ) or ( PASSWORD = ? and ID in(?,?) )
+    public void testExampleOr(){
+        //进行复杂查询，or
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andGreaterThanOrEqualTo(&quot;age&quot;,30);
+        criteria.andLike(&quot;name&quot;,&quot;%xx%&quot;);
+
+        Example.Criteria criteria12 = example.createCriteria();
+        //添加and条件，密码为123456
+        criteria12.andEqualTo(&quot;password&quot;,&quot;123456&quot;);
+        List&lt;Object&gt; ids = new ArrayList&lt;Object&gt;();
+        ids.add(&quot;1&quot;);
+        ids.add(&quot;2&quot;);
+        criteria12.andIn(&quot;id&quot;,ids);
+
+        //多个criteria之间是or的关系
+        example.or(criteria12);
+
+        List&lt;User&gt; users = mapper.selectByExample(example);
+        for(User u : users)
+            System.out.println(u);
+    }
+
+    @Test
+    public void testExampleSort(){
+        Example example = new Example(User.class);
+        example.setOrderByClause(&quot;age desc,id desc&quot;);
+        List&lt;User&gt; users = mapper.selectByExample(example);
+    }
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaEE/" rel="tag">#JavaEE</a>
+          
+            <a href="/tags/SSM/" rel="tag">#SSM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/30/[Java]Java泛型/" rel="next" title="Java泛型">
+                <i class="fa fa-chevron-left"></i> Java泛型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/" rel="prev" title="IDEA在编辑时提示could not autowire">
+                IDEA在编辑时提示could not autowire <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入依赖"><span class="nav-number">1.</span> <span class="nav-text">导入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github"><span class="nav-number">2.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询用户列表"><span class="nav-number">3.</span> <span class="nav-text">查询用户列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义EasyUIPage"><span class="nav-number">3.1.</span> <span class="nav-text">定义EasyUIPage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controller"><span class="nav-number">3.2.</span> <span class="nav-text">controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写userservice"><span class="nav-number">3.3.</span> <span class="nav-text">编写userservice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写userMapper"><span class="nav-number">3.4.</span> <span class="nav-text">编写userMapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userMapper对应的xml"><span class="nav-number">3.5.</span> <span class="nav-text">userMapper对应的xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#页面跳转合并★★★★★★"><span class="nav-number">4.</span> <span class="nav-text">页面跳转合并★★★★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加用户"><span class="nav-number">5.</span> <span class="nav-text">添加用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期格式转换"><span class="nav-number">5.1.</span> <span class="nav-text">日期格式转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加失败"><span class="nav-number">5.2.</span> <span class="nav-text">添加失败</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导出excel"><span class="nav-number">6.</span> <span class="nav-text">导出excel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#poi依赖"><span class="nav-number">6.1.</span> <span class="nav-text">poi依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入编写好的Excel视图"><span class="nav-number">6.2.</span> <span class="nav-text">导入编写好的Excel视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明excel视图"><span class="nav-number">6.3.</span> <span class="nav-text">声明excel视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器"><span class="nav-number">6.4.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean视图解析器"><span class="nav-number">6.5.</span> <span class="nav-text">bean视图解析器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除用户"><span class="nav-number">7.</span> <span class="nav-text">删除用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器-1"><span class="nav-number">7.1.</span> <span class="nav-text">控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql语句"><span class="nav-number">7.2.</span> <span class="nav-text">sql语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用mapper"><span class="nav-number">8.</span> <span class="nav-text">通用mapper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入依赖-1"><span class="nav-number">8.1.</span> <span class="nav-text">导入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis配置文件方式"><span class="nav-number">8.2.</span> <span class="nav-text">Mybatis配置文件方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用mapper使用"><span class="nav-number">8.3.</span> <span class="nav-text">通用mapper使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承通用的Mapper-必须指定泛型"><span class="nav-number">8.3.1.</span> <span class="nav-text">继承通用的Mapper,必须指定泛型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型-实体类-的类型必须符合要求★★★★★"><span class="nav-number">8.3.2.</span> <span class="nav-text">泛型(实体类)的类型必须符合要求★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通用mapper使用-1"><span class="nav-number">8.3.3.</span> <span class="nav-text">通用mapper使用</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

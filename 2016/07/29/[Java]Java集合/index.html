@@ -1,0 +1,652 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,Java集合," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="集合框架–使用
+开发常用　　●　在实际开发过程中，比较常用的是Vector、Stack、ArrayList、LinkedList、HashMap、HashTable　　●　集合类基本上在util包中
+集合分类　　Java集合类主要有以下几种　 　●　List结构的集合类：ArrayList、LinkedList、Vector、Stack　 　●　Map结构的集合类：HashMap、HashTabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合">
+<meta property="og:url" content="http://yoursite.com/2016/07/29/[Java]Java集合/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="集合框架–使用
+开发常用　　●　在实际开发过程中，比较常用的是Vector、Stack、ArrayList、LinkedList、HashMap、HashTable　　●　集合类基本上在util包中
+集合分类　　Java集合类主要有以下几种　 　●　List结构的集合类：ArrayList、LinkedList、Vector、Stack　 　●　Map结构的集合类：HashMap、HashTabl">
+<meta property="og:image" content="http://img.blog.csdn.net/20160416165357245">
+<meta property="og:updated_time" content="2016-07-29T03:53:24.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合">
+<meta name="twitter:description" content="集合框架–使用
+开发常用　　●　在实际开发过程中，比较常用的是Vector、Stack、ArrayList、LinkedList、HashMap、HashTable　　●　集合类基本上在util包中
+集合分类　　Java集合类主要有以下几种　 　●　List结构的集合类：ArrayList、LinkedList、Vector、Stack　 　●　Map结构的集合类：HashMap、HashTabl">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160416165357245">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/29/[Java]Java集合/"/>
+
+
+  <title> Java集合 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java集合
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-29T00:00:00+08:00" content="2016-07-29">
+              2016-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="集合框架–使用"><a href="#集合框架–使用" class="headerlink" title="集合框架–使用"></a>集合框架–使用</h2><p><img src="http://img.blog.csdn.net/20160416165357245" alt="这里写图片描述"></p>
+<h3 id="开发常用"><a href="#开发常用" class="headerlink" title="开发常用"></a><em>开发常用</em></h3><p>　　●　在实际开发过程中，比较常用的是Vector、Stack、ArrayList、LinkedList、HashMap、HashTable<br>　　●　集合类基本上在util包中</p>
+<h3 id="集合分类"><a href="#集合分类" class="headerlink" title="集合分类"></a><em>集合分类</em></h3><p>　　Java集合类主要有以下几种<br>　 　●　List结构的集合类：ArrayList、LinkedList、Vector、Stack<br>　 　●　Map结构的集合类：HashMap、HashTable<br>　 　●　Set结构的集合类：HashSet、TreeSet<br>　 　●　Queue结构的集合：Queue接口</p>
+<h2 id="List结构的集合类"><a href="#List结构的集合类" class="headerlink" title="List结构的集合类"></a>List结构的集合类</h2><h3 id="ArrayList类的使用-无同步性，线程不安全"><a href="#ArrayList类的使用-无同步性，线程不安全" class="headerlink" title="ArrayList类的使用(无同步性，线程不安全)"></a><em>ArrayList类的使用(无同步性，线程不安全)</em></h3><ul>
+<li>基于动态数组的数据结构，随机访问优于LinkedList<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class ArrayList</div><div class="line"></div><div class="line">1. 往list中插入元素 </div><div class="line">    ● boolean add(E e) 元素添加到列表的尾部 </div><div class="line">    ● void    add(int index, E element) 元素插入到列表的指定位置</div><div class="line">2. 返回列表中的元素数 </div><div class="line">    ● int size() 返回列表中的元素数 </div><div class="line">3. 如果此列表中没有元素，则返回 true </div><div class="line">    ● boolean isEmpty() </div><div class="line">4. 返回此列表中指定位置上的元素 </div><div class="line">    ● E get(int index) </div><div class="line">5. 用指定的元素替代此列表中指定位置上的元素,返回值是以前位于该位上的元素 </div><div class="line">    ● E set(int index, E element) </div><div class="line">6. 移除列表上的元素 </div><div class="line">    ● E remove(int index) 移除此列表中指定位置上的元素 </div><div class="line">    ● boolean remove(Object o) 移除此列表中首次出现的指定元素（如果存在） </div><div class="line">    ● protected void removeRange(int fromIndex, int toIndex) 移除列表中索引在 fromIndex（包括）和 toIndex（不包括）之间的所有元素。 </div><div class="line">    ● void clear() 移除列表中所有元素</div><div class="line">7. 查找元素 </div><div class="line">    ● contains(Object o) 判断list中是否含有指定元素 </div><div class="line">    ● int indexOf(Object o) 返回list中元素第一次出现的位置,若没有则返回-1 </div><div class="line">    ● int lastIndexOf(Object o) 返回arraylist中元素最后一次出现的位置,若没有则返回-1</div><div class="line">8. 返回包含此列表中所有元素的数组（按顺序），相当于数组API和collection API的桥梁,返回一个object的数组 </div><div class="line">    ● Object[] toArray()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="LinkedList类的使用"><a href="#LinkedList类的使用" class="headerlink" title="LinkedList类的使用"></a><em>LinkedList类的使用</em></h3><ul>
+<li>基于链表的数据结构，新增add和删除remove操作优于ArrayList<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 将指定元素插入此列表的开头</div><div class="line">    ● void addFirst(E e) </div><div class="line">2. 将指定元素添加到此列表的结尾</div><div class="line">    ● void addLast(E e)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Vector同理-线程安全具有同步性"><a href="#Vector同理-线程安全具有同步性" class="headerlink" title="Vector同理(线程安全具有同步性)"></a><em>Vector同理(线程安全具有同步性)</em></h3><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a><em>Stack</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 测试堆栈是否为空 </div><div class="line">    boolean empty() </div><div class="line">2. 查看堆栈顶部的对象，但不从堆栈中移除它 </div><div class="line">    E peek() </div><div class="line">3. 移除堆栈顶部的对象，并作为此函数的值返回该对象</div><div class="line">    E pop() </div><div class="line">4. 把项压入堆栈顶部</div><div class="line">    E push(E item) </div><div class="line">5. 返回对象在堆栈中的位置，以 1 为基数  </div><div class="line">    int search(Object o)</div></pre></td></tr></table></figure>
+<h3 id="ArrayList和Vector的区别"><a href="#ArrayList和Vector的区别" class="headerlink" title="ArrayList和Vector的区别"></a>ArrayList和Vector的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ArrayList和Vector的区别</div><div class="line">    ArrayList与Vector都是java的集合类，都可以用来存放java对象，这是他们的相同点，但是他们也有区别：</div><div class="line">1、同步性</div><div class="line">    Vector是线程同步的。这个类中的一些方法保证了Vector中的对象是线程安全的。而ArrayList则是线程异步的，因此ArrayList中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用ArrayList是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销。</div><div class="line">2、数据增长</div><div class="line">    从内部实现机制来讲ArrayList和Vector都是使用数组(Array)来控制集合中的对象。当你向这两种类型中增加元素的时候，如果元素的数目超出了内部数组目前的长度它们都需要扩展内部数组的长度，Vector缺省情况下自动增长原来一倍的数组长度，ArrayList是原来的50%，所以最后你获得的这个集合所占的空间总是比你实际需要的要大。所以如果你要在集合中保存大量的数据那么使用Vector有一些优势，因为你可以通过设置集合的初始化大小来避免不必要的资源开销。</div></pre></td></tr></table></figure>
+<h2 id="Map结构的集合类"><a href="#Map结构的集合类" class="headerlink" title="Map结构的集合类"></a>Map结构的集合类</h2><h3 id="HashMap（线程不同步），HashTable（线程同步）集合类"><a href="#HashMap（线程不同步），HashTable（线程同步）集合类" class="headerlink" title="HashMap（线程不同步），HashTable（线程同步）集合类"></a><em>HashMap（线程不同步），HashTable（线程同步）集合类</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">void clear() </div><div class="line">      从此映射中移除所有映射关系。 </div><div class="line">V get(Object key) </div><div class="line">      返回指定键所映射的值；如果对于该键来说，此映射不包含任何映射关系，则返回 null。 </div><div class="line">boolean isEmpty() </div><div class="line">      如果此映射不包含键-值映射关系，则返回 true。 </div><div class="line">V put(K key, V value) </div><div class="line">      在此映射中关联指定值与指定键。 </div><div class="line">V remove(Object key) </div><div class="line">      从此映射中移除指定键的映射关系（如果存在）。 </div><div class="line">int size() </div><div class="line">      返回此映射中的键-值映射关系数。</div></pre></td></tr></table></figure>
+<h3 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a><em>Map遍历</em></h3><pre><code>1. Map.Entry&lt;String, String&gt;的数据类型为键值对。
+
+2. map.entrySet(),返回类型为Set&lt;Entry&lt;String, String&gt;&gt; ，即map中非空元素组成的键值对Set集合，可以用图例（key1,value1）,(key2,value2)...(keyn,valuen)表示。
+
+3. Map.Entry&lt;String, String&gt;类型分别通过getKey()、getValue()方法取出键和值。
+
+4. 可以通过map.keySet()方法取出全部键的Set集合，从而通过map.get(Object key)方法取出值，即方法一。
+
+5. 可以通过map.value()得到Collection&lt;String&gt;集合，得到所有值。即方法四
+
+6、方法二中使用迭代器对数据遍历，类型是Map.Entry&lt;String, String&gt;，即仍旧是键值对，集合是map.entrySet().iterator()，比方法三麻烦。
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">  Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">  map.put(<span class="string">"1"</span>, <span class="string">"value1"</span>);</div><div class="line">  map.put(<span class="string">"2"</span>, <span class="string">"value2"</span>);</div><div class="line">  map.put(<span class="string">"3"</span>, <span class="string">"value3"</span>);</div><div class="line">  </div><div class="line">  <span class="comment">//第一种：普遍使用，二次取值</span></div><div class="line">  System.out.println(<span class="string">"通过Map.keySet遍历key和value："</span>);</div><div class="line">  <span class="keyword">for</span> (String key : map.keySet()) &#123;</div><div class="line">   System.out.println(<span class="string">"key= "</span>+ key + <span class="string">" and value= "</span> + map.get(key));</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//第二种</span></div><div class="line">  System.out.println(<span class="string">"通过Map.entrySet使用iterator遍历key和value："</span>);</div><div class="line">  Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();</div><div class="line">  <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">   Map.Entry&lt;String, String&gt; entry = it.next();</div><div class="line">   System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//第三种：推荐，尤其是容量大时</span></div><div class="line">  System.out.println(<span class="string">"通过Map.entrySet遍历key和value"</span>);</div><div class="line">  <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</div><div class="line">   System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//第四种</span></div><div class="line">  System.out.println(<span class="string">"通过Map.values()遍历所有的value，但不能遍历key"</span>);</div><div class="line">  <span class="keyword">for</span> (String v : map.values()) &#123;</div><div class="line">   System.out.println(<span class="string">"value= "</span> + v);</div><div class="line">  &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h3 id="HashMap和Hashtable集合类的区别"><a href="#HashMap和Hashtable集合类的区别" class="headerlink" title="HashMap和Hashtable集合类的区别"></a><em>HashMap和Hashtable集合类的区别</em></h3><pre><code>HashMap与Hashtable都是java的集合类，都可以用来存放java对象，这是他们的相同点，但是他们也有区别。
+1、历史原因
+    Hashtable是基于陈旧的Dictionary类的，HashMap是java 1.2引进的Map接口的一个实现。
+2、同步性
+    Hashtable是线程同步的。这个类中的一些方法保证了Hashtable中的对象是线程安全的。而HashMap则是线程异步的，因此HashMap中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用HashMap是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销，从而提高效率。
+3、值
+    HashMap可以让你将空值作为一个表的条目的key或value但是Hashtable是不能放入空值的(null)
+</code></pre><h2 id="List、Map集合框架的选择★（常用）★★★★"><a href="#List、Map集合框架的选择★（常用）★★★★" class="headerlink" title="List、Map集合框架的选择★（常用）★★★★"></a>List、Map集合框架的选择★（常用）★★★★</h2><pre><code>如何选用集合类？
+1、要求线程安全，使用Vector、Hashtable
+2、不要求线程安全，使用ArrayList,LinkedList,HashMap
+3、要求key和value键值，则使用HashMap,Hashtable
+4、数据量很大，又要线程安全，则使用Vector
+</code></pre><h2 id="Set结构的集合类"><a href="#Set结构的集合类" class="headerlink" title="Set结构的集合类"></a>Set结构的集合类</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a><em>用法</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#添加</div><div class="line">add(Object)</div><div class="line"></div><div class="line">#遍历</div><div class="line">Iterator&lt;String&gt; iterator = hashSet.iterator();</div><div class="line">while(iterator.hasNext())&#123;</div><div class="line">	System.out.println(iterator.next());</div><div class="line">&#125;</div><div class="line"></div><div class="line">#删除元素</div><div class="line">删除一个元素 remove(Object)</div><div class="line">删除所有元素 clear()</div><div class="line"></div><div class="line">#包含</div><div class="line">contain(Object)</div></pre></td></tr></table></figure>
+<h3 id="HashSet与TreeSet区别"><a href="#HashSet与TreeSet区别" class="headerlink" title="HashSet与TreeSet区别"></a><em>HashSet与TreeSet区别</em></h3><ul>
+<li>HashSet随机存储对象，不能保证先插入的元素出现在前面；TreeSet中元素默认按照元素自然序进行排列，使用compareTo()方法自定义排序</li>
+<li>HashSet内部依靠HashMap，而TreeSet依靠TreeMap</li>
+<li>HashSet可以存储空对象，但TreeSet不允许</li>
+<li>性能，HashSet对基本操作add，remove，size有常数的时间复杂度，TreeSet有log(n)的时间复杂度</li>
+<li>TreeSet比起HashSet具有更多丰富的功能，例如pollFirst(),pollLast(),first(),last(),celling(),lower()等</li>
+<li>比较，HashSet使用equals()方法进行比较，而TreeSet使用compareTo()方法获得排列顺序</li>
+</ul>
+<h3 id="HashSet与TreeSet相同点"><a href="#HashSet与TreeSet相同点" class="headerlink" title="HashSet与TreeSet相同点"></a><em>HashSet与TreeSet相同点</em></h3><ul>
+<li>只能存储独一无二的元素，不允许任何重复的元素</li>
+<li>不是线程安全</li>
+<li>Clone方法有相同的实现技术</li>
+</ul>
+<h2 id="Queue结构的集合"><a href="#Queue结构的集合" class="headerlink" title="Queue结构的集合"></a>Queue结构的集合</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/Java集合/" rel="tag">#Java集合</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/15/[Spring]Spring笔记/" rel="next" title="Spring笔记">
+                <i class="fa fa-chevron-left"></i> Spring笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/29/[Java]java中的事件监听是怎样实现随时监听的/" rel="prev" title="java中的事件监听是怎样实现随时监听的">
+                java中的事件监听是怎样实现随时监听的 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#集合框架–使用"><span class="nav-number">1.</span> <span class="nav-text">集合框架–使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发常用"><span class="nav-number">1.1.</span> <span class="nav-text">开发常用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合分类"><span class="nav-number">1.2.</span> <span class="nav-text">集合分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List结构的集合类"><span class="nav-number">2.</span> <span class="nav-text">List结构的集合类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList类的使用-无同步性，线程不安全"><span class="nav-number">2.1.</span> <span class="nav-text">ArrayList类的使用(无同步性，线程不安全)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedList类的使用"><span class="nav-number">2.2.</span> <span class="nav-text">LinkedList类的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector同理-线程安全具有同步性"><span class="nav-number">2.3.</span> <span class="nav-text">Vector同理(线程安全具有同步性)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">2.4.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和Vector的区别"><span class="nav-number">2.5.</span> <span class="nav-text">ArrayList和Vector的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map结构的集合类"><span class="nav-number">3.</span> <span class="nav-text">Map结构的集合类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap（线程不同步），HashTable（线程同步）集合类"><span class="nav-number">3.1.</span> <span class="nav-text">HashMap（线程不同步），HashTable（线程同步）集合类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map遍历"><span class="nav-number">3.2.</span> <span class="nav-text">Map遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和Hashtable集合类的区别"><span class="nav-number">3.3.</span> <span class="nav-text">HashMap和Hashtable集合类的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List、Map集合框架的选择★（常用）★★★★"><span class="nav-number">4.</span> <span class="nav-text">List、Map集合框架的选择★（常用）★★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set结构的集合类"><span class="nav-number">5.</span> <span class="nav-text">Set结构的集合类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">5.1.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet与TreeSet区别"><span class="nav-number">5.2.</span> <span class="nav-text">HashSet与TreeSet区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet与TreeSet相同点"><span class="nav-number">5.3.</span> <span class="nav-text">HashSet与TreeSet相同点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue结构的集合"><span class="nav-number">6.</span> <span class="nav-text">Queue结构的集合</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="IDEA,Servlet," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="本文的思路是先创建Maven项目，再加上Java Web模块支持
+创建Maven项目File - New - Project，创建Maven项目
+
+Next，填写GroupId，ArtifactId和Version
+
+Next，这里在Properties中添加一个参数archetypeCatalog=internal，不加这个参数，在maven生成骨架的时候将会非常慢，有时候会直接卡住。
+来自网上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intellij IDEA15创建Maven管理的Java Web项目">
+<meta property="og:url" content="http://yoursite.com/2016/07/07/[Servlet]Intellij IDEA创建Maven管理的Java Web项目/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="本文的思路是先创建Maven项目，再加上Java Web模块支持
+创建Maven项目File - New - Project，创建Maven项目
+
+Next，填写GroupId，ArtifactId和Version
+
+Next，这里在Properties中添加一个参数archetypeCatalog=internal，不加这个参数，在maven生成骨架的时候将会非常慢，有时候会直接卡住。
+来自网上">
+<meta property="og:image" content="http://i.imgur.com/yCSg2OK.png">
+<meta property="og:image" content="http://i.imgur.com/VlBtIOA.png">
+<meta property="og:image" content="http://i.imgur.com/YePrI2x.png">
+<meta property="og:image" content="http://i.imgur.com/yrmOBcr.png">
+<meta property="og:image" content="http://i.imgur.com/mppsHHu.png">
+<meta property="og:image" content="http://i.imgur.com/p5NAWmy.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/14/1363248954_3896.png">
+<meta property="og:image" content="http://i.imgur.com/L5LXM7A.png">
+<meta property="og:image" content="http://i.imgur.com/77V6dHo.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/14/1363248975_9849.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/14/1363248979_4524.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/14/1363248982_3705.png">
+<meta property="og:image" content="http://i.imgur.com/zVA6RYW.png">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201303/14/1363248993_1308.png">
+<meta property="og:image" content="http://i.imgur.com/xsZHFqP.png">
+<meta property="og:image" content="http://i.imgur.com/fmJjfqg.png">
+<meta property="og:image" content="http://i.imgur.com/LMFpfTI.png">
+<meta property="og:updated_time" content="2016-07-07T05:48:15.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Intellij IDEA15创建Maven管理的Java Web项目">
+<meta name="twitter:description" content="本文的思路是先创建Maven项目，再加上Java Web模块支持
+创建Maven项目File - New - Project，创建Maven项目
+
+Next，填写GroupId，ArtifactId和Version
+
+Next，这里在Properties中添加一个参数archetypeCatalog=internal，不加这个参数，在maven生成骨架的时候将会非常慢，有时候会直接卡住。
+来自网上">
+<meta name="twitter:image" content="http://i.imgur.com/yCSg2OK.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/07/[Servlet]Intellij IDEA创建Maven管理的Java Web项目/"/>
+
+
+  <title> Intellij IDEA15创建Maven管理的Java Web项目 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule" rel="section">
+            
+            日程
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Intellij IDEA15创建Maven管理的Java Web项目
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-07T10:13:00+08:00" content="2016-07-07">
+              2016-07-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Servlet/" itemprop="url" rel="index">
+                    <span itemprop="name">Servlet</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文的思路是先创建Maven项目，再加上Java Web模块支持</p>
+<h2 id="创建Maven项目"><a href="#创建Maven项目" class="headerlink" title="创建Maven项目"></a>创建Maven项目</h2><p><strong><em>File - New - Project，创建Maven项目</em></strong></p>
+<p><img src="http://i.imgur.com/yCSg2OK.png" alt=""></p>
+<p><strong><em>Next，填写GroupId，ArtifactId和Version</em></strong></p>
+<p><img src="http://i.imgur.com/VlBtIOA.png" alt=""></p>
+<p><strong><em>Next，这里在Properties中添加一个参数<code>archetypeCatalog=internal</code>，不加这个参数，在maven生成骨架的时候将会非常慢，有时候会直接卡住。</em></strong></p>
+<pre><code>来自网上的解释：      
+archetypeCatalog表示插件使用的archetype元数据，不加这个参数时默认为remote，local，即中央仓库archetype元数据，由于中央仓库的archetype太多了，所以导致很慢，指定internal来表示仅使用内部元数据。
+</code></pre><p><img src="http://i.imgur.com/YePrI2x.png" alt=""></p>
+<p><strong><em>Next，填写项目名和module名称，项目名和模块名可以不一样（还不是很清楚两者的区别）</em></strong></p>
+<p><img src="http://i.imgur.com/yrmOBcr.png" alt=""></p>
+<p><strong><em>点击Finsh，项目的目录结构如下：</em></strong>  </p>
+<p><img src="http://i.imgur.com/mppsHHu.png" alt=""></p>
+<p>Maven规定，src文件下有<code>main</code>和<code>test</code>两个文件夹。其中：  </p>
+<ul>
+<li>main文件为项目主体目录，main下的java文件夹为源代码目录，resource为所需资源目录</li>
+<li>test为项目测试目录，test下的java文件夹为测试代码目录，resources为测试所需资源目录</li>
+</ul>
+<p><strong><em>发现生成的Maven项目，没有Web目录！在项目名称右击，选择Add Framework Support</em></strong></p>
+<p><img src="http://i.imgur.com/p5NAWmy.png" alt=""></p>
+<p><strong><em>在Add Framework Support对话框中勾选Web Application，版本选择3.0并勾选Create web.xml</em></strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/14/1363248954_3896.png" alt=""></p>
+<p><strong><em>点击OK后，看到如下界面，项目中出现了web文件夹，是不是很熟悉了，和MyEclipse中的项目结构类似</em></strong></p>
+<p><img src="http://i.imgur.com/L5LXM7A.png" alt=""></p>
+<h2 id="配置Tomcat服务器"><a href="#配置Tomcat服务器" class="headerlink" title="配置Tomcat服务器"></a>配置Tomcat服务器</h2><p><strong><em>点击右上角的倒三角，选择<code>Edit Configurations</code>，弹出服务器配置页面</em></strong></p>
+<p><img src="http://i.imgur.com/77V6dHo.png" alt=""></p>
+<p><strong><em>如下图，选择Local，然后点击Configure，在弹出的对话框中选择Tomcat安装目录</em></strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/14/1363248975_9849.png" alt=""></p>
+<p><strong><em>选择Tomcat Server，然后点击绿色的“+”号</em></strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/14/1363248979_4524.png" alt=""></p>
+<p><strong><em>点击“+”后选择Local，刚刚已经配置好了Local的Tomcat服务器</em></strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/14/1363248982_3705.png" alt=""></p>
+<p><strong><em>这里会新建一个Tomcat服务，输入任意名字即可。Update的快捷键是Ctrl+F10</em></strong></p>
+<p><img src="http://i.imgur.com/zVA6RYW.png" alt=""></p>
+<p><strong><em>点击Deployment，然后点击右边的“+”，添加Artifact部署</em></strong></p>
+<p><img src="http://img.my.csdn.net/uploads/201303/14/1363248993_1308.png" alt=""></p>
+<p><strong><em>输入应用程序Context，输入路径:<code>/工程名</code></em></strong></p>
+<p><img src="http://i.imgur.com/xsZHFqP.png" alt=""></p>
+<p><strong><em>点击界面上方的启动按钮就可以启动Tomcat服务器，启动后服务器自动打开浏览器</em></strong></p>
+<p><img src="http://i.imgur.com/fmJjfqg.png" alt=""></p>
+<p><strong><em>回到主界面，如图，点击Run打开服务器视图，能看到项目的部署情况了，而且可以完成服务器重启/关闭，项目部署等操作</em></strong></p>
+<p><img src="http://i.imgur.com/LMFpfTI.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IDEA/" rel="tag">#IDEA</a>
+          
+            <a href="/tags/Servlet/" rel="tag">#Servlet</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/06/[Servlet]Servlet笔记/" rel="next" title="Servlet笔记">
+                <i class="fa fa-chevron-left"></i> Servlet笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/08/[IDEA]IDEA快捷键/" rel="prev" title="IDEA快捷键">
+                IDEA快捷键 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Maven项目"><span class="nav-number">1.</span> <span class="nav-text">创建Maven项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Tomcat服务器"><span class="nav-number">2.</span> <span class="nav-text">配置Tomcat服务器</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
