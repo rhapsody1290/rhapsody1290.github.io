@@ -1,0 +1,930 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="读取文件根目录根目录在工程目录
+InputStream ips = new FileInputStream(&amp;quot;src/xx.properties&amp;quot;);
+类加载器根目录在src下
+InputStream ips = test.class.getClassLoader().getResourceAsStream(&amp;quot;xx.properties&amp;quot;);
+maven项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础常用">
+<meta property="og:url" content="http://yoursite.com/2016/07/08/[Java]Java基础常用/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="读取文件根目录根目录在工程目录
+InputStream ips = new FileInputStream(&amp;quot;src/xx.properties&amp;quot;);
+类加载器根目录在src下
+InputStream ips = test.class.getClassLoader().getResourceAsStream(&amp;quot;xx.properties&amp;quot;);
+maven项目">
+<meta property="og:updated_time" content="2016-10-08T03:26:55.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java基础常用">
+<meta name="twitter:description" content="读取文件根目录根目录在工程目录
+InputStream ips = new FileInputStream(&amp;quot;src/xx.properties&amp;quot;);
+类加载器根目录在src下
+InputStream ips = test.class.getClassLoader().getResourceAsStream(&amp;quot;xx.properties&amp;quot;);
+maven项目">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/08/[Java]Java基础常用/"/>
+
+
+  <title> Java基础常用 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '823unzztyxMCsvrWHD_T','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java基础常用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-08T14:49:00+08:00" content="2016-07-08">
+              2016-07-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/08/[Java]Java基础常用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/08/[Java]Java基础常用/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="读取文件根目录"><a href="#读取文件根目录" class="headerlink" title="读取文件根目录"></a>读取文件根目录</h2><pre><code>根目录在工程目录
+InputStream ips = new FileInputStream(&quot;src/xx.properties&quot;);
+类加载器根目录在src下
+InputStream ips = test.class.getClassLoader().getResourceAsStream(&quot;xx.properties&quot;);
+maven项目根目录为resources
+InputStream ips = test.class.getClassLoader().getResourceAsStream(&quot;xx.properties&quot;);
+</code></pre><h2 id="读取文本文件"><a href="#读取文本文件" class="headerlink" title="读取文本文件"></a>读取文本文件</h2><pre><code>//读取文件
+String realPath = this.getServletContext().getRealPath(&quot;record.txt&quot;);
+FileReader fileReader = new FileReader(realPath);
+BufferedReader br = new BufferedReader(fileReader);
+String nums = br.readLine();
+//一定要关闭流
+br.close();
+fileReader.close();
+out.println(nums);
+//写入文件
+FileWriter fileWriter = new FileWriter(realPath);
+BufferedWriter bw = new BufferedWriter(fileWriter);
+bw.write(String.valueOf(Integer.parseInt(nums) + 1));
+bw.close();
+fileWriter.close();
+</code></pre><h2 id="从控制台读取数据"><a href="#从控制台读取数据" class="headerlink" title="从控制台读取数据"></a>从控制台读取数据</h2><pre><code>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+System.out.println(br.readLine());
+</code></pre><h2 id="Java读取资源文件"><a href="#Java读取资源文件" class="headerlink" title="Java读取资源文件"></a>Java读取资源文件</h2><pre><code>/**
+ * 文件类型是UTF-8，在String生成字符时需指定解码方式为utf-8；
+ */
+InputStream ips = null;
+try {
+    ips = MyServer.class.getClassLoader().getResourceAsStream(&quot;com/main/戏曲.txt&quot;);
+    int hasRead = 0;
+    byte[] buffer = new byte[1024];
+    StringBuffer content = new StringBuffer();
+    while((hasRead = ips.read(buffer)) &gt; 0){
+        content.append(new String(buffer, 0, hasRead, &quot;utf-8&quot;));
+    }
+    System.out.println(content);
+} catch (Exception e) {
+    e.printStackTrace();
+}finally{
+    if (ips != null) {
+        try {
+            ips.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><pre><code>四舍五入
+float totalMoney = 123.124f;
+BigDecimal b = new BigDecimal(totalMoney);  
+totalMoney  = b.setScale(2,BigDecimal.ROUND_HALF_UP).floatValue();  
+保留两位小数
+String.format(&quot;%.2f&quot;, totalMoney)
+</code></pre><h2 id="生成指定长度的随机字符串"><a href="#生成指定长度的随机字符串" class="headerlink" title="生成指定长度的随机字符串"></a>生成指定长度的随机字符串</h2><pre><code>//生成指定长度的随机字符串    
+public static String GenRandomString(int length){
+    Random random = new Random();    
+    char[] charArray = &quot;abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;.toCharArray();
+    char[] randomChar = new char [length];
+    for(int i = 0; i &lt; randomChar.length; i++){
+        randomChar[i] = charArray[random.nextInt(charArray.length)];
+    }        
+    return new String(randomChar);    
+}
+</code></pre><h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><pre><code>MAVEN依赖：http://blog.csdn.net/earbao/article/details/44900083
+连接步骤：http://www.cnblogs.com/hongten/archive/2011/03/29/1998311.html
+</code></pre><p><strong><em>JDBC查询</em></strong></p>
+<pre><code>//到数据库中验证
+/*
+* 1.加载驱动
+* 2.得到连接
+* 3.创建PrepareStatment
+* 4.执行操作
+* 5.根据结果做处理
+* */
+Connection connection = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
+
+try {
+    //1.加载驱动
+    Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+    //2.获得连接
+    connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/servlet_users_manager&quot;,&quot;root&quot;,&quot;root&quot;);
+    //3.创建prepareStatement
+    ps = connection.prepareStatement(&quot;select * from users where username = ? and passwd = ?&quot;);
+    ps.setObject(1,username);
+    ps.setObject(2,password);
+    //4.执行操作
+    rs = ps.executeQuery();
+    //5.根据结果做处理
+    if(rs.next()){
+        //说明用户合法
+        System.out.println(rs.getString(&quot;username&quot;) + &quot; &quot; + rs.getString(&quot;passwd&quot;));
+        request.getRequestDispatcher(&quot;/MainFrame&quot;).forward(request,response);
+    }else{
+        request.getRequestDispatcher(&quot;/Login&quot;).forward(request,response);
+    }
+} catch (Exception e) {
+    e.printStackTrace();
+}finally {
+    //关闭资源
+    if(rs != null){   // 关闭记录集
+        try{
+            rs.close();
+        }catch(Exception e){
+            e.printStackTrace() ;
+        }
+    }
+    if(ps != null){   // 关闭声明
+        try{
+            ps.close() ;
+        }catch(Exception e){
+            e.printStackTrace() ;
+        }
+    }
+    if(connection != null){  // 关闭连接对象
+        try{
+            connection.close() ;
+        }catch(Exception e){
+            e.printStackTrace() ;
+        }
+    }
+}
+</code></pre><h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p><strong><em>定义四个分页变量</em></strong></p>
+<pre><code>pageNow   表示第几页,该变量是由用户来决定,因此变化
+pageSize  每页显示几条记录,由程序指定,也可以由用户定制
+pageCount 表示共有多少页, 该变量是计算出来-&gt;思考 怎样确定
+rowCount  共有多少条记录,该变量是查询数据库得到
+</code></pre><p><strong><em>如何确定pageCount</em></strong>    </p>
+<pre><code>(1)
+if(rowCount% pageSize==0){
+    pageCount=rowCount/pageSize;
+}else{
+    pageCount= rowCount/pageSize+1;
+}
+试试: 比如 users表 9 条记录 pageSize=3  =&gt;pageCount=3
+       比如 users表 10 条记录 pageSize=3  =&gt;pageCount=4
+(2)
+上面的算法等价于
+pageCount=rowCount% pageSize==0 ? rowCount/pageSize: rowCount/pageSize+1;
+
+该运算称为三目运算
+(3)
+更简单的算法是:★★★★★
+pageCount=(rowCount-1)/pageSize+1;
+试试: 比如 users表 9 条记录 pageSize=3  =&gt;pageCount=3
+       比如 users表 11 条记录 pageSize=3  =&gt;pageCount=4
+为什么？
+    如果pageSize整除rowCount，值不需要加一；
+    如果pageSize不整除rowCount，值需要加一。
+    我们可以使rowCount-1，保证每次都不能整除，这样可以得到统一公式:
+        pageCount = （rowCount-1）/pageSize + 1
+</code></pre><h3 id="项目中传递参数"><a href="#项目中传递参数" class="headerlink" title="项目中传递参数"></a>项目中传递参数</h3><p>客户端传递：pageNow、pageSize（为保证程序健壮性，服务器中设置pageNow和pageSize的默认值）<br>服务器传递：数据和rowCount</p>
+<h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p>利用Java自带的MD5加密</p>
+<pre><code>class MD5Util {
+    public final static String MD5(String s) {
+        char hexDigits[] = { &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;7&apos;, &apos;8&apos;, &apos;9&apos;,
+                &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;, &apos;e&apos;, &apos;f&apos; };
+        try {
+            byte[] strTemp = s.getBytes();
+            MessageDigest mdTemp = MessageDigest.getInstance(&quot;MD5&quot;);
+            mdTemp.update(strTemp);
+            byte[] md = mdTemp.digest();
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i &lt; j; i++) {
+                byte byte0 = md[i];
+                str[k++] = hexDigits[byte0 &gt;&gt;&gt; 4 &amp; 0xf];
+                str[k++] = hexDigits[byte0 &amp; 0xf];
+            }
+            return new String(str);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        // MD5_Test aa = new MD5_Test();
+        System.out.print(MD5Util.MD5(&quot;qm&quot;));
+    }
+}
+</code></pre><h2 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h2><pre><code>public class check_code extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 7.禁止浏览器缓存随机图片
+        response.setDateHeader(&quot;Expires&quot;, -1);
+        response.setHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;);
+        response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);
+        // 6.通知客户机以图片方式打开发送过去的数据
+        response.setHeader(&quot;Content-Type&quot;, &quot;image/jpeg&quot;);
+        // 1.在内存中创建一副图片
+        BufferedImage image = new BufferedImage(60,30,BufferedImage.TYPE_INT_RGB);
+        // 2.向图片上写数据
+        Graphics g = image.getGraphics();
+        // 设背景色
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, 60, 30);
+        // 3.设置写入数据的颜色和字体
+        g.setColor(Color.RED);
+        g.setFont(new Font(null, Font.BOLD, 20));
+        // 4.向图片上写数据
+        String num = makeNum();
+        //这句话就是把随机生成的数值，保存到session
+        request.getSession().setAttribute(&quot;check_code&quot;, num); //通过session就可以直接去到随即生成的验证码了
+        g.drawString(num, 5, 22);
+        // 5.把写好数据的图片输出给浏览器
+        ImageIO.write(image, &quot;jpg&quot;, response.getOutputStream());
+    }
+    //该函数时随机生成4位数字
+    public String makeNum() {
+        Random r = new Random();
+        //9999999 可以生成7位
+        String num = r.nextInt(9999) + &quot;&quot;;
+        StringBuffer sb = new StringBuffer();
+        //如果不够4位，前面补零
+        for (int i = 0; i &lt; 4 - num.length(); i++) {
+            sb.append(&quot;0&quot;);
+        }
+        num = sb.toString() + num;
+        return num;
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request, response);
+    }
+}
+</code></pre><h2 id="list转string"><a href="#list转string" class="headerlink" title="list转string[]"></a>list转string[]</h2><p>方法一：单个元素转换</p>
+<pre><code>//ArrayList
+ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+array.add(&quot;aaa&quot;);
+array.add(&quot;bbb&quot;);
+array.add(&quot;ccc&quot;);
+//转化成Object数组
+Object[] objs = array.toArray();
+//新建数组
+String[] strings = new String[array.size()];
+//每个元素类型转换
+int i = 0;
+for(Object obj : objs){
+    if(obj instanceof String){
+        strings[i++] = (String)obj;
+    }
+}
+for(String s : strings){
+    System.out.println(s);
+}
+</code></pre><p>方法二：整个转</p>
+<pre><code>//ArrayList
+ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+array.add(&quot;aaa&quot;);
+array.add(&quot;bbb&quot;);
+array.add(&quot;ccc&quot;);
+
+String[] strings = new String[array.size()];
+array.toArray(strings);
+for(String s : strings){
+    System.out.println(s);
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/08/[IDEA]IDEA快捷键/" rel="next" title="IDEA快捷键">
+                <i class="fa fa-chevron-left"></i> IDEA快捷键
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/08/[Java]JAVA分层思想/" rel="prev" title="JAVA分层思想">
+                JAVA分层思想 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/08/[Java]Java基础常用/"
+           data-title="Java基础常用" data-url="http://yoursite.com/2016/07/08/[Java]Java基础常用/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文件根目录"><span class="nav-number">1.</span> <span class="nav-text">读取文件根目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取文本文件"><span class="nav-number">2.</span> <span class="nav-text">读取文本文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从控制台读取数据"><span class="nav-number">3.</span> <span class="nav-text">从控制台读取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java读取资源文件"><span class="nav-number">4.</span> <span class="nav-text">Java读取资源文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">5.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成指定长度的随机字符串"><span class="nav-number">6.</span> <span class="nav-text">生成指定长度的随机字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC"><span class="nav-number">7.</span> <span class="nav-text">JDBC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">8.</span> <span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目中传递参数"><span class="nav-number">8.1.</span> <span class="nav-text">项目中传递参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5"><span class="nav-number">9.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证码"><span class="nav-number">10.</span> <span class="nav-text">验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list转string"><span class="nav-number">11.</span> <span class="nav-text">list转string[]</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

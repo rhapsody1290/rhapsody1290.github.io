@@ -1,0 +1,2152 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hibernate,Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Hibernate简介
+Hibernate是对jdbc进行轻量级封装的ORM框架，位于数据持久层
+ORM全称对象关系映射，框架在Java对象与关系数据库之间建立 映射，以实现 直接存取 Java对象
+
+Hibernate参考资料Hibernate3.2API.chmhttps://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/Hib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate笔记">
+<meta property="og:url" content="http://yoursite.com/2016/08/12/[Hibernate]Hibernate笔记/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="Hibernate简介
+Hibernate是对jdbc进行轻量级封装的ORM框架，位于数据持久层
+ORM全称对象关系映射，框架在Java对象与关系数据库之间建立 映射，以实现 直接存取 Java对象
+
+Hibernate参考资料Hibernate3.2API.chmhttps://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/Hib">
+<meta property="og:image" content="http://i.imgur.com/0aHzHBf.png">
+<meta property="og:image" content="http://i.imgur.com/9vM5xkp.png">
+<meta property="og:image" content="http://i.imgur.com/tdPdlVh.png">
+<meta property="og:image" content="http://i.imgur.com/Xi1skxd.png">
+<meta property="og:image" content="http://i.imgur.com/3zKcZfm.png">
+<meta property="og:image" content="http://i.imgur.com/pgTOK72.png">
+<meta property="og:image" content="http://i.imgur.com/1xjDVPD.png">
+<meta property="og:image" content="http://i.imgur.com/CrHatM0.png">
+<meta property="og:image" content="http://i.imgur.com/cvdhJFx.png">
+<meta property="og:image" content="http://i.imgur.com/FIm3Wt8.png">
+<meta property="og:image" content="http://i.imgur.com/sAHw9by.png">
+<meta property="og:image" content="http://i.imgur.com/tadYPC3.png">
+<meta property="og:image" content="http://i.imgur.com/592uDna.png">
+<meta property="og:image" content="http://i.imgur.com/dpI2qNp.png">
+<meta property="og:image" content="http://i.imgur.com/duTZSlM.png">
+<meta property="og:image" content="http://i.imgur.com/PXz7CeO.png">
+<meta property="og:image" content="http://i.imgur.com/6hDMVCk.png">
+<meta property="og:image" content="http://i.imgur.com/5tEWDh7.png">
+<meta property="og:image" content="http://i.imgur.com/6cu2JfO.png">
+<meta property="og:image" content="http://i.imgur.com/jO4KEIX.png">
+<meta property="og:image" content="http://i.imgur.com/d8X9T9W.png">
+<meta property="og:image" content="http://i.imgur.com/Vdl8u49.png">
+<meta property="og:image" content="http://i.imgur.com/uXvnw1s.png">
+<meta property="og:image" content="http://i.imgur.com/DouTjzj.png">
+<meta property="og:image" content="http://i.imgur.com/wI2ANRU.png">
+<meta property="og:image" content="http://i.imgur.com/wRgVmDq.png">
+<meta property="og:image" content="http://i.imgur.com/8pSzSoU.png">
+<meta property="og:image" content="http://i.imgur.com/Qwp0a37.png">
+<meta property="og:image" content="http://i.imgur.com/dobH4GE.png">
+<meta property="og:image" content="http://i.imgur.com/6uIqrv1.png">
+<meta property="og:image" content="http://i.imgur.com/1MPLBrn.png">
+<meta property="og:image" content="http://i.imgur.com/kqShTak.png">
+<meta property="og:updated_time" content="2016-08-23T15:23:41.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate笔记">
+<meta name="twitter:description" content="Hibernate简介
+Hibernate是对jdbc进行轻量级封装的ORM框架，位于数据持久层
+ORM全称对象关系映射，框架在Java对象与关系数据库之间建立 映射，以实现 直接存取 Java对象
+
+Hibernate参考资料Hibernate3.2API.chmhttps://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/Hib">
+<meta name="twitter:image" content="http://i.imgur.com/0aHzHBf.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/12/[Hibernate]Hibernate笔记/"/>
+
+
+  <title> Hibernate笔记 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '823unzztyxMCsvrWHD_T','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hibernate笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-12T17:55:00+08:00" content="2016-08-12">
+              2016-08-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Hibernate/" itemprop="url" rel="index">
+                    <span itemprop="name">Hibernate</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/12/[Hibernate]Hibernate笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/[Hibernate]Hibernate笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Hibernate简介"><a href="#Hibernate简介" class="headerlink" title="Hibernate简介"></a>Hibernate简介</h2><ul>
+<li><strong><em>Hibernate是对jdbc进行轻量级封装的ORM框架，位于数据持久层</em></strong></li>
+<li>ORM全称对象关系映射，框架在Java对象与关系数据库之间建立 <strong><em>映射</em></strong>，以实现 <strong><em>直接存取</em></strong> Java对象</li>
+</ul>
+<h2 id="Hibernate参考资料"><a href="#Hibernate参考资料" class="headerlink" title="Hibernate参考资料"></a>Hibernate参考资料</h2><p>Hibernate3.2API.chm<br><a href="https://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/Hibernate3.2API.chm" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/Hibernate3.2API.chm</a></p>
+<p>hibernate3.2_reference.pdf<br><a href="https://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/hibernate3.2_reference.pdf" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/hibernate3.2_reference.pdf</a></p>
+<h2 id="ORM概述"><a href="#ORM概述" class="headerlink" title="ORM概述"></a>ORM概述</h2><ul>
+<li>传统数据持久化编程中，需要使用JDBC并配合大量的SQL语句。<strong><em>JDBC API与SQL语句夹杂在一起</em></strong>，开发效率都很低下</li>
+<li>后来出现DAO模式，所有的JDBC API和SQL语句均移到了DAO层，<strong><em>但仍然需要编写大量的SQL语句</em></strong></li>
+<li>ORM框架的思路是通过配置文件，将Java对象 <strong><em>映射</em></strong> 到关系型数据库，<strong><em>自动生成SQL语句</em></strong> 并执行</li>
+<li>举个例子，<strong><em>插入数据</em></strong> 时就是把POJO的各个属性拼装成SQL语句，保存进数据库；<strong><em>读取数据</em></strong> 时，就是用SQL语句读取数据库，然后拼装成POJO对象返回</li>
+</ul>
+<h2 id="为什么需要Hibernate？"><a href="#为什么需要Hibernate？" class="headerlink" title="为什么需要Hibernate？"></a>为什么需要Hibernate？</h2><ul>
+<li>使用jdbc操作数据库，SQL语句编写比较麻烦</li>
+<li>切换数据库时需要重写SQL语句</li>
+<li>我们程序员希望不关注数据库本身，而是关注业务本身</li>
+</ul>
+<p><img src="http://i.imgur.com/0aHzHBf.png" alt=""></p>
+<p>　　引入Hibernate后，程序员在业务逻辑中使用hql语句（一种万能语句），Hibernate会自动完成数据库的操作，这种方式程序员只需关注业务本身，提高开发效率，程序也具有很好的移植性<br>　　<strong><em>学习Hibernate关键是1、Hibernate API 2、Hibernate核心配置文件 3、对象关系映射文件</em></strong></p>
+<h2 id="Hibernate开发的三种方式"><a href="#Hibernate开发的三种方式" class="headerlink" title="Hibernate开发的三种方式"></a>Hibernate开发的三种方式</h2><p><img src="http://i.imgur.com/9vM5xkp.png" alt=""></p>
+<p>数据库中的表与java domain对象，通过Hibernate的对象关系映射文件关联起来，该文件会说明表和对象的关系，以及<strong><em>对象的属性与表的字段的对应关系</em></strong></p>
+<ul>
+<li>开发方式一：由Domain对象 ——&gt; Mapping ——&gt; DB</li>
+<li>开发方式二：由DB开始，用工具生成mapping和Domain object（使用较多）</li>
+<li>开发方式三：由映射文件开始</li>
+</ul>
+<h2 id="Hibernate快速入门（第二种开发方式）★★★★★★"><a href="#Hibernate快速入门（第二种开发方式）★★★★★★" class="headerlink" title="Hibernate快速入门（第二种开发方式）★★★★★★"></a>Hibernate快速入门（第二种开发方式）★★★★★★</h2><h3 id="github代码"><a href="#github代码" class="headerlink" title="github代码"></a>github代码</h3><p><a href="https://github.com/rhapsody1290/Hibernate_Study" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study</a></p>
+<h3 id="创建employee表"><a href="#创建employee表" class="headerlink" title="创建employee表"></a>创建employee表</h3><p><img src="http://i.imgur.com/tdPdlVh.png" alt=""></p>
+<h3 id="开发domain对象"><a href="#开发domain对象" class="headerlink" title="开发domain对象"></a>开发domain对象</h3><ul>
+<li><p>建议<strong><em>domain对象</em></strong> 的名称就是对应表的首字母大写，同时</p>
+<ol>
+<li>需要一个无参的构造函数(用于hibernate反射该对象)</li>
+<li>应当有一个无业务逻辑的主键属性.</li>
+<li>给每个属性提供 get/set 方法.</li>
+<li>在domian对象中的属性，只有配置到了对象映射文件后，才会被hibernate管理.</li>
+<li>属性一般是private范围</li>
+</ol>
+</li>
+<li><p>该pojo按照规范应当序列化，目的是可以唯一标该对象。同时可以在网络和文件上传输</p>
+</li>
+</ul>
+<pre><code>public class Employee implements Serializable{
+    private Integer id;
+    private String name;
+    private String email;
+    private  java.util.Date hiredate;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getHiredate() {
+        return hiredate;
+    }
+
+    public void setHiredate(Date hiredate) {
+        this.hiredate = hiredate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+</code></pre><h3 id="对象关系映射文件"><a href="#对象关系映射文件" class="headerlink" title="对象关系映射文件"></a>对象关系映射文件</h3><p>对象关系映射文件作用是用于指定domain对象和表的映射关系，该文件的取名有规范：<strong><em>domain对象.hbm.xml</em></strong>，一般我们放在和domain对象同一个文件夹下(包下)</p>
+<pre><code>&lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+        &quot;-//Hibernate/Hibernate Mapping DTD 3.0//EN&quot;
+        &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt;
+&lt;hibernate-mapping package=&quot;cn.apeius.domain&quot;&gt;
+
+    &lt;class name=&quot;Employee&quot; table=&quot;employee&quot;&gt;
+        &lt;!--id文件用于指定主键属性--&gt;
+        &lt;id name = &quot;id&quot; column=&quot;id&quot; type=&quot;java.lang.Integer&quot;&gt;
+            &lt;generator class=&quot;increment&quot;/&gt;
+        &lt;/id&gt;
+        &lt;!--对其他属性配置--&gt;
+        &lt;property name=&quot;name&quot; type=&quot;java.lang.String&quot;&gt;
+            &lt;column name=&quot;name&quot; length=&quot;255&quot; not-null=&quot;true&quot;/&gt;
+        &lt;/property&gt;
+        &lt;property name=&quot;email&quot; type=&quot;java.lang.String&quot;&gt;
+            &lt;column name=&quot;email&quot; length=&quot;255&quot; not-null=&quot;false&quot;/&gt;
+        &lt;/property&gt;
+        &lt;property name=&quot;hiredate&quot; type=&quot;java.util.Date&quot;&gt;
+            &lt;column name=&quot;hiredate&quot; length=&quot;255&quot; not-null=&quot;false&quot;/&gt;
+        &lt;/property&gt;
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;
+</code></pre><p><strong><em>细节</em></strong></p>
+<p>对象关系文件中，有些属性是可以不配，hibernate会采用默认机制，比如</p>
+<pre><code>&lt;class table=&quot;?&quot; &gt; table值不配，则以类的小写做表名
+&lt;property type=&quot;?&quot;&gt; type不配置，则hibernate会根据类的属性类型，选择一个适当的类型
+</code></pre><h3 id="手动配置我们的hibernate-cfg-xml文件"><a href="#手动配置我们的hibernate-cfg-xml文件" class="headerlink" title="手动配置我们的hibernate.cfg.xml文件"></a>手动配置我们的hibernate.cfg.xml文件</h3><p>该文件用于配置连接的数据库的类型、driver、用户名、密码、url等，同时管理对象关系映射文件。<strong><em>该文件的名称，我们一般不修改</em></strong>.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;
+        &quot;http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd&quot;&gt;
+&lt;hibernate-configuration&gt;
+    &lt;session-factory&gt;
+        &lt;!--hibernate常用改的配置见：hibernate.properties--&gt;
+        &lt;!-- 配置dialect方言,明确告诉hibernate连接是哪种数据库 --&gt;
+        &lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:mysql://localhost:3306/hibernate&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.password&quot;&gt;root&lt;/property&gt;
+        &lt;!--显示出对应的SQL语句--&gt;
+        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;
+        &lt;property name=&quot;hibernate.format_sql&quot;&gt;true&lt;/property&gt;
+        &lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;
+        &lt;mapping resource=&quot;Employee.hbm.xml&quot;/&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre><h3 id="增加用户"><a href="#增加用户" class="headerlink" title="增加用户"></a>增加用户</h3><pre><code>import cn.apeius.domain.Employee;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Created by Asus on 2016/8/16.
+ */
+public class Main {
+    public static void main(String[] args){
+        //1、创建configuration，该对象用于读取hibernate.ctf.xml，并完成初始化
+        Configuration configuration = new Configuration().configure();
+        //2、创建sessionFactory，这是一个会话工厂，是个重量级的对象，应当保证连接一个数据库SessionFactory是单例
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        //3、创建session，相当于jdbc connection
+        Session session = sessionFactory.openSession();
+        //4、在进行增加、删除、修改的时候使用事务提交
+        Transaction transaction = session.beginTransaction();
+        //添加一个雇员
+        Employee employee = new Employee();
+        employee.setName(&quot;qm1&quot;);
+        employee.setEmail(&quot;qm1@126.com&quot;);
+        employee.setHiredate(new java.util.Date());
+        //保存
+        session.save(employee);
+        //提交
+        transaction.commit();
+        session.close();
+    }
+}
+</code></pre><h3 id="修改用户（先查后改）"><a href="#修改用户（先查后改）" class="headerlink" title="修改用户（先查后改）"></a>修改用户（先查后改）</h3><p>注意：SessionFactory是个重量级对象，应保证其实单例。在util包中封装了SessionFactory</p>
+<pre><code>//获取一个会话
+Session session = MySessionFactory.getInstatnce().openSession();
+Transaction transaction = session.beginTransaction();
+//修改用户1、获得要修改的对象2、修改
+//load是通过主键属性，获取该对象实例
+Employee employee = (Employee) session.load(Employee.class,2);//产生select .. where id = 2
+employee.setName(&quot;钱明&quot;);//这句话会产生update语句
+transaction.commit();
+session.close();
+</code></pre><h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><pre><code>//获取一个会话
+Session session = MySessionFactory.getInstatnce().openSession();
+Transaction transaction = session.beginTransaction();
+Employee employee = (Employee) session.load(Employee.class,2);
+session.delete(employee);
+transaction.commit();
+session.close();
+</code></pre><h2 id="模版（加入了异常回滚）★★★★★★"><a href="#模版（加入了异常回滚）★★★★★★" class="headerlink" title="模版（加入了异常回滚）★★★★★★"></a>模版（加入了异常回滚）★★★★★★</h2><pre><code>public static void updateEmployee() {
+    //获取一个会话
+    //Session session = MySessionFactory.getInstatnce().openSession();
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction transaction = null;
+    try{
+        transaction = session.beginTransaction();
+        //do...
+        //修改用户1、获得要修改的对象2、修改
+        //load是通过主键属性，获取该对象实例
+        Employee employee = (Employee) session.load(Employee.class,3);//产生select .. where id = 2
+        employee.setName(&quot;钱明&quot;);//这句话会产生update语句
+        //出现异常
+        //int i = 9/0;
+        transaction.commit();
+    }catch (Exception e){
+        if(transaction != null){
+            transaction.rollback();
+        }
+        throw new RuntimeException(e.getMessage());
+    }finally {
+        //关闭session
+        if(session != null &amp;&amp; session.isOpen()){
+            session.close();
+        }
+    }
+}
+</code></pre><h2 id="SessionFactory单例"><a href="#SessionFactory单例" class="headerlink" title="SessionFactory单例"></a>SessionFactory单例</h2><ul>
+<li>SessionFactory是个重量级对象，在开发中保证只有一个SessionFactory</li>
+<li>一个数据库对应一个SessionFactory对象</li>
+</ul>
+<pre><code>//单例模式
+public class MySessionFactory {
+    private MySessionFactory(){}
+    private static class HoldClass{
+        private static final SessionFactory instance = new Configuration().configure().buildSessionFactory();
+    }
+    public static SessionFactory getInstatnce(){
+        return HoldClass.instance;
+    }
+}
+</code></pre><h2 id="Maven下载各数据库JDBC及Hibernate配置文件"><a href="#Maven下载各数据库JDBC及Hibernate配置文件" class="headerlink" title="Maven下载各数据库JDBC及Hibernate配置文件"></a>Maven下载各数据库JDBC及Hibernate配置文件</h2><p>各数据库连接配置与maven依赖安装<br><a href="http://blog.163.com/luowei505050@126/blog/static/119907206201210223827126/" target="_blank" rel="external">http://blog.163.com/luowei505050@126/blog/static/119907206201210223827126/</a></p>
+<h2 id="Hibernate切换数据库★★★★★"><a href="#Hibernate切换数据库★★★★★" class="headerlink" title="Hibernate切换数据库★★★★★"></a>Hibernate切换数据库★★★★★</h2><ul>
+<li>使用Hibernate自动完成domain ——&gt; 映射文件 ——&gt; 表的工作</li>
+<li>重新配置Hibernate数据库，以sqlserver2000为例</li>
+<li><font color="red">增加属性hibernate.hbm2ddl.auto</font><ul>
+<li>create : 当我们的应用程序加载hibernate.cfg.xml [ new Configuration().config(); ]就会根据映射文件，创建出数据库, 每次都会重新创建， 原来表中的数据就没有!!!</li>
+<li>update: 如果数据库中没有该表，则创建，如果有表，则看有没有变化，如果有变化，则更新.</li>
+<li>create-drop: 在显示关闭 sessionFactory时，将drop掉数据库的schema</li>
+<li>validate: 相当于每次插入数据之前都会验证数据库中的表结构和hbm文件的结构是否一致</li>
+<li>在开发测试中，我们配置哪个都可以测试，但是如果项目发布后，最好自己配置一次，让对应的数据库生成，完后取消配置， </li>
+</ul>
+</li>
+<li>修改主键生成策略</li>
+</ul>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        &quot;-//Hibernate/Hibernate Configuration DTD 3.0//EN&quot;
+        &quot;http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd&quot;&gt;
+&lt;hibernate-configuration&gt;
+    &lt;session-factory&gt;
+        &lt;!--hibernate常用改的配置见：hibernate.properties--&gt;
+        &lt;!-- 配置dialect方言,明确告诉hibernate连接是哪种数据库 --&gt;
+        &lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.SQLServerDialect&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;net.sourceforge.jtds.jdbc.Driver&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.url&quot;&gt;jdbc:jtds:sqlserver://localhost:1433/hibernate&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.username&quot;&gt;sa&lt;/property&gt;
+        &lt;property name=&quot;hibernate.connection.password&quot;&gt;sa&lt;/property&gt;
+        &lt;!--显示出对应的SQL语句--&gt;
+        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;
+        &lt;!--让hibernate自动创建表 create:如果没有这张表则创建--&gt;
+        &lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;
+        &lt;mapping resource=&quot;Employee.hbm.xml&quot;/&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre><h2 id="Hibernate的核心类和接口★★★★★★★★★★"><a href="#Hibernate的核心类和接口★★★★★★★★★★" class="headerlink" title="Hibernate的核心类和接口★★★★★★★★★★"></a>Hibernate的核心类和接口★★★★★★★★★★</h2><p><img src="http://i.imgur.com/Xi1skxd.png" alt=""></p>
+<h3 id="Configuration-类"><a href="#Configuration-类" class="headerlink" title="Configuration 类"></a>Configuration 类</h3><ul>
+<li>读取hibernate.cfg.xml</li>
+<li>加载hibernate的驱动、url、用户..</li>
+<li>管理对象关系映射文件 <code>&lt;mapping resource=&quot;&quot;&gt;</code></li>
+<li>管理hibernate配置信息</li>
+</ul>
+<h3 id="SessionFactory-（会话工厂）"><a href="#SessionFactory-（会话工厂）" class="headerlink" title="SessionFactory （会话工厂）"></a>SessionFactory （会话工厂）</h3><ul>
+<li>可以缓存sql语句和数据(称为session级缓存)!!</li>
+<li>是一个重量级的类，因此我们需要保证一个数据库，有一个SessionFactory</li>
+<li>如果某个应用访问多个数据库，则要创建多个会话工厂，一个数据库一个会话工厂实例<br><img src="http://i.imgur.com/3zKcZfm.png" alt=""></li>
+<li><p>通过SessionFactory接口可以获得Session实例，有两种方式：</p>
+<ul>
+<li>openSession() 是获取一个新的session</li>
+<li>getCurrentSession () 获取和当前线程绑定的session,换言之，在同一个线程中，我们获取的session是同一session，这样更利于事务控制</li>
+<li>使用 getCurrentSession 需要配置 hibernate.cfg.xml中配置<br>①如果使用本地事务（jdbc事务）<br><code>&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</code><br>②如果使用全局事务（jta事务）<br><code>&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;jta&lt;/property&gt;</code></li>
+<li>如何选择<br>①如果需要在同一线程中，保证使用<strong><em>同一个Session</em></strong>，则使用getCurrentSession()<br>②如果在一个线程中，需要使用<strong><em>不同的Session</em></strong>,则使用opentSession()</li>
+<li>通过 getCurrentSession() 获取的session在事务提交后，会自动关闭，通过openSession()获取的session则必须手动关闭</li>
+<li><strong><em>如果是通过getCurrentSession()获取sesssion,进行查询需要事务提交</em></strong>.</li>
+</ul>
+</li>
+</ul>
+<p>　　<strong><em>使用同一个Session案例</em></strong></p>
+<p><img src="http://i.imgur.com/pgTOK72.png" alt=""></p>
+<p>　　在一个http请求中，需要同时进行操作、更新、删除等操作，三个操作在不同service中进行，但要将三个操作在一个事务中进行控制。三个service分别会调用hibernate，使用getCurrentSession，可以将三个操作在一个事务中进行（http请求只要不结束，就看成一个线程）</p>
+<p>　　<strong><em>本地事务与全局事务</em></strong></p>
+<p><img src="http://i.imgur.com/1xjDVPD.png" alt=""></p>
+<p>　　本地事务：增对一个数据库的事务<br>　　全局事务：跨数据库的事务（JTA）。以银行转账为例，需要在农行账户中增加10元，在工行账户中减去10元，涉及到多个数据库中的事务</p>
+<h3 id="session接口的理解"><a href="#session接口的理解" class="headerlink" title="session接口的理解"></a>session接口的理解</h3><ul>
+<li><p>Session(会话)接口的理解：SessionFactory常驻内存，每次连接数据库会化工厂建立与数据库的session，图中横线就是一个session。</p>
+</li>
+<li><p>如何查看session是否关闭：查看数据库连接端口是否关闭，如mysql 3306端口是否关闭</p>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/CrHatM0.png" alt=""></p>
+<p><img src="http://i.imgur.com/cvdhJFx.png" alt=""></p>
+<p>session接口它的主要功能和作用是:</p>
+<ul>
+<li>Session一个实例代表与数据库的一次操作(当然一次操作可以是crud组合)</li>
+<li>Session实例通过SessionFactory获取，用完需要关闭</li>
+<li><strong><em>Session是线程不同步的(不安全),因此要保证在同一线程中使用,可以用 getCurrentSessiong()</em></strong></li>
+<li>Session可以看做是持久化管理器,它是与持久化操作相关的接口</li>
+</ul>
+<h3 id="Session查询详解★★★★★★"><a href="#Session查询详解★★★★★★" class="headerlink" title="Session查询详解★★★★★★"></a>Session查询详解★★★★★★</h3><ul>
+<li><p>如果查询不到数据，get 会返回 <strong><em>null</em></strong>,但是不会报错, load 如果查询不到数据，则<strong><em>报错ObjectNotFoundException</em></strong></p>
+<pre>
+Employee employee1 = (Employee) session.load(Employee.class,10);
+System.out.println(employee1);//ObjectNotFoundException
+Employee employee2 = (Employee) session.get(Employee.class,10);
+System.out.println(employee2);//null
+</pre>
+</li>
+<li><p>使用get去查询数据，先到缓存（session缓存、二级缓存）中去查，如果没有就到DB中取查，即立即向db发出查询请求(select …),</p>
+</li>
+<li>如果你使用的是load查询数据，先到缓存(session缓存、二级缓存)中查询，如果没有则返回一个代理对象（不马上到DB中去查）。等后面使用这个代理对象时才到DB中查询，如果后面没有使用查询结果，它不会真的向数据库发select，这个现象我们称为懒加载(lazy)<strong><em>【load是懒加载，返回代理对象，使用时候才去数据库查询】</em></strong><pre>
+Employee employee1 = (Employee) session.load(Employee.class,1);
+System.out.println(employee1);//如果这句话注释，不会向数据库发送sql语句，等到使用给代理对象时才到DB中查询
+</pre></li>
+<li>通过修改配置文件，我们可以取消懒加载<br><code>&lt;class  name=&quot;Employee&quot; lazy=&quot;false&quot; table=&quot;employee&quot;&gt;</code></li>
+<li><strong><em>如何选择使用哪个：如果你确定DB中有这个对象就用load(),不确定就用get()（这样效率高）</em></strong></li>
+</ul>
+<h3 id="Hibernate缓存原理★★★★★★"><a href="#Hibernate缓存原理★★★★★★" class="headerlink" title="Hibernate缓存原理★★★★★★"></a>Hibernate缓存原理★★★★★★</h3><p><img src="http://i.imgur.com/FIm3Wt8.png" alt=""></p>
+<ul>
+<li>接受到一个load查询，先去session缓存中查询，如果没有再去二级缓存查找，如果还没有，就不查询了，返回一个代理对象proxy obj = load</li>
+<li>如果使用这个代理对象后，就会去数据库查询，<strong><em>并把这条记录放入二级缓存</em></strong></li>
+<li>等到下次查询时，先查询session缓存，找不到，然后去二级缓存中取得对象，并返回结果。<strong><em>同时把这条记录放入一级缓存</em></strong></li>
+<li>get查询也类似，先查询一级缓存，再查询二级缓存<br></li>
+<li>Hibernate缓存机制可以减少对数据库的查询<pre>
+Employee employee1 = (Employee) session.load(Employee.class,1);//发送select语句，放缓存
+System.out.println(employee1);
+Employee employee2 = (Employee) session.get(Employee.class,1);//从缓存中取，没有select语句
+System.out.println(employee2);
+Employee employee3 = (Employee) session.get(Employee.class,100);//缓存中找不到，向数据库发送select语句
+System.out.println(employee3);
+</pre>
+
+</li>
+</ul>
+<h3 id="HibernateUtil（线程局部模式：获取全新的Session或与线程绑定的Session）★★★★★★"><a href="#HibernateUtil（线程局部模式：获取全新的Session或与线程绑定的Session）★★★★★★" class="headerlink" title="HibernateUtil（线程局部模式：获取全新的Session或与线程绑定的Session）★★★★★★"></a>HibernateUtil（线程局部模式：获取全新的Session或与线程绑定的Session）★★★★★★</h3><p>注意：不再需要配置 hibernate.cfg.xml</p>
+<pre><code>final public class HibernateUtil { //SqlHelper
+    private static SessionFactory sessionFactory = null;
+    //使用线程局部模式
+    private static ThreadLocal&lt;Session&gt; threadLocal = new ThreadLocal&lt;Session&gt;();
+
+    static {
+        sessionFactory=new Configuration().configure().buildSessionFactory();
+    }
+
+    private HibernateUtil(){}
+
+    //获取全新的全新的sesession
+    public static Session openSession(){
+        return sessionFactory.openSession();
+    }
+    //获取和线程关联的session
+    public static Session getCurrentSession(){
+        Session session = threadLocal.get();
+        //判断是否得到
+        if(session == null){
+            session = sessionFactory.openSession();
+            //把session对象设置到 threadLocal,相当于该session已经和线程绑定
+            threadLocal.set(session);
+        }
+        return session;
+    }
+}
+</code></pre><p><strong><em>测试</em></strong></p>
+<pre><code>System.out.println(HibernateUtil.getCurrentSession().hashCode());
+System.out.println(HibernateUtil.getCurrentSession().hashCode());
+System.out.println(HibernateUtil.openSession().hashCode());
+System.out.println(HibernateUtil.openSession().hashCode());
+结果：
+    725455968
+    725455968
+    1473790157
+    914784201
+</code></pre><p><strong><em>线程局部模式</em></strong></p>
+<p><img src="http://i.imgur.com/sAHw9by.png" alt=""></p>
+<p>在一个线程中，某个时间点通过set将对象放入ThredLocal，又在某个点通过get方法取出对象。这个变量与线程绑定</p>
+<h3 id="query接口★★★★★★"><a href="#query接口★★★★★★" class="headerlink" title="query接口★★★★★★"></a>query接口★★★★★★</h3><p>通过query接口我们可以完成更加复杂的查询任务<br>举例: 通过用户来查询数据.</p>
+<pre><code>//获取query引用
+Query query = session.createQuery(&quot;from Employee where id = 1&quot;);
+//通过List方法获取结果，这个list会自动封装成domain对象
+List&lt;Employee&gt; list = query.list();
+for(Employee e : list){
+    System.out.println(e.getName() + &quot; &quot; + e.getHiredate());
+}
+</code></pre><p>注意：Employee是Java对象而不是表名，id也是类的属性名</p>
+<h3 id="Criteria接口（不常用）"><a href="#Criteria接口（不常用）" class="headerlink" title="Criteria接口（不常用）"></a>Criteria接口（不常用）</h3><p>Criteria接口也可用于面向对象方式的查询，关于它的具体用法我们这里先不做介绍,简单看几个案例.</p>
+<pre><code>Criteria cri = session.createCriteria(Employee.class)
+        .setMaxResults(2)
+        .addOrder(Order.asc(&quot;id&quot;));
+List&lt;Employee&gt; list = cri.list();
+for(Employee e : list){
+    System.out.println(e.getId() + &quot; &quot; + e.getName());
+}
+</code></pre><h2 id="工具生成domain对象和对象关系映射文件"><a href="#工具生成domain对象和对象关系映射文件" class="headerlink" title="工具生成domain对象和对象关系映射文件"></a>工具生成domain对象和对象关系映射文件</h2><ul>
+<li><p>使用IntelliJ IDEA开发SpringMVC网站（三）数据库配置★★★<br><a href="http://blog.csdn.net/chenxiao_ji/article/details/50849365" target="_blank" rel="external">http://blog.csdn.net/chenxiao_ji/article/details/50849365</a></p>
+</li>
+<li><p>在创建工程的时候勾选上hibernate支持。</p>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/tadYPC3.png" alt=""></p>
+<ul>
+<li>在主界面右侧找到database，点击添加数据库</li>
+</ul>
+<p><img src="http://i.imgur.com/592uDna.png" alt=""></p>
+<ul>
+<li>在新界面中添加数据库驱动和数据库链接信息</li>
+</ul>
+<p><img src="http://i.imgur.com/dpI2qNp.png" alt=""></p>
+<ul>
+<li>保存后在主面板左侧有persistence，在hibernate图标上点击右键-Generate Persistence Mapping-By Database Scheme</li>
+</ul>
+<p><img src="http://i.imgur.com/duTZSlM.png" alt=""></p>
+<ul>
+<li>选好数据库，选好包的位置，在下面勾上要生成的表对应的pojo，并且勾上为每一个pojo生成XML即可</li>
+</ul>
+<p><img src="http://i.imgur.com/PXz7CeO.png" alt=""></p>
+<h2 id="IDEA一对多关系设置"><a href="#IDEA一对多关系设置" class="headerlink" title="IDEA一对多关系设置"></a>IDEA一对多关系设置</h2><ul>
+<li>模拟一个学生选课系统 ，创建三张表：student、studCourse、course</li>
+<li>数据库备份<br><a href="https://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/hibernate.sql" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study/blob/master/doc/hibernate.sql</a></li>
+<li>student与studCourse的关系为一对多，即一个学生可以选择多门课程。Student类中有一个studCourse的集合属性，studCourse中有一个Student的成员变量</li>
+<li><p>设置student与studCourse之间的关系</p>
+<ul>
+<li>原则：在有外键的表上设置表之间的关系，本例中在studCourse上设置关系    </li>
+<li>在上图中选中studCourse表，studCourse通过外键sid和cid关联student表和couse表。注意外键不打勾</li>
+<li>点击左上角绿色的加号或右键选择<code>add relationship</code></li>
+<li>studCourse类中有一个类型为Course的course变量，Course类中有一个名为studCourses的集合，两个表通过cid关联起来<br><img src="http://i.imgur.com/6hDMVCk.png" alt=""></li>
+</ul>
+</li>
+<li><p>同理设置studCourse与student关系</p>
+</li>
+<li>设置完成后观察属性是否正确<br><img src="http://i.imgur.com/5tEWDh7.png" alt=""></li>
+<li>生成的domain对象及hdm文件见github<br><a href="https://github.com/rhapsody1290/Hibernate_Study/tree/master/src/main/java/cn/apeius/domain" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study/tree/master/src/main/java/cn/apeius/domain</a><br><a href="https://github.com/rhapsody1290/Hibernate_Study/tree/master/src/main/resources" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study/tree/master/src/main/resources</a></li>
+</ul>
+<h2 id="HQL语句详解★★★★★★"><a href="#HQL语句详解★★★★★★" class="headerlink" title="HQL语句详解★★★★★★"></a>HQL语句详解★★★★★★</h2><h3 id="关系模型和对象模型映射"><a href="#关系模型和对象模型映射" class="headerlink" title="关系模型和对象模型映射"></a>关系模型和对象模型映射</h3><p><img src="http://i.imgur.com/6cu2JfO.png" alt=""></p>
+<ul>
+<li>studCourse表有两个外键，一个是与student表关联的sid，另一个是与course关联的cid</li>
+<li>一个学生可以选择多门课程，一个课程可以被多名学生选择，两个表是多对多的关系</li>
+<li>在对象模型中，一个学生可以选择多个课程，所以它有一个set集合的成员变量，存放studcourse</li>
+<li>在对象模型中，一个课程可以可以被多名学生选择，所以它有一个set集合的成员变量，存放studcourses</li>
+</ul>
+<h3 id="取出部分属性"><a href="#取出部分属性" class="headerlink" title="取出部分属性"></a>取出部分属性</h3><ul>
+<li>在讲解jdbc中，要查询什么字段就查询什么字段，不要<code>select * from..</code></li>
+<li>但是在Hibernate中，建议把整个对象的属性都查询</li>
+</ul>
+<p><strong><em>查询整个对象的属性</em></strong><br>list方法返回的是整个Student对象</p>
+<pre><code>List&lt;Student&gt; list = session.createQuery(&quot;from Student&quot;).list();
+for(Student s : list){
+    System.out.println(s.getSname() + &quot; &quot;  + s.getSid());
+}
+</code></pre><p><strong><em>查询部分属性</em></strong></p>
+<p>因为只是查询部分属性，hibernate没有把返回的结果封装成Student对象，而只是Object数组</p>
+<pre><code>List list = session.createQuery(&quot;select sname,sid from Student&quot;).list();
+for(int i = 0; i &lt; list.size(); i++){
+    Object[] obj = (Object[]) list.get(i);
+    System.out.println(obj[0] + &quot; &quot; + obj[1]);
+}
+</code></pre><p>或（推荐）</p>
+<pre><code>List&lt;Object[]&gt; list = session.createQuery(&quot;select sname,sid from Student&quot;).list();
+for(Object[] obj : list){
+    System.out.println(obj[0] + &quot; &quot; + obj[1]);
+}
+</code></pre><p>原理：创建list对象，对于每条记录创建一个对象数组，并加入list中</p>
+<p><img src="http://i.imgur.com/jO4KEIX.png" alt=""></p>
+<p><strong><em>如果我们返回的是一列数据</em></strong></p>
+<pre><code>//这时我们的取法是直接取出list-&gt;object 而不是 list-&gt;Object[]
+List&lt;Object&gt; list = session.createQuery(&quot;select sname from Student&quot;).list();
+for(Object obj : list){
+    System.out.println(obj);
+}
+</code></pre><h3 id="对象模型关联查询"><a href="#对象模型关联查询" class="headerlink" title="对象模型关联查询"></a>对象模型关联查询</h3><p><strong><em>查询学生就能查出于课程关联的全部信息</em></strong></p>
+<pre><code>List&lt;Student&gt; list = session.createQuery(&quot;from Student&quot;).list();
+for(Student s : list){
+    System.out.print(s.getSname());
+    if(s.getStudcourses().size() == 0){
+        System.out.println(&quot;没有选课&quot;);
+    }else{
+        System.out.print(&quot;选了&quot;);
+        for(Studcourse studcourse : s.getStudcourses()){
+            System.out.print(studcourse.getCourse().getCname() + &quot; &quot;);
+        }
+        System.out.println();
+    }
+}
+</code></pre><p><strong><em>请显示所有选择了21号课程的学生信息</em></strong></p>
+<pre><code>String sql = &quot;select student.sname,student.sage from Studcourse where course.cid = 21&quot;;
+List&lt;Object[]&gt; list = HibernateUtil.executeQuery(sql,null);
+for(Object[]  s : list){
+    System.out.println(s[0] + &quot; &quot; + s[1]);
+}
+</code></pre><h3 id="uniqueResult方法-只有一个对象"><a href="#uniqueResult方法-只有一个对象" class="headerlink" title="uniqueResult方法(只有一个对象)"></a>uniqueResult方法(只有一个对象)</h3><p>当<code>session.createQuery(&quot;from xxx where cardid=&#39;xxx&#39;&quot;).uniqueResult();</code>返回的结果<strong><em>只有一个对象</em></strong>时，可以使用<code>uniqueResult()</code>得到该对象，效率高。但是，如果结果是多条，使用该方法就会抛出异常。</p>
+<pre><code>Student student = (Student) session.createQuery(&quot;from Student where id = 20050003&quot;).uniqueResult();
+if(student != null) System.out.println(student.getSname()); else System.out.println(&quot;记录不存在&quot;);
+</code></pre><h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><pre><code>String sql = &quot;select sname,sage from Student where sname like &apos;林%&apos;&quot;;
+List&lt;Object[]&gt; list = HibernateUtil.executeQuery(sql,null);
+for(Object[] s : list){
+    System.out.println(s[0] + &quot; &quot; + s[1]);
+}
+</code></pre><h3 id="distinct的用法（过滤重复的记录）"><a href="#distinct的用法（过滤重复的记录）" class="headerlink" title="distinct的用法（过滤重复的记录）"></a>distinct的用法（过滤重复的记录）</h3><p>比如，显示所有学生的性别和年龄</p>
+<pre><code>List list=session.createQuery(&quot;select distinct sage,ssex from Student&quot;).list();
+for(int i=0;i&lt;list.size();i++){
+    Object []  objs=(Object[]) list.get(i);
+    System.out.println(objs[0].toString()+&quot; &quot;+objs[1].toString());
+}
+</code></pre><h3 id="between-and"><a href="#between-and" class="headerlink" title="between and"></a>between and</h3><p>年龄在20岁到22岁的学生</p>
+<pre><code>List list=session.createQuery(&quot;select distinct sage,ssex,sname from Student where sage between 20 and 22&quot;).list();
+for(int i=0;i&lt;list.size();i++){
+    Object []  objs=(Object[]) list.get(i);
+    System.out.println(objs[0].toString()+&quot; &quot;+objs[1].toString()+objs[2].toString());
+}
+</code></pre><h3 id="in-not-in"><a href="#in-not-in" class="headerlink" title="in /not in"></a>in /not in</h3><p>查询计算机系和外语系的学生信息</p>
+<pre><code>List&lt;Student&gt; list=session.createQuery(&quot;from Student where sdept in (&apos;计算机系&apos;,&apos;外语系&apos;)&quot;).list();
+for(Student s:list){
+    System.out.println(s.getSname()+&quot; &quot;+s.getSaddress()+&quot; &quot;+s.getSdept());
+}
+</code></pre><h3 id="group-by使用"><a href="#group-by使用" class="headerlink" title="group by使用"></a>group by使用</h3><p>显示各个系的学生的平均年龄</p>
+<pre><code>List&lt;Object[]&gt; list=session.createQuery(&quot;select avg(sage),sdept from  Student group by sdept&quot;).list();
+for(Object[] obj:list){
+    System.out.println(obj[0].toString()+&quot; &quot;+obj[1].toString());
+}
+</code></pre><h3 id="having的使用"><a href="#having的使用" class="headerlink" title="having的使用"></a>having的使用</h3><p>对分组查询后的结果，进行筛选</p>
+<p><strong><em>1.请显示人数大于3的系名称</em></strong></p>
+<pre><code>//a. 查询各个系分别有多少学生 b.筛选    
+List&lt;Object[]&gt; list=session.createQuery(&quot;select count(*) as c1,sdept from  Student group by sdept having count(*)&gt;3&quot;).list();
+//取出1. for 增强
+for(Object[] obj:list){
+    System.out.println(obj[0].toString()+&quot; &quot;+obj[1].toString());
+}
+</code></pre><p><strong><em>2.查询女生少于200人的系</em></strong></p>
+<pre><code>List&lt;Object[]&gt; list = session.createQuery(&quot;select count(*),sdept from Student  where ssex = &apos;F&apos;group by sdept having count(*) &lt; 200&quot;).list();
+for(Object[] obj : list){
+    System.out.println(obj[0] + &quot; &quot; + obj[1]);
+}
+</code></pre><h3 id="聚集函数的使用-count-avg-max-min-sum"><a href="#聚集函数的使用-count-avg-max-min-sum" class="headerlink" title="聚集函数的使用 count(),avg(),max(),min(),sum()"></a>聚集函数的使用 count(),avg(),max(),min(),sum()</h3><p><strong><em>1.查询计算机系共多少人</em></strong></p>
+<pre><code>Long count = (Long) session.createQuery(&quot;select count(*) from Student where sdept=&apos;计算机系&apos;&quot;).uniqueResult();
+System.out.println(count);
+</code></pre><p><strong><em>2.查询选修11号课程的最高分和最低分</em></strong></p>
+<pre><code>List&lt;Object[]&gt; list=session.
+createQuery(&quot;select 11,max(grade),min(grade) from Studcourse where course.cid=11&quot;).list();
+for(Object[] obj:list){
+    System.out.println(obj[0].toString()+&quot; max=&quot;+obj[1].toString()+&quot; min=&quot;+obj[2].toString());
+    }
+</code></pre><p><strong><em>3.计算各个科目不及格的学生数量</em></strong></p>
+<pre><code>List&lt;Object[]&gt; list=session.createQuery(&quot;select count(*),course.cname from Studcourse where grade &lt; 60 group by course.cname&quot;).list();
+for(Object[] obj:list){
+    System.out.println(obj[0].toString()+ &quot; &quot; + obj[1]);
+}
+</code></pre><p><strong><em>4.显示各科考试不及格学生的名字，科目和分数</em></strong></p>
+<pre><code>List&lt;Object[]&gt; list=session.createQuery(&quot;select student.sname,course.cname,grade from Studcourse where grade &lt; 60&quot;).list();
+for(Object[] obj:list){
+    System.out.println(obj[0].toString()+ &quot; &quot; + obj[1] + &quot; &quot; + obj[2]);
+}
+</code></pre><h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>分页原理见Java基础常用</p>
+<p><strong><em>函数使用</em></strong></p>
+<p>  List q=session.createQuery(hql).setFirstResultl(从第几条取//从0开始计算).setMaxResult(取出几条).list();</p>
+<p><strong><em>据用户输入的pageNow 和pageSize显示对象</em></strong></p>
+<pre><code>Session session = HibernateUtil.getCurrentSession();
+Transaction transaction = null;
+
+int pageNow  = 1;
+int pageSize = 3;
+int pageCount = 0;
+int rowCount = 0;
+try{
+    transaction = session.beginTransaction();
+    //do...
+    rowCount = Integer.parseInt(session.createQuery(&quot;select count(*) from Student&quot;).uniqueResult().toString());
+    pageCount = (rowCount -1)/pageSize + 1;
+    //遍历
+    for(int i = 0; i &lt;= pageCount; i++){
+        System.out.println(&quot;***********************************&quot;);
+        List&lt;Student&gt; list = session.createQuery(&quot;from Student&quot;).setFirstResult(pageSize*i).setMaxResults(pageSize).list();
+        for(Student s : list){
+            System.out.println(s.getSname());
+        }
+    }
+    transaction.commit();
+}catch (Exception e){
+    e.printStackTrace();
+    if (transaction != null){
+        transaction.rollback();
+    }
+    throw new RuntimeException(e.getMessage());
+}finally {
+    if(session != null &amp;&amp; session.isOpen()){
+        session.close();
+    }
+}
+</code></pre><h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><pre><code>select * from student where sage=2412 or 1=1
+</code></pre><p>上面我们使得WHERE恒真，所以该查询中WHERE已经不起作用了</p>
+<h3 id="参数绑定"><a href="#参数绑定" class="headerlink" title="参数绑定"></a>参数绑定</h3><p><strong><em>使用参数绑定的好处：</em></strong></p>
+<ol>
+<li>可读性提高</li>
+<li>效果高 </li>
+<li>防止sql注入漏洞</li>
+</ol>
+<p><strong><em>面试题: 如果不使用参数绑定，怎样防止登录时， sql注入?</em></strong></p>
+<p>　　思路: 1. 通过用户名，查询出该用户名在数据库中对应的密码，然后再与用户输入的密码比较，如果相等，则用户和法，否则，非法.</p>
+<p><strong><em>参数绑定有两种形式</em></strong></p>
+<pre><code>Query q=session.createQuery(from Student where sdept=:dept and sage&gt;:age)
+</code></pre><p>如果我们的参数是:冒号形式给出的，则我们的参数绑定应当这样:</p>
+<pre><code>List&lt;Student&gt; list=session.createQuery(&quot;from Student where sdept=:a1 and sage&gt;:sage&quot;).setString(&quot;a1&quot;, &quot;计算机系&quot;).setString(&quot;sage&quot;, &quot;2&quot;).list();
+</code></pre><p>还有一种形式:</p>
+<pre><code>Query q=session.createQuery(from Student where sdept=? and sage&gt;?)
+</code></pre><p>如果我们的参数是以 ? 形式给出的则，参数绑定应当:</p>
+<pre><code>List&lt;Student&gt; list=session.createQuery(&quot;from Student where sdept=? and sage&gt;?&quot;).setString(0, &quot;计算机系&quot;).setString(1, &quot;2&quot;).list();
+</code></pre><p>参数的绑定，可以分开写：</p>
+<pre><code>Query query=session.createQuery(&quot;from Student where sdept=? and sage&gt;?&quot;);        
+query.setString(0, &quot;计算机系&quot;);
+query.setString(1, &quot;2&quot;);
+List &lt;Student&gt; list=query.list();
+for(int i=0;i&lt;list.size();i++){
+    Student s= list.get(i);
+    System.out.println(s.getSname()+&quot; &quot;+s.getSage());
+}
+</code></pre><p>把HibernateUtil升级了</p>
+<h3 id="多表查询★★★"><a href="#多表查询★★★" class="headerlink" title="多表查询★★★"></a>多表查询★★★</h3><p>在实际项目中，我们不可能只对一张表进行查询，通常有多张表联合查询</p>
+<h4 id="hibernate对象之间关系"><a href="#hibernate对象之间关系" class="headerlink" title="hibernate对象之间关系"></a>hibernate对象之间关系</h4><ol>
+<li>one – to – one : 身份证&lt;—&gt;人 </li>
+<li>one – to – many  部门 &lt;—&gt; 员工</li>
+<li>many-to-one   员工&lt;—&gt;部门</li>
+<li>many-to-many  学生&lt;—&gt;老师 </li>
+</ol>
+<h4 id="多对多关系转换成两个一对多"><a href="#多对多关系转换成两个一对多" class="headerlink" title="多对多关系转换成两个一对多"></a>多对多关系转换成两个一对多</h4><p><img src="http://i.imgur.com/d8X9T9W.png" alt=""></p>
+<ul>
+<li>一个学生可以选择多门课程，一门课程可以被多名学生选择，在实际开发中应将其转成两个一对多或多两个多对一。这样程序好控制，同时不会有冗余</li>
+<li>对象配置文件可以体现出，Student.hbm.xml和Course.xml中是one-to-many，而Studcourse是many-to-one</li>
+</ul>
+<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><p>请显示林青霞 选择的所有课程名，和成绩</p>
+<pre><code>String sql = &quot;select course.cname,grade from Studcourse where student.sname = &apos;林青霞&apos;&quot;;
+List&lt;Object[]&gt; list = HibernateUtil.executeQuery(sql,null);
+for(Object[] s : list){
+    System.out.println(s[0] + &quot; &quot; + s[1]);
+}
+</code></pre><h2 id="Criteria—略讲"><a href="#Criteria—略讲" class="headerlink" title="Criteria—略讲"></a>Criteria—略讲</h2><pre><code>//查询年龄大于10岁的学生
+//获取一个会话
+Session session = HibernateUtil.getCurrentSession();
+Transaction transaction = null;
+try {
+    transaction = session.beginTransaction();
+    Criteria cri = session.createCriteria(Student.class);
+    //增加检索条件
+    cri.add(Restrictions.gt(&quot;sage&quot;,10));
+    List&lt;Student&gt; list = cri.list();
+    for(Student s : list){
+        System.out.println(s.getSname());
+    }
+    transaction.commit();
+} catch (Exception e) {
+    if (transaction != null) {
+        transaction.rollback();
+    }
+    throw new RuntimeException(e.getMessage());
+} finally {
+    //关闭session
+    if (session != null &amp;&amp; session.isOpen()) {
+        session.close();
+    }
+}
+</code></pre><h2 id="hibernate对象的三种状态"><a href="#hibernate对象的三种状态" class="headerlink" title="hibernate对象的三种状态"></a>hibernate对象的三种状态</h2><h3 id="如果判断一个对象处于怎样的状态？"><a href="#如果判断一个对象处于怎样的状态？" class="headerlink" title="如果判断一个对象处于怎样的状态？"></a>如果判断一个对象处于怎样的状态？</h3><p>主要的依据是: 1. 看该对象是否处于session管理下 2. 看在数据库中有没有对应的记录</p>
+<ul>
+<li>瞬时态: <font color="blue">没有session管理</font>，同时数据库没有对应记录</li>
+<li>持久态: <font color="red">有session管理</font>，同时在数据库中有记录。相关联的session没有关闭，事务没有提交，持久对象状态发生改变，在事务提交时会影响到数据库，即hibernate能检测到变化</li>
+<li>脱管态/游离态： <font color="blue">没有session管理</font>，但是在数据库中有记录。脱管对象状态发生改变，hibernate不能检测到</li>
+</ul>
+<h3 id="对象三种状态"><a href="#对象三种状态" class="headerlink" title="对象三种状态"></a>对象三种状态</h3><pre><code>//对象三种状态
+Course c1 = new Course();//没有在session管理下，数据库没记录，c1就是瞬时态
+c1.setCid(100);
+c1.setCcredit(3);
+c1.setCname(&quot;php&quot;);
+
+Session session = null;
+Transaction tx  = null;
+try{
+    session = HibernateUtil.getCurrentSession();
+    tx = session.beginTransaction();
+    session.save(c1);//c1这时处于session管理下，同时c1对象被保存到数据库，c1处于持久态
+    tx.commit();
+    session.close();
+    //c1没有处于session管理下，单被保存到数据库中，c1就是脱管态（游离态）
+    System.out.println(c1.getCname());
+}catch (Exception e){
+    e.printStackTrace();
+}
+</code></pre><p><img src="http://i.imgur.com/Vdl8u49.png" alt=""></p>
+<h3 id="持久态中改变属性，反应到数据库中"><a href="#持久态中改变属性，反应到数据库中" class="headerlink" title="持久态中改变属性，反应到数据库中"></a>持久态中改变属性，反应到数据库中</h3><pre>
+//对象三种状态
+Course c1 = new Course();//c1就是瞬时态
+c1.setCid(100);
+c1.setCcredit(3);
+<font color="red">c1.setCname("php1");</font>
+
+Session session = null;
+Transaction tx  = null;
+try{
+    session = HibernateUtil.getCurrentSession();
+    tx = session.beginTransaction();
+    session.save(c1);//c1这时处于session管理下，同时c1对象被保存到数据库，c1处于持久态
+    <font color="red">c1.setCname("php2");</font>//处于持久态，c1的改变有效，加入的数据php2
+    tx.commit();
+    session.close();
+    //这时c1被保存到数据库中，同时没有处于session管理下，c1就是脱管态（游离态）
+    <font color="red">c1.setCname("php3");</font>
+    System.out.println(c1.getCname());//<font color="blue">结果为php3，但数据库中时php2</font>
+}catch (Exception e){
+    e.printStackTrace();
+}
+</pre>
+
+<h3 id="持久态中删除记录"><a href="#持久态中删除记录" class="headerlink" title="持久态中删除记录"></a>持久态中删除记录</h3><pre><code>Course c1 = new Course();//c1就是瞬时态
+c1.setCid(100);
+c1.setCcredit(3);
+c1.setCname(&quot;php1&quot;);
+Session session = null;
+Transaction tx  = null;
+try{
+    session = HibernateUtil.getCurrentSession();
+    tx = session.beginTransaction();
+    session.save(c1);//c1这时处于session管理下，同时c1对象被保存到数据库，c1处于持久态
+    c1.setCname(&quot;php2&quot;);//处于持久态，c1的改变有效，加入的数据php2
+    session.delete(c1);//删除数据库记录，c1处于瞬时态
+    tx.commit();
+    session.close();
+    //c1对应的记录被删除，同时没有处于session管理下，c1处于瞬时态
+    c1.setCname(&quot;php3&quot;);
+    System.out.println(c1.getCname());
+}catch (Exception e){
+    e.printStackTrace();
+}
+</code></pre><h3 id="对象状态-完整版"><a href="#对象状态-完整版" class="headerlink" title="对象状态 - 完整版"></a>对象状态 - 完整版</h3><p><img src="http://i.imgur.com/uXvnw1s.png" alt=""></p>
+<h2 id="Hibernate关系映射★★★★★★★"><a href="#Hibernate关系映射★★★★★★★" class="headerlink" title="Hibernate关系映射★★★★★★★"></a>Hibernate关系映射★★★★★★★</h2><h3 id="多对一（内含懒加载问题）★★★★★★★"><a href="#多对一（内含懒加载问题）★★★★★★★" class="headerlink" title="多对一（内含懒加载问题）★★★★★★★"></a>多对一（内含懒加载问题）★★★★★★★</h3><h4 id="多对一案例"><a href="#多对一案例" class="headerlink" title="多对一案例"></a>多对一案例</h4><p><img src="http://i.imgur.com/DouTjzj.png" alt=""></p>
+<p>采用开发方式一：从Domain和对象关系映射文件开始写，自动创建对应表</p>
+<p><strong><em>Department.java</em></strong></p>
+<pre><code>package cn.apeius.domain;
+
+public class Department implements java.io.Serializable {
+
+    private Integer id;
+    private String name;
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+</code></pre><p><strong><em>Department.hbm.xml</em></strong></p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+&lt;hibernate-mapping package="cn.apeius.domain">
+    &lt;class name="Department" lazy="false" table='department'>
+        &lt;!-- 配置主键属性 -->
+        &lt;id name="id" column='id' type="java.lang.Integer">
+            &lt;!-- 生成策略 -->
+            &lt;generator class="increment"/>
+        &lt;/id>
+        &lt;property name="name" type="java.lang.String">
+            &lt;column name="name" length="255" not-null="true"/>
+        &lt;/property>
+    &lt;/class>
+&lt;/hibernate-mapping>
+</pre>
+
+<p><strong><em>Intern.java</em></strong></p>
+<pre>
+package cn.apeius.domain;
+
+public class Intern implements java.io.Serializable{
+
+    private Integer id;
+    private String name;
+    <font color="red">private Department dept;</font>
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Department getDept() {
+        return dept;
+    }
+    public void setDept(Department dept) {
+        this.dept = dept;
+    }
+}
+</pre>
+
+<p><strong><em>Intern.hbm.xml</em></strong></p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+&lt;hibernate-mapping package="cn.apeius.domain">
+    &lt;class name="cn.apeius.domain.Intern" table='intern'>
+        &lt;id name="id" column='id' type="java.lang.Integer">
+            &lt;generator class="increment"/>
+        &lt;/id>
+        &lt;property name="name" type="java.lang.String">
+            &lt;column name="name" length="255"/>
+        &lt;/property>
+        &lt;!--对于private Department dept;就不能使用property-->
+        &lt;!--column="dept_id" 表示将来自动生成的表的外键名-->
+        &lt;!--class可选，默认是通过反射得到属性类型-->
+        <font color="red">&lt;many-to-one name="dept" class = 'Department' column="dept_id"/></font>
+    &lt;/class>
+&lt;/hibernate-mapping>    
+</pre>
+
+<p><strong><em>hibernate.cfg.xml</em></strong></p>
+<pre><code>&lt;property name=&quot;hibernate.hbm2ddl.auto&quot;&gt;update&lt;/property&gt;
+</code></pre><p><strong><em>Main</em></strong></p>
+<pre><code>//创建实习生
+Intern intern = new Intern();
+intern.setName(&quot;宋江&quot;);
+//创建部门
+Department department = new Department();
+department.setName(&quot;财务部&quot;);
+//实习生分配部门
+intern.setDept(department);
+//保存
+session.save(department);
+session.save(intern);
+</code></pre><p><strong><em>结论一</em></strong></p>
+<ul>
+<li>应当先保存部门，再保存实习生</li>
+<li>保存部门后，产生部门id；当保存实习生时再将部门id存入实习生表中</li>
+<li>若先保存实习生，此时还不知道部门id，dept_id的值为null；当保存部门并生成部门id时，在更新实习生表；这样比方式一效率低</li>
+</ul>
+<h4 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h4><p>当我们查询一个对象的时候，在默认情况下,返回的只是该对象的<strong><em>普通属性</em></strong>，当用户去<strong><em>使用对象属性</em></strong> 时，才会向<strong><em>数据库</em></strong> 发出再一次的查询.这种现象我们称为lazy现象.</p>
+<pre><code>Intern intern = (Intern) session.get(Intern.class,3);
+//System.out.println(intern.getName() + &quot; &quot; + intern.getDept().getName());//可以读出部门名称
+transaction.commit();
+session.close();
+System.out.println(intern.getName() + &quot; &quot; + intern.getDept().getName());//session关闭，不可以读出部门名称
+</code></pre><ul>
+<li>在session未关闭时，可以通过学生名得到部门名</li>
+<li>session关闭后，由于懒加载机制，会报错，不能得到部门名</li>
+</ul>
+<h4 id="解决懒加载"><a href="#解决懒加载" class="headerlink" title="解决懒加载"></a>解决懒加载</h4><ul>
+<li>显示初始化Hibernate.initized(代理对象)</li>
+</ul>
+<pre>
+Intern intern = (Intern) session.get(Intern.class,3);
+<font color="red">Hibernate.initialize(intern.getDept());</font>
+transaction.commit();
+session.close();//关闭session，若没有显示初始化代理对象，则会报错
+System.out.println(intern.getName() + " " + intern.getDept().getName());//session关闭，不可以读出部门名称
+</pre>
+
+<ul>
+<li>在department映射文件中加入lazy=’false’</li>
+</ul>
+<pre><code>&lt;class name=&quot;Department&quot; lazy=&quot;false&quot;&gt;
+</code></pre><ul>
+<li>通过过滤器(web项目) openSessionInView</li>
+</ul>
+<pre><code>many-to-one的many这方，如果你配置了 &lt;class name=&quot;Student&quot; lazy=&quot;false&quot;&gt;
+那么hibernate就会在 查询学生 many 方时，把它相互关联的对象也查询,这里我们可以看出，对select语句查询影响不大,
+
+one-to-many 的one 的这方，如果你配置 &lt;set name=&quot;stus&quot; cascade=&quot;save-update&quot; lazy=&quot;false&quot;&gt;
+当你去查询一个部门的时候，该部门关联的学生全部返回，不管你使用否!!!
+如果设置lazy=&quot;true&quot;，在session关闭后如果需要查询部门所在的学生就会报错
+</code></pre><p><strong><em>矛盾: 如何让我们在需要使用的时候才去查询？即如何让我们的session范围更大？</em></strong></p>
+<ul>
+<li>一个http请求所在一个session，缺点是session关闭会延时<br><img src="http://i.imgur.com/wI2ANRU.png" alt=""></li>
+<li>过滤器配合实现</li>
+</ul>
+<pre><code>public class MyFilter1 extends HttpServlet implements Filter {
+
+    public void doFilter(ServletRequest arg0, ServletResponse arg1,
+            FilterChain arg2) throws IOException, ServletException {
+        // TODO Auto-generated method stub
+        Session s=null;
+        Transaction tx=null;
+        try {
+            s =HibernateUtil.getCurrentSession();
+            tx=s.beginTransaction();
+            arg2.doFilter(arg0, arg1);
+            //代码运行到这，整个请求结束
+            tx.commit();
+
+        } catch (Exception e) {
+            if(tx!=null){
+                tx.rollback();
+            }
+            throw new RuntimeException(e.getMessage());
+        }finally{        
+            HibernateUtil.closeCurrentSession();
+        }
+    }
+}
+</code></pre><ul>
+<li>HibernateUtil加入关闭session方法</li>
+</ul>
+<pre><code>public static void closeCurrentSession() {
+
+    Session s = getCurrentSession();
+
+    if (s != null &amp;&amp; s.isOpen()) {
+        s.close();
+        threadLocal.set(null);
+    }
+}
+</code></pre><ul>
+<li>利用Spring可以更好得解决</li>
+</ul>
+<h3 id="一对多（内含级联操作）"><a href="#一对多（内含级联操作）" class="headerlink" title="一对多（内含级联操作）"></a>一对多（内含级联操作）</h3><p>需求：通过一个部门号1，来获取该部门的所有学生?</p>
+<p><img src="http://i.imgur.com/wRgVmDq.png" alt=""></p>
+<h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p><strong><em>Department.java</em></strong></p>
+<pre>
+package cn.apeius.domain;
+
+import java.util.Set;
+
+public class Department implements java.io.Serializable {
+
+    private Integer id;
+    private String name;
+    //配置一个set集合，对应多个学生
+    <font color="red">private Set&lt;Intern> interns;</font>
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<intern> getInterns() {
+        return interns;
+    }
+
+    public void setInterns(Set<intern> interns) {
+        this.interns = interns;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+}
+</intern></intern></pre>
+
+<p><strong><em>Department.hbm.xml</em></strong></p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+&lt;hibernate-mapping package="cn.apeius.domain">
+    &lt;class name="Department" lazy="false" table = 'department'>
+        &lt;!-- 配置主键属性 -->
+        &lt;id name="id" type="java.lang.Integer" column = 'id' >
+            &lt;!-- 生成策略 -->
+            &lt;generator class="increment"/>
+        &lt;/id>
+        &lt;property name="name" type="java.lang.String">
+            &lt;column name="name" length="255" not-null="true"/>
+        &lt;/property>
+        <font color="red">&lt;!--配置one-to-many的关系-->
+        &lt;set name="interns" <font color="blue">cascade="save-update"></font>
+            &lt;!--指定intern类对应的外键-->
+            &lt;key column="dept_id"/>
+            &lt;!--集合中的类名-->
+            &lt;one-to-many class="Intern"/>
+        &lt;/set></font>
+    &lt;/class>
+&lt;/hibernate-mapping>
+</pre>
+
+<p><strong><em>Intern.java</em></strong></p>
+<pre>
+package cn.apeius.domain;
+public class Intern implements java.io.Serializable{
+    private Integer id;
+    private String name;
+    <font color="red">private Department dept;</font>
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Department getDept() {
+        return dept;
+    }
+    public void setDept(Department dept) {
+        this.dept = dept;
+    }
+}
+</pre>
+
+<p><strong><em>Intern.hbm.xml</em></strong></p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+&lt;hibernate-mapping package="cn.apeius.domain">
+    &lt;class name="cn.apeius.domain.Intern">
+        &lt;id name="id" type="java.lang.Integer" column = 'id'>
+            &lt;generator class="increment"/>
+        &lt;/id>
+        &lt;property name="name" type="java.lang.String">
+            &lt;column name="name" length="255"/>
+        &lt;/property>
+        &lt;!--对于private Department dept;就不能使用property-->
+        &lt;!--column="dept_id" 表示将来自动生成的表的外键名-->
+        &lt;!--class可选，默认是通过反射得到属性类型-->
+        <font color="red">&lt;many-to-one name="dept" class='Department' column="dept_id"/></font>
+    &lt;/class>
+&lt;/hibernate-mapping>
+</pre>
+
+<p><strong><em>查询部门的实习生</em></strong></p>
+<pre><code>Department department = (Department) session.get(Department.class,1);
+//取出该部门的实习生
+Set&lt;Intern&gt; set = department.getInterns();
+for(Intern intern : set)
+    System.out.println(intern.getName());
+</code></pre><p><strong><em>部门中添加实习生</em></strong></p>
+<pre>
+//创建部门
+Department department = new Department();
+department.setName("业务部");
+//创建实习生
+Intern intern1 = new Intern();
+intern1.setName("实习生1");
+Intern intern2 = new Intern();
+intern2.setName("实习生2");
+//部门分配学生
+Set<intern> set = new HashSet<intern>();
+set.add(intern1);
+set.add(intern2);
+<font color="red">//级联添加，在department.hdm.xml中添加cascade属性 &lt;set name="interns" cascade="save-update"></font>
+department.setInterns(set);
+//保存
+session.save(department);
+</intern></intern></pre>
+
+<h4 id="级联操作"><a href="#级联操作" class="headerlink" title="级联操作"></a>级联操作</h4><p>所谓级联操作就是说，当你进行某个操作(添加/修改/删除…)，就由hibernate自动给你完成</p>
+<p><strong><em>案例:如何配置级联操作，当删除某个部门的时候，我们自动删除其学生.</em></strong></p>
+<p><strong><em>首先我们在 配置文件中修改:</em></strong></p>
+<pre><code>&lt;!-- 配置one-to-many关系     cascade=&quot;delete&quot; 当删除该部门的时候(主对象，则级联删除它的学生从对象) --&gt;
+&lt;set name=&quot;stus&quot; cascade=&quot;delete&quot;&gt;
+&lt;!-- 指定Student类对应的外键 --&gt;
+    &lt;key column=&quot;dept_id&quot; /&gt;
+    &lt;one-to-many class=&quot;Student&quot; /&gt;
+&lt;/set&gt;
+</code></pre><p><strong><em>java代码中操作:</em></strong></p>
+<pre><code>//演示删除级联
+//获取到某个部分
+Department department=(Department) s.get(Department.class, 41);
+s.delete(department);
+</code></pre><p><strong><em>演示save-update</em></strong></p>
+<pre><code>配置文件:
+&lt;set name=&quot;stus&quot; cascade=&quot;save-update&quot;&gt;
+&lt;!-- 指定Student类对应的外键 --&gt;
+&lt;key column=&quot;dept_id&quot; /&gt;
+&lt;one-to-many class=&quot;Student&quot; /&gt;
+&lt;/set&gt;
+</code></pre><p><strong><em>代码：</em></strong></p>
+<pre><code>//添加学生
+Department department=new Department();
+department.setName(&quot;业务部门3&quot;);
+
+Student stu1=new Student();
+stu1.setName(&quot;顺平6&quot;);
+Student stu2=new Student();
+stu2.setName(&quot;小明6&quot;);
+
+Set&lt;Student&gt; students=new HashSet&lt;Student&gt;();
+students.add(stu1);
+students.add(stu2);
+department.setStus(students);
+
+s.save(department);
+</code></pre><p><strong><em>说明: </em></strong></p>
+<pre><code>① 在集合属性和普通属性中都能使用cascade
+② 一般讲cascade配置在one-to-many(one的一方,比如Employee-Department),和one-to-one(主对象一方)
+</code></pre><h3 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h3><h4 id="基于主键的one-to-one"><a href="#基于主键的one-to-one" class="headerlink" title="基于主键的one-to-one"></a>基于主键的one-to-one</h4><p><img src="http://i.imgur.com/8pSzSoU.png" alt=""></p>
+<p>测试代码如下</p>
+<ul>
+<li>生成两张表，person表和idCard表。person中id为主键，idCard表中id既为主键，也为外键</li>
+<li>person指定id和name，IdCard的主键由person的id指定</li>
+<li><font color="red">IdCard设置外键可以多对一，但当外键同时也为主键时，可以保证一对一</font>
+
+
+</li>
+</ul>
+<pre><code>Person p1 = new Person();
+p1.setId(100);
+p1.setName(&quot;成龙&quot;);
+IdCard idCard = new IdCard();
+idCard.setValidateDte(new Date());
+//表示idCard对象是属于p1这个对象
+idCard.setPerson(p1);
+
+session.save(p1);
+session.save(idCard);
+</code></pre><h4 id="基于外键的one-to-one"><a href="#基于外键的one-to-one" class="headerlink" title="基于外键的one-to-one"></a>基于外键的one-to-one</h4><p><img src="http://i.imgur.com/Qwp0a37.png" alt=""></p>
+<ul>
+<li>在关系模型中，idCard设置外键person_id，则person与idCard是一对多的关系。如何限制约束使得一个person对应一个idCard，只需在references增加约束unique</li>
+<li>IdCard关系映射文件，在many-to-one中增加约束unique=’true’，外键名为person_id</li>
+</ul>
+<p>测试代码</p>
+<pre><code>Person p1 = new Person();
+p1.setId(10);
+p1.setName(&quot;成龙&quot;);
+
+IdCard idCard = new IdCard();
+idCard.setId(100);
+idCard.setValidateDte(new Date());
+//表示idCard对象是属于p1这个对象
+idCard.setPerson(p1);
+
+session.save(p1);
+session.save(idCard);
+</code></pre><h3 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h3><p>在操作和性能方面都不太理想，所以多对多的映射使用较少，实际使用中最好转换成一对多的对象模型</p>
+<p><img src="http://i.imgur.com/dobH4GE.png" alt=""></p>
+<h2 id="Hibernate一级缓存"><a href="#Hibernate一级缓存" class="headerlink" title="Hibernate一级缓存"></a>Hibernate一级缓存</h2><h3 id="缓存原理图"><a href="#缓存原理图" class="headerlink" title="缓存原理图"></a>缓存原理图</h3><p><img src="http://i.imgur.com/6uIqrv1.png" alt=""></p>
+<p>从上图看出: 当我们去查询对象的时候，首先到一级缓存去取数据，如果有，则不到数据库中取，如果没有则到数据库中取，同时在一级缓存中放入对象.</p>
+<h3 id="缓存的细节"><a href="#缓存的细节" class="headerlink" title="缓存的细节"></a>缓存的细节</h3><p>①什么操作会向一级缓存放入数据</p>
+<pre><code>save,update,saveOrUpdate,load,get,list,iterate,lock
+</code></pre><p>save 案例:</p>
+<pre><code>//添加一个学生
+Student student=new Student();
+student.setName(&quot;小东&quot;);    
+s.save(student);//放入一级缓存
+
+//我马上查询
+Student stu2=(Student) s.get(Student.class, student.getId()); //select
+System.out.println(&quot;你刚刚加入的学生名字是&quot;+stu2.getName());
+</code></pre><p>②什么操作会从一级缓存取数据</p>
+<pre><code>get/load/list
+</code></pre><ul>
+<li>get/load会首先从一级缓存中取，如没有,再有不同的操作</li>
+<li>get会立即向数据库发请求，而load 会返回一个代理对象，直到用户真的去使用数据，才会向数据库发请求</li>
+</ul>
+<p>list会不会从session缓存取数据？</p>
+<pre><code>//查询45号学生
+Student stu=(Student) s.get(Student.class, 45);
+System.out.println(&quot;|||||||||||||||||||&quot;);
+String hql=&quot;from Student where id=45&quot;;
+Student stu2=(Student) s.createQuery(hql).uniqueResult();
+System.out.println(stu2.getName());
+</code></pre><p>从上面的案例，我看出 query.list() query.uniueResut() <strong><em>不会从一级缓取数据</em></strong> ! 但是query.list 或者query.uniqueRestu() 会<strong><em>向一级缓存放数据</em></strong>的</p>
+<p>③一级缓存不需要配置，就可以使用,它本身没有保护机制，所以我们程序员要考虑这个问题,我们可以同 evict 或者 clear来清除session缓存中对象. evict 是清除一个对象，clear是清除所有的sesion缓存对象</p>
+<p>④session级缓存中对象的生命周期, 当session关闭后，就自动销毁</p>
+<p>⑤我们自己用HashMap来模拟一个Session缓存，加深对缓存的深入</p>
+<pre><code>import java.util.*；
+public class MyCache {
+    //使用map来模拟缓存
+    static Map&lt;Integer,Student&gt; maps=new HashMap&lt;Integer,Student&gt;();
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        getStudent(1);
+        getStudent(1);
+        getStudent(1);
+        getStudent(1);
+        getStudent(3);
+        getStudent(3);
+
+    }
+
+    public static Student getStudent(Integer id){  //s.get()
+
+        //先到缓存去
+        if(maps.containsKey(id)){
+            //在缓存有
+            System.out.println(&quot;从缓存取出&quot;);
+            return maps.get(id);
+        }else{
+            System.out.println(&quot;从数据库中取&quot;);
+            //到数据库取
+            Student stu=MyDB.getStudentFromDB(id);
+            //放入缓存
+            maps.put(id, stu);
+            return stu;
+        }    
+
+    }
+
+}
+
+//我的数据库
+class MyDB{
+
+    static List&lt;Student&gt; lists=new  ArrayList&lt;Student&gt;();
+
+    //初始化数据库,假设有三个学生
+    static{
+        Student s1=new Student();
+        s1.setId(1);
+        s1.setName(&quot;aaa&quot;);
+        Student s2=new Student();
+        s2.setId(2);
+        s2.setName(&quot;bbb&quot;);
+        Student s3=new Student();
+        s3.setId(3);
+        s3.setName(&quot;ccc&quot;);
+        lists.add(s1);
+        lists.add(s2);
+        lists.add(s3);
+
+    }
+
+    public static Student getStudentFromDB(Integer id){
+        for(Student s: lists){
+            if(s.getId().equals(id)){
+                return s;
+            }
+        }
+        return null;// 在数据库中没有.
+    }
+}
+
+class Student{
+    private Integer id;
+    private String name;
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+</code></pre><h2 id="Hibernate二级缓存"><a href="#Hibernate二级缓存" class="headerlink" title="Hibernate二级缓存"></a>Hibernate二级缓存</h2><h3 id="为什么需要二级缓存？"><a href="#为什么需要二级缓存？" class="headerlink" title="为什么需要二级缓存？"></a>为什么需要二级缓存？</h3><p>因为一级缓存有限(生命周期短),所以我们需要二级缓存(SessionFactory缓存)来弥补这个问题，SessionFactory关闭后缓存才消失</p>
+<ol>
+<li>需要配置</li>
+<li>二级缓存是交给第三方去处理,常见的Hashtable , OSCache , EHCache</li>
+<li>二级缓存的对象可能放在内存，也可能放在磁盘.</li>
+<li>二级缓存的原理</li>
+</ol>
+<p><img src="http://i.imgur.com/1MPLBrn.png" alt=""></p>
+<h3 id="快速入门案例"><a href="#快速入门案例" class="headerlink" title="快速入门案例"></a>快速入门案例</h3><p>使用OsCache来演示二级缓存的使用</p>
+<p>1、配置二级缓存</p>
+<pre><code>&lt;!-- 启动二级缓存 --&gt;
+&lt;property name=&quot;cache.use_second_level_cache&quot;&gt;true&lt;/property&gt;
+&lt;!-- 指定使用哪种二级缓存 --&gt;
+&lt;property name=&quot;cache.provider_class&quot;&gt;org.hibernate.cache.OSCacheProvider&lt;/property&gt;
+&lt;mapping resource=&quot;com/hsp/domain/Department.hbm.xml&quot; /&gt;
+&lt;mapping resource=&quot;com/hsp/domain/Student.hbm.xml&quot; /&gt;
+&lt;!-- 指定哪个domain启用二级缓存 
+特别说明二级缓存策略:
+    1. read-only只读缓存
+    2. read-write读写缓存
+    3. nonstrict-read-write不严格读写缓存
+    4. transcational事务缓存
+--&gt;
+&lt;class-cache class=&quot;com.hsp.domain.Student&quot; usage=&quot;read-write&quot;/&gt;
+</code></pre><p>2、把oscahe.properties文件放在 src目录下，这样你可以指定放入二级缓存的对象capacity 大小默认1000</p>
+<p>3、使用</p>
+<pre><code>//通过获取一个sesion,让hibernate框架运行(config-&gt;加载hibernate.cfg.xml)
+Session s=null;
+Transaction tx=null;    
+try {
+    //我们使用基础模板来讲解.
+    s=HibernateUtil.openSession();
+    tx=s.beginTransaction();        
+    //查询45号学生    
+    Student stu1=(Student) s.get(Student.class, 45);//45-&gt;一级缓存        
+    System.out.println(stu1.getName());
+    tx.commit();        
+} catch (Exception e) {
+    e.printStackTrace();
+    if(tx!=null){
+        tx.rollback();
+    }
+}finally{        
+    if(s!=null &amp;&amp; s.isOpen()){
+        s.close();
+    }
+}
+
+System.out.println(&quot;*********************************&quot;);
+try {
+    //我们使用基础模板来讲解.
+    s=HibernateUtil.openSession();
+    tx=s.beginTransaction();        
+    //查询45号学生
+    Student stu1=(Student) s.get(Student.class, 45);    
+    System.out.println(stu1.getName());
+
+    Student stu3=(Student) s.get(Student.class, 46);    
+    System.out.println(stu3.getName());
+        tx.commit();
+
+} catch (Exception e) {
+    e.printStackTrace();
+    if(tx!=null){
+        tx.rollback();
+    }
+}finally{
+
+    if(s!=null &amp;&amp; s.isOpen()){
+        s.close();
+    }
+}
+
+//完成一个统计，统计的信息在Sessfactory
+//SessionFactory对象.
+Statistics statistics= HibernateUtil.getSessionFactory().getStatistics();
+System.out.println(statistics);
+System.out.println(&quot;放入&quot;+statistics.getSecondLevelCachePutCount());
+System.out.println(&quot;命中&quot;+statistics.getSecondLevelCacheHitCount());
+System.out.println(&quot;错过&quot;+statistics.getSecondLevelCacheMissCount());
+</code></pre><p>4、在配置了二级缓存后，请大家要注意可以通过 Statistics,查看你的配置命中率高不高</p>
+<h2 id="主键增长策略"><a href="#主键增长策略" class="headerlink" title="主键增长策略"></a>主键增长策略</h2><p>① increment</p>
+<pre><code>自增，每次增长1, 适用于所有数据库。但是不要使用在多进程、主键类型是数值型
+select max(id) from Student
+</code></pre><p>② identity</p>
+<pre><code>自增，每次增长1, 适用于支持identity的数据(mysql,sql server), 主键类型是数值
+</code></pre><p>③ sequence</p>
+<pre><code>依赖于底层数据库系统的序列，前提条件:需要数据库支持序列机制（如:oracle等）,而且OID必须为数值类型,比如long,int,short类型。
+</code></pre><p>④ native</p>
+<pre><code>会根据数据类型来选择，使用identity,sequence,hilo 
+select hibernate_sequence.nextval from dual
+主键类型是数值long , short ,int
+&lt;id name=&quot;id&quot; type=&quot;java.lang.Integer&quot;&gt; 
+    &lt;generator class=&quot;native&quot;/&gt;
+&lt;/id&gt;
+</code></pre><p>⑤ hilo</p>
+<pre><code>hilo标识符生成器由Hibernate按照一种high/low算法生成标识符
+用法:
+&lt;id name=&quot;id&quot; type=&quot;java.lang.Integer&quot; column=&quot;ID&quot;&gt;
+    &lt;generator class=&quot;hilo&quot;&gt;
+        &lt;param name=&quot;table&quot;&gt;my_hi_value&lt;/param&gt;
+        &lt;param name=”column”&gt;next_value&lt;/param&gt;
+    &lt;/generator&gt;
+&lt;/id&gt;
+</code></pre><p>⑥ uuid</p>
+<pre><code>会根据uuid算法，生成128-bit的字串
+主键属性类型不能是数值型，而是字串型
+</code></pre><p>⑦ assigned</p>
+<pre><code>用户自己设置主键值，所以主键属性类型可以是数值，字串
+</code></pre><p>⑧ 映射复合主键<br>⑨ foreign </p>
+<pre><code>在one-to-one的关系中，有另一张表的主键(Person)来决定自己主键/外键(IdCard)[既是主键也是外键]
+</code></pre><h3 id="一个简单选择原则"><a href="#一个简单选择原则" class="headerlink" title="一个简单选择原则"></a>一个简单选择原则</h3><ul>
+<li>针对 mysql [主键是 int/long/short 建议使用increment/assigend，如果是字串 UUId/assigned]</li>
+<li>针对 sql server [主键是 int/long/short 建议使用 identity/native/assinged，如果主键是字串，使用uuid/assigned ]</li>
+<li>one-to-one 又是基于主键的则使用foreign</li>
+</ul>
+<h2 id="Hibernate最佳实践"><a href="#Hibernate最佳实践" class="headerlink" title="Hibernate最佳实践"></a>Hibernate最佳实践</h2><h3 id="Hibernate不适合的场景"><a href="#Hibernate不适合的场景" class="headerlink" title="Hibernate不适合的场景"></a>Hibernate不适合的场景</h3><ul>
+<li>不适合OLAP(On-Line Analytical Processing <strong><em>联机分析处理</em></strong> )，以查询分析数据为主的系统；适合OLTP（on-line transaction processing <strong><em>联机事务处理</em></strong> ）</li>
+</ul>
+<p><img src="http://i.imgur.com/kqShTak.png" alt=""></p>
+<ul>
+<li>对于些关系模型设计不合理的老系统，也不能发挥hibernate优势</li>
+<li>数据量巨大，性能要求苛刻的系统，hibernate也很难达到要求, 批量操作数据的效率也不高 </li>
+</ul>
+<h3 id="Hibernate最佳实践-1"><a href="#Hibernate最佳实践-1" class="headerlink" title="Hibernate最佳实践"></a>Hibernate最佳实践</h3><ul>
+<li>对于数据量大，性能要求高系统，不太适用使用hiberante</li>
+<li>主要用于事务操作比较多的项目(oa/某个行业软件[石油、税务、crm, 财务系统]</li>
+<li>OLAP-&gt;hibernate用的比较少   </li>
+<li>OLTP-&gt;hibernate</li>
+</ul>
+<h2 id="Hibernate开发过程（总结）"><a href="#Hibernate开发过程（总结）" class="headerlink" title="Hibernate开发过程（总结）"></a>Hibernate开发过程（总结）</h2><p><strong><em>hibernate.cfg.xml</em></strong></p>
+<pre><code>Hibernate快速入门 - hibernate.cfg.xml
+</code></pre><p><strong><em>domain对象</em></strong></p>
+<pre><code>Hibernate快速入门 - 开发domain对象
+</code></pre><p><strong><em>关系映射文件</em></strong></p>
+<pre><code>Hibernate快速入门 - 手动配置我们的hibernate.cfg.xml文件
+</code></pre><p><strong><em>基础模版</em></strong></p>
+<pre><code>//获取一个会话
+Session session = HibernateUtil.getCurrentSession();
+Transaction transaction = null;
+try{
+    transaction = session.beginTransaction();
+    //do...
+
+    transaction.commit();
+}catch (Exception e){
+    e.printStackTrace();
+    if(transaction != null){
+        transaction.rollback();
+    }
+    throw new RuntimeException(e.getMessage());
+}finally {
+    //关闭session
+    if(session != null &amp;&amp; session.isOpen()){
+        session.close();
+    }
+}
+</code></pre><p><strong><em>HibernateUtil（增删改查）</em></strong><br><a href="https://github.com/rhapsody1290/Hibernate_Study/blob/master/src/main/java/cn/apeius/util/HibernateUtil.java" target="_blank" rel="external">https://github.com/rhapsody1290/Hibernate_Study/blob/master/src/main/java/cn/apeius/util/HibernateUtil.java</a></p>
+<p><strong><em>查询</em></strong></p>
+<pre><code>#查询全部
+String sql = &quot;from Student&quot;;
+List&lt;Student&gt; list = HibernateUtil.executeQuery(sql, null);
+for(Student s : list)
+    System.out.println(s.getSname());
+#条件查询
+String sql = &quot;from Student where sdept = ? and sage &gt; ?&quot;;
+String[] parameters = {&quot;计算机系&quot;, &quot;3&quot;};
+List&lt;Student&gt; list = HibernateUtil.executeQuery(sql, parameters);
+for(Student s : list)
+    System.out.println(s.getSname());
+#部分查询
+String sql = &quot;select sname, saddress from Student where sdept = ? and sage &gt; ?&quot;;
+String[] parameters = {&quot;计算机系&quot;, &quot;3&quot;};
+List&lt;Object[]&gt; list = HibernateUtil.executeQuery(sql, parameters);
+for(Object[] s : list)
+    System.out.println(s[0] + &quot; &quot; + s[1]);
+</code></pre><p><strong><em>分页</em></strong></p>
+<pre><code>String sql = &quot;from Student order by sage&quot;;
+List&lt;Student&gt; list = HibernateUtil.executeQueryByPage(sql, null,4,2);
+for(Student s : list)
+    System.out.println(s.getSname());
+</code></pre><p><strong><em>添加</em></strong></p>
+<pre><code>Course c = new Course();
+c.setCid(61);
+c.setCname(&quot;servlet&quot;);
+HibernateUtil.save(c);
+</code></pre><p><strong><em>修改</em></strong></p>
+<pre><code>String sql = &quot;update Course set ccredit = 2 where cid = 61&quot;;
+HibernateUtil.executeUpdate(sql,null);
+</code></pre><p><strong><em>删除</em></strong></p>
+<pre><code>String sql = &quot;delete from Course where cid = 61&quot;;
+HibernateUtil.executeUpdate(sql,null);
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hibernate/" rel="tag">#Hibernate</a>
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/11/[mybatis]mybatis笔记/" rel="next" title="mybatis笔记">
+                <i class="fa fa-chevron-left"></i> mybatis笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/18/[Maven]Maven安装及基础功能/" rel="prev" title="Maven安装及基础功能">
+                Maven安装及基础功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/12/[Hibernate]Hibernate笔记/"
+           data-title="Hibernate笔记" data-url="http://yoursite.com/2016/08/12/[Hibernate]Hibernate笔记/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate简介"><span class="nav-number">1.</span> <span class="nav-text">Hibernate简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate参考资料"><span class="nav-number">2.</span> <span class="nav-text">Hibernate参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM概述"><span class="nav-number">3.</span> <span class="nav-text">ORM概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要Hibernate？"><span class="nav-number">4.</span> <span class="nav-text">为什么需要Hibernate？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate开发的三种方式"><span class="nav-number">5.</span> <span class="nav-text">Hibernate开发的三种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate快速入门（第二种开发方式）★★★★★★"><span class="nav-number">6.</span> <span class="nav-text">Hibernate快速入门（第二种开发方式）★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#github代码"><span class="nav-number">6.1.</span> <span class="nav-text">github代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建employee表"><span class="nav-number">6.2.</span> <span class="nav-text">创建employee表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发domain对象"><span class="nav-number">6.3.</span> <span class="nav-text">开发domain对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象关系映射文件"><span class="nav-number">6.4.</span> <span class="nav-text">对象关系映射文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动配置我们的hibernate-cfg-xml文件"><span class="nav-number">6.5.</span> <span class="nav-text">手动配置我们的hibernate.cfg.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加用户"><span class="nav-number">6.6.</span> <span class="nav-text">增加用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改用户（先查后改）"><span class="nav-number">6.7.</span> <span class="nav-text">修改用户（先查后改）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户"><span class="nav-number">6.8.</span> <span class="nav-text">删除用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模版（加入了异常回滚）★★★★★★"><span class="nav-number">7.</span> <span class="nav-text">模版（加入了异常回滚）★★★★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SessionFactory单例"><span class="nav-number">8.</span> <span class="nav-text">SessionFactory单例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven下载各数据库JDBC及Hibernate配置文件"><span class="nav-number">9.</span> <span class="nav-text">Maven下载各数据库JDBC及Hibernate配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate切换数据库★★★★★"><span class="nav-number">10.</span> <span class="nav-text">Hibernate切换数据库★★★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate的核心类和接口★★★★★★★★★★"><span class="nav-number">11.</span> <span class="nav-text">Hibernate的核心类和接口★★★★★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration-类"><span class="nav-number">11.1.</span> <span class="nav-text">Configuration 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SessionFactory-（会话工厂）"><span class="nav-number">11.2.</span> <span class="nav-text">SessionFactory （会话工厂）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session接口的理解"><span class="nav-number">11.3.</span> <span class="nav-text">session接口的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Session查询详解★★★★★★"><span class="nav-number">11.4.</span> <span class="nav-text">Session查询详解★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate缓存原理★★★★★★"><span class="nav-number">11.5.</span> <span class="nav-text">Hibernate缓存原理★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HibernateUtil（线程局部模式：获取全新的Session或与线程绑定的Session）★★★★★★"><span class="nav-number">11.6.</span> <span class="nav-text">HibernateUtil（线程局部模式：获取全新的Session或与线程绑定的Session）★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#query接口★★★★★★"><span class="nav-number">11.7.</span> <span class="nav-text">query接口★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Criteria接口（不常用）"><span class="nav-number">11.8.</span> <span class="nav-text">Criteria接口（不常用）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具生成domain对象和对象关系映射文件"><span class="nav-number">12.</span> <span class="nav-text">工具生成domain对象和对象关系映射文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA一对多关系设置"><span class="nav-number">13.</span> <span class="nav-text">IDEA一对多关系设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HQL语句详解★★★★★★"><span class="nav-number">14.</span> <span class="nav-text">HQL语句详解★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关系模型和对象模型映射"><span class="nav-number">14.1.</span> <span class="nav-text">关系模型和对象模型映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取出部分属性"><span class="nav-number">14.2.</span> <span class="nav-text">取出部分属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象模型关联查询"><span class="nav-number">14.3.</span> <span class="nav-text">对象模型关联查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uniqueResult方法-只有一个对象"><span class="nav-number">14.4.</span> <span class="nav-text">uniqueResult方法(只有一个对象)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模糊查询"><span class="nav-number">14.5.</span> <span class="nav-text">模糊查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distinct的用法（过滤重复的记录）"><span class="nav-number">14.6.</span> <span class="nav-text">distinct的用法（过滤重复的记录）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#between-and"><span class="nav-number">14.7.</span> <span class="nav-text">between and</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-not-in"><span class="nav-number">14.8.</span> <span class="nav-text">in /not in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#group-by使用"><span class="nav-number">14.9.</span> <span class="nav-text">group by使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#having的使用"><span class="nav-number">14.10.</span> <span class="nav-text">having的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚集函数的使用-count-avg-max-min-sum"><span class="nav-number">14.11.</span> <span class="nav-text">聚集函数的使用 count(),avg(),max(),min(),sum()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页"><span class="nav-number">14.12.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入"><span class="nav-number">14.13.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数绑定"><span class="nav-number">14.14.</span> <span class="nav-text">参数绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多表查询★★★"><span class="nav-number">14.15.</span> <span class="nav-text">多表查询★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hibernate对象之间关系"><span class="nav-number">14.15.1.</span> <span class="nav-text">hibernate对象之间关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多对多关系转换成两个一对多"><span class="nav-number">14.15.2.</span> <span class="nav-text">多对多关系转换成两个一对多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个例子"><span class="nav-number">14.15.3.</span> <span class="nav-text">举个例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Criteria—略讲"><span class="nav-number">15.</span> <span class="nav-text">Criteria—略讲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hibernate对象的三种状态"><span class="nav-number">16.</span> <span class="nav-text">hibernate对象的三种状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如果判断一个对象处于怎样的状态？"><span class="nav-number">16.1.</span> <span class="nav-text">如果判断一个对象处于怎样的状态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象三种状态"><span class="nav-number">16.2.</span> <span class="nav-text">对象三种状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久态中改变属性，反应到数据库中"><span class="nav-number">16.3.</span> <span class="nav-text">持久态中改变属性，反应到数据库中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久态中删除记录"><span class="nav-number">16.4.</span> <span class="nav-text">持久态中删除记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象状态-完整版"><span class="nav-number">16.5.</span> <span class="nav-text">对象状态 - 完整版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate关系映射★★★★★★★"><span class="nav-number">17.</span> <span class="nav-text">Hibernate关系映射★★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多对一（内含懒加载问题）★★★★★★★"><span class="nav-number">17.1.</span> <span class="nav-text">多对一（内含懒加载问题）★★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多对一案例"><span class="nav-number">17.1.1.</span> <span class="nav-text">多对一案例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#懒加载"><span class="nav-number">17.1.2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决懒加载"><span class="nav-number">17.1.3.</span> <span class="nav-text">解决懒加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对多（内含级联操作）"><span class="nav-number">17.2.</span> <span class="nav-text">一对多（内含级联操作）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#案例"><span class="nav-number">17.2.1.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#级联操作"><span class="nav-number">17.2.2.</span> <span class="nav-text">级联操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一"><span class="nav-number">17.3.</span> <span class="nav-text">一对一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于主键的one-to-one"><span class="nav-number">17.3.1.</span> <span class="nav-text">基于主键的one-to-one</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于外键的one-to-one"><span class="nav-number">17.3.2.</span> <span class="nav-text">基于外键的one-to-one</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多对多"><span class="nav-number">17.4.</span> <span class="nav-text">多对多</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate一级缓存"><span class="nav-number">18.</span> <span class="nav-text">Hibernate一级缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存原理图"><span class="nav-number">18.1.</span> <span class="nav-text">缓存原理图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存的细节"><span class="nav-number">18.2.</span> <span class="nav-text">缓存的细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate二级缓存"><span class="nav-number">19.</span> <span class="nav-text">Hibernate二级缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要二级缓存？"><span class="nav-number">19.1.</span> <span class="nav-text">为什么需要二级缓存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速入门案例"><span class="nav-number">19.2.</span> <span class="nav-text">快速入门案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主键增长策略"><span class="nav-number">20.</span> <span class="nav-text">主键增长策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单选择原则"><span class="nav-number">20.1.</span> <span class="nav-text">一个简单选择原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate最佳实践"><span class="nav-number">21.</span> <span class="nav-text">Hibernate最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate不适合的场景"><span class="nav-number">21.1.</span> <span class="nav-text">Hibernate不适合的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate最佳实践-1"><span class="nav-number">21.2.</span> <span class="nav-text">Hibernate最佳实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate开发过程（总结）"><span class="nav-number">22.</span> <span class="nav-text">Hibernate开发过程（总结）</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
