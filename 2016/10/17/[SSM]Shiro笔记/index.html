@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://i.imgur.com/0Nrv45E.png">
 <meta property="og:image" content="http://i.imgur.com/Vkfw4UF.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-07T14:41:35.389Z">
+<meta property="og:updated_time" content="2016-11-08T07:48:00.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法，依赖一个keyCredential（证书）：验证主体身份的信息Cryptography（密码学）：密码学保护信息不被不比希望让他看的人的看到Hash：数据经过hash">
@@ -901,47 +901,197 @@ securityManager.realms = $staticRealm
 <p><img src="http://i.imgur.com/Vkfw4UF.png" alt=""></p>
 <ul>
 <li>AbstractFilter：实现Filter接口，<strong>类的主要功能是实现Filter接口init方法，保存FilterConfig作为成员变量，在init方法中调用无参的setFilterConfig，<font color="red">子类的初始化方法通过改写onFilterConfigSet方法</font></strong></li>
-<li>NameableFilter：给Filter起个名字。在类中增加总价一个name成员变量，set/get方法</li>
-<li>OncePerRequestFilter：用于防止多次执行 Filter 的，也就是收一次请求该过滤器只会执行一次。<strong>重写Filter接口的doFilter方法，同时设置了enabled属性，表示是否开启拦截器实例，<font color="red">子类过滤操作重写doFilterInternal方法</font></strong></li>
+<li>NameableFilter：给Filter起个名字。在类中增加一个name成员变量，set/get方法</li>
+<li>OncePerRequestFilter：一次请求中，保证过滤链中同一个过滤器只被执行一次。<strong>重写Filter接口的doFilter方法，同时设置了enabled属性，表示是否开启该拦截器，<font color="red">子类需要重写doFilterInternal方法，加上具体的过滤操作</font></strong></li>
 </ul>
-<pre><code>public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)  
+<pre>
+public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)  
         throws ServletException, IOException {  
     String alreadyFilteredAttributeName = getAlreadyFilteredAttributeName();  
     if (request.getAttribute(alreadyFilteredAttributeName) != null || shouldNotFilter(request)) {  
-        log.trace(&quot;Filter &apos;{}&apos; already executed.  Proceeding without invoking this filter.&quot;, getName());  
+        log.trace("Filter '{}' already executed.  Proceeding without invoking this filter.", getName());  
         // Proceed without invoking this filter...  
         filterChain.doFilter(request, response);  
     } else {  
         // Do invoke this filter...  
-        log.trace(&quot;Filter &apos;{}&apos; not yet executed.  Executing now.&quot;, getName());  
+        log.trace("Filter '{}' not yet executed.  Executing now.", getName());  
         request.setAttribute(alreadyFilteredAttributeName, Boolean.TRUE);  
 
-        try {  
+        try {
+            <font color="red">//抽象方法，由子类实现</font>  
             doFilterInternal(request, response, filterChain);  
         } finally {  
-            // Once the request has finished, we&apos;re done and we don&apos;t  
-            // need to mark as &apos;already filtered&apos; any more.  
+            // Once the request has finished, we're done and we don't  
+            // need to mark as 'already filtered' any more.  
             request.removeAttribute(alreadyFilteredAttributeName);  
         }  
     }  
 }  
-</code></pre><ul>
-<li>AbstractShiroFilter：Shiro过滤器前最后一个抽象类，有两个成员变量：WebSecurityManager（存储SecurityManager的引用，以便过滤器使用）、FilterChainResolver（判断url是否需要拦截）；重写onFilterConfigSet方法，<strong><font color="red">子类的初始化方法通过重写init方法完成初始化工作</font></strong>;重写doFilterInternal方法</li>
+</pre>
+
+<ul>
+<li>AbstractShiroFilter：Shiro过滤器前最后一个抽象类，有两个成员变量：WebSecurityManager（存储SecurityManager的引用，以便过滤器使用）、FilterChainResolver（首先拦截所有的url，再根据实际情况判断url是否需要拦截）；重写onFilterConfigSet方法，<strong><font color="red">子类的初始化方法通过重写init方法完成初始化工作</font></strong>;<strong>重写doFilterInternal方法，为subject的入口，重点★★★★★</strong></li>
 </ul>
-<h4 id="自己提出的问题★★★★★"><a href="#自己提出的问题★★★★★" class="headerlink" title="自己提出的问题★★★★★"></a>自己提出的问题★★★★★</h4><p>1、Shiro Filter中SecurityManager是否需要绑定到内存的问题</p>
-<p><strong>详见AbstractShiroFilter.java</strong></p>
+<pre><code>//重写onFilterConfigSet方法，子类重写init方法增加自定义初始化工作
+protected final void onFilterConfigSet() throws Exception {
+    //added in 1.2 for SHIRO-287:
+    applyStaticSecurityManagerEnabledConfig();
+    init();
+    ensureSecurityManager();
+    //added in 1.2 for SHIRO-287:
+    if (isStaticSecurityManagerEnabled()) {
+        SecurityUtils.setSecurityManager(getSecurityManager());
+    }
+}
+</code></pre><ul>
+<li>ShiroFilter、SpringShiroFilter、SpringShiroFilter 实现 AbstractShiroFilter，主要功能是创建过滤器对象，并将SecurityManager和FilterChainResolver属性的注入</li>
+</ul>
+<p><strong>另一条过滤器主线：与SpringMVC中的拦截器类似进行设计</strong></p>
+<ul>
+<li>AdviceFilter</li>
+</ul>
+<p>AdviceFilter 提供了 AOP 风格的支持，类似于 SpringMVC 中的 Interceptor：</p>
+<p>1、preHandler：类似于 AOP 中的前置增强；在拦截器链执行之前执行；如果返回 true 则继续<br>拦截器链；否则中断后续的拦截器链的执行直接返回；进行预处理（如基于表单的身份验<br>证、授权）<br>2、postHandle： 类似于 AOP 中的后置返回增强； 在拦截器链执行完成后执行； 进行后处理 （如<br>记录执行时间之类的）；<br>3、afterCompletion：类似于 AOP 中的后置最终增强；即不管有没有异常都会执行；可以进行<br>清理资源（如接触 Subject 与线程的绑定之类的）；</p>
+<pre>
+//重写doFilterInternal方法
+public void doFilterInternal(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws ServletException, IOException {
+
+    Exception exception = null;
+
+    try {
+        <font color="red">//前置方法，如果前置返回false，则不执行下一个过滤器</font>
+        boolean continueChain = preHandle(request, response);
+        if (log.isTraceEnabled()) {
+            log.trace("Invoked preHandle method.  Continuing chain?: [" + continueChain + "]");
+        }
+
+        if (continueChain) {
+            executeChain(request, response, chain);
+        }
+        <font color="red">//后置方法，访问Servlet后执行</font>
+        postHandle(request, response);
+        if (log.isTraceEnabled()) {
+            log.trace("Successfully invoked postHandle method");
+        }
+
+    } catch (Exception e) {
+        exception = e;
+    } finally {
+        <font color="red">//afterCompletion，不管有没有异常都会执行，可以进行清理资源</font>
+        cleanup(request, response, exception);
+    }
+}
+</pre>
+
+<ul>
+<li>PathMatchingFilter：提供了基于 Ant 风格的请求路径匹配功能及拦截器参数解析的功能，如<br>“roles[admin,user]”自动根据”，”分割解析到一个路径参数配置并绑定到相应的路径</li>
+</ul>
+<p>1、pathsMatch该方法用于 path 与请求路径进行匹配的方法；如果匹配返回 true；<br>2、onPreHandle：在 preHandle 中，当 pathsMatch 匹配一个路径后，会调用 opPreHandler 方法<br>并将路径绑定参数配置传给 mappedValue；然后可以在这个方法中进行一些验证（如角色<br>授权），如果验证失败可以返回 false 中断流程；默认返回 true；<strong>也就是说子类可以只实现<br>onPreHandle 即可</strong>， 无须实现 preHandle。 如果没有 path 与请求路径匹配， 默认是通过的 （即<br>preHandle 返回 true）。</p>
+<pre>
+protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
+
+    if (this.appliedPaths == null || this.appliedPaths.isEmpty()) {
+        if (log.isTraceEnabled()) {
+            log.trace("appliedPaths property is null or empty.  This Filter will passthrough immediately.");
+        }
+        return true;
+    }
+
+    <font color="red">for (String path : this.appliedPaths.keySet()) {
+        // If the path does match, then pass on to the subclass implementation for specific checks
+        //(first match 'wins'):
+        if (pathsMatch(path, request)) {
+            log.trace("Current requestURI matches pattern '{}'.  Determining filter chain execution...", path);
+            Object config = this.appliedPaths.get(path);
+            return isFilterChainContinued(request, response, path, config);
+        }
+    }</font>
+
+    //no path matched, allow the request to go through:
+    return true;
+}
+
+private boolean isFilterChainContinued(ServletRequest request, ServletResponse response,
+                                       String path, Object pathConfig) throws Exception {
+
+    if (isEnabled(request, response, path, pathConfig)) { //isEnabled check added in 1.2
+        if (log.isTraceEnabled()) {
+            log.trace("Filter '{}' is enabled for the current request under path '{}' with config [{}].  " +
+                    "Delegating to subclass implementation for 'onPreHandle' check.",
+                    new Object[]{getName(), path, pathConfig});
+        }
+        //The filter is enabled for this specific request, so delegate to subclass implementations
+        //so they can decide if the request should continue through the chain or not:
+        <font color="red">return onPreHandle(request, response, pathConfig);</font>
+    }
+
+    if (log.isTraceEnabled()) {
+        log.trace("Filter '{}' is disabled for the current request under path '{}' with config [{}].  " +
+                "The next element in the FilterChain will be called immediately.",
+                new Object[]{getName(), path, pathConfig});
+    }
+    //This filter is disabled for this specific request,
+    //return 'true' immediately to indicate that the filter will not process the request
+    //and let the request/response to continue through the filter chain:
+    return true;
+}
+</pre>
+
+<ul>
+<li><p>AnonymousFilter：继承PathMatchingFilter，重写preHandle方法，总是返回true，则允许所有请求通过</p>
+</li>
+<li><p>AccessControlFilter：继承PathMatchingFilter，重写onPreHandle方法</p>
+</li>
+</ul>
+<pre><code>public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+    return isAccessAllowed(request, response, mappedValue) || onAccessDenied(request, response, mappedValue);
+}
+</code></pre><p>1、isAccessAllowed：表示是否允许访问；mappedValue 就是[urls]配置中拦截器参数部分，如果允许访问返回 true，否则 false；<br>2、onAccessDenied：表示当访问拒绝时是否已经处理了；如果返回 true 表示需要继续处理；如果返回 false 表示该拦截器实例已经处理了，将直接返回即可</p>
+<p><strong>两个方法为抽象方法，都需要都子类重写</strong></p>
+<p>另外 AccessControlFilter 还提供了如下方法用于处理如登录成功后/重定向到上一个请求：</p>
+<pre><code>void setLoginUrl(String loginUrl) //身份验证时使用，默认/login.jsp 
+String getLoginUrl() 
+Subject getSubject(ServletRequest request, ServletResponse response) //获取 Subject 实例
+boolean  isLoginRequest(ServletRequest  request,  ServletResponse  response)//当前请求是否是登录请求
+void  saveRequestAndRedirectToLogin(ServletRequest  request,  ServletResponse  response) 
+throws IOException //将当前请求保存起来并重定向到登录页面
+void saveRequest(ServletRequest request) //将请求保存起来，如登录成功后再重定向回该请
+求
+void redirectToLogin(ServletRequest request, ServletResponse response) //重定向到登录页面
+</code></pre><ul>
+<li>AuthenticationFilter继承AccessControlFilter，并重写isAccessAllowed方法，判断用户是否登录</li>
+</ul>
+<pre><code>protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {  
+        Subject subject = getSubject(request, response);  
+        return subject.isAuthenticated();  
+    } 
+</code></pre><p><strong>总结：</strong></p>
+<p>1、过滤器设计，顶层是接口，然后一个抽象类实现接口，每个抽象类中值承担一个职责！</p>
+<ul>
+<li>AbstractFilter保存filterConfig，并提供一个无参的onFilterConfigSet初始化方法</li>
+<li>NameableFilter为过滤器取一个名字</li>
+<li>OncePerRequestFilter重写doFilter方法，保证一个过滤器在一次请求中只执行一次，过滤器中个操作转移到doFilterInternal中。</li>
+<li>之后过滤器子类分为两个分支，一个是Shiro的主过滤器，配置在web.xml中，为Shiro的入口；另一个是AOP风格的过滤器形式，类时Spring MVC中的拦截器，进入ShiroFilter中先执行完Shiro的一些过滤器，在执行Tomcat中的其他过滤器</li>
+<li>★★★★★AdviceFilter重写doFilterInternal方法，将过滤操作分为preHandle、postHandle、afterCompletion操作。如果preHandle返回true，执行下一个过滤器，否则访问终止</li>
+<li>PathMatchingFilter重写preHandle方法，进行路径匹配，路径匹配后是否执行Tomcat其他过滤器由onPreHandle的返回结果决定，供子类改写</li>
+<li>AccessControlFilter重写onPreHandle方法，可以重写isAccessAllowed、onAccessDenied来实现访问控制</li>
+</ul>
+<p><strong>开发建议：</strong><br><strong>如果我们想进行访问访问的控制就可以继承AccessControlFilter；如果我们要添加一些通用数据我们可以直接继承 PathMatchingFilter</strong></p>
+<h4 id="自己提出的问题★★★★★"><a href="#自己提出的问题★★★★★" class="headerlink" title="自己提出的问题★★★★★"></a>自己提出的问题★★★★★</h4><p><strong>1、</strong>Shiro Filter中SecurityManager是否需要绑定到内存的问题<em>*</em></p>
+<p>详见AbstractShiroFilter.java</p>
 <ul>
 <li>如果在Shiro过滤器初始化参数中设置了staticSecurityManagerEnabled的值为true，则SecurityManager与线程绑定</li>
 <li>默认是false，即SecurityManager不与线程绑定，设置在WebEnvironment中</li>
 </ul>
-<p>2、Shiro Filter中SecurityManager变量依赖注入的方式</p>
+<p><strong>2、</strong>Shiro Filter中SecurityManager变量依赖注入的方式</p>
 <p>Shiro Filter中成员变量SecurityManager实例化的方式有两种：</p>
 <ul>
 <li>第一种方式是 SecurityManager 在 Spring 中创建，可以自定义设置SecurityManager的属性，然后依赖注入到Shiro Filter中（单例）</li>
 <li>如果没有通过依赖注入的方式得到SecurityManager的实例，Shiro将自动创建默认的SecurityManager（每次调用过滤器都会创建一个默认SecurityManager，不推荐）</li>
 </ul>
-<p><strong>详见AbstractShiroFilter.java</strong></p>
-<p>3、★★★★在Web.xml中配置</p>
+<p>详见AbstractShiroFilter.java</p>
+<p><strong>3、</strong>★★★★在Web.xml中配置</p>
 <pre><code>&lt;filter&gt;
     &lt;filter-name&gt;shiroFilter&lt;/filter-name&gt;
     &lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;
@@ -982,12 +1132,56 @@ securityManager.realms = $staticRealm
     }
     return instance;
 }
-</code></pre><p>5、真正创建对象的方法在createInstance中，可见代理的过滤器是SpringShiroFilter</p>
+</code></pre><p>5、真正创建对象的方法在createInstance中，<strong>可见代理的过滤器是SpringShiroFilter</strong></p>
 <pre><code>protected AbstractShiroFilter createInstance() throws Exception {
     ...
     return new SpringShiroFilter((WebSecurityManager) securityManager, chainResolver);
 }
 </code></pre><p>6、SpringShiroFilter: ShiroFilterFactoryBean的内部类，继承AbstractShiroFilter</p>
+<pre><code>private static final class SpringShiroFilter extends AbstractShiroFilter {
+
+    protected SpringShiroFilter(WebSecurityManager webSecurityManager, FilterChainResolver resolver) {
+        super();
+        if (webSecurityManager == null) {
+            throw new IllegalArgumentException(&quot;WebSecurityManager property cannot be null.&quot;);
+        }
+        setSecurityManager(webSecurityManager);
+        if (resolver != null) {
+            setFilterChainResolver(resolver);
+        }
+    }
+}
+</code></pre><p>7、每次URL请求，经过代理过滤器DelegatingFilterProxy时，调用SpringShiroFilter实例的doFilter方法</p>
+<p>DelegatingFilterProxy.java</p>
+<pre>
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
+
+    // Lazily initialize the delegate if necessary.
+    <font color="red">Filter delegateToUse = this.delegate;</font>
+    if (delegateToUse == null) {
+        synchronized (this.delegateMonitor) {
+            if (this.delegate == null) {
+                WebApplicationContext wac = findWebApplicationContext();
+                if (wac == null) {
+                    throw new IllegalStateException("No WebApplicationContext found: no ContextLoaderListener registered?");
+                }
+                this.delegate = initDelegate(wac);
+            }
+            delegateToUse = this.delegate;
+        }
+    }
+
+    // Let the delegate perform the actual doFilter operation.
+    <font color="red">invokeDelegate(delegateToUse, request, response, filterChain);</font>
+}
+</pre>    
+
+<p><strong>总结：</strong></p>
+<p>1、Tomcat创建代理对象，初始化代理对象的时候，代理对象通过bean工厂获得被代理对象，并做成其成员对象；每当来一个客户端请求，代理对象的doFilter方法，代理对象调用被代理对象的doFilter方法</p>
+<p>2、DelegatingFilterProxy的主要作用就是一个代理模式的应用,可以把 servlet 容器中的filter同spring容器中的bean关联起来[既可以代理Spring Security的过滤器，也可以代理Shiro中的过滤器]</p>
+<p><strong>4、</strong> 路径匹配规则</p>
+<p>1、路径为空，不进行匹配默认全部通过<br>2、请求url与资源权限路径列表从上到下进行匹配，如果某一个路径匹配，进行权限验证，根据返回结果通过还是拒绝</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>SecurityManager在Shiro过滤器中实例化 -&gt;依赖注入</p>
 <p>ShrioFilter中的WebEnvironment怎么设置，SecurityManager放在WebEnvironment中？</p>
 <ul>

@@ -97,7 +97,7 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
 
 初始化的顺序跟Listener、Filter、Servlet在web.xml中的顺序无">
 <meta property="og:image" content="http://i.imgur.com/J2JOzld.jpg">
-<meta property="og:updated_time" content="2016-11-08T02:21:11.816Z">
+<meta property="og:updated_time" content="2016-11-08T02:41:04.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat操作Servlet流程">
 <meta name="twitter:description" content="Tomcat调用Servlet的流程
@@ -358,12 +358,15 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
 <h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><ul>
 <li>Filter的初始化方法在服务器启动时执行,过滤方法在请求发出后立即调用，可以过滤特定的URL</li>
 <li>过滤器的URL匹配遵从最大长度匹配原则</li>
-<li>一个URL匹配多个过滤器，按照filter-mapping配置节点的出现顺序依次调用doFilter()</li>
+<li>一个URL匹配多个过滤器，<strong>按照filter-mapping配置节点的出现顺序</strong> 依次调用doFilter()</li>
 </ul>
 <p>过滤器链：</p>
 <p>参考：<a href="http://blog.sina.com.cn/s/blog_667ab8240101gfd6.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_667ab8240101gfd6.html</a></p>
 <p>有多个过滤器 filter1 filter2 filter3，组成一个过滤器链 FilterChain[filter1,filter2,filter3]</p>
 <p>如何做到过滤器的依次执行？<br>调用过滤器链的doFilter参数，获取下一个过滤器链，然后执行下一个Filter的方法</p>
+<font color="red"><strong>前置方法和后置方法的执行顺序？</strong></font>
+
+<p>1、前置方法按照过滤器的调用顺序因此按顺序执行<br>2、后置方法的顺序与前置方法相反，即后调用的过滤器的后置方法先执行<br>3、<strong>Chain.doFilter前的代码为访问Servlet前执行，Chain.doFilter后的代码访问Servlet后执行</strong>（分析源代码）</p>
 <p>1、下面是一个简单的时序图</p>
 <p><img src="http://i.imgur.com/J2JOzld.jpg" alt=""></p>
 <p>2、对上面时序图中用到的主要类进行分析</p>
