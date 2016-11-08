@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://i.imgur.com/0Nrv45E.png">
 <meta property="og:image" content="http://i.imgur.com/Vkfw4UF.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-08T07:51:56.732Z">
+<meta property="og:updated_time" content="2016-11-08T12:40:58.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法，依赖一个keyCredential（证书）：验证主体身份的信息Cryptography（密码学）：密码学保护信息不被不比希望让他看的人的看到Hash：数据经过hash">
@@ -1077,7 +1077,158 @@ void redirectToLogin(ServletRequest request, ServletResponse response) //重定�
 <li>AccessControlFilter重写onPreHandle方法，可以重写isAccessAllowed、onAccessDenied来实现访问控制</li>
 </ul>
 <p><strong>开发建议：</strong><br><strong>如果我们想进行访问访问的控制就可以继承AccessControlFilter；如果我们要添加一些通用数据我们可以直接继承 PathMatchingFilter</strong></p>
-<h4 id="自己提出的问题★★★★★"><a href="#自己提出的问题★★★★★" class="headerlink" title="自己提出的问题★★★★★"></a>自己提出的问题★★★★★</h4><p><strong>1、</strong>Shiro Filter中SecurityManager是否需要绑定到内存的问题<em>*</em></p>
+<h4 id="拦截器链"><a href="#拦截器链" class="headerlink" title="拦截器链"></a>拦截器链</h4><p>Shiro 对 Servlet 容器的 FilterChain 进行了代理，即 ShiroFilter 在继续 Servlet 容器的 Filter 链的执行之前，通过 ProxiedFilterChain 对 Servlet 容器的 FilterChain 进行了代理；<strong>即先走Shiro 自己的 Filter 体系，然后才会委托给 Servlet 容器的 FilterChain 进行 Servlet 容器级别的 Filter 链执行</strong>； </p>
+<p>Shiro 的 ProxiedFilterChain 执行流程：<br>1、 执行 Shiro 自己的 Filter 链； 2、再执行 Servlet 容器的 Filter 链（即原始的 Filter）</p>
+<p><strong>★★★★★如何实现先执行Shiro自己的Filter链，然后执行Servlet容器的Filter链？</strong></p>
+<p>1、调用Shiro的主过滤器后，执行AbstractShiroFilter类的doFilterInternal方法</p>
+<pre>
+protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse, final FilterChain chain)
+            throws ServletException, IOException {
+    ...
+    subject.execute(new Callable() {
+                    public Object call() throws Exception {
+                        updateSessionLastAccessTime(request, response);
+                        <font color="red">executeChain(request, response, chain);</font>
+                        return null;
+                    }
+                });
+    ...
+}
+</pre>
+
+<p>2、AbstractShiroFilter类的executeChain方法，会返回一个Servlet过滤链的代理类ProxiedFilterChain，当执行doFilter方法时，如果Shiro内部的过滤器没有执行完，先执行内部过滤器，等全部执行完成后，在执行Servlet的下一个过滤器。代理Chain对Servlet是透明的</p>
+<pre><code>protected void executeChain(ServletRequest request, ServletResponse response, FilterChain origChain)
+        throws IOException, ServletException {
+    FilterChain chain = getExecutionChain(request, response, origChain);
+    chain.doFilter(request, response);
+}
+</code></pre><p>代理过滤器链ProxiedFilterChain的代码如下，包含原来的过滤链和所需要执行的Shiro过滤器；如果Shiro过滤器没有执行完，则首先执行Shiro过滤器，之后再执行 Servlet 过滤器</p>
+<pre>
+public class ProxiedFilterChain implements FilterChain {
+
+    //TODO - complete JavaDoc
+
+    private static final Logger log = LoggerFactory.getLogger(ProxiedFilterChain.class);
+
+    //原来的过滤链对象
+    <font color="red">private FilterChain orig;
+    private List<filter> filters;</filter></font>
+    private int index = 0;
+
+    public ProxiedFilterChain(FilterChain orig, List<filter> filters) {
+        if (orig == null) {
+            throw new NullPointerException("original FilterChain cannot be null.");
+        }
+        this.orig = orig;
+        this.filters = filters;
+        this.index = 0;
+    }
+
+    public void doFilter(ServletRequest request, ServletResponse response) throws IOException, ServletException {
+        //如果执行完Shiro的权限过滤器，则继续执行Servlet中的过滤器
+        if (this.filters == null || this.filters.size() == this.index) {
+            //we've reached the end of the wrapped chain, so invoke the original one:
+            if (log.isTraceEnabled()) {
+                log.trace("Invoking original filter chain.");
+            }
+            <font color="red">this.orig.doFilter(request, response);</font>
+        } else {
+            if (log.isTraceEnabled()) {
+                log.trace("Invoking wrapped filter at index [" + this.index + "]");
+            }
+            <font color="red">this.filters.get(this.index++).doFilter(request, response, this);</font>
+        }
+    }
+}
+</filter></pre>
+
+<p><strong>代理过滤链的产生流程</strong></p>
+<p>1、AbstractShiroFilter中的getExecutionChain方法，通过FilterChainResolver的getChain方法，获得过滤链</p>
+<pre>
+protected FilterChain getExecutionChain(ServletRequest request, ServletResponse response, FilterChain origChain) {
+    FilterChain chain = origChain;
+
+    <font color="red">FilterChainResolver resolver = getFilterChainResolver();</font>
+    if (resolver == null) {
+        log.debug("No FilterChainResolver configured.  Returning original FilterChain.");
+        return origChain;
+    }
+
+    <font color="red">FilterChain resolved = resolver.getChain(request, response, origChain);</font>
+    if (resolved != null) {
+        log.trace("Resolved a configured FilterChain for the current request.");
+        chain = resolved;
+    } else {
+        log.trace("No FilterChain configured for the current request.  Using the default.");
+    }
+
+    return chain;
+}
+</pre>
+
+<p>2、FilterChainResolver接口的默认实现是PathMatchingFilterChainResolver，必须实现getChain方法。DefaultFilterChainManager 实现 FilterChainManager 接口，维护着 url 模式与拦截器链的关系，遍历url模式，如果与访问的url匹配，则根据匹配的 url 模式找到相应的过滤器，用来生成过滤器链；</p>
+<pre>
+public FilterChain getChain(ServletRequest request, ServletResponse response, FilterChain originalChain) {
+    FilterChainManager filterChainManager = getFilterChainManager();
+    if (!filterChainManager.hasChains()) {
+        return null;
+    }
+
+    String requestURI = getPathWithinApplication(request);
+
+    for (String pathPattern : filterChainManager.getChainNames()) {
+
+        if (pathMatches(pathPattern, requestURI)) {
+            if (log.isTraceEnabled()) {
+                log.trace("Matched path pattern [" + pathPattern + "] for requestURI [" + requestURI + "].  " +
+                        "Utilizing corresponding filter chain...");
+            }
+            return filterChainManager.proxy(originalChain, pathPattern);
+        }
+    }
+
+    return null;
+}
+</pre>
+
+<p><strong>PathMatchingFilterChainResolver维护着FilterChainManager和PatternMatcher两个成员变量</strong>，FilterChainManager维护着url 模式与拦截器链的关系，默认是DefaultFilterChainManager；PatternMatcher为请求url与url 模式的匹配方式，默认是AntPathMatcher（PathMatchingFilterChainResolver中构造器时赋值）</p>
+<p><strong>Shiro Filter初始化时，ShiroFilterFactoryBean调用getObject时，createInstance中创建了一些重要的组件，包括SecurityManager、FilterChainResolver（FilterChainManager为其成员变量）。</strong></p>
+<pre>
+protected AbstractShiroFilter createInstance() throws Exception {
+
+    log.debug("Creating Shiro Filter instance.");
+
+    SecurityManager securityManager = getSecurityManager();
+    if (securityManager == null) {
+        String msg = "SecurityManager property must be set.";
+        throw new BeanInitializationException(msg);
+    }
+
+    if (!(securityManager instanceof WebSecurityManager)) {
+        String msg = "The security manager does not implement the WebSecurityManager interface.";
+        throw new BeanInitializationException(msg);
+    }
+
+    //创建DefaultFilterChainManager
+    <font color="red">FilterChainManager manager = createFilterChainManager();</font>
+
+    //Expose the constructed FilterChainManager by first wrapping it in a
+    // FilterChainResolver implementation. The AbstractShiroFilter implementations
+    // do not know about FilterChainManagers - only resolvers:
+    PathMatchingFilterChainResolver chainResolver = new PathMatchingFilterChainResolver();
+    <font color="red">chainResolver.setFilterChainManager(manager);</font>
+
+    //Now create a concrete ShiroFilter instance and apply the acquired SecurityManager and built
+    //FilterChainResolver.  It doesn't matter that the instance is an anonymous inner class
+    //here - we're just using it because it is a concrete AbstractShiroFilter instance that accepts
+    //injection of the SecurityManager and FilterChainResolver:
+    return new SpringShiroFilter((WebSecurityManager) securityManager, chainResolver);
+}
+</pre>
+
+<p><strong>总结：</strong></p>
+<p>1、当用户发送请求时，被Shiro Filter拦截，利用FilterChainResolver的getChain方法，获得代理的过滤链，这样可以先执行Shiro 中的一些过滤器，再执行Servlet的其他过滤器<br>2、获得过滤链代理的主要流程是：FilterChainResolver的实现类PathMatchingFilterChainResolver维护着FilterChainManager和PatternMatcher两个成员变量，FilterChainManager维护着url 模式与拦截器链的关系，PatternMatcher为请求url与url 模式的匹配方式，遍历url模式并与请求url进行匹配，获取配置的过滤器，组成代理的过滤器链，并返回</p>
+<h4 id="自己提出的问题★★★★★"><a href="#自己提出的问题★★★★★" class="headerlink" title="自己提出的问题★★★★★"></a>自己提出的问题★★★★★</h4><p><strong>1、</strong>Shiro Filter中SecurityManager是否需要绑定到内存的问题</p>
 <p>详见AbstractShiroFilter.java</p>
 <ul>
 <li>如果在Shiro过滤器初始化参数中设置了staticSecurityManagerEnabled的值为true，则SecurityManager与线程绑定</li>
@@ -1410,7 +1561,7 @@ user_id    +  role_id
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jdbcRealm使用"><span class="nav-number">5.1.5.</span> <span class="nav-text">jdbcRealm使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.3.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#realm"><span class="nav-number">5.4.1.</span> <span class="nav-text">realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AuthenticationToken"><span class="nav-number">5.4.2.</span> <span class="nav-text">AuthenticationToken</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AuthenticationInfo"><span class="nav-number">5.4.3.</span> <span class="nav-text">AuthenticationInfo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AuthorizationInfo"><span class="nav-number">5.4.4.</span> <span class="nav-text">AuthorizationInfo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject"><span class="nav-number">5.4.5.</span> <span class="nav-text">Subject</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.5.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.5.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.5.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.6.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.6.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.6.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.6.3.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jdbcRealm使用"><span class="nav-number">5.1.5.</span> <span class="nav-text">jdbcRealm使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.3.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#realm"><span class="nav-number">5.4.1.</span> <span class="nav-text">realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AuthenticationToken"><span class="nav-number">5.4.2.</span> <span class="nav-text">AuthenticationToken</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AuthenticationInfo"><span class="nav-number">5.4.3.</span> <span class="nav-text">AuthenticationInfo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AuthorizationInfo"><span class="nav-number">5.4.4.</span> <span class="nav-text">AuthorizationInfo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject"><span class="nav-number">5.4.5.</span> <span class="nav-text">Subject</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.5.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.5.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.5.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.6.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.6.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.6.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.6.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.6.4.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
