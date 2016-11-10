@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Spring," />
 
 
 
@@ -84,12 +84,37 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Qian's Home">
-<meta property="og:url" content="http://yoursite.com/tags/标签2/index.html">
+<meta name="description" content="前言在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：
+
+使用元素，实际上是让Spring执行无参或有参构造器
+使用元素，实际上是让Spring执行一次setter方法
+
+但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对象的Field等，而Spring也为这种语句提供了对应的配置语法：
+
+调用getter方法：使用Pr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring中你不知道的注入方式">
+<meta property="og:url" content="http://yoursite.com/2016/11/10/[Spring]Spring中你不知道的注入方式/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="前言在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：
+
+使用元素，实际上是让Spring执行无参或有参构造器
+使用元素，实际上是让Spring执行一次setter方法
+
+但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对象的Field等，而Spring也为这种语句提供了对应的配置语法：
+
+调用getter方法：使用Pr">
+<meta property="og:updated_time" content="2016-11-10T06:15:00.771Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Qian's Home">
+<meta name="twitter:title" content="Spring中你不知道的注入方式">
+<meta name="twitter:description" content="前言在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：
+
+使用元素，实际上是让Spring执行无参或有参构造器
+使用元素，实际上是让Spring执行一次setter方法
+
+但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对象的Field等，而Spring也为这种语句提供了对应的配置语法：
+
+调用getter方法：使用Pr">
 
 
 
@@ -110,10 +135,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/标签2/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/10/[Spring]Spring中你不知道的注入方式/"/>
 
 
-  <title> 标签: 标签2 | Mr.Qian's Home </title>
+  <title> Spring中你不知道的注入方式 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +159,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -245,46 +270,159 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        标签2
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring中你不知道的注入方式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-10T11:44:00+08:00" content="2016-11-10">
+              2016-11-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/10/[Spring]Spring中你不知道的注入方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/[Spring]Spring中你不知道的注入方式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：</p>
+<ul>
+<li>使用<bean>元素，实际上是让Spring执行无参或有参构造器</bean></li>
+<li>使用<property>元素，实际上是让Spring执行一次setter方法</property></li>
+</ul>
+<p>但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对象的Field等，而Spring也为这种语句提供了对应的配置语法：</p>
+<ul>
+<li>调用getter方法：使用PropertyPathFactoryBean</li>
+<li>调用类或对象的Filed值：使用FiledRetrievingFactoryBean</li>
+<li>调用普通方法：使用MethodInvokingFactoryBean</li>
+</ul>
+<p><a href="https://my.oschina.net/itblog/blog/206481" target="_blank" rel="external">https://my.oschina.net/itblog/blog/206481</a></p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/11/07/[Servlet]Tomcat操作Servlet流程/" itemprop="url">
-              
-                <span itemprop="name">Tomcat操作Servlet流程</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-07T20:40:00+08:00"
-              content="2016-11-07" >
-          11-07
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag">#Spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/07/[Servlet]Tomcat操作Servlet流程/" rel="next" title="Tomcat操作Servlet流程">
+                <i class="fa fa-chevron-left"></i> Tomcat操作Servlet流程
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -292,6 +430,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/10/[Spring]Spring中你不知道的注入方式/"
+           data-title="Spring中你不知道的注入方式" data-url="http://yoursite.com/2016/11/10/[Spring]Spring中你不知道的注入方式/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -311,8 +457,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -362,6 +517,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -458,6 +624,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
