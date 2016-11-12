@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://i.imgur.com/rde5CK6.png">
 <meta property="og:image" content="http://i.imgur.com/WT5FGEk.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-11T15:10:47.468Z">
+<meta property="og:updated_time" content="2016-11-12T12:56:09.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -879,7 +879,7 @@ subject().checkPermissions(&quot;user:view&quot;);
 </code></pre><p>5、实例级别的权限</p>
 <p>《跟我我学Shiro》26页</p>
 <h4 id="授权流程"><a href="#授权流程" class="headerlink" title="授权流程"></a>授权流程</h4><p><img src="http://i.imgur.com/S7tKDiy.png" alt=""></p>
-<p>流程如下：<br>1、首先调用 Subject.isPermitted<em>/hasRole</em>接口，其会委托给 SecurityManager，而SecurityManager 接着会委托给 Authorizer；<br>2、Authorizer 是真正的授权者，如果我们调用如 isPermitted(“user:view”)，其首先会通过PermissionResolver 把字符串转换成相应的 Permission 实例；<br>3、在进行授权之前，其会调用相应的 Realm 获取 Subject 相应的角色/权限用于匹配传入的角色/权限；<br>4、Authorizer 会判断 Realm 的角色/权限是否和传入的匹配，如果有多个 Realm，会委托给ModularRealmAuthorizer 进行循环判断，如果匹配如 isPermitted<em>/hasRole</em>会返回 true，否<br>则返回 false 表示授权失败。</p>
+<p>流程如下：<br>1、首先调用 Subject.isPermitted<em>/hasRole</em>接口，其会委托给 SecurityManager，而SecurityManager 接着会委托给 Authorizer；<br>2、Authorizer 是真正的授权者，如果我们调用如 isPermitted(“user:view”)，其首先会通过PermissionResolver 把字符串转换成相应的 Permission 实例；<br>3、在进行授权之前，其会调用相应的 Realm 获取 Subject 相应的角色/权限用于匹配传入的角色/权限；<br>4、Authorizer 会判断 Realm 的角色/权限是否和传入的匹配，如果有多个 Realm，会委托给ModularRealmAuthorizer 进行循环判断，如果匹配如 isPermitted<em>/hasRole</em>会返回 true，否则返回 false 表示授权失败。</p>
 <h4 id="授权源码分析★★★★★"><a href="#授权源码分析★★★★★" class="headerlink" title="授权源码分析★★★★★"></a>授权源码分析★★★★★</h4><p>1、定义接口Authorizer接口，包括一些isPermitted、checkPermission、hasRole、checkRole一些方法</p>
 <pre><code>public interface Authorizer {
 
@@ -1014,14 +1014,59 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
 }
 </pre>
 
-<p>4、抽象类AuthorizingRealm，继承AuthenticatingRealm，主要功能是完成Authorizer委托的任务，完成isPermitted、hasRole等方法，所以实现了Authorizer接口；<strong>成员变量PermissionResolver、RolePermissionResolver，由Authorizer传入</strong>；</p>
-<pre><code>public abstract class AuthorizingRealm extends AuthenticatingRealm
+<p>4、抽象类AuthorizingRealm，继承AuthenticatingRealm，主要功能是完成Authorizer委托的任务，完成isPermitted、hasRole等方法，所以实现了Authorizer接口；<strong>doGetAuthorizationInfo方法需要由子类改写</strong></p>
+<p>注意：<br><strong>成员变量PermissionResolver、RolePermissionResolver，由Authorizer传入</strong></p>
+<pre>
+public abstract class AuthorizingRealm extends AuthenticatingRealm
     implements Authorizer, Initializable, PermissionResolverAware, RolePermissionResolverAware {
 
-       private PermissionResolver permissionResolver;
+    //成员变量PermissionResolver、RolePermissionResolver，由Authorizer传入
+    private PermissionResolver permissionResolver;
     private RolePermissionResolver permissionRoleResolver;
+
+    <font color="red">/*
+    * 1、调用getAuthorizationInfo方法从数据库获得权限信息
+    * 2、查看用户是否有该操作的权限
+    */</font>
+    public boolean hasRole(PrincipalCollection principal, String roleIdentifier) {
+        AuthorizationInfo info = getAuthorizationInfo(principal);
+        return hasRole(roleIdentifier, info);
+    }
+
+    protected boolean hasRole(String roleIdentifier, AuthorizationInfo info) {
+        return info != null && info.getRoles() != null && info.getRoles().contains(roleIdentifier);
+    }
+
+    protected abstract AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals);
+
+    //权限：1、调用PermissionResolver，先把权限字符串转换为Permission
+    public boolean isPermitted(PrincipalCollection principals, String permission) {
+        Permission p = getPermissionResolver().resolvePermission(permission);
+        return isPermitted(principals, p);
+    }
+
+    //2、判断权限
+    public boolean isPermitted(PrincipalCollection principals, Permission permission) {
+        AuthorizationInfo info = getAuthorizationInfo(principals);
+        return isPermitted(permission, info);
+    }
+
+    //3、调用Permission的implies方法，将数据库的权限与用户传入的进行对比
+    protected boolean isPermitted(Permission permission, AuthorizationInfo info) {
+        Collection<permission> perms = getPermissions(info);
+        if (perms != null && !perms.isEmpty()) {
+            for (Permission perm : perms) {
+                if (perm.implies(permission)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
-</code></pre><h4 id="realm相关对象"><a href="#realm相关对象" class="headerlink" title="realm相关对象"></a>realm相关对象</h4><p>实际开发过程中，自定义的realm继承AuthorizingRealm，改写doGetAuthenticationInfo和doGetAuthorizationInfo方法</p>
+</permission></pre>
+
+<h4 id="realm相关对象"><a href="#realm相关对象" class="headerlink" title="realm相关对象"></a>realm相关对象</h4><p>实际开发过程中，自定义的realm继承AuthorizingRealm，改写doGetAuthenticationInfo和doGetAuthorizationInfo方法</p>
 <ul>
 <li>doGetAuthenticationInfo 获取身份验证相关信息：1、调用Subject.login(token)触发方法，根据token获得User信息，没找到用户、密码不正确时抛出异常 2、生成AuthenticationInfo信息并返回 3、父类AuthenticatingRealm 使用 CredentialsMatcher 进行判断密码是否匹配， 如果不匹配将抛出密码错误异常，如果密码重试重试次数太多将抛出重试次数异常</li>
 <li>doGetAuthorizationInfo 获取授权信息：根据用户名获得角色及权限信息，并组装成AuthorizationInfo返回</li>
@@ -1036,7 +1081,70 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
 <p>当我们使用 AuthorizingRealm 时 ， 如果身份验证成功 ， 在进行授权时就通过<br>doGetAuthorizationInfo 方法获取角色/权限信息用于授权验证</p>
 <p><strong>Subject</strong></p>
 <p>Subject 是 Shiro 的核心对象，基本所有身份验证、授权都是通过 Subject 完成。</p>
-<h3 id="！！（未写）SecurityManager源码分析★★★★★"><a href="#！！（未写）SecurityManager源码分析★★★★★" class="headerlink" title="！！（未写）SecurityManager源码分析★★★★★"></a>！！（未写）SecurityManager源码分析★★★★★</h3><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>AuthenticatingRealm中的成员变量CredentialsMatcher进行密码验证服务，Shiro 提供了 redentialsMatcher 的散列实现 HashedCredentialsMatcher，它用于密码验证，且可以提供自己的盐</p>
+<h3 id="SecurityManager源码分析★★★★★"><a href="#SecurityManager源码分析★★★★★" class="headerlink" title="SecurityManager源码分析★★★★★"></a>SecurityManager源码分析★★★★★</h3><p>1、定义SecurityManager接口，同时继承Authenticator、Authorizer、SessionManager，为什么？SecurityManager委托Authenticator、Authorize和SessionManager的操作</p>
+<pre><code>public interface SecurityManager extends Authenticator, Authorizer, SessionManager {
+
+    Subject login(Subject subject, AuthenticationToken authenticationToken) throws AuthenticationException;
+
+    void logout(Subject subject);
+
+    Subject createSubject(SubjectContext context);
+
+}
+</code></pre><p>2、CachingSecurityManager维护一个CacheManager成员变量</p>
+<pre><code>public abstract class CachingSecurityManager implements SecurityManager, Destroyable, CacheManagerAware, EventBusAware {
+
+    private CacheManager cacheManager;
+
+}
+</code></pre><p>3、RealmSecurityManager，设置realm</p>
+<pre><code>public abstract class RealmSecurityManager extends CachingSecurityManager {
+
+    private Collection&lt;Realm&gt; realms;
+
+    public void setRealm(Realm realm) {
+        if (realm == null) {
+            throw new IllegalArgumentException(&quot;Realm argument cannot be null&quot;);
+        }
+        Collection&lt;Realm&gt; realms = new ArrayList&lt;Realm&gt;(1);
+        realms.add(realm);
+        setRealms(realms);
+    }
+}
+</code></pre><p>4、AuthenticatingSecurityManager保存一个Authenticator，默认是ModularRealmAuthenticator，代理认证的功能</p>
+<pre><code>public abstract class AuthenticatingSecurityManager extends RealmSecurityManager {
+
+    private Authenticator authenticator;
+
+    public AuthenticatingSecurityManager() {
+        super();
+        this.authenticator = new ModularRealmAuthenticator();
+    }
+
+}
+</code></pre><p>5、AuthorizingSecurityManager保存一个Authorizer功能，默认是ModularRealmAuthorizer，代理授权功能</p>
+<pre><code>public abstract class AuthorizingSecurityManager extends AuthenticatingSecurityManager {
+
+    private Authorizer authorizer;
+
+    public AuthorizingSecurityManager() {
+        super();
+        this.authorizer = new ModularRealmAuthorizer();
+    }
+
+}
+</code></pre><p>6、SessionsSecurityManager保存一个SessionManager，默认是DefaultSessionManager，代理会话管理</p>
+<pre><code>public abstract class SessionsSecurityManager extends AuthorizingSecurityManager {
+
+    private SessionManager sessionManager;
+
+    public SessionsSecurityManager() {
+        super();
+        this.sessionManager = new DefaultSessionManager();
+        applyCacheManagerToSessionManager();
+    }
+}
+</code></pre><h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>AuthenticatingRealm中的成员变量CredentialsMatcher进行密码验证服务，Shiro 提供了 redentialsMatcher 的散列实现 HashedCredentialsMatcher，它用于密码验证，且可以提供自己的盐</p>
 <p>realm认证</p>
 <pre><code>//判断认证
 @Override
@@ -1873,7 +1981,7 @@ user_id    +  role_id
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#！！（未写）SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">！！（未写）SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话存储/持久化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话存储/持久化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
