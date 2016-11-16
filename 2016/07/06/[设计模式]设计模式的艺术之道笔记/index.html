@@ -99,9 +99,10 @@
 代码库中有已经实现类似该接口的功能，但接口不一致（请求参数、方法名不同），为了开发效率决定重用代码库中的类
 引入一个适配器类，通过">
 <meta property="og:image" content="http://i.imgur.com/nGDvXzt.png">
+<meta property="og:image" content="http://i.imgur.com/c6WHHLA.png">
 <meta property="og:image" content="http://i.imgur.com/Czffk8B.png">
 <meta property="og:image" content="http://i.imgur.com/F5VGhOh.png">
-<meta property="og:updated_time" content="2016-11-01T09:01:41.953Z">
+<meta property="og:updated_time" content="2016-11-16T15:02:18.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式的艺术之道笔记">
 <meta name="twitter:description" content="第9章：适配器模式背景有的笔记本电脑的工作电压是20V，而我国的家庭用电是220V，如何才能让20V的笔记本电脑能够在220V的电压下工作，答案是引入一个电源适配器
@@ -363,9 +364,179 @@
 <li><strong>适配器模式可以将一个类的接口和另一个类的接口匹配起来</strong>，而无须修改原来适配者接口和抽象目标类的接口</li>
 </ul>
 <p><img src="http://i.imgur.com/nGDvXzt.png" alt=""></p>
-<p>如果需要使用其他的适配者，可以增加一个新的适配器类，使用新的适配器来适配新的算法</p>
-<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>面向接口编程，程序有扩展性和灵活性</p>
+<p>具体实现代码请见清单 1-4。<br>清单 1. 客户端使用的接口</p>
+<pre><code>/*
+ * 定义客户端使用的接口，与业务相关
+ */
+public interface Target {
+     /*
+     * 客户端请求处理的方法
+     */
+    public void request();
+}
+</code></pre><p>清单 2. 被适配的对象</p>
+<pre><code>/*
+ * 已经存在的接口，这个接口需要配置
+ */
+public class Adaptee {
+     /*
+     * 原本存在的方法
+     */
+    public void specificRequest(){
+        //业务代码
+    }
+}
+</code></pre><p>清单 3. 适配器实现</p>
+<pre><code>/*
+ * 适配器类
+ */
+public class Adapter implements Target{
+     /*
+     * 持有需要被适配的接口对象
+     */
+    private Adaptee adaptee;
+        /*
+         * 构造方法，传入需要被适配的对象
+         * @param adaptee 需要被适配的对象
+         */
+    public Adapter(Adaptee adaptee){
+        this.adaptee = adaptee;
+    }
+
+    @Override
+    public void request() {
+        // TODO Auto-generated method stub
+        adaptee.specificRequest();
+    }
+
+}
+</code></pre><p>清单 4. 客户端代码</p>
+<pre><code>/*
+ * 使用适配器的客户端
+ */
+public class Client {
+     public static void main(String[] args){
+         //创建需要被适配的对象
+         Adaptee adaptee = new Adaptee();
+         //创建客户端需要调用的接口对象
+         Target target = new Adapter(adaptee);
+         //请求处理
+         target.request();
+     }
+}
+</code></pre><h3 id="电脑适配器的例子"><a href="#电脑适配器的例子" class="headerlink" title="电脑适配器的例子"></a>电脑适配器的例子</h3><p>电</p>
+<pre><code>public interface Electricity {
+    public void support();
+}
+
+public class ElectricityImpl implements Electricity {
+
+    private Integer value;
+
+    public ElectricityImpl(Integer value){
+        this.value = value;
+    }
+
+    public void support(){
+        System.out.println(&quot;提供&quot;+ value +&quot;电&quot;);
+    }
+}
+</code></pre><p>适配器</p>
+<pre><code>public interface Adapter {
+    public void transform();
+}
+
+public class Adapter220To12V implements Adapter{
+
+    private Electricity electricity;
+
+    public Adapter220To12V(Electricity electricity){
+        this.electricity = electricity;
+    }
+
+    public void transform(){
+        electricity.support();
+        System.out.println(&quot;220V电压转成12V&quot;);
+    }
+}
+
+public class Adapter330To12V implements Adapter{
+
+    Electricity electricity;
+
+    public Adapter330To12V(Electricity electricity){
+        this.electricity = electricity;
+    }
+
+    @Override
+    public void transform() {
+        electricity.support();
+        System.out.println(&quot;330V转成12V&quot;);
+    }
+}
+</code></pre><p>电脑</p>
+<pre><code>public interface Computer {
+    public void work();
+}
+
+public class ComputerImpl implements Computer{
+
+    private Adapter adapter;
+
+    public ComputerImpl(Adapter adapter){
+        this.adapter = adapter;
+    }
+
+    public void work(){
+        adapter.transform();
+        System.out.println(&quot;电脑运行需要12v&quot;);
+    }
+}
+</code></pre><p>测试</p>
+<pre><code>public class App {
+    public static void main(String[] args){
+
+        //电
+        Electricity electricity = new ElectricityImpl(220);
+
+        //适配器
+        Adapter adapter = new Adapter220To12V(electricity);
+
+        //电脑
+        ComputerImpl computer = new ComputerImpl(adapter);
+        computer.work();
+
+        System.out.println(&quot;---------------------------&quot;);
+
+        //电
+        electricity = new ElectricityImpl(330);
+
+        //适配器
+        adapter = new Adapter330To12V(electricity);
+
+        //电脑
+        computer = new ComputerImpl(adapter);
+        computer.work();
+
+    }
+}
+</code></pre><p>结果</p>
+<pre><code>提供220电
+220V电压转成12V
+电脑运行需要12v
+---------------------------
+提供330电
+330V转成12V
+电脑运行需要12v
+</code></pre><h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>面向接口编程，程序有扩展性和灵活性</p>
 <h3 id="缺省适配器模式"><a href="#缺省适配器模式" class="headerlink" title="缺省适配器模式"></a>缺省适配器模式</h3><p>当不需要实现一个接口所提供的所有方法时，<strong>可先设计一个抽象类实现该接口</strong>，并未接口中每个方法提供一个默认实现（空方法），<strong>那么该抽象类的子类可以选择性覆盖父类的某些方法来实现需求</strong>，它适用于不想使用一个接口中的所有方法的情况，又称单接口适配器模式</p>
+<h2 id="第13章：提供统一入口——外观模式"><a href="#第13章：提供统一入口——外观模式" class="headerlink" title="第13章：提供统一入口——外观模式"></a>第13章：提供统一入口——外观模式</h2><p><strong>有时候客户端需要与多个子系统进行复杂的交互，而增加一个外观角色后，客户端只需要直接与外观角色交互</strong>，客户端与子系统之间原有的复杂关系由外观角色来实现，从而降低了系统的耦合度</p>
+<p><img src="http://i.imgur.com/c6WHHLA.png" alt=""></p>
+<p>总结：</p>
+<ul>
+<li>外观模式通过引入一个外观角色来简化客户端与子系统之间的交互，<strong>为复杂的子系统调用提供一个统一的入口</strong>，使子系统与客户端的耦合度降低，且客户端调用非常方便</li>
+<li><strong>外观模式并不给系统增加任何新功能，它进京是简化调用接口</strong></li>
+</ul>
 <h2 id="第15章：代理模式"><a href="#第15章：代理模式" class="headerlink" title="第15章：代理模式"></a>第15章：代理模式</h2><p>客户端使用对象时，返回这个对象的代理对象，这个代理对象控制对原对象的引用，对于客户端的使用是透明的</p>
 <p><img src="http://i.imgur.com/Czffk8B.png" alt=""></p>
 <h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p><img src="http://i.imgur.com/F5VGhOh.png" alt=""></p>
@@ -629,7 +800,7 @@ public class RealSubject implements Subject{
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章：适配器模式"><span class="nav-number">1.</span> <span class="nav-text">第9章：适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">1.2.</span> <span class="nav-text">适配器模式的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">1.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质"><span class="nav-number">1.4.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省适配器模式"><span class="nav-number">1.5.</span> <span class="nav-text">缺省适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章：代理模式"><span class="nav-number">2.</span> <span class="nav-text">第15章：代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">2.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-动态代理"><span class="nav-number">2.2.</span> <span class="nav-text">Java 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">2.2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么这么设计"><span class="nav-number">2.2.2.</span> <span class="nav-text">为什么这么设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的代理类型"><span class="nav-number">2.3.</span> <span class="nav-text">其他的代理类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章：适配器模式"><span class="nav-number">1.</span> <span class="nav-text">第9章：适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">1.2.</span> <span class="nav-text">适配器模式的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">1.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电脑适配器的例子"><span class="nav-number">1.4.</span> <span class="nav-text">电脑适配器的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质"><span class="nav-number">1.5.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省适配器模式"><span class="nav-number">1.6.</span> <span class="nav-text">缺省适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章：提供统一入口——外观模式"><span class="nav-number">2.</span> <span class="nav-text">第13章：提供统一入口——外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章：代理模式"><span class="nav-number">3.</span> <span class="nav-text">第15章：代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">3.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-动态代理"><span class="nav-number">3.2.</span> <span class="nav-text">Java 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">3.2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么这么设计"><span class="nav-number">3.2.2.</span> <span class="nav-text">为什么这么设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的代理类型"><span class="nav-number">3.3.</span> <span class="nav-text">其他的代理类型</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

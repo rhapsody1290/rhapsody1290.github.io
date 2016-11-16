@@ -95,12 +95,13 @@
 <meta property="og:image" content="http://i.imgur.com/b2Degfn.png">
 <meta property="og:image" content="http://i.imgur.com/S7tKDiy.png">
 <meta property="og:image" content="http://i.imgur.com/0Nrv45E.png">
+<meta property="og:image" content="http://i.imgur.com/NMGskjt.png">
 <meta property="og:image" content="http://i.imgur.com/Vkfw4UF.png">
 <meta property="og:image" content="http://i.imgur.com/rde5CK6.png">
-<meta property="og:image" content="http://i.imgur.com/WT5FGEk.png">
 <meta property="og:image" content="http://i.imgur.com/GCOP4Bg.png">
+<meta property="og:image" content="http://i.imgur.com/WT5FGEk.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-12T14:40:38.955Z">
+<meta property="og:updated_time" content="2016-11-16T12:06:29.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -1082,7 +1083,7 @@ public abstract class AuthorizingRealm extends AuthenticatingRealm
 <p>当我们使用 AuthorizingRealm 时 ， 如果身份验证成功 ， 在进行授权时就通过<br>doGetAuthorizationInfo 方法获取角色/权限信息用于授权验证</p>
 <p><strong>Subject</strong></p>
 <p>Subject 是 Shiro 的核心对象，基本所有身份验证、授权都是通过 Subject 完成。</p>
-<h3 id="SecurityManager源码分析★★★★★"><a href="#SecurityManager源码分析★★★★★" class="headerlink" title="SecurityManager源码分析★★★★★"></a>SecurityManager源码分析★★★★★</h3><p>1、定义SecurityManager接口，同时继承Authenticator、Authorizer、SessionManager，为什么？SecurityManager委托Authenticator、Authorize和SessionManager的操作</p>
+<h3 id="SecurityManager源码分析★★★★★"><a href="#SecurityManager源码分析★★★★★" class="headerlink" title="SecurityManager源码分析★★★★★"></a>SecurityManager源码分析★★★★★</h3><p>1、定义SecurityManager接口，同时继承Authenticator、Authorizer、SessionManager，为什么？<strong>代理模式，SecurityManager代理Authenticator、Authorize和SessionManager的操作，需要实现三者的接口</strong></p>
 <pre><code>public interface SecurityManager extends Authenticator, Authorizer, SessionManager {
 
     Subject login(Subject subject, AuthenticationToken authenticationToken) throws AuthenticationException;
@@ -1092,7 +1093,8 @@ public abstract class AuthorizingRealm extends AuthenticatingRealm
     Subject createSubject(SubjectContext context);
 
 }
-</code></pre><p>2、CachingSecurityManager维护一个CacheManager成员变量</p>
+</code></pre><p><img src="http://i.imgur.com/NMGskjt.png" alt=""></p>
+<p>2、CachingSecurityManager维护一个CacheManager成员变量</p>
 <pre><code>public abstract class CachingSecurityManager implements SecurityManager, Destroyable, CacheManagerAware, EventBusAware {
 
     private CacheManager cacheManager;
@@ -1541,21 +1543,22 @@ protected AbstractShiroFilter createInstance() throws Exception {
 </pre>
 
 <h4 id="拦截器链总结"><a href="#拦截器链总结" class="headerlink" title="拦截器链总结"></a>拦截器链总结</h4><p>1、当用户发送请求时，被Shiro Filter拦截，利用FilterChainResolver的getChain方法，获得代理的过滤链，这样可以先执行Shiro 中的一些过滤器，再执行Servlet的其他过滤器<br>2、获得过滤链代理的主要流程是：FilterChainResolver的实现类PathMatchingFilterChainResolver维护着FilterChainManager和PatternMatcher两个成员变量，FilterChainManager维护着url 模式与拦截器链的关系，PatternMatcher为请求url与url 模式的匹配方式，遍历url模式并与请求url进行匹配，获取配置的过滤器，组成代理的过滤器链，并返回</p>
-<h4 id="默认拦截器"><a href="#默认拦截器" class="headerlink" title="默认拦截器"></a>默认拦截器</h4><p>public enum DefaultFilter {</p>
-<pre><code>anon(AnonymousFilter.class),
-authc(FormAuthenticationFilter.class),
-authcBasic(BasicHttpAuthenticationFilter.class),
-logout(LogoutFilter.class),
-noSessionCreation(NoSessionCreationFilter.class),
-perms(PermissionsAuthorizationFilter.class),
-port(PortFilter.class),
-rest(HttpMethodPermissionFilter.class),
-roles(RolesAuthorizationFilter.class),
-ssl(SslFilter.class),
-user(UserFilter.class);
-...
-</code></pre><p>}</p>
-<p><img src="http://i.imgur.com/rde5CK6.png" alt=""></p>
+<h4 id="默认拦截器"><a href="#默认拦截器" class="headerlink" title="默认拦截器"></a>默认拦截器</h4><pre><code>public enum DefaultFilter {
+
+    anon(AnonymousFilter.class),
+    authc(FormAuthenticationFilter.class),
+    authcBasic(BasicHttpAuthenticationFilter.class),
+    logout(LogoutFilter.class),
+    noSessionCreation(NoSessionCreationFilter.class),
+    perms(PermissionsAuthorizationFilter.class),
+    port(PortFilter.class),
+    rest(HttpMethodPermissionFilter.class),
+    roles(RolesAuthorizationFilter.class),
+    ssl(SslFilter.class),
+    user(UserFilter.class);
+    ...
+}
+</code></pre><p><img src="http://i.imgur.com/rde5CK6.png" alt=""></p>
 <h4 id="自己提出的问题★★★★★"><a href="#自己提出的问题★★★★★" class="headerlink" title="自己提出的问题★★★★★"></a>自己提出的问题★★★★★</h4><p><strong>1、</strong>Shiro Filter中SecurityManager是否需要绑定到内存的问题</p>
 <p>详见AbstractShiroFilter.java</p>
 <ul>
@@ -1660,7 +1663,48 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 <p>2、DelegatingFilterProxy的主要作用就是一个代理模式的应用,可以把 servlet 容器中的filter同spring容器中的bean关联起来[既可以代理Spring Security的过滤器，也可以代理Shiro中的过滤器]</p>
 <p><strong>4、</strong> 路径匹配规则</p>
 <p>1、路径为空，不进行匹配默认全部通过<br>2、请求url与资源权限路径列表从上到下进行匹配，如果某一个路径匹配，进行权限验证，根据返回结果通过还是拒绝</p>
-<h3 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h3><h4 id="会话管理器"><a href="#会话管理器" class="headerlink" title="会话管理器"></a>会话管理器</h4><ul>
+<h3 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h3><h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4><p>所谓会话，即用户访问应用时保持的连接关系，<strong>在多次交互中应用能够识别出当前访问的用户是谁</strong>，且可以在多次交互中保存一些数据。如访问一些网站时登录成功后，网站可以记住用户，且在退出之前都可以识别当前用户是谁。</p>
+<pre><code>public interface Session {
+
+    /**
+     * 获取当前会话的唯一标识。
+     */
+    Serializable getId();
+
+    /* 获得属性
+     */
+    Object getAttribute(Object key) throws InvalidSessionException;
+
+    /* 设置属性
+     */
+    void setAttribute(Object key, Object value) throws InvalidSessionException;
+
+    /* 删除属性
+     */
+    Object removeAttribute(Object key) throws InvalidSessionException;
+
+    ...
+}
+</code></pre><h4 id="会话存储-持久化★★★★★"><a href="#会话存储-持久化★★★★★" class="headerlink" title="会话存储/持久化★★★★★"></a>会话存储/持久化★★★★★</h4><p>Shiro 提供 SessionDAO 用于会话的 CRUD，即 DAO（Data Access Object）模式实现：</p>
+<pre><code>//如 DefaultSessionManager 在创建完 session 后会调用该方法；如保存到关系数据库/文件
+系统/NoSQL 数据库；即可以实现会话的持久化；返回会话 ID ；主要此处返回的
+ID.equals(session.getId())；
+Serializable create(Session session); 
+//根据会话 ID 获取会话
+Session readSession(Serializable sessionId) throws UnknownSessionException; 
+//更新会话；如更新会话最后访问时间/停止会话/设置超时时间/设置移除属性等会调用
+void update(Session session) throws UnknownSessionException; 
+//删除会话；当会话过期/会话停止（如用户退出时）会调用
+void delete(Session session); 
+//获取当前所有活跃用户，如果用户量多此方法影响性能
+</code></pre><p>Shiro 内嵌了如下 SessionDAO 实现：</p>
+<p><img src="http://i.imgur.com/GCOP4Bg.png" alt=""></p>
+<p>AbstractSessionDAO 提供了 SessionDAO 的基础实现， 如生成会话 ID 等； CachingSessionDAO<br>提供了对开发者透明的会话缓存的功能，只需要设置相应的 CacheManager 即可；MemorySessionDAO 直接在内存中进行会话维护； 而 EnterpriseCacheSessionDAO 提供了缓存功能的会话维护，<strong>默认情况下使用 MapCache 实现，内部使用 ConcurrentHashMap 保存缓存的会话</strong>。</p>
+<p>可以通过如下配置设置 SessionDAO：</p>
+<pre><code>sessionDAO=org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO 
+sessionManager.sessionDAO=$sessionDAO 
+</code></pre><p>Shiro 提供了使用 Ehcache 进行会话存储，Ehcache 可以配合 TerraCotta 实现容器无关的分<br>布式集群——98页</p>
+<h4 id="会话管理器"><a href="#会话管理器" class="headerlink" title="会话管理器"></a>会话管理器</h4><ul>
 <li>会话管理器管理着应用中所有 Subject 的会话的创建、维护、删除、失效、验证等工作。是Shiro 的核心组件</li>
 <li>顶层组件 SecurityManager 直接继承了 SessionManager，且提供了SessionsSecurityManager 实 现直接把会话管理<strong>委托</strong>给相应的 SessionManager </li>
 </ul>
@@ -1702,27 +1746,8 @@ sessionManager.sessionIdCookie=$sessionIdCookie
 sessionManager.sessionIdCookieEnabled=true 
 securityManager.sessionManager=$sessionManager 
 </code></pre><h4 id="会话监听器"><a href="#会话监听器" class="headerlink" title="会话监听器"></a>会话监听器</h4><p>会话监听器用于监听会话创建、过期及停止事件</p>
-<h4 id="会话存储-持久化"><a href="#会话存储-持久化" class="headerlink" title="会话存储/持久化"></a>会话存储/持久化</h4><p>Shiro 提供 SessionDAO 用于会话的 CRUD，即 DAO（Data Access Object）模式实现：</p>
-<pre><code>//如 DefaultSessionManager 在创建完 session 后会调用该方法；如保存到关系数据库/文件
-系统/NoSQL 数据库；即可以实现会话的持久化；返回会话 ID ；主要此处返回的
-ID.equals(session.getId())；
-Serializable create(Session session); 
-//根据会话 ID 获取会话
-Session readSession(Serializable sessionId) throws UnknownSessionException; 
-//更新会话；如更新会话最后访问时间/停止会话/设置超时时间/设置移除属性等会调用
-void update(Session session) throws UnknownSessionException; 
-//删除会话；当会话过期/会话停止（如用户退出时）会调用
-void delete(Session session); 
-//获取当前所有活跃用户，如果用户量多此方法影响性能
-</code></pre><p>Shiro 内嵌了如下 SessionDAO 实现：</p>
-<p><img src="http://i.imgur.com/GCOP4Bg.png" alt=""></p>
-<p>AbstractSessionDAO 提供了 SessionDAO 的基础实现， 如生成会话 ID 等； CachingSessionDAO<br>提供了对开发者透明的会话缓存的功能，只需要设置相应的 CacheManager 即可；MemorySessionDAO 直接在内存中进行会话维护； 而 EnterpriseCacheSessionDAO 提供了缓存功能的会话维护，<strong>默认情况下使用 MapCache 实现，内部使用 ConcurrentHashMap 保存缓存的会话</strong>。</p>
-<p>可以通过如下配置设置 SessionDAO：</p>
-<pre><code>sessionDAO=org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO 
-sessionManager.sessionDAO=$sessionDAO 
-</code></pre><p>Shiro 提供了使用 Ehcache 进行会话存储，Ehcache 可以配合 TerraCotta 实现容器无关的分<br>布式集群——98页</p>
 <h4 id="会话验证"><a href="#会话验证" class="headerlink" title="会话验证"></a>会话验证</h4><p>Shiro 提供了会话验证调度器，用于定期的验证会话是否已过期，如果过期将停止会话；<strong>出于性能考虑， 一般情况下都是获取会话时来验证会话是否过期并停止会话的</strong>； 但是如在 web 环境中，如果用户不主动退出是不知道会话是否过期的，因此需要定期的检测会话是否过期，Shiro 提供了会话验证调度器 SessionValidationScheduler 来做这件事情。</p>
-<h4 id="sessionFactory"><a href="#sessionFactory" class="headerlink" title="sessionFactory"></a>sessionFactory</h4><h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>导入依赖</p>
+<h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>导入依赖</p>
 <pre><code>&lt;!--shiro与ehcache整合--&gt;
 &lt;dependency&gt;
     &lt;groupId&gt;org.apache.shiro&lt;/groupId&gt;
@@ -2011,7 +2036,7 @@ user_id    +  role_id
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析★★★★★★"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析★★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话存储/持久化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话验证"><span class="nav-number">5.8.4.</span> <span class="nav-text">会话验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sessionFactory"><span class="nav-number">5.8.5.</span> <span class="nav-text">sessionFactory</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析★★★★★★"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析★★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化★★★★★"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话存储/持久化★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.4.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话验证"><span class="nav-number">5.8.5.</span> <span class="nav-text">会话验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
