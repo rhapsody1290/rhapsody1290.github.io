@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -84,12 +84,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Qian's Home">
-<meta property="og:url" content="http://yoursite.com/tags/Token/index.html">
+<meta name="description" content="类-实例instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。
+形象地：自身实例或子类实例 instanceof 自身类返回true例： String s=new String(“javaisland”);    System.out.println(s instanceof String); //tru">
+<meta property="og:type" content="article">
+<meta property="og:title" content="instanceof, isinstance,isAssignableFrom的区别">
+<meta property="og:url" content="http://yoursite.com/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="类-实例instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。
+形象地：自身实例或子类实例 instanceof 自身类返回true例： String s=new String(“javaisland”);    System.out.println(s instanceof String); //tru">
+<meta property="og:updated_time" content="2016-11-24T13:40:53.864Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Qian's Home">
+<meta name="twitter:title" content="instanceof, isinstance,isAssignableFrom的区别">
+<meta name="twitter:description" content="类-实例instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。
+形象地：自身实例或子类实例 instanceof 自身类返回true例： String s=new String(“javaisland”);    System.out.println(s instanceof String); //tru">
 
 
 
@@ -110,10 +117,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Token/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/"/>
 
 
-  <title> 标签: Token | Mr.Qian's Home </title>
+  <title> instanceof, isinstance,isAssignableFrom的区别 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +141,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -245,46 +252,151 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Token
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                instanceof, isinstance,isAssignableFrom的区别
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-24T21:38:00+08:00" content="2016-11-24">
+              2016-11-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="类-实例"><a href="#类-实例" class="headerlink" title="类-实例"></a>类-实例</h2><p>instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。</p>
+<p>形象地：自身实例或子类实例 instanceof 自身类返回true<br>例： String s=new String(“javaisland”);<br>    System.out.println(s instanceof String); //true </p>
+<h2 id="Class-实例"><a href="#Class-实例" class="headerlink" title="Class-实例"></a>Class-实例</h2><p>Class类的isInstance(Object obj)方法，obj是被测试的对象，如果obj是调用这个方法的class或接口 的实例，则返回true。这个方法是instanceof运算符的动态等价。<br>形象地：自身类.class.isInstance(自身实例或子类实例)返回true<br>例：String s=new String(“javaisland”);<br>    System.out.println(String.class.isInstance(s)); //true </p>
+<h2 id="Class-Class"><a href="#Class-Class" class="headerlink" title="Class-Class"></a>Class-Class</h2><p>Class类的isAssignableFrom(Class cls)方法，如果调用这个方法的class或接口 与 参数cls表示的类或接口相同，或者是参数cls表示的类或接口的父类，则返回true。<br>形象地：自身类.class.isAssignableFrom(自身类或子类.class)返回true<br>例：System.out.println(ArrayList.class.isAssignableFrom(Object.class));  //false<br>    System.out.println(Object.class.isAssignableFrom(ArrayList.class));  //true</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/10/11/[Java]基于Token的身份验证/" itemprop="url">
-              
-                <span itemprop="name">基于 Token 的身份验证</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-10-11T10:50:00+08:00"
-              content="2016-10-11" >
-          10-11
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/10/[Spring]Spring中你不知道的注入方式/" rel="next" title="Spring中你不知道的注入方式">
+                <i class="fa fa-chevron-left"></i> Spring中你不知道的注入方式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -292,6 +404,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/"
+           data-title="instanceof, isinstance,isAssignableFrom的区别" data-url="http://yoursite.com/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -311,8 +431,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -362,6 +491,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类-实例"><span class="nav-number">1.</span> <span class="nav-text">类-实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-实例"><span class="nav-number">2.</span> <span class="nav-text">Class-实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-Class"><span class="nav-number">3.</span> <span class="nav-text">Class-Class</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -458,6 +598,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
