@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://i.imgur.com/i1mAQCJ.png">
 <meta property="og:image" content="http://i.imgur.com/Tdbme0T.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-27T07:42:56.472Z">
+<meta property="og:updated_time" content="2016-11-27T13:06:53.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -1155,8 +1155,35 @@ public abstract class AuthorizingRealm extends AuthenticatingRealm
         applyCacheManagerToSessionManager();
     }
 }
-</code></pre><p>7、DefaultSecurityManager</p>
-<p>8、DefaultWebSecurityManager</p>
+</code></pre><p>7、DefaultSecurityManager：利用SubjectDAO、SubjectFactory创建、存储Subject</p>
+<pre><code>public class DefaultSecurityManager extends SessionsSecurityManager {
+
+    protected RememberMeManager rememberMeManager;
+    protected SubjectDAO subjectDAO;
+    protected SubjectFactory subjectFactory;
+
+    public DefaultSecurityManager() {
+        super();
+        this.subjectFactory = new DefaultSubjectFactory();
+        this.subjectDAO = new DefaultSubjectDAO();
+    }
+
+    protected SubjectContext createSubjectContext() {
+        return new DefaultSubjectContext();
+    }
+
+    public Subject createSubject(SubjectContext subjectContext) {
+        SubjectContext context = copy(subjectContext);
+        context = ensureSecurityManager(context);
+        context = resolveSession(context);
+        context = resolvePrincipals(context);
+        Subject subject = doCreateSubject(context);
+        save(subject);
+        return subject;
+    }
+
+}
+</code></pre><p>8、DefaultWebSecurityManager：增加了一些Session的维护</p>
 <h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>AuthenticatingRealm中的成员变量CredentialsMatcher进行密码验证服务，Shiro 提供了 redentialsMatcher 的散列实现 HashedCredentialsMatcher，它用于密码验证，且可以提供自己的盐</p>
 <p>realm认证</p>
 <pre><code>//判断认证
