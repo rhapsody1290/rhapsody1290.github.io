@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://i.imgur.com/i1mAQCJ.png">
 <meta property="og:image" content="http://i.imgur.com/Tdbme0T.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-28T09:26:55.328Z">
+<meta property="og:updated_time" content="2016-11-28T13:37:38.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -2086,15 +2086,7 @@ public static Subject getSubject() {
     return (Subject) get(SUBJECT_KEY);
 }
 </code></pre><h5 id="SubjectContext"><a href="#SubjectContext" class="headerlink" title="SubjectContext"></a>SubjectContext</h5><p>于ThreadContext的设计类似</p>
-<h4 id="Subject-getSession-boolean-create"><a href="#Subject-getSession-boolean-create" class="headerlink" title="Subject.getSession(boolean create)"></a>Subject.getSession(boolean create)</h4><p>第一次调用</p>
-<pre><code>SecurityUtil.getSubject()
-</code></pre><p>或在AbstractShiroFilter中创建Subject时</p>
-<pre><code>final Subject subject = createSubject(request, response);
-
-protected WebSubject createSubject(ServletRequest request, ServletResponse response) {
-    return new WebSubject.Builder(getSecurityManager(), request, response).buildWebSubject();
-}    
-</code></pre><p>创建Subject的时候不新建Session，整体三大步骤，先创建一个SessionContext ，然后传递SessionContext给securityMa但我们可以看下如何创建Session的nager来创建Session，最后是装饰Session,由于创建Session过程内容比较多，先说说装饰Session。</p>
+<h4 id="Subject-getSession-boolean-create"><a href="#Subject-getSession-boolean-create" class="headerlink" title="Subject.getSession(boolean create)"></a>Subject.getSession(boolean create)</h4><p>整体三大步骤，先创建一个SessionContext ，然后传递SessionContext给securityMa但我们可以看下如何创建Session的nager来创建Session，最后是装饰Session,由于创建Session过程内容比较多，先说说装饰Session。</p>
 <pre><code>public class DelegatingSubject implements Subject {
 
     public Session getSession(boolean create) {        
@@ -2493,7 +2485,8 @@ protected void mergePrincipals(Subject subject) {
 
     return loggedIn;
 }
-</code></pre><p>对于验证过程这里不再说明，重点还是在验证通过后，会创建一个新的Subject，<strong>新建SubjectContext，并设置了认证信息</strong></p>
+</code></pre><p>对于验证过程这里不再说明，重点还是在验证通过后，<font color="red"><strong>会创建一个新的Subject，同时Subject中包含认真信息和Session；</strong></font></p>
+<p>新建SubjectContext，并设置了认证信息</p>
 <pre><code>protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
         SubjectContext context = createSubjectContext();
         context.setAuthenticated(true);
@@ -2511,7 +2504,7 @@ protected SubjectContext createSubjectContext() {
 }
 </code></pre><font color="red"><strong>在系统刚启动时，创建Subject时，参数SubjectContext中的Session、Principal都为空，不创建Session；但在调用Subject.login有了认证成功的AuthenticationInfo信息，调用SubjectContext在resolvePrincipals便可以获取用户信息</strong></font>
 
-<p>再次调用createSubject(context）创建Subject，此时resolvePrincipals(context)中，可以获取到刚才认证传入的AuthenticationInfo，并取出Principal</p>
+<p>再次调用createSubject(context）创建Subject，此时resolvePrincipals(context)中，可以获取到刚才认证传入的AuthenticationInfo，并取出Principal。<strong>在SubjectContext中Principal不为空，但Session为空</strong></p>
 <pre><code>public Subject createSubject(SubjectContext subjectContext) {
 
     SubjectContext context = copy(subjectContext);
@@ -2523,7 +2516,8 @@ protected SubjectContext createSubjectContext() {
 
     return subject;
 }
-</code></pre><p><font color="red"><strong>PrincipalCollection不为空了，在save(subject)的时候会得到session为空，同时PrincipalCollection不为空，则会执行Session的创建。</strong></font>也就是说在认证通过后，会执行Session的创建，返回的Session为Subject和Session的封装体，并在Session中存入Principal</p>
+</code></pre><font color="red"><strong>PrincipalCollection不为空了，在save(subject)的时候会得到session为空，同时PrincipalCollection不为空，则会执行Session的创建。</strong></font>也就是说在认证通过后，会执行Session的创建，返回的Session为Subject和Session的封装体，并在Session中存入Principal<br><br><font color="blue"><strong>调用subject.getSession()，回返回一个Subject和Session的封装体，并且设置该Session为Subject的成员变量</strong></font>
+
 <pre><code>protected void mergePrincipals(Subject subject) {
     PrincipalCollection currentPrincipals = null;
     if (subject.isRunAs() &amp;&amp; subject instanceof DelegatingSubject) {
@@ -2544,6 +2538,7 @@ protected SubjectContext createSubjectContext() {
     if (session == null) {
         if (!CollectionUtils.isEmpty(currentPrincipals)) {
             //【此处会执行！！！】Principal不为空会创建一个Session
+            //调用subject.getSession()，回返回一个Subject和Session的共同体，并且设置该Session为Subject的成员变量
             session = subject.getSession();
             session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);
         }
@@ -2565,14 +2560,13 @@ protected SubjectContext createSubjectContext() {
         }
     }
 }
-</code></pre><p>委托SecurityManager执行登录操作完毕，返回Subject对象，此时Subject</p>
+</code></pre><p>委托SecurityManager执行登录操作完毕，回到DelegatingSubject的login函数：</p>
 <p>Session创建完成之后会进行一次装饰，即用StoppingAwareProxiedSession将创建出来的session和subject关联起来，然后又进行如下操作：</p>
 <pre><code>public class DelegatingSubject implements Subject {
 
     public void login(AuthenticationToken token) throws AuthenticationException {
         clearRunAsIdentitiesInternal();
-        //这里的Subject则是经过认证后创建的并且也含有刚才创建的session，类型为
-        //StoppingAwareProxiedSession，即是该subject本身和session的合体。
+        //★★★★★这里的Subject则是经过认证后创建的并且也含有刚才创建的session
         Subject subject = securityManager.login(this, token);
 
         PrincipalCollection principals;
