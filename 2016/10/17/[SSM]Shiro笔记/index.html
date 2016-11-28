@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://i.imgur.com/i1mAQCJ.png">
 <meta property="og:image" content="http://i.imgur.com/Tdbme0T.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-27T15:43:14.292Z">
+<meta property="og:updated_time" content="2016-11-28T07:50:13.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -2181,42 +2181,53 @@ public static Subject getSubject() {
     }
 </code></pre><p>首先就是复制SubjectContext，即新建一个SubjectContext实例，与原来的对象具有相同的属性值，SubjectContext的详细介绍见下一节</p>
 <p>对于context，把能获取到的参数都凑齐，SecurityManager、Session、Principal，以Session为例，整个过程如下;</p>
-<p>public class DefaultSecurityManager extends SessionsSecurityManager {</p>
-<pre><code>//①以获取Session为例
-protected SubjectContext resolveSession(SubjectContext context) {
-    //②尝试获取context的map中获取Session
-    if (context.resolveSession() != null) {
-        log.debug(&quot;Context already contains a session.  Returning.&quot;);
+<pre><code>public class DefaultSecurityManager extends SessionsSecurityManager {
+
+    //①以获取Session为例
+    protected SubjectContext resolveSession(SubjectContext context) {
+        //②尝试获取context的map中获取Session
+        if (context.resolveSession() != null) {
+            log.debug(&quot;Context already contains a session.  Returning.&quot;);
+            return context;
+        }
+        try {
+            //Context couldn&apos;t resolve it directly, let&apos;s see if we can since we have direct access to
+            //the session manager:
+
+            //③若没有再尝试获取sessionId
+            Session session = resolveContextSession(context);
+            if (session != null) {
+                context.setSession(session);
+            }
+        } catch (InvalidSessionException e) {
+            log.debug(&quot;Resolved SubjectContext context session is invalid.  Ignoring and creating an anonymous &quot; +
+                    &quot;(session-less) Subject instance.&quot;, e);
+        }
         return context;
     }
-    try {
-        //Context couldn&apos;t resolve it directly, let&apos;s see if we can since we have direct access to
-        //the session manager:
 
-        //③若没有再尝试获取sessionId
-        Session session = resolveContextSession(context);
-        if (session != null) {
-            context.setSession(session);
+    protected Session resolveContextSession(SubjectContext context) throws InvalidSessionException {
+        SessionKey key = getSessionKey(context);
+        if (key != null) {
+            return getSession(key);
         }
-    } catch (InvalidSessionException e) {
-        log.debug(&quot;Resolved SubjectContext context session is invalid.  Ignoring and creating an anonymous &quot; +
-                &quot;(session-less) Subject instance.&quot;, e);
+        return null;
     }
-    return context;
-}
 
-protected Session resolveContextSession(SubjectContext context) throws InvalidSessionException {
-    SessionKey key = getSessionKey(context);
-    if (key != null) {
-        return getSession(key);
+    protected SessionKey getSessionKey(SubjectContext context) {
+        Serializable sessionId = context.getSessionId();
+        if (sessionId != null) {
+            return new DefaultSessionKey(sessionId);
+        }
+        return null;
     }
-    return null;
+
 }
-</code></pre><p>}</p>
-<p>首先调用SubjectContext的resolveSession方法，尝试获取context的map中获取Session：</p>
-<p>1、首先获取与SubjectContext中Session<font color="red">（？）</font><br>2、如果没找到，<font color="red">尝试获取SubjectContext存储的Subject（？）</font>，如果存在的话，调用Subject的getSession方法获取Session（不新建Session，没有返回null）</p>
-<p>若没有再尝试获取sessionId,若果有了sessionId则构建成一个DefaultSessionKey来获取对应的Session。</p>
-<p>除此创建Subject的时候不新建Session，但我们可以看下如何创建Session的，整体三大步骤，先创建一个SessionContext ，然后传递SessionContext给securityManager来创建Session，最后是装饰Session,由于创建Session过程内容比较多，先说说装饰Session。</p>
+</code></pre><p>首先调用SubjectContext的resolveSession方法，尝试获取context的map中获取Session：</p>
+<pre><code>1、首先获取与SubjectContext中Session&lt;font color=&apos;red&apos;&gt;（？）&lt;/font&gt;
+2、如果没找到，&lt;font color=&apos;red&apos;&gt;尝试获取SubjectContext存储的Subject（？）&lt;/font&gt;，如果存在的话，调用Subject的getSession方法获取Session（不新建Session，没有返回null）
+</code></pre><p>若没有再尝试获取sessionId,若果有了sessionId则构建成一个DefaultSessionKey来获取对应的Session。</p>
+<p>注意：创建Subject的时候不新建Session，但我们可以看下如何创建Session的，整体三大步骤，先创建一个SessionContext ，然后传递SessionContext给securityManager来创建Session，最后是装饰Session,由于创建Session过程内容比较多，先说说装饰Session。</p>
 <pre><code>public class DelegatingSubject implements Subject {
 
     public Session getSession(boolean create) {        
@@ -2256,7 +2267,323 @@ protected Session resolveContextSession(SubjectContext context) throws InvalidSe
         owner = owningSubject;
     }
 }
-</code></pre><h5 id="SubjectContext、MapContext、Map"><a href="#SubjectContext、MapContext、Map" class="headerlink" title="SubjectContext、MapContext、Map"></a>SubjectContext、MapContext、Map</h5><p>接口设计:</p>
+</code></pre><p>在创建Subject搜集session信息时，使用的此时的Subject的Session、sessionId都为空，所以获取不到Session。然后就是doCreateSubject：</p>
+<p><strong>DefaultSecurityManager：</strong></p>
+<pre>
+public class DefaultSecurityManager extends SessionsSecurityManager {
+
+    <font color="red">protected SubjectDAO subjectDAO;</font>
+    <font color="red">protected SubjectFactory subjectFactory;</font>
+
+    //④SubjectDAO、SubjectFactory默认值
+    public DefaultSecurityManager() {
+        super();
+        <font color="red">this.subjectFactory = new DefaultSubjectFactory();</font>
+        <font color="red">this.subjectDAO = new DefaultSubjectDAO();</font>
+    }
+
+    //①
+    public Subject createSubject(SubjectContext subjectContext) {
+        SubjectContext context = copy(subjectContext);
+        context = ensureSecurityManager(context);
+        context = resolveSession(context);
+        context = resolvePrincipals(context);
+        //②
+        <font color="red">Subject subject = doCreateSubject(context);</font>
+        save(subject);
+        return subject;
+    }
+
+    //③
+    //通过SubjectFactory工厂接口来创建Subject的，而DefaultSecurityManager默认使用的SubjectFactory是DefaultSubjectFactory：
+    protected Subject doCreateSubject(SubjectContext context) {
+        return getSubjectFactory().createSubject(context);
+    }
+}
+</pre>
+
+<p>继续看DefaultSubjectFactory是怎么创建Subject的：</p>
+<pre><code>public Subject createSubject(SubjectContext context) {
+    SecurityManager securityManager = context.resolveSecurityManager();
+    Session session = context.resolveSession();
+    boolean sessionCreationEnabled = context.isSessionCreationEnabled();
+    PrincipalCollection principals = context.resolvePrincipals();
+    boolean authenticated = context.resolveAuthenticated();
+    String host = context.resolveHost();
+
+    return new DelegatingSubject(principals, authenticated, host, session, sessionCreationEnabled, securityManager);
+}
+</code></pre><p>仍然就是从SubjectContext获取这些属性，传递给新建的Subject实例：DelegatingSubject，也没什么好说的，创建完成之后，就需要将刚创建的Subject保存起来</p>
+<p>来看下save方法：</p>
+<pre><code>protected void save(Subject subject) {
+    this.subjectDAO.save(subject);
+}
+</code></pre><p>可以看到又是使用另一个模块来完成的即SubjectDAO，SubjectDAO接口的默认实现为DefaultSubjectDAO()，具体的实现类DefaultSubjectDAO是如何来保存的：</p>
+<pre><code>public Subject save(Subject subject) {
+    if (isSessionStorageEnabled(subject)) {
+        saveToSession(subject);
+    } else {
+        log.trace(&quot;Session storage of subject state for Subject [{}] has been disabled: identity and &quot; +
+                &quot;authentication state are expected to be initialized on every request or invocation.&quot;, subject);
+    }
+
+    return subject;
+}
+</code></pre><p>首先就是判断isSessionStorageEnabled，是否要存储该Subject的session到<br>DefaultSubjectDAO：有一个重要属性SessionStorageEvaluator，它是用来决定一个Subject的Session来记录Subject的状态，接口如下</p>
+<pre><code>public interface SessionStorageEvaluator {
+    boolean isSessionStorageEnabled(Subject subject);
+}
+</code></pre><p>其实现为DefaultSessionStorageEvaluator：</p>
+<pre><code>public class DefaultSessionStorageEvaluator implements SessionStorageEvaluator {
+
+    private boolean sessionStorageEnabled = true;
+
+    public boolean isSessionStorageEnabled(Subject subject) {
+        return (subject != null &amp;&amp; subject.getSession(false) != null) || isSessionStorageEnabled();
+    }
+}
+</code></pre><p>决定策略就是通过DefaultSessionStorageEvaluator 的sessionStorageEnabled的true或false 和subject是否有Session对象来决定的。如果允许存储Subject的Session的话，下面就说具体的存储过程：</p>
+<pre><code>protected void saveToSession(Subject subject) {
+    mergePrincipals(subject);
+    mergeAuthenticationState(subject);
+}
+
+protected void mergePrincipals(Subject subject) {
+    //merge PrincipalCollection state:
+
+    PrincipalCollection currentPrincipals = null;
+
+    //SHIRO-380: added if/else block - need to retain original (source) principals
+    //This technique (reflection) is only temporary - a proper long term solution needs to be found,
+    //but this technique allowed an immediate fix that is API point-version forwards and backwards compatible
+    //
+    //A more comprehensive review / cleaning of runAs should be performed for Shiro 1.3 / 2.0 +
+    if (subject.isRunAs() &amp;&amp; subject instanceof DelegatingSubject) {
+        try {
+            Field field = DelegatingSubject.class.getDeclaredField(&quot;principals&quot;);
+            field.setAccessible(true);
+            currentPrincipals = (PrincipalCollection)field.get(subject);
+        } catch (Exception e) {
+            throw new IllegalStateException(&quot;Unable to access DelegatingSubject principals property.&quot;, e);
+        }
+    }
+    if (currentPrincipals == null || currentPrincipals.isEmpty()) {
+        currentPrincipals = subject.getPrincipals();
+    }
+
+    Session session = subject.getSession(false);
+
+    if (session == null) {
+       //只有当Session为空，并且currentPrincipals不为空的时候才会去创建Session
+       //Subject subject = SecurityUtils.getSubject()此时两者都是为空的，
+       //不会去创建Session
+        if (!CollectionUtils.isEmpty(currentPrincipals)) {
+            session = subject.getSession();
+            session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);
+        }
+        //otherwise no session and no principals - nothing to save
+    } else {
+        PrincipalCollection existingPrincipals =
+                (PrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+
+        if (CollectionUtils.isEmpty(currentPrincipals)) {
+            if (!CollectionUtils.isEmpty(existingPrincipals)) {
+                session.removeAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            }
+            //otherwise both are null or empty - no need to update the session
+        } else {
+            if (!currentPrincipals.equals(existingPrincipals)) {
+                session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);
+            }
+            //otherwise they&apos;re the same - no need to update the session
+        }
+    }
+}
+</code></pre><p>上面有我们关心的重点，当subject.getSession(false)获取的Session为空时（它不会去创建Session），此时就需要去创建Session，subject.getSession()则默认调用的是subject.getSession(true),则会进行Session的创建，创建过程上文已详细说明了。</p>
+<p>在第一次创建Subject的时候</p>
+<pre><code>Subject subject = SecurityUtils.getSubject();
+</code></pre><p><strong>虽然Session为空，但此时还没有用户身份信息，也不会去创建Session</strong>。案例中的<strong>subject.login(token)</strong>该过程则会去创建Session，具体看下过程：</p>
+<p>首先DelegatingSubject调用login方法会委托给SecurityManager的securityManager.login(this, token)方法</p>
+<pre><code>public void login(AuthenticationToken token) throws AuthenticationException {
+    clearRunAsIdentitiesInternal();
+
+    //SecurityManager完成实际的登录操作
+    Subject subject = securityManager.login(this, token);
+
+    PrincipalCollection principals;
+
+    String host = null;
+
+    if (subject instanceof DelegatingSubject) {
+        DelegatingSubject delegating = (DelegatingSubject) subject;
+        principals = delegating.principals;
+        host = delegating.host;
+    } else {
+        principals = subject.getPrincipals();
+    }
+
+    if (principals == null || principals.isEmpty()) {
+        String msg = &quot;Principals returned from securityManager.login( token ) returned a null or &quot; +
+                &quot;empty value.  This value must be non null and populated with one or more elements.&quot;;
+        throw new IllegalStateException(msg);
+    }
+    this.principals = principals;
+    this.authenticated = true;
+    if (token instanceof HostAuthenticationToken) {
+        host = ((HostAuthenticationToken) token).getHost();
+    }
+    if (host != null) {
+        this.host = host;
+    }
+    Session session = subject.getSession(false);
+    if (session != null) {
+        this.session = decorate(session);
+    } else {
+        this.session = null;
+    }
+}
+</code></pre><p>SecurityManager的login方法分为两步：1、对用户名、密码验证 2、创建Subject</p>
+<pre><code>public Subject login(Subject subject, AuthenticationToken token) throws AuthenticationException {
+    AuthenticationInfo info;
+    try {
+        info = authenticate(token);
+    } catch (AuthenticationException ae) {
+        try {
+            onFailedLogin(token, ae, subject);
+        } catch (Exception e) {
+            if (log.isInfoEnabled()) {
+                log.info(&quot;onFailedLogin method threw an &quot; +
+                        &quot;exception.  Logging and propagating original AuthenticationException.&quot;, e);
+            }
+        }
+        throw ae; //propagate
+    }
+     //在该过程会进行Session的创建
+    Subject loggedIn = createSubject(token, info, subject);
+
+    onSuccessfulLogin(token, info, loggedIn);
+
+    return loggedIn;
+}
+</code></pre><p>对于验证过程这里不再说明，重点还是在验证通过后，会创建一个新的Subject，<strong>新建SubjectContext，并设置了认证信息</strong></p>
+<pre><code>protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
+        SubjectContext context = createSubjectContext();
+        context.setAuthenticated(true);
+        context.setAuthenticationToken(token);
+        context.setAuthenticationInfo(info);
+        if (existing != null) {
+            context.setSubject(existing);
+        }
+        //根据SubjectContext创建Subject，之前详细讲解过
+        return createSubject(context);
+    }
+
+protected SubjectContext createSubjectContext() {
+    return new DefaultSubjectContext();
+}
+</code></pre><font color="red"><strong>在系统刚启动时，创建Subject时，参数SubjectContext中的Session、Principal都为空，不创建Session；但在调用Subject.login有了认证成功的AuthenticationInfo信息，调用SubjectContext在resolvePrincipals便可以获取用户信息</strong></font>
+
+<p>再次调用createSubject(context）创建Subject，此时resolvePrincipals(context)中，可以获取到刚才认证传入的AuthenticationInfo，并取出Principal</p>
+<pre><code>public Subject createSubject(SubjectContext subjectContext) {
+
+    SubjectContext context = copy(subjectContext);
+    context = ensureSecurityManager(context);
+    context = resolveSession(context);
+    context = resolvePrincipals(context);
+    Subject subject = doCreateSubject(context);
+    save(subject);
+
+    return subject;
+}
+</code></pre><p><font color="red"><strong>PrincipalCollection不为空了，在save(subject)的时候会得到session为空，同时PrincipalCollection不为空，则会执行Session的创建。</strong></font>也就是说在认证通过后，会执行Session的创建，返回的Session为Subject和Session的封装体，并在Session中存入Principal</p>
+<pre><code>protected void mergePrincipals(Subject subject) {
+    PrincipalCollection currentPrincipals = null;
+    if (subject.isRunAs() &amp;&amp; subject instanceof DelegatingSubject) {
+        try {
+            Field field = DelegatingSubject.class.getDeclaredField(&quot;principals&quot;);
+            field.setAccessible(true);
+            currentPrincipals = (PrincipalCollection)field.get(subject);
+        } catch (Exception e) {
+            throw new IllegalStateException(&quot;Unable to access DelegatingSubject principals property.&quot;, e);
+        }
+    }
+    if (currentPrincipals == null || currentPrincipals.isEmpty()) {
+        currentPrincipals = subject.getPrincipals();
+    }
+
+    Session session = subject.getSession(false);
+
+    if (session == null) {
+        if (!CollectionUtils.isEmpty(currentPrincipals)) {
+            //【此处会执行！！！】Principal不为空会创建一个Session
+            session = subject.getSession();
+            session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);
+        }
+        //otherwise no session and no principals - nothing to save
+    } else {
+        PrincipalCollection existingPrincipals =
+                (PrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+
+        if (CollectionUtils.isEmpty(currentPrincipals)) {
+            if (!CollectionUtils.isEmpty(existingPrincipals)) {
+                session.removeAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            }
+            //otherwise both are null or empty - no need to update the session
+        } else {
+            if (!currentPrincipals.equals(existingPrincipals)) {
+                session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);
+            }
+            //otherwise they&apos;re the same - no need to update the session
+        }
+    }
+}
+</code></pre><p>委托SecurityManager执行登录操作完毕，返回Subject对象，此时Subject</p>
+<p>Session创建完成之后会进行一次装饰，即用StoppingAwareProxiedSession将创建出来的session和subject关联起来，然后又进行如下操作：</p>
+<pre><code>public class DelegatingSubject implements Subject {
+
+    public void login(AuthenticationToken token) throws AuthenticationException {
+        clearRunAsIdentitiesInternal();
+        //这里的Subject则是经过认证后创建的并且也含有刚才创建的session，类型为
+        //StoppingAwareProxiedSession，即是该subject本身和session的合体。
+        Subject subject = securityManager.login(this, token);
+
+        PrincipalCollection principals;
+
+        String host = null;
+
+        if (subject instanceof DelegatingSubject) {
+            DelegatingSubject delegating = (DelegatingSubject) subject;
+            //we have to do this in case there are assumed identities - we don&apos;t want to lose the &apos;real&apos; principals:
+            principals = delegating.principals;
+            host = delegating.host;
+        } else {
+            principals = subject.getPrincipals();
+        }
+
+        if (principals == null || principals.isEmpty()) {
+            String msg = &quot;Principals returned from securityManager.login( token ) returned a null or &quot; +
+                    &quot;empty value.  This value must be non null and populated with one or more elements.&quot;;
+            throw new IllegalStateException(msg);
+        }
+        this.principals = principals;
+        this.authenticated = true;
+        if (token instanceof HostAuthenticationToken) {
+            host = ((HostAuthenticationToken) token).getHost();
+        }
+        if (host != null) {
+            this.host = host;
+        }
+        Session session = subject.getSession(false);
+        if (session != null) {
+            //在这里可以看到又进行了一次装饰
+            this.session = decorate(session);
+        } else {
+            this.session = null;
+        }
+    }
+}
+</code></pre><p>subject 创建出来之后，暂且叫内部subject，就是把认证通过的内部subject的信息和session复制给我们外界使用的subject.login(token)的subject中，这个subject暂且叫外部subject，看下session的赋值，又进行了一次装饰，这次装饰则把session(类型为StoppingAwareProxiedSession，即是内部subject和session的合体)和外部subject绑定到一起。</p>
+<h5 id="总结：过滤器中创建Subject的过程"><a href="#总结：过滤器中创建Subject的过程" class="headerlink" title="总结：过滤器中创建Subject的过程"></a>总结：过滤器中创建Subject的过程</h5><h5 id="SubjectContext、MapContext、Map"><a href="#SubjectContext、MapContext、Map" class="headerlink" title="SubjectContext、MapContext、Map"></a>SubjectContext、MapContext、Map</h5><p>接口设计:</p>
 <p><img src="http://i.imgur.com/5BjziW0.png" alt=""></p>
 <p><strong>MapContext</strong>：实现了Map接口，<strong>内部拥有一个类型为HashMap的backingMap属性，大部分方法都由HashMap来实现，然后仅仅更改某些行为</strong>，<strong>MapContext没有选择去继承HashMap，而是使用了组合的方式，更加容易去扩展</strong>，如backingMap的类型不一定非要选择HashMap，可以换成其他的Map实现，一旦MapContext选择继承HashMap，如果想对其他的Map类型进行同样的功能增强的话，就需要另写一个类来继承它然后改变一些方法实现，这样的话就会有很多重复代码。这也是设计模式所强调的少用继承多用组合</p>
 <pre><code>public class MapContext implements Map&lt;String, Object&gt;, Serializable {
@@ -2652,7 +2979,7 @@ user_id    +  role_id
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析★★★★★★"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析★★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化★★★★★"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话存储/持久化★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.4.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话验证"><span class="nav-number">5.8.5.</span> <span class="nav-text">会话验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session源代码"><span class="nav-number">5.8.6.</span> <span class="nav-text">Session源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionFactory源码分析"><span class="nav-number">5.8.7.</span> <span class="nav-text">SessionFactory源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionDAO"><span class="nav-number">5.8.8.</span> <span class="nav-text">SessionDAO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionManager源代码解析"><span class="nav-number">5.8.9.</span> <span class="nav-text">SessionManager源代码解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject创建Session"><span class="nav-number">5.8.10.</span> <span class="nav-text">Subject创建Session</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ThreadContext（类似于数据库，共享Subject、SecurityManager）"><span class="nav-number">5.8.10.1.</span> <span class="nav-text">ThreadContext（类似于数据库，共享Subject、SecurityManager）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SecurityUtils（创建Subject，设置、获取SecurityManager）"><span class="nav-number">5.8.10.2.</span> <span class="nav-text">SecurityUtils（创建Subject，设置、获取SecurityManager）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectContext、MapContext、Map"><span class="nav-number">5.8.10.3.</span> <span class="nav-text">SubjectContext、MapContext、Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectFactory"><span class="nav-number">5.8.10.4.</span> <span class="nav-text">SubjectFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Subject"><span class="nav-number">5.8.10.5.</span> <span class="nav-text">Subject</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析★★★★★★"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析★★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化★★★★★"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话存储/持久化★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.4.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话验证"><span class="nav-number">5.8.5.</span> <span class="nav-text">会话验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session源代码"><span class="nav-number">5.8.6.</span> <span class="nav-text">Session源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionFactory源码分析"><span class="nav-number">5.8.7.</span> <span class="nav-text">SessionFactory源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionDAO"><span class="nav-number">5.8.8.</span> <span class="nav-text">SessionDAO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionManager源代码解析"><span class="nav-number">5.8.9.</span> <span class="nav-text">SessionManager源代码解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject创建Session"><span class="nav-number">5.8.10.</span> <span class="nav-text">Subject创建Session</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ThreadContext（类似于数据库，共享Subject、SecurityManager）"><span class="nav-number">5.8.10.1.</span> <span class="nav-text">ThreadContext（类似于数据库，共享Subject、SecurityManager）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SecurityUtils（创建Subject，设置、获取SecurityManager）"><span class="nav-number">5.8.10.2.</span> <span class="nav-text">SecurityUtils（创建Subject，设置、获取SecurityManager）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#总结：过滤器中创建Subject的过程"><span class="nav-number">5.8.10.3.</span> <span class="nav-text">总结：过滤器中创建Subject的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectContext、MapContext、Map"><span class="nav-number">5.8.10.4.</span> <span class="nav-text">SubjectContext、MapContext、Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectFactory"><span class="nav-number">5.8.10.5.</span> <span class="nav-text">SubjectFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Subject"><span class="nav-number">5.8.10.6.</span> <span class="nav-text">Subject</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
