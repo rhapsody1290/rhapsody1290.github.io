@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://i.imgur.com/i1mAQCJ.png">
 <meta property="og:image" content="http://i.imgur.com/Tdbme0T.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-28T13:37:38.763Z">
+<meta property="og:updated_time" content="2016-11-29T00:08:57.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -2560,8 +2560,8 @@ protected SubjectContext createSubjectContext() {
         }
     }
 }
-</code></pre><p>委托SecurityManager执行登录操作完毕，回到DelegatingSubject的login函数：</p>
-<p>Session创建完成之后会进行一次装饰，即用StoppingAwareProxiedSession将创建出来的session和subject关联起来，然后又进行如下操作：</p>
+</code></pre><p>委托SecurityManager执行登录操作完毕，回到DelegatingSubject的login函数，<strong>返回了新建的Subject</strong></p>
+<p>Session创建完成之后会进行一次装饰，即用新建一个StoppingAwareProxiedSession对象，其中的delegate为session（也为StoppingAwareProxiedSession类型），owner为Subject，然后又进行如下操作：</p>
 <pre><code>public class DelegatingSubject implements Subject {
 
     public void login(AuthenticationToken token) throws AuthenticationException {
@@ -2604,8 +2604,182 @@ protected SubjectContext createSubjectContext() {
         }
     }
 }
-</code></pre><p>subject 创建出来之后，暂且叫内部subject，就是把认证通过的内部subject的信息和session复制给我们外界使用的subject.login(token)的subject中，这个subject暂且叫外部subject，看下session的赋值，又进行了一次装饰，这次装饰则把session(类型为StoppingAwareProxiedSession，即是内部subject和session的合体)和外部subject绑定到一起。</p>
-<h5 id="总结：过滤器中创建Subject的过程"><a href="#总结：过滤器中创建Subject的过程" class="headerlink" title="总结：过滤器中创建Subject的过程"></a>总结：过滤器中创建Subject的过程</h5><h5 id="SubjectContext、MapContext、Map"><a href="#SubjectContext、MapContext、Map" class="headerlink" title="SubjectContext、MapContext、Map"></a>SubjectContext、MapContext、Map</h5><p>接口设计:</p>
+</code></pre><p>subject 创建出来之后，暂且叫内部subject，就是<strong>把认证通过的内部subject的信息和session复制给我们外界使用的subject.login(token)的subject中（principals、host、authenticated、Session）</strong>，这个subject暂且叫外部subject，看下session的赋值，又进行了一次装饰，这次装饰则把session(类型为StoppingAwareProxiedSession，<strong>即是内部subject和session的合体)和外部subject绑定到一起</strong></p>
+<h5 id="从Cookie、URL、request中根据Token获取Session"><a href="#从Cookie、URL、request中根据Token获取Session" class="headerlink" title="从Cookie、URL、request中根据Token获取Session"></a>从Cookie、URL、request中根据Token获取Session</h5><p>1、客户端请求到来，调用AbstractShiroFilter中的doFilterInternal方法，创建Subject</p>
+<pre><code>final Subject subject = createSubject(request, response);
+</code></pre><p>2、调用WebSubject.Builder().buildWebSubject方法</p>
+<pre><code>protected WebSubject createSubject(ServletRequest request, ServletResponse response) {
+    return new WebSubject.Builder(getSecurityManager(), request, response).buildWebSubject();
+}
+</code></pre><p>3、创建WebSubject与默认的Subject稍微有差别，但还是调用父类（即Subject接口的Builder中的BuildSubject方法）</p>
+<pre><code>public WebSubject buildWebSubject() {
+        Subject subject = super.buildSubject();
+        if (!(subject instanceof WebSubject)) {
+            String msg = &quot;Subject implementation returned from the SecurityManager was not a &quot; +
+                    WebSubject.class.getName() + &quot; implementation.  Please ensure a Web-enabled SecurityManager &quot; +
+                    &quot;has been configured and made available to this builder.&quot;;
+            throw new IllegalStateException(msg);
+        }
+        return (WebSubject) subject;
+    }
+</code></pre><p>4、父类的buildSubject方法，将创建Subject的方法委托为SecurityManager</p>
+<pre><code>public Subject buildSubject() {
+    return this.securityManager.createSubject(this.subjectContext);
+}
+</code></pre><p>5、DefaultSecurityManager的createSubject</p>
+<pre><code>public Subject createSubject(SubjectContext subjectContext) {
+    SubjectContext context = copy(subjectContext);
+    context = ensureSecurityManager(context);
+    context = resolveSession(context);
+    context = resolvePrincipals(context);
+    Subject subject = doCreateSubject(context);
+    save(subject);
+    return subject;
+}
+</code></pre><p>6、resolveSession(context)解析Session，context.resolveSession()返回的是null，调用Session session = resolveContextSession(context)尝试获取Session</p>
+<pre><code>protected SubjectContext resolveSession(SubjectContext context) {
+    //①
+    if (context.resolveSession() != null) {
+        log.debug(&quot;Context already contains a session.  Returning.&quot;);
+        return context;
+    }
+    try {
+        //Context couldn&apos;t resolve it directly, let&apos;s see if we can since we have direct access to 
+        //the session manager:
+        //②
+        Session session = resolveContextSession(context);
+        if (session != null) {
+            context.setSession(session);
+        }
+    } catch (InvalidSessionException e) {
+        log.debug(&quot;Resolved SubjectContext context session is invalid.  Ignoring and creating an anonymous &quot; +
+                &quot;(session-less) Subject instance.&quot;, e);
+    }
+    return context;
+}
+</code></pre><p>7、具体看resolveContextSession，调用getSessionKey(context)</p>
+<pre><code>protected Session resolveContextSession(SubjectContext context) throws InvalidSessionException {
+    SessionKey key = getSessionKey(context);
+    if (key != null) {
+        return getSession(key);
+    }
+    return null;
+}
+</code></pre><p>8、DefaultWebSecurityManager重写getSessionKey(SubjectContext context)方法</p>
+<pre><code>protected SessionKey getSessionKey(SubjectContext context) {
+    if (WebUtils.isWeb(context)) {
+        Serializable sessionId = context.getSessionId();
+        ServletRequest request = WebUtils.getRequest(context);
+        ServletResponse response = WebUtils.getResponse(context);
+        return new WebSessionKey(sessionId, request, response);
+    } else {
+        return super.getSessionKey(context);
+
+    }
+}
+</code></pre><p>返回WebSessionKey实例，但WebSessionKey中的sessionId为null</p>
+<p>9、回到第7步SessionKey key = getSessionKey(context)，此时key不为空，调用SessionSecurityManager的getSession方法（接口方法）</p>
+<pre><code>public Session getSession(SessionKey key) throws SessionException {
+    return this.sessionManager.getSession(key);
+}
+</code></pre><p>10、调用AbstractNativeSessionManager中的getSession</p>
+<pre><code>public Session getSession(SessionKey key) throws SessionException {
+    Session session = lookupSession(key);
+    return session != null ? createExposedSession(session, key) : null;
+}
+</code></pre><p>11、进入到lookupSession</p>
+<pre><code>private Session lookupSession(SessionKey key) throws SessionException {
+    if (key == null) {
+        throw new NullPointerException(&quot;SessionKey argument cannot be null.&quot;);
+    }
+    return doGetSession(key);
+}
+</code></pre><p>12、doGetSession被子类AbstractValidatingSessionManager重写</p>
+<pre><code>protected final Session doGetSession(final SessionKey key) throws InvalidSessionException {
+    enableSessionValidationIfNecessary();
+
+    log.trace(&quot;Attempting to retrieve session with key {}&quot;, key);
+
+    Session s = retrieveSession(key);
+    if (s != null) {
+        validate(s, key);
+    }
+    return s;
+}
+</code></pre><p>13、retrieveSession也是个抽象方法，被子类DefaultSessionManager重写，</p>
+<pre><code>protected Session retrieveSession(SessionKey sessionKey) throws UnknownSessionException {
+    Serializable sessionId = getSessionId(sessionKey);
+    if (sessionId == null) {
+        log.debug(&quot;Unable to resolve session ID from SessionKey [{}].  Returning null to indicate a &quot; +
+                &quot;session could not be found.&quot;, sessionKey);
+        return null;
+    }
+    Session s = retrieveSessionFromDataSource(sessionId);
+    if (s == null) {
+        //session ID was provided, meaning one is expected to be found, but we couldn&apos;t find one:
+        String msg = &quot;Could not find session with ID [&quot; + sessionId + &quot;]&quot;;
+        throw new UnknownSessionException(msg);
+    }
+    return s;
+}
+</code></pre><p>14、getSessionId被子类DefaultWebSessionManager重写</p>
+<pre><code>public Serializable getSessionId(SessionKey key) {
+    Serializable id = super.getSessionId(key);
+    if (id == null &amp;&amp; WebUtils.isWeb(key)) {
+        ServletRequest request = WebUtils.getRequest(key);
+        ServletResponse response = WebUtils.getResponse(key);
+        id = getSessionId(request, response);
+    }
+    return id;
+}
+</code></pre><p>由于父类的getSessionId返回null，执行getSessionId(request,response)</p>
+<pre><code>protected Serializable getSessionId(SessionKey sessionKey) {
+    return sessionKey.getSessionId();
+}
+</code></pre><p>15、DefaultWebSessionManager的getSessionId</p>
+<pre><code>protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+    return getReferencedSessionId(request, response);
+}
+</code></pre><p>16、★★★★★★★getReferencedSessionId先解析cookie，在解析URL，最后解析</p>
+<pre><code>private Serializable getReferencedSessionId(ServletRequest request, ServletResponse response) {
+
+    String id = getSessionIdCookieValue(request, response);
+    if (id != null) {
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE,
+                ShiroHttpServletRequest.COOKIE_SESSION_ID_SOURCE);
+    } else {
+        //not in a cookie, or cookie is disabled - try the request URI as a fallback (i.e. due to URL rewriting):
+
+        //try the URI path segment parameters first:
+        id = getUriPathSegmentParamValue(request, ShiroHttpSession.DEFAULT_SESSION_ID_NAME);
+
+        if (id == null) {
+            //not a URI path segment parameter, try the query parameters:
+            String name = getSessionIdName();
+            id = request.getParameter(name);
+            if (id == null) {
+                //try lowercase:
+                id = request.getParameter(name.toLowerCase());
+            }
+        }
+        if (id != null) {
+            request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE,
+                    ShiroHttpServletRequest.URL_SESSION_ID_SOURCE);
+        }
+    }
+    if (id != null) {
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, id);
+        //automatically mark it valid here.  If it is invalid, the
+        //onUnknownSession method below will be invoked and we&apos;ll remove the attribute at that time.
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+    }
+
+    // always set rewrite flag - SHIRO-361
+    request.setAttribute(ShiroHttpServletRequest.SESSION_ID_URL_REWRITING_ENABLED, isSessionIdUrlRewritingEnabled());
+
+    return id;
+}
+</code></pre><h5 id="SubjectContext、MapContext、Map"><a href="#SubjectContext、MapContext、Map" class="headerlink" title="SubjectContext、MapContext、Map"></a>SubjectContext、MapContext、Map</h5><p>接口设计:</p>
 <p><img src="http://i.imgur.com/5BjziW0.png" alt=""></p>
 <p><strong>MapContext</strong>：实现了Map接口，<strong>内部拥有一个类型为HashMap的backingMap属性，大部分方法都由HashMap来实现，然后仅仅更改某些行为</strong>，<strong>MapContext没有选择去继承HashMap，而是使用了组合的方式，更加容易去扩展</strong>，如backingMap的类型不一定非要选择HashMap，可以换成其他的Map实现，一旦MapContext选择继承HashMap，如果想对其他的Map类型进行同样的功能增强的话，就需要另写一个类来继承它然后改变一些方法实现，这样的话就会有很多重复代码。这也是设计模式所强调的少用继承多用组合</p>
 <pre><code>public class MapContext implements Map&lt;String, Object&gt;, Serializable {
@@ -3001,7 +3175,7 @@ user_id    +  role_id
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析★★★★★★"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析★★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化★★★★★"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话存储/持久化★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.4.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话验证"><span class="nav-number">5.8.5.</span> <span class="nav-text">会话验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session源代码"><span class="nav-number">5.8.6.</span> <span class="nav-text">Session源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionFactory源码分析"><span class="nav-number">5.8.7.</span> <span class="nav-text">SessionFactory源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionDAO"><span class="nav-number">5.8.8.</span> <span class="nav-text">SessionDAO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionManager源代码解析"><span class="nav-number">5.8.9.</span> <span class="nav-text">SessionManager源代码解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadContext、SubjectContext（类似）"><span class="nav-number">5.8.10.</span> <span class="nav-text">ThreadContext、SubjectContext（类似）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ThreadContext（类似于数据库，共享Subject、SecurityManager）"><span class="nav-number">5.8.10.1.</span> <span class="nav-text">ThreadContext（类似于数据库，共享Subject、SecurityManager）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectContext"><span class="nav-number">5.8.10.2.</span> <span class="nav-text">SubjectContext</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject-getSession-boolean-create"><span class="nav-number">5.8.11.</span> <span class="nav-text">Subject.getSession(boolean create)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SecurityUtils创建Subject"><span class="nav-number">5.8.12.</span> <span class="nav-text">SecurityUtils创建Subject</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#★★★★★在DefaultSecurityManager的createSubject"><span class="nav-number">5.8.12.1.</span> <span class="nav-text">★★★★★在DefaultSecurityManager的createSubject</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject-login-token"><span class="nav-number">5.8.13.</span> <span class="nav-text">Subject.login(token)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#总结：过滤器中创建Subject的过程"><span class="nav-number">5.8.13.1.</span> <span class="nav-text">总结：过滤器中创建Subject的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectContext、MapContext、Map"><span class="nav-number">5.8.13.2.</span> <span class="nav-text">SubjectContext、MapContext、Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectFactory"><span class="nav-number">5.8.13.3.</span> <span class="nav-text">SubjectFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Subject"><span class="nav-number">5.8.13.4.</span> <span class="nav-text">Subject</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（Terminology）"><span class="nav-number">1.</span> <span class="nav-text">术语（Terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro快速入门（j2se）"><span class="nav-number">3.</span> <span class="nav-text">Shiro快速入门（j2se）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro-API"><span class="nav-number">3.1.</span> <span class="nav-text">Shiro API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shiro-ini"><span class="nav-number">3.2.</span> <span class="nav-text">shiro.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web应用程序整合"><span class="nav-number">4.</span> <span class="nav-text">Web应用程序整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开启Shiro环境"><span class="nav-number">4.1.</span> <span class="nav-text">开启Shiro环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加-shiro-ini-文件"><span class="nav-number">4.1.1.</span> <span class="nav-text">添加 shiro.ini 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在web-xml文件中支持Shiro"><span class="nav-number">4.1.2.</span> <span class="nav-text">在web.xml文件中支持Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行webapp"><span class="nav-number">4.1.3.</span> <span class="nav-text">运行webapp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到用户仓库"><span class="nav-number">4.2.</span> <span class="nav-text">连接到用户仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Realm"><span class="nav-number">4.2.1.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ini"><span class="nav-number">4.2.2.</span> <span class="nav-text">ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shiro登录-退出与访问控制"><span class="nav-number">4.3.</span> <span class="nav-text">Shiro登录/退出与访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ini文件，添加访问控制"><span class="nav-number">4.3.1.</span> <span class="nav-text">ini文件，添加访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录页面"><span class="nav-number">4.3.2.</span> <span class="nav-text">登录页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录验证页面"><span class="nav-number">4.3.3.</span> <span class="nav-text">登录验证页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的权限控制★★★★★"><span class="nav-number">4.4.</span> <span class="nav-text">基于角色的权限控制★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro细节"><span class="nav-number">5.</span> <span class="nav-text">Shiro细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">5.1.</span> <span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#认证身份流程"><span class="nav-number">5.1.1.</span> <span class="nav-text">认证身份流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义realm"><span class="nav-number">5.1.2.</span> <span class="nav-text">自定义realm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多-Realm-配置"><span class="nav-number">5.1.3.</span> <span class="nav-text">多 Realm 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro-默认提供的-Realm及开发建议★★★★★"><span class="nav-number">5.1.4.</span> <span class="nav-text">Shiro 默认提供的 Realm及开发建议★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authenticator接口及其子类源码分析★★★★★★"><span class="nav-number">5.1.5.</span> <span class="nav-text">Authenticator接口及其子类源码分析★★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-number">5.2.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#角色"><span class="nav-number">5.2.1.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于角色的访问控制（隐式角色）"><span class="nav-number">5.2.2.</span> <span class="nav-text">基于角色的访问控制（隐式角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于资源的访问控制（显示角色）"><span class="nav-number">5.2.3.</span> <span class="nav-text">基于资源的访问控制（显示角色）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限"><span class="nav-number">5.2.4.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权流程"><span class="nav-number">5.2.5.</span> <span class="nav-text">授权流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#授权源码分析★★★★★"><span class="nav-number">5.2.6.</span> <span class="nav-text">授权源码分析★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Realm及相关对象★★★★★"><span class="nav-number">5.3.</span> <span class="nav-text">Realm及相关对象★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户、角色、权限的关系"><span class="nav-number">5.3.1.</span> <span class="nav-text">用户、角色、权限的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm接口及其子类源码分析"><span class="nav-number">5.3.2.</span> <span class="nav-text">realm接口及其子类源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#realm相关对象"><span class="nav-number">5.3.3.</span> <span class="nav-text">realm相关对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SecurityManager源码分析★★★★★"><span class="nav-number">5.4.</span> <span class="nav-text">SecurityManager源码分析★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密"><span class="nav-number">5.5.</span> <span class="nav-text">加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web集成"><span class="nav-number">5.6.</span> <span class="nav-text">Web集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ShiroFilter入口"><span class="nav-number">5.6.1.</span> <span class="nav-text">ShiroFilter入口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL匹配"><span class="nav-number">5.6.2.</span> <span class="nav-text">URL匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拦截器机制"><span class="nav-number">5.7.</span> <span class="nav-text">拦截器机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析"><span class="nav-number">5.7.1.</span> <span class="nav-text">Shiro拦截器源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Shiro拦截器源码分析总结"><span class="nav-number">5.7.2.</span> <span class="nav-text">Shiro拦截器源码分析总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链"><span class="nav-number">5.7.3.</span> <span class="nav-text">拦截器链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器链总结"><span class="nav-number">5.7.4.</span> <span class="nav-text">拦截器链总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认拦截器"><span class="nav-number">5.7.5.</span> <span class="nav-text">默认拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己提出的问题★★★★★"><span class="nav-number">5.7.6.</span> <span class="nav-text">自己提出的问题★★★★★</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">5.8.</span> <span class="nav-text">会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#会话"><span class="nav-number">5.8.1.</span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话存储-持久化★★★★★"><span class="nav-number">5.8.2.</span> <span class="nav-text">会话存储/持久化★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理器"><span class="nav-number">5.8.3.</span> <span class="nav-text">会话管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话监听器"><span class="nav-number">5.8.4.</span> <span class="nav-text">会话监听器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话验证"><span class="nav-number">5.8.5.</span> <span class="nav-text">会话验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session源代码"><span class="nav-number">5.8.6.</span> <span class="nav-text">Session源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionFactory源码分析"><span class="nav-number">5.8.7.</span> <span class="nav-text">SessionFactory源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionDAO"><span class="nav-number">5.8.8.</span> <span class="nav-text">SessionDAO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SessionManager源代码解析"><span class="nav-number">5.8.9.</span> <span class="nav-text">SessionManager源代码解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadContext、SubjectContext（类似）"><span class="nav-number">5.8.10.</span> <span class="nav-text">ThreadContext、SubjectContext（类似）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ThreadContext（类似于数据库，共享Subject、SecurityManager）"><span class="nav-number">5.8.10.1.</span> <span class="nav-text">ThreadContext（类似于数据库，共享Subject、SecurityManager）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectContext"><span class="nav-number">5.8.10.2.</span> <span class="nav-text">SubjectContext</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject-getSession-boolean-create"><span class="nav-number">5.8.11.</span> <span class="nav-text">Subject.getSession(boolean create)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SecurityUtils创建Subject"><span class="nav-number">5.8.12.</span> <span class="nav-text">SecurityUtils创建Subject</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#★★★★★在DefaultSecurityManager的createSubject"><span class="nav-number">5.8.12.1.</span> <span class="nav-text">★★★★★在DefaultSecurityManager的createSubject</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Subject-login-token"><span class="nav-number">5.8.13.</span> <span class="nav-text">Subject.login(token)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#从Cookie、URL、request中根据Token获取Session"><span class="nav-number">5.8.13.1.</span> <span class="nav-text">从Cookie、URL、request中根据Token获取Session</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectContext、MapContext、Map"><span class="nav-number">5.8.13.2.</span> <span class="nav-text">SubjectContext、MapContext、Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SubjectFactory"><span class="nav-number">5.8.13.3.</span> <span class="nav-text">SubjectFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Subject"><span class="nav-number">5.8.13.4.</span> <span class="nav-text">Subject</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存机制"><span class="nav-number">5.9.</span> <span class="nav-text">缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">5.9.1.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限-1"><span class="nav-number">7.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#权限概述"><span class="nav-number">7.1.</span> <span class="nav-text">权限概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库设计"><span class="nav-number">7.2.</span> <span class="nav-text">数据库设计</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
