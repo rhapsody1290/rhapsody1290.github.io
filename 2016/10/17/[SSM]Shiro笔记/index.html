@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://i.imgur.com/i1mAQCJ.png">
 <meta property="og:image" content="http://i.imgur.com/Tdbme0T.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-29T01:31:15.981Z">
+<meta property="og:updated_time" content="2016-11-29T01:33:14.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -2892,7 +2892,7 @@ SecurityManager resolveSecurityManager();
     return new DelegatingSubject(principals, authenticated, host, session, sessionCreationEnabled, securityManager);
 }
 </code></pre><h4 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h4><p><img src="http://i.imgur.com/Tdbme0T.png" alt=""></p>
-<h4 id="★★★会话管理总结"><a href="#★★★会话管理总结" class="headerlink" title="★★★会话管理总结"></a>★★★会话管理总结</h4><p>1、服务器刚启动时，创建Subject，其Principal、Session为空<br>2、用户登录，调用Subject.login获取用户信息，创建Session，在Session中存入Principal信息，更新Subject中的Session、Principal<br>3、下次用户携带Token登录，恢复Session，取出Principal，建立带带状态信息的Subject</p>
+<h4 id="★★★会话管理总结"><a href="#★★★会话管理总结" class="headerlink" title="★★★会话管理总结"></a>★★★会话管理总结</h4><p>1、服务器刚启动时，创建Subject，其Principal、Session为空<br>2、用户登录，调用Subject.login获取用户信息，创建Session，在Session中存入Principal信息，更新Subject中的Session、Principal<br>3、下次用户携带Token登录，恢复Session，取出Principal，建立带状态信息的Subject</p>
 <h3 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>导入依赖</p>
 <pre><code>&lt;!--shiro与ehcache整合--&gt;
 &lt;dependency&gt;
