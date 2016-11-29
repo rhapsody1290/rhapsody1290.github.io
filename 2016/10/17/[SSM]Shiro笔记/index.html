@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://i.imgur.com/i1mAQCJ.png">
 <meta property="og:image" content="http://i.imgur.com/Tdbme0T.png">
 <meta property="og:image" content="http://i.imgur.com/O5fa7S2.png">
-<meta property="og:updated_time" content="2016-11-29T00:42:52.454Z">
+<meta property="og:updated_time" content="2016-11-29T01:18:25.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiro笔记">
 <meta name="twitter:description" content="术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、用户ID、安全码……Credential（证书）：验证主体身份的信息Cryptography（密码学">
@@ -2117,7 +2117,7 @@ public static Subject getSubject() {
         return new StoppingAwareProxiedSession(session, this);
     }
 }
-</code></pre><p>装饰Session就是将Session和DelegatingSubject封装起来，返回的Session包含Subject和Session的实例</p>
+</code></pre><p>装饰Session就是将Session和DelegatingSubject封装起来，返回的Session包含Subject和Session的实例，其中owner表示拥有该Session的Subject，delegate为代理的Session，类型为DelegatingSession</p>
 <pre><code>private class StoppingAwareProxiedSession extends ProxiedSession {
     private final DelegatingSubject owner;
 
