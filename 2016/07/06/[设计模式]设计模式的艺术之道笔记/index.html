@@ -84,28 +84,33 @@
 
 
 
-<meta name="description" content="第8章：复杂对象的组装与创建——建造者模式建造者模式是为了解决这类问题：如何一步一步地创建一个包含多个组个组成部分的复杂对象
+<meta name="description" content="XMLUtil//工具类XMLUtil.java  
+import javax.xml.parsers.*;  
+import org.w3c.dom.*;  
+import org.xml.sax.SAXException;  
+import java.io.*;  
 
-建造者模式将包含多个组成部分的复杂对象的创建过程分离
-不同具体的建造者定义了不同的创建过程
-建造新的建造者非常方便，无需修改已有代码，系统具有较好的扩展性
-
-有Director的建造者模式Director类有两个作用：
-
-隔离了客户与创建过程，客户只要与Director类">
+public class XMLUtil {  
+//该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式的艺术之道笔记">
 <meta property="og:url" content="http://yoursite.com/2016/07/06/[设计模式]设计模式的艺术之道笔记/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="第8章：复杂对象的组装与创建——建造者模式建造者模式是为了解决这类问题：如何一步一步地创建一个包含多个组个组成部分的复杂对象
+<meta property="og:description" content="XMLUtil//工具类XMLUtil.java  
+import javax.xml.parsers.*;  
+import org.w3c.dom.*;  
+import org.xml.sax.SAXException;  
+import java.io.*;  
 
-建造者模式将包含多个组成部分的复杂对象的创建过程分离
-不同具体的建造者定义了不同的创建过程
-建造新的建造者非常方便，无需修改已有代码，系统具有较好的扩展性
-
-有Director的建造者模式Director类有两个作用：
-
-隔离了客户与创建过程，客户只要与Director类">
+public class XMLUtil {  
+//该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象">
+<meta property="og:image" content="http://i.imgur.com/EGuKZbM.png">
+<meta property="og:image" content="http://i.imgur.com/Mw6iOgv.png">
+<meta property="og:image" content="http://i.imgur.com/eJUCJtW.png">
+<meta property="og:image" content="http://i.imgur.com/22oEW71.jpg">
+<meta property="og:image" content="http://i.imgur.com/CbRwljs.jpg">
+<meta property="og:image" content="http://i.imgur.com/03wHvRx.jpg">
+<meta property="og:image" content="http://i.imgur.com/Z9Nc3VN.jpg">
 <meta property="og:image" content="http://i.imgur.com/mNnbWcu.png">
 <meta property="og:image" content="http://i.imgur.com/nGDvXzt.png">
 <meta property="og:image" content="http://i.imgur.com/whQUxwW.png">
@@ -114,19 +119,20 @@
 <meta property="og:image" content="http://i.imgur.com/c6WHHLA.png">
 <meta property="og:image" content="http://i.imgur.com/Czffk8B.png">
 <meta property="og:image" content="http://i.imgur.com/F5VGhOh.png">
-<meta property="og:updated_time" content="2016-11-25T07:22:38.835Z">
+<meta property="og:image" content="http://i.imgur.com/hfZUs1B.jpg">
+<meta property="og:image" content="http://i.imgur.com/D8P7zwo.jpg">
+<meta property="og:updated_time" content="2016-12-05T06:21:27.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式的艺术之道笔记">
-<meta name="twitter:description" content="第8章：复杂对象的组装与创建——建造者模式建造者模式是为了解决这类问题：如何一步一步地创建一个包含多个组个组成部分的复杂对象
+<meta name="twitter:description" content="XMLUtil//工具类XMLUtil.java  
+import javax.xml.parsers.*;  
+import org.w3c.dom.*;  
+import org.xml.sax.SAXException;  
+import java.io.*;  
 
-建造者模式将包含多个组成部分的复杂对象的创建过程分离
-不同具体的建造者定义了不同的创建过程
-建造新的建造者非常方便，无需修改已有代码，系统具有较好的扩展性
-
-有Director的建造者模式Director类有两个作用：
-
-隔离了客户与创建过程，客户只要与Director类">
-<meta name="twitter:image" content="http://i.imgur.com/mNnbWcu.png">
+public class XMLUtil {  
+//该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象">
+<meta name="twitter:image" content="http://i.imgur.com/EGuKZbM.png">
 
 
 
@@ -369,7 +375,189 @@
       
 
       
-        <h2 id="第8章：复杂对象的组装与创建——建造者模式"><a href="#第8章：复杂对象的组装与创建——建造者模式" class="headerlink" title="第8章：复杂对象的组装与创建——建造者模式"></a>第8章：复杂对象的组装与创建——建造者模式</h2><p>建造者模式是为了解决这类问题：<strong>如何一步一步地创建一个包含多个组个组成部分的复杂对象</strong></p>
+        <h2 id="XMLUtil"><a href="#XMLUtil" class="headerlink" title="XMLUtil"></a>XMLUtil</h2><pre><code>//工具类XMLUtil.java  
+import javax.xml.parsers.*;  
+import org.w3c.dom.*;  
+import org.xml.sax.SAXException;  
+import java.io.*;  
+
+public class XMLUtil {  
+//该方法用于从XML配置文件中提取具体类类名，并返回一个实例对象  
+    public static Object getBean() {  
+        try {  
+            //创建DOM文档对象  
+            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();  
+            DocumentBuilder builder = dFactory.newDocumentBuilder();  
+            Document doc;                             
+            doc = builder.parse(new File(&quot;config.xml&quot;));   
+
+            //获取包含类名的文本节点  
+            NodeList nl = doc.getElementsByTagName(&quot;className&quot;);  
+            Node classNode=nl.item(0).getFirstChild();  
+            String cName=classNode.getNodeValue();  
+
+            //通过类名生成实例对象并将其返回  
+            Class c=Class.forName(cName);  
+            Object obj=c.newInstance();  
+            return obj;  
+        }     
+        catch(Exception e) {  
+            e.printStackTrace();  
+            return null;  
+         }  
+    }  
+} 
+</code></pre><p>文件</p>
+<pre><code>&lt;!— config.xml --&gt;  
+&lt;?xml version=&quot;1.0&quot;?&gt;  
+&lt;config&gt;  
+    &lt;className&gt;FileLoggerFactory&lt;/className&gt;  
+&lt;/config&gt;  
+</code></pre><h2 id="第4章：集中式工厂的实现——简单工厂模式"><a href="#第4章：集中式工厂的实现——简单工厂模式" class="headerlink" title="第4章：集中式工厂的实现——简单工厂模式"></a>第4章：集中式工厂的实现——简单工厂模式</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p>1、定义抽象产品类，将产品 <strong>公共的代码</strong> 移至抽象产品类，并在抽象产品类中声明一些 <strong>抽象方法</strong>，供不同的具体产品类来实现<br>2、具体产品类继承抽象产品类，实现抽象类中抽象方法<br>3、工厂类提供一个创建产品的工厂方法，根据传入参数不同创建不同具体产品的对象</p>
+<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><p><img src="http://i.imgur.com/EGuKZbM.png" alt=""></p>
+<p>抽象产品类</p>
+<pre><code>abstract class Product {  
+    //所有产品类的公共业务方法  
+    public void methodSame() {  
+        //公共方法的实现  
+    }  
+
+    //声明抽象业务方法  
+    public abstract void methodDiff();  
+}  
+</code></pre><p>具体产品类</p>
+<pre><code>class ConcreteProduct extends Product {  
+    //实现业务方法  
+    public void methodDiff() {  
+        //业务方法的实现  
+    }  
+} 
+</code></pre><p>工厂类</p>
+<pre><code>class Factory {  
+    //静态工厂方法  
+    public static Product getProduct(String arg) {  
+        Product product = null;  
+        if (arg.equalsIgnoreCase(&quot;A&quot;)) {  
+            product = new ConcreteProductA();  
+            //初始化设置product  
+        }  
+        else if (arg.equalsIgnoreCase(&quot;B&quot;)) {  
+            product = new ConcreteProductB();  
+            //初始化设置product  
+        }  
+        return product;  
+    }  
+}  
+</code></pre><h3 id="简单工厂模式的简化"><a href="#简单工厂模式的简化" class="headerlink" title="简单工厂模式的简化"></a>简单工厂模式的简化</h3><p><img src="http://i.imgur.com/Mw6iOgv.png" alt=""></p>
+<p>将抽象产品类和工厂类合并，将静态工厂方法移至抽象产品类中</p>
+<h3 id="创建对象与使用对象"><a href="#创建对象与使用对象" class="headerlink" title="创建对象与使用对象"></a>创建对象与使用对象</h3><p>与一个对象相关的职责通常有3类：对象本身所具有的职责、创建对象的职责、使用对象的职责</p>
+<p>在Java语言中，通常有以下几种创建对象的方式：</p>
+<p>1、使用new关键字直接创建对象<br>2、通过反射机制创建对象<br>3、通过clone方法创建对象<br>4、通过工厂类创建对象</p>
+<h2 id="第5章：多态工厂的实现——工厂方法模式"><a href="#第5章：多态工厂的实现——工厂方法模式" class="headerlink" title="第5章：多态工厂的实现——工厂方法模式"></a>第5章：多态工厂的实现——工厂方法模式</h2><p>简单工厂虽然简单，但存在一个很严重的问题，当系统中需要引入新产品时，由于静态工厂方法 <strong>通过传入参数的不同来创建不同的产品</strong>，这必定要修改工厂类的源代码，<strong>违背开闭原则</strong></p>
+<p>在工厂方法模式中，不再提供一个统一的工厂类来创建所有的产品对象，而是针对不同的产品提供不同的工厂</p>
+<h3 id="工厂方法模式结构图"><a href="#工厂方法模式结构图" class="headerlink" title="工厂方法模式结构图"></a>工厂方法模式结构图</h3><p><img src="http://i.imgur.com/eJUCJtW.png" alt=""></p>
+<ul>
+<li>具体产品实现抽象产品接口，具体产品和具体工厂之间一一对应</li>
+<li>与简单工厂模式相比，工厂方式模式组重要的区别是引入了抽象工厂角色，在抽象工厂中声明工厂方法，由具体工厂类实现</li>
+<li>客户端针对抽象工厂编程，在运行时再指定具体工厂类，<strong>不同的具体工厂可以创建不同的具体产品</strong></li>
+<li>具体工厂类在实现工厂方法时除了创建具体产品对象之外，还可以 <strong>负责产品对象的初始化工作以及一些资源和环境配置工作</strong>，例如连接数据库、创建文件等。</li>
+</ul>
+<h3 id="使用工厂方法模式设计的日志记录器"><a href="#使用工厂方法模式设计的日志记录器" class="headerlink" title="使用工厂方法模式设计的日志记录器"></a>使用工厂方法模式设计的日志记录器</h3><p><img src="http://i.imgur.com/22oEW71.jpg" alt=""></p>
+<p>抽象产品：</p>
+<pre><code>//日志记录器接口：抽象产品
+interface Logger {
+    public void writeLog();
+}
+</code></pre><p>具体产品：</p>
+<pre><code>//数据库日志记录器：具体产品
+class DatabaseLogger implements Logger {
+    public void writeLog() {
+        System.out.println(&quot;数据库日志记录。&quot;);
+    }
+}
+
+//文件日志记录器：具体产品
+class FileLogger implements Logger {
+    public void writeLog() {
+        System.out.println(&quot;文件日志记录。&quot;);
+    }
+}
+</code></pre><p>抽象工厂：</p>
+<pre><code>//日志记录器工厂接口：抽象工厂
+interface LoggerFactory {
+    public Logger createLogger();
+}
+</code></pre><p>具体工厂：</p>
+<pre><code>//数据库日志记录器工厂类：具体工厂
+class DatabaseLoggerFactory implements LoggerFactory {
+    public Logger createLogger() {
+            //连接数据库，代码省略
+            //创建数据库日志记录器对象
+            Logger logger = new DatabaseLogger(); 
+            //初始化数据库日志记录器，代码省略
+            return logger;
+    }    
+}
+
+//文件日志记录器工厂类：具体工厂
+class FileLoggerFactory implements LoggerFactory {
+    public Logger createLogger() {
+            //创建文件日志记录器对象
+            Logger logger = new FileLogger(); 
+            //创建文件，代码省略
+            return logger;
+    }    
+}
+</code></pre><p>客户端测试:</p>
+<pre><code>class Client {  
+    public static void main(String args[]) {  
+        LoggerFactory factory;  
+        Logger logger;  
+        factory = new FileLoggerFactory(); //可引入配置文件实现  
+        logger = factory.createLogger();  
+        logger.writeLog();  
+    }  
+}  
+</code></pre><h2 id="第6章：产品族的创建——抽象工厂模式"><a href="#第6章：产品族的创建——抽象工厂模式" class="headerlink" title="第6章：产品族的创建——抽象工厂模式"></a>第6章：产品族的创建——抽象工厂模式</h2><p>工厂方法模式中每个工厂只生产一类产品，<strong>可能会导致系统中存在大量的工厂类</strong>，势必会增加系统的开销，此时可以考虑将<strong>一些相关的产品组成一个”产品族”</strong>，由同一个工厂统一生产（抽象工厂中声明多个工厂方法，用于创建不同类型的产品，这些产品构成了一个产品族）</p>
+<h3 id="产品等级结构与产品族"><a href="#产品等级结构与产品族" class="headerlink" title="产品等级结构与产品族"></a>产品等级结构与产品族</h3><p>(1) 产品等级结构：<strong>产品等级结构即产品的继承结构</strong>，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，则 <strong>抽象电视机与具体品牌的电视机之间构成了一个产品等级结构</strong>，抽象电视机是父类，而具体品牌的电视机是其子类。</p>
+<p>(2) 产品族：在抽象工厂模式中，产品族是指由<strong>同一个工厂生产的，位于不同产品等级结构中的一组产品</strong>，如 <strong>海尔电器工厂生产的海尔电视机、海尔电冰箱，海尔电视机</strong> 位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中，海尔电视机、海尔电冰箱构成了一个产品族。</p>
+<p><img src="http://i.imgur.com/CbRwljs.jpg" alt=""></p>
+<p>不同颜色的多个正方形、圆形和椭圆形分别构成了三个不同的产品等级结构，而相同颜色的正方形、圆形和椭圆形构成了一个产品族，每一个形状对象都位于某个产品族，并属于某个产品等级结构</p>
+<h3 id="抽象工厂模式结构图"><a href="#抽象工厂模式结构图" class="headerlink" title="抽象工厂模式结构图"></a>抽象工厂模式结构图</h3><p><img src="http://i.imgur.com/03wHvRx.jpg" alt=""></p>
+<p>在抽象工厂模式中，每一个具体的工厂都提供了 <strong>多个工厂方法</strong> 用于产生多种不同类型的产品，<strong>这些产品构成了一个产品族</strong></p>
+<p>抽象工厂的典型代码如下：</p>
+<pre><code>abstract class AbstractFactory {  
+    public abstract AbstractProductA createProductA(); //工厂方法一  
+    public abstract AbstractProductB createProductB(); //工厂方法二  
+    ……  
+}
+</code></pre><p>具体工厂实现了抽象工厂，每一个具体的工厂方法可以返回一个特定的产品对象，而同一个具体工厂创建的产品对象构成了一个产品族：</p>
+<pre><code>class ConcreteFactory1 extends AbstractFactory {  
+    //工厂方法一  
+    public AbstractProductA createProductA() {  
+        return new ConcreteProductA1();  
+    }  
+
+    //工厂方法二  
+    public AbstractProductB createProductB() {  
+        return new ConcreteProductB1();  
+    }  
+
+    ……  
+}  
+</code></pre><h3 id="完整解决方案"><a href="#完整解决方案" class="headerlink" title="完整解决方案"></a>完整解决方案</h3><p>使用抽象工厂模式来重构界面皮肤库的设计，<em>要求同一风格的具体界面组件要一起显示</em>，其基本结构如图所示：</p>
+<p><img src="http://i.imgur.com/Z9Nc3VN.jpg" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>优点：</p>
+<ul>
+<li>能够保证客户端始终使用只使用同一个产品族中的产品</li>
+<li><strong>增加新的产品族很方便</strong>，无需修改已有系统</li>
+</ul>
+<p>缺点：</p>
+<p><strong>增加新的等级结构麻烦</strong>，需要对原有系统进行较大的修改，甚至需要修改抽象层的代码</p>
+<p>使用场景：</p>
+<p><strong>属于同一产品族的产品要在一起使用，这一约束必须在系统的设计中体现出来</strong>，例如：</p>
+<p>1、同一操作系统下的按钮和文本，按钮和文本没有直接关系，但他们都属于某一操作系统，此时具有一个 <strong>约束条件</strong> 就是：同一个操作系统</p>
+<h2 id="第8章：复杂对象的组装与创建——建造者模式"><a href="#第8章：复杂对象的组装与创建——建造者模式" class="headerlink" title="第8章：复杂对象的组装与创建——建造者模式"></a>第8章：复杂对象的组装与创建——建造者模式</h2><p>建造者模式是为了解决这类问题：<strong>如何一步一步地创建一个包含多个组个组成部分的复杂对象</strong></p>
 <ul>
 <li>建造者模式将包含多个组成部分的复杂对象的创建过程分离</li>
 <li><strong>不同具体的建造者定义了不同的创建过程</strong></li>
@@ -505,7 +693,7 @@ public class AngelActorBuilder extends AbstractActorBuilder{
 <li>代码库中有已经实现类似该接口的功能，但接口不一致（请求参数、方法名不同），为了开发效率决定重用代码库中的类</li>
 <li>引入一个适配器类，通过适配器类来调用代码库中的接口</li>
 </ul>
-<h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><ul>
+<h3 id="类图-1"><a href="#类图-1" class="headerlink" title="类图"></a>类图</h3><ul>
 <li>应用程序调用适配器的方法时，适配器内部将调用适配者类的方法</li>
 <li><strong>适配器模式可以将一个类的接口和另一个类的接口匹配起来</strong>，而无须修改原来适配者接口和抽象目标类的接口</li>
 </ul>
@@ -942,7 +1130,189 @@ public class RealSubject implements Subject{
 </code></pre><h4 id="为什么这么设计"><a href="#为什么这么设计" class="headerlink" title="为什么这么设计"></a>为什么这么设计</h4><p>1、动态代理需要 <strong>代理不同的目标对象</strong> 和 <strong>同一目标对象的不同方法</strong>，所以动态代理类中需要传入代理方法（<strong>接口</strong>）和<strong>代理对象</strong><br>2、在Object newProxyInstance(ClassLoader loader,     Class&lt;?&gt;[] interfaces,InvocationHandler h)方法中直接传入接口，和InvocationHandler的实例，其中实例中传入目标对象，和调用处理方法，根据要求对不同方法进行代理</p>
 <h3 id="其他的代理类型"><a href="#其他的代理类型" class="headerlink" title="其他的代理类型"></a>其他的代理类型</h3><p>1、远程代理：位于不同地址空间的对象提供一个本地的代理对象，这个不同的地址空间可以在同一台主机，也可以在另一台主机中。在Java语言中，可以通过RMI机制来实现远程代理</p>
 <p>2、虚拟代理：如果需要创建一个资源消耗较大的资源，先创建一个消耗相对较小的对象来表示，真是对象只是在需要时才会被真正创建。在真实对象创建成功之前虚拟代理扮演真实对象的替身，而当真实对象创建之后，虚拟代理将用户的请求转发给真实对象</p>
-<h2 id="ThreadLocal设计模式"><a href="#ThreadLocal设计模式" class="headerlink" title="ThreadLocal设计模式"></a>ThreadLocal设计模式</h2><p><a href="https://my.oschina.net/pingpangkuangmo/blog/376321" target="_blank" rel="external">https://my.oschina.net/pingpangkuangmo/blog/376321</a></p>
+<h2 id="第22章：对象间的联动——观察者模式"><a href="#第22章：对象间的联动——观察者模式" class="headerlink" title="第22章：对象间的联动——观察者模式"></a>第22章：对象间的联动——观察者模式</h2><p>观察者模式定义对象之间的一种一对多依赖关系，使得 <strong>当一个对对象状态发生改变时，其相关依赖对象皆得到通知并被自动更新</strong></p>
+<p>在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者</p>
+<h3 id="观察者模式示意代码"><a href="#观察者模式示意代码" class="headerlink" title="观察者模式示意代码"></a>观察者模式示意代码</h3><p>定义一个抽象目标Subject</p>
+<pre><code>import java.util.*;
+abstract class Subject {
+    //定义一个观察者集合用于存储所有观察者对象
+    protected ArrayList observers&lt;Observer&gt; = new ArrayList();
+
+    //注册方法，用于向观察者集合中增加一个观察者
+    public void attach(Observer observer) {
+        observers.add(observer);
+    }
+
+    //注销方法，用于在观察者集合中删除一个观察者
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+
+    //声明抽象通知方法
+    public abstract void notify();
+}    
+</code></pre><p>具体目标类ConcreteSubject（如果无须扩展目标类，则具体目标类可省略）</p>
+<pre><code>class ConcreteSubject extends Subject {  
+    //实现通知方法  
+    public void notify() {  
+        //遍历观察者集合，调用每一个观察者的响应方法  
+        for(Object obs:observers) {  
+            ((Observer)obs).update();  
+        }  
+    }     
+}  
+</code></pre><p>抽象观察者角色一般定义为一个接口，通常只声明一个update()方法</p>
+<pre><code>interface Observer {  
+    //声明响应方法  
+    public void update();  
+}  
+</code></pre><p>具体观察者ConcreteObserver中实现了update()方法</p>
+<pre><code>class ConcreteObserver implements Observer {  
+    //实现响应方法  
+    public void update() {  
+        //具体响应代码  
+    }  
+} 
+</code></pre><h3 id="多人联机对战游戏结构图"><a href="#多人联机对战游戏结构图" class="headerlink" title="多人联机对战游戏结构图"></a>多人联机对战游戏结构图</h3><p><img src="http://i.imgur.com/hfZUs1B.jpg" alt=""></p>
+<p>抽象观察类  </p>
+<pre><code>interface Observer {  
+    public String getName();  
+    public void setName(String name);  
+    public void help(); //声明支援盟友方法  
+    public void beAttacked(AllyControlCenter acc); //声明遭受攻击方法  
+}  
+</code></pre><p>战队成员类：具体观察者类  </p>
+<pre><code>class Player implements Observer {  
+    private String name;  
+
+    public Player(String name) {  
+        this.name = name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+
+    public String getName() {  
+        return this.name;  
+    }  
+
+    //支援盟友方法的实现  
+    public void help() {  
+        System.out.println(&quot;坚持住，&quot; + this.name + &quot;来救你！&quot;);  
+    }  
+
+    //遭受攻击方法的实现，当遭受攻击时将调用战队控制中心类的通知方法notifyObserver()来通知盟友  
+    public void beAttacked(AllyControlCenter acc) {  
+        System.out.println(this.name + &quot;被攻击！&quot;);  
+        acc.notifyObserver(name);         
+    }  
+}  
+</code></pre><p>战队控制中心类：目标类  </p>
+<pre><code>abstract class AllyControlCenter {  
+    protected String allyName; //战队名称  
+    protected ArrayList&lt;Observer&gt; players = new ArrayList&lt;Observer&gt;(); //定义一个集合用于存储战队成员  
+
+    public void setAllyName(String allyName) {  
+        this.allyName = allyName;  
+    }  
+
+    public String getAllyName() {  
+        return this.allyName;  
+    }  
+
+    //注册方法  
+    public void join(Observer obs) {  
+        System.out.println(obs.getName() + &quot;加入&quot; + this.allyName + &quot;战队！&quot;);  
+        players.add(obs);  
+    }  
+
+    //注销方法  
+    public void quit(Observer obs) {  
+        System.out.println(obs.getName() + &quot;退出&quot; + this.allyName + &quot;战队！&quot;);  
+        players.remove(obs);  
+    }  
+
+    //声明抽象通知方法  
+    public abstract void notifyObserver(String name);  
+}  
+</code></pre><p>具体战队控制中心类：具体目标类  </p>
+<pre><code>class ConcreteAllyControlCenter extends AllyControlCenter {  
+    public ConcreteAllyControlCenter(String allyName) {  
+        System.out.println(allyName + &quot;战队组建成功！&quot;);  
+        System.out.println(&quot;----------------------------&quot;);  
+        this.allyName = allyName;  
+    }  
+
+    //实现通知方法  
+    public void notifyObserver(String name) {  
+        System.out.println(this.allyName + &quot;战队紧急通知，盟友&quot; + name + &quot;遭受敌人攻击！&quot;);  
+        //遍历观察者集合，调用每一个盟友（自己除外）的支援方法  
+        for(Object obs : players) {  
+            if (!((Observer)obs).getName().equalsIgnoreCase(name)) {  
+                ((Observer)obs).help();  
+            }  
+        }         
+    }  
+}  
+</code></pre><p>编写如下客户端测试代码：</p>
+<pre><code>class Client {  
+    public static void main(String args[]) {  
+        //定义观察目标对象  
+        AllyControlCenter acc;  
+        acc = new ConcreteAllyControlCenter(&quot;金庸群侠&quot;);  
+
+        //定义四个观察者对象  
+        Observer player1,player2,player3,player4;  
+
+        player1 = new Player(&quot;杨过&quot;);  
+        acc.join(player1);  
+
+        player2 = new Player(&quot;令狐冲&quot;);  
+        acc.join(player2);  
+
+        player3 = new Player(&quot;张无忌&quot;);  
+        acc.join(player3);  
+
+        player4 = new Player(&quot;段誉&quot;);  
+        acc.join(player4);  
+
+        //某成员遭受攻击  
+        Player1.beAttacked(acc);  
+    }  
+} 
+</code></pre><h2 id="JDK对观察者模式的支持"><a href="#JDK对观察者模式的支持" class="headerlink" title="JDK对观察者模式的支持"></a>JDK对观察者模式的支持</h2><p><img src="http://i.imgur.com/D8P7zwo.jpg" alt=""></p>
+<p>(1)Observer接口<br>在java.util.Observer接口中只声明一个方法，它充当抽象观察者，其方法声明代码如下所示：</p>
+<pre><code>void  update(Observable o, Object arg);
+</code></pre><p>当观察目标的状态发生变化时，该方法将会被调用，在Observer的子类中将实现update()方法，即具体观察者可以根据需要具有不同的更新行为。当调用观察目标类Observable的notifyObservers()方法时，将执行观察者类中的update()方法。</p>
+<p>(2)Observable类<br>java.util.Observable类充当观察目标类，在Observable中定义了一个向量Vector来存储观察者对象</p>
+<p>实例：</p>
+<p>观察者：</p>
+<pre><code>public class Listener implements Observer {
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println(&quot;update&quot;);
+    }
+}
+</code></pre><p>观察目标：</p>
+<pre><code>public class Source extends Observable {
+
+    public void fire(){
+        setChanged();
+        notifyObservers();
+    }
+}
+</code></pre><p>测试：</p>
+<pre><code>public class APP {
+    public static void main(String[] args){
+        Observer listener = new Listener();
+        Source source = new Source();
+        source.addObserver(listener);
+
+        source.fire();
+    }
+}
+</code></pre><h2 id="ThreadLocal设计模式"><a href="#ThreadLocal设计模式" class="headerlink" title="ThreadLocal设计模式"></a>ThreadLocal设计模式</h2><p><a href="https://my.oschina.net/pingpangkuangmo/blog/376321" target="_blank" rel="external">https://my.oschina.net/pingpangkuangmo/blog/376321</a></p>
 <p>ThreadLocal设计模式：<br>（1）ThreadLocal所操作的数据是<strong>线程间不共享的</strong>。它不是用来解决多个线程竞争同一资源的多线程问题<br>（2）ThreadLocal所操作的数据主要用于<strong>线程内共享数据</strong>，可以避免同一线程内函数间的传参数问题</p>
 <p>ThreadLocal更像是一个操作线程数据的工具类，哪个线程调用它，它就操作哪个线程的数据。 </p>
 <p>其中ThreadUtil就是用ThreadLocal来实现的，ThreadLocal完全可以这样理解，它就是操作线程数据的工具类，哪个线程调用它的get或set方法，它就会操作调用它的线程中的数据如下：</p>
@@ -1067,7 +1437,7 @@ public class RealSubject implements Subject{
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1084,7 +1454,7 @@ public class RealSubject implements Subject{
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1113,7 +1483,7 @@ public class RealSubject implements Subject{
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第8章：复杂对象的组装与创建——建造者模式"><span class="nav-number">1.</span> <span class="nav-text">第8章：复杂对象的组装与创建——建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有Director的建造者模式"><span class="nav-number">1.1.</span> <span class="nav-text">有Director的建造者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#省略Director"><span class="nav-number">1.2.</span> <span class="nav-text">省略Director</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钩子方法的引入"><span class="nav-number">1.3.</span> <span class="nav-text">钩子方法的引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章：适配器模式"><span class="nav-number">2.</span> <span class="nav-text">第9章：适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">2.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">2.2.</span> <span class="nav-text">适配器模式的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">2.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电脑适配器的例子"><span class="nav-number">2.4.</span> <span class="nav-text">电脑适配器的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质"><span class="nav-number">2.5.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省适配器模式"><span class="nav-number">2.6.</span> <span class="nav-text">缺省适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12章：扩展系统功能——装饰模式"><span class="nav-number">3.</span> <span class="nav-text">第12章：扩展系统功能——装饰模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰模式结构图"><span class="nav-number">3.1.</span> <span class="nav-text">装饰模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只有一个具体构建类的装饰模式"><span class="nav-number">3.2.</span> <span class="nav-text">只有一个具体构建类的装饰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">3.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课后题"><span class="nav-number">3.4.</span> <span class="nav-text">课后题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章：提供统一入口——外观模式"><span class="nav-number">4.</span> <span class="nav-text">第13章：提供统一入口——外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章：代理模式"><span class="nav-number">5.</span> <span class="nav-text">第15章：代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">5.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-动态代理"><span class="nav-number">5.2.</span> <span class="nav-text">Java 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">5.2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么这么设计"><span class="nav-number">5.2.2.</span> <span class="nav-text">为什么这么设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的代理类型"><span class="nav-number">5.3.</span> <span class="nav-text">其他的代理类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal设计模式"><span class="nav-number">6.</span> <span class="nav-text">ThreadLocal设计模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLUtil"><span class="nav-number">1.</span> <span class="nav-text">XMLUtil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章：集中式工厂的实现——简单工厂模式"><span class="nav-number">2.</span> <span class="nav-text">第4章：集中式工厂的实现——简单工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思想"><span class="nav-number">2.1.</span> <span class="nav-text">设计思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">2.2.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式的简化"><span class="nav-number">2.3.</span> <span class="nav-text">简单工厂模式的简化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象与使用对象"><span class="nav-number">2.4.</span> <span class="nav-text">创建对象与使用对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章：多态工厂的实现——工厂方法模式"><span class="nav-number">3.</span> <span class="nav-text">第5章：多态工厂的实现——工厂方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法模式结构图"><span class="nav-number">3.1.</span> <span class="nav-text">工厂方法模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用工厂方法模式设计的日志记录器"><span class="nav-number">3.2.</span> <span class="nav-text">使用工厂方法模式设计的日志记录器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章：产品族的创建——抽象工厂模式"><span class="nav-number">4.</span> <span class="nav-text">第6章：产品族的创建——抽象工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#产品等级结构与产品族"><span class="nav-number">4.1.</span> <span class="nav-text">产品等级结构与产品族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式结构图"><span class="nav-number">4.2.</span> <span class="nav-text">抽象工厂模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整解决方案"><span class="nav-number">4.3.</span> <span class="nav-text">完整解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第8章：复杂对象的组装与创建——建造者模式"><span class="nav-number">5.</span> <span class="nav-text">第8章：复杂对象的组装与创建——建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有Director的建造者模式"><span class="nav-number">5.1.</span> <span class="nav-text">有Director的建造者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#省略Director"><span class="nav-number">5.2.</span> <span class="nav-text">省略Director</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钩子方法的引入"><span class="nav-number">5.3.</span> <span class="nav-text">钩子方法的引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章：适配器模式"><span class="nav-number">6.</span> <span class="nav-text">第9章：适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">6.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">6.2.</span> <span class="nav-text">适配器模式的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图-1"><span class="nav-number">6.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电脑适配器的例子"><span class="nav-number">6.4.</span> <span class="nav-text">电脑适配器的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质"><span class="nav-number">6.5.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省适配器模式"><span class="nav-number">6.6.</span> <span class="nav-text">缺省适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12章：扩展系统功能——装饰模式"><span class="nav-number">7.</span> <span class="nav-text">第12章：扩展系统功能——装饰模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰模式结构图"><span class="nav-number">7.1.</span> <span class="nav-text">装饰模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只有一个具体构建类的装饰模式"><span class="nav-number">7.2.</span> <span class="nav-text">只有一个具体构建类的装饰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">7.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课后题"><span class="nav-number">7.4.</span> <span class="nav-text">课后题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章：提供统一入口——外观模式"><span class="nav-number">8.</span> <span class="nav-text">第13章：提供统一入口——外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章：代理模式"><span class="nav-number">9.</span> <span class="nav-text">第15章：代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">9.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-动态代理"><span class="nav-number">9.2.</span> <span class="nav-text">Java 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">9.2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么这么设计"><span class="nav-number">9.2.2.</span> <span class="nav-text">为什么这么设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的代理类型"><span class="nav-number">9.3.</span> <span class="nav-text">其他的代理类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第22章：对象间的联动——观察者模式"><span class="nav-number">10.</span> <span class="nav-text">第22章：对象间的联动——观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式示意代码"><span class="nav-number">10.1.</span> <span class="nav-text">观察者模式示意代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人联机对战游戏结构图"><span class="nav-number">10.2.</span> <span class="nav-text">多人联机对战游戏结构图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK对观察者模式的支持"><span class="nav-number">11.</span> <span class="nav-text">JDK对观察者模式的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal设计模式"><span class="nav-number">12.</span> <span class="nav-text">ThreadLocal设计模式</span></a></li></ol></div>
             
           </div>
         </section>

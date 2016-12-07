@@ -1,0 +1,824 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TCP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议
+可靠数据传输的原理完全可靠信道上的可靠数据传输：rdt1.0
+rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态
+rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP">
+<meta property="og:url" content="http://yoursite.com/2016/12/06/[网络安全]TCP/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议
+可靠数据传输的原理完全可靠信道上的可靠数据传输：rdt1.0
+rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态
+rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待">
+<meta property="og:updated_time" content="2016-12-07T06:17:47.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP">
+<meta name="twitter:description" content="TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议
+可靠数据传输的原理完全可靠信道上的可靠数据传输：rdt1.0
+rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态
+rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/06/[网络安全]TCP/"/>
+
+
+  <title> TCP | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                TCP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-06T19:36:00+08:00" content="2016-12-06">
+              2016-12-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络安全/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/06/[网络安全]TCP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/06/[网络安全]TCP/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议</p>
+<h2 id="可靠数据传输的原理"><a href="#可靠数据传输的原理" class="headerlink" title="可靠数据传输的原理"></a>可靠数据传输的原理</h2><h3 id="完全可靠信道上的可靠数据传输：rdt1-0"><a href="#完全可靠信道上的可靠数据传输：rdt1-0" class="headerlink" title="完全可靠信道上的可靠数据传输：rdt1.0"></a>完全可靠信道上的可靠数据传输：rdt1.0</h3><ul>
+<li>rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态</li>
+<li>rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待下层调用</li>
+</ul>
+<p>因为信道完全可靠，接收方不需要提供任何反馈信息给发送方</p>
+<h3 id="具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）"><a href="#具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）" class="headerlink" title="具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）"></a>具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）</h3><p>人类处理这类情形：报文接受者在听到每句话后会说OK，如果消息接受者听到一句含糊不清的话，他可能要求你重复刚才那句话。这种口述消息协议使用了<strong>肯定确认</strong>（OK）与<strong>否定确认</strong>（请重复一遍）</p>
+<p>在计算机网络中，基于这种重传机制的可靠数据传输协议称为<strong>自动重传请求</strong>（ARQ），需要三种协议来处理比特差错：</p>
+<ul>
+<li>差错检测</li>
+<li>接收方反馈：肯定确认（ACK），否定确认（NAK）</li>
+<li>重传</li>
+</ul>
+<p>rdt2.0发送方两个状态：</p>
+<p>1、等待上层调用：rdt_send事件发生，产生数据包，发送该分组，状态跳到2<br>2、等待接收方的ACK或NAK</p>
+<ul>
+<li>如果收到ACK分组，则发送发知道最近传输的分组已经被正确接收，因此状态返回<strong>等待上层调用</strong></li>
+<li>如果收到一个NAK分组，重传最后一个分组，并<strong>等待接受方的ACK或NAK</strong></li>
+</ul>
+<p>rdt2.0接收方的只有一个状态：当分组到达时，接收方要么回答一个ACK，要么回答一个NAK</p>
+<p><strong>问题：</strong></p>
+<p>1、停等协议：只有当上一个分组发送成功，才能发送下一个分组，效率低<br>2、没有考虑ACK或NAK分组受损<font color="red"><strong>（假设分组不丢失）</strong></font>，发送方无法知道接收方是否正确接收了上一块发送的数据</p>
+<p><strong>rdt2.1：引入序列号解决冗余分组</strong></p>
+<p>解决ACK或NAK受损的一种方式是：当发送方收到含糊不清的ACK或NAK分组时，直接重发当前数据分组，但这引入了<strong>冗余分组</strong>，接收方不知道上次发送的ACK或NAK是否被发送方正确接收到，导致接收方无法知道接收到的分组是<strong>新的</strong>，还是一次<strong>重传</strong>（重传的数据包保证该数据包中的数据只提取一次）</p>
+<p>解决这个问题的一个简单方法是在数据分组中 <strong>添加一个新字段</strong>，对于停等协议，1比特就够了，如果接收到的分组序号与最近收到的分组序号<strong>相同</strong>，知道是在<strong>重发</strong>，<strong>不相同</strong>则是一个<strong>新分组</strong></p>
+<p>发送方状态：<br>当发送完<strong>分组0</strong>，处于等待ACK或NAK的状态，如果<strong>分组受损</strong>或收到<strong>NAK</strong>，重发分组；如果收到ACK，说明接收方正确接收到分组0，状态跳转到等待发送<strong>分组1</strong>的状态</p>
+<p>接收方状态：如果接收到受损包，直接发送NAK；如果收到分组的序号与上一次收到的序号一致，说明是重传包，直接发送ACK；如果收到的分组序号与上一次收到的不一致，发送NAk。具体的，划分出<strong>两个状态</strong>：<strong>等待数据0</strong>和<strong>等待数据包1</strong></p>
+<p><strong>rdt2.2：冗余ACK来代替NAK</strong></p>
+<p>rdt2.1中接收到受损分组时发送一个NAK，通知发送端重发。如果不发送NAK，而是发送一个对上次正确接收的分组的ACK（即<strong>冗余ACK</strong>），发送方接收到对同一个分组的两个ACK，就知道接受方没有正确接收到跟在被确认两次的分组后面的分组</p>
+<p>发送方状态：<br>在等待ACK0时，若收到损坏的分组或ACK1，则重传，否则状态跳到等待上层调用1</p>
+<p>接收方状态：<br>如果接收到受损包，或收到分组的序号与上一次收到的序号一致，说明是重传包，直接发送以上一次的发送的ACK（冗余ACK）；如果收到的分组序号和上一次收到的不一致，则提取数据，发送ACk</p>
+<h3 id="具有比特差错的丢包信道上的可靠数据传输：rdt3-0"><a href="#具有比特差错的丢包信道上的可靠数据传输：rdt3-0" class="headerlink" title="具有比特差错的丢包信道上的可靠数据传输：rdt3.0"></a>具有比特差错的丢包信道上的可靠数据传输：rdt3.0</h3><p>需要考虑两个问题：</p>
+<ul>
+<li>如何检测丢包</li>
+<li>发生丢包后该做什么</li>
+</ul>
+<p>利用校验和、序号、ACK分组和重传可以解决后一个问题，即<strong>重传</strong>，所以重点是解决如何检测丢包问题</p>
+<p>在发送方负责检测和恢复丢包，增加一个<strong>倒计时定时器</strong>，发送一个分组后（包括重传），便启动一个定时器</p>
+<p>发送方状态：上层调用rdt_send(data)时，发送数据包，并<strong>开启定时器</strong>，状态转移到等待ACK的状态。<strong>如果接收到破损包或者上一个分组包的ACK，先不采取任何操作，等到定时器超时后进行重传，这种方式也考虑到包丢失的情况</strong></p>
+<p>接收方状态：如果接收到受损包，或收到分组的序号与上一次收到的序号一致，说明是重传包，直接发送以上一次的发送的ACK（冗余ACK）；如果收到的分组序号和上一次收到的不一致，则提取数据，发送ACk（<strong>与rdt2.2一样</strong>）</p>
+<h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TCP/" rel="tag">#TCP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/30/[网络安全]DOS文献/" rel="next" title="DOS文献">
+                <i class="fa fa-chevron-left"></i> DOS文献
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/06/[网络安全]TCP/"
+           data-title="TCP" data-url="http://yoursite.com/2016/12/06/[网络安全]TCP/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠数据传输的原理"><span class="nav-number">1.</span> <span class="nav-text">可靠数据传输的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#完全可靠信道上的可靠数据传输：rdt1-0"><span class="nav-number">1.1.</span> <span class="nav-text">完全可靠信道上的可靠数据传输：rdt1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）"><span class="nav-number">1.2.</span> <span class="nav-text">具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错的丢包信道上的可靠数据传输：rdt3-0"><span class="nav-number">1.3.</span> <span class="nav-text">具有比特差错的丢包信道上的可靠数据传输：rdt3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线可靠数据传输协议"><span class="nav-number">1.4.</span> <span class="nav-text">流水线可靠数据传输协议</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
