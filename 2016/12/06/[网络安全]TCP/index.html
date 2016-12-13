@@ -96,13 +96,15 @@ rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收�
 可靠数据传输的原理完全可靠信道上的可靠数据传输：rdt1.0
 rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态
 rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待">
-<meta property="og:updated_time" content="2016-12-07T07:06:53.406Z">
+<meta property="og:image" content="http://i.imgur.com/aVtCxCl.png">
+<meta property="og:updated_time" content="2016-12-07T09:39:43.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP">
 <meta name="twitter:description" content="TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议
 可靠数据传输的原理完全可靠信道上的可靠数据传输：rdt1.0
 rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态
 rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待">
+<meta name="twitter:image" content="http://i.imgur.com/aVtCxCl.png">
 
 
 
@@ -391,7 +393,23 @@ rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收�
 <li>回退N步</li>
 <li>选择重传</li>
 </ul>
-<h4 id="回退N步"><a href="#回退N步" class="headerlink" title="回退N步"></a>回退N步</h4><h4 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h4>
+<h4 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h4><p>将<strong>基序号（base）</strong>定义为最早的未被确认分组的序号，将<strong>下一个序号（nextseqnum）</strong>定义为下一个待发送的分组序号</p>
+<p><img src="http://i.imgur.com/aVtCxCl.png" alt=""></p>
+<p>序号分为4部分：</p>
+<ul>
+<li>[0，base-1]内的序号对应于已经发送并确认过的序号</li>
+<li>[base，nextseqnum-1]内的序号对应已经发送但未被确认的分组</li>
+<li>[nextseqnum，base+N-1]内的序号可用于那些要被立刻发送的分组，其数据来自上层</li>
+<li>大于或等于base+N的序号是不能使用的，知道当前流水线中未被确认的分组已得到确认为止</li>
+</ul>
+<p>GBN发送方响应的三种类型事件：</p>
+<ul>
+<li>上层的调用：如果发送窗口未满，则创建一个分组并发送，否则不传送</li>
+<li>收到ACK：采用累积确认，表示接收方已正确接收序号n之前的所有分组</li>
+<li>超时时间：GBN协议中，使用的一个定时器当做是<strong>最早的已发送但未被确认的分组</strong>所使用过的定时器（即base分组），如果超时将重传所有已发送但未被确认的分组（即图中灰色的分组）；如果收到一个ACK，但仍有未被确认的分组，则定时器被重新启动，如果没有已发送但未被确认的分组，则定时器终止</li>
+</ul>
+<p>接收方：<strong>丢弃所有失序分组</strong>。如果期望n分组，而n+1分组却到了，不需要缓存n+1分组，因为如果n分组丢失，发送方将会重新发送n分组和n+1分组，这样设计，接收方<strong>不需要缓存任何失序分组</strong>，接收方只需要维护<strong>下一个按需接收的分组的序号</strong>。</p>
+<h4 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h4>
       
     </div>
 
@@ -429,6 +447,10 @@ rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收�
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/13/[数据结构与算法]面试总结/" rel="prev" title="面试总结">
+                面试总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -500,7 +522,7 @@ rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -517,7 +539,7 @@ rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -546,7 +568,7 @@ rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠数据传输的原理"><span class="nav-number">1.</span> <span class="nav-text">可靠数据传输的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#完全可靠信道上的可靠数据传输：rdt1-0"><span class="nav-number">1.1.</span> <span class="nav-text">完全可靠信道上的可靠数据传输：rdt1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）"><span class="nav-number">1.2.</span> <span class="nav-text">具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错的丢包信道上的可靠数据传输：rdt3-0"><span class="nav-number">1.3.</span> <span class="nav-text">具有比特差错的丢包信道上的可靠数据传输：rdt3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线可靠数据传输协议"><span class="nav-number">1.4.</span> <span class="nav-text">流水线可靠数据传输协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#回退N步"><span class="nav-number">1.4.1.</span> <span class="nav-text">回退N步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择重传"><span class="nav-number">1.4.2.</span> <span class="nav-text">选择重传</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#可靠数据传输的原理"><span class="nav-number">1.</span> <span class="nav-text">可靠数据传输的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#完全可靠信道上的可靠数据传输：rdt1-0"><span class="nav-number">1.1.</span> <span class="nav-text">完全可靠信道上的可靠数据传输：rdt1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）"><span class="nav-number">1.2.</span> <span class="nav-text">具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有比特差错的丢包信道上的可靠数据传输：rdt3-0"><span class="nav-number">1.3.</span> <span class="nav-text">具有比特差错的丢包信道上的可靠数据传输：rdt3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线可靠数据传输协议"><span class="nav-number">1.4.</span> <span class="nav-text">流水线可靠数据传输协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#回退N步（GBN）"><span class="nav-number">1.4.1.</span> <span class="nav-text">回退N步（GBN）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择重传"><span class="nav-number">1.4.2.</span> <span class="nav-text">选择重传</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
