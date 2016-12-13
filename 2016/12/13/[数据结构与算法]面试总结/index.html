@@ -106,7 +106,8 @@ yum install 安装软件
 mkdir 建立文件夹rmdir 删除空文件rm -rf 删除文件夹
 mv 移动cp 复制
 netstat -anp |">
-<meta property="og:updated_time" content="2016-12-13T13:51:21.778Z">
+<meta property="og:image" content="http://i.imgur.com/rdtyB5M.jpg">
+<meta property="og:updated_time" content="2016-12-13T14:11:32.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="Linux命令：wget  要下载文件的url
@@ -118,6 +119,7 @@ yum install 安装软件
 mkdir 建立文件夹rmdir 删除空文件rm -rf 删除文件夹
 mv 移动cp 复制
 netstat -anp |">
+<meta name="twitter:image" content="http://i.imgur.com/rdtyB5M.jpg">
 
 
 
@@ -385,8 +387,30 @@ netstat -anp |">
 <p>类加载器的委托机制：</p>
 <p>1、当Java虚拟机要加载一个类时，到底派出哪个类加载器去加载呢?<br>　　①首先 当前线程的类加载器 去加载线程中的第一个类.<br>　　②如果类A中引用了类B，Java虚拟机将使用加载类A的类加载器加载类B<br>　　③还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类.</p>
 <p>2、每个类加载器加载类时，又先<strong>委托给其上级类加载器</strong><br>　　当所有祖宗类加载器没有加载到类，回到发起者类加载器，如果还加载不了，则抛出ClassNotFoundException异常。它不会去找发起者类加载器的儿子，因为没有getChild()方法，即使有，有那么多的儿子交给那一个呢?所以干脆就不交给儿子处理了。</p>
-<h3 id="ArrayList和LinkedList和Vector"><a href="#ArrayList和LinkedList和Vector" class="headerlink" title="ArrayList和LinkedList和Vector"></a>ArrayList和LinkedList和Vector</h3><p>1、ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构<br>2、对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针<br>3、对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据</p>
-<h3 id="HashMap和HashTable"><a href="#HashMap和HashTable" class="headerlink" title="HashMap和HashTable"></a>HashMap和HashTable</h3><p>JVM，多线程<br>HashMap底层实现<br>ConcurrentHashmao<br>Hash table<br>wait和sleep的区别<br>放不放锁呗<br>还有生产者消费者<br>RPC<br>IPC</p>
+<h3 id="ArrayList和LinkedList和Vector"><a href="#ArrayList和LinkedList和Vector" class="headerlink" title="ArrayList和LinkedList和Vector"></a>ArrayList和LinkedList和Vector</h3><p>1、ArrayList是实现了基于<strong>动态数组</strong>的数据结构，LinkedList基于<strong>链表</strong>的数据结构<br>2、对于<strong>随机访问</strong>get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针<br>3、对于<strong>新增和删除</strong>操作add和remove，LinedList比较占优势，因为ArrayList要移动数据</p>
+<p>Vector和ArrayList几乎是完全相同的，唯一的区别在于Vector是同步类(synchronized).因此,开销就比ArrayList要大.正常情况下,大多数的Java程序员使用ArrayList而不是Vector,因为同步完全可以由程序员自己来控制</p>
+<h3 id="HashMap和HashTable"><a href="#HashMap和HashTable" class="headerlink" title="HashMap和HashTable"></a>HashMap和HashTable</h3><p>1、历史原因</p>
+<p>Hashtable是基于陈旧的Dictionary类的，HashMap是java 1.2引进的Map接口的一个实现</p>
+<p>2、同步性</p>
+<p>Hashtable是线程同步的。这个类中的一些方法保证了Hashtable中的对象是线程安全的（Synchronized）。而HashMap则是线程异步的，因此HashMap中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用HashMap是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销，从而提高效率</p>
+<p>3、值</p>
+<p>HashMap可以让你将空值作为一个表的条目的key或value但是Hashtable是不能放入空值的(null)</p>
+<h3 id="HashMap底层实现"><a href="#HashMap底层实现" class="headerlink" title="HashMap底层实现"></a>HashMap底层实现</h3><p>HashMap是基于哈希表的Map接口的<strong>非同步</strong>实现。此实现提供所有可选的映射操作，并允许<strong>使用null值和null键</strong>。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
+<p>HashMap的数据结构：</p>
+<p>在Java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个”链表散列”的数据结构，即数组和链表的结合体。</p>
+<p><img src="http://i.imgur.com/rdtyB5M.jpg" alt=""></p>
+<p>从上图中可以看出，<strong>HashMap底层就是一个数组结构，数组中的每一项又是一个链表</strong>。当新建一个HashMap的时候，就会初始化一个数组。</p>
+<pre><code>transient Entry[] table;  
+
+static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {  
+    final K key;  
+    V value;  
+    Entry&lt;K,V&gt; next;  
+    final int hash;  
+    ……  
+}  
+</code></pre><p>可以看出，Entry就是数组中的元素，<strong>每个 Map.Entry 其实就是一个key-value对</strong>，它持有一个指向下一个元素的引用，这就构成了链表。</p>
+<p>JVM，多线程<br>HashMap底层实现<br>ConcurrentHashmao<br>Hash table<br>wait和sleep的区别<br>放不放锁呗<br>还有生产者消费者<br>RPC<br>IPC</p>
 
       
     </div>
@@ -542,7 +566,7 @@ netstat -anp |">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux命令："><span class="nav-number">1.</span> <span class="nav-text">Linux命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法重写与方法重载"><span class="nav-number">2.1.</span> <span class="nav-text">方法重写与方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器"><span class="nav-number">2.2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList和Vector"><span class="nav-number">2.3.</span> <span class="nav-text">ArrayList和LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和HashTable"><span class="nav-number">2.4.</span> <span class="nav-text">HashMap和HashTable</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux命令："><span class="nav-number">1.</span> <span class="nav-text">Linux命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法重写与方法重载"><span class="nav-number">2.1.</span> <span class="nav-text">方法重写与方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器"><span class="nav-number">2.2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList和Vector"><span class="nav-number">2.3.</span> <span class="nav-text">ArrayList和LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和HashTable"><span class="nav-number">2.4.</span> <span class="nav-text">HashMap和HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap底层实现"><span class="nav-number">2.5.</span> <span class="nav-text">HashMap底层实现</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
