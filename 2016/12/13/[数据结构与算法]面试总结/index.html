@@ -107,7 +107,9 @@ mkdir 建立文件夹rmdir 删除空文件rm -rf 删除文件夹
 mv 移动cp 复制
 netstat -anp |">
 <meta property="og:image" content="http://i.imgur.com/rdtyB5M.jpg">
-<meta property="og:updated_time" content="2016-12-13T14:11:32.613Z">
+<meta property="og:image" content="http://i.imgur.com/E7X556s.jpg">
+<meta property="og:image" content="http://i.imgur.com/PCeb1Xo.jpg">
+<meta property="og:updated_time" content="2016-12-14T03:52:06.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="Linux命令：wget  要下载文件的url
@@ -395,11 +397,12 @@ netstat -anp |">
 <p>Hashtable是线程同步的。这个类中的一些方法保证了Hashtable中的对象是线程安全的（Synchronized）。而HashMap则是线程异步的，因此HashMap中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用HashMap是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销，从而提高效率</p>
 <p>3、值</p>
 <p>HashMap可以让你将空值作为一个表的条目的key或value但是Hashtable是不能放入空值的(null)</p>
-<h3 id="HashMap底层实现"><a href="#HashMap底层实现" class="headerlink" title="HashMap底层实现"></a>HashMap底层实现</h3><p>HashMap是基于哈希表的Map接口的<strong>非同步</strong>实现。此实现提供所有可选的映射操作，并允许<strong>使用null值和null键</strong>。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
+<h3 id="HashMap底层实现"><a href="#HashMap底层实现" class="headerlink" title="HashMap底层实现"></a>HashMap底层实现</h3><p><a href="http://zhangshixi.iteye.com/blog/672697" target="_blank" rel="external">http://zhangshixi.iteye.com/blog/672697</a></p>
+<p>HashMap是基于哈希表的Map接口的<strong>非同步</strong>实现。此实现提供所有可选的映射操作，并允许<strong>使用null值和null键</strong>。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。</p>
 <p>HashMap的数据结构：</p>
 <p>在Java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个”链表散列”的数据结构，即数组和链表的结合体。</p>
 <p><img src="http://i.imgur.com/rdtyB5M.jpg" alt=""></p>
-<p>从上图中可以看出，<strong>HashMap底层就是一个数组结构，数组中的每一项又是一个链表</strong>。当新建一个HashMap的时候，就会初始化一个数组。</p>
+<p>从上图中可以看出，<strong>HashMap底层就是一个数组结构，数组中的每一项又是一个链表，链表的每一个元素是键-值对</strong>。当新建一个HashMap的时候，就会初始化一个数组。</p>
 <pre><code>transient Entry[] table;  
 
 static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {  
@@ -410,7 +413,97 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
     ……  
 }  
 </code></pre><p>可以看出，Entry就是数组中的元素，<strong>每个 Map.Entry 其实就是一个key-value对</strong>，它持有一个指向下一个元素的引用，这就构成了链表。</p>
-<p>JVM，多线程<br>HashMap底层实现<br>ConcurrentHashmao<br>Hash table<br>wait和sleep的区别<br>放不放锁呗<br>还有生产者消费者<br>RPC<br>IPC</p>
+<p>HashMap的存取实现：</p>
+<p>1) 存储：</p>
+<pre><code>public V put(K key, V value) {  
+    // HashMap允许存放null键和null值。  
+    // 当key为null时，调用putForNullKey方法，将value放置在数组第一个位置。  
+    if (key == null)  
+        return putForNullKey(value);  
+    // 根据key的keyCode重新计算hash值。  
+    int hash = hash(key.hashCode());  
+    // 搜索指定hash值在对应table中的索引。  
+    int i = indexFor(hash, table.length);  
+    // 如果 i 索引处的 Entry 不为 null，通过循环不断遍历 e 元素的下一个元素。  
+    for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) {  
+        Object k;  
+        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) {  
+            V oldValue = e.value;  
+            e.value = value;  
+            e.recordAccess(this);  
+            return oldValue;  
+        }  
+    }  
+    // 如果i索引处的Entry为null，表明此处还没有Entry。  
+    modCount++;  
+    // 将key、value添加到i索引处。  
+    addEntry(hash, key, value, i);  
+    return null;  
+}  
+</code></pre><p>从上面的源代码中可以看出：当我们往HashMap中put元素的时候，先根据key的hashCode重新计算hash值，根据hash值得到这个元素在数组中的位置（即下标），如果数组该位置上已经存放有其他元素了，那么在这个位置上的元素将以链表的形式存放，新加入的放在链头，最先加入的放在链尾。如果数组该位置上没有元素，就直接将该元素放到此数组中的该位置上。</p>
+<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>1、必须针对接口进行代理<br>2、生成代理对象，通过Proxy类进行代理，传入目标对象类加载器、目标对象接口 、处理类<br>3、自己实现InvocationHandler 接口</p>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p>1、thread与runnable</p>
+<p>如果改写thread的run方法和传入runnable类，使用的是那个run？</p>
+<p>Thread的run方法，如果runnable对象不为空，去执行runnable中的run方法，但是如果Thread的run方法被重写，则使用改写的Thread中的run方法</p>
+<pre><code>public void run() {
+    if (target != null) {
+        target.run();
+    }
+}
+</code></pre><p>2、synchronized，使用的对象锁必须<strong>同一个对象</strong>，可以this或字符串常量</p>
+<pre><code>Synchronized(){
+    //保护一段代码
+}
+</code></pre><p>也可以修饰方法，来保护整个方法（默认对象锁是this）</p>
+<p>如果修饰静态方法，静态对象对应的对象锁是<strong>类的字节码</strong></p>
+<h3 id="Spring-MVC-和-Struts2的区别"><a href="#Spring-MVC-和-Struts2的区别" class="headerlink" title="Spring MVC 和 Struts2的区别"></a>Spring MVC 和 Struts2的区别</h3><ul>
+<li>Struts2的入口是filter，Spring MVC的入口是Servlet，两者的实现机制不同</li>
+<li>Struts2是基于类设计的，参数绑定到类的属性，所有的方法都可以使用；Spring MVC是基于方法设计的，参数绑定到方法的形参，并且只有一个方法可以使用</li>
+<li>Struts2必须是多例的（Struts2传递到的参数绑定到类的属性，如果是单例会导致不同用户数据的冲突），Spring MVC默认是单例的，所以Spring MVC的性能比Struts2好</li>
+</ul>
+<h3 id="重定向与转发的区别"><a href="#重定向与转发的区别" class="headerlink" title="重定向与转发的区别"></a>重定向与转发的区别</h3><ul>
+<li>浏览器中的url：转发仍是原来的url，重定向为新的url</li>
+<li>重定向发生在浏览器，由浏览器重新发出http请求，转发发生web服务器，请求在web服务器转发</li>
+<li>重定向可以到外部网站，重定向只能访问WEB应用个资源</li>
+</ul>
+<h3 id="Sesssion"><a href="#Sesssion" class="headerlink" title="Sesssion"></a>Sesssion</h3><p><strong>Session的生命周期</strong></p>
+<p>Session存储在服务器端，一般为了防止在服务器的内存中（为了高速存取），<strong>Sessinon在用户访问第一次访问服务器时创建，需要注意只有访问JSP、Servlet等程序时才会创建Session</strong>，只访问HTML、IMAGE等静态资源并不会创建Session，可调用<strong>request.getSession(true)强制生成Session</strong></p>
+<p><strong>Session什么时候失效？</strong></p>
+<p>1、服务器会把长时间没有活动的Session从服务器内存中清除，此时Session便失效。Tomcat中Session的默认失效时间为30分钟。<br>2、调用Session的invalidate方法。</p>
+<h2 id="JVM内存结构"><a href="#JVM内存结构" class="headerlink" title="JVM内存结构"></a>JVM内存结构</h2><p><img src="http://i.imgur.com/E7X556s.jpg" alt=""></p>
+<p>图一：java内存结构划分</p>
+<p><img src="http://i.imgur.com/PCeb1Xo.jpg" alt=""></p>
+<p>我感觉这图更形象一点</p>
+<p>由上图可知，java内存主要分为6部分，分别是 程序计数器，虚拟机栈，本地方法栈，堆，方法区和直接内存，下面将逐一详细描述。</p>
+<p>1、程序计数器<br>线程私有，即每个线程都会有一个，线程之间互不影响，独立存储，代表着当前线程所执行字节码的行号指示器。</p>
+<p>2、虚拟机栈<br>线程私有，它的生命周期和线程相同，描述的是 java方法执行的内存模型 ：<strong>每个方法在执行的同时多会创建一个栈帧用于存储局部变量表、操作数栈、动态链表、方法出口等信息</strong>。</p>
+<p>每一个方法从调用直至完成的过程，就对应着一个栈帧在虚拟机中入栈到出栈的过程。</p>
+<p>局部变量表存放了编译期可知的各种基本数据类型和对象引用，所需内存空间在编译期确定。</p>
+<p>-Xoss 参数设置本地方法栈大小（ 对于HotSpot无效 ）</p>
+<p>-Xss 参数设置栈容量 例： -Xss128k</p>
+<p>3、本地方法栈<br>同虚拟机栈，只不过本地方法栈位虚拟机使用到的native方法服务。</p>
+<p>Sun HotSpot虚拟机把本地方法栈和虚拟机栈合二为一 。</p>
+<p>4、java堆<br>线程共享</p>
+<p>主要用于分配对象实例和数组。</p>
+<p>-Xms 参数设置最小值</p>
+<p>-Xmx 参数设置最大值 例：VM Args: -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError</p>
+<p>若-Xms=-Xmx,则可避免堆自动扩展。</p>
+<p>-XX:+HeapDumpOnOutOfMemoryError 可以让虚拟机在出现内存溢出是dump出当前的内存堆转储快照。</p>
+<p>5、方法区<br>线程共享</p>
+<p>用于存储已被虚拟机加载的类信息、常量、静态变量、即使编译后的代码等数据 。</p>
+<p>别名永久代（Permanent Generation）</p>
+<p>-XX:MaxPermSize 设置上限</p>
+<p>-XX:PermSize 设置最小值 例：VM Args: -XX:PermSize=10M -XX:MaxPermSize=10M</p>
+<p>运行时常量池(Runtime Constant Pool)是方法区的一部分 。</p>
+<p>Class文件中除了有类的版本、字段、方法、接口等信息外，还有一项是 常量池 （Constant Pool Table）,用于存放编译期生成的各种字面量和符号引用，这部分 内容将在类加载后进入方法区的运行时常量池中存放 。</p>
+<p>运行时常量池相对于Class文件常量池的一个重要特征是具备动态性：即除了Class文件中常量池的内容能被放到运行时常量池外，运行期间也可能将新的常量放入池中，比如 String类的intern（）方法。</p>
+<p>6、直接内存<br>直接内存并不是虚拟机运行时数据区的一部分。</p>
+<p>在NIO中，引入了一种基于通道和缓冲区的I/O方式，它可以使用native函数直接分配堆外内存，然后通过一个存储在java堆中的DirectByteBuffer对象作为这块内存的引用进行操作。</p>
+<p>-XX:MaxDirectMemorySize 设置最大值，默认与java堆最大值一样。</p>
+<p>例 ：-XX:MaxDirectMemorySize=10M -Xmx20M</p>
+<p>对于32位操作系统来说，系统最大内存为4G。</p>
+<p>系统给每个进程的内存是有限制的，譬如32位的windows 限制为2G</p>
+<p>JVM，多线程<br>ConcurrentHashmao<br>wait和sleep的区别<br>放不放锁呗<br>还有生产者消费者<br>RPC<br>IPC</p>
 
       
     </div>
@@ -566,7 +659,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux命令："><span class="nav-number">1.</span> <span class="nav-text">Linux命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法重写与方法重载"><span class="nav-number">2.1.</span> <span class="nav-text">方法重写与方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器"><span class="nav-number">2.2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList和Vector"><span class="nav-number">2.3.</span> <span class="nav-text">ArrayList和LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和HashTable"><span class="nav-number">2.4.</span> <span class="nav-text">HashMap和HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap底层实现"><span class="nav-number">2.5.</span> <span class="nav-text">HashMap底层实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux命令："><span class="nav-number">1.</span> <span class="nav-text">Linux命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法重写与方法重载"><span class="nav-number">2.1.</span> <span class="nav-text">方法重写与方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器"><span class="nav-number">2.2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList和Vector"><span class="nav-number">2.3.</span> <span class="nav-text">ArrayList和LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和HashTable"><span class="nav-number">2.4.</span> <span class="nav-text">HashMap和HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap底层实现"><span class="nav-number">2.5.</span> <span class="nav-text">HashMap底层实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理"><span class="nav-number">2.6.</span> <span class="nav-text">动态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">2.7.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-MVC-和-Struts2的区别"><span class="nav-number">2.8.</span> <span class="nav-text">Spring MVC 和 Struts2的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向与转发的区别"><span class="nav-number">2.9.</span> <span class="nav-text">重定向与转发的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sesssion"><span class="nav-number">2.10.</span> <span class="nav-text">Sesssion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM内存结构"><span class="nav-number">3.</span> <span class="nav-text">JVM内存结构</span></a></li></ol></div>
             
           </div>
         </section>
