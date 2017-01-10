@@ -109,7 +109,7 @@
 基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
 排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序r">
 <meta property="og:image" content="http://i.imgur.com/GDFtowZ.png">
-<meta property="og:updated_time" content="2016-11-21T09:08:52.577Z">
+<meta property="og:updated_time" content="2016-12-15T03:30:29.210Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法4笔记">
 <meta name="twitter:description" content="书本源代码http://algs4.cs.princeton.edu/code/
@@ -406,6 +406,186 @@
         if(N % i == 0) return false;
     return true;
 }
+</code></pre><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>固定长度栈</p>
+<pre><code>public class FixedCapacityStack&lt;Item&gt;{
+
+    private Item[] items;
+    //top指向栈顶元素后一位，top = 0表示空栈，也表示栈中元素个数
+    private Integer top;
+
+    public FixedCapacityStack(Integer cap){
+        items = (Item[]) new Object[cap];
+        top = 0;
+    }
+
+    public void push(Item item){
+        items[top++] = item;
+    }
+
+    public Item pop(){
+        return items[--top];
+    }
+
+    public Integer size(){
+        return top;
+    }
+
+    public boolean isEmpty(){
+        return top == 0;
+    }
+
+    public void traverse(){
+        for(int i = 0; i &lt; top; i++){
+            System.out.print(items[i] + &quot; &quot;);
+        }
+        System.out.println();
+    }
+}
+</code></pre><p>算法1.1 下压（LIFO）栈（能够动态调整数组大小的实现）</p>
+<pre><code>public class ResizingArrayStack&lt;Item&gt;{
+
+    private Item[] items = (Item[]) new Object[1];
+    //top指向栈顶元素后一位，top = 0表示空栈，也表示栈中元素个数
+    private Integer top = 0;
+
+    public void push(Item item){
+        //栈满了
+        if(top == items.length){
+            resize(2*items.length);
+        }
+        items[top++] = item;
+    }
+
+    public Item pop(){
+        Item item = items[--top];
+        //避免对象游离
+        items[top] = null;
+        //减少长度，使用率不会低于1/4
+        if(top &gt; 0 &amp;&amp; top == items.length/4) resize(items.length/2);
+        return item;
+    }
+
+    public void resize(Integer length){
+        Item[] temp = (Item[]) new Object[length];
+        //赋值
+        for(int i = 0; i &lt; top; i++){
+            temp[i] = items[i];
+        }
+        items = temp;
+    }
+
+    public Integer size(){
+        return top;
+    }
+
+    public boolean isEmpty(){
+        return top == 0;
+    }
+
+    public void traverse(){
+        for(int i = 0; i &lt; top; i++){
+            System.out.print(items[i] + &quot; &quot;);
+        }
+        System.out.println();
+    }
+}
+</code></pre><p>算法1.2 下压堆栈（链表实现）</p>
+<pre><code>public class Stack&lt;Item&gt; {
+    private Node top = null;
+    private Integer N = 0;
+
+    private class Node{
+        //定义了节点的嵌套类
+        Item item;
+        Node next;
+    }
+
+    public void push(Item item){
+        Node old = top;
+        top = new Node();
+        top.item = item;
+        top.next = old;
+        N++;
+    }
+
+    public Item pop(){
+        Item item = top.item;
+        top = top.next;
+        N--;
+        return item;
+    }
+
+    public Integer size(){
+        return N;
+    }
+
+    public boolean isEmpty(){
+        return N == 0;//或top == null
+    }
+
+    public void traverse(){
+        Node p = top;
+        while(p != null){
+            System.out.print(p.item + &quot; &quot;);
+            p = p.next;
+        }
+        System.out.println();
+    }
+}
+</code></pre><h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>算法1.3 先进先出队列</p>
+<pre><code>public class Queue&lt;Item&gt; {
+    //队头
+    private Node first;
+    //队尾
+    private Node last;
+    //元素个数
+    private int N;
+
+    private class Node{
+        private Item item;
+        private Node next;
+    }
+
+    public void enqueue(Item item){
+        Node old = last;
+        last = new Node();
+        last.item = item;
+        last.next = null;
+        //队列为空时处理first指针
+        if(isEmpty())
+            first = last;
+        else
+            old.next = last;
+        N++;
+    }
+
+    public Item dequeue(){
+        Item item = first.item;
+        first = first.next;
+        //队列为空时处理last指针
+        if(isEmpty())
+            last = null;
+        N--;
+        return item;
+    }
+
+    public boolean isEmpty(){
+        return first == null;
+    }
+
+    public Integer size(){
+        return N;
+    }
+
+    public void traverse(){
+        Node p = first;
+        while(p != null){
+            System.out.print(p.item + &quot; &quot;);
+            p = p.next;
+        }
+        System.out.println();
+    }
+}
 </code></pre>
       
     </div>
@@ -521,7 +701,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -529,7 +709,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -538,7 +718,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -567,7 +747,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">4.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">4.2.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -586,7 +766,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

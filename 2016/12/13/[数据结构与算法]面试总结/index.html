@@ -109,7 +109,7 @@ netstat -anp |">
 <meta property="og:image" content="http://i.imgur.com/rdtyB5M.jpg">
 <meta property="og:image" content="http://i.imgur.com/E7X556s.jpg">
 <meta property="og:image" content="http://i.imgur.com/PCeb1Xo.jpg">
-<meta property="og:updated_time" content="2016-12-14T03:52:06.516Z">
+<meta property="og:updated_time" content="2016-12-14T08:08:31.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
 <meta name="twitter:description" content="Linux命令：wget  要下载文件的url
@@ -482,15 +482,15 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
 <p>-Xoss 参数设置本地方法栈大小（ 对于HotSpot无效 ）</p>
 <p>-Xss 参数设置栈容量 例： -Xss128k</p>
 <p>3、本地方法栈<br>同虚拟机栈，只不过本地方法栈位虚拟机使用到的native方法服务。</p>
-<p>Sun HotSpot虚拟机把本地方法栈和虚拟机栈合二为一 。</p>
+<p>Sun HotSpot虚拟机把本地方法栈和虚拟机栈合二为一</p>
 <p>4、java堆<br>线程共享</p>
-<p>主要用于分配对象实例和数组。</p>
+<p>主要用于分配<strong>对象实例和数组</strong>。</p>
 <p>-Xms 参数设置最小值</p>
 <p>-Xmx 参数设置最大值 例：VM Args: -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError</p>
 <p>若-Xms=-Xmx,则可避免堆自动扩展。</p>
 <p>-XX:+HeapDumpOnOutOfMemoryError 可以让虚拟机在出现内存溢出是dump出当前的内存堆转储快照。</p>
 <p>5、方法区<br>线程共享</p>
-<p>用于存储已被虚拟机加载的类信息、常量、静态变量、即使编译后的代码等数据 。</p>
+<p><strong>用于存储已被虚拟机加载的类信息、常量、静态变量、即使编译后的代码等数据</strong></p>
 <p>别名永久代（Permanent Generation）</p>
 <p>-XX:MaxPermSize 设置上限</p>
 <p>-XX:PermSize 设置最小值 例：VM Args: -XX:PermSize=10M -XX:MaxPermSize=10M</p>
@@ -503,7 +503,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
 <p>例 ：-XX:MaxDirectMemorySize=10M -Xmx20M</p>
 <p>对于32位操作系统来说，系统最大内存为4G。</p>
 <p>系统给每个进程的内存是有限制的，譬如32位的windows 限制为2G</p>
-<p>JVM，多线程<br>ConcurrentHashmao<br>wait和sleep的区别<br>放不放锁呗<br>还有生产者消费者<br>RPC<br>IPC</p>
+<p>JVM，多线程<br>ConcurrentHashmao<br>wait和sleep的区别<br>放不放锁呗<br>还有生产者消费者<br>RPC<br>IPC<br>快速排序<br>二叉排序树<br>索引数据结构<br>缓存</p>
 
       
     </div>
@@ -542,6 +542,10 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/14/[Java]Java多线程与并发库高级应用/" rel="prev" title="Java多线程与并发库高级应用">
+                Java多线程与并发库高级应用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -613,7 +617,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -621,7 +625,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -630,7 +634,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -678,7 +682,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

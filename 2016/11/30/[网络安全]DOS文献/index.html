@@ -102,7 +102,7 @@
 3、协议分析
 4、基于SYN Cookie技术的SYN Flood攻击防御模块
 5、自学习子系统，包含蜜罐系统和数据挖掘系统，蜜罐系统旁路手机网络">
-<meta property="og:updated_time" content="2016-11-30T09:40:06.946Z">
+<meta property="og:updated_time" content="2016-12-21T15:08:39.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOS文献">
 <meta name="twitter:description" content="SYNFlood型DDos攻击检测与防御研究Linux系统增加Netfilter防火墙功能，在IP层内提供了另外5个插入点，非常容易捕获并处理网络数据包
@@ -368,7 +368,8 @@
 </ul>
 <p>选择：正常情况下使用Netfilter/Iptables，会增加不必要的系统开销，因此在正常网络流量环境下，采用Libpcap旁路获取数据包形式</p>
 <p>Libpcap是Unix/Linux平台下的网络数据包捕获函数宝，而在Windows系统下有相应的Winpcap库</p>
-<p>数据包常规</p>
+<h2 id="攻击检测算法与SYN-Cookie算法研究"><a href="#攻击检测算法与SYN-Cookie算法研究" class="headerlink" title="攻击检测算法与SYN Cookie算法研究"></a>攻击检测算法与SYN Cookie算法研究</h2><p>基于TCP协议的攻击占了DDos攻击的绝大多数，而SYN Flood攻击又在TCP攻击中扮演着最重要的角色，当前防御SYN Flood攻击最流行的方法是使用SYN Proxy和SYN Cookie</p>
+<p>DDos攻击防御系统检测阶段的任务就是要在攻击分组到来时及时向防御系统发出警报，从而使防御系统能在短时间做出反应，开启防御策略，实施分组过滤</p>
 
       
     </div>
@@ -482,7 +483,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -490,7 +491,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -499,7 +500,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -528,7 +529,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SYNFlood型DDos攻击检测与防御研究"><span class="nav-number">1.</span> <span class="nav-text">SYNFlood型DDos攻击检测与防御研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux包捕获机制"><span class="nav-number">2.</span> <span class="nav-text">Linux包捕获机制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SYNFlood型DDos攻击检测与防御研究"><span class="nav-number">1.</span> <span class="nav-text">SYNFlood型DDos攻击检测与防御研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux包捕获机制"><span class="nav-number">2.</span> <span class="nav-text">Linux包捕获机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击检测算法与SYN-Cookie算法研究"><span class="nav-number">3.</span> <span class="nav-text">攻击检测算法与SYN Cookie算法研究</span></a></li></ol></div>
             
           </div>
         </section>
@@ -547,7 +548,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
