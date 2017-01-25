@@ -98,7 +98,7 @@
 多线程的应用不是为了提高运行效率，而是为了提高资源使用效率；当一个资源在等待I/O输入时，另一个线程可以使用处理器，提高了资源的利用率
 
 为什么使用多线程下载速度会变快？多线程下载：并不是自己电脑快了，而是抢到更多服务器资源。例：服务器为一个客户分配一个20K的线程下载，你用多个线程，服务器以为是多个用户就分配了多个20K的资源给你">
-<meta property="og:updated_time" content="2017-01-23T13:56:41.538Z">
+<meta property="og:updated_time" content="2017-01-25T14:06:19.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发库高级应用">
 <meta name="twitter:description" content="多线程与效率
@@ -743,7 +743,243 @@ class Person{
 }
 </pre>
 
-<h2 id="多个线程之间共享数据的方式探讨"><a href="#多个线程之间共享数据的方式探讨" class="headerlink" title="多个线程之间共享数据的方式探讨"></a>多个线程之间共享数据的方式探讨</h2>
+<h2 id="多个线程之间共享数据的方式探讨"><a href="#多个线程之间共享数据的方式探讨" class="headerlink" title="多个线程之间共享数据的方式探讨"></a>多个线程之间共享数据的方式探讨</h2><p>1、两个线程的操作一致，可以使用同一个Runnable对象。火车站买票适用这种情况</p>
+<pre><code>public class Method1 {
+
+    public static void main(String[] args){
+
+        Runnable runnable = new sell();
+
+        new Thread(runnable).start();
+        new Thread(runnable).start();
+    }
+}
+
+class sell implements Runnable{
+
+    private int ticket = 1000000;
+
+    public synchronized void sell(){
+        if(ticket &gt; 0){
+            ticket--;
+            System.out.println(Thread.currentThread() + &quot; 剩余票&quot; + ticket);
+        }
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            sell();
+        }
+    }
+}
+</code></pre><p>2、两个线程操作不一样。此时必须设置第三方共享数据，并调用他的方法进行数据操作（推荐）</p>
+<pre><code>public class Method1 {
+
+    public static void main(String[] args){
+
+        final TrainCenter trainCenter = new TrainCenter();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true)
+                   trainCenter.sell();
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true)
+                    trainCenter.sell();
+            }
+        }).start();
+    }
+}
+
+
+
+class TrainCenter{
+    private int ticket = 100000;
+
+    public int getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(int ticket) {
+        this.ticket = ticket;
+    }
+
+    public synchronized void sell(){
+        if(ticket &gt; 0){
+            ticket--;
+            System.out.println(Thread.currentThread() + &quot; 剩余 &quot; + ticket);
+        }
+    }
+}
+</code></pre><p>3、共享数据传入Runnable对象中，进行操作</p>
+<pre><code>public class Method1 {
+
+    public static void main(String[] args){
+
+        TrainCenter trainCenter = new TrainCenter();
+
+        new Thread(new Train1(trainCenter)).start();
+        new Thread(new Train2(trainCenter)).start();
+
+    }
+}
+
+
+class Train1 implements Runnable{
+
+    private TrainCenter trainCenter;
+
+    public Train1(TrainCenter trainCenter){
+        this.trainCenter = trainCenter;
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            trainCenter.sell();
+        }
+    }
+}
+
+class Train2 implements Runnable{
+
+    private TrainCenter trainCenter;
+
+    public Train2(TrainCenter trainCenter){
+        this.trainCenter = trainCenter;
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            trainCenter.sell();
+        }
+    }
+}
+
+
+
+class TrainCenter{
+    private int ticket = 100000;
+
+    public int getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(int ticket) {
+        this.ticket = ticket;
+    }
+
+    public synchronized void sell(){
+        if(ticket &gt; 0){
+            ticket--;
+            System.out.println(Thread.currentThread() + &quot; 剩余 &quot; + ticket);
+        }
+    }
+}
+</code></pre><h2 id="Java线程并法库-java-util-concurrent"><a href="#Java线程并法库-java-util-concurrent" class="headerlink" title="Java线程并法库 java.util.concurrent"></a>Java线程并法库 java.util.concurrent</h2><h3 id="java5原子性操作类的应用"><a href="#java5原子性操作类的应用" class="headerlink" title="java5原子性操作类的应用"></a>java5原子性操作类的应用</h3><p>Atomicxxx</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>线程池的作用：</p>
+<ul>
+<li>根据系统自身的环境情况，<strong>有效的限制执行线程的数量</strong>，超出数量的任务排队等候，等待有任务执行完毕，再从队列最前面取出任务执行</li>
+<li>减少创建和销毁线程的次数，每个工作线程可以多次使用</li>
+</ul>
+<p>常见线程池：<br>①newSingleThreadExecutor<br>单个线程的线程池，即线程池中每次只有一个线程工作，单线程串行执行任务<br>②newFixedThreadExecutor(n)<br>固定数量的线程池，没提交一个任务就是一个线程，直到达到线程池的最大数量，然后后面<strong>进入等待队列</strong>直到前面的任务完成才继续执行<br><strong>③newCacheThreadExecutor（推荐使用）</strong><br>可缓存线程池，当线程池大小超过了处理任务所需的线程，那么就会<strong>回收部分空闲</strong>（一般是60秒无执行）的线程，当有任务来时，又<strong>智能的添加</strong>新线程来执行。<br>④newScheduleThreadExecutor<br>大小无限制的线程池，支持定时和周期性的执行线程</p>
+<p>实例：</p>
+<p>①newSingleThreadExecutor</p>
+<pre><code>public class TestSingleThreadExecutor {
+    public static void main(String[] args){
+        //创建一个单个线程的线程池
+        ExecutorService pool = Executors.newSingleThreadExecutor();
+        //将任务放入池中并执行
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        //关闭
+        pool.shutdown();
+    }
+}
+
+class Task implements Runnable{
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + &quot;执行中。。。&quot;);
+    }
+}
+</code></pre><p>result：</p>
+<pre><code>pool-1-thread-1执行中。。。
+pool-1-thread-1执行中。。。
+pool-1-thread-1执行中。。。
+pool-1-thread-1执行中。。。
+pool-1-thread-1执行中。。。
+</code></pre><p>②newFixedThreadExecutor(n)</p>
+<pre><code>public class TestFixedThreadPool {
+    public static void main(String[] args){
+        //创建一个固定线程数的线程池
+        ExecutorService pool = Executors.newFixedThreadPool(2);
+        //将任务放入池中并执行
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        //关闭
+        pool.shutdown();
+    }
+}
+</code></pre><p>result：</p>
+<pre><code>pool-1-thread-1执行中。。。
+pool-1-thread-2执行中。。。
+pool-1-thread-1执行中。。。
+pool-1-thread-2执行中。。。
+pool-1-thread-1执行中。。。
+</code></pre><p>③newCacheThreadExecutor</p>
+<pre><code>public class TestCachedThreadPool {
+    public static void main(String[] args) {
+        //创建一个可重用固定线程数的线程池
+        ExecutorService pool = Executors.newCachedThreadPool();
+        //将任务放入池中并执行
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        pool.execute(new Task());
+        //关闭
+        pool.shutdown();
+    }
+}
+</code></pre><p>result：</p>
+<pre><code>pool-1-thread-1执行中。。。
+pool-1-thread-2执行中。。。
+pool-1-thread-4执行中。。。
+pool-1-thread-3执行中。。。
+pool-1-thread-5执行中。。。
+</code></pre><p><strong>JAVA线程池shutdown和shutdownNow的区别</strong></p>
+<p>shutDown() </p>
+<p>当线程池调用该方法时，线程池的状态则立刻变成SHUTDOWN状态。此时，则<strong>不能再往线程池中添加任何任务</strong>，否则将会抛出RejectedExecutionException异常。但是，此时线程池不会立刻退出，直到添加到线程池中的任务都<strong>已经处理完成，才会退出</strong>。 </p>
+<p>shutdownNow() </p>
+<p>根据JDK文档描述，大致意思是：执行该方法，<strong>线程池的状态立刻变成STOP状态，并试图停止所有正在执行的线程，不再处理还在池队列中等待的任务</strong>，当然，它会返回那些未执行的任务。 </p>
+<p>它试图终止线程的方法是通过调用Thread.interrupt()方法来实现的，但是大家知道，这种方法的作用有限，如果线程中没有sleep 、wait、Condition、定时锁等应用, interrupt()方法是无法中断当前的线程的。所以，ShutdownNow()并不代表线程池就一定立即就能退出，它可能必须要<strong>等待所有正在执行的任务都执行完成了才能退出</strong>。 </p>
+<p><strong>线程池定时器</strong></p>
+<p>这种做法从性能方面讲相对于传统的定时器要好</p>
+<pre><code>public static void main(String[] args){
+    Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println(&quot;测试开始&quot;);
+        }
+    },0,1, TimeUnit.SECONDS);
+}
+</code></pre><h3 id="Callable和Future"><a href="#Callable和Future" class="headerlink" title="Callable和Future"></a>Callable和Future</h3>
       
     </div>
 
@@ -908,7 +1144,7 @@ class Person{
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程技术回顾"><span class="nav-number">3.</span> <span class="nav-text">传统线程技术回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承Thread"><span class="nav-number">3.0.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">3.1.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">4.</span> <span class="nav-text">定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器的使用"><span class="nav-number">4.1.</span> <span class="nav-text">定时器的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">5.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术"><span class="nav-number">6.</span> <span class="nav-text">传统线程同步通信技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">7.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">7.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">7.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">7.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">8.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程技术回顾"><span class="nav-number">3.</span> <span class="nav-text">传统线程技术回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承Thread"><span class="nav-number">3.0.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">3.1.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">4.</span> <span class="nav-text">定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器的使用"><span class="nav-number">4.1.</span> <span class="nav-text">定时器的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">5.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术"><span class="nav-number">6.</span> <span class="nav-text">传统线程同步通信技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">7.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">7.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">7.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">7.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">8.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java线程并法库-java-util-concurrent"><span class="nav-number">9.</span> <span class="nav-text">Java线程并法库 java.util.concurrent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java5原子性操作类的应用"><span class="nav-number">9.1.</span> <span class="nav-text">java5原子性操作类的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">9.2.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callable和Future"><span class="nav-number">9.3.</span> <span class="nav-text">Callable和Future</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
