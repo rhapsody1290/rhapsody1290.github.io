@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,多线程,并发库," />
+  <meta name="keywords" content="Java,多线程,并发库,并发编程," />
 
 
 
@@ -91,14 +91,14 @@
 为什么使用多线程下载速度会变快？多线程下载：并不是自己电脑快了，而是抢到更多服务器资源。例：服务器为一个客户分配一个20K的线程下载，你用多个线程，服务器以为是多个用户就分配了多个20K的资源给你">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多线程与并发库高级应用">
-<meta property="og:url" content="http://yoursite.com/2016/12/14/[Java]Java多线程与并发库高级应用/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/12/14/[Java并发编程]Java多线程与并发库高级应用/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
 <meta property="og:description" content="多线程与效率
 多线程并不一定会提高程序的运行效率，反而会降低效率
 多线程的应用不是为了提高运行效率，而是为了提高资源使用效率；当一个资源在等待I/O输入时，另一个线程可以使用处理器，提高了资源的利用率
 
 为什么使用多线程下载速度会变快？多线程下载：并不是自己电脑快了，而是抢到更多服务器资源。例：服务器为一个客户分配一个20K的线程下载，你用多个线程，服务器以为是多个用户就分配了多个20K的资源给你">
-<meta property="og:updated_time" content="2016-12-15T10:02:11.725Z">
+<meta property="og:updated_time" content="2017-01-23T13:56:41.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发库高级应用">
 <meta name="twitter:description" content="多线程与效率
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/14/[Java]Java多线程与并发库高级应用/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/14/[Java并发编程]Java多线程与并发库高级应用/"/>
 
 
   <title> Java多线程与并发库高级应用 | Mr.Qian's Home </title>
@@ -308,8 +308,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发编程</span>
                   </a>
                 </span>
 
@@ -324,8 +324,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/14/[Java]Java多线程与并发库高级应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/14/[Java]Java多线程与并发库高级应用/" itemprop="commentsCount"></span>
+                <a href="/2016/12/14/[Java并发编程]Java多线程与并发库高级应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/14/[Java并发编程]Java多线程与并发库高级应用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -502,17 +502,30 @@ new Timer().schedule(new TimerTask() {
 2、静态同步方法使用的锁是该方法所在的class对象
 </code></pre><p>案例：output1和output2互斥，因为互斥变量都为当前对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">				<span class="keyword">int</span> len = name.length();</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">					System.out.print(name.charAt(i));</div><div class="line">				System.out.println();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
 <p>此时为静态函数，要实现互斥，使用Outputer的字节码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">synchronized</span> (Outputer.class) &#123;</div><div class="line">				<span class="keyword">int</span> len = name.length();</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">					System.out.print(name.charAt(i));</div><div class="line">				System.out.println();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="传统线程同步通信技术"><a href="#传统线程同步通信技术" class="headerlink" title="传统线程同步通信技术"></a>传统线程同步通信技术</h2><p>面试题：子线程循环10次，接着主线程循环100，接着又回到子线程循环10次，接着再回到主线程又循环100，如此循环50次，请写出程序</p>
-<p>思考：<br>1、需要控制两个线程的调度达到两个线程交替运行<br>2、线程1执行一次后，等待线程2执行；线程2执行后唤醒线程1执行，线程2等待…如此反复<br>3、<strong>可以将线程1和线程2的任务提取出来</strong>，在一个Business类中控制方法间的同步：在Business中定义一个boolean变量决定当前该运行哪个线程</p>
-<pre><code>public class Test {
-    public static void main(String[] args) throws Exception {
-        final Business business = new Business();
+<h2 id="传统线程同步通信技术"><a href="#传统线程同步通信技术" class="headerlink" title="传统线程同步通信技术"></a>传统线程同步通信技术</h2><p>线程同步就是线程按照<strong>先后的次序</strong>运行，即”我执行完之后然后你执行”</p>
+<p>面试题：子线程循环10次，接着主线程循环100，接着又回到子线程循环10次，接着再回到主线程又循环100，如此循环50次，请写出程序</p>
+<pre><code>/**
+ * 面试题：子线程循环10次，接着主线程循环100，
+ * 接着又回到子线程循环10次，接着再回到主线程又循环100，
+ * 如此循环50次，请写出程序
+ */
+
+/** 解题思路：线程交替运行，这是一个线程同步问题
+ * 1、首先保证子任务和主任务执行过程中不冲突：将子任务和主任务封装在business类中，使用关键词Synchronized保证代码块的原子性
+ * 2、子任务、主任务前后执行顺序控制：使用wait/notify机制，使用boolean类型的isSub变量控制当前应该执行哪个任务，如果不该执
+ *    行则休眠，否则执行；执行结束后必须反转isSub变量，然后通知阻塞进程继续执行
+ * 3、交替执行50次：子任务和主任务各自循环50次，在第2步时已经保证子任务和主任务的交替运行，完成要求
+ */
+
+class TwoThreadSynchronized {
+    public static void main(String[] args){
+        final Bussiness bussiness = new Bussiness();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for(int i = 0; i &lt; 50; i++)
-                    business.sub(i);
+                    bussiness.main(i+1);
             }
         }).start();
 
@@ -520,17 +533,19 @@ new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 for(int i = 0; i &lt; 50; i++)
-                    business.main(i);
+                    bussiness.sub(i+1);
             }
         }).start();
     }
 }
 
-class Business{
-    private boolean isShouldSub = true;
+class Bussiness{
 
-    public synchronized void sub(int k){
-        while(!isShouldSub){
+    //共享变量，子任务先开始
+    boolean isSub = true;
+
+    public synchronized void main(int loop){
+        while(isSub){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -538,36 +553,197 @@ class Business{
             }
         }
 
-        System.out.print(&quot;loop &quot; + k + &quot;：&quot;);
-        for(int i = 0; i &lt; 10; i++){
-            System.out.print(i + &quot; &quot;);
-        }
-        System.out.println();
+        System.out.println(&quot;第&quot; + loop + &quot;次循环：&quot;);
 
-        isShouldSub = false;
-        notify();
-    }
-
-    public synchronized void main(int k){
-        while(isShouldSub){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.print(&quot;loop &quot; + k + &quot;：&quot;);
+        System.out.print(&quot;main：&quot;);
         for(int i = 0; i &lt; 100; i++){
             System.out.print(i + &quot; &quot;);
         }
         System.out.println();
 
-        isShouldSub = true;
+        isSub = true;
         notify();
     }
+
+    public synchronized void sub(int loop){
+
+        while(!isSub){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println(&quot;第&quot; + loop + &quot;次循环：&quot;);
+
+        System.out.print(&quot;sub：&quot;);
+        for(int i = 0; i &lt; 10; i++){
+            System.out.print(i + &quot; &quot;);
+        }
+        System.out.println();
+
+        isSub = false;
+        notify();
+    }
+
 }
-</code></pre><h2 id="ThreadLocal实现线程范围内的数据共享"><a href="#ThreadLocal实现线程范围内的数据共享" class="headerlink" title="ThreadLocal实现线程范围内的数据共享"></a>ThreadLocal实现线程范围内的数据共享</h2>
+</code></pre><h2 id="ThreadLocal实现线程范围内的数据共享"><a href="#ThreadLocal实现线程范围内的数据共享" class="headerlink" title="ThreadLocal实现线程范围内的数据共享"></a>ThreadLocal实现线程范围内的数据共享</h2><p><img src="" alt="搜狗截图20170123165837"></p>
+<p>什么是线程范围内的数据共享？一个线程内部的各个函数都能访问该共享变量，而其他线程不能访问（区别于静态变量，静态变量能被所有线程访问，但需要解决线程间数据同步的问题）</p>
+<p>应用：</p>
+<ul>
+<li>用户访问Web服务器，服务器启动一条线程处理用户请求，不同用户之间不受干扰</li>
+<li>用户访问数据库，每个用户使用独立的connection。不然会出现A用户开启事务，操作还没有结束，B用户使用的是相同的connection，提交事务，导致A用户还未完成操作但事务提交了</li>
+</ul>
+<h3 id="自己的实现的线程范围内的数据共享"><a href="#自己的实现的线程范围内的数据共享" class="headerlink" title="自己的实现的线程范围内的数据共享"></a>自己的实现的线程范围内的数据共享</h3><p>使用全局的map，键为线程，值为该线程中需要共享的变量。每次取值时，传入当前的线程，即可取到当前线程共享的变量</p>
+<pre><code>public class ThreadLocalTest {
+    //键为当前线程，值为线程范围内的共享变量
+    static Map&lt;Thread, Integer&gt; map = new HashMap&lt;Thread, Integer&gt;();
+
+    public static void main(String[] args){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                map.put(Thread.currentThread(),1);
+                System.out.println(&quot;A:&quot; + new A().get());
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                map.put(Thread.currentThread(),2);
+                System.out.println(&quot;B:&quot; + new A().get());
+            }
+        }).start();
+
+
+    }
+
+    static class A{
+        public Integer get(){
+            return map.get(Thread.currentThread());
+        }
+    }
+}
+</code></pre><h3 id="使用-ThreadLocal-实现的线程间数据共享"><a href="#使用-ThreadLocal-实现的线程间数据共享" class="headerlink" title="使用 ThreadLocal 实现的线程间数据共享"></a>使用 ThreadLocal 实现的线程间数据共享</h3><pre><code>public class ThreadLocalTest {
+
+    static ThreadLocal&lt;Integer&gt; threadLocal = new ThreadLocal&lt;Integer&gt;();
+
+    public static void main(String[] args){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                threadLocal.set(1);
+                System.out.println(&quot;A:&quot; + new A().get());
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                threadLocal.set(2);
+                System.out.println(&quot;B:&quot; + new A().get());
+            }
+        }).start();
+
+    }
+
+    static class A{
+        public Integer get(){
+            return threadLocal.get();
+        }
+    }
+}
+</code></pre><p>原理：</p>
+<p>1、1个ThreadLocal代表一个与线程绑定的值<br>2、线程中存储多个ThreadLocal的值，用Map存储</p>
+<pre><code>public class ThreadLocal&lt;T&gt; {
+
+    public void set(T value) {
+        Thread t = Thread.currentThread();
+        ThreadLocalMap map = getMap(t);
+        if (map != null)
+            map.set(this, value);
+        else
+            createMap(t, value);
+    }
+
+    public T get() {
+        Thread t = Thread.currentThread();
+        ThreadLocalMap map = getMap(t);
+        if (map != null) {
+            ThreadLocalMap.Entry e = map.getEntry(this);
+            if (e != null)
+                return (T)e.value;
+        }
+        return setInitialValue();
+    }
+
+    ThreadLocalMap getMap(Thread t) {
+        return t.threadLocals;
+    }
+
+}
+</code></pre><h3 id="使用-ThreadLocal-实现线程范围内的单例"><a href="#使用-ThreadLocal-实现线程范围内的单例" class="headerlink" title="使用 ThreadLocal 实现线程范围内的单例"></a>使用 ThreadLocal 实现线程范围内的单例</h3><ul>
+<li>每个线程都使用一个类的实例，实现这个功能需要结合ThreadLocal，与线程绑定</li>
+<li>单例模式无法实现，是在整个应用中保持单例</li>
+</ul>
+<p>应用：对于每一个用户请求，对应一个线程，为之创建一个容器，仅供该用户使用。该容器可以使用线程范围内的单例来实现</p>
+<pre>
+public class ThreadLocalTest {
+
+    public static void main(String[] args){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
+                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
+                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
+            }
+        }).start();
+    }
+}
+
+class Person{
+
+    <font color="red">private static ThreadLocal<person> threadLocal = new ThreadLocal<person>();
+    public static Person getThreadLocalInstance(){
+        Person person = threadLocal.get();
+        if(person == null){
+            person = new Person();
+            threadLocal.set(person);
+        }
+        return person;
+    }</person></person></font>
+
+    private String name;
+    private Integer age;
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+}
+</pre>
+
+<h2 id="多个线程之间共享数据的方式探讨"><a href="#多个线程之间共享数据的方式探讨" class="headerlink" title="多个线程之间共享数据的方式探讨"></a>多个线程之间共享数据的方式探讨</h2>
       
     </div>
 
@@ -595,6 +771,8 @@ class Business{
           
             <a href="/tags/并发库/" rel="tag">#并发库</a>
           
+            <a href="/tags/并发编程/" rel="tag">#并发编程</a>
+          
         </div>
       
 
@@ -610,7 +788,7 @@ class Business{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/20/[Java]正确使用 Volatile 变量/" rel="prev" title="正确使用 Volatile 变量">
+              <a href="/2016/12/20/[Java并发编程]正确使用 Volatile 变量/" rel="prev" title="正确使用 Volatile 变量">
                 正确使用 Volatile 变量 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -638,8 +816,8 @@ class Business{
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/14/[Java]Java多线程与并发库高级应用/"
-           data-title="Java多线程与并发库高级应用" data-url="http://yoursite.com/2016/12/14/[Java]Java多线程与并发库高级应用/">
+      <div class="ds-thread" data-thread-key="2016/12/14/[Java并发编程]Java多线程与并发库高级应用/"
+           data-title="Java多线程与并发库高级应用" data-url="http://yoursite.com/2016/12/14/[Java并发编程]Java多线程与并发库高级应用/">
       </div>
     
   </div>
@@ -684,7 +862,7 @@ class Business{
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -692,7 +870,7 @@ class Business{
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -701,7 +879,7 @@ class Business{
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -730,7 +908,7 @@ class Business{
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程技术回顾"><span class="nav-number">3.</span> <span class="nav-text">传统线程技术回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承Thread"><span class="nav-number">3.0.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">3.1.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">4.</span> <span class="nav-text">定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器的使用"><span class="nav-number">4.1.</span> <span class="nav-text">定时器的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">5.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术"><span class="nav-number">6.</span> <span class="nav-text">传统线程同步通信技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">7.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程技术回顾"><span class="nav-number">3.</span> <span class="nav-text">传统线程技术回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#继承Thread"><span class="nav-number">3.0.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">3.0.2.</span> <span class="nav-text">实现Runnable接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">3.1.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">4.</span> <span class="nav-text">定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定时器的使用"><span class="nav-number">4.1.</span> <span class="nav-text">定时器的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">5.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术"><span class="nav-number">6.</span> <span class="nav-text">传统线程同步通信技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">7.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">7.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">7.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">7.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">8.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li></ol></div>
             
           </div>
         </section>
