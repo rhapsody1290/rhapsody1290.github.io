@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -84,12 +84,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Qian's Home">
-<meta property="og:url" content="http://yoursite.com/categories/JSP/index.html">
+<meta name="description" content="Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。
+Future模式在请求发生时，会先产生一个Futur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程设计模式">
+<meta property="og:url" content="http://yoursite.com/2017/01/25/[Java并发编程]并发编程设计模式/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。
+Future模式在请求发生时，会先产生一个Futur">
+<meta property="og:image" content="http://i.imgur.com/487kq32.jpg">
+<meta property="og:updated_time" content="2017-02-06T07:30:40.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Qian's Home">
+<meta name="twitter:title" content="并发编程设计模式">
+<meta name="twitter:description" content="Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。
+Future模式在请求发生时，会先产生一个Futur">
+<meta name="twitter:image" content="http://i.imgur.com/487kq32.jpg">
 
 
 
@@ -110,10 +119,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/JSP/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/01/25/[Java并发编程]并发编程设计模式/"/>
 
 
-  <title> 分类: JSP | Mr.Qian's Home </title>
+  <title> 并发编程设计模式 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +143,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -245,47 +254,168 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        JSP
-        <small>分类</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                并发编程设计模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-25T22:44:00+08:00" content="2017-01-25">
+              2017-01-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/25/[Java并发编程]并发编程设计模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/25/[Java并发编程]并发编程设计模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="Future-模式"><a href="#Future-模式" class="headerlink" title="Future 模式"></a>Future 模式</h2><p>考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以<strong>我们希望在文件开启之后，会有一个默认背景</strong>（可以是纯色图片，也可以是正在加载的图片），<strong>与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。</strong></p>
+<p>Future模式在请求发生时，会先产生一个Future物件给发出请求的客户，而同时间，真正的目标物件之生成，由一个新的执行持续进行（即 Worker Thread），真正的目标物件生成之后，将之设定至Future之中，而当客户端真正需要目标物件时，目标物件也已经准备好，可以让客户提取使用。 </p>
+<p><img src="http://i.imgur.com/487kq32.jpg" alt=""></p>
+<p>一个简单的Java程式片段示范可能像是这样：</p>
+<pre><code>public Future request() {
+    final Future future = new Future();
 
-      <h1 class="post-title">
+    new Thread() {
+        public void run() {
+            // 下面這個動作可能是耗時的
+            RealSubject subject = new RealSubject();
+            future.setRealSubject(subject);
+        }
+    }.start();
+
+    return future;
+} 
+</code></pre>
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/07/14/[JSP]JSP笔记/" itemprop="url">
-              
-                <span itemprop="name">JSP笔记</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-14T11:09:00+08:00"
-              content="2016-07-14" >
-          07-14
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/18/[mybatis]通用mapper/" rel="next" title="通用mapper">
+                <i class="fa fa-chevron-left"></i> 通用mapper
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/09/[Maven]Maven聚合与继承/" rel="prev" title="Maven聚合与继承">
+                Maven聚合与继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -293,6 +423,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/25/[Java并发编程]并发编程设计模式/"
+           data-title="并发编程设计模式" data-url="http://yoursite.com/2017/01/25/[Java并发编程]并发编程设计模式/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -312,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -324,7 +471,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -332,7 +479,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -341,7 +488,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -363,6 +510,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Future-模式"><span class="nav-number">1.</span> <span class="nav-text">Future 模式</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -459,6 +617,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

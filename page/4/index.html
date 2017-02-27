@@ -269,8 +269,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/18/[Maven]Maven基础POM配置讲解/" itemprop="url">
-                  Maven基础POM配置讲解
+                <a class="post-title-link" href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/" itemprop="url">
+                  IDEA在编辑时提示could not autowire
                 </a>
               
             
@@ -283,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T00:00:00+08:00" content="2016-08-18">
-              2016-08-18
+            <time itemprop="dateCreated" datetime="2016-10-08T10:28:00+08:00" content="2016-10-08">
+              2016-10-08
             </time>
           </span>
 
@@ -297,8 +297,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
+                  <a href="/categories/SSM/" itemprop="url" rel="index">
+                    <span itemprop="name">SSM</span>
                   </a>
                 </span>
 
@@ -313,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/18/[Maven]Maven基础POM配置讲解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/[Maven]Maven基础POM配置讲解/" itemprop="commentsCount"></span>
+                <a href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/[SSM]IDEA在编辑时提示could not autowire/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -339,17 +339,13 @@
       
         
           
-          Maven坐标maven坐标的主要组成groupId：定义当前maven项目属于哪个项目
-artifactId：定义实际项目中的某一个模块
-version：定义当前项目的当前版本
-packaging：定义当前项目的打包方式 jar、war
-
-根据这些坐标，在maven库中可以找到唯一的jar包
-其中
+          在开发中我在applicationContext-dao.xml中加入了mapper扫描器
+&lt;!--mapper扫描器--&gt;  
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/18/[Maven]Maven基础POM配置讲解/#more" rel="contents">
+            <a class="btn" href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -400,8 +396,8 @@ packaging：定义当前项目的打包方式 jar、war
             
               
                 
-                <a class="post-title-link" href="/2016/08/18/[Maven]Maven安装及基础功能/" itemprop="url">
-                  Maven安装及基础功能
+                <a class="post-title-link" href="/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/" itemprop="url">
+                  SpringMVC-Spring-Mybatis整合
                 </a>
               
             
@@ -414,8 +410,8 @@ packaging：定义当前项目的打包方式 jar、war
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T00:00:00+08:00" content="2016-08-18">
-              2016-08-18
+            <time itemprop="dateCreated" datetime="2016-10-07T12:52:00+08:00" content="2016-10-07">
+              2016-10-07
             </time>
           </span>
 
@@ -428,8 +424,8 @@ packaging：定义当前项目的打包方式 jar、war
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
+                  <a href="/categories/SSM/" itemprop="url" rel="index">
+                    <span itemprop="name">SSM</span>
                   </a>
                 </span>
 
@@ -444,8 +440,8 @@ packaging：定义当前项目的打包方式 jar、war
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/18/[Maven]Maven安装及基础功能/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/[Maven]Maven安装及基础功能/" itemprop="commentsCount"></span>
+                <a href="/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -470,16 +466,920 @@ packaging：定义当前项目的打包方式 jar、war
       
         
           
-          Maven作用★★★★★
-统一开发规范与工具：项目目录结构，配置文件、单元测试代码位置；项目构建工具，自动完成那个编译、测试、打包等工作
-统一管理 jar 包：Maven 中央仓库下载jar包
-
-项目构建过程Maven是一个跨平台的项目管理工具，主要用于基于java平台的项目构建，依赖管理。
-如图为
+          导入依赖&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xs
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/18/[Maven]Maven安装及基础功能/#more" rel="contents">
+            <a class="btn" href="/2016/10/07/[SSM]SpringMVC-Spring-Mybatis整合/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/30/[Java]list转string[]/" itemprop="url">
+                  list转string[]
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-30T00:00:00+08:00" content="2016-09-30">
+              2016-09-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/30/[Java]list转string[]/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/30/[Java]list转string[]/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          方法一：单个元素转换//ArrayList
+ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+array.add(&quot;aaa&quot;);
+array.add(&quot;bbb&quot;);
+array.add
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/30/[Java]list转string[]/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/30/[Java]Java泛型/" itemprop="url">
+                  Java泛型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-30T00:00:00+08:00" content="2016-09-30">
+              2016-09-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/30/[Java]Java泛型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/30/[Java]Java泛型/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          泛型的基本应用
+Jdk1.5的集合类希望你在定义集合时，明确表示你要向集合中装哪种类型的数据，无法加入指定类型以外的数据
+如下例子，如果不给定参数类型，可以在集合类中加入任意类型的数据，但在取元素时必须由程序员强行转换数据类型，编译器不会报错，出现问题由程序员负责
+
+ArrayList collec
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/30/[Java]Java泛型/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/07/[Spring MVC]Jave Web模型2和MVC模式/" itemprop="url">
+                  Jave Web模型2和MVC模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T23:00:00+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring MVC</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/[Spring MVC]Jave Web模型2和MVC模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/[Spring MVC]Jave Web模型2和MVC模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          模型1和模型2介绍
+Java Web应用开发中有两种设计模型，为了方便，分别称为模型1和模型2
+模型1是通过链接方式进行JSP页面之间的跳转
+方式直接，适合小型应用开发
+但在中型和大型应用中，这种方式会带来维护上的问题
+
+
+模型2是基于MVC模式，是Java Web应用的推荐架构
+一个MVC模式的应
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/07/[Spring MVC]Jave Web模型2和MVC模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/06/[Java]自动装箱与拆箱/" itemprop="url">
+                  自动装箱与拆箱（张孝祥补充）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T17:07:00+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/06/[Java]自动装箱与拆箱/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/[Java]自动装箱与拆箱/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Integer与int比较
+Integer.valueof() 返回的是Integer的对象
+Integer.parseInt() 返回的是一个int的值
+new Integer.valueof().intValue();返回的也是一个int的值
+
+不同类型比较public static void 
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/[Java]自动装箱与拆箱/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/06/[网络安全]IP地址与整数转换/" itemprop="url">
+                  IP地址与整数转换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-06T09:52:00+08:00" content="2016-09-06">
+              2016-09-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络安全/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/06/[网络安全]IP地址与整数转换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/[网络安全]IP地址与整数转换/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Java中byte, int的转换int -&gt; byte
+可以直接使用强制类型转换: byte b = (byte) aInt;
+这个操作是直接截取int中最低一个字节，如果int大于255，则值就会变得面目全非了
+
+byte -&gt; int
+这里有两种情况，一种是要求保持值不变，例如进行
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/06/[网络安全]IP地址与整数转换/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/01/[Spring MVC]Spring MVC学习笔记/" itemprop="url">
+                  Spring MVC学习笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T00:00:00+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Spring-MVC/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring MVC</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/01/[Spring MVC]Spring MVC学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/[Spring MVC]Spring MVC学习笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Spring MVC简介
+SpringMVC是一个基于MVC设计理念的web框架
+Spring MVC通过一套MVC注解，让POJO成为处理请求的控制器，无需实现任何接口，同时SpringMVC还支持REST风格的URL请求
+Spring MVC在框架设计、扩展性、灵活性等方面全面超越Struts、
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/01/[Spring MVC]Spring MVC学习笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/22/[Java]Java分层思想——Struts+Hibernate+接口编程的方式/" itemprop="url">
+                  Java分层思想——Struts+Hibernate+接口编程的方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-22T00:00:00+08:00" content="2016-08-22">
+              2016-08-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/22/[Java]Java分层思想——Struts+Hibernate+接口编程的方式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/22/[Java]Java分层思想——Struts+Hibernate+接口编程的方式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          接口编程
+通过接口(使用动态代理)，就达到web层和业务层的解耦（业务层代码改动，web层不需要重写，达到解耦）
+数据库有两张表，分别是users表和message表，对应的在业务层有Users对象、UsersService对象；Message对象、MessageService对象
+在web层定义U
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/22/[Java]Java分层思想——Struts+Hibernate+接口编程的方式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -636,911 +1536,11 @@ packaging：定义当前项目的打包方式 jar、war
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/12/[Hibernate]Hibernate笔记/" itemprop="url">
-                  Hibernate笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-12T17:55:00+08:00" content="2016-08-12">
-              2016-08-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Hibernate/" itemprop="url" rel="index">
-                    <span itemprop="name">Hibernate</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/12/[Hibernate]Hibernate笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/12/[Hibernate]Hibernate笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Hibernate简介
-Hibernate是对jdbc进行轻量级封装的ORM框架，位于数据持久层
-ORM全称对象关系映射，框架在Java对象与关系数据库之间建立 映射，以实现 直接存取 Java对象
-
-Hibernate参考资料Hibernate3.2API.chmhttps://github.co
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/12/[Hibernate]Hibernate笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/11/[mybatis]mybatis笔记/" itemprop="url">
-                  mybatis笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T00:00:00+08:00" content="2016-08-11">
-              2016-08-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/11/[mybatis]mybatis笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/[mybatis]mybatis笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          JDBC回顾JDBC连接数据库分为六步1. 加载驱动
-2. 创建连接
-3. 获取statement对象
-4. 执行sql语句
-5. 处理结果集
-6. 关闭资源
-
-存在的问题及解决方案1、加载驱动问题：
-　　● 每次执行都加载驱动
-　　● 驱动名称，硬编码到java代码中，如果需要修改驱动，需要修改j
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/11/[mybatis]mybatis笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/11/[Struts2]Struts2笔记/" itemprop="url">
-                  Struts2笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-11T00:00:00+08:00" content="2016-08-11">
-              2016-08-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Struts2/" itemprop="url" rel="index">
-                    <span itemprop="name">Struts2</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/11/[Struts2]Struts2笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/11/[Struts2]Struts2笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          什么是Struts2
-Struts2是一个MVC框架
-Struts2起源于WebWork框架，Struts2就是WebWork2
-Struts2是对Struts1的一个补充，而不是替代品
-
-Struts2快速入门(Action、struts.xml、跳转结果)登录功能Actionpackage cn
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/11/[Struts2]Struts2笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/09/[Java]命令行编译Java程序/" itemprop="url">
-                  命令行编译Java程序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-09T00:00:00+08:00" content="2016-08-09">
-              2016-08-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/09/[Java]命令行编译Java程序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/09/[Java]命令行编译Java程序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          先说下.java和.class文件，.java文件可以放在任何位置，只要运行javac时，指定你要编译的源文件位置就好，然后javac还有另一个参数是指定.class文件输出到哪个目录。另外javac还有一个option叫 -d，表示编译出来的.class文件，按照包名放进相应层级的目录中去。所以，
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/09/[Java]命令行编译Java程序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/08/[Java]Log4j笔记/" itemprop="url">
-                  Log4j笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-08T00:00:00+08:00" content="2016-08-08">
-              2016-08-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/08/[Java]Log4j笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/08/[Java]Log4j笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          依赖&lt;dependency&gt;
-    &lt;groupId&gt;log4j&lt;/groupId&gt;
-    &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-    &lt;version&gt;1.2.17&lt;/version&gt;
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/08/[Java]Log4j笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/04/[网络安全]Dos攻击原理及防御/" itemprop="url">
-                  Dos攻击原理及防御
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-04T00:00:00+08:00" content="2016-08-04">
-              2016-08-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/网络安全/" itemprop="url" rel="index">
-                    <span itemprop="name">网络安全</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/04/[网络安全]Dos攻击原理及防御/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/04/[网络安全]Dos攻击原理及防御/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Dos攻击简介DoS是Denial of Service的简称，即拒绝服务，造成DoS的攻击行为被称为DoS攻击，其目的是使计算机或网络无法提供正常的服务。最常见的DoS攻击有计算机网络 带宽攻击和 连通性攻击。
-
-带宽攻击 指以极大的通信量冲击网络，使得所有可用网络资源都被消耗殆尽，最后导致合法的
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/04/[网络安全]Dos攻击原理及防御/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/01/[Linux]磁盘分区/" itemprop="url">
-                  磁盘分区
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T00:00:00+08:00" content="2016-08-01">
-              2016-08-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/01/[Linux]磁盘分区/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/[Linux]磁盘分区/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          磁盘连接方式与设备文件名的关系
-计算机常用的磁盘接口有两种，分别是IDE与SATA接口，目前主流是SATA接口
-一个IDE电缆可以连接两个IDE设备，通常主机提供两个IDE接口，因此最多可以接四个IDE设备。IDE设备分为主设备（Master）与从设备（Slave），四个IDE设备的文件名分别是/d
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/[Linux]磁盘分区/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1581,7 +1581,7 @@ Struts2快速入门(Action、struts.xml、跳转结果)登录功能Actionpackage
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1589,7 +1589,7 @@ Struts2快速入门(Action、struts.xml、跳转结果)登录功能Actionpackage
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1598,7 +1598,7 @@ Struts2快速入门(Action、struts.xml、跳转结果)登录功能Actionpackage
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

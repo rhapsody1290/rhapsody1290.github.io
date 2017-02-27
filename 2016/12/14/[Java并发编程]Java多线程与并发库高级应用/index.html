@@ -98,7 +98,7 @@
 多线程的应用不是为了提高运行效率，而是为了提高资源使用效率；当一个资源在等待I/O输入时，另一个线程可以使用处理器，提高了资源的利用率
 
 为什么使用多线程下载速度会变快？多线程下载：并不是自己电脑快了，而是抢到更多服务器资源。例：服务器为一个客户分配一个20K的线程下载，你用多个线程，服务器以为是多个用户就分配了多个20K的资源给你">
-<meta property="og:updated_time" content="2017-01-25T14:13:40.761Z">
+<meta property="og:updated_time" content="2017-02-06T14:25:30.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发库高级应用">
 <meta name="twitter:description" content="多线程与效率
@@ -884,7 +884,7 @@ class TrainCenter{
         }
     }
 }
-</code></pre><h2 id="Java线程并法库-java-util-concurrent"><a href="#Java线程并法库-java-util-concurrent" class="headerlink" title="== Java线程并法库 java.util.concurrent =="></a>== Java线程并法库 java.util.concurrent ==</h2><h3 id="java5原子性操作类的应用"><a href="#java5原子性操作类的应用" class="headerlink" title="java5原子性操作类的应用"></a>java5原子性操作类的应用</h3><p>Atomicxxx</p>
+</code></pre><h2 id="Java并法库-java-util-concurrent"><a href="#Java并法库-java-util-concurrent" class="headerlink" title="== Java并法库 java.util.concurrent =="></a>== Java并法库 java.util.concurrent ==</h2><h3 id="java5原子性操作类的应用"><a href="#java5原子性操作类的应用" class="headerlink" title="java5原子性操作类的应用"></a>java5原子性操作类的应用</h3><p>Atomicxxx</p>
 <h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>线程池的作用：</p>
 <ul>
 <li>根据系统自身的环境情况，<strong>有效的限制执行线程的数量</strong>，超出数量的任务排队等候，等待有任务执行完毕，再从队列最前面取出任务执行</li>
@@ -978,7 +978,43 @@ pool-1-thread-5执行中。。。
         }
     },0,1, TimeUnit.SECONDS);
 }
-</code></pre><h3 id="Callable和Future"><a href="#Callable和Future" class="headerlink" title="Callable和Future"></a>Callable和Future</h3>
+</code></pre><h3 id="Callable和Future"><a href="#Callable和Future" class="headerlink" title="Callable和Future"></a>Callable和Future</h3><p>Callable和Future，一个产生结果，一个拿到结果。 Callable接口类似于Runnable，从名字就可以看出来了，但是Runnable不会返回结果，并且无法抛出返回结果的异常，而Callable功能更强大一些，<strong>被线程执行后，可以返回值，这个返回值可以被Future拿到</strong>，也就是说，<strong>Future可以拿到异步执行任务的返回值</strong>，下面来看一个简单的例子：</p>
+<pre><code>public class CallableAndFuture {
+    private FutureTask&lt;Integer&gt; future;
+
+    public static void main(String[] args) {
+
+        //复杂操作，需要耗费很长时间，但结果不是立刻需要
+        Callable&lt;Integer&gt; callable = new Callable&lt;Integer&gt;() {
+            public Integer call() throws Exception {
+                Thread.sleep(10000);
+                return new Random().nextInt(100);
+            }
+        };
+
+        FutureTask&lt;Integer&gt; future = new FutureTask&lt;Integer&gt;(callable);
+        new Thread(future).start();
+
+        try {
+            Thread.sleep(5000);// 可能做一些事情
+
+            if(!future.isDone()){
+                System.out.println(&quot;任务还没有执行完，先返回默认值0&quot;);
+            }
+
+            //用户有足够的耐心等待任务执行结束
+            System.out.println(&quot;任务执行结束：&quot; + future.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p>FutureTask实现了两个接口，Runnable和Future，所以它<strong>既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值</strong>，那么这个组合的使用有什么好处呢？假设有一个很耗时的返回值需要计算，并且这个返回值不是立刻需要的话，那么就可以使用这个组合，<strong>用另一个线程去计算返回值，而当前线程在使用这个返回值之前可以做其它的操作，等到需要这个返回值时，再通过Future得到</strong>，岂不美哉！这里有一个Future模式的介绍：<a href="http://openhome.cc/Gossip/DesignPattern/FuturePattern.htm。" target="_blank" rel="external">http://openhome.cc/Gossip/DesignPattern/FuturePattern.htm。</a> </p>
+<p>下面来看另一种方式使用Callable和Future，通过ExecutorService的submit方法执行Callable，并返回Future，代码如下：</p>
+
       
     </div>
 
@@ -1097,7 +1133,7 @@ pool-1-thread-5执行中。。。
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">64</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1105,7 +1141,7 @@ pool-1-thread-5执行中。。。
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1114,7 +1150,7 @@ pool-1-thread-5执行中。。。
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1143,7 +1179,7 @@ pool-1-thread-5执行中。。。
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程技术回顾"><span class="nav-number">3.</span> <span class="nav-text">== 传统线程技术回顾 ==</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线程的两种传统方式"><span class="nav-number">4.</span> <span class="nav-text">创建线程的两种传统方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread"><span class="nav-number">4.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">4.2.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">4.3.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">5.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">6.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术"><span class="nav-number">7.</span> <span class="nav-text">传统线程同步通信技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">8.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">8.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">8.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">8.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">9.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java线程并法库-java-util-concurrent"><span class="nav-number">10.</span> <span class="nav-text">== Java线程并法库 java.util.concurrent ==</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java5原子性操作类的应用"><span class="nav-number">10.1.</span> <span class="nav-text">java5原子性操作类的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">10.2.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池定时器"><span class="nav-number">10.3.</span> <span class="nav-text">线程池定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callable和Future"><span class="nav-number">10.4.</span> <span class="nav-text">Callable和Future</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程技术回顾"><span class="nav-number">3.</span> <span class="nav-text">== 传统线程技术回顾 ==</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线程的两种传统方式"><span class="nav-number">4.</span> <span class="nav-text">创建线程的两种传统方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread"><span class="nav-number">4.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">4.2.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">4.3.</span> <span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">5.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">6.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术"><span class="nav-number">7.</span> <span class="nav-text">传统线程同步通信技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">8.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">8.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">8.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">8.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">9.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java并法库-java-util-concurrent"><span class="nav-number">10.</span> <span class="nav-text">== Java并法库 java.util.concurrent ==</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java5原子性操作类的应用"><span class="nav-number">10.1.</span> <span class="nav-text">java5原子性操作类的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">10.2.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池定时器"><span class="nav-number">10.3.</span> <span class="nav-text">线程池定时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callable和Future"><span class="nav-number">10.4.</span> <span class="nav-text">Callable和Future</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
