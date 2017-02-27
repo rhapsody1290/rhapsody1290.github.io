@@ -109,7 +109,7 @@
 基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
 排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序r">
 <meta property="og:image" content="http://i.imgur.com/GDFtowZ.png">
-<meta property="og:updated_time" content="2016-12-15T03:30:29.210Z">
+<meta property="og:updated_time" content="2017-02-27T14:49:38.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法4笔记">
 <meta name="twitter:description" content="书本源代码http://algs4.cs.princeton.edu/code/
@@ -586,6 +586,53 @@
         System.out.println();
     }
 }
+</code></pre><h2 id="排序方法"><a href="#排序方法" class="headerlink" title="排序方法"></a>排序方法</h2><p>选择排序</p>
+<pre><code>int[] a = {5, 4, 3, 2, 1};
+int n = a.length;
+for (int i = 0; i &lt; n - 1; i++) {
+    int min = i;
+    for (int j = i + 1; j &lt; n; j++) {
+        //min为下标，不要搞错
+        if (a[j] &lt; a[min]) {
+            min = j;
+        }
+    }
+    if (min != i) {
+        int t = a[min];
+        a[min] = a[i];
+        a[i] = t;
+    }
+}
+System.out.println(Arrays.toString(a));
+</code></pre><p>插入排序</p>
+<pre><code>int[] a = {5, 4, 3, 2, 1};
+int n = a.length;
+//1 ~ n-1，执行n-1次
+for (int i = 1; i &lt; n; i++) {
+    int j = i - 1;
+    int t = a[i];
+    //j &gt;=0 要放在前面
+    while (j &gt;= 0 &amp;&amp; t &lt; a[j]) {
+        a[j + 1] = a[j];
+        j--;
+    }
+    a[j + 1] = t;
+}
+System.out.println(Arrays.toString(a));
+</code></pre><p>冒泡排序</p>
+<pre><code>int[] a = {5, 4, 3, 2, 1};
+int n = a.length;
+for (int i = 0; i &lt; n - 1; i++) {
+    //j的范围为从n-2 ~ 0
+    for (int j = 0; j &lt; n - 1 - i; j++) {
+        if (a[j] &gt; a[j + 1]) {
+            int t = a[j];
+            a[j] = a[j + 1];
+            a[j + 1] = t;
+        }
+    }
+}
+System.out.println(Arrays.toString(a));
 </code></pre>
       
     </div>
@@ -701,7 +748,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">65</span>
+              <span class="site-state-item-count">66</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -747,7 +794,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">4.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">4.2.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">4.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">4.2.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序方法"><span class="nav-number">5.</span> <span class="nav-text">排序方法</span></a></li></ol></div>
             
           </div>
         </section>
