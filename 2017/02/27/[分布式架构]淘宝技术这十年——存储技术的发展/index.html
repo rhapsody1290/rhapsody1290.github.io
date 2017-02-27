@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="存储,淘宝技术这十年," />
 
 
 
@@ -84,12 +84,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Qian's Home">
-<meta property="og:url" content="http://yoursite.com/archives/2016/07/index.html">
+<meta name="description" content="开发语言决不是系统的瓶颈，业务带来的压力多在于数据和存储方面，淘宝网的数据和存储发展大致如下：
+集中式架构缓存：所有数据都从数据库获取一方面速度比较慢，另一方面数据库承受不了这么大的访问量。一些被经常访问的数据直接从缓存中获取可以显著提高效率，减轻数据库的压力
+读写分离：从原来的对一个数据库进行所有读写操作，拆分为一个主库和两个从库，并且读写分离，因为写操作比读操作更费时。主库只进行写操作，从库只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="淘宝技术这十年——存储技术的发展">
+<meta property="og:url" content="http://yoursite.com/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="开发语言决不是系统的瓶颈，业务带来的压力多在于数据和存储方面，淘宝网的数据和存储发展大致如下：
+集中式架构缓存：所有数据都从数据库获取一方面速度比较慢，另一方面数据库承受不了这么大的访问量。一些被经常访问的数据直接从缓存中获取可以显著提高效率，减轻数据库的压力
+读写分离：从原来的对一个数据库进行所有读写操作，拆分为一个主库和两个从库，并且读写分离，因为写操作比读操作更费时。主库只进行写操作，从库只">
+<meta property="og:updated_time" content="2017-02-27T10:56:55.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Qian's Home">
+<meta name="twitter:title" content="淘宝技术这十年——存储技术的发展">
+<meta name="twitter:description" content="开发语言决不是系统的瓶颈，业务带来的压力多在于数据和存储方面，淘宝网的数据和存储发展大致如下：
+集中式架构缓存：所有数据都从数据库获取一方面速度比较慢，另一方面数据库承受不了这么大的访问量。一些被经常访问的数据直接从缓存中获取可以显著提高效率，减轻数据库的压力
+读写分离：从原来的对一个数据库进行所有读写操作，拆分为一个主库和两个从库，并且读写分离，因为写操作比读操作更费时。主库只进行写操作，从库只">
 
 
 
@@ -110,10 +120,10 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/07/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/"/>
 
 
-  <title> 归档 | Mr.Qian's Home </title>
+  <title> 淘宝技术这十年——存储技术的发展 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +144,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -245,402 +255,161 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      好! 目前共计 65 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/29/[Java]JAVA深复制(深克隆)与浅复制(浅克隆)/" itemprop="url">
-              
-                <span itemprop="name">JAVA深复制(深克隆)与浅复制(浅克隆)</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-29T00:00:00+08:00"
-              content="2016-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/29/[Java]Java类加载器深入讲解/" itemprop="url">
-              
-                <span itemprop="name">Java类加载器深入讲解</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-29T00:00:00+08:00"
-              content="2016-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/29/[Java]java中的事件监听是怎样实现随时监听的/" itemprop="url">
-              
-                <span itemprop="name">java中的事件监听是怎样实现随时监听的</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-29T00:00:00+08:00"
-              content="2016-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/29/[Java]Java集合/" itemprop="url">
-              
-                <span itemprop="name">Java集合</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-29T00:00:00+08:00"
-              content="2016-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/29/[Java]Java面向对象编程的四大特征/" itemprop="url">
-              
-                <span itemprop="name">Java面向对象编程的四大特征</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-29T00:00:00+08:00"
-              content="2016-07-29" >
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/15/[Spring]Spring笔记/" itemprop="url">
-              
-                <span itemprop="name">Spring笔记</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-15T08:51:00+08:00"
-              content="2016-07-15" >
-          07-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/14/[Servlet]JSP笔记/" itemprop="url">
-              
-                <span itemprop="name">JSP笔记</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-14T11:09:00+08:00"
-              content="2016-07-14" >
-          07-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/13/[Java]Java中配置文件放在哪里/" itemprop="url">
-              
-                <span itemprop="name">Java中配置文件放在哪里</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-13T22:04:00+08:00"
-              content="2016-07-13" >
-          07-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/08/[Java]JAVA分层思想/" itemprop="url">
-              
-                <span itemprop="name">JAVA分层思想</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-08T14:49:00+08:00"
-              content="2016-07-08" >
-          07-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/07/08/[Java]Java基础常用/" itemprop="url">
-              
-                <span itemprop="name">Java基础常用</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-07-08T14:49:00+08:00"
-              content="2016-07-08" >
-          07-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2016/07/page/2/">2</a><a class="extend next" rel="next" href="/archives/2016/07/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                淘宝技术这十年——存储技术的发展
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-27T14:52:00+08:00" content="2017-02-27">
+              2017-02-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/分布式架构/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式架构</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
 
 
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>开发语言决不是系统的瓶颈，业务带来的压力多在于数据和存储方面，淘宝网的数据和存储发展大致如下：</p>
+<h2 id="集中式架构"><a href="#集中式架构" class="headerlink" title="集中式架构"></a>集中式架构</h2><p>缓存：所有数据都从数据库获取一方面速度比较慢，另一方面数据库承受不了这么大的访问量。一些被经常访问的数据直接从缓存中获取可以显著提高效率，减轻数据库的压力</p>
+<p>读写分离：从原来的对一个数据库进行所有读写操作，拆分为一个主库和两个从库，并且读写分离，因为写操作比读操作更费时。主库只进行写操作，从库只进行读操作，主库进行写操作的同时，数据向从数据库同步</p>
+<p>分库分表：查询速度与数据库容量成反比，采用多个数据库，对同一张表复制成多张，同时数据库路由的框架DBRoute，统一处理了数据的合并、排序、分页等操作，让程序员像使用一个数据库一样操作多个数据库里的数据</p>
+<p>Mysql换成Oracle：选择Oracle的原因除了它容量大、稳定、安全、性能高之外，Oracle的性能和并发访问能力之所以如此强大，有一个关键性的设计——连接池，任何一个请求只需要从连接池中取得一个连接即可，用完后释放，这不需要频繁地创建和断开连接，而连接的创建和断开的开销是非常大的。Oracle从一开始运行在本机上，Nas上，到后来的小型机上，这些都能短时间提高存储容量，但Oracle、EMC、小型机都是很贵的，随着淘宝网的快速发展，钱钱终将不能解决问题，需要自主开发新的技术，一步一步地把IOE（IBM小型机、Oracle、EMC存储）</p>
+<h2 id="分布式架构"><a href="#分布式架构" class="headerlink" title="分布式架构"></a>分布式架构</h2><p>淘宝分布式数据库TDDL：对上层来说，像查询一个数据库一样来查询数据，还要像查询一个数据库一样快；从集中式的Oracle切换到分布式的Mysql集群；用PC服务器替换小型机，小型机通过提高CPU，内存，磁盘等方式提高处理能力，价格昂贵，这种集中式架构的存储方式越来越不适应海量数据计算能力</p>
+<p>分布式文件存储：淘宝的去IOE战略（IBM小型机、Oracle、EMC），使用适合淘宝使用的图片存储系统TFS</p>
+<p>分布式缓存Tair：把常用的信息放在内存中，每次都从内存里取，性能会好很多。现在常用memcached、redis这种Key-Value缓存，只不过当时他们还没崭露头角</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/存储/" rel="tag">#存储</a>
+          
+            <a href="/tags/淘宝技术这十年/" rel="tag">#淘宝技术这十年</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/26/[编码]Java编码转换/" rel="next" title="Java编码转换">
+                <i class="fa fa-chevron-left"></i> Java编码转换
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/27/[分布式架构]淘宝技术这十年——分布式架构电子商务操作系统/" rel="prev" title="淘宝技术这十年——分布式架构电子商务操作系统.md">
+                淘宝技术这十年——分布式架构电子商务操作系统.md <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -648,6 +417,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/"
+           data-title="淘宝技术这十年——存储技术的发展" data-url="http://yoursite.com/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -667,8 +444,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -718,6 +504,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#集中式架构"><span class="nav-number">1.</span> <span class="nav-text">集中式架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式架构"><span class="nav-number">2.</span> <span class="nav-text">分布式架构</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -814,11 +611,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
 
 
   
