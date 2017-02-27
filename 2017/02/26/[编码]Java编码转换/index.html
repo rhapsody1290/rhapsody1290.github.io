@@ -109,7 +109,7 @@ getBytes(charset)Java中个 getBytes(charset) 函数的作用是将字符串所�
 <meta property="og:image" content="http://i.imgur.com/Wtw98Er.png">
 <meta property="og:image" content="http://i.imgur.com/ibOwYKn.png">
 <meta property="og:image" content="http://i.imgur.com/jcha13T.png">
-<meta property="og:updated_time" content="2017-02-27T09:34:34.781Z">
+<meta property="og:updated_time" content="2017-02-27T11:16:27.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编码转换">
 <meta name="twitter:description" content="首先要注意，字符串在java内存中总是按unicode编码
@@ -491,7 +491,43 @@ System.out.println(&quot;接收：&quot;+ s1);
 ä¸æµ·与之对应的iso8859-1编码形式：[-28, -72, -118, -26, -75, -73]
 接收：上海
 </code></pre><p>2、传送字节</p>
-<h2 id="Mysql-几个参数的意义"><a href="#Mysql-几个参数的意义" class="headerlink" title="Mysql 几个参数的意义"></a>Mysql 几个参数的意义</h2><h2 id="gbk和utf-8不能转码"><a href="#gbk和utf-8不能转码" class="headerlink" title="gbk和utf-8不能转码"></a>gbk和utf-8不能转码</h2>
+<p>如果需要传送字节，在发送端利用iso-8859-1解码，获得字符串。<strong>问题转换为如何正确传输该字符串</strong>，此时可以将字符串用utf-8编码发送字节流，接收端用utf-8解码得到字符串。字符串正确传递后，在用iso-8859-1解码即能获得正确的字节</p>
+<p>如果只有发送端和接收端：</p>
+<pre><code>//发送端
+byte[] bytes = new byte[]{50, 0, -1, 28, -24};
+String sendString = new String(bytes, &quot;iso-8859-1&quot;);
+byte[] sendBytes = sendString.getBytes(&quot;UTF8&quot;);
+//接收端
+String recString = new String(sendBytes, &quot;UTF-8&quot;);
+byte[] Mybytes = recString.getBytes(&quot;iso-8859-1&quot;);
+</code></pre><p>如果考虑了中间件，代码如下：</p>
+<pre><code>//发送端
+byte[] bytes = new byte[]{50, 0, -1, 28, -24};
+System.out.println(&quot;传送的字节：&quot; + Arrays.toString(bytes));
+String send = new String(bytes, &quot;iso-8859-1&quot;);//发送所需的字节流问题转化为发送该字节流使用iso-8859-1解码后的字符串
+System.out.println(&quot;传送的字节经过iso-8859-1解码：&quot; + send);
+byte[] send_bytes = send.getBytes(&quot;utf-8&quot;);
+System.out.println(&quot;字符经过utf-8编码：&quot; + Arrays.toString(send_bytes));
+//中间件
+String t = new String(send_bytes, &quot;iso-8859-1&quot;);
+System.out.println(&quot;中间件用iso-8859-1解码的字符：&quot; + t);
+byte[] t_bytes = t.getBytes(&quot;iso-8859-1&quot;);
+System.out.println(&quot;中间件用iso-8859-1编码的字节&quot; + Arrays.toString(t_bytes));
+//接收端
+String recv = new String(t_bytes, &quot;utf-8&quot;);//正确接收字符串
+System.out.println(&quot;接收端用utf-8解码的字符：&quot; + recv);
+byte[] recv_bytes = recv.getBytes(&quot;iso-8859-1&quot;);//获得原先所需的字节流
+System.out.println(&quot;接收端恢复编码：&quot; + Arrays.toString(recv_bytes));
+</code></pre><p>输出结果：</p>
+<pre><code>传送的字节：[50, 0, -1, 28, -24]
+传送的字节经过iso-8859-1解码：2 ÿè
+字符经过utf-8编码：[50, 0, -61, -65, 28, -61, -88]
+中间件用iso-8859-1解码的字符：2 Ã¿Ã¨
+中间件用iso-8859-1编码的字节[50, 0, -61, -65, 28, -61, -88]
+接收端用utf-8解码的字符：2 ÿè
+接收端恢复编码：[50, 0, -1, 28, -24]
+</code></pre><p>4、<strong>中间件采用iso-8859-1编码不会出现乱码</strong>，这也是许多软件都默认采用latin1作为编码的原因，如Tomcat默认是iso-8859-1编码，Mysql默认也是iso-8859-1编码</p>
+<h2 id="Mysql-几个参数的意义"><a href="#Mysql-几个参数的意义" class="headerlink" title="Mysql 几个参数的意义"></a>Mysql 几个参数的意义</h2>
       
     </div>
 
@@ -650,7 +686,7 @@ System.out.println(&quot;接收：&quot;+ s1);
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#getBytes-charset"><span class="nav-number">1.</span> <span class="nav-text">getBytes(charset)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-String-charset"><span class="nav-number">2.</span> <span class="nav-text">new String(charset)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ISO-8859-1存储中文"><span class="nav-number">3.</span> <span class="nav-text">使用ISO-8859-1存储中文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免中文乱码及乱码产生的原因★★★"><span class="nav-number">4.</span> <span class="nav-text">避免中文乱码及乱码产生的原因★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-几个参数的意义"><span class="nav-number">5.</span> <span class="nav-text">Mysql 几个参数的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gbk和utf-8不能转码"><span class="nav-number">6.</span> <span class="nav-text">gbk和utf-8不能转码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#getBytes-charset"><span class="nav-number">1.</span> <span class="nav-text">getBytes(charset)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-String-charset"><span class="nav-number">2.</span> <span class="nav-text">new String(charset)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ISO-8859-1存储中文"><span class="nav-number">3.</span> <span class="nav-text">使用ISO-8859-1存储中文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免中文乱码及乱码产生的原因★★★"><span class="nav-number">4.</span> <span class="nav-text">避免中文乱码及乱码产生的原因★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-几个参数的意义"><span class="nav-number">5.</span> <span class="nav-text">Mysql 几个参数的意义</span></a></li></ol></div>
             
           </div>
         </section>
