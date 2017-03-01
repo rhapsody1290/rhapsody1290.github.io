@@ -84,25 +84,25 @@
 
 
 
-<meta name="description" content="JDBCJDBC获得数据库连接时写在URL上的?useUnicode=true&amp;amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
+<meta name="description" content="JDBC?JDBC获得数据库连接时写在URL上的?useUnicode=true&amp;amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
 例如：mysql数据库用的是gbk编码，而项目数据库用的是utf-8编码。这时候如果添加了useUnicode=true&amp;amp;characterEncoding=UTF-8 ，那么作用有如下两个方面：
 1、存数据时：
-数据库在存">
+数据库在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql中文乱码">
-<meta property="og:url" content="http://yoursite.com/2017/02/25/[Mysql]Mysql中文乱码/index.html">
+<meta property="og:url" content="http://qianmingxs.com/2017/02/25/[Mysql]Mysql中文乱码/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="JDBCJDBC获得数据库连接时写在URL上的?useUnicode=true&amp;amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
+<meta property="og:description" content="JDBC?JDBC获得数据库连接时写在URL上的?useUnicode=true&amp;amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
 例如：mysql数据库用的是gbk编码，而项目数据库用的是utf-8编码。这时候如果添加了useUnicode=true&amp;amp;characterEncoding=UTF-8 ，那么作用有如下两个方面：
 1、存数据时：
-数据库在存">
-<meta property="og:updated_time" content="2017-02-26T04:18:42.356Z">
+数据库在">
+<meta property="og:updated_time" content="2017-02-28T13:19:34.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql中文乱码">
-<meta name="twitter:description" content="JDBCJDBC获得数据库连接时写在URL上的?useUnicode=true&amp;amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
+<meta name="twitter:description" content="JDBC?JDBC获得数据库连接时写在URL上的?useUnicode=true&amp;amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
 例如：mysql数据库用的是gbk编码，而项目数据库用的是utf-8编码。这时候如果添加了useUnicode=true&amp;amp;characterEncoding=UTF-8 ，那么作用有如下两个方面：
 1、存数据时：
-数据库在存">
+数据库在">
 
 
 
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/25/[Mysql]Mysql中文乱码/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/02/25/[Mysql]Mysql中文乱码/"/>
 
 
   <title> Mysql中文乱码 | Mr.Qian's Home </title>
@@ -345,7 +345,7 @@
       
 
       
-        <h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><p>JDBC获得数据库连接时写在URL上的?useUnicode=true&amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式</p>
+        <h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC?"></a>JDBC?</h2><p>JDBC获得数据库连接时写在URL上的?useUnicode=true&amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式</p>
 <p>例如：mysql数据库用的是gbk编码，而项目数据库用的是utf-8编码。这时候如果添加了useUnicode=true&amp;characterEncoding=UTF-8 ，那么作用有如下两个方面：</p>
 <p>1、存数据时：</p>
 <p>数据库在存放项目数据的时候会先用UTF-8格式将数据解码成字节码，然后再将解码后的字节码重新使用GBK编码存放到数据库中。</p>
@@ -380,6 +380,7 @@ SET character_set_results = utf8;
 <p>换句话说，每个路径要<strong>经过3次改变字符集编码</strong>。以出现乱码的输出为例，server里utf8的数据，传入connection转为latin1，传入results转为latin1，utf-8页面又把results转过来。<strong>如果两种字符集不兼容，比如latin1和utf8，转化过程就为不可逆的，破坏性的。</strong></p>
 <p>但这里要声明一点，”SET NAMES UTF8”作用只是临时的，MySQL重启后就恢复默认了。</p>
 <p>总结：为了让你的网页能在更多的服务器上正常地显示，还是加上”SET NAMES UTF8”吧，即使你现在没有加上这句也能正常访问。</p>
+<p>从执行命令前后可知，set names gbk只可以修改character_set_client、character_set_connection、 character_set_results的编码方式，并且这种修改是窗口级别的，只针对本窗口有效，打开另外一个窗口修改无效。也可发现数据库底层的编码方式没有改变，插入数据后还是以utf8编码方式保持。</p>
 <p><a href="http://blog.csdn.net/zsmj_2011/article/details/7943734" target="_blank" rel="external">http://blog.csdn.net/zsmj_2011/article/details/7943734</a></p>
 
       
@@ -443,7 +444,7 @@ SET character_set_results = utf8;
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/02/25/[Mysql]Mysql中文乱码/"
-           data-title="Mysql中文乱码" data-url="http://yoursite.com/2017/02/25/[Mysql]Mysql中文乱码/">
+           data-title="Mysql中文乱码" data-url="http://qianmingxs.com/2017/02/25/[Mysql]Mysql中文乱码/">
       </div>
     
   </div>
@@ -488,7 +489,7 @@ SET character_set_results = utf8;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">66</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -496,7 +497,7 @@ SET character_set_results = utf8;
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -505,7 +506,7 @@ SET character_set_results = utf8;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -534,7 +535,7 @@ SET character_set_results = utf8;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC"><span class="nav-number">1.</span> <span class="nav-text">JDBC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置数据库字符集"><span class="nav-number">2.</span> <span class="nav-text">设置数据库字符集</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC"><span class="nav-number">1.</span> <span class="nav-text">JDBC?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置数据库字符集"><span class="nav-number">2.</span> <span class="nav-text">设置数据库字符集</span></a></li></ol></div>
             
           </div>
         </section>
@@ -813,6 +814,7 @@ SET character_set_results = utf8;
 
   
 
-
+  
+<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
 </body>
 </html>
