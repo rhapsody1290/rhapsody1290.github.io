@@ -1,0 +1,1116 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JVM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="思维导图
+
+Java代码的执行讨论三个问题，JDK如何将代码编译为class文件、如何装载class文件、如何执行class
+编译编译器将源码编译成class文件
+编译过程：1、分析和输入到符号表。Parse过程将代码字符串转变成token序列，再由token序列生成抽象语法树；Enter过程将符号输入到符号表2、注解处理3、语法分析和生成class文件
+12javac -g Foo.java 生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM重点知识总结">
+<meta property="og:url" content="http://qianmingxs.com/2017/03/03/[Java]JVM重点知识总结/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="思维导图
+
+Java代码的执行讨论三个问题，JDK如何将代码编译为class文件、如何装载class文件、如何执行class
+编译编译器将源码编译成class文件
+编译过程：1、分析和输入到符号表。Parse过程将代码字符串转变成token序列，再由token序列生成抽象语法树；Enter过程将符号输入到符号表2、注解处理3、语法分析和生成class文件
+12javac -g Foo.java 生">
+<meta property="og:image" content="http://i.imgur.com/es8HuS8.jpg">
+<meta property="og:image" content="http://my.csdn.net/uploads/201207/12/1342057661_9458.png">
+<meta property="og:image" content="http://i.imgur.com/4cDnolx.jpg">
+<meta property="og:image" content="http://i.imgur.com/BMNPnYQ.jpg">
+<meta property="og:image" content="http://i.imgur.com/wE9zCQ9.jpg">
+<meta property="og:image" content="http://i.imgur.com/NZcvXVd.jpg">
+<meta property="og:image" content="http://i.imgur.com/7u4tVeC.jpg">
+<meta property="og:image" content="http://i.imgur.com/E2VlX8P.jpg">
+<meta property="og:image" content="http://i.imgur.com/EHofL2T.jpg">
+<meta property="og:image" content="http://i.imgur.com/MRwIFTy.jpg">
+<meta property="og:image" content="http://i.imgur.com/uYN3Hi0.jpg">
+<meta property="og:image" content="http://i.imgur.com/1rVbVZp.png">
+<meta property="og:updated_time" content="2017-03-13T14:22:17.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM重点知识总结">
+<meta name="twitter:description" content="思维导图
+
+Java代码的执行讨论三个问题，JDK如何将代码编译为class文件、如何装载class文件、如何执行class
+编译编译器将源码编译成class文件
+编译过程：1、分析和输入到符号表。Parse过程将代码字符串转变成token序列，再由token序列生成抽象语法树；Enter过程将符号输入到符号表2、注解处理3、语法分析和生成class文件
+12javac -g Foo.java 生">
+<meta name="twitter:image" content="http://i.imgur.com/es8HuS8.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/03/03/[Java]JVM重点知识总结/"/>
+
+
+  <title> JVM重点知识总结 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JVM重点知识总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-03T13:33:00+08:00" content="2017-03-03">
+              2017-03-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/03/[Java]JVM重点知识总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/03/[Java]JVM重点知识总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>思维导图</p>
+<p><img src="http://i.imgur.com/es8HuS8.jpg" alt=""></p>
+<h2 id="Java代码的执行"><a href="#Java代码的执行" class="headerlink" title="Java代码的执行"></a>Java代码的执行</h2><p>讨论三个问题，JDK如何将代码<strong>编译为class文件</strong>、如何<strong>装载class文件</strong>、如何<strong>执行class</strong></p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>编译器将源码编译成class文件</p>
+<p>编译过程：<br>1、分析和输入到符号表。Parse过程将代码字符串转变成token序列，再由token序列生成抽象语法树；Enter过程将符号输入到符号表<br>2、注解处理<br>3、语法分析和生成class文件</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">javac </span>-g Foo.<span class="keyword">java </span>生成所有调试信息</div><div class="line"><span class="keyword">javap </span>-c -s -l -verbose Foo来查看编译后的class文件</div></pre></td></tr></table></figure>
+<h3 id="装载"><a href="#装载" class="headerlink" title="装载"></a>装载</h3><p>class文件由类加载器（ClassLoader）加载进内存，并形成Class对象，之后就可以对Class对象进行实例化并调用</p>
+<p>Java类加载机制的特点：<br>1、类加载机制可在<strong>运行时动态加载</strong>外部的类、远程网络下载过来的class文件<br>2、可以通过JVM的类加载机制来实现类隔离的效果</p>
+<p>类加载过程步骤：装载、链接、初始化<br>JVM通过<strong>类的全限定名</strong>和<strong>类加载器实例</strong>来标识一个被加载的类，类的命名方式如下：</p>
+<ul>
+<li>对于接口或<strong>非数组型</strong>的类，其名称即为类名，由类所在的ClassLoader负责加载</li>
+<li><strong>数组型</strong>的类，其名称为[ + 基本类型或L+引用类型;</li>
+</ul>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">int</span>[] a = <span class="keyword">new</span> <span class="built_in">int</span>[<span class="number">10</span>];</div><div class="line">System.out.<span class="built_in">println</span>(a.getClass().getName());<span class="comment">//[I</span></div><div class="line"></div><div class="line"><span class="keyword">Object</span>[] a = <span class="keyword">new</span> <span class="keyword">Object</span>[<span class="number">10</span>];</div><div class="line">System.out.<span class="built_in">println</span>(a.getClass().getName());<span class="comment">//[Ljava.lang.Object;</span></div></pre></td></tr></table></figure>
+<p>JVM中类加载器的树状层次结构：</p>
+<p><img src="http://my.csdn.net/uploads/201207/12/1342057661_9458.png" alt="类加载器之间的父子关系和管辖范围图"></p>
+<ul>
+<li><p>引导类加载器（bootstrap class loader）：它用来加载 Java 的<strong>核心库</strong>(jre/lib/rt.jar)，是用原生C++代码来实现的，并不继承自java.lang.ClassLoader。加载扩展类和应用程序类加载器，并指定他们的父类加载器，<strong>在java中获取不到</strong>。 </p>
+</li>
+<li><p>扩展类加载器（extensions class loader）：它用来加载 Java 的<strong>扩展库</strong>(jre/ext/*.jar)。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。 对应Sun JDK中的ExtClassLoader</p>
+</li>
+<li><p>系统类加载器（system class loader）：它根据 Java 应用的<strong>类路径</strong>（CLASSPATH）来加载 Java 类。<strong>一般来说，Java 应用的类都是由它来完成加载的</strong>。可以通过 ClassLoader.getSystemClassLoader()来获取它。对应Sun JDK中的AppClassLoader</p>
+</li>
+<li><p>自定义类加载器（custom class loader）：除了系统提供的类加载器以外，开发人员可以通过继承 java.lang.ClassLoader类的方式<strong>实现自己的类加载器</strong>。自定义的ClassLoader可用于加载非Classpath中的jar（如网络上加载的jar或二进制），还可以在加载之前对class文件做一些动作，比如解密等</p>
+</li>
+</ul>
+<p>类加载的双亲委派机制：</p>
+<p>某个特定的类加载器在接到加载类的请求时，首先将加载任务委托交给<strong>父类加载器</strong>，父类加载器又将加载任务<strong>向上委托</strong>，直到最父类加载器，如果最父类加载器<strong>可以完成</strong>类加载任务，就<strong>成功返回</strong>，如果不行就<strong>向下传递</strong>委托任务，由其子类加载器进行加载。如果该类加载器的父类不能完成加载，则<strong>由该类进行加载</strong></p>
+<p>双亲委派机制的好处：</p>
+<p>保证Java<strong>核心库的安全性</strong>。例如：如果用户自己写了一个java.lang.String类就会因为双亲委派机制交由Bootstrap ClassLoader加载，但Bootstrap已经加载过 java.lang.String 类，导致加载不能被加载，不会破坏原生的String类的加载）</p>
+<p>代理模式：</p>
+<p>与双亲委派机制相反，代理模式是<strong>先自己尝试加载</strong>，如果<strong>无法加载则向上传递</strong>，这样会造成<strong>多个不同的Classloader都加载了某Class</strong>，并且这些Class的实例对象<strong>都不相同</strong>。</p>
+<p><strong>由于JVM采用类名+ClassLoader实例作为Class加载的判断</strong>，JVM会保证同一个ClassLoader实例对象只能加载一次同样名称的Class，因此可以借此实现<strong>类隔离</strong>的需求。<strong>Tomcat就是代理模式</strong></p>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><p>class的执行有<strong>解释执行</strong>和<strong>编译为机器码执行</strong>两种方式，其中编译为机器码又分为client和server两种模式</p>
+<p>字节码解释执行：<br>字节码是一种中间代码的方式，要由JVM<strong>在运行时对其进行解释并执行</strong>，这种方式称为字节码解释执行方式</p>
+<p>JVM 是基于栈的体系结构来执行 class 字节码的。<strong>线程创建后，都会产生程序计数器（PC）和栈（Stack）</strong>，程序计数器存放<strong>下一条要执行的指令在方法内的偏移量</strong>，栈中存放一个个<strong>栈帧</strong>，每个栈帧对应着<strong>每个方法的每次调用</strong>，而栈帧又是有<strong>局部变量区</strong>和<strong>操作数栈</strong>两部分组成，局部变量区用于存放<strong>方法中的局部变量和参数</strong>，操作数栈中用于存放<strong>方法执行过程中产生的中间结果</strong>。栈的结构如下图所示：</p>
+<p><img src="http://i.imgur.com/4cDnolx.jpg" alt=""></p>
+<p>对于方法的指令解释执行，执行方式为冯诺依曼体系中的FDX循环方式，即<strong>获取下一条指令，解码并分派，然后执行</strong></p>
+<p>编译执行：<br>解释执行的效率较低，为提升代码的执行性能，Sun JDK提供了<strong>将字节码编译为机器码</strong>的支持，<strong>编译在运行时进行</strong>，通常称为<strong>JIT编译器</strong>。</p>
+<p>Sun JDK在执行过程中，对执行<strong>频率高的代码进行编译</strong>，对执行<strong>不频繁额代码则继续采用解释的方式</strong></p>
+<p>编译分为Client compiler和Server compiler。C1较轻量级，只做少量性能开销高的优化，占用内存少，适合桌面交互式应用；C2较为重量级，采用大量的传统编译优化技巧，占用内存相对多一点，适合服务端的应用</p>
+<p>反射执行：</p>
+<p>反射可以<strong>动态</strong>调用某<strong>对象实例</strong>中对应的方法、访问对象的属性，可以灵活得实现对象的调用</p>
+<p>要实现动态的调用，最直接的方式就是<strong>动态得生成字节码，并加载到JVM中执行</strong>，Sun采用的即为这种方式</p>
+<p>采用反射的方式，提升了代码编写的灵活性，但比直接编译成字节码方式，调用复杂的多，因此性能比直接执行的慢一点</p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>主要内容是JVM如何进行内存的分配和回收</p>
+<p>JVM<strong>自动管理</strong>内存的分配与回收，大大<strong>降低了开发人员编程序的难度</strong>，但副作用是可能在不知不觉中<strong>浪费了很多内存</strong>，导致JVM花费很多时间进行内存的回收；另外还可能由于不清楚内存的分配和回收机制，造成<strong>内存泄漏</strong></p>
+<h3 id="JVM内存空间"><a href="#JVM内存空间" class="headerlink" title="JVM内存空间"></a>JVM内存空间</h3><p><img src="http://i.imgur.com/BMNPnYQ.jpg" alt=""></p>
+<p>JVM的内存结构分为以下部分：</p>
+<ul>
+<li>程序计数器：每个线程拥有一个PC寄存器，记录了<strong>下一条指令在方法中的偏移</strong></li>
+<li>虚拟机栈：每个线程私有，栈中存放了栈帧，<strong>每次方法调用都会产生栈帧</strong>，栈帧主要分为<strong>局部变量区</strong>和<strong>操作数栈</strong>两部分；通过-Xss指定其大小</li>
+<li>本地方法栈：用于<strong>支持native方法的执行，存储了每个native方法调用的状态</strong>，在Sun JDK的实现中本地方法栈和JVM方法栈是同一个</li>
+<li>堆：用于存储<strong>对象实例及数组值</strong>，所有new创建出来的对象的内存都在此分配；通过-Xms和-Xmx来设定最小值和最大值，为避免频繁调整Heap的大小，通常将两个值设置成一样</li>
+<li>方法区：存放了要加载<strong>类的信息（属性、方法）、类中的静态变量、类中定义为final的常量</strong>。在Sun JDK中这块区域对应Permanet Generation，又称为持久代，可通过-XX:PermSize及-XX:MaxPermSize来指定最小值和最大值</li>
+</ul>
+<p>其中，程序计数器、虚拟机栈和本地方法栈是<strong>线程隔离</strong>的；方法区、堆是<strong>所有线程共享</strong>的</p>
+<hr>
+<p>内存的各个区域详细解释</p>
+<p>堆的分代：</p>
+<p>为了让内存回收更加高效，对堆采用了分代管理的方式</p>
+<p><img src="http://i.imgur.com/wE9zCQ9.jpg" alt=""></p>
+<ul>
+<li>新生代：大多数情况下Java程序中新建的对象都从新生代分配，新生代由<strong>Eden Space</strong>和<strong>两块相同大小的Survivor Space</strong>（又称S0和S1或From和To）构成，通过-Xmn参数指定新生代的大小，也可通过-XX:Survivor Ratio调整Eden Space和Survivor Space的大小</li>
+<li>旧生代：用于存放新生代中经过多次垃圾回收<strong>仍然存活</strong>的对象；但是，新建的对象也有可能在旧生代<strong>直接分配</strong>内存；旧生代占用的内存大小为-Xmx减去-Xmn的值<ul>
+<li>一种是大对象，-XX:PretenureSizeThreshold=1024来代表当对象超过多大时就不在新生代分配，而是直接在旧生代分配</li>
+<li>另一种为大的数组对象，且数组中无引用外部对象</li>
+</ul>
+</li>
+</ul>
+<p>虚拟机栈：</p>
+<p><img src="http://i.imgur.com/NZcvXVd.jpg" alt=""></p>
+<p>栈中存放了栈帧，每个方法调用都会产生栈帧。栈帧主要分为<strong>局部变量区</strong>和操作数栈两部分</p>
+<ul>
+<li>局部变量存放方法中的局部变量和参数</li>
+<li>操作数栈用于存放方法<strong>执行过程中产生的中间结果</strong>，计算完成后将数据放入局部变量区</li>
+</ul>
+<h3 id="内存分配与回收策略"><a href="#内存分配与回收策略" class="headerlink" title="内存分配与回收策略"></a>内存分配与回收策略</h3><p>1、Java对象所占用的内存<strong>主要从堆上进行分配</strong>，堆是所有<strong>线程共享</strong>的，因此在堆上分配内存时需要<strong>加锁</strong>，这导致了创建对象<strong>开销比较大</strong>；</p>
+<ul>
+<li>对象优先在Eden分配</li>
+<li><strong>大对象直接进入旧生代</strong>（需要大量连续内存空间的Java对象，最典型的大对象就是那种很长的字符串及数组）</li>
+<li>长期存活的对象将进入老年代</li>
+</ul>
+<p>2、Sun JDK为了提升内存分配的效率，会为每个新创建的线程在新生代的<strong>Eden Space</strong>分配一块独立的空间，这块空间称为TLAB（ThreadLocal Allocation Buffer，<strong>线程局部分配缓存</strong>）</p>
+<p>在TLAB上分配内存时不需要加锁，因此JVM在给线程中的对象分配内存时会<strong>尽量在TLAB上分配</strong>，如果对象过大或TLAB空间已用完，则仍然在堆上进行分配，通常<strong>多个小的对象比大的对象更加高效</strong></p>
+<p>3、除了从堆上分配及从TLAB上分配外，还要一种是基于逃逸分析直接在栈上进行分配的方式</p>
+<pre><code>逃逸分析优化JVM原理
+我们知道Java对象是在堆里分配的，在调用栈中，只保存了对象的指针。
+当对象不再使用后，需要依靠GC来遍历引用树并回收内存，如果对象数量较多，将给GC带来较大压力，也间接影响了应用的性能。减少临时对象在堆内分配的数量，无疑是最有效的优化方法。
+怎么减少临时对象在堆内的分配数量呢？不可能不实例化对象吧！
+场景介绍
+其实，在Java应用里普遍存在一种场景。一般是在方法体内，声明了一个局部变量，且该变量在方法执行生命周期内未发生逃逸（在方法体内，未将引用暴露给外面）。
+按照JVM内存分配机制，首先会在堆里创建变量类的实例，然后将返回的对象指针压入调用栈，继续执行。
+这是优化前，JVM的处理方式。
+逃逸分析优化 - 栈上分配
+优化原理：分析找到未逃逸的变量，将变量类的实例化内存直接在栈里分配(无需进入堆)，分配完成后，继续在调用栈内执行，最后线程结束，栈空间被回收，局部变量对象也被回收。
+这是优化后的处理方式，对比可以看出，主要区别在栈空间直接作为临时对象的存储介质。从而减少了临时对象在堆内的分配数量。
+逃逸分析的原理很简单，但JVM在应用过程中，还是有诸多考虑。
+比如，逃逸分析不能在静态编译时进行，必须在JIT里完成。原因是，与Java的动态性有冲突。因为你可以在运行时，通过动态代理改变一个类的行为，此时，逃逸分析是无法得知类已经变化了。
+</code></pre><p>逃逸分析—-在计算机语言编译器语言优化管理中，分析指针动态范围的方法称之为逃逸分析（通俗点讲，<strong>当一个对象的指针被多个方法或线程引用时</strong>），我们称这个指针发生了逃逸</p>
+<p>在这个例子中，一共举了3种常见的指针逃逸场景。分别是 全局变量赋值，方法返回值，实例引用传递。<strong>对于每一个方法中都创建了new了一个局部变量，但都将该变量暴露给外部引用</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">G</span> &#123;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> B b;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">globalVariablePointerEscape</span>(<span class="params"></span>)</span>&#123;<span class="comment">//给全局变量赋值，发生逃逸</span></div><div class="line">		b=<span class="keyword">new</span> B();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> B <span class="title">methodPointerEscape</span>(<span class="params"></span>)</span>&#123;<span class="comment">//方法返回值，发生逃逸</span></div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> B();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">instancePassPointerEscape</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		methodPointerEscape().printClassName(<span class="keyword">this</span>);<span class="comment">//实例引用发生逃逸</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">B</span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printClassName</span>(<span class="params">G g</span>)</span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(g.getClass().getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="内存回收"><a href="#内存回收" class="headerlink" title="内存回收"></a>内存回收</h3><p>如何判断对象是否该回收：</p>
+<ul>
+<li>引用计数算法：采用<strong>分散式</strong>的管理方式，每个对象都有一个计数器，当<strong>计数器为零</strong>时，说明此对象已经不再被使用，可被回收；每次对象<strong>赋值</strong>进行引用计数器的增减。但对<strong>循环引用</strong>的场景没办法实现回收，例如下图对象A释放了B、C的引用，但B和C互相引用，也无法回收BC，对于Java这种有<strong>复杂引用关系</strong>的语言而言，<strong>引用计数器不是非常合适</strong></li>
+</ul>
+<p><img src="http://i.imgur.com/7u4tVeC.jpg" alt=""></p>
+<ul>
+<li><p><strong>可达性分析算法</strong></p>
+<p>  <img src="http://i.imgur.com/E2VlX8P.jpg" alt=""></p>
+</li>
+</ul>
+<p>采用<strong>集中式</strong>的管理方式，<strong>全局记录数据的引用状态</strong>。基于一定条件的触发（定时、空间不足），执行时需要<strong>从根集合扫描对象的引用关系</strong></p>
+<p>在主流的商用程序语言（Java、C#，甚至包括前面提到的古老的Lisp）的主流实现中，都是称通过可达性分析（Reachability Analysis）来判定对象是否存活的。这个算法的基本思路就是通过一系列的称为<strong>“GC Roots”的对象作为起始点</strong>，从这些节点开始<strong>向下搜索</strong>，搜索所走过的路径称为引用链（Reference Chain），当一个<strong>对象到GC Roots没有任何引用链相连</strong>（用图论的话来说，就是从GC Roots到这个对象不可达）时，则证明<strong>此对象是不可用的</strong>。如图3-1所示，对象object 5、object 6、object 7虽然互相有关联，但是它们到GC Roots是不可达的，所以它们将会被判定为是可回收的对象。</p>
+<p>在Java语言中，可作为GC Roots的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI（即一般说的Native方法）引用的对象</li>
+</ul>
+<p>垃圾收集算法：</p>
+<ul>
+<li>复制：从根集合中扫描出存活的对象，并将存活的对象<strong>复制到一块新的完全未使用的空间中</strong>。回收的空间中存活对象较少时复制算法会比较高效，但需要增加一块新的空间及进行对象的移动</li>
+</ul>
+<p><img src="http://i.imgur.com/EHofL2T.jpg" alt=""></p>
+<ul>
+<li>标记-清除算法：从<strong>根集合</strong>中开始扫描，对<strong>存活的对象进行标记</strong>，标记完毕后对<strong>未标记</strong>的对象进行回收。缺点是会造成内存碎片</li>
+</ul>
+<p><img src="http://i.imgur.com/MRwIFTy.jpg" alt=""></p>
+<ul>
+<li>标记-压缩：从<strong>根集合</strong>中开始扫描，对存活的对象进行标记，在回收不存活对象后，会将所有存活的对象都忘左端空闲的空间进行移动，并更新引用对象的指针</li>
+</ul>
+<p><img src="http://i.imgur.com/uYN3Hi0.jpg" alt=""></p>
+<p>Sun JDK中可用的GC：</p>
+<p>程序中<strong>大部分</strong>对象的存活时间较短，<strong>少部分</strong>对象是长期存活的，因此将JVM对划分成<strong>新生代和旧生代</strong>，并且基于新生代和旧生代<strong>对象存活时间的特征</strong>，提供了不同的GC实现</p>
+<p>1、新生代GC</p>
+<ul>
+<li><p>垃圾回收策略</p>
+<ul>
+<li>新生代的对象通常<strong>存活时间较短</strong>，采用<strong>复制算法</strong>来实现对象的回收；执行复制时，<strong>需要一块未使用的空间存放存活对象</strong>，这是新生代又被划分为Eden、S0、S1三块空间的原因；Eden存放新创建的对象，S0或S1的其中一块在<strong>Minor GC</strong>触发时作为复制的目标对象，另一块的内容会被清空</li>
+<li>Minor GC从<strong>根集合</strong>中（虚拟机栈、本地方法栈、方法区引用的对象）扫描出存活的对象，复制到S0或S1；如果<strong>旧生代中的对象引用新生代的对象</strong>，从根集合中是找不到的，但旧生代通常比较大，扫描整个旧生代影响性能采用<strong>remember set</strong>的方式，如果赋值是一个对象引用，检查<strong>赋值对象是否在旧生代，引用是否在新生代</strong>，如果满足则在remenber set中做个标记；因此对于Minor GC，<font color="red">完整的根集合是Sun JDK认为的根集合加上remember set中标记的对象</font></li>
+</ul>
+</li>
+<li><p>触发机制：Eden Space空间不足时</p>
+</li>
+<li>新生代可用GC：串行复制GC（单线程）、并行复制GC（多线程，优化）、并发复制GC</li>
+</ul>
+<p>2、旧生代</p>
+<p>在经过几次Minor GC仍然存活的对象，会被放入新生代</p>
+<ul>
+<li>垃圾回收策略</li>
+<li>触发机制</li>
+</ul>
+<p>对象引用关系：</p>
+<ul>
+<li>强引用：new的方式，主动释放才会被GC</li>
+<li>弱引用：JVM内存不足时会被回收，适合做缓存</li>
+<li>虚引用：强引用释放后，GC时会被自动释放</li>
+</ul>
+<h3 id="内存状况分析"><a href="#内存状况分析" class="headerlink" title="内存状况分析"></a>内存状况分析</h3><p>jmap查看JVM内存的状况<br>MAT对内存占用、引用关系进行分析</p>
+<h2 id="线程资源同步和交互机制"><a href="#线程资源同步和交互机制" class="headerlink" title="线程资源同步和交互机制"></a>线程资源同步和交互机制</h2><p>重点是：JVM中<strong>线程资源同步</strong>机制及<strong>线程之间交互</strong>的机制</p>
+<h3 id="线程资源同步"><a href="#线程资源同步" class="headerlink" title="线程资源同步"></a>线程资源同步</h3><p>i++操作实质：</p>
+<p>i++动作在JVM中分为<strong>装载i</strong>、<strong>读取i</strong>、<strong>进行i+1操作</strong>、<strong>存储i</strong>、及<strong>写入i</strong>五个步骤</p>
+<p>线程之间的<strong>共享变量存储在主内存（main memory）</strong>中，每个线程都有一个<strong>私有的本地内存</strong>（local memory），本地内存中存储了该线程以读/写共享变量的<strong>副本</strong>。</p>
+<p><img src="http://i.imgur.com/1rVbVZp.png" alt=""></p>
+<p>对于一个简单的 i++ 操作，结合上图1 ，会发生如下的步骤</p>
+<ul>
+<li>read：作用于<strong>主内存</strong>中，把主内存中一个变量的值<strong>传输</strong>到 工作内存 中。</li>
+<li>load：作用于工作内存，把从read 操作从主内存中得到的值放入到工作内存的副本中。</li>
+<li>use：把工作内存中的该副本值传递给执行引擎（也就是操作数栈中）。</li>
+<li>assign：作用于工作内存，把执行引擎执行后的新值传递给该工作内存的变量。</li>
+<li>store：作用于工作内存，把工作内存中该变量的值<strong>传送</strong>到 主内存 中去。</li>
+<li>write：作用于<strong>主内存</strong>的变量，把store 操作 得到的值写入到 主内存的该变量中。</li>
+</ul>
+<p><strong>前三步（read、load、use）完成变量值的读取，在虚拟机栈内完成i+1操作，后三步将变量写入主内存</strong></p>
+<p>所以说，一个 i++ 操作并<strong>不是原子性</strong>（原子性：一些程序语句，必须连续执行，<strong>中间不能被打断</strong>）的。这上述的这些步骤中，可能会有其他线程对主内存的变量进行操作，从而导致出现多线程问题。</p>
+<p>同步机制</p>
+<ul>
+<li>synchronized</li>
+<li>volatile</li>
+<li>lock/unlock机制</li>
+</ul>
+<p>1、synchronized</p>
+<pre><code>public synchronized int getNextId(){
+    return i++;
+}
+</code></pre><p>线程A执行getNextId方法时，<strong>在对象实例ID加上一个lock</strong>，然后继续执行return i++；此时如果线程B并发访问getNextId()方法时，发现这个对象实例ID有lock，于是将线程B放入等待队列，只有当线程A执行完成后，<strong>释放对象实例ID上的lock</strong>，当下次线程调度线程B时，线程B才可以执行</p>
+<p>synchronized方法锁的对象是当前对象实例，当synchronized标记在一个static方法上，那么锁放在<strong>当前Class实例上</strong></p>
+<p>2、lock/unlock</p>
+<p>使用lock/unlock编写多线程程序时，一定要保证lock和unlock是成对出现的，并且保证lock后程序完毕后，一定要unlock</p>
+<p>3、volatile</p>
+<p>控制对象的<strong>可见性</strong>，并<font color="red"><strong>不能保证对象操作的原子性</strong></font>；定义volatile的对象，线程不会将其从主内存复制到本地内存中，而是<strong>直接在主内存中进行操作</strong></p>
+<p>适用于多线程<strong>读操作</strong>，写操作需要加锁</p>
+<h3 id="线程交互机制"><a href="#线程交互机制" class="headerlink" title="线程交互机制"></a>线程交互机制</h3><p>线程之间除了产生资源竞争外，还会有交互的需求。比如<strong>连接池中会有get和return操作</strong>，当get方法时可用的线程数为0时，需要进入一个<strong>等待状态</strong>，当有连接返回时，应该通知get方法，<strong>不需要再等待了</strong>。如果没有交互机制，只能在get中<strong>不断轮训</strong>判断可使用的连接数了</p>
+<p>JVM提供<strong>wait/notify/notifyAll</strong>方法支持这类需求</p>
+<p>案例</p>
+<pre><code>public class ConnectionPool {
+
+    //两个连接
+    private int[] connections = new int[]{1, 2};
+    private int current = 0;
+
+    public synchronized int get() throws InterruptedException {
+        while (current == connections.length) {
+            System.out.println(Thread.currentThread().getName() + &quot;在等待&quot;);
+            this.wait();
+        }
+
+        System.out.println(Thread.currentThread().getName() + &quot;获得连接&quot;);
+        return connections[current++];
+
+    }
+
+    public synchronized void release() {
+        if (current &gt; 0) {
+            current--;
+        }
+        System.out.println(Thread.currentThread().getName() + &quot;释放连接&quot;);
+        notify();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        final ConnectionPool connectionPool = new ConnectionPool();
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    connectionPool.get();
+                    Thread.sleep(2000);
+                    connectionPool.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    connectionPool.get();
+                    Thread.sleep(2000);
+                    connectionPool.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    connectionPool.get();
+                    Thread.sleep(2000);
+                    connectionPool.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+}
+</code></pre><p>结果</p>
+<pre><code>Thread-0获得连接
+Thread-1获得连接
+Thread-2在等待
+Thread-0释放连接
+Thread-2获得连接
+Thread-1释放连接
+Thread-2释放连接
+</code></pre><p>调用Object的wait方法可以让当前线程<strong>进入等待状态，程序不能往下执行</strong>，只有调用了<strong>此Object</strong>的<strong>notify、或notifyAll方法，或者wait到达了指定的时间</strong>后，才会<strong>激活继续执行</strong></p>
+<p>notify只是随机找处于<strong>等待此Object</strong>的<strong>一个线程</strong>；notifyAll是通知wait<strong>此Object</strong>的<strong>所有线程</strong></p>
+<p>为了放置<strong>假唤醒</strong>，提高程序的<strong>可靠性</strong>，wait被唤醒后，需要再次判断等待的状态是否被更改了，如果未更改，则继续进入wait状态，这种做法称作双重检查。查看一下代码，即<strong>加上了while进行双重检查</strong>，而且wait操作写在最前面</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (current == connections.length) &#123;</div><div class="line">    <span class="keyword">System</span>.out.println(Thread.currentThread().<span class="built_in">getName</span>() + <span class="string">"在等待"</span>);</div><div class="line">    this.<span class="built_in">wait</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>wait/notify机制原理：</p>
+<p>当调用了对象的wait方法后，JVM程序<strong>执行引擎</strong>将<strong>此线程放入一个wait集合中</strong>，<font color="red"><strong>并释放此对象的锁</strong></font>（本来加上了synchronized只能有一个线程处于等待状态，现在可以多个线程处于等待状态）</p>
+<ul>
+<li><p>当其他线程调用此对象的notify方法时，会从wait集合中中随机找<strong>一个</strong>等待的此对象上的线程，并将其从wait集合中删除，<strong>JVM线程执行引擎</strong>就可以再次<strong>调度</strong>此线程了</p>
+</li>
+<li><p>当使用notifyAll方法时，则会删除wait集合中所有等待此对象的线程</p>
+</li>
+</ul>
+<h3 id="线程状态及分析方法"><a href="#线程状态及分析方法" class="headerlink" title="线程状态及分析方法"></a>线程状态及分析方法</h3><ul>
+<li>线程创建完毕后进入<strong>new</strong>状态</li>
+<li>调用了线程的start方法后，线程进入<strong>Runnable</strong>状态，放入jVM的<strong>可运行线程队列</strong>中，等待CPU的执行权</li>
+<li>当线程执行时，线程状态变为<strong>Running</strong></li>
+<li>线程执行sleep、wait、join或者进入了IO阻塞、锁等待时，则进入<strong>Wait或Block</strong>状态</li>
+</ul>
+<h2 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h2><h3 id="从编写源代码到程序运行的过程"><a href="#从编写源代码到程序运行的过程" class="headerlink" title="从编写源代码到程序运行的过程"></a>从编写源代码到程序运行的过程</h3><ul>
+<li><p>第一步(编译)：创建完源文件之后，使用javac命令，程序会先被编译为.class文件</p>
+</li>
+<li><p>第二步（运行)：java类运行的过程大概可分为两个过程：1、类的加载  2、类的执行。</p>
+</li>
+</ul>
+<p>需要说明的是：JVM主要在程序<strong>第一次主动使用类的时候，才会去加载该类</strong>。也就是说，JVM并不是在一开始就把一个程序就所有的类都加载到内存中，而是到不得不用的时候才把它加载进来，而且只加载一次。</p>
+<p>1、（java命令）在编译好java程序得到MainApp.class文件后，在命令行上敲java AppMain。系统就会启动一个jvm进程，jvm进程从classpath路径中找到一个名为AppMain.class的二进制文件，将 MainApp的类信息加载到运行时数据区的方法区内，这个过程叫做<strong>MainApp类的加载</strong>，然后JVM找到AppMain的主函数入口，开始<strong>执行main函数</strong></p>
+<p>2、（类加载器）执行过程中，会<strong>创建对象</strong>。JVM会首先<strong>从方法区加载类信息和相关常量</strong>，class加载完毕之后,<strong>在堆上为对象分配内存</strong>，然后调用初始化实例，当然这时候实例保持指向class类型信息，这个信息保存在方法区中。</p>
+<p>3、（执行引擎）<strong>调用实例方法</strong>时，会根据引用找到对象信息，进而可定位对应的class类型信息，和方法表。</p>
+<p>4、（执行引擎）<strong>执行方法时</strong>，在<strong>虚拟机栈</strong>中进行，分配栈帧，随着入栈出栈，完成方法调用操作。</p>
+<p>执行引擎</p>
+<p>运行Java的<strong>每一个线程都是一个独立的虚拟机执行引擎的实例</strong>。从线程生命周期的开始到结束，他要么在执行字节码，要么在执行本地方法。一个线程可能通过解释或者使用芯片级指令直接执行字节码，或者间接通过JIT执行编译过的本地代码。我们上文讲到的main函数，也就是<strong>执行引擎的操作入口。</strong></p>
+<h3 id="垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><a href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情" class="headerlink" title="垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　"></a>垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</h3><p><strong>在什么时候</strong>，即什么时候触发垃圾回收</p>
+<p>首先需要知道，GC又分为 minor GC 和 Full GC (也称为 Major GC )。Java 堆内存分为新生代和老年代，新生代中又分为1个 Eden 区域 和两个 Survivor 区域。</p>
+<p>那么对于 Minor GC 的触发条件：大多数情况下，直接在 Eden 区中进行分配。<strong>如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC；</strong>对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话（在新生代多次清理未被清理的晋升到旧生代或直接在旧生代分配的大对象，大数组），那么就会进行一次 Full GC。</p>
+<p>Ps：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：</p>
+<p><strong>在发生Minor GC之前</strong>，虚拟机会先检查<strong>老年代最大可用的连续空间</strong>是否大于<strong>新生代所有对象的总空间</strong>。如果<strong>大于</strong>则进行Minor GC，如果<strong>小于</strong>则看HandlePromotionFailure设置<strong>是否允许担保失败</strong>（不允许则直接Full GC）。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于则尝试Minor GC（如果尝试失败也会触发Full GC），如果小于则进行Full GC。</p>
+<p>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</p>
+<p>接着继续问你为什么要在这种时候对象才会被GC？　　接着继续问你GC策略都有哪些分类？　　你如果说出来了，继续问你这些策略分别都有什么优劣势？都适用于什么场景？　　你继续说出来了以后，给你举个实际的场景，让你选择一个GC策略？　　你如果选出来了，继续问你，为什么要选择这个策略？下面是关于类加载机制的简单连环炮。首先肯定是先问你Java的类加载器都有哪些？　　回答了这些以后，可能会问你每个类加载器都加载哪些类？　　说完以后，可能会问你这些类加载之间的父子关系是怎样的？　　你在回答的时候可能会提到双亲委派模型，那么可以继续问你什么是双亲委派模型？　　你解释完了以后，可能会继续问你，为什么Java的类加载器要使用双亲委派模型？　　你回答完以后，可能会继续问你如何自定义自己的类加载器，自己的类加载器和Java自带的类加载器关系如何处理？再来一个关于内存的连环炮。首先肯定就是问你内存分为哪几部分，这些部分分别都存储哪些数据？　　然后继续问你一个对象从创建到销毁都是怎么在这些部分里存活和转移的？　　接着可能会问你，内存的哪些部分会参与GC的回收？　　完事以后，可能还会问你Java的内存模型是怎么设计的？　　你回答了以后，还会继续问你为什么要这么设计？　　问完以后，还可能会让你结合内存模型的设计谈谈validate关键字的作用？　　你在谈的时候，肯定会提到可见性，那么接着可见性这三个字，还可以继续问你并发的内容。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag">#JVM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/02/[Java]Java中关于父子类之间this关键字的一个问题/" rel="next" title="Java中关于父子类之间this关键字的一个问题">
+                <i class="fa fa-chevron-left"></i> Java中关于父子类之间this关键字的一个问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/06/[Java并发编程]Java NIO 笔记/" rel="prev" title="Java NIO 笔记">
+                Java NIO 笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/03/[Java]JVM重点知识总结/"
+           data-title="JVM重点知识总结" data-url="http://qianmingxs.com/2017/03/03/[Java]JVM重点知识总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java代码的执行"><span class="nav-number">1.</span> <span class="nav-text">Java代码的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装载"><span class="nav-number">1.2.</span> <span class="nav-text">装载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">1.3.</span> <span class="nav-text">执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">2.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM内存空间"><span class="nav-number">2.1.</span> <span class="nav-text">JVM内存空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配与回收策略"><span class="nav-number">2.2.</span> <span class="nav-text">内存分配与回收策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收"><span class="nav-number">2.3.</span> <span class="nav-text">内存回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存状况分析"><span class="nav-number">2.4.</span> <span class="nav-text">内存状况分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程资源同步和交互机制"><span class="nav-number">3.</span> <span class="nav-text">线程资源同步和交互机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程资源同步"><span class="nav-number">3.1.</span> <span class="nav-text">线程资源同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程交互机制"><span class="nav-number">3.2.</span> <span class="nav-text">线程交互机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程状态及分析方法"><span class="nav-number">3.3.</span> <span class="nav-text">线程状态及分析方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见面试题"><span class="nav-number">4.</span> <span class="nav-text">常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从编写源代码到程序运行的过程"><span class="nav-number">4.1.</span> <span class="nav-text">从编写源代码到程序运行的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><span class="nav-number">4.2.</span> <span class="nav-text">垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+</body>
+</html>

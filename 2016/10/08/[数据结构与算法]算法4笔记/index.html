@@ -109,7 +109,7 @@
 基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
 排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序r">
 <meta property="og:image" content="http://i.imgur.com/GDFtowZ.png">
-<meta property="og:updated_time" content="2017-02-27T14:49:38.551Z">
+<meta property="og:updated_time" content="2017-03-05T14:52:30.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法4笔记">
 <meta name="twitter:description" content="书本源代码http://algs4.cs.princeton.edu/code/
@@ -633,7 +633,10 @@ for (int i = 0; i &lt; n - 1; i++) {
     }
 }
 System.out.println(Arrays.toString(a));
-</code></pre>
+</code></pre><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序是一种基于分治技术的排序算法，思想核心是选择一个基准元素X将待排序元素分成两个子序列，使得一个子序列中的元素均小于等于X,而另一个子序列中的元素均大于X,处于其终端所处在的位置上。</p>
+<p>或者你也可以打个比喻，想象一下，假设r为主元素，J元素为前方开路元素,和主元素进行比较，如果大于主元素则继续开路 ，如果小于主元素则I元素加1之后和J元素交换之后，J元素继续开路直到最后。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">QUICKSORT</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">        <span class="keyword">int</span>[] a = &#123;<span class="number">10</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-3</span>&#125;;</div><div class="line">        quicksort(a, <span class="number">0</span>, a.length - <span class="number">1</span>);</div><div class="line">        System.<span class="keyword">out</span>.println(Arrays.toString(a));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quicksort</span>(<span class="params"><span class="keyword">int</span>[] a, <span class="keyword">int</span> p, <span class="keyword">int</span> q</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (p &lt; q) &#123;</div><div class="line">            <span class="keyword">int</span> r = partition(a, p, q);</div><div class="line">            quicksort(a, p, r - <span class="number">1</span>);</div><div class="line">            quicksort(a, r + <span class="number">1</span>, q);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span>(<span class="params"><span class="keyword">int</span>[] a, <span class="keyword">int</span> p, <span class="keyword">int</span> q</span>) </span>&#123;</div><div class="line">        <span class="keyword">int</span> i = p - <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = p; j &lt; q; j++) &#123;</div><div class="line">            <span class="comment">//注意是&lt;=</span></div><div class="line">            <span class="keyword">if</span> (a[j] &lt;= a[q]) &#123;</div><div class="line">                swap(a, ++i, j);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        swap(a, ++i, q);</div><div class="line">        <span class="keyword">return</span> i;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span>(<span class="params"><span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j</span>) </span>&#123;</div><div class="line">        <span class="keyword">int</span> temp = a[i];</div><div class="line">        a[i] = a[j];</div><div class="line">        a[j] = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2>
       
     </div>
 
@@ -748,7 +751,7 @@ System.out.println(Arrays.toString(a));
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">70</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -756,7 +759,7 @@ System.out.println(Arrays.toString(a));
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -765,7 +768,7 @@ System.out.println(Arrays.toString(a));
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -794,7 +797,7 @@ System.out.println(Arrays.toString(a));
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">4.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">4.2.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序方法"><span class="nav-number">5.</span> <span class="nav-text">排序方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">4.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">4.2.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序方法"><span class="nav-number">5.</span> <span class="nav-text">排序方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">6.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">7.</span> <span class="nav-text">归并排序</span></a></li></ol></div>
             
           </div>
         </section>

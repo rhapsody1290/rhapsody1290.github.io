@@ -84,41 +84,27 @@
 
 
 
-<meta name="description" content="Linux命令：wget  要下载文件的urltail 查看日志tar -zxvf 解压zip xx 压缩
-mount  挂载unmount 卸载
-make 根据makefile进行编译make install 根据makefile进行安装
-rpm 查看软件
-yum install 安装软件
-mkdir 建立文件夹rmdir 删除空文件rm -rf 删除文件夹
-mv 移动cp 复制
-netstat">
+<meta name="description" content="项目经历园区网用户行为审计系统项目介绍：本项目为解决园区网络内部的安全问题，对园区网络的内网用户访问外部网络的行为进行监控和审计，并将网络上发生的事件记录下来以便事后追查主要负责：
+1、利用华为二层、三层交换机组建园区网络：接入层采用二层交换机，骨干网采用高性能的三层交换机
+2、基于SNMP协议审计虚假路由攻击：实时监测园区网络中路由表的变化，SNMP是简单网络管理协议，可以获得设备的基本信息；使">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试总结">
 <meta property="og:url" content="http://qianmingxs.com/2016/12/13/[数据结构与算法]面试总结/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="Linux命令：wget  要下载文件的urltail 查看日志tar -zxvf 解压zip xx 压缩
-mount  挂载unmount 卸载
-make 根据makefile进行编译make install 根据makefile进行安装
-rpm 查看软件
-yum install 安装软件
-mkdir 建立文件夹rmdir 删除空文件rm -rf 删除文件夹
-mv 移动cp 复制
-netstat">
+<meta property="og:description" content="项目经历园区网用户行为审计系统项目介绍：本项目为解决园区网络内部的安全问题，对园区网络的内网用户访问外部网络的行为进行监控和审计，并将网络上发生的事件记录下来以便事后追查主要负责：
+1、利用华为二层、三层交换机组建园区网络：接入层采用二层交换机，骨干网采用高性能的三层交换机
+2、基于SNMP协议审计虚假路由攻击：实时监测园区网络中路由表的变化，SNMP是简单网络管理协议，可以获得设备的基本信息；使">
+<meta property="og:image" content="http://i.imgur.com/vwU8xop.png">
 <meta property="og:image" content="http://i.imgur.com/rdtyB5M.jpg">
 <meta property="og:image" content="http://i.imgur.com/E7X556s.jpg">
 <meta property="og:image" content="http://i.imgur.com/PCeb1Xo.jpg">
-<meta property="og:updated_time" content="2017-03-02T13:19:39.524Z">
+<meta property="og:updated_time" content="2017-03-13T14:25:27.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试总结">
-<meta name="twitter:description" content="Linux命令：wget  要下载文件的urltail 查看日志tar -zxvf 解压zip xx 压缩
-mount  挂载unmount 卸载
-make 根据makefile进行编译make install 根据makefile进行安装
-rpm 查看软件
-yum install 安装软件
-mkdir 建立文件夹rmdir 删除空文件rm -rf 删除文件夹
-mv 移动cp 复制
-netstat">
-<meta name="twitter:image" content="http://i.imgur.com/rdtyB5M.jpg">
+<meta name="twitter:description" content="项目经历园区网用户行为审计系统项目介绍：本项目为解决园区网络内部的安全问题，对园区网络的内网用户访问外部网络的行为进行监控和审计，并将网络上发生的事件记录下来以便事后追查主要负责：
+1、利用华为二层、三层交换机组建园区网络：接入层采用二层交换机，骨干网采用高性能的三层交换机
+2、基于SNMP协议审计虚假路由攻击：实时监测园区网络中路由表的变化，SNMP是简单网络管理协议，可以获得设备的基本信息；使">
+<meta name="twitter:image" content="http://i.imgur.com/vwU8xop.png">
 
 
 
@@ -361,7 +347,79 @@ netstat">
       
 
       
-        <h2 id="Linux命令："><a href="#Linux命令：" class="headerlink" title="Linux命令："></a>Linux命令：</h2><p>wget  要下载文件的url<br>tail 查看日志<br>tar -zxvf 解压<br>zip xx 压缩</p>
+        <h2 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h2><h3 id="园区网用户行为审计系统"><a href="#园区网用户行为审计系统" class="headerlink" title="园区网用户行为审计系统"></a>园区网用户行为审计系统</h3><p>项目介绍：本项目为解决园区网络内部的安全问题，对园区网络的内网用户访问外部网络的行为进行监控和审计，并将网络上发生的事件记录下来以便事后追查<br>主要负责：</p>
+<p>1、利用华为二层、三层交换机组建园区网络：接入层采用二层交换机，骨干网采用高性能的三层交换机</p>
+<p>2、基于SNMP协议审计虚假路由攻击：实时监测园区网络中路由表的变化，SNMP是简单网络管理协议，可以获得设备的基本信息；使用UDP作为传输层；用161端口接收get/set报文，用162接收trap报文；当系统启动时主动获取路由器中的路由表，当路由表发生变化时，会向管理主机发送一个trap报文，查询路由表并与之间的对比，如果路由表发生变化则认为发生虚假路由攻击</p>
+<p>3、利用Jpcap抓包对网络流量监控：Java语言对网络层以下的控制无能为力，Jpcap是一个中间件，JPCAP调用wincap，对数据链路层的控制；利用Java第三方类库Jpcap抓取网络数据包，统计单位时间网络传输的字节速率，具体方案是维护{bytes = 0，开始时间}，当时间小于一秒钟，累计字节数；如果超过1秒就记录下当时的字节数，得到的结果就是一秒内传输的字节速率</p>
+<p>4、TCP重组算法还原完整TCP会话：传输层接收到应用层的数据时，会将数据分成多个数据包在网络上传输。但由网络原因数据包不一定会按序到达，在接收端收到的数据包的顺序会发生改变。从TCP三次握手建立连接，数据传输，释放连接为一个完整的TCP会话。TCP重组算法就是</p>
+<p>三次握手</p>
+<p><img src="http://i.imgur.com/vwU8xop.png" alt=""></p>
+<p>首先客户端向服务端发送SYN报文（seq = client_isn），服务端收到后发送ACK（client_isn+1），和SYN报文（seq = server_isn），客户端再发送ACK（server_isn+1），TCP连接建立</p>
+<p>TCP 数据传输<br>当双方建立 TCP 连接以后，就可以传输数据了，传输过程中发送方每发送一个数据包 ，接收方都要给予一个应答。</p>
+<p>TCP 断开连接<br>建立一个连接需要 3 次握手，而终止一个连接要经过 4 次握手（如图 2 ）。这是因为一个 TCP 连接是全双工（即数据在两个方向上能同时传递），每个方向必须单独地进行关闭。4 次握手实际上就是双方单独关闭的过程。</p>
+<p>思路：<br>1、以源IP，源端口、目的IP和目的端口四元组确定一条TCP连接，每当接收到一个数据包，根据四元组将数据包放到对应TCP连接的队列中</p>
+<p>5、常用协议审计：记录园区网用户在上网过程中的用户行为，涉及到的协议包括HTTP、FTP、SMTP<br>6、DOS攻击审计：评估正常网络流量，若检测到一段时间流量显著上升，则判断为受到DOS攻击<br>7、用户权限：采用主流的RBAC权限模型，集成轻量级的Shiro权限框架，对用户进行鉴权、授权<br>8、数据显示：采用SSM框架，后端数据处理后存入数据库，Web应用程序读取数据库并在页面中显示<br>9、用UML规范中的用例模型、类图、序列图、活动图等对软件进行建模，编写项目文档</p>
+<h3 id="实习"><a href="#实习" class="headerlink" title="实习"></a>实习</h3><p><a href="http://www.jianshu.com/p/0f4113d6ec4b" target="_blank" rel="external">http://www.jianshu.com/p/0f4113d6ec4b</a><br>应用场景：<br>主要用于分布式系统中，用于各个服务/模块之间的通信，就是常说的RPC，并且由于<strong>跨语言</strong>，对服务端和客户端的语言没有硬性要求。一个比较简单的场景：<br>某公司有两个部门，一个部门A用C语言开发，另一个部门B用Java语言开发，现在A需要B部门的一些数据，则B部门可以提供一个thrift接口，A部门通过这个thrift接口获取需要的数据，不仅跨服务，而且跨语言！</p>
+<h3 id="公众号开发"><a href="#公众号开发" class="headerlink" title="公众号开发"></a>公众号开发</h3><p>项目介绍：马可波罗瓷砖莞深销售中心公众号，用于解决分公司日常的<strong>销售业务中</strong>存在大量的信息沟通需要</p>
+<p>如零售终端客户需了解订单配送进展、收款情况；家装报备；送货派车等等，这些信息现在是或是通过系统短信沟通，或是系统外进行沟通。现有的方式，或是传递信息有限，或是耗用时间资源，或是一些有效信息未能纳入系统管理，可能造成一些管理漏洞，因此拟开发、搭建企业微信服务号，通过微信的推送、互动等功能，实现客户订单信息推送与查询、家装报备、送货确认、服务评价、收款等等功能。</p>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>单向链表头插法：</p>
+<pre><code>t = first;
+first = new Node();
+first.next = t;
+</code></pre><p>这种写法对first是否为null都不影响，但是对last指针有影响：当first为空时，last=first，否则last不变，完整写法：</p>
+<pre><code>t = first;
+first = new Node();
+first.next = t;
+if(t == null){
+    last = first;
+}else{
+    //不操作
+}
+</code></pre><p>双向链表头插法：</p>
+<p>不考虑特殊情况的写法：</p>
+<pre><code>t = first;
+first = new Node();
+first.next = t;
+first.pre = null;
+t.pre = first;
+</code></pre><p>但当first为null的时候，t.pre=first会报空指针异常，修正：</p>
+<pre><code>t = first;
+first = new Node();
+first.next = t;
+first.pre = null;
+if(t == null){
+    last = first;
+}else{
+    t.pre = first;
+}
+</code></pre><p>总结：头插法和尾插法思考方法<br>1、保存first或last的指针<br>2、first或last指向新new出来的对象，维护其与前后节点之间的关系<br>3、当first或last为空时，分别使last或first执行new的对象，如果是双向链表，还需维持new出来对象前后之间的关联</p>
+<p>头插法双向链表：</p>
+<pre><code>private void linkFirst(E e) {
+    final Node&lt;E&gt; f = first;
+    final Node&lt;E&gt; newNode = new Node&lt;&gt;(null, e, f);
+    first = newNode;
+    //易错点
+    if (f == null)
+        last = newNode;
+    else
+        f.prev = newNode;
+    size++;
+    modCount++;
+}
+</code></pre><p>尾插法双向链表：</p>
+<pre><code>void linkLast(E e) {
+    final Node&lt;E&gt; l = last;
+    final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);
+    last = newNode;
+    //易错点
+    if (l == null)
+        first = newNode;
+    else
+        l.next = newNode;
+    size++;
+    modCount++;
+}
+</code></pre><h2 id="Linux命令："><a href="#Linux命令：" class="headerlink" title="Linux命令："></a>Linux命令：</h2><p>wget  要下载文件的url<br>tail 查看日志<br>tar -zxvf 解压<br>zip xx 压缩</p>
 <p>mount  挂载<br>unmount 卸载</p>
 <p>make 根据makefile进行编译<br>make install 根据makefile进行安装</p>
 <p>rpm 查看软件</p>
@@ -375,11 +433,37 @@ netstat">
 <p>权限：<br>chmod 777 文件名 #！！！！！！！！！！<br>chown 用户名 文件名 #修改文件所有者<br>chgrp 组名 文件名 #修改文件所有组</p>
 <p>/etc/profile #系统整体配置文件</p>
 <p>df 系统分区情况</p>
+<h2 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h2><h3 id="什么是SOA"><a href="#什么是SOA" class="headerlink" title="什么是SOA"></a>什么是SOA</h3><p>SOA：面向服务的架构，强调的是一种架构思想，系统之间以标准服务的方式进行交互，组件化的灵活开发方式。</p>
+<p>（将系统划分为多个模块，也称为服务，这些服务之间通过接口和协议联系起来，接在一起以实现特定的功能。）</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><h3 id="方法重写与方法重载的区别"><a href="#方法重写与方法重载的区别" class="headerlink" title="方法重写与方法重载的区别"></a>方法重写与方法重载的区别</h3><p><br></p>
 <font color="red"><strong>方法的重写</strong></font>是指<strong>子类中的方法</strong>与<strong>父类中继承的方法</strong>有完全相同的<strong>返回值类型</strong>、<strong>方法名</strong>、<strong>参数表</strong>（参数类型、参数个数、参数顺序），而且<strong>子类函数的访问修饰权限不能少于父类的</strong><br><br>在重写方法时，需要遵循以下的规则：<br><br>(一) 父类方法的参数列表必须完全与被子类重写的方法的参数列表相同，否则不能称其为重写而是重载<br>(二) 父类的<strong>返回类型</strong>必须与被子类重写的方法返回类型相同，否则不能称其为重写而是重载<br>(三) Java中规定，被子类重写的方法不能拥有比父类方法更加严格的访问权限（<strong>子类函数的访问修饰权限不能少于父类的；</strong>），<font color="red">否则会编译错误</font>
 
 <p><font color="red"><strong>方法重载</strong></font>：在一个类中有多个<strong>相同名字</strong>的方法，但具有<strong>不同的参数表</strong>（参数类型、个数、顺序），<strong>返回值类型可以相同也可以不相同</strong>。无法以返回型别作为重载函数的区分标准，调用方法时通过传递给它们的不同参数个数和参数类型来决定具体使用哪个方法, 这就是多态性。</p>
 <p><strong>总结：</strong>方法重写要求具有相同的返回类型，方法名，参数表，子类的访问修饰不能少于父类；方法重载具有相同的方法名，参数表必须不同，返回类型无所谓</p>
+<h2 id="Java中static作用"><a href="#Java中static作用" class="headerlink" title="Java中static作用"></a>Java中static作用</h2><p>static表示”全局”或者”静态”的意思，用来修饰<strong>成员变量</strong>和<strong>成员方法</strong>，也可以形成静态<strong>static代码块</strong>，但是Java语言中没有全局变量的概念</p>
+<p>被static修饰的成员变量和成员方法<strong>独立于该类的任何对象，被类的所有实例共享</strong>。</p>
+<p><strong>public修饰的static成员变量和成员方法本质是全局变量和全局方法</strong>，当声明它类的对象市，不生成static变量的副本，而是类的所有实例共享同一个static变量。</p>
+<p>static变量前可以有<strong>private修饰</strong>，表示这个变量可以在<strong>类的静态代码块中，或者类的其他静态成员方法中使用</strong>（当然也可以在非静态成员方法中使用–废话），但是<strong>不能在其他类中通过类名来直接引用</strong>，这一点很重要</p>
+<p>总结：</p>
+<ul>
+<li>static表示静态的，修饰变量、方法后叫做静态变量和静态方法，<strong>在加载类的过程中完成静态变量的内存分配</strong>，为所有对象所共有，通过类直接方法</li>
+<li>static块在类加载的时候执行      </li>
+</ul>
+<h2 id="HashMap底层"><a href="#HashMap底层" class="headerlink" title="HashMap底层"></a>HashMap底层</h2><p><a href="http://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="external">http://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/</a></p>
+<p>定义：</p>
+<pre><code>基于Map接口实现、允许null键/值、非同步、不保证有序(比如插入的顺序)、也不保证序不随时间变化。
+</code></pre><p>记忆：定义（Map接口）、特点（无序、null）、线程同步（非同步）</p>
+<p>两个重要的参数：容量(Capacity)和负载因子(Load factor)</p>
+<pre><code>简单的说，Capacity就是bucket的大小，Load factor就是bucket填满程度的最大比例。如果对迭代性能要求很高的话不要把capacity设置过大，也不要把load factor设置过小。当bucket中的entries的数目大于capacity*load factor时就需要调整bucket的大小为当前的2倍。
+</code></pre><p>记忆：容量（篮子的大小）、负载因子（篮子容量超过负载因子时，调整篮子的大小为当前的两倍）</p>
+<p>put函数的实现：</p>
+<pre><code>对key的hashCode()做hash，然后再计算index;
+如果没碰撞直接放到bucket里；
+如果碰撞了，以链表的形式存在buckets后；
+如果碰撞导致链表过长(大于等于TREEIFY_THRESHOLD)，就把链表转换成红黑树；
+如果节点已经存在就替换old value(保证key的唯一性)
+如果bucket满了(超过load factor*current capacity)，就要resize。
+</code></pre><p>记忆：1、key做hash计算数组下标，2、是否碰撞（不碰撞，直接放入篮子；否则以链表形式放入篮子），3、如果碰撞导致链表长度过长，就把链表转成红黑树；4、如果节点存在则替换，5、如果bucket满了则resize</p>
 <h2 id="动态绑定"><a href="#动态绑定" class="headerlink" title="动态绑定"></a>动态绑定</h2><p>Java的动态绑定又称为运行时绑定。意思就是说，<strong>程序会在运行的时候自动选择调用哪个方法。</strong></p>
 <h2 id="OOP三大特性：继承，多态，封装。"><a href="#OOP三大特性：继承，多态，封装。" class="headerlink" title="OOP三大特性：继承，多态，封装。"></a>OOP三大特性：继承，多态，封装。</h2><h2 id="RESTFUL-API"><a href="#RESTFUL-API" class="headerlink" title="RESTFUL API"></a>RESTFUL API</h2><h2 id="StringBuilder，StringBuffer"><a href="#StringBuilder，StringBuffer" class="headerlink" title="StringBuilder，StringBuffer"></a>StringBuilder，StringBuffer</h2><h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><h2 id="Mysql索引"><a href="#Mysql索引" class="headerlink" title="Mysql索引"></a>Mysql索引</h2><h2 id="判断对象是否相等"><a href="#判断对象是否相等" class="headerlink" title="判断对象是否相等"></a>判断对象是否相等</h2><p>推荐使用java.util.Objects#equals （JDK7引入的工具类）</p>
 <pre><code>public static boolean equals(Object a, Object b) {
@@ -391,7 +475,7 @@ netstat">
 <p>1、当Java虚拟机要加载一个类时，到底派出哪个类加载器去加载呢?<br>　　①首先 当前线程的类加载器 去加载线程中的第一个类.<br>　　②如果类A中引用了类B，Java虚拟机将使用加载类A的类加载器加载类B<br>　　③还可以直接调用ClassLoader.loadClass()方法来指定某个类加载器去加载某个类.</p>
 <p>2、每个类加载器加载类时，又先<strong>委托给其上级类加载器</strong><br>　　当所有祖宗类加载器没有加载到类，回到发起者类加载器，如果还加载不了，则抛出ClassNotFoundException异常。它不会去找发起者类加载器的儿子，因为没有getChild()方法，即使有，有那么多的儿子交给那一个呢?所以干脆就不交给儿子处理了。</p>
 <h3 id="ArrayList和LinkedList和Vector"><a href="#ArrayList和LinkedList和Vector" class="headerlink" title="ArrayList和LinkedList和Vector"></a>ArrayList和LinkedList和Vector</h3><p>1、ArrayList是实现了基于<strong>动态数组</strong>的数据结构，LinkedList基于<strong>链表</strong>的数据结构<br>2、对于<strong>随机访问</strong>get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针<br>3、对于<strong>新增和删除</strong>操作add和remove，LinedList比较占优势，因为ArrayList要移动数据</p>
-<p>Vector和ArrayList几乎是完全相同的，唯一的区别在于Vector是同步类(synchronized).因此,开销就比ArrayList要大.正常情况下,大多数的Java程序员使用ArrayList而不是Vector,因为同步完全可以由程序员自己来控制</p>
+<p>Vector和ArrayList几乎是完全相同的，唯一的区别在于<strong>Vector是同步类</strong>(synchronized).因此,开销就比ArrayList要大.正常情况下,大多数的Java程序员使用ArrayList而不是Vector,因为同步完全可以由程序员自己来控制</p>
 <h3 id="HashMap和HashTable"><a href="#HashMap和HashTable" class="headerlink" title="HashMap和HashTable"></a>HashMap和HashTable</h3><p>1、历史原因</p>
 <p>Hashtable是基于陈旧的Dictionary类的，HashMap是java 1.2引进的Map接口的一个实现</p>
 <p>2、同步性</p>
@@ -621,7 +705,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">70</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -629,7 +713,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -638,7 +722,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -667,7 +751,7 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux命令："><span class="nav-number">1.</span> <span class="nav-text">Linux命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java基础"><span class="nav-number">2.</span> <span class="nav-text">Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法重写与方法重载的区别"><span class="nav-number">2.1.</span> <span class="nav-text">方法重写与方法重载的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态绑定"><span class="nav-number">3.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OOP三大特性：继承，多态，封装。"><span class="nav-number">4.</span> <span class="nav-text">OOP三大特性：继承，多态，封装。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTFUL-API"><span class="nav-number">5.</span> <span class="nav-text">RESTFUL API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder，StringBuffer"><span class="nav-number">6.</span> <span class="nav-text">StringBuilder，StringBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO"><span class="nav-number">7.</span> <span class="nav-text">NIO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql索引"><span class="nav-number">8.</span> <span class="nav-text">Mysql索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断对象是否相等"><span class="nav-number">9.</span> <span class="nav-text">判断对象是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器"><span class="nav-number">9.1.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList和Vector"><span class="nav-number">9.2.</span> <span class="nav-text">ArrayList和LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和HashTable"><span class="nav-number">9.3.</span> <span class="nav-text">HashMap和HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap底层实现"><span class="nav-number">9.4.</span> <span class="nav-text">HashMap底层实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理"><span class="nav-number">9.5.</span> <span class="nav-text">动态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">9.6.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-MVC-和-Struts2的区别"><span class="nav-number">9.7.</span> <span class="nav-text">Spring MVC 和 Struts2的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向与转发的区别"><span class="nav-number">9.8.</span> <span class="nav-text">重定向与转发的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sesssion"><span class="nav-number">9.9.</span> <span class="nav-text">Sesssion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">10.</span> <span class="nav-text">JVM</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目经历"><span class="nav-number">1.</span> <span class="nav-text">项目经历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#园区网用户行为审计系统"><span class="nav-number">1.1.</span> <span class="nav-text">园区网用户行为审计系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实习"><span class="nav-number">1.2.</span> <span class="nav-text">实习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公众号开发"><span class="nav-number">1.3.</span> <span class="nav-text">公众号开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构与算法"><span class="nav-number">2.</span> <span class="nav-text">数据结构与算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux命令："><span class="nav-number">3.</span> <span class="nav-text">Linux命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SOA"><span class="nav-number">4.</span> <span class="nav-text">SOA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是SOA"><span class="nav-number">4.1.</span> <span class="nav-text">什么是SOA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java基础"><span class="nav-number">5.</span> <span class="nav-text">Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法重写与方法重载的区别"><span class="nav-number">5.1.</span> <span class="nav-text">方法重写与方法重载的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中static作用"><span class="nav-number">6.</span> <span class="nav-text">Java中static作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap底层"><span class="nav-number">7.</span> <span class="nav-text">HashMap底层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态绑定"><span class="nav-number">8.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OOP三大特性：继承，多态，封装。"><span class="nav-number">9.</span> <span class="nav-text">OOP三大特性：继承，多态，封装。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RESTFUL-API"><span class="nav-number">10.</span> <span class="nav-text">RESTFUL API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder，StringBuffer"><span class="nav-number">11.</span> <span class="nav-text">StringBuilder，StringBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO"><span class="nav-number">12.</span> <span class="nav-text">NIO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql索引"><span class="nav-number">13.</span> <span class="nav-text">Mysql索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断对象是否相等"><span class="nav-number">14.</span> <span class="nav-text">判断对象是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类加载器"><span class="nav-number">14.1.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList和Vector"><span class="nav-number">14.2.</span> <span class="nav-text">ArrayList和LinkedList和Vector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap和HashTable"><span class="nav-number">14.3.</span> <span class="nav-text">HashMap和HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap底层实现"><span class="nav-number">14.4.</span> <span class="nav-text">HashMap底层实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态代理"><span class="nav-number">14.5.</span> <span class="nav-text">动态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">14.6.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-MVC-和-Struts2的区别"><span class="nav-number">14.7.</span> <span class="nav-text">Spring MVC 和 Struts2的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向与转发的区别"><span class="nav-number">14.8.</span> <span class="nav-text">重定向与转发的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sesssion"><span class="nav-number">14.9.</span> <span class="nav-text">Sesssion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">15.</span> <span class="nav-text">JVM</span></a></li></ol></div>
             
           </div>
         </section>

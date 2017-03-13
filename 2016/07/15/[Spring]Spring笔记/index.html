@@ -89,9 +89,8 @@ struts是web框架 (jsp/action/actionfrom)
 hibernate是orm框架，处于持久层
 spring是容器框架，用于配置各个层的bean（action/service/domain/dao），并维护bean之间关系的框架 
 
-spring中重要概念★★★★★bean
-Spring管理的对象为bean
-bean是java中的任何一种对象（javabe">
+面试回答：Spring就是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。
+spring中重要概念★★★★★b">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring笔记">
 <meta property="og:url" content="http://qianmingxs.com/2016/07/15/[Spring]Spring笔记/index.html">
@@ -101,9 +100,8 @@ struts是web框架 (jsp/action/actionfrom)
 hibernate是orm框架，处于持久层
 spring是容器框架，用于配置各个层的bean（action/service/domain/dao），并维护bean之间关系的框架 
 
-spring中重要概念★★★★★bean
-Spring管理的对象为bean
-bean是java中的任何一种对象（javabe">
+面试回答：Spring就是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。
+spring中重要概念★★★★★b">
 <meta property="og:image" content="http://i.imgur.com/xPyY3mN.png">
 <meta property="og:image" content="http://i.imgur.com/IYAnjQ8.png">
 <meta property="og:image" content="http://i.imgur.com/n6bHb14.png">
@@ -118,7 +116,7 @@ bean是java中的任何一种对象（javabe">
 <meta property="og:image" content="http://i.imgur.com/fzfob6x.png">
 <meta property="og:image" content="http://i.imgur.com/eK3KdQ1.png">
 <meta property="og:image" content="http://i.imgur.com/DR0KqCg.png">
-<meta property="og:updated_time" content="2017-02-21T13:16:35.860Z">
+<meta property="og:updated_time" content="2017-03-13T14:21:37.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring笔记">
 <meta name="twitter:description" content="Spring是什么
@@ -126,9 +124,8 @@ struts是web框架 (jsp/action/actionfrom)
 hibernate是orm框架，处于持久层
 spring是容器框架，用于配置各个层的bean（action/service/domain/dao），并维护bean之间关系的框架 
 
-spring中重要概念★★★★★bean
-Spring管理的对象为bean
-bean是java中的任何一种对象（javabe">
+面试回答：Spring就是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。
+spring中重要概念★★★★★b">
 <meta name="twitter:image" content="http://i.imgur.com/xPyY3mN.png">
 
 
@@ -377,8 +374,9 @@ bean是java中的任何一种对象（javabe">
 <li>hibernate是orm框架，处于持久层</li>
 <li>spring是<strong><em>容器框架</em></strong>，用于配置各个层的bean（action/service/domain/dao），并维护bean之间关系的框架 </li>
 </ul>
+<p>面试回答：<strong>Spring就是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。</strong></p>
 <h2 id="spring中重要概念★★★★★"><a href="#spring中重要概念★★★★★" class="headerlink" title="spring中重要概念★★★★★"></a>spring中重要概念★★★★★</h2><h3 id="bean"><a href="#bean" class="headerlink" title="bean"></a>bean</h3><ul>
-<li>Spring管理的对象为bean</li>
+<li><strong>Spring管理的对象为bean</strong></li>
 <li>bean是java中的任何一种对象（javabean/service/action/数据源/dao），spring作用是配置各个层中的组件（bean），并维持组件（bean）之间的关系</li>
 <li>JavaBean必须拥有一个无参的构造器，通过get/set方法访问参数，同时支持持久化</li>
 </ul>
@@ -1182,7 +1180,7 @@ System.out.println(dbUtil.getDrivername());
 <p>AOP编程可以在不增加原来业务逻辑方法代码的情况下，<strong>扩展某个方法</strong>，传统的方法是采用 <strong>继承</strong> 的方式，现在可以采用<strong>动态代理技术</strong></p>
 <p>连接点表示哪些方法 <strong>可以被扩展</strong>（拦截）；切入点表示哪些方法 <strong>需要被扩展</strong>（拦截）；织入是把通知应用到目标上，生成动态代理类的过程；切面表示公用的业务逻辑，包括多个切入点和多个通知</p>
 <h3 id="AOP底层实现"><a href="#AOP底层实现" class="headerlink" title="AOP底层实现"></a>AOP底层实现</h3><h4 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h4><p>动态代理可以让一个类 代理多个不同的目标类，而且可以 代理不同的方法</p>
-<p>详见Java——设计模式版块~<br><a href="http://qianmingxs.com/2016/07/06/[%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F]%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%89%BA%E6%9C%AF%E4%B9%8B%E9%81%93%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">http://qianmingxs.com/2016/07/06/[%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F]%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%89%BA%E6%9C%AF%E4%B9%8B%E9%81%93%E7%AC%94%E8%AE%B0/</a></p>
+<p>详见Java——设计模式版块~<br><a href="http://qianmingxs.com/2016/07/06/[%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F]%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%89%BA%E6%9C%AF%E4%B9%8B%E9%81%93%E7%AC%94%E8%AE%B0/">http://qianmingxs.com/2016/07/06/[%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F]%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%89%BA%E6%9C%AF%E4%B9%8B%E9%81%93%E7%AC%94%E8%AE%B0/</a></p>
 <p>1、必须针对接口进行代理<br>2、生成代理对象，通过Proxy类进行代理，传入目标对象类加载器、目标对象接口 、处理类<br>3、自己实现InvocationHandler 接口 </p>
 <p><img src="http://i.imgur.com/fzfob6x.png" alt=""></p>
 <p>说明：</p>
@@ -1613,7 +1611,7 @@ public class MyAspect {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">70</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1621,7 +1619,7 @@ public class MyAspect {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1630,7 +1628,7 @@ public class MyAspect {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
