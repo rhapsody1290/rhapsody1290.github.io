@@ -94,7 +94,7 @@
 <meta property="og:description" content="1、”.”、”|”、”“都是转义字符，*必须得加”\\“
 如果用&amp;quot;.&amp;quot;作为分隔的话，必须是如下写法：String.split(&amp;quot;\\.&amp;quot;)，这样才能正确的分隔开，不能用String.split(&amp;quot;.&amp;quot;)；
 如果用&amp;quot;|&amp;quot;作为分隔的话，必须是如下写法：String.split(&amp;quot;\\|&amp;quot;)，这样才能正确">
-<meta property="og:updated_time" content="2017-03-02T13:19:39.521Z">
+<meta property="og:updated_time" content="2017-03-24T09:12:58.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java正则表达式(未完待续)">
 <meta name="twitter:description" content="1、”.”、”|”、”“都是转义字符，*必须得加”\\“
@@ -351,6 +351,7 @@
 <p>此方法返回的数组包含此字符串的每个<strong>子字符串</strong>，这些子字符串由<strong>另一个匹配给定的表达式的子字符串</strong>终止或由<strong>字符串结束符</strong>来终止。数组中的子字符串按它们在此字符串中的顺序排列。如果表达式不匹配输入的任何部分，则结果数组只具有一个元素，即<strong>此字符串</strong>。</p>
 <p>4、public string[] split(string regex)</p>
 <p>这里的参数的名称是 regex ，也就是 regular expression （正则表达式）。这个参数并不是一个简单的分割用的字符，而是一个正则表达式，<br>他对一些特殊的字符可能会出现你预想不到的结果，比如测试下面的代码： </p>
+<h2 id="正则表达式案例"><a href="#正则表达式案例" class="headerlink" title="正则表达式案例"></a>正则表达式案例</h2><p>多关键词<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String s=<span class="string">"utf-8<span class="subst">#&#123;gb2312&#125;</span>utf-8<span class="subst">#&#123;iso8859-<span class="number">1</span>&#125;</span>gbk<span class="subst">#&#123;zzz&#125;</span>"</span>;<span class="regexp">//</span>[<span class="string">'utf-8'</span>,<span class="string">'gbk'</span>,<span class="string">'gb2312'</span>,<span class="string">'iso8859-1'</span>]</div><div class="line">Pattern pattern = Pattern.compile(<span class="string">"utf-8|gbk|gb2312|iso8859-1"</span>);</div><div class="line">Matcher m = pattern.matcher(s);</div><div class="line"><span class="keyword">while</span>(m.find())&#123;</div><div class="line">    System.out.println(m.group());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -464,7 +465,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -472,7 +473,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -481,7 +482,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -510,7 +511,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式案例"><span class="nav-number">1.</span> <span class="nav-text">正则表达式案例</span></a></li></ol></div>
             
           </div>
         </section>

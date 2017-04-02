@@ -84,31 +84,32 @@
 
 
 
-<meta name="description" content="转自 http://tutorials.jenkov.com/java-nio/index.html
+<meta name="description" content="转自 http://ifeve.com/java-nio-all/
 NIO是什么Java NIO(New IO)是一个可以替代标准Java IO API的IO API（从Java 1.4开始)，Java NIO提供了与标准IO不同的IO工作方式。
 1、Java NIO: Channels and Buffers（通道和缓冲区）
-标准的IO基于字节流和字符流进行操作">
+标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Chann">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java NIO 系列教程">
 <meta property="og:url" content="http://qianmingxs.com/2017/03/09/[NIO]Java NIO 系列教程/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="转自 http://tutorials.jenkov.com/java-nio/index.html
+<meta property="og:description" content="转自 http://ifeve.com/java-nio-all/
 NIO是什么Java NIO(New IO)是一个可以替代标准Java IO API的IO API（从Java 1.4开始)，Java NIO提供了与标准IO不同的IO工作方式。
 1、Java NIO: Channels and Buffers（通道和缓冲区）
-标准的IO基于字节流和字符流进行操作">
+标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Chann">
 <meta property="og:image" content="http://i.imgur.com/OMUe99f.png">
 <meta property="og:image" content="http://i.imgur.com/LXlI8Ux.png">
 <meta property="og:image" content="http://i.imgur.com/OMUe99f.png">
 <meta property="og:image" content="http://i.imgur.com/EVfAOgu.png">
 <meta property="og:image" content="http://i.imgur.com/5gzGOOT.png">
 <meta property="og:image" content="http://i.imgur.com/oP8lagL.png">
-<meta property="og:updated_time" content="2017-03-13T14:22:17.602Z">
+<meta property="og:image" content="http://i.imgur.com/LXlI8Ux.png">
+<meta property="og:updated_time" content="2017-04-01T09:57:46.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java NIO 系列教程">
-<meta name="twitter:description" content="转自 http://tutorials.jenkov.com/java-nio/index.html
+<meta name="twitter:description" content="转自 http://ifeve.com/java-nio-all/
 NIO是什么Java NIO(New IO)是一个可以替代标准Java IO API的IO API（从Java 1.4开始)，Java NIO提供了与标准IO不同的IO工作方式。
 1、Java NIO: Channels and Buffers（通道和缓冲区）
-标准的IO基于字节流和字符流进行操作">
+标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Chann">
 <meta name="twitter:image" content="http://i.imgur.com/OMUe99f.png">
 
 
@@ -352,7 +353,7 @@ NIO是什么Java NIO(New IO)是一个可以替代标准Java IO API的IO API（�
       
 
       
-        <p>转自 <a href="http://tutorials.jenkov.com/java-nio/index.html" target="_blank" rel="external">http://tutorials.jenkov.com/java-nio/index.html</a></p>
+        <p>转自 <a href="http://ifeve.com/java-nio-all/" target="_blank" rel="external">http://ifeve.com/java-nio-all/</a></p>
 <h2 id="NIO是什么"><a href="#NIO是什么" class="headerlink" title="NIO是什么"></a>NIO是什么</h2><p>Java NIO(<strong>New IO</strong>)是一个可以替代标准Java IO API的IO API（从Java 1.4开始)，<strong>Java NIO提供了与标准IO不同的IO工作方式</strong>。</p>
 <p>1、Java NIO: Channels and Buffers（通道和缓冲区）</p>
 <p>标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。</p>
@@ -526,7 +527,7 @@ aFile.close();
 <li>第一个不相等的元素小于另一个Buffer中对应的元素 。</li>
 <li>所有元素都相等，但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)。<br>（译注：剩余元素是从 position到limit之间的元素）</li>
 </ul>
-<h2 id="Scatter-Gather"><a href="#Scatter-Gather" class="headerlink" title="Scatter/Gather"></a>Scatter/Gather</h2><p>Java NIO开始支持scatter/gather，scatter/gather用于描述从Channel（译者注：Channel在中文经常翻译为通道）中读取或者写入到Channel的操作。</p>
+<h2 id="Scatter-Gather"><a href="#Scatter-Gather" class="headerlink" title="Scatter/Gather"></a>Scatter/Gather</h2><p>Java NIO开始支持scatter/gather，scatter/gather用于描述从Channel（译者注：Channel在中文经常翻译为通道）中读取或者写入到Buffer中的操作。</p>
 <ul>
 <li>分散（scatter）从Channel中读取是指在读操作时<strong>将读取的数据写入多个buffer中</strong>。因此，Channel将从Channel中读取的数据“分散（scatter）”到多个Buffer中。</li>
 <li>聚集（gather）写入Channel是指在写操作时<strong>将多个buffer的数据写入同一个Channel</strong>，因此，Channel 将多个Buffer中的数据“聚集（gather）”后发送到Channel。</li>
@@ -568,7 +569,12 @@ long position = 0;
 long count = fromChannel.size();
 fromChannel.transferTo(position, count, toChannel);
 </code></pre><p>是不是发现这个例子和前面那个例子特别相似？除了调用方法的FileChannel对象不一样外，其他的都一样。<br>上面所说的关于SocketChannel的问题在transferTo()方法中同样存在。SocketChannel会一直传输数据直到目标buffer被填满。</p>
-
+<h2 id="Selector-1"><a href="#Selector-1" class="headerlink" title="Selector"></a>Selector</h2><p>Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能够知晓通道是否为诸如读写事件做好准备的组件。这样，<strong>一个单独的线程可以管理多个channel，从而管理多个网络连接</strong>。</p>
+<h3 id="为什么使用Selector"><a href="#为什么使用Selector" class="headerlink" title="为什么使用Selector?"></a>为什么使用Selector?</h3><p>仅用单个线程来处理多个Channels的好处是，只需要更少的线程来处理通道。事实上，<strong>可以只用一个线程处理所有的通道</strong>。对于操作系统来说，线程之间上下文切换的开销很大，而且每个线程都要占用系统的一些资源（如内存）。因此，使用的线程越少越好。</p>
+<p>但是，需要记住，现代的操作系统和CPU在多任务方面表现的越来越好，所以多线程的开销随着时间的推移，变得越来越小了。实际上，如果一个CPU有多个内核，不使用多任务可能是在浪费CPU能力。不管怎么说，关于那种设计的讨论应该放在另一篇不同的文章中。在这里，只要知道使用Selector能够处理多个通道就足够了。</p>
+<p>下面是单线程使用一个Selector处理3个channel的示例图：</p>
+<p><img src="http://i.imgur.com/LXlI8Ux.png" alt=""></p>
+<h3 id="Selector的创建"><a href="#Selector的创建" class="headerlink" title="Selector的创建"></a>Selector的创建</h3>
       
     </div>
 
@@ -599,13 +605,17 @@ fromChannel.transferTo(position, count, toChannel);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/06/[Java并发编程]Java NIO 笔记/" rel="next" title="Java NIO 笔记">
-                <i class="fa fa-chevron-left"></i> Java NIO 笔记
+              <a href="/2017/03/06/[NIO]同步异步、阻塞非阻塞/" rel="next" title="同步异步、阻塞非阻塞">
+                <i class="fa fa-chevron-left"></i> 同步异步、阻塞非阻塞
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/26/[Java]Java集合 - 对map集合进行排序/" rel="prev" title="对map集合进行排序">
+                对map集合进行排序 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -677,7 +687,7 @@ fromChannel.transferTo(position, count, toChannel);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -685,7 +695,7 @@ fromChannel.transferTo(position, count, toChannel);
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -694,7 +704,7 @@ fromChannel.transferTo(position, count, toChannel);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -723,7 +733,7 @@ fromChannel.transferTo(position, count, toChannel);
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO是什么"><span class="nav-number">1.</span> <span class="nav-text">NIO是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-NIO-概述"><span class="nav-number">2.</span> <span class="nav-text">Java NIO 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-和-Buffer"><span class="nav-number">2.1.</span> <span class="nav-text">Channel 和 Buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selector"><span class="nav-number">2.2.</span> <span class="nav-text">Selector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Channel"><span class="nav-number">3.</span> <span class="nav-text">Channel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel与流的区别"><span class="nav-number">3.1.</span> <span class="nav-text">Channel与流的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel的实现"><span class="nav-number">3.2.</span> <span class="nav-text">Channel的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的-Channel-示例"><span class="nav-number">3.3.</span> <span class="nav-text">基本的 Channel 示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer"><span class="nav-number">4.</span> <span class="nav-text">Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的基本用法"><span class="nav-number">4.1.</span> <span class="nav-text">Buffer的基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的capacity-position和limit"><span class="nav-number">4.2.</span> <span class="nav-text">Buffer的capacity,position和limit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的类型"><span class="nav-number">4.3.</span> <span class="nav-text">Buffer的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的分配"><span class="nav-number">4.4.</span> <span class="nav-text">Buffer的分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向Buffer中写数据"><span class="nav-number">4.5.</span> <span class="nav-text">向Buffer中写数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flip-方法"><span class="nav-number">4.6.</span> <span class="nav-text">flip()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从Buffer中读取数据"><span class="nav-number">4.7.</span> <span class="nav-text">从Buffer中读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rewind-方法"><span class="nav-number">4.8.</span> <span class="nav-text">rewind()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear-与compact-方法"><span class="nav-number">4.9.</span> <span class="nav-text">clear()与compact()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mark-与reset-方法"><span class="nav-number">4.10.</span> <span class="nav-text">mark()与reset()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals-与compareTo-方法"><span class="nav-number">4.11.</span> <span class="nav-text">equals()与compareTo()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scatter-Gather"><span class="nav-number">5.</span> <span class="nav-text">Scatter/Gather</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scattering-Reads"><span class="nav-number">5.1.</span> <span class="nav-text">Scattering Reads</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gathering-Writes"><span class="nav-number">5.2.</span> <span class="nav-text">Gathering Writes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通道之间的数据传输"><span class="nav-number">6.</span> <span class="nav-text">通道之间的数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#transferFrom"><span class="nav-number">6.1.</span> <span class="nav-text">transferFrom()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transferTo"><span class="nav-number">6.2.</span> <span class="nav-text">transferTo()</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO是什么"><span class="nav-number">1.</span> <span class="nav-text">NIO是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-NIO-概述"><span class="nav-number">2.</span> <span class="nav-text">Java NIO 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-和-Buffer"><span class="nav-number">2.1.</span> <span class="nav-text">Channel 和 Buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selector"><span class="nav-number">2.2.</span> <span class="nav-text">Selector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Channel"><span class="nav-number">3.</span> <span class="nav-text">Channel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel与流的区别"><span class="nav-number">3.1.</span> <span class="nav-text">Channel与流的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel的实现"><span class="nav-number">3.2.</span> <span class="nav-text">Channel的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的-Channel-示例"><span class="nav-number">3.3.</span> <span class="nav-text">基本的 Channel 示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer"><span class="nav-number">4.</span> <span class="nav-text">Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的基本用法"><span class="nav-number">4.1.</span> <span class="nav-text">Buffer的基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的capacity-position和limit"><span class="nav-number">4.2.</span> <span class="nav-text">Buffer的capacity,position和limit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的类型"><span class="nav-number">4.3.</span> <span class="nav-text">Buffer的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer的分配"><span class="nav-number">4.4.</span> <span class="nav-text">Buffer的分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向Buffer中写数据"><span class="nav-number">4.5.</span> <span class="nav-text">向Buffer中写数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flip-方法"><span class="nav-number">4.6.</span> <span class="nav-text">flip()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从Buffer中读取数据"><span class="nav-number">4.7.</span> <span class="nav-text">从Buffer中读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rewind-方法"><span class="nav-number">4.8.</span> <span class="nav-text">rewind()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear-与compact-方法"><span class="nav-number">4.9.</span> <span class="nav-text">clear()与compact()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mark-与reset-方法"><span class="nav-number">4.10.</span> <span class="nav-text">mark()与reset()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals-与compareTo-方法"><span class="nav-number">4.11.</span> <span class="nav-text">equals()与compareTo()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scatter-Gather"><span class="nav-number">5.</span> <span class="nav-text">Scatter/Gather</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scattering-Reads"><span class="nav-number">5.1.</span> <span class="nav-text">Scattering Reads</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gathering-Writes"><span class="nav-number">5.2.</span> <span class="nav-text">Gathering Writes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通道之间的数据传输"><span class="nav-number">6.</span> <span class="nav-text">通道之间的数据传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#transferFrom"><span class="nav-number">6.1.</span> <span class="nav-text">transferFrom()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transferTo"><span class="nav-number">6.2.</span> <span class="nav-text">transferTo()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Selector-1"><span class="nav-number">7.</span> <span class="nav-text">Selector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么使用Selector"><span class="nav-number">7.1.</span> <span class="nav-text">为什么使用Selector?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selector的创建"><span class="nav-number">7.2.</span> <span class="nav-text">Selector的创建</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

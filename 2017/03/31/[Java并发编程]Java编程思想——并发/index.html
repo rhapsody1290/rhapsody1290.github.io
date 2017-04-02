@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="NIO," />
+  <meta name="keywords" content="并发," />
 
 
 
@@ -84,34 +84,40 @@
 
 
 
-<meta name="description" content="同步、异步区别/阻塞、非阻塞区别老张爱喝茶，废话不说，煮开水。
-出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。
-1、老张把水壶放到火上，立等水开。（同步阻塞）
-老张觉得自己有点傻
-2、老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）
-老张还是觉得自己有点傻，于是变高端了，买了把会响笛的那种水壶。水开之后，能大声发出嘀~~~~的噪音。
-3、老张把响">
+<meta name="description" content="思维导图
+
+线程与进程线程资源同步和交互机制重点是：JVM中线程资源同步机制及线程之间交互的机制
+线程资源同步i++操作实质：
+i++动作在JVM中分为装载i、读取i、进行i+1操作、存储i、及写入i五个步骤
+线程之间的共享变量存储在主内存（main memory）中，每个线程都有一个私有的本地内存（local memory），本地内存中存储了该线程以读/写共享变量的副本。
+
+对于一个简单的 i+">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java NIO 笔记">
-<meta property="og:url" content="http://qianmingxs.com/2017/03/06/[Java并发编程]Java NIO 笔记/index.html">
+<meta property="og:title" content="Java编程思想——并发">
+<meta property="og:url" content="http://qianmingxs.com/2017/03/31/[Java并发编程]Java编程思想——并发/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="同步、异步区别/阻塞、非阻塞区别老张爱喝茶，废话不说，煮开水。
-出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。
-1、老张把水壶放到火上，立等水开。（同步阻塞）
-老张觉得自己有点傻
-2、老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）
-老张还是觉得自己有点傻，于是变高端了，买了把会响笛的那种水壶。水开之后，能大声发出嘀~~~~的噪音。
-3、老张把响">
-<meta property="og:updated_time" content="2017-03-06T14:17:50.483Z">
+<meta property="og:description" content="思维导图
+
+线程与进程线程资源同步和交互机制重点是：JVM中线程资源同步机制及线程之间交互的机制
+线程资源同步i++操作实质：
+i++动作在JVM中分为装载i、读取i、进行i+1操作、存储i、及写入i五个步骤
+线程之间的共享变量存储在主内存（main memory）中，每个线程都有一个私有的本地内存（local memory），本地内存中存储了该线程以读/写共享变量的副本。
+
+对于一个简单的 i+">
+<meta property="og:image" content="http://i.imgur.com/es8HuS8.jpg">
+<meta property="og:image" content="http://i.imgur.com/1rVbVZp.png">
+<meta property="og:updated_time" content="2017-03-31T08:07:20.856Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java NIO 笔记">
-<meta name="twitter:description" content="同步、异步区别/阻塞、非阻塞区别老张爱喝茶，废话不说，煮开水。
-出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。
-1、老张把水壶放到火上，立等水开。（同步阻塞）
-老张觉得自己有点傻
-2、老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）
-老张还是觉得自己有点傻，于是变高端了，买了把会响笛的那种水壶。水开之后，能大声发出嘀~~~~的噪音。
-3、老张把响">
+<meta name="twitter:title" content="Java编程思想——并发">
+<meta name="twitter:description" content="思维导图
+
+线程与进程线程资源同步和交互机制重点是：JVM中线程资源同步机制及线程之间交互的机制
+线程资源同步i++操作实质：
+i++动作在JVM中分为装载i、读取i、进行i+1操作、存储i、及写入i五个步骤
+线程之间的共享变量存储在主内存（main memory）中，每个线程都有一个私有的本地内存（local memory），本地内存中存储了该线程以读/写共享变量的副本。
+
+对于一个简单的 i+">
+<meta name="twitter:image" content="http://i.imgur.com/es8HuS8.jpg">
 
 
 
@@ -132,10 +138,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/03/06/[Java并发编程]Java NIO 笔记/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/03/31/[Java并发编程]Java编程思想——并发/"/>
 
 
-  <title> Java NIO 笔记 | Mr.Qian's Home </title>
+  <title> Java编程思想——并发 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +294,7 @@
             
             
               
-                Java NIO 笔记
+                Java编程思想——并发
               
             
           </h1>
@@ -300,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-06T20:08:00+08:00" content="2017-03-06">
-              2017-03-06
+            <time itemprop="dateCreated" datetime="2017-03-31T15:41:00+08:00" content="2017-03-31">
+              2017-03-31
             </time>
           </span>
 
@@ -330,8 +336,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/03/06/[Java并发编程]Java NIO 笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/06/[Java并发编程]Java NIO 笔记/" itemprop="commentsCount"></span>
+                <a href="/2017/03/31/[Java并发编程]Java编程思想——并发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/31/[Java并发编程]Java编程思想——并发/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -354,19 +360,135 @@
       
 
       
-        <h2 id="同步、异步区别-阻塞、非阻塞区别"><a href="#同步、异步区别-阻塞、非阻塞区别" class="headerlink" title="同步、异步区别/阻塞、非阻塞区别"></a>同步、异步区别/阻塞、非阻塞区别</h2><p>老张爱喝茶，废话不说，煮开水。</p>
-<p>出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。</p>
-<p>1、老张把水壶放到火上，立等水开。（同步阻塞）</p>
-<p>老张觉得自己有点傻</p>
-<p>2、老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）</p>
-<p>老张还是觉得自己有点傻，于是变高端了，买了把会响笛的那种水壶。水开之后，能大声发出嘀~~~~的噪音。</p>
-<p>3、老张把响水壶放到火上，立等水开。（异步阻塞）</p>
-<p>老张觉得这样傻等意义不大</p>
-<p>4、老张把响水壶放到火上，去客厅看电视，水壶响之前不再去看它了，响了再去拿壶。（异步非阻塞）</p>
-<p>老张觉得自己聪明了。</p>
-<p><strong>所谓同步异步，只是对于水壶而言。</strong><br>普通水壶，同步；响水壶，异步。<br>虽然都能干活，但响水壶可以在自己完工之后，<strong>提示老张水开了</strong>。这是普通水壶所不能及的。<br>同步只能让<strong>调用者去轮询自己</strong>（情况2中），造成老张效率的低下。</p>
-<p><strong>所谓阻塞非阻塞，仅仅对于老张而言。</strong><br>立等的老张，阻塞；看电视的老张，非阻塞。<br>情况1和情况3中老张就是阻塞的，媳妇喊他都不知道。虽然3中响水壶是异步的，可对于立等的老张没有太大的意义。所以一般<strong>异步是配合非阻塞</strong>使用的，这样才能发挥异步的效用。</p>
-<p><strong>Java中的NIO是同步非阻塞</strong>，即程序可以做别的事情，但时不时去看是否有IO操作</p>
+        <p>思维导图</p>
+<p><img src="http://i.imgur.com/es8HuS8.jpg" alt=""></p>
+<h2 id="线程与进程"><a href="#线程与进程" class="headerlink" title="线程与进程"></a>线程与进程</h2><h2 id="线程资源同步和交互机制"><a href="#线程资源同步和交互机制" class="headerlink" title="线程资源同步和交互机制"></a>线程资源同步和交互机制</h2><p>重点是：JVM中<strong>线程资源同步</strong>机制及<strong>线程之间交互</strong>的机制</p>
+<h3 id="线程资源同步"><a href="#线程资源同步" class="headerlink" title="线程资源同步"></a>线程资源同步</h3><p>i++操作实质：</p>
+<p>i++动作在JVM中分为<strong>装载i</strong>、<strong>读取i</strong>、<strong>进行i+1操作</strong>、<strong>存储i</strong>、及<strong>写入i</strong>五个步骤</p>
+<p>线程之间的<strong>共享变量存储在主内存（main memory）</strong>中，每个线程都有一个<strong>私有的本地内存</strong>（local memory），本地内存中存储了该线程以读/写共享变量的<strong>副本</strong>。</p>
+<p><img src="http://i.imgur.com/1rVbVZp.png" alt=""></p>
+<p>对于一个简单的 i++ 操作，结合上图1 ，会发生如下的步骤</p>
+<ul>
+<li>read：作用于<strong>主内存</strong>中，把主内存中一个变量的值<strong>传输</strong>到 工作内存 中。</li>
+<li>load：作用于工作内存，把从read 操作从主内存中得到的值放入到工作内存的副本中。</li>
+<li>use：把工作内存中的该副本值传递给执行引擎（也就是操作数栈中）。</li>
+<li>assign：作用于工作内存，把执行引擎执行后的新值传递给该工作内存的变量。</li>
+<li>store：作用于工作内存，把工作内存中该变量的值<strong>传送</strong>到 主内存 中去。</li>
+<li>write：作用于<strong>主内存</strong>的变量，把store 操作 得到的值写入到 主内存的该变量中。</li>
+</ul>
+<p><strong>前三步（read、load、use）完成变量值的读取，在虚拟机栈内完成i+1操作，后三步将变量写入主内存</strong></p>
+<p>所以说，一个 i++ 操作并<strong>不是原子性</strong>（原子性：一些程序语句，必须连续执行，<strong>中间不能被打断</strong>）的。这上述的这些步骤中，可能会有其他线程对主内存的变量进行操作，从而导致出现多线程问题。</p>
+<p>同步机制</p>
+<ul>
+<li>synchronized</li>
+<li>volatile</li>
+<li>lock/unlock机制</li>
+</ul>
+<p>1、synchronized</p>
+<pre><code>public synchronized int getNextId(){
+    return i++;
+}
+</code></pre><p>线程A执行getNextId方法时，<strong>在对象实例ID加上一个lock</strong>，然后继续执行return i++；此时如果线程B并发访问getNextId()方法时，发现这个对象实例ID有lock，于是将线程B放入等待队列，只有当线程A执行完成后，<strong>释放对象实例ID上的lock</strong>，当下次线程调度线程B时，线程B才可以执行</p>
+<p>synchronized方法锁的对象是当前对象实例，当synchronized标记在一个static方法上，那么锁放在<strong>当前Class实例上</strong></p>
+<p>2、lock/unlock</p>
+<p>使用lock/unlock编写多线程程序时，一定要保证lock和unlock是成对出现的，并且保证lock后程序完毕后，一定要unlock</p>
+<p>3、volatile</p>
+<p>控制对象的<strong>可见性</strong>，并<font color="red"><strong>不能保证对象操作的原子性</strong></font>；定义volatile的对象，线程不会将其从主内存复制到本地内存中，而是<strong>直接在主内存中进行操作</strong></p>
+<p>适用于多线程<strong>读操作</strong>，写操作需要加锁</p>
+<h3 id="线程交互机制"><a href="#线程交互机制" class="headerlink" title="线程交互机制"></a>线程交互机制</h3><p>线程之间除了产生资源竞争外，还会有交互的需求。比如<strong>连接池中会有get和return操作</strong>，当get方法时可用的线程数为0时，需要进入一个<strong>等待状态</strong>，当有连接返回时，应该通知get方法，<strong>不需要再等待了</strong>。如果没有交互机制，只能在get中<strong>不断轮训</strong>判断可使用的连接数了</p>
+<p>JVM提供<strong>wait/notify/notifyAll</strong>方法支持这类需求</p>
+<p>案例</p>
+<pre><code>public class ConnectionPool {
+
+    //两个连接
+    private int[] connections = new int[]{1, 2};
+    private int current = 0;
+
+    public synchronized int get() throws InterruptedException {
+        while (current == connections.length) {
+            System.out.println(Thread.currentThread().getName() + &quot;在等待&quot;);
+            this.wait();
+        }
+
+        System.out.println(Thread.currentThread().getName() + &quot;获得连接&quot;);
+        return connections[current++];
+
+    }
+
+    public synchronized void release() {
+        if (current &gt; 0) {
+            current--;
+        }
+        System.out.println(Thread.currentThread().getName() + &quot;释放连接&quot;);
+        notify();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        final ConnectionPool connectionPool = new ConnectionPool();
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    connectionPool.get();
+                    Thread.sleep(2000);
+                    connectionPool.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    connectionPool.get();
+                    Thread.sleep(2000);
+                    connectionPool.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    connectionPool.get();
+                    Thread.sleep(2000);
+                    connectionPool.release();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+}
+</code></pre><p>结果</p>
+<pre><code>Thread-0获得连接
+Thread-1获得连接
+Thread-2在等待
+Thread-0释放连接
+Thread-2获得连接
+Thread-1释放连接
+Thread-2释放连接
+</code></pre><p>调用Object的wait方法可以让当前线程<strong>进入等待状态，程序不能往下执行</strong>，只有调用了<strong>此Object</strong>的<strong>notify、或notifyAll方法，或者wait到达了指定的时间</strong>后，才会<strong>激活继续执行</strong></p>
+<p>notify只是随机找处于<strong>等待此Object</strong>的<strong>一个线程</strong>；notifyAll是通知wait<strong>此Object</strong>的<strong>所有线程</strong></p>
+<p>为了放置<strong>假唤醒</strong>，提高程序的<strong>可靠性</strong>，wait被唤醒后，需要再次判断等待的状态是否被更改了，如果未更改，则继续进入wait状态，这种做法称作双重检查。查看一下代码，即<strong>加上了while进行双重检查</strong>，而且wait操作写在最前面</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (current == connections.length) &#123;</div><div class="line">    <span class="keyword">System</span>.out.println(Thread.currentThread().<span class="built_in">getName</span>() + <span class="string">"在等待"</span>);</div><div class="line">    this.<span class="built_in">wait</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>wait/notify机制原理：</p>
+<p>当调用了对象的wait方法后，JVM程序<strong>执行引擎</strong>将<strong>此线程放入一个wait集合中</strong>，<font color="red"><strong>并释放此对象的锁</strong></font>（本来加上了synchronized只能有一个线程处于等待状态，现在可以多个线程处于等待状态）</p>
+<ul>
+<li><p>当其他线程调用此对象的notify方法时，会从wait集合中中随机找<strong>一个</strong>等待的此对象上的线程，并将其从wait集合中删除，<strong>JVM线程执行引擎</strong>就可以再次<strong>调度</strong>此线程了</p>
+</li>
+<li><p>当使用notifyAll方法时，则会删除wait集合中所有等待此对象的线程</p>
+</li>
+</ul>
+<h3 id="线程状态及分析方法"><a href="#线程状态及分析方法" class="headerlink" title="线程状态及分析方法"></a>线程状态及分析方法</h3><ul>
+<li>线程创建完毕后进入<strong>new</strong>状态</li>
+<li>调用了线程的start方法后，线程进入<strong>Runnable</strong>状态，放入jVM的<strong>可运行线程队列</strong>中，等待CPU的执行权</li>
+<li>当线程执行时，线程状态变为<strong>Running</strong></li>
+<li>线程执行sleep、wait、join或者进入了IO阻塞、锁等待时，则进入<strong>Wait或Block</strong>状态</li>
+</ul>
 
       
     </div>
@@ -389,7 +511,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NIO/" rel="tag">#NIO</a>
+            <a href="/tags/并发/" rel="tag">#并发</a>
           
         </div>
       
@@ -398,16 +520,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/03/[Java]JVM重点知识总结/" rel="next" title="JVM重点知识总结">
-                <i class="fa fa-chevron-left"></i> JVM重点知识总结
+              <a href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/" rel="next" title="Mybatis - 动态SQL语句">
+                <i class="fa fa-chevron-left"></i> Mybatis - 动态SQL语句
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/09/[NIO]Java NIO 系列教程/" rel="prev" title="Java NIO 系列教程">
-                Java NIO 系列教程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/31/[Java并发编程]操作系统/" rel="prev" title="操作系统">
+                操作系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -434,8 +556,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/06/[Java并发编程]Java NIO 笔记/"
-           data-title="Java NIO 笔记" data-url="http://qianmingxs.com/2017/03/06/[Java并发编程]Java NIO 笔记/">
+      <div class="ds-thread" data-thread-key="2017/03/31/[Java并发编程]Java编程思想——并发/"
+           data-title="Java编程思想——并发" data-url="http://qianmingxs.com/2017/03/31/[Java并发编程]Java编程思想——并发/">
       </div>
     
   </div>
@@ -480,7 +602,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -488,7 +610,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -497,7 +619,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -526,7 +648,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#同步、异步区别-阻塞、非阻塞区别"><span class="nav-number">1.</span> <span class="nav-text">同步、异步区别/阻塞、非阻塞区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程与进程"><span class="nav-number">1.</span> <span class="nav-text">线程与进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程资源同步和交互机制"><span class="nav-number">2.</span> <span class="nav-text">线程资源同步和交互机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程资源同步"><span class="nav-number">2.1.</span> <span class="nav-text">线程资源同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程交互机制"><span class="nav-number">2.2.</span> <span class="nav-text">线程交互机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程状态及分析方法"><span class="nav-number">2.3.</span> <span class="nav-text">线程状态及分析方法</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
