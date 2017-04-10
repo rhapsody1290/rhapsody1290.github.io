@@ -114,7 +114,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <meta property="og:image" content="http://i.imgur.com/DlW4pGD.jpg">
 <meta property="og:image" content="http://i.imgur.com/iw9P4K4.jpg">
 <meta property="og:image" content="http://img.blog.csdn.net/20170323193113437?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-02T08:32:08.630Z">
+<meta property="og:updated_time" content="2017-04-10T01:48:33.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM重点知识总结">
 <meta name="twitter:description" content="思维导图
@@ -421,21 +421,16 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <li>虚拟机栈：每个线程私有，栈中存放了栈帧，<strong>每次方法调用都会产生栈帧</strong>，栈帧主要分为<strong>局部变量区</strong>和<strong>操作数栈</strong>两部分；通过-Xss指定其大小</li>
 <li>本地方法栈：用于<strong>支持native方法的执行，存储了每个native方法调用的状态</strong>，在Sun JDK的实现中本地方法栈和JVM方法栈是同一个</li>
 <li>堆：用于存储<strong>对象实例及数组值</strong>，所有new创建出来的对象的内存都在此分配；通过-Xms和-Xmx来设定最小值和最大值，为避免频繁调整Heap的大小，通常将两个值设置成一样</li>
-<li>方法区：存放了要加载<strong>类的信息（属性、方法）、类中的静态变量、类中定义为final的常量</strong>。在Sun JDK中这块区域对应Permanet Generation，又称为持久代，可通过-XX:PermSize及-XX:MaxPermSize来指定最小值和最大值</li>
+<li>方法区：存放了要加载<strong>类的信息</strong>（类的版本，属性、方法，接口信息）、<strong>即时编译器编译后的代码</strong>、<strong>静态变量</strong>、<strong>常量</strong>。<strong>运行时常量</strong>位于方法区，用于存放编译时的<strong>字面值</strong>和<strong>符号引用</strong>；在Sun JDK中这块区域对应Permanet Generation，又称为持久代，可通过-XX:PermSize及-XX:MaxPermSize来指定最小值和最大值</li>
 </ul>
 <p>其中，程序计数器、虚拟机栈和本地方法栈是<strong>线程隔离</strong>的；方法区、堆是<strong>所有线程共享</strong>的</p>
-<hr>
-<p>内存的各个区域详细解释</p>
+<p><strong>内存的各个区域详细解释<br>————————————————————————————————————————</strong></p>
 <p>堆的分代：</p>
 <p>为了让内存回收更加高效，对堆采用了分代管理的方式</p>
 <p><img src="http://i.imgur.com/wE9zCQ9.jpg" alt=""></p>
 <ul>
-<li>新生代：大多数情况下Java程序中新建的对象都从新生代分配，新生代由<strong>Eden Space</strong>和<strong>两块相同大小的Survivor Space</strong>（又称S0和S1或From和To）构成，通过-Xmn参数指定新生代的大小，也可通过-XX:Survivor Ratio调整Eden Space和Survivor Space的大小</li>
-<li>旧生代：用于存放新生代中经过多次垃圾回收<strong>仍然存活</strong>的对象；但是，新建的对象也有可能在旧生代<strong>直接分配</strong>内存；旧生代占用的内存大小为-Xmx减去-Xmn的值<ul>
-<li>一种是大对象，-XX:PretenureSizeThreshold=1024来代表当对象超过多大时就不在新生代分配，而是直接在旧生代分配</li>
-<li>另一种为大的数组对象，且数组中无引用外部对象</li>
-</ul>
-</li>
+<li>新生代：大多数情况下Java程序中新建的对象都从新生代分配，新生代由<strong>Eden Space</strong>和<strong>两块相同大小的Survivor Space</strong>（又称S0和S1或From和To）构成</li>
+<li>老年代：用于存放新生代中经过多次垃圾回收<strong>仍然存活</strong>的对象；但是，大对象在老年代<strong>直接分配</strong>内存；动态对象年龄判断，如果Survivor相同年龄所有对象大小大于Survivor空间大小的一半，年龄大于等于该年龄的对象直接进入老年代；老年代占用的内存大小为-Xmx减去-Xmn的值</li>
 </ul>
 <p>虚拟机栈：</p>
 <p><img src="http://i.imgur.com/NZcvXVd.jpg" alt=""></p>
@@ -447,7 +442,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <h3 id="内存分配与回收策略★★★★★"><a href="#内存分配与回收策略★★★★★" class="headerlink" title="内存分配与回收策略★★★★★"></a>内存分配与回收策略★★★★★</h3><p>1、Java对象所占用的内存<strong>主要从堆上进行分配</strong>，堆是所有<strong>线程共享</strong>的，因此在堆上分配内存时需要<strong>加锁</strong>，这导致了创建对象<strong>开销比较大</strong>；</p>
 <ul>
 <li>对象优先在Eden分配</li>
-<li><strong>大对象直接进入旧生代</strong>（需要大量连续内存空间的Java对象，最典型的大对象就是那种很长的字符串及数组）</li>
+<li><strong>大对象直接进入老年代</strong>（需要大量连续内存空间的Java对象，最典型的大对象就是那种很长的字符串及数组）</li>
 <li>长期存活的对象将进入老年代</li>
 <li>动态年龄判断：如果在Survivor区中<strong>相同年龄所有对象大小的总和大于Survivor空间的一半</strong>，年龄大于或等于该年龄的对象就可以直接进入老年代</li>
 <li>空间分配担保:在发生Minor GC前，虚拟机先检查老年代最大可用的连续空间是否大于新生代所有对象的总和，若大于这Minor GC是可以确保安全的。若不大于，则虚拟机检查HandlePromotionFailure的值，若<strong>允许担保失败</strong>继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小(经验值)，若大于，则尝试进行一次Minor GC，虽然是有风险的；若小于或HandlePromotionFailure不允许担保失败则进行一次Full  GC</li>
@@ -571,7 +566,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <p>运行Java的<strong>每一个线程都是一个独立的虚拟机执行引擎的实例</strong>。从线程生命周期的开始到结束，他要么在执行字节码，要么在执行本地方法。一个线程可能通过解释或者使用芯片级指令直接执行字节码，或者间接通过JIT执行编译过的本地代码。我们上文讲到的main函数，也就是<strong>执行引擎的操作入口。</strong></p>
 <h3 id="垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><a href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情" class="headerlink" title="垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　"></a>垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</h3><p><strong>在什么时候</strong>，即什么时候触发垃圾回收</p>
 <p>首先需要知道，GC又分为 minor GC 和 Full GC (也称为 Major GC )。Java 堆内存分为新生代和老年代，新生代中又分为1个 Eden 区域和两个 Survivor 区域。</p>
-<p>那么对于 Minor GC 的触发条件：大多数情况下，直接在 Eden 区中进行分配。<strong>如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC；</strong>对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话（在新生代多次清理未被清理的晋升到旧生代或直接在旧生代分配的大对象，大数组），那么就会进行一次 Full GC。</p>
+<p>那么对于 Minor GC 的触发条件：大多数情况下，直接在 Eden 区中进行分配。<strong>如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC；</strong>对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话（在新生代多次清理未被清理的晋升到老年代或直接在老年代分配的大对象，大数组），那么就会进行一次 Full GC。</p>
 <p>Ps：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：</p>
 <p><strong>在发生Minor GC之前</strong>，虚拟机会先检查<strong>老年代最大可用的连续空间</strong>是否大于<strong>新生代所有对象的总空间</strong>。如果<strong>大于</strong>则进行Minor GC，如果<strong>小于</strong>则看HandlePromotionFailure设置<strong>是否允许担保失败</strong>。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于则尝试Minor GC（<strong>如果尝试失败也会触发Full GC</strong>），如果小于后不允许担保失败，则进行Full GC。</p>
 <p>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</p>
@@ -694,7 +689,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">80</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -711,7 +706,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

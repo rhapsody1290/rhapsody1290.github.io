@@ -84,40 +84,55 @@
 
 
 
-<meta name="description" content="jstat实际使用1：
+<meta name="description" content="jps列出正在运行的虚拟机进程
+使用案例：
+jps -l
+语法：
+jps [-option] [hostid]
+q    只输出LVMID，省略主类的名称
+m    输出main method的参数
+l    输出完全的包名，应用主类名，jar的完全路径名
+v    输出jvm参数
+jstat监视虚拟机运行状态信息
+实际使用1：
 jstat -gcutil 25444
 实际使用2：
-jstat -gcutil 25444 1000 5
-语法结构：
-Usage: 
-jstat -help|-options
-jstat -&amp;lt;option&amp;gt; [-t] [-h&amp;lt;lines&amp;gt;] &amp;lt;vmid&amp;gt; [&amp;lt;interval&amp;gt; [&amp;lt;count&amp;gt;]]
-参数解释：">
+jstat -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM性能调优">
 <meta property="og:url" content="http://qianmingxs.com/2017/04/01/[JVM]JVM性能调优/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="jstat实际使用1：
+<meta property="og:description" content="jps列出正在运行的虚拟机进程
+使用案例：
+jps -l
+语法：
+jps [-option] [hostid]
+q    只输出LVMID，省略主类的名称
+m    输出main method的参数
+l    输出完全的包名，应用主类名，jar的完全路径名
+v    输出jvm参数
+jstat监视虚拟机运行状态信息
+实际使用1：
 jstat -gcutil 25444
 实际使用2：
-jstat -gcutil 25444 1000 5
-语法结构：
-Usage: 
-jstat -help|-options
-jstat -&amp;lt;option&amp;gt; [-t] [-h&amp;lt;lines&amp;gt;] &amp;lt;vmid&amp;gt; [&amp;lt;interval&amp;gt; [&amp;lt;count&amp;gt;]]
-参数解释：">
-<meta property="og:updated_time" content="2017-04-01T10:27:01.678Z">
+jstat -">
+<meta property="og:updated_time" content="2017-04-09T11:59:39.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM性能调优">
-<meta name="twitter:description" content="jstat实际使用1：
+<meta name="twitter:description" content="jps列出正在运行的虚拟机进程
+使用案例：
+jps -l
+语法：
+jps [-option] [hostid]
+q    只输出LVMID，省略主类的名称
+m    输出main method的参数
+l    输出完全的包名，应用主类名，jar的完全路径名
+v    输出jvm参数
+jstat监视虚拟机运行状态信息
+实际使用1：
 jstat -gcutil 25444
 实际使用2：
-jstat -gcutil 25444 1000 5
-语法结构：
-Usage: 
-jstat -help|-options
-jstat -&amp;lt;option&amp;gt; [-t] [-h&amp;lt;lines&amp;gt;] &amp;lt;vmid&amp;gt; [&amp;lt;interval&amp;gt; [&amp;lt;count&amp;gt;]]
-参数解释：">
+jstat -">
 
 
 
@@ -360,7 +375,17 @@ jstat -&amp;lt;option&amp;gt; [-t] [-h&amp;lt;lines&amp;gt;] &amp;lt;vmid&amp;gt
       
 
       
-        <h2 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h2><p>实际使用1：</p>
+        <h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>列出正在运行的虚拟机进程</p>
+<p>使用案例：</p>
+<pre><code>jps -l
+</code></pre><p>语法：</p>
+<p>jps [-option] [hostid]</p>
+<pre><code>q    只输出LVMID，省略主类的名称
+m    输出main method的参数
+l    输出完全的包名，应用主类名，jar的完全路径名
+v    输出jvm参数
+</code></pre><h2 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h2><p>监视虚拟机运行状态信息</p>
+<p>实际使用1：</p>
 <pre><code>jstat -gcutil 25444
 </code></pre><p>实际使用2：</p>
 <pre><code>jstat -gcutil 25444 1000 5
@@ -397,6 +422,65 @@ GCT — 从应用程序启动到采样时用于垃圾回收的总时间( 单位�
 -gcpermcapacity：统计gc时，permanent区heap容量
 -gcutil：统计gc时，heap情况
 -printcompilation：不知道干什么的，一直没用过。
+</code></pre><h2 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h2><p>生成堆存储快照，查看堆内存使用情况</p>
+<p>使用案例，详细参数见案例说明：</p>
+<pre><code>jmap -heap pid #查看进程堆内存使用情况，包括使用的GC算法、堆配置参数和各代中堆内存使用情况
+jmap -histo[:live] pid #查看堆内存中的对象数目、大小统计直方图，如果带上live则只统计活对象
+</code></pre><p>语法：</p>
+<pre><code>jmap [ -option ] &lt;pid&gt;
+</code></pre><p>option参数：</p>
+<pre><code>dump    生成堆存储快照，格式为：-dump:[live, ]format=b, file=&lt;filename&gt;，live说明是否只dump出存活的对象。
+heap    显示java堆详细信息，如使用那种回收器、参数配置、分代状况等。
+histo    显示堆中对象统计信息，包括类、实例数量、合计容量。
+</code></pre><p>案例说明：</p>
+<pre><code>C:\Users\Asus&gt;jmap -heap 10416 | more
+Attaching to process ID 10416, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 20.45-b01
+
+using thread-local object allocation. #使用本地线程分配缓存
+Parallel GC with 4 thread(s) # 并行垃圾回收，4个线程
+
+Heap Configuration: #堆设置
+   MinHeapFreeRatio = 40 #GC后，如果发现空闲堆内存占到整个预估堆内存的40%，则放大堆内存的预估最大值，但不超过固定最大值。
+   MaxHeapFreeRatio = 70 #GC后，如果发现空闲堆内存占到整个预估堆内存的70%，则收缩堆内存预估最大值。什么是预估堆内存？1、预估堆内存是堆大小动态调控的重要选项之一 2、堆内存预估最大值一定小于或等于固定最大值(-Xmx指定的数值) 3、前者会根据使用情况动态调大或缩小，以提高GC回收的效率。
+   MaxHeapSize      = 2124414976 (2026.0MB)
+   NewSize          = 1310720 (1.25MB)
+   MaxNewSize       = 17592186044415 MB
+   OldSize          = 5439488 (5.1875MB)
+   NewRatio         = 2 #新生代和老年代占用比例，-XX:NewRatio=2设置
+   SurvivorRatio    = 8 # Eden和一块Survivor的大小比例是8：1，新生代采用复制算法，垃圾回收时将Eden和一块Survivor中存活的对象复制到另一块Survivor中，并清空上一块Survivor。因此新生代可用容量为90%（80%+10%），10%的Survivor总是空的
+   PermSize         = 21757952 (20.75MB)
+   MaxPermSize      = 85983232 (82.0MB)
+
+Heap Usage:
+PS Young Generation
+Eden Space:
+   capacity = 49020928 (46.75MB)
+   used     = 30167344 (28.769821166992188MB)
+   free     = 18853584 (17.980178833007812MB)
+   61.53972442137366% used
+From Space:
+   capacity = 4325376 (4.125MB)
+   used     = 376912 (0.3594512939453125MB)
+   free     = 3948464 (3.7655487060546875MB)
+   8.713970762310606% used
+To Space:
+   capacity = 5898240 (5.625MB)
+   used     = 0 (0.0MB)
+   free     = 5898240 (5.625MB)
+   0.0% used
+PS Old Generation
+   capacity = 88473600 (84.375MB)
+   used     = 56496112 (53.87889099121094MB)
+   free     = 31977488 (30.496109008789062MB)
+   63.85646339699074% used
+PS Perm Generation
+   capacity = 21757952 (20.75MB)
+   used     = 10613560 (10.121879577636719MB)
+   free     = 11144392 (10.628120422363281MB)
+   48.78014254282756% used
 </code></pre>
       
     </div>
@@ -435,6 +519,10 @@ GCT — 从应用程序启动到采样时用于垃圾回收的总时间( 单位�
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/09/[JVM]JVM的符号引用和直接引用/" rel="prev" title="JVM的符号引用和直接引用">
+                JVM的符号引用和直接引用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -506,7 +594,7 @@ GCT — 从应用程序启动到采样时用于垃圾回收的总时间( 单位�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">80</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -523,7 +611,7 @@ GCT — 从应用程序启动到采样时用于垃圾回收的总时间( 单位�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-count">69</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -552,7 +640,7 @@ GCT — 从应用程序启动到采样时用于垃圾回收的总时间( 单位�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jstat"><span class="nav-number">1.</span> <span class="nav-text">jstat</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jps"><span class="nav-number">1.</span> <span class="nav-text">jps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jstat"><span class="nav-number">2.</span> <span class="nav-text">jstat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jmap"><span class="nav-number">3.</span> <span class="nav-text">jmap</span></a></li></ol></div>
             
           </div>
         </section>
