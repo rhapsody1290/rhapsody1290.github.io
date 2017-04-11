@@ -116,7 +116,7 @@ spring中重要概念★★★★★b">
 <meta property="og:image" content="http://i.imgur.com/fzfob6x.png">
 <meta property="og:image" content="http://i.imgur.com/eK3KdQ1.png">
 <meta property="og:image" content="http://i.imgur.com/DR0KqCg.png">
-<meta property="og:updated_time" content="2017-03-13T14:21:37.731Z">
+<meta property="og:updated_time" content="2017-04-11T13:05:02.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring笔记">
 <meta name="twitter:description" content="Spring是什么
@@ -1442,61 +1442,103 @@ target(cn.itcast.service.UserService) 拦截UserService所有方法 （不包括
     }
 
 }
-</code></pre><h4 id="AspcetJ注解驱动的切面"><a href="#AspcetJ注解驱动的切面" class="headerlink" title="@AspcetJ注解驱动的切面"></a>@AspcetJ注解驱动的切面</h4><p>1、接口</p>
+</code></pre><h4 id="AspcetJ注解驱动的切面★★★★★★★★★"><a href="#AspcetJ注解驱动的切面★★★★★★★★★" class="headerlink" title="@AspcetJ注解驱动的切面★★★★★★★★★"></a>@AspcetJ注解驱动的切面★★★★★★★★★</h4><p>1、接口</p>
 <pre><code>public interface IAopService {
     public void withAop() throws Exception;
 }
 </code></pre><p>2、实现</p>
-<pre><code>@Service(&quot;aopServiceImpl&quot;)
+<pre><code>@Service
 public class AopServiceImpl implements IAopService {
     public void withAop() throws Exception {
         System.out.println(&quot;业务逻辑处理中&quot;);
     }
 }
-</code></pre><p>3、通知</p>
-<pre><code>@Component
-@Aspect
+</code></pre><p>3、切面，包括切入点和通知</p>
+<pre><code>@Aspect
 //表示当前类是一个通知
 public class MyAspect {
 
-    @Before(value = &quot;bean(aopServiceImpl)&quot;)
-    public void before1(JoinPoint jointPoint){
-        System.out.println(&quot;before1&quot;);
+    private static final Logger logger = Logger.getLogger(MyAspect.class);
+
+    //定义切入点方法一：定义在一个空方法上
+    @Pointcut(&quot;execution(* *.*(..)))&quot;)
+    private void myPointcut() {
     }
 
-    public void before2(JoinPoint jointPoint){
-        System.out.println(&quot;before2&quot;);
+    //定义切点方法二：直接在通知上定义切入点
+    @Before(&quot;execution(* *.*(..)))&quot;)
+    public void before(JoinPoint joinPoint) {
+        String className = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
+        logger.warn(className + &quot;的&quot; + methodName + &quot;执行了&quot;);
+        Object[] args = joinPoint.getArgs();
+        StringBuilder log = new StringBuilder(&quot;参数为：&quot;);
+        for (Object arg : args) {
+            log.append(arg + &quot; &quot;);
+        }
+        logger.warn(log.toString());
+    }
+
+    @AfterReturning(value = &quot;execution(* *.*(..)))&quot;, returning = &quot;returnVal&quot;)
+    public void afterReturin(Object returnVal) {
+        logger.warn(&quot;方法正常结束了,方法的返回值:&quot; + returnVal);
+    }
+
+    @AfterThrowing(value = &quot;myPointcut()&quot;, throwing = &quot;e&quot;)
+    public void afterThrowing(Throwable e) {
+        logger.error(&quot;AfterThrowing&quot; + e.getMessage(),e);
+    }
+
+    @Around(value = &quot;myPointcut()&quot;)
+    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        logger.warn(&quot;Around:前置增强&quot;);
+        Object result = null;
+        try {
+            result = proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            logger.error(&quot;Around:&quot; + e.getMessage(),e);
+        }
+        logger.warn(&quot;Around:后置增强&quot;);
+        return result;
     }
 }
 </code></pre><p>4、配置</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans
-        xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-        xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
-        xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
-        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-        xmlns:p=&quot;http://www.springframework.org/schema/p&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-        xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/aop
-    http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+    xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:p=&quot;http://www.springframework.org/schema/p&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
 
-    &lt;context:component-scan base-package=&quot;AOP.AspectJAnnotation&quot;/&gt;
-    &lt;!--开启AspectJ注解开发的配置--&gt;
-    &lt;aop:aspectj-autoproxy/&gt;
-&lt;/beans&gt;
-</code></pre><p>5、测试</p>
+&lt;context:component-scan base-package=&quot;AOP&quot;/&gt;
+&lt;!--1、开启AspectJ注解开发的配置--&gt;
+&lt;aop:aspectj-autoproxy/&gt;
+&lt;!--配置切面--&gt;
+&lt;bean id = &quot;MyAspect&quot; class=&quot;AOP.AspectJAnnotation.MyAspect&quot;/&gt;
+</code></pre><p></p>
+<p>5、测试</p>
 <pre><code>public class AopRun {
 
     public static void main(String[] args) throws Exception {
-
         ApplicationContext context = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
-        IAopService hello = (IAopService) context.getBean(&quot;aopServiceImpl&quot;);
-        hello.withAop();
+        IAopService aopService = (IAopService) context.getBean(IAopService.class);
+        aopService.withAop();
     }
 
 }
-</code></pre>
+</code></pre><p>spring 的环绕通知和前置通知，后置通知有着很大的区别，主要有两个重要的区别：</p>
+<ol>
+<li><p>目标方法的调用由环绕通知决定，即你可以决定是否调用目标方法，而前置和后置通知   是不能决定的，他们只是在方法的调用前后执行通知而已，即目标方法肯定是要执行的。</p>
+</li>
+<li><p>环绕通知可以控制返回对象，即你可以返回一个与目标对象完全不同的返回值，虽然这很危险，但是你却可以办到。而后置方法是无法办到的，因为他是在目标方法返回值后调用</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -1657,7 +1699,7 @@ public class MyAspect {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring是什么"><span class="nav-number">1.</span> <span class="nav-text">Spring是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring中重要概念★★★★★"><span class="nav-number">2.</span> <span class="nav-text">spring中重要概念★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean"><span class="nav-number">2.1.</span> <span class="nav-text">bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制反转"><span class="nav-number">2.2.</span> <span class="nav-text">控制反转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.3.</span> <span class="nav-text">依赖注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring在程序中的位置"><span class="nav-number">3.</span> <span class="nav-text">Spring在程序中的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring快速入门"><span class="nav-number">4.</span> <span class="nav-text">Spring快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#github"><span class="nav-number">4.1.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入依赖"><span class="nav-number">4.2.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组件"><span class="nav-number">4.3.</span> <span class="nav-text">创建组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml中配置bean"><span class="nav-number">4.4.</span> <span class="nav-text">applicationContext.xml中配置bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得bean并调用方法"><span class="nav-number">4.5.</span> <span class="nav-text">获得bean并调用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring运行原理图"><span class="nav-number">5.</span> <span class="nav-text">Spring运行原理图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring接口编程"><span class="nav-number">6.</span> <span class="nav-text">Spring接口编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML配置文件"><span class="nav-number">7.</span> <span class="nav-text">XML配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种获取ApplicationContext对象引用的方法"><span class="nav-number">8.</span> <span class="nav-text">三种获取ApplicationContext对象引用的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两个获取bean的方式★★★"><span class="nav-number">9.</span> <span class="nav-text">两个获取bean的方式★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从ApplicationContex应用上下文容器中获取bean"><span class="nav-number">9.1.</span> <span class="nav-text">从ApplicationContex应用上下文容器中获取bean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本模式创建一个bean实例★★★★★"><span class="nav-number">9.1.1.</span> <span class="nav-text">基本模式创建一个bean实例★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式创建一个bean实例"><span class="nav-number">9.1.2.</span> <span class="nav-text">工厂模式创建一个bean实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从bean工厂容器中获取bean"><span class="nav-number">9.2.</span> <span class="nav-text">从bean工厂容器中获取bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">9.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean的生命周期"><span class="nav-number">10.</span> <span class="nav-text">bean的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean装配的细节"><span class="nav-number">11.</span> <span class="nav-text">bean装配的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注入的写法★"><span class="nav-number">11.1.</span> <span class="nav-text">注入的写法★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的作用域scope"><span class="nav-number">11.2.</span> <span class="nav-text">bean的作用域scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何给集合类型注入值"><span class="nav-number">11.3.</span> <span class="nav-text">如何给集合类型注入值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部bean"><span class="nav-number">11.4.</span> <span class="nav-text">内部bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承配置"><span class="nav-number">11.5.</span> <span class="nav-text">继承配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过构造函数注入值★★★"><span class="nav-number">11.6.</span> <span class="nav-text">通过构造函数注入值★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过参数名传递参数"><span class="nav-number">11.6.1.</span> <span class="nav-text">通过参数名传递参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过指数方式传递参数"><span class="nav-number">11.6.2.</span> <span class="nav-text">通过指数方式传递参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化bean和销毁bean的时候执行某个方法"><span class="nav-number">11.7.</span> <span class="nav-text">初始化bean和销毁bean的时候执行某个方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解装配Bean"><span class="nav-number">12.</span> <span class="nav-text">注解装配Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入context名称空间，并配置扫描包"><span class="nav-number">12.1.</span> <span class="nav-text">引入context名称空间，并配置扫描包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">12.2.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入-1"><span class="nav-number">12.3.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单类型数据注入"><span class="nav-number">12.3.1.</span> <span class="nav-text">简单类型数据注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂对象类型数据注入"><span class="nav-number">12.3.2.</span> <span class="nav-text">复杂对象类型数据注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配bean的属性值"><span class="nav-number">13.</span> <span class="nav-text">自动装配bean的属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#byName的用法"><span class="nav-number">13.1.</span> <span class="nav-text">byName的用法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byType的用法"><span class="nav-number">13.2.</span> <span class="nav-text">byType的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor的用法"><span class="nav-number">13.3.</span> <span class="nav-text">constructor的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autodetect的用法"><span class="nav-number">13.4.</span> <span class="nav-text">autodetect的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defualt"><span class="nav-number">13.5.</span> <span class="nav-text">defualt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#no-不自动装配"><span class="nav-number">13.6.</span> <span class="nav-text">no: 不自动装配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用spring的特殊bean-完成分散配置"><span class="nav-number">14.</span> <span class="nav-text">使用spring的特殊bean,完成分散配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP编程"><span class="nav-number">15.</span> <span class="nav-text">AOP编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP技术的实现原理"><span class="nav-number">15.1.</span> <span class="nav-text">AOP技术的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP底层实现"><span class="nav-number">15.2.</span> <span class="nav-text">AOP底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDK动态代理"><span class="nav-number">15.2.1.</span> <span class="nav-text">JDK动态代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cglib动态代理机制"><span class="nav-number">15.2.2.</span> <span class="nav-text">Cglib动态代理机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-AOP"><span class="nav-number">15.2.3.</span> <span class="nav-text">Spring AOP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-AOP三种配置详细介绍"><span class="nav-number">15.3.</span> <span class="nav-text">Spring AOP三种配置详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于代理的经典AOP"><span class="nav-number">15.3.1.</span> <span class="nav-text">基于代理的经典AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤"><span class="nav-number">15.3.1.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通知类型"><span class="nav-number">15.3.1.2.</span> <span class="nav-text">通知类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传统AOP切面编程"><span class="nav-number">15.3.2.</span> <span class="nav-text">传统AOP切面编程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AspectJ切入点"><span class="nav-number">15.3.2.1.</span> <span class="nav-text">AspectJ切入点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤-1"><span class="nav-number">15.3.2.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspectJ-AOP切面编程"><span class="nav-number">15.3.3.</span> <span class="nav-text">AspectJ AOP切面编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspcetJ注解驱动的切面"><span class="nav-number">15.3.4.</span> <span class="nav-text">@AspcetJ注解驱动的切面</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring是什么"><span class="nav-number">1.</span> <span class="nav-text">Spring是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring中重要概念★★★★★"><span class="nav-number">2.</span> <span class="nav-text">spring中重要概念★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean"><span class="nav-number">2.1.</span> <span class="nav-text">bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制反转"><span class="nav-number">2.2.</span> <span class="nav-text">控制反转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.3.</span> <span class="nav-text">依赖注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring在程序中的位置"><span class="nav-number">3.</span> <span class="nav-text">Spring在程序中的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring快速入门"><span class="nav-number">4.</span> <span class="nav-text">Spring快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#github"><span class="nav-number">4.1.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入依赖"><span class="nav-number">4.2.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组件"><span class="nav-number">4.3.</span> <span class="nav-text">创建组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml中配置bean"><span class="nav-number">4.4.</span> <span class="nav-text">applicationContext.xml中配置bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得bean并调用方法"><span class="nav-number">4.5.</span> <span class="nav-text">获得bean并调用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring运行原理图"><span class="nav-number">5.</span> <span class="nav-text">Spring运行原理图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring接口编程"><span class="nav-number">6.</span> <span class="nav-text">Spring接口编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML配置文件"><span class="nav-number">7.</span> <span class="nav-text">XML配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种获取ApplicationContext对象引用的方法"><span class="nav-number">8.</span> <span class="nav-text">三种获取ApplicationContext对象引用的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两个获取bean的方式★★★"><span class="nav-number">9.</span> <span class="nav-text">两个获取bean的方式★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从ApplicationContex应用上下文容器中获取bean"><span class="nav-number">9.1.</span> <span class="nav-text">从ApplicationContex应用上下文容器中获取bean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本模式创建一个bean实例★★★★★"><span class="nav-number">9.1.1.</span> <span class="nav-text">基本模式创建一个bean实例★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式创建一个bean实例"><span class="nav-number">9.1.2.</span> <span class="nav-text">工厂模式创建一个bean实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从bean工厂容器中获取bean"><span class="nav-number">9.2.</span> <span class="nav-text">从bean工厂容器中获取bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">9.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean的生命周期"><span class="nav-number">10.</span> <span class="nav-text">bean的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean装配的细节"><span class="nav-number">11.</span> <span class="nav-text">bean装配的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注入的写法★"><span class="nav-number">11.1.</span> <span class="nav-text">注入的写法★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的作用域scope"><span class="nav-number">11.2.</span> <span class="nav-text">bean的作用域scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何给集合类型注入值"><span class="nav-number">11.3.</span> <span class="nav-text">如何给集合类型注入值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部bean"><span class="nav-number">11.4.</span> <span class="nav-text">内部bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承配置"><span class="nav-number">11.5.</span> <span class="nav-text">继承配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过构造函数注入值★★★"><span class="nav-number">11.6.</span> <span class="nav-text">通过构造函数注入值★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过参数名传递参数"><span class="nav-number">11.6.1.</span> <span class="nav-text">通过参数名传递参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过指数方式传递参数"><span class="nav-number">11.6.2.</span> <span class="nav-text">通过指数方式传递参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化bean和销毁bean的时候执行某个方法"><span class="nav-number">11.7.</span> <span class="nav-text">初始化bean和销毁bean的时候执行某个方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解装配Bean"><span class="nav-number">12.</span> <span class="nav-text">注解装配Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入context名称空间，并配置扫描包"><span class="nav-number">12.1.</span> <span class="nav-text">引入context名称空间，并配置扫描包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">12.2.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入-1"><span class="nav-number">12.3.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单类型数据注入"><span class="nav-number">12.3.1.</span> <span class="nav-text">简单类型数据注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂对象类型数据注入"><span class="nav-number">12.3.2.</span> <span class="nav-text">复杂对象类型数据注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配bean的属性值"><span class="nav-number">13.</span> <span class="nav-text">自动装配bean的属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#byName的用法"><span class="nav-number">13.1.</span> <span class="nav-text">byName的用法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byType的用法"><span class="nav-number">13.2.</span> <span class="nav-text">byType的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor的用法"><span class="nav-number">13.3.</span> <span class="nav-text">constructor的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autodetect的用法"><span class="nav-number">13.4.</span> <span class="nav-text">autodetect的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defualt"><span class="nav-number">13.5.</span> <span class="nav-text">defualt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#no-不自动装配"><span class="nav-number">13.6.</span> <span class="nav-text">no: 不自动装配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用spring的特殊bean-完成分散配置"><span class="nav-number">14.</span> <span class="nav-text">使用spring的特殊bean,完成分散配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP编程"><span class="nav-number">15.</span> <span class="nav-text">AOP编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP技术的实现原理"><span class="nav-number">15.1.</span> <span class="nav-text">AOP技术的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP底层实现"><span class="nav-number">15.2.</span> <span class="nav-text">AOP底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDK动态代理"><span class="nav-number">15.2.1.</span> <span class="nav-text">JDK动态代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cglib动态代理机制"><span class="nav-number">15.2.2.</span> <span class="nav-text">Cglib动态代理机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-AOP"><span class="nav-number">15.2.3.</span> <span class="nav-text">Spring AOP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-AOP三种配置详细介绍"><span class="nav-number">15.3.</span> <span class="nav-text">Spring AOP三种配置详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于代理的经典AOP"><span class="nav-number">15.3.1.</span> <span class="nav-text">基于代理的经典AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤"><span class="nav-number">15.3.1.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通知类型"><span class="nav-number">15.3.1.2.</span> <span class="nav-text">通知类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传统AOP切面编程"><span class="nav-number">15.3.2.</span> <span class="nav-text">传统AOP切面编程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AspectJ切入点"><span class="nav-number">15.3.2.1.</span> <span class="nav-text">AspectJ切入点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤-1"><span class="nav-number">15.3.2.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspectJ-AOP切面编程"><span class="nav-number">15.3.3.</span> <span class="nav-text">AspectJ AOP切面编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspcetJ注解驱动的切面★★★★★★★★★"><span class="nav-number">15.3.4.</span> <span class="nav-text">@AspcetJ注解驱动的切面★★★★★★★★★</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
