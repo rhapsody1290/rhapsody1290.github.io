@@ -111,7 +111,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <meta property="og:image" content="http://i.imgur.com/DlW4pGD.jpg">
 <meta property="og:image" content="http://i.imgur.com/iw9P4K4.jpg">
 <meta property="og:image" content="http://img.blog.csdn.net/20170323193113437?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-10T02:57:25.331Z">
+<meta property="og:updated_time" content="2017-04-10T07:55:12.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM重点知识总结">
 <meta name="twitter:description" content="思维导图
@@ -436,14 +436,15 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <li>局部变量存放方法中的局部变量和参数</li>
 <li>操作数栈用于存放方法<strong>执行过程中产生的中间结果</strong>，计算完成后将数据放入局部变量区</li>
 </ul>
-<h3 id="内存分配★★★★★"><a href="#内存分配★★★★★" class="headerlink" title="内存分配★★★★★"></a>内存分配★★★★★</h3><p>1、Java对象所占用的内存<strong>主要从堆上进行分配</strong>，堆是所有<strong>线程共享</strong>的，因此在堆上分配内存时需要<strong>加锁</strong>，这导致了创建对象<strong>开销比较大</strong>；</p>
-<ul>
+<h3 id="内存分配策略★★★★★"><a href="#内存分配策略★★★★★" class="headerlink" title="内存分配策略★★★★★"></a>内存分配策略★★★★★</h3><ul>
 <li>对象优先在Eden分配</li>
 <li><strong>大对象直接进入老年代</strong>（需要大量连续内存空间的Java对象，最典型的大对象就是那种很长的字符串及数组）</li>
 <li>长期存活的对象将进入老年代</li>
 <li>动态年龄判断：如果在Survivor区中<strong>相同年龄所有对象大小的总和大于Survivor空间的一半</strong>，年龄大于或等于该年龄的对象就可以直接进入老年代</li>
 <li>空间分配担保:在发生Minor GC前，虚拟机先检查老年代最大可用的连续空间是否大于新生代所有对象的总和，若大于这Minor GC是可以确保安全的。若不大于，则虚拟机检查HandlePromotionFailure的值，若<strong>允许担保失败</strong>继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小(经验值)，若大于，则尝试进行一次Minor GC，虽然是有风险的；若小于或HandlePromotionFailure不允许担保失败则进行一次Full  GC</li>
 </ul>
+<p>新生代内存分配：</p>
+<p>1、Java对象所占用的内存<strong>主要从堆上进行分配</strong>，堆是所有<strong>线程共享</strong>的，因此在堆上分配内存时需要<strong>加锁</strong>，这导致了创建对象<strong>开销比较大</strong>；</p>
 <p>2、Sun JDK为了提升内存分配的效率，会为每个新创建的线程在新生代的<strong>Eden Space</strong>分配一块独立的空间，这块空间称为TLAB（ThreadLocal Allocation Buffer，<strong>线程局部分配缓存</strong>）</p>
 <p>在TLAB上分配内存时不需要加锁，因此JVM在给线程中的对象分配内存时会<strong>尽量在TLAB上分配</strong>，如果对象过大或TLAB空间已用完，则仍然在堆上进行分配，通常<strong>多个小的对象比大的对象更加高效</strong></p>
 <p>3、除了从堆上分配及从TLAB上分配外，还要一种是基于逃逸分析直接在栈上进行分配的方式</p>
@@ -571,9 +572,9 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
 <p>执行new指令之后会接着执行Init方法，进行初始化，这样一个对象才算产生出来</p>
 <h3 id="垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><a href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情" class="headerlink" title="垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　"></a>垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</h3><p><strong>在什么时候</strong>，即什么时候触发垃圾回收</p>
 <p>首先需要知道，GC又分为 minor GC 和 Full GC (也称为 Major GC )。Java 堆内存分为新生代和老年代，新生代中又分为1个 Eden 区域和两个 Survivor 区域。</p>
-<p>那么对于 Minor GC 的触发条件：大多数情况下，直接在 Eden 区中进行分配。<strong>如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC；</strong>对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话（在新生代多次清理未被清理的晋升到老年代或直接在老年代分配的大对象，大数组），那么就会进行一次 Full GC。</p>
+<p>那么对于 Minor GC 的触发条件：大多数情况下，直接在 Eden 区中进行分配。<strong>如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC；</strong>对于 Full GC（Major GC）的触发条件：1、如果老年代没有足够空间的话（在新生代多次清理未被清理的晋升到老年代或直接在老年代分配的大对象，大数组），2、持久带被写满 3、System.gc()被显示调用 4、上一次GC之后堆分配策略动态变化，那么就会进行一次 Full GC。</p>
 <p>Ps：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：</p>
-<p><strong>在发生Minor GC之前</strong>，虚拟机会先检查<strong>老年代最大可用的连续空间</strong>是否大于<strong>新生代所有对象的总空间</strong>。如果<strong>大于</strong>则进行Minor GC，如果<strong>小于</strong>则看HandlePromotionFailure设置<strong>是否允许担保失败</strong>。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于则尝试Minor GC（<strong>如果尝试失败也会触发Full GC</strong>），如果小于后不允许担保失败，则进行Full GC。</p>
+<p><strong>在发生Minor GC之前</strong>，虚拟机会先检查<strong>老年代最大可用的连续空间</strong>是否大于<strong>新生代所有对象的总空间</strong>。如果<strong>大于</strong>则进行Minor GC，如果<strong>小于</strong>则看HandlePromotionFailure设置<strong>是否允许担保失败</strong>。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的<strong>平均大小</strong>，如果大于则尝试Minor GC（<strong>如果尝试失败也会触发Full GC</strong>），如果小于后不允许担保失败，则进行Full GC。</p>
 <p>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</p>
 <p><strong>对什么东西</strong>，什么对象判定为需要垃圾回收：<br>主要根据<strong>可达性分析算法</strong>，如果一个对象不可达，那么就是可以回收的；如果一个对象可达，那么这个对象就不可以回收。对于可达性分析算法，它是通过一系列称为”GC Roots” 的对象作为起始点，当一个对象到 GC Roots 没有任何引用链相接的时候，那么这个对象就是不可达，就可以被回收。如下图:</p>
 <p><img src="http://img.blog.csdn.net/20170323193113437?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
@@ -694,7 +695,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">80</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -702,7 +703,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -711,7 +712,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -740,7 +741,7 @@ Java代码的执行讨论三个问题，JDK如何将代码编译为class文件�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java代码的执行"><span class="nav-number">1.</span> <span class="nav-text">Java代码的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装载"><span class="nav-number">1.2.</span> <span class="nav-text">装载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">1.3.</span> <span class="nav-text">执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">2.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM内存空间"><span class="nav-number">2.1.</span> <span class="nav-text">JVM内存空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配★★★★★"><span class="nav-number">2.2.</span> <span class="nav-text">内存分配★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收"><span class="nav-number">2.3.</span> <span class="nav-text">内存回收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见面试题"><span class="nav-number">3.</span> <span class="nav-text">常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从编写源代码到程序运行的过程"><span class="nav-number">3.1.</span> <span class="nav-text">从编写源代码到程序运行的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的创建"><span class="nav-number">3.2.</span> <span class="nav-text">对象的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><span class="nav-number">3.3.</span> <span class="nav-text">垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java代码的执行"><span class="nav-number">1.</span> <span class="nav-text">Java代码的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装载"><span class="nav-number">1.2.</span> <span class="nav-text">装载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">1.3.</span> <span class="nav-text">执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">2.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM内存空间"><span class="nav-number">2.1.</span> <span class="nav-text">JVM内存空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配策略★★★★★"><span class="nav-number">2.2.</span> <span class="nav-text">内存分配策略★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收"><span class="nav-number">2.3.</span> <span class="nav-text">内存回收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见面试题"><span class="nav-number">3.</span> <span class="nav-text">常见面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从编写源代码到程序运行的过程"><span class="nav-number">3.1.</span> <span class="nav-text">从编写源代码到程序运行的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的创建"><span class="nav-number">3.2.</span> <span class="nav-text">对象的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><span class="nav-number">3.3.</span> <span class="nav-text">垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
