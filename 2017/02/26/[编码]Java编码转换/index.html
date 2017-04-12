@@ -109,7 +109,7 @@ getBytes(charset)Java中个 getBytes(charset) 函数的作用是将字符串所�
 <meta property="og:image" content="http://i.imgur.com/Wtw98Er.png">
 <meta property="og:image" content="http://i.imgur.com/ibOwYKn.png">
 <meta property="og:image" content="http://i.imgur.com/jcha13T.png">
-<meta property="og:updated_time" content="2017-02-27T11:16:27.554Z">
+<meta property="og:updated_time" content="2017-04-12T02:09:30.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编码转换">
 <meta name="twitter:description" content="首先要注意，字符串在java内存中总是按unicode编码
@@ -415,7 +415,7 @@ String sendString = new String(bytes, &quot;iso-8859-1&quot;);
 byte[] sendBytes = sendString.getBytes(&quot;UTF8&quot;);
 //接收端
 String recString = new String(sendBytes, &quot;UTF-8&quot;);
-byte[] Mybytes = recString.getBytes(&quot;iso-8859-1&quot;);
+byte[] Mybytes = recString.getBytes(&quot;iso-8859-1&quot;);//发送的时候用iso-8859-1编码，解码是反过程
 </code></pre><p>sendString显示的是拉丁字符，是iso-8859-1单字节解码后的结果</p>
 <h2 id="避免中文乱码及乱码产生的原因★★★"><a href="#避免中文乱码及乱码产生的原因★★★" class="headerlink" title="避免中文乱码及乱码产生的原因★★★"></a>避免中文乱码及乱码产生的原因★★★</h2><p>1、最简单避免中文乱码的方式是统一编码，<strong>推荐整个系统中采用统一的utf-8编码方式</strong><br>2、编码、解码的字符集不一致会出现乱码，如采用utf-8编码，但是用gbk解码，则会产生乱码，如下：</p>
 <pre><code>String str = &quot;上海&quot;;
@@ -640,7 +640,7 @@ System.out.println(&quot;接收端恢复编码：&quot; + Arrays.toString(recv_b
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-count">84</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -657,7 +657,7 @@ System.out.println(&quot;接收端恢复编码：&quot; + Arrays.toString(recv_b
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
