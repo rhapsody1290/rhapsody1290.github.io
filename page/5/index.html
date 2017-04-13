@@ -269,8 +269,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/30/[网络安全]DOS文献/" itemprop="url">
-                  DOS文献
+                <a class="post-title-link" href="/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/" itemprop="url">
+                  淘宝技术这十年——存储技术的发展
                 </a>
               
             
@@ -283,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-30T15:44:00+08:00" content="2016-11-30">
-              2016-11-30
+            <time itemprop="dateCreated" datetime="2017-02-27T14:52:00+08:00" content="2017-02-27">
+              2017-02-27
             </time>
           </span>
 
@@ -297,8 +297,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/网络安全/" itemprop="url" rel="index">
-                    <span itemprop="name">网络安全</span>
+                  <a href="/categories/分布式架构/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式架构</span>
                   </a>
                 </span>
 
@@ -313,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/30/[网络安全]DOS文献/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/30/[网络安全]DOS文献/" itemprop="commentsCount"></span>
+                <a href="/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -339,16 +339,13 @@
       
         
           
-          SYNFlood型DDos攻击检测与防御研究Linux系统增加Netfilter防火墙功能，在IP层内提供了另外5个插入点，非常容易捕获并处理网络数据包
-防DDos攻击的系统特点：
-1、基于信息熵值得实时攻击检测
-2、黑白单过滤，减轻防御模块的工作任务
-3、协议分析
-4、基于SYN Cookie技术
+          开发语言决不是系统的瓶颈，业务带来的压力多在于数据和存储方面，淘宝网的数据和存储发展大致如下：
+集中式架构缓存：所有数据都从数据库获取一方面速度比较慢，另一方面数据库承受不了这么大的访问量。一些被经常访问的数据直接从缓存中获取可以显著提高效率，减轻数据库的压力
+读写分离：从原来的对一个数据库进行所有
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/30/[网络安全]DOS文献/#more" rel="contents">
+            <a class="btn" href="/2017/02/27/[分布式架构]淘宝技术这十年——存储技术的发展/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -399,8 +396,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/" itemprop="url">
-                  instanceof, isinstance,isAssignableFrom的区别
+                <a class="post-title-link" href="/2017/02/26/[编码]Java编码转换/" itemprop="url">
+                  Java编码转换
                 </a>
               
             
@@ -413,8 +410,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-24T21:38:00+08:00" content="2016-11-24">
-              2016-11-24
+            <time itemprop="dateCreated" datetime="2017-02-26T12:48:00+08:00" content="2017-02-26">
+              2017-02-26
             </time>
           </span>
 
@@ -427,8 +424,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/编码/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -443,8 +440,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/" itemprop="commentsCount"></span>
+                <a href="/2017/02/26/[编码]Java编码转换/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/26/[编码]Java编码转换/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -469,12 +466,13 @@
       
         
           
-          类-实例instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。
-形象地：自身实例或子类实例 instanceof 自身类返回true例： String s=new String(“javaisland”);
+          首先要注意，字符串在java内存中总是按unicode编码
+getBytes(charset)Java中个 getBytes(charset) 函数的作用是将字符串所表示的是字符按照charset编码，并以字节表示
+比如”中文”，在Java内存中用unicode编码，表示为0x4E2D 0x6587
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/#more" rel="contents">
+            <a class="btn" href="/2017/02/26/[编码]Java编码转换/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -525,8 +523,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/10/[Spring]Spring中你不知道的注入方式/" itemprop="url">
-                  Spring中你不知道的注入方式
+                <a class="post-title-link" href="/2017/02/25/[Mysql]Mysql中文乱码/" itemprop="url">
+                  Mysql中文乱码
                 </a>
               
             
@@ -539,8 +537,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-10T11:44:00+08:00" content="2016-11-10">
-              2016-11-10
+            <time itemprop="dateCreated" datetime="2017-02-25T23:42:00+08:00" content="2017-02-25">
+              2017-02-25
             </time>
           </span>
 
@@ -553,8 +551,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
                   </a>
                 </span>
 
@@ -569,8 +567,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/10/[Spring]Spring中你不知道的注入方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/10/[Spring]Spring中你不知道的注入方式/" itemprop="commentsCount"></span>
+                <a href="/2017/02/25/[Mysql]Mysql中文乱码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/25/[Mysql]Mysql中文乱码/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -595,16 +593,12 @@
       
         
           
-          前言在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：
-
-使用元素，实际上是让Spring执行无参或有参构造器
-使用元素，实际上是让Spring执行一次setter方法
-
-但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对
+          JDBC?JDBC获得数据库连接时写在URL上的?useUnicode=true&amp;characterEncoding=utf-8，作用是指定字符的编码和解码格式
+例如：mysql数据库用的是gbk编码，而项目数据库用的是utf-8编码。这时候如果添加了useUnicode=true&amp;
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/10/[Spring]Spring中你不知道的注入方式/#more" rel="contents">
+            <a class="btn" href="/2017/02/25/[Mysql]Mysql中文乱码/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -655,8 +649,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/11/07/[Servlet]Tomcat操作Servlet流程/" itemprop="url">
-                  Tomcat操作Servlet流程
+                <a class="post-title-link" href="/2017/02/17/[Git]Git笔记/" itemprop="url">
+                  Git笔记
                 </a>
               
             
@@ -669,8 +663,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-07T20:40:00+08:00" content="2016-11-07">
-              2016-11-07
+            <time itemprop="dateCreated" datetime="2017-02-17T11:14:00+08:00" content="2017-02-17">
+              2017-02-17
             </time>
           </span>
 
@@ -683,8 +677,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Servlet/" itemprop="url" rel="index">
-                    <span itemprop="name">Servlet</span>
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
                   </a>
                 </span>
 
@@ -699,8 +693,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/07/[Servlet]Tomcat操作Servlet流程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/07/[Servlet]Tomcat操作Servlet流程/" itemprop="commentsCount"></span>
+                <a href="/2017/02/17/[Git]Git笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/17/[Git]Git笔记/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -725,12 +719,12 @@
       
         
           
-          Tomcat调用Servlet的流程
-Listener的初始化最早，Filter次之。他俩的初始化都是在容器启动完成之前初始化的。 Servlet没有初始化，原因是没有匹配的请求进来。 如果想要servlet自动初始化，需要在指定的servlet中配置参数，没有此标签，默认启动时servlet不进行
+          git log -p FILEPATH 单文件的改动git reset –hard commit_id 撤销摸个commit
+git branch 查看本地分支git branch xx 创建分支git branch -d xx 删除分支git checkout xx 切换分支git branch 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/07/[Servlet]Tomcat操作Servlet流程/#more" rel="contents">
+            <a class="btn" href="/2017/02/17/[Git]Git笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -781,8 +775,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
             
               
                 
-                <a class="post-title-link" href="/2016/11/01/[Java]Java 接口和抽象类区别/" itemprop="url">
-                  Java 接口和抽象类区别
+                <a class="post-title-link" href="/2017/02/15/[编码]字符编码/" itemprop="url">
+                  字符编码
                 </a>
               
             
@@ -795,8 +789,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-01T20:52:00+08:00" content="2016-11-01">
-              2016-11-01
+            <time itemprop="dateCreated" datetime="2017-02-15T10:39:00+08:00" content="2017-02-15">
+              2017-02-15
             </time>
           </span>
 
@@ -809,8 +803,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/编码/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -825,8 +819,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/01/[Java]Java 接口和抽象类区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/01/[Java]Java 接口和抽象类区别/" itemprop="commentsCount"></span>
+                <a href="/2017/02/15/[编码]字符编码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/15/[编码]字符编码/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -851,12 +845,11 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
       
         
           
-          参考http://blog.csdn.net/xw13106209/article/details/6923556
-面向接口编程OOP面向对象的编程，如果要提高程序的复用率，增加程序的可维护性，可扩展性，就必须是面向接口的编程，面向抽象的编程，正确地使用接口、抽象类这些有用的抽象类型作为你结构层次上
+          各种字符集和编码详解http://blog.csdn.net/ancky/article/details/2034809Java字符编码http://blog.csdn.net/xiongchao2011/article/details/7276834★★★十分钟搞清字符集和字符编码http://c
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/01/[Java]Java 接口和抽象类区别/#more" rel="contents">
+            <a class="btn" href="/2017/02/15/[编码]字符编码/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -907,8 +900,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
             
               
                 
-                <a class="post-title-link" href="/2016/10/17/[SSM]Shiro笔记/" itemprop="url">
-                  Shiro笔记
+                <a class="post-title-link" href="/2017/02/13/[Thrift]Thrift笔记/" itemprop="url">
+                  Thrift笔记
                 </a>
               
             
@@ -921,8 +914,133 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-17T23:00:00+08:00" content="2016-10-17">
-              2016-10-17
+            <time itemprop="dateCreated" datetime="2017-02-13T16:21:00+08:00" content="2017-02-13">
+              2017-02-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Thrift/" itemprop="url" rel="index">
+                    <span itemprop="name">Thrift</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/13/[Thrift]Thrift笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/[Thrift]Thrift笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Thrifthttp://www.ibm.com/developerworks/cn/java/j-lo-apachethrift/#ibm-pcon目前流行的服务调用方式有很多种，例如基于 SOAP 消息格式的 Web Service，基于 JSON 消息格式的 RESTful 服务等。其中所用到
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/13/[Thrift]Thrift笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/13/[SSM]XML CDATA的作用/" itemprop="url">
+                  XML CDATA的作用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-13T09:54:00+08:00" content="2017-02-13">
+              2017-02-13
             </time>
           </span>
 
@@ -951,8 +1069,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/17/[SSM]Shiro笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/17/[SSM]Shiro笔记/" itemprop="commentsCount"></span>
+                <a href="/2017/02/13/[SSM]XML CDATA的作用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/13/[SSM]XML CDATA的作用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -977,11 +1095,18 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
       
         
           
-          术语（Terminology）Authentication（鉴权，身份验证）：校验Subject（主体）的身份是否合法Authorization（授权）：根据主体的角色和权限来决定允许或拒绝访问请求Cipher：执行加密或解密的算法Principal：一个主体的标识属性，独一无二的标识，可以是昵称、
+          http://www.cnblogs.com/myparamita/archive/2008/12/27/1363626.html
+XML文件中的一些特殊符号，例如：”&lt;”、”&gt;”、”/“、”？”等，会破坏了XML结构
+有两种方式解决：
+
+转义字符
+CDATA部件
+
+转义字符如果在XML
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/17/[SSM]Shiro笔记/#more" rel="contents">
+            <a class="btn" href="/2017/02/13/[SSM]XML CDATA的作用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1032,8 +1157,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
             
               
                 
-                <a class="post-title-link" href="/2016/10/13/[Java]JDK源码阅读/" itemprop="url">
-                  JDK源码阅读
+                <a class="post-title-link" href="/2017/02/09/[Maven]Maven聚合与继承/" itemprop="url">
+                  Maven聚合与继承
                 </a>
               
             
@@ -1046,8 +1171,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-13T09:00:00+08:00" content="2016-10-13">
-              2016-10-13
+            <time itemprop="dateCreated" datetime="2017-02-09T22:13:00+08:00" content="2017-02-09">
+              2017-02-09
             </time>
           </span>
 
@@ -1060,8 +1185,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Maven/" itemprop="url" rel="index">
+                    <span itemprop="name">Maven</span>
                   </a>
                 </span>
 
@@ -1076,8 +1201,8 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/13/[Java]JDK源码阅读/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/13/[Java]JDK源码阅读/" itemprop="commentsCount"></span>
+                <a href="/2017/02/09/[Maven]Maven聚合与继承/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/09/[Maven]Maven聚合与继承/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1102,12 +1227,12 @@ Listener的初始化最早，Filter次之。他俩的初始化都是在容器启
       
         
           
-          文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath();
-BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类
+          聚合什么是聚合？聚合就是把多个模块或项目聚合到一起，简单统一的完成编译等工作
+为了能够使用一条命令就能构建 account-email 和 account-persist两个模块，我们需要建立一个额外的名为 account-aggregator 的模块，然后通过该模块构建整个项目的所有模块。 acc
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/13/[Java]JDK源码阅读/#more" rel="contents">
+            <a class="btn" href="/2017/02/09/[Maven]Maven聚合与继承/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1158,8 +1283,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
             
               
                 
-                <a class="post-title-link" href="/2016/10/11/[Java]基于Token的身份验证/" itemprop="url">
-                  基于 Token 的身份验证
+                <a class="post-title-link" href="/2017/01/25/[Java并发编程]并发编程设计模式/" itemprop="url">
+                  并发编程设计模式
                 </a>
               
             
@@ -1172,8 +1297,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T10:50:00+08:00" content="2016-10-11">
-              2016-10-11
+            <time itemprop="dateCreated" datetime="2017-01-25T22:44:00+08:00" content="2017-01-25">
+              2017-01-25
             </time>
           </span>
 
@@ -1186,8 +1311,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发编程</span>
                   </a>
                 </span>
 
@@ -1202,8 +1327,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/11/[Java]基于Token的身份验证/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/[Java]基于Token的身份验证/" itemprop="commentsCount"></span>
+                <a href="/2017/01/25/[Java并发编程]并发编程设计模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/25/[Java并发编程]并发编程设计模式/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1228,12 +1353,11 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
       
         
           
-          为什么要身份验证可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！
-但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不
+          Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/11/[Java]基于Token的身份验证/#more" rel="contents">
+            <a class="btn" href="/2017/01/25/[Java并发编程]并发编程设计模式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1284,8 +1408,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
             
               
                 
-                <a class="post-title-link" href="/2016/10/11/[网络安全]运输层/" itemprop="url">
-                  运输层
+                <a class="post-title-link" href="/2017/01/18/[mybatis]通用mapper/" itemprop="url">
+                  通用mapper
                 </a>
               
             
@@ -1298,8 +1422,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-11T00:00:00+08:00" content="2016-10-11">
-              2016-10-11
+            <time itemprop="dateCreated" datetime="2017-01-18T09:23:00+08:00" content="2017-01-18">
+              2017-01-18
             </time>
           </span>
 
@@ -1312,8 +1436,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/网络安全/" itemprop="url" rel="index">
-                    <span itemprop="name">网络安全</span>
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
                   </a>
                 </span>
 
@@ -1328,8 +1452,8 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/11/[网络安全]运输层/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/[网络安全]运输层/" itemprop="commentsCount"></span>
+                <a href="/2017/01/18/[mybatis]通用mapper/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/18/[mybatis]通用mapper/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1354,148 +1478,12 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
       
         
           
-          概述运输层服务计算机网络最基本的问题:
-● 两个实体怎样才能在一种会丢失或损坏数据的介质上可靠得通信
-● 控制运输层实体的传输速率以避免网络中的拥塞，或从拥塞中恢复出来
+          不是表中字段的属性必须加 @Transient 注解
 
-运输层协议为运行在不同主机上的应用进程之间提供了逻辑通信（Logic Communication）。通过逻辑，运行不同进程的主机
-          ...
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/11/[网络安全]运输层/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/08/[数据结构与算法]算法4笔记/" itemprop="url">
-                  算法4笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-08T19:07:00+08:00" content="2016-10-08">
-              2016-10-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/08/[数据结构与算法]算法4笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/08/[数据结构与算法]算法4笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          书本源代码http://algs4.cs.princeton.edu/code/
-算法与数据结构课程介绍
-算法是解决问题的方法
-数据结构是存储数据的方法
-
-课程内容
-第一部分内容：
-
-基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority que
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/08/[数据结构与算法]算法4笔记/#more" rel="contents">
+            <a class="btn" href="/2017/01/18/[mybatis]通用mapper/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1529,7 +1517,7 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1570,7 +1558,7 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">84</span>
+              <span class="site-state-item-count">104</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1587,7 +1575,7 @@ BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputS
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

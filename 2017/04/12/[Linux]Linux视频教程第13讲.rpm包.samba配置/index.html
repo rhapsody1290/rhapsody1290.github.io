@@ -1,0 +1,837 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="RPM包概述一种用于互联网下载包的打包及安装工具，它包含在某些Linux分发版中。它生成具有.RPM扩展名的文件。RPM是Redhat Package Manager（Redhat软件包管理工具）的缩写。这一文件格式虽然打上了Redhat的标志，但是其原始设计理念是开放式的，现在包括OpenLinux、S.u.S.E.以及Turbo Linux等Linux的分发版本都有采用。可以算是公认的行业标准">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux视频教程第13讲.rpm包.samba配置">
+<meta property="og:url" content="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第13讲.rpm包.samba配置/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="RPM包概述一种用于互联网下载包的打包及安装工具，它包含在某些Linux分发版中。它生成具有.RPM扩展名的文件。RPM是Redhat Package Manager（Redhat软件包管理工具）的缩写。这一文件格式虽然打上了Redhat的标志，但是其原始设计理念是开放式的，现在包括OpenLinux、S.u.S.E.以及Turbo Linux等Linux的分发版本都有采用。可以算是公认的行业标准">
+<meta property="og:updated_time" content="2017-04-12T15:39:46.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux视频教程第13讲.rpm包.samba配置">
+<meta name="twitter:description" content="RPM包概述一种用于互联网下载包的打包及安装工具，它包含在某些Linux分发版中。它生成具有.RPM扩展名的文件。RPM是Redhat Package Manager（Redhat软件包管理工具）的缩写。这一文件格式虽然打上了Redhat的标志，但是其原始设计理念是开放式的，现在包括OpenLinux、S.u.S.E.以及Turbo Linux等Linux的分发版本都有采用。可以算是公认的行业标准">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第13讲.rpm包.samba配置/"/>
+
+
+  <title> Linux视频教程第13讲.rpm包.samba配置 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux视频教程第13讲.rpm包.samba配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-12T23:27:00+08:00" content="2017-04-12">
+              2017-04-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/12/[Linux]Linux视频教程第13讲.rpm包.samba配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/12/[Linux]Linux视频教程第13讲.rpm包.samba配置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="RPM包"><a href="#RPM包" class="headerlink" title="RPM包"></a>RPM包</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>一种用于互联网下载包的打包及安装工具</strong>，它包含在某些Linux分发版中。它生成具有.RPM扩展名的文件。RPM是Redhat Package Manager（Redhat软件包管理工具）的缩写。这一文件格式虽然打上了Redhat的标志，但是其原始设计理念是开放式的，现在包括OpenLinux、S.u.S.E.以及Turbo Linux等Linux的分发版本都有采用。可以算是公认的行业标准了</p>
+<h3 id="RPM包的名称格式"><a href="#RPM包的名称格式" class="headerlink" title="RPM包的名称格式"></a>RPM包的名称格式</h3><p>apache-1.3.23-11.i386.rpm</p>
+<p>“1.3.23-11”：软件的版本号，主版本和此版本<br>“i386”：是软件所运行的硬件平台<br>“rpm”：文件扩展名，代表RPM包</p>
+<h3 id="RPM常用命令"><a href="#RPM常用命令" class="headerlink" title="RPM常用命令"></a>RPM常用命令</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">rpm ‐qa             <span class="comment">#查询所安装的所有rpm软件包 </span></div><div class="line">rpm ‐qa | more      <span class="comment">#分页显示</span></div><div class="line">rpm ‐qa | grep X <span class="string">"apache"</span>   <span class="comment">#软件名称</span></div><div class="line">rpm ‐q 软件包名     <span class="comment">#查询软件包是否安装★★★</span></div><div class="line">rpm ‐qi 软件包名    <span class="comment">#查询软件包信息 </span></div><div class="line">rpm ‐ql 软件包名    <span class="comment">#查询软件包中的文件 </span></div><div class="line">rpm ‐qf 文件全路径名        <span class="comment">#查询文件所属的软件包</span></div><div class="line">    [例]rpm ‐qf <span class="regexp">/etc/</span>passwd </div><div class="line">    [例]rpm ‐qf <span class="regexp">/root/i</span>nstall.log</div><div class="line">rpm ‐qp 包文件名    <span class="comment">#查询包的信息对这个软件包的介绍</span></div><div class="line">[例]rpm ‐qp jdk-<span class="number">1</span>_5_0-Linux-i586.rpm </div><div class="line">[例]rpm ‐qpi jdk-<span class="number">1</span>_5_0-Linux-i586.rpm </div><div class="line">[例]rpm ‐qpl jdk-<span class="number">1</span>_5_0-Linux-i586.rpm</div></pre></td></tr></table></figure>
+<h2 id="安装RPM包"><a href="#安装RPM包" class="headerlink" title="安装RPM包"></a>安装RPM包</h2><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">rpm ‐ivh RPM包全路径名称    <span class="comment">#安装包到当前系统</span></div><div class="line">i=install，安装</div><div class="line">v=verbose，提示，即有提示信息 </div><div class="line">h=hash，进度条</div></pre></td></tr></table></figure>
+<h3 id="删除RPM包"><a href="#删除RPM包" class="headerlink" title="删除RPM包"></a>删除RPM包</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rpm</span> ‐e RPM包的名称 </div><div class="line">【案例】rpm ‐e jdk</div></pre></td></tr></table></figure>
+<p>如果其它软件包依赖于您要卸载的软件包，卸载时则会产生错误信息，如：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">【案例】rpm ‐e foo</div><div class="line">removing these packages would <span class="keyword">break</span> dependencies：foo <span class="keyword">is</span> needed <span class="keyword">by</span> bar<span class="number">-1.0</span><span class="number">-1</span> 若让RPM忽略这个错误继续卸载，请使用‐‐nodeps命令行选项</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">强行删除，不建议</div><div class="line">【案例】rpm ‐e ‐‐nodeps foo</div></pre></td></tr></table></figure>
+<h3 id="升级RPM包"><a href="#升级RPM包" class="headerlink" title="升级RPM包"></a>升级RPM包</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">rpm</span> ‐<span class="selector-tag">U</span> <span class="selector-tag">RPM</span>包全路径名</div><div class="line">【案例】<span class="selector-tag">rpm</span> ‐<span class="selector-tag">U</span> <span class="selector-tag">cvs-1</span><span class="selector-class">.11</span><span class="selector-class">.2-10</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div></pre></td></tr></table></figure>
+<h2 id="SPRM"><a href="#SPRM" class="headerlink" title="SPRM"></a>SPRM</h2><p>鸟哥p815</p>
+<h2 id="安装软件路径"><a href="#安装软件路径" class="headerlink" title="安装软件路径"></a>安装软件路径</h2><pre><code>以apache为例，安装路径有
+· /etc/httped
+· /usr/lib
+· /usr/bin
+· /usr/share/man
+分别代表配置文件、函式库、执行档、联机帮助档
+如果放在预设的/usr/local，那么数据就会被放在
+· /usr/local/etc
+· /usr/local/bin
+· /usr/local/lib
+· /usr/local/man
+如果每个软件都选择在这个默认的路径下安装，那么所有的软件的档案都将放置在这四个目录中，未来想要升级或移除的时候都会比较难以追查档案的来源。所以如果在安装的时候选择的是单独的目录，例如apache放在/usr/local/apache，那么档案目录就会变成：
+· /usr/local/apache/etc
+· /usr/local/apache/bin
+· /usr/local/apache/lib
+· /usr/local/apache/man
+移除软件就简单的多，只要将目录移除即可
+
+为方便Tarball的管理，建议：
+1. 最好将tarball的原始数据解压到/usr/local/src中
+2. 安装时最好安装到/usr/local这个默认路径下
+3. 考虑未来的反安装步骤，最好可以将每个软件单独的安装在/usr/local底下
+4. 为安装到单独的软件之man page加入man path搜寻：如果你安装的软件放置在/usr/local/software，那么man page搜索的设定中，可将就得在/etc/man.config的40~50加入一行MANPATH /usr/local/software/man
+</code></pre><p>##函式库管理</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">p794</div><div class="line"></div><div class="line">静态函式库，扩展名<span class="selector-class">.a</span></div><div class="line">动态函式库，扩展名<span class="selector-class">.so</span></div><div class="line">绝大数的函式库都放置在：/usr/lib,/lib,Kernel的函式库在/lib/modules</div><div class="line"></div><div class="line">将动态函式库加载高速缓存当中</div><div class="line"><span class="number">1</span>. 在/etc/ld<span class="selector-class">.so</span><span class="selector-class">.conf</span>写下想要读入高速缓存当中的动态函式库所在的目录</div><div class="line"><span class="number">2</span>. 接在来利用ldconfig将/etc/ld<span class="selector-class">.so</span><span class="selector-class">.conf</span>读入快取当中，画面上不会显示任何的信息</div><div class="line"><span class="number">3</span>. 同时也将数据记录一份在/etc/ld<span class="selector-class">.so</span><span class="selector-class">.cache</span>这个档案当中</div></pre></td></tr></table></figure>
+<p>##samba配置</p>
+<p>###什么是samba</p>
+<p>这些年来，windows与Linux操作系统各自拥有自己的用户群和市场。然而在一般公司或学校里，可能同时有windows和Linux主机，windows主机彼此之间可以利用”网上邻居”来访问共享资源。NFS也能使Linux主机之间实现资源访问。<strong>而samba服务软件能够使windows与Linux之间实现资源共享</strong>.</p>
+<p>SMB通信协议采用的是C/S结构，所以SAMBA软件可分阶段客户端及服务端两部分。通过执行samba客户端程序，Linux主机使可使用网络上的windows主机所共享的资源。而在Linux主机上安装samba服务器，则可以使windows主机访问samba服务器共享的资源</p>
+<p>###samba安装 </p>
+<p>samba的安装步骤<br>1、看看是否已经安装了samba<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm ‐<span class="selector-tag">q</span> samba</div></pre></td></tr></table></figure></p>
+<p>2、如果有的话，就先卸载<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">rpm</span> ‐e ‐‐nodeps samba（强制删除）</div></pre></td></tr></table></figure></p>
+<p>3、把安装文件挂载到Linux下<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>) <span class="selector-tag">samba-common-2</span><span class="selector-class">.2</span><span class="selector-class">.7a-7</span><span class="selector-class">.9</span><span class="selector-class">.0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span> </div><div class="line"><span class="selector-tag">b</span>) <span class="selector-tag">samba-client-2</span><span class="selector-class">.2</span><span class="selector-class">.7a-7</span><span class="selector-class">.9</span><span class="selector-class">.0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span> </div><div class="line"><span class="selector-tag">c</span>) <span class="selector-tag">samba-2</span><span class="selector-class">.2</span><span class="selector-class">.7a-7</span><span class="selector-class">.9</span><span class="selector-class">.0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div></pre></td></tr></table></figure></p>
+<p>4、拷贝samba的rpm包到/home，准备安装<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp sam* /<span class="built_in">home</span></div></pre></td></tr></table></figure></p>
+<p>5、开始安装(顺序)<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>) <span class="selector-tag">rpm</span> ‐<span class="selector-tag">ivh</span> <span class="selector-tag">samba-common-2</span><span class="selector-class">.2</span><span class="selector-class">.7a-7</span><span class="selector-class">.9</span><span class="selector-class">.0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span> </div><div class="line"><span class="selector-tag">b</span>) <span class="selector-tag">rpm</span> –<span class="selector-tag">ivh</span> <span class="selector-tag">samba-client-2</span><span class="selector-class">.2</span><span class="selector-class">.7a-7</span><span class="selector-class">.9</span><span class="selector-class">.0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span> </div><div class="line"><span class="selector-tag">c</span>) <span class="selector-tag">rpm</span> –<span class="selector-tag">ivh</span> <span class="selector-tag">samba-2</span><span class="selector-class">.2</span><span class="selector-class">.7a-7</span><span class="selector-class">.9</span><span class="selector-class">.0</span><span class="selector-class">.i386</span><span class="selector-class">.rpm</span></div></pre></td></tr></table></figure></p>
+<p>6、创建一个用户youyou<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a) useradd youyou </div><div class="line"><span class="keyword">b) </span>passwd youyou</div></pre></td></tr></table></figure></p>
+<p>7、给youyou设置samba密码<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">将<span class="meta-keyword">/etc/</span>passwd中的用户都加到smbpasswd中</div><div class="line">a) cat <span class="meta-keyword">/etc/</span>passwd | mksmbpasswd.sh &gt; <span class="meta-keyword">/etc/</span>samba/smbpasswd</div><div class="line"></div><div class="line">设置密码 </div><div class="line">b) smbpasswd youyou</div></pre></td></tr></table></figure></p>
+<p>8、启动samba服务器，测试<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>) <span class="selector-tag">service</span> <span class="selector-tag">smb</span> <span class="selector-tag">start</span>，启动</div><div class="line"><span class="selector-tag">b</span>) <span class="selector-tag">service</span> <span class="selector-tag">smb</span> <span class="selector-tag">stop</span>，停止 </div><div class="line"><span class="selector-tag">c</span>) <span class="selector-tag">service</span> <span class="selector-tag">smb</span> <span class="selector-tag">restart</span>,重启</div><div class="line"><span class="selector-tag">d</span>) 在<span class="selector-tag">windows</span>运行窗口输入<span class="selector-tag">Linux</span>的<span class="selector-tag">IP</span>\\192<span class="selector-class">.168</span><span class="selector-class">.222</span><span class="selector-class">.88</span> 输入<span class="selector-tag">youyou</span>的<span class="selector-tag">samba</span>用户名，密码</div></pre></td></tr></table></figure></p>
+<p>###samba配置</p>
+<p>共享资源的基本配置/etc/samba/smb.conf</p>
+<p>1、comment：针对共享资源所做的说明文字。默认值为空字符串<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">【案例】comment=<span class="built_in">dir</span> <span class="keyword">for</span> todayhero：共享这个目录是为了todayhero这个用户</div></pre></td></tr></table></figure></p>
+<p>2、path：若共享的资源是目录，是指定该目录的位置<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">【案例】<span class="built_in">path</span>=/tmp：共享tmp这个目录</div></pre></td></tr></table></figure></p>
+<p>3、guestok：是否允许用户不使用账号和密码访问此资源<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">【案例】guest ok=<span class="literal">yes</span>：允许用户不使用账号和密码访问此资源</div><div class="line">【案例】guest ok=<span class="literal">no</span>：不允许用户不使用账号和密码访问此资源</div></pre></td></tr></table></figure></p>
+<p>4、hostsallow：设置连接主机的地址<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">【案例】hosts allow=<span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span> server.abc.com：允许来自<span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span>或</div><div class="line">server.abc.com</div></pre></td></tr></table></figure></p>
+<p>5、hostsdeny：设置禁止连接的主机地址<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">【案例】hosts deny=<span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span>：不允许<span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span>的主机访问samba服务器的资源</div></pre></td></tr></table></figure></p>
+<p>6、readonly：用于设置共享的资源是否为可读<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">【案例】<span class="keyword">read</span> <span class="keyword">only</span>=yes：允许只读</div><div class="line">【案例】<span class="keyword">read</span> <span class="keyword">only</span>=<span class="keyword">no</span>：不仅仅只读，也就是说可以写入</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/12/[Linux]Linux视频教程第12讲.网络环境配置/" rel="next" title="Linux视频教程第12讲.网络环境配置">
+                <i class="fa fa-chevron-left"></i> Linux视频教程第12讲.网络环境配置
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/" rel="prev" title="Linux视频教程第14讲.crontab详解">
+                Linux视频教程第14讲.crontab详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/12/[Linux]Linux视频教程第13讲.rpm包.samba配置/"
+           data-title="Linux视频教程第13讲.rpm包.samba配置" data-url="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第13讲.rpm包.samba配置/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM包"><span class="nav-number">1.</span> <span class="nav-text">RPM包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPM包的名称格式"><span class="nav-number">1.2.</span> <span class="nav-text">RPM包的名称格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPM常用命令"><span class="nav-number">1.3.</span> <span class="nav-text">RPM常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装RPM包"><span class="nav-number">2.</span> <span class="nav-text">安装RPM包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除RPM包"><span class="nav-number">2.1.</span> <span class="nav-text">删除RPM包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级RPM包"><span class="nav-number">2.2.</span> <span class="nav-text">升级RPM包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPRM"><span class="nav-number">3.</span> <span class="nav-text">SPRM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装软件路径"><span class="nav-number">4.</span> <span class="nav-text">安装软件路径</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+</body>
+</html>
