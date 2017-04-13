@@ -86,22 +86,49 @@
 
 <meta name="description" content="Linux命令缩写，方便记忆
 http://blog.chinaunix.net/uid-27164517-id-3299073.html
-系统调优常用指令常用123456789101112131415161718192021222324252627282930313233343536373839cd ~                    #跳转到用户主目录tab">
+开发者常用指令
+
+netstat -anp | grep 8080 #查询端口
+route #路由表
+tracert #路由追踪
+ps -aux #进程列表
+kill -9 pid #杀进程
+top
+
+env                     #查看环境">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令">
 <meta property="og:url" content="http://qianmingxs.com/2017/04/12/[Linux]Linux常用命令/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
 <meta property="og:description" content="Linux命令缩写，方便记忆
 http://blog.chinaunix.net/uid-27164517-id-3299073.html
-系统调优常用指令常用123456789101112131415161718192021222324252627282930313233343536373839cd ~                    #跳转到用户主目录tab">
+开发者常用指令
+
+netstat -anp | grep 8080 #查询端口
+route #路由表
+tracert #路由追踪
+ps -aux #进程列表
+kill -9 pid #杀进程
+top
+
+env                     #查看环境">
 <meta property="og:image" content="http://www.th7.cn/d/file/p/2014/11/04/74a34c1bdf612bbcc05bd30c3a5647ed.png">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227194314714">
-<meta property="og:updated_time" content="2017-04-13T02:56:25.172Z">
+<meta property="og:updated_time" content="2017-04-13T03:36:23.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="Linux命令缩写，方便记忆
 http://blog.chinaunix.net/uid-27164517-id-3299073.html
-系统调优常用指令常用123456789101112131415161718192021222324252627282930313233343536373839cd ~                    #跳转到用户主目录tab">
+开发者常用指令
+
+netstat -anp | grep 8080 #查询端口
+route #路由表
+tracert #路由追踪
+ps -aux #进程列表
+kill -9 pid #杀进程
+top
+
+env                     #查看环境">
 <meta name="twitter:image" content="http://www.th7.cn/d/file/p/2014/11/04/74a34c1bdf612bbcc05bd30c3a5647ed.png">
 
 
@@ -347,7 +374,55 @@ http://blog.chinaunix.net/uid-27164517-id-3299073.html
       
         <p>Linux命令缩写，方便记忆</p>
 <p><a href="http://blog.chinaunix.net/uid-27164517-id-3299073.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-27164517-id-3299073.html</a></p>
-<h2 id="系统调优常用指令"><a href="#系统调优常用指令" class="headerlink" title="系统调优常用指令"></a>系统调优常用指令</h2><h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~                    <span class="comment">#跳转到用户主目录</span></div><div class="line">tab                     <span class="comment">#文件名自动提示</span></div><div class="line"><span class="built_in">pwd</span>                     <span class="comment">#查看当前目录</span></div><div class="line">reset                   <span class="comment">#清屏</span></div><div class="line">clear                   <span class="comment">#清屏</span></div><div class="line">ctrl + alt + T          <span class="comment">#终端，需在首选项-快捷键中设置</span></div><div class="line"></div><div class="line">env                     <span class="comment">#查看环境变量</span></div><div class="line">/etc/profile            <span class="comment">#系统整体配置文件</span></div><div class="line">~/.bash_profile或~/.bash_login或~/.profile  <span class="comment">#个人设定</span></div><div class="line">ehoc <span class="variable">$PATH</span>              <span class="comment">#PATH路径</span></div><div class="line"></div><div class="line">ls                      <span class="comment">#文件列表</span></div><div class="line">ls <span class="_">-a</span>                   <span class="comment">#显示隐藏文件</span></div><div class="line">ls <span class="_">-l</span>                   <span class="comment">#列表显示</span></div><div class="line">ls -al &lt;path&gt;           <span class="comment">#查看path路径下的文件列表</span></div><div class="line">ls -ld /tmp             <span class="comment">#查看目录的权限</span></div><div class="line"></div><div class="line">|                       <span class="comment">#管道命令</span></div><div class="line">&gt;                       <span class="comment">#管道定向，双箭头&gt;&gt;追加到文件结尾</span></div><div class="line">less                    <span class="comment">#u，d，space，b</span></div><div class="line">more                    <span class="comment">#空格下一页，shift+PageUp上一页[more name]</span></div><div class="line">cat xxx | more</div><div class="line"></div><div class="line">grep xxx <span class="comment">#搜索字符串</span></div><div class="line">grep -n <span class="string">"System"</span> file1 file2 <span class="comment">#查找，显示行数</span></div><div class="line"></div><div class="line">tar -zxvf libpcap-1.3.0.tar.gz  <span class="comment">#解压</span></div><div class="line">zip aa.zip 文件名</div><div class="line"></div><div class="line">mount /mnt/cdrom        <span class="comment">#挂载光驱 </span></div><div class="line">unmount /mnt/cdrom      <span class="comment">#卸载光驱</span></div><div class="line"></div><div class="line">ifconfig                <span class="comment">#在linux/unix查看ip的命令</span></div><div class="line"></div><div class="line">df - h                  <span class="comment">#查看Linux系统分区具体情况</span></div><div class="line">df -h /etc              <span class="comment">#查看/etc底下可用的磁盘容量以易读的容量格式显示</span></div><div class="line"></div><div class="line">crontab <span class="_">-e</span>              <span class="comment">#任务调度</span></div></pre></td></tr></table></figure>
+<h2 id="开发者常用指令"><a href="#开发者常用指令" class="headerlink" title="开发者常用指令"></a>开发者常用指令</h2><pre>
+
+netstat -anp | grep 8080 #查询端口
+route #路由表
+tracert #路由追踪
+ps -aux #进程列表
+kill -9 pid #杀进程
+top
+
+env                     #查看环境变量
+/etc/profile 和 ~/.bash_profile #系统整体配置文件（系统/个人用户）
+ehoc $PATH              #PATH路径
+
+ifconfig                #在linux/unix查看ip的命令
+
+df - h                  #查看Linux系统分区具体情况
+df -h /etc              #查看/etc底下可用的磁盘容量以易读的容量格式显示
+
+crontab -e              #任务调度
+
+ls -a                   #显示隐藏文件
+ls -l                   #列表显示
+
+cat Hello.txt | grep "pattern" #搜索字符串
+grep -n "pattern" file1 file2  #文件中查找，显示行数，可以在多个文件
+
+tar -zxvf libpcap-1.3.0.tar.gz  #解压
+zip aa.zip 文件名               #压缩
+
+./configure，make，make install #Linux下编译安装源代码三个步骤
+rpm ‐ivh RPM包全路径名称        #安装包到当前系统
+rpm -ivh url --replacepkgs      #重新安装软件
+rpm ‐e RPM包的名称              #删除
+
+sudo 命令 / sudo su     #管理员权限
+
+#文件操作
+
+mkdir   folder          #建立文件夹
+touch   filename        #新建文件
+rmdir   folder          #删除空目录
+rm filename             #删除文件
+rm -rf 目录名字          #删除文件夹 -r下递归-f强行删除
+cp file1 file2          #拷贝
+cp -r dir1 dir2         #递归复制命令（复制子目录信息）
+find /root/ -name Hello.java    #查找文件[不常用，速度慢，执行在硬盘中搜索，时间在文件权限那里]
+</pre>
+
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~                    <span class="comment">#跳转到用户主目录</span></div><div class="line">tab                     <span class="comment">#文件名自动提示</span></div><div class="line"><span class="built_in">pwd</span>                     <span class="comment">#查看当前目录</span></div><div class="line">reset                   <span class="comment">#清屏</span></div><div class="line">clear                   <span class="comment">#清屏</span></div><div class="line">ctrl + alt + T          <span class="comment">#终端，需在首选项-快捷键中设置</span></div><div class="line"></div><div class="line">env                     <span class="comment">#查看环境变量</span></div><div class="line">/etc/profile            <span class="comment">#系统整体配置文件</span></div><div class="line">~/.bash_profile或~/.bash_login或~/.profile  <span class="comment">#个人设定</span></div><div class="line">ehoc <span class="variable">$PATH</span>              <span class="comment">#PATH路径</span></div><div class="line"></div><div class="line">ls                      <span class="comment">#文件列表</span></div><div class="line">ls <span class="_">-a</span>                   <span class="comment">#显示隐藏文件</span></div><div class="line">ls <span class="_">-l</span>                   <span class="comment">#列表显示</span></div><div class="line">ls -al &lt;path&gt;           <span class="comment">#查看path路径下的文件列表</span></div><div class="line">ls -ld /tmp             <span class="comment">#查看目录的权限</span></div><div class="line"></div><div class="line">|                       <span class="comment">#管道命令</span></div><div class="line">&gt;                       <span class="comment">#管道定向，双箭头&gt;&gt;追加到文件结尾</span></div><div class="line">less                    <span class="comment">#u，d，space，b</span></div><div class="line">more                    <span class="comment">#空格下一页，shift+PageUp上一页[more name]</span></div><div class="line">cat xxx | more</div><div class="line"></div><div class="line">grep xxx <span class="comment">#搜索字符串</span></div><div class="line">grep -n <span class="string">"System"</span> file1 file2 <span class="comment">#查找，显示行数</span></div><div class="line"></div><div class="line">tar -zxvf libpcap-1.3.0.tar.gz  <span class="comment">#解压</span></div><div class="line">zip aa.zip 文件名</div><div class="line"></div><div class="line">mount /mnt/cdrom        <span class="comment">#挂载光驱 </span></div><div class="line">unmount /mnt/cdrom      <span class="comment">#卸载光驱</span></div><div class="line"></div><div class="line">ifconfig                <span class="comment">#在linux/unix查看ip的命令</span></div><div class="line"></div><div class="line">df - h                  <span class="comment">#查看Linux系统分区具体情况</span></div><div class="line">df -h /etc              <span class="comment">#查看/etc底下可用的磁盘容量以易读的容量格式显示</span></div><div class="line"></div><div class="line">crontab <span class="_">-e</span>              <span class="comment">#任务调度</span></div></pre></td></tr></table></figure>
 <h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 安装二进制文件</span></div><div class="line">vim README/INSTALL      <span class="meta">#安装前参阅安装说明</span></div><div class="line">./configure --help      <span class="meta">#查看可用参数</span></div><div class="line">./configure --prefix=/usr/<span class="keyword">local</span>/xxx</div><div class="line"></div><div class="line"><span class="meta">#检查环境，创建makefile文件</span></div><div class="line"><span class="built_in">make</span> clean              <span class="meta">#根据makefile清理一下环境</span></div><div class="line"><span class="built_in">make</span>                    <span class="meta">#根据makefile进行编译</span></div><div class="line"><span class="built_in">make</span> insatll            <span class="meta">#根据makefile进行安装</span></div><div class="line"></div><div class="line"><span class="meta"># rpm</span></div><div class="line">rpm ‐q 软件包名             <span class="meta">#查询软件包是否安装</span></div><div class="line">rpm -qi rpm包               <span class="meta">#列出该软件的详细信息</span></div><div class="line">rpm -ql  rpm包  <span class="meta">#列出该软件所有的文件与目录所在的完整文件名</span></div><div class="line">rpm -qc rpm包               <span class="meta">#查询配置文件</span></div><div class="line">rpm -qf 配置文件             <span class="meta">#查询配置文件是哪个软件的</span></div><div class="line">rpm -qa                     <span class="meta">#已安装的软件名称</span></div><div class="line"></div><div class="line">rpm ‐ivh RPM包全路径名称     <span class="meta">#安装包到当前系统</span></div><div class="line">rpm -ivh url --replacepkgs  <span class="meta">#重新安装软件</span></div><div class="line">rpm ‐e RPM包的名称          <span class="meta">#删除</span></div><div class="line">rpm ‐e ‐‐nodeps samba      <span class="meta">#强制删除 </span></div><div class="line">rpm ‐Uvh RPM包全路径名     <span class="meta">#升级，未安装的文件也会直接安装</span></div><div class="line">rpm - Fvh                 <span class="meta">#升级，未安装的不安装</span></div><div class="line"></div><div class="line">rpm - V 软件              <span class="meta">#该软件的档案被更动过，会列出来</span></div><div class="line">rpm -Va                  <span class="meta">#列出系统上所有可能被更动的档案</span></div><div class="line">rpm -Vp 文件名            <span class="meta">#列出该软件内可能被更动过的文件</span></div><div class="line">rpm -Vf                  <span class="meta">#某个文件是否被更动过</span></div><div class="line"></div><div class="line"><span class="meta"># yum</span></div><div class="line">yun install 软件        <span class="meta">#安装软件</span></div><div class="line">yum update 软件         <span class="meta">#升级软件</span></div><div class="line">yum remove 软件         <span class="meta">#移除软件</span></div><div class="line">yum list    软件        <span class="meta">#可用列表</span></div></pre></td></tr></table></figure>
 <p>##文件操作<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">mkdir   folder          <span class="comment">#建立文件夹</span></div><div class="line">touch   filename        <span class="comment">#新建文件</span></div><div class="line"></div><div class="line">rmdir   folder          <span class="comment">#删除空目录</span></div><div class="line">rm filename             <span class="comment">#删除文件</span></div><div class="line">rm -rf 目录名字          <span class="comment">#删除文件夹 -r下递归-f强行删除</span></div><div class="line">rm -i bashrc*           <span class="comment">#利用通配符删除bashrc开头的文件   </span></div><div class="line"></div><div class="line">mv test.log <span class="built_in">test</span>1.txt   <span class="comment">#文件改名</span></div><div class="line">mv -i <span class="built_in">log</span>1.txt <span class="built_in">log</span>2.txt <span class="comment">#将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</span></div><div class="line">mv <span class="built_in">test</span>1.txt <span class="built_in">test</span>3      <span class="comment">#移动文件</span></div><div class="line">mv <span class="built_in">log</span>1.txt <span class="built_in">log</span>2.txt <span class="built_in">log</span>3.txt <span class="built_in">test</span>3 <span class="comment">#将文件log1.txt,log2.txt,log3.txt移动到目录test3中。 </span></div><div class="line"></div><div class="line">cp file1 file2          <span class="comment">#拷贝</span></div><div class="line">cp -i file1 file2       <span class="comment">#文件是否覆盖提醒</span></div><div class="line">cp <span class="_">-a</span> file1 file2       <span class="comment">#相当于-dpR,保持文件的连接(d),保持原文件的属性(p)并作递归处理(R)</span></div><div class="line">cp -p file1 file2       <span class="comment">#连同文件的属性一起复制过去，而非使用默认属性</span></div><div class="line">cp -r dir1 dir2         <span class="comment">#递归复制命令（复制子目录信息）</span></div><div class="line">cp -rf dir1 dir2        <span class="comment">#拷贝文件夹，不提示是否覆盖</span></div><div class="line"></div><div class="line">whereis &lt;文件或目录&gt;    <span class="comment">#查找文件</span></div><div class="line">locate &lt;文件或目录&gt;     <span class="comment">#查找包含该字符的文件或目录，updatedb更新数据库</span></div><div class="line">find /root/ -name Hello.java    <span class="comment">#查找文件[不常用，速度慢，执行在硬盘中搜索，时间在文件权限那里]</span></div><div class="line"></div><div class="line">ln –s /etc/inittab inittab <span class="comment">#（inittab指向实际文件/etc/inittab） #ln 建立符号连接(和windows的快捷方式)</span></div></pre></td></tr></table></figure></p>
 <p>##系统管理<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">shutdown -h now         <span class="comment">#立即进行关机(管理员root才可以) </span></div><div class="line">shutdown -r now         <span class="comment">#现在重新启动计算机 </span></div><div class="line">rebot                   <span class="comment">#重启</span></div><div class="line">halt                    <span class="comment">#关机</span></div><div class="line">logout                  <span class="comment">#注销</span></div><div class="line"></div><div class="line">chkconfig               <span class="comment">#系统服务</span></div><div class="line">netstat -anp | grep <span class="number">8080</span> <span class="comment">#查询端口</span></div><div class="line">route <span class="comment">#路由表</span></div><div class="line">tracert <span class="comment">#路由追踪</span></div><div class="line">ps -aux <span class="comment">#进程列表</span></div><div class="line"><span class="built_in">kill</span> <span class="number">-9</span> pid <span class="comment">#杀进程</span></div><div class="line"></div><div class="line">sudo 命令 / sudo su     <span class="comment">#管理员权限</span></div><div class="line">exit                    <span class="comment">#退出当前用户</span></div><div class="line">su - test               <span class="comment">#切换普通用户</span></div><div class="line">su或su -                <span class="comment">#切换回root</span></div><div class="line"><span class="comment"></span></div><div class="line">//python</div><div class="line">sudo pip install -r requirements.txt</div><div class="line"></div><div class="line"><span class="comment">#系统服务</span></div><div class="line">service mysqld <span class="built_in">start</span>    <span class="comment">#启动mysql数据库</span></div><div class="line">service mysqld <span class="built_in">stop</span>     <span class="comment">#停止</span></div><div class="line">service mysqld status   <span class="comment">#查看状态</span></div><div class="line"></div><div class="line">chkconfig <span class="comment">--list        #查看系统服务</span></div><div class="line">chkconfig mysqld <span class="keyword">on</span>      #添加到开机启动</div><div class="line">chkconfig mydql off     <span class="comment">#关闭开机启动</span></div><div class="line"></div><div class="line"><span class="comment">#防火墙</span></div><div class="line">service   iptables status   <span class="comment">#查询防火墙状态</span></div><div class="line">service   iptables <span class="built_in">stop</span>     <span class="comment">#停止防火墙</span></div><div class="line">service   iptables <span class="built_in">start</span>    <span class="comment">#启动防火墙</span></div><div class="line">service   iptables restart  <span class="comment">#重启防火墙</span></div><div class="line">chkconfig   iptables off    <span class="comment">#永久关闭防火墙</span></div><div class="line">chkconfig   iptables <span class="keyword">on</span>     #永久关闭后启用</div><div class="line">更改过滤规则 <span class="number">1</span>、vim /etc/sysconfig/iptables <span class="number">2</span>、添加过滤规则 <span class="number">3</span>、service iptables restart 重启</div></pre></td></tr></table></figure></p>
@@ -493,7 +568,7 @@ d) 执行方式（./文件名）
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">104</span>
+              <span class="site-state-item-count">106</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -510,7 +585,7 @@ d) 执行方式（./文件名）
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-count">75</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -539,7 +614,7 @@ d) 执行方式（./文件名）
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调优常用指令"><span class="nav-number">1.</span> <span class="nav-text">系统调优常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用"><span class="nav-number">2.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件安装"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">4.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发者常用指令"><span class="nav-number">1.</span> <span class="nav-text">开发者常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用"><span class="nav-number">2.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件安装"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">4.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
             
           </div>
         </section>
