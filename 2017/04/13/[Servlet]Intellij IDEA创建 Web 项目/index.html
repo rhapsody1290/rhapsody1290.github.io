@@ -119,7 +119,8 @@
 <meta property="og:image" content="http://i.imgur.com/ZtFol1O.png">
 <meta property="og:image" content="http://i.imgur.com/pDTb6B7.png">
 <meta property="og:image" content="http://i.imgur.com/cTzERfo.png">
-<meta property="og:updated_time" content="2017-04-13T12:45:34.748Z">
+<meta property="og:image" content="http://i.imgur.com/AUPqNZY.png">
+<meta property="og:updated_time" content="2017-04-15T04:01:10.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Intellij IDEA创建 Web 项目">
 <meta name="twitter:description" content="快速构建 Web 项目打开IDEA，新建Project，左边菜单栏选择 Maven，直接点 Next
@@ -467,7 +468,29 @@
 &lt;/project&gt;
 </code></pre><p>简要说明一下：</p>
 <p>path是访问应用的路径<br>port是 tomcat 的端口号<br>uriEncoding URL按UTF-8进行编码，这样就解决了中文参数乱码。<br>Server指定tomcat名称</p>
-
+<h2 id="IDEA-引入自定义jar包"><a href="#IDEA-引入自定义jar包" class="headerlink" title="IDEA 引入自定义jar包"></a>IDEA 引入自定义jar包</h2><p>之后可以在 Project Structure 的 Modules - Dependencies看到添加的lib文件，或者可以在Project Structure - Libraries看到添加的lib文件</p>
+<p>移除lib文件需要在上述两个位置中进行移除</p>
+<p><img src="http://i.imgur.com/AUPqNZY.png" alt=""></p>
+<h2 id="war打包工具"><a href="#war打包工具" class="headerlink" title="war打包工具"></a>war打包工具</h2><p>可以向用户自定义的文件打包到web目录下，下面给出了一个将用户自定义的lib文件打包到WEB-INF目录下</p>
+<pre><code>&lt;!--war打包--&gt;
+&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+    &lt;version&gt;2.1.1&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;webResources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;${project.basedir}/lib&lt;/directory&gt;
+                &lt;targetPath&gt;WEB-INF/lib&lt;/targetPath&gt;
+                &lt;filtering&gt;false&lt;/filtering&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.jar&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+        &lt;/webResources&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
       
     </div>
 
@@ -508,8 +531,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/3017/04/10/[JVM]一个Java对象到底占用多大内存？/" rel="prev" title="一个Java对象到底占用多大内存？（未理解，待续）">
-                一个Java对象到底占用多大内存？（未理解，待续） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/13/[Maven]Maven插件/" rel="prev" title="Maven插件">
+                Maven插件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +605,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">106</span>
+              <span class="site-state-item-count">108</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -599,7 +622,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -628,7 +651,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速构建-Web-项目"><span class="nav-number">1.</span> <span class="nav-text">快速构建 Web 项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Tomcat插件"><span class="nav-number">2.</span> <span class="nav-text">使用Tomcat插件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快速构建-Web-项目"><span class="nav-number">1.</span> <span class="nav-text">快速构建 Web 项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Tomcat插件"><span class="nav-number">2.</span> <span class="nav-text">使用Tomcat插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA-引入自定义jar包"><span class="nav-number">3.</span> <span class="nav-text">IDEA 引入自定义jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#war打包工具"><span class="nav-number">4.</span> <span class="nav-text">war打包工具</span></a></li></ol></div>
             
           </div>
         </section>

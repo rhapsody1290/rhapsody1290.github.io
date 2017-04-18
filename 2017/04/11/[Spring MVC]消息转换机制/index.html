@@ -84,23 +84,26 @@
 
 
 
-<meta name="description" content="HttpMessageConverter接口就是Spring提供的http消息转换接口
+<meta name="description" content="源码分析：http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html
+HttpMessageConverter接口就是Spring提供的http消息转换接口
 
-1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()方法获得输出流2、消息转换器的最高层次的接口抽象：HttpMessageConverter3、根据@RequestBody注解选择适当的HttpMes">
+1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()">
 <meta property="og:type" content="article">
 <meta property="og:title" content="消息转换机制">
 <meta property="og:url" content="http://qianmingxs.com/2017/04/11/[Spring MVC]消息转换机制/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="HttpMessageConverter接口就是Spring提供的http消息转换接口
+<meta property="og:description" content="源码分析：http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html
+HttpMessageConverter接口就是Spring提供的http消息转换接口
 
-1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()方法获得输出流2、消息转换器的最高层次的接口抽象：HttpMessageConverter3、根据@RequestBody注解选择适当的HttpMes">
+1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()">
 <meta property="og:image" content="http://i.imgur.com/UXOcuk9.png">
-<meta property="og:updated_time" content="2017-04-11T15:19:48.195Z">
+<meta property="og:updated_time" content="2017-04-13T15:32:32.960Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消息转换机制">
-<meta name="twitter:description" content="HttpMessageConverter接口就是Spring提供的http消息转换接口
+<meta name="twitter:description" content="源码分析：http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html
+HttpMessageConverter接口就是Spring提供的http消息转换接口
 
-1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()方法获得输出流2、消息转换器的最高层次的接口抽象：HttpMessageConverter3、根据@RequestBody注解选择适当的HttpMes">
+1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()">
 <meta name="twitter:image" content="http://i.imgur.com/UXOcuk9.png">
 
 
@@ -344,7 +347,8 @@
       
 
       
-        <p>HttpMessageConverter接口就是Spring提供的http消息转换接口</p>
+        <p>源码分析：<br><a href="http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html" target="_blank" rel="external">http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html</a></p>
+<p>HttpMessageConverter接口就是Spring提供的http消息转换接口</p>
 <p><img src="http://i.imgur.com/UXOcuk9.png" alt=""></p>
 <p>1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()方法获得输出流<br>2、消息转换器的最高层次的接口抽象：HttpMessageConverter<br>3、根据@RequestBody注解选择适当的HttpMessageConverter实现类来将请求参数解析到string变量中</p>
 <p>开启注解驱动：<code>&lt;mvc:annotation-driven/&gt;</code>后实例化了RequestMappingHandlerMapping，RequestMappingHandlerAdapter等诸多类。</p>
@@ -463,7 +467,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">106</span>
+              <span class="site-state-item-count">108</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -480,7 +484,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

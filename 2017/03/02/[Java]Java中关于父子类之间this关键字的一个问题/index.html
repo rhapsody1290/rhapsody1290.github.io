@@ -96,7 +96,7 @@ Parent类：
 java中关于父子类之间this关键字的一个问题https://my.oschina.net/mlongbo/blog/90047
 Parent类：
 12345678public class Parent &amp;#123;	publ">
-<meta property="og:updated_time" content="2017-03-02T13:19:39.520Z">
+<meta property="og:updated_time" content="2017-04-17T02:39:21.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中关于父子类之间this关键字的一个问题">
 <meta name="twitter:description" content="父类方法中使用this，那么这个this指的是谁？http://blog.csdn.net/sinat_31311947/article/details/50619467
@@ -362,7 +362,7 @@ demo.test.Child@2e6e1408
 </code></pre><p>结论：</p>
 <ul>
 <li>this指的是当前对象</li>
-<li>在new子类的时候，会先调用父类的构造方法。但是只会new一个子类对象，不会new父类对象，所以<strong>在继承关系中只有子类一个对象，this也就指的是子类对象</strong></li>
+<li>在new子类的时候，<font color="red"><strong>会先调用父类的构造方法。但是只会new一个子类对象，不会new父类对象</strong></font>，所以<strong>在继承关系中只有子类一个对象，this也就指的是子类对象</strong></li>
 <li>在继承关系中，this指的是子类，或者说谁调用的方法就是指谁。多重继承也是如此。</li>
 </ul>
 
@@ -478,7 +478,7 @@ demo.test.Child@2e6e1408
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">106</span>
+              <span class="site-state-item-count">108</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -495,7 +495,7 @@ demo.test.Child@2e6e1408
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

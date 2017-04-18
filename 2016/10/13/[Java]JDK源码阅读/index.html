@@ -94,7 +94,7 @@ public abstract void write">
 <meta property="og:description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath();
 BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类OutputStream类有三个write方法
 public abstract void write">
-<meta property="og:updated_time" content="2016-10-14T08:48:09.450Z">
+<meta property="og:updated_time" content="2017-04-18T14:11:47.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDK源码阅读">
 <meta name="twitter:description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath();
@@ -428,7 +428,95 @@ public void write(byte b[], int off, int len)
 </code></pre><p>结论： </p>
 <p>OutputStream的缓存器（数组）与BufferedOutputStream中类的缓存器（数组）本质是一样的，只是BufferedOutputStream类中将要写入到底层io流中的数据先 <strong>凑个整</strong>，然后再一起写入底层io流中，这样就大大<strong>节省了io操作</strong>，大大提高了io利用率，写一次io是很费资源的。这样也出现了一个问题，假设向硬盘中写入一个文件，文件最后数据比默认值8192个字节小，则BufferOutputStream就不会将这些数据写入底层io流中，造成文件缺失，因此就<strong>需要在close()前调用flush（）方法，强制将还没有装满buf数组的数据写入底层io中</strong>。同时也可以看出节点流是不用flush()方法的，而一般的处理流都会采用固定buf这种方式的，比如常用的PrintWriter里面其实操作的就是一个BufferedWriter对象，因此也需要调用flush（）方法来刷新，因为默认是不刷新的。</p>
 <p>引用：<a href="http://m.blog.csdn.net/article/details?id=51355523" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=51355523</a></p>
+<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><h3 id="copyOf"><a href="#copyOf" class="headerlink" title="copyOf"></a>copyOf</h3><pre>
+<font color="red">//复制原来的数组，长度为newLength</font>
+public static <t> T[] copyOf(T[] original, int newLength) {
+    return (T[]) copyOf(original, newLength, original.getClass());
+}
 
+public static <t,u> T[] copyOf(U[] original, int newLength, Class<? extends T[]> newType) {
+    T[] copy = ((Object)newType == (Object)Object[].class)
+        ? (T[]) new Object[newLength]
+        : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+    <font color="red">//将original复制到copy中，从originnal的0开始，copy的0开始，长度为newLength</font>
+    System.arraycopy(original, 0, copy, 0,
+                     Math.min(original.length, newLength));
+    return copy;
+}
+</t,u></t></pre>
+
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><pre>
+<font color="red">//from包括，toIndex不包括</font>
+public static void sort(int[] a, int fromIndex, int toIndex) {
+    rangeCheck(a.length, fromIndex, toIndex);
+    sort1(a, fromIndex, toIndex-fromIndex);
+}
+</pre>
+
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><pre>
+public static boolean equals(int[] a, int[] a2) {
+    if (a==a2)
+        return true;
+    if (a==null || a2==null)
+        return false;
+
+    int length = a.length;
+    if (a2.length != length)
+        return false;
+
+    for (int i=0; i<length; i++)="" if="" (a[i]="" !="a2[i])" return="" false;="" true;="" }="" <="" pre="">
+
+<h3 id="asList"><a href="#asList" class="headerlink" title="asList"></a>asList</h3><pre>
+public static <t> List<t> asList(T... a) {
+<font color="red">//生成的是内部类的ArrayList</font>
+return new ArrayList<t>(a);
+}
+
+<font color="red">//内部类，add、remove没有重写，get、set重写了</font>
+private static class ArrayList<e> extends AbstractList<e>
+implements RandomAccess, java.io.Serializable
+{
+    private static final long serialVersionUID = -2764017481108945198L;
+    private final E[] a;
+
+    ArrayList(E[] array) {
+        if (array==null)
+            throw new NullPointerException();
+        a = array;
+    }
+
+    public int size() {
+        return a.length;
+    }
+
+    public Object[] toArray() {
+        return a.clone();
+    }
+
+    public <t> T[] toArray(T[] a) {
+        int size = size();
+        if (a.length < size)
+            return Arrays.copyOf(this.a, size,
+                     (Class<? extends T[]>) a.getClass());
+        System.arraycopy(this.a, 0, a, 0, size);
+        if (a.length > size)
+            a[size] = null;
+        return a;
+    }
+
+    public E get(int index) {
+        return a[index];
+    }
+
+    public E set(int index, E element) {
+        E oldValue = a[index];
+        a[index] = element;
+        return oldValue;
+    }
+
+    public int indexOf(Object o) {
+        if (o==null) {
+            for (int i=0; i<a.length; i++)="" if="" (a[i]="=null)" return="" i;="" }="" else="" {="" for="" (int="" i="0;" i<a.length;="" (o.equals(a[i]))="" -1;="" public="" boolean="" contains(object="" o)="" indexof(o)="" !="-1;" <="" pre=""></a.length;></t></e></e></t></t></t></pre></length;></pre>
       
     </div>
 
@@ -541,7 +629,7 @@ public void write(byte b[], int off, int len)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">106</span>
+              <span class="site-state-item-count">108</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -558,7 +646,7 @@ public void write(byte b[], int off, int len)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">75</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -587,7 +675,7 @@ public void write(byte b[], int off, int len)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件IO"><span class="nav-number">1.</span> <span class="nav-text">文件IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BufferedOutputStream"><span class="nav-number">1.1.</span> <span class="nav-text">BufferedOutputStream</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件IO"><span class="nav-number">1.</span> <span class="nav-text">文件IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BufferedOutputStream"><span class="nav-number">1.1.</span> <span class="nav-text">BufferedOutputStream</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays"><span class="nav-number">2.</span> <span class="nav-text">Arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copyOf"><span class="nav-number">2.1.</span> <span class="nav-text">copyOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.2.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">2.3.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asList"><span class="nav-number">2.4.</span> <span class="nav-text">asList</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
