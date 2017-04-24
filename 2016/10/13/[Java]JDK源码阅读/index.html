@@ -94,12 +94,14 @@ public abstract void write">
 <meta property="og:description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath();
 BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类OutputStream类有三个write方法
 public abstract void write">
-<meta property="og:updated_time" content="2017-04-18T14:11:47.993Z">
+<meta property="og:image" content="http://i.imgur.com/lOd5Awk.png">
+<meta property="og:updated_time" content="2017-04-24T02:37:52.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDK源码阅读">
 <meta name="twitter:description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath();
 BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类OutputStream类有三个write方法
 public abstract void write">
+<meta name="twitter:image" content="http://i.imgur.com/lOd5Awk.png">
 
 
 
@@ -472,7 +474,7 @@ public static <t> List<t> asList(T... a) {
 return new ArrayList<t>(a);
 }
 
-<font color="red">//内部类，add、remove没有重写，get、set重写了</font>
+<font color="red">//内部类，add、remove没有重写（改动了数组的长度），get、set重写了（不改动数组的长度）</font>
 private static class ArrayList<e> extends AbstractList<e>
 implements RandomAccess, java.io.Serializable
 {
@@ -516,7 +518,72 @@ implements RandomAccess, java.io.Serializable
 
     public int indexOf(Object o) {
         if (o==null) {
-            for (int i=0; i<a.length; i++)="" if="" (a[i]="=null)" return="" i;="" }="" else="" {="" for="" (int="" i="0;" i<a.length;="" (o.equals(a[i]))="" -1;="" public="" boolean="" contains(object="" o)="" indexof(o)="" !="-1;" <="" pre=""></a.length;></t></e></e></t></t></t></pre></length;></pre>
+            for (int i=0; i<a.length; i++)="" if="" (a[i]="=null)" return="" i;="" }="" else="" {="" for="" (int="" i="0;" i<a.length;="" (o.equals(a[i]))="" -1;="" public="" boolean="" contains(object="" o)="" indexof(o)="" !="-1;" <="" pre="">
+
+<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><p><a href="http://blog.csdn.net/huachao1001/article/details/51970237" target="_blank" rel="external">http://blog.csdn.net/huachao1001/article/details/51970237</a></p>
+<p>ThreadLocal里面的实现，主要涉及到以下几个重要类：</p>
+<ul>
+<li>Thread：大家很熟悉的线程类，一个Thread类自然代表一个线程</li>
+<li>ThreadLocal：既然本文是要解析ThreadLocal类，自然就离不开这个类啦</li>
+<li>ThreadLocalMap：可以看成一个HashMap，但是它本身具体的实现并没有实现继承HashMap甚至跟java.util.Map都沾不上一点关系。只是内部的实现跟HashMap类似（通过哈希表的方式存储）</li>
+<li>ThreadLocalMap.Entry：把它看成是保存键值对的对象，其本质上是一个WeakReference<threadlocal>对象</threadlocal></li>
+</ul>
+<p>ThreadLocal的存取机制可以用下图表示：</p>
+<p><img src="http://i.imgur.com/lOd5Awk.png" alt=""></p>
+<p>1、<strong>Thread中有一个ThreadLocalMap属性，存放线程局部变量</strong>，是键值对的存储方式，以ThreadLocal对象为键，要保存的变量为值（ThreadLocalMap.Entry是保存键值对的对象）</p>
+<p>2、<font color="red"><strong>ThreadLocal可以看做是ThreadLocalMap的操作类</strong></font>，在当前线程中通过ThreadLocal的set/get操作，对当前线程中的ThreadLocalMap进行操作</p>
+<ul>
+<li>set方法：首先获取当前线程的ThreadLocalMap的引用，然后以ThreadLocal实例作为key，保存的变量为value，保存到当前线程的ThreadLocalMap中</li>
+<li>get方法：以当前ThreadLocal实例作为key，取出当前线程的ThreadLocalMap变量中该key的值</li>
+</ul>
+<p>3、<strong>每个线程都拥有自己的ThreadLocalMap属性，每个线程都是从自己的ThreadLocalMap中取值，所以互不影响</strong></p>
+<p>4、作用：可以实现线程范围内的单例、线程范围内数据共享</p>
+<pre><code>private static ThreadLocal&lt;Person&gt; threadLocal = new ThreadLocal&lt;Person&gt;();
+public static Person getThreadLocalInstance(){
+    Person person = threadLocal.get();
+    if(person == null){
+        person = new Person();
+        threadLocal.set(person);
+    }
+    return person;
+}
+</code></pre><h2 id="判断两个对象是否相等"><a href="#判断两个对象是否相等" class="headerlink" title="判断两个对象是否相等"></a>判断两个对象是否相等</h2><h3 id="判断两个对象是否相等代码"><a href="#判断两个对象是否相等代码" class="headerlink" title="判断两个对象是否相等代码"></a>判断两个对象是否相等代码</h3><pre><code>public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Employee employee = (Employee) o;
+
+    if (id != null ? !id.equals(employee.id) : employee.id != null) return false;
+    if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
+    if (email != null ? !email.equals(employee.email) : employee.email != null) return false;
+    if (hiredate != null ? !hiredate.equals(employee.hiredate) : employee.hiredate != null) return false;
+
+    return true;
+}
+</code></pre><p>其中Employee有如下属性：</p>
+<pre><code>public class Employee {
+    private Integer id;
+    private String name;
+    private String email;
+    private Date hiredate;
+}
+</code></pre><h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>判断两个对象是否相等的原则：<strong><em>对象类型相同</em></strong>，而且<strong><em>属性值全部相等</em></strong></p>
+<p>1、如果两个对象地址相等，两个对象一定相等</p>
+<pre><code>if( this == o ) return true;
+</code></pre><p>2、两个对象类型不相等，两个一定不相等</p>
+<pre><code>if( getClass() != o.getClass() ) return false;
+养成一个好习惯，在使用对象前判断对象o是否为空
+考虑到如果比较对象o为空null，但当前对象this必然不为null，不相等，可以结合起来：
+if( o == null || getClass() != o.getClass() ) return false;
+</code></pre><p>3、如果两个对象所有属性相等，两个对象才相等，否则判定为不相等</p>
+<pre><code>类型强转:Employee employee = (Employee) o;
+如果属性不相等，return false
+if( !id.equals(employee.id) ) return false;
+同样，需要判断id是否为空。如果id为空，不能使用equals作为判断方法，如下
+if( id == null &amp;&amp; employee.id != null || id != null &amp;&amp; !id.equals(employee.id) ) return false;
+使用三目运算符让代码更加优雅：
+if( id != null ? !id.equals(employee.id) : employee.id != null) return false
+</code></pre></a.length;></t></e></e></t></t></t></pre></length;></pre>
       
     </div>
 
@@ -629,7 +696,7 @@ implements RandomAccess, java.io.Serializable
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">108</span>
+              <span class="site-state-item-count">109</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -637,7 +704,7 @@ implements RandomAccess, java.io.Serializable
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -646,7 +713,7 @@ implements RandomAccess, java.io.Serializable
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -675,7 +742,7 @@ implements RandomAccess, java.io.Serializable
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件IO"><span class="nav-number">1.</span> <span class="nav-text">文件IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BufferedOutputStream"><span class="nav-number">1.1.</span> <span class="nav-text">BufferedOutputStream</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays"><span class="nav-number">2.</span> <span class="nav-text">Arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copyOf"><span class="nav-number">2.1.</span> <span class="nav-text">copyOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.2.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">2.3.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asList"><span class="nav-number">2.4.</span> <span class="nav-text">asList</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件IO"><span class="nav-number">1.</span> <span class="nav-text">文件IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BufferedOutputStream"><span class="nav-number">1.1.</span> <span class="nav-text">BufferedOutputStream</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays"><span class="nav-number">2.</span> <span class="nav-text">Arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copyOf"><span class="nav-number">2.1.</span> <span class="nav-text">copyOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.2.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">2.3.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asList"><span class="nav-number">2.4.</span> <span class="nav-text">asList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal"><span class="nav-number">3.</span> <span class="nav-text">ThreadLocal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断两个对象是否相等"><span class="nav-number">4.</span> <span class="nav-text">判断两个对象是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断两个对象是否相等代码"><span class="nav-number">4.1.</span> <span class="nav-text">判断两个对象是否相等代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码解析"><span class="nav-number">4.2.</span> <span class="nav-text">代码解析</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="优雅代码," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,34 +84,12 @@
 
 
 
-<meta name="description" content="判断两个对象是否相等判断两个对象是否相等代码public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Employee employee = (Employee) o;
-
-    if (i">
-<meta property="og:type" content="article">
-<meta property="og:title" content="优雅代码解析">
-<meta property="og:url" content="http://qianmingxs.com/2016/08/18/[Java]优雅代码解析/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr.Qian's Home">
+<meta property="og:url" content="http://qianmingxs.com/tags/Storm/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="判断两个对象是否相等判断两个对象是否相等代码public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Employee employee = (Employee) o;
-
-    if (i">
-<meta property="og:updated_time" content="2016-08-18T10:20:24.458Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="优雅代码解析">
-<meta name="twitter:description" content="判断两个对象是否相等判断两个对象是否相等代码public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Employee employee = (Employee) o;
-
-    if (i">
+<meta name="twitter:title" content="Mr.Qian's Home">
 
 
 
@@ -132,10 +110,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2016/08/18/[Java]优雅代码解析/"/>
+  <link rel="canonical" href="http://qianmingxs.com/tags/Storm/"/>
 
 
-  <title> 优雅代码解析 | Mr.Qian's Home </title>
+  <title> 标签: Storm | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +134,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -267,187 +245,46 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                优雅代码解析
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-18T00:00:00+08:00" content="2016-08-18">
-              2016-08-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/18/[Java]优雅代码解析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/[Java]优雅代码解析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="判断两个对象是否相等"><a href="#判断两个对象是否相等" class="headerlink" title="判断两个对象是否相等"></a>判断两个对象是否相等</h2><h3 id="判断两个对象是否相等代码"><a href="#判断两个对象是否相等代码" class="headerlink" title="判断两个对象是否相等代码"></a>判断两个对象是否相等代码</h3><pre><code>public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Employee employee = (Employee) o;
-
-    if (id != null ? !id.equals(employee.id) : employee.id != null) return false;
-    if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
-    if (email != null ? !email.equals(employee.email) : employee.email != null) return false;
-    if (hiredate != null ? !hiredate.equals(employee.hiredate) : employee.hiredate != null) return false;
-
-    return true;
-}
-</code></pre><p>其中Employee有如下属性：</p>
-<pre><code>public class Employee {
-    private Integer id;
-    private String name;
-    private String email;
-    private Date hiredate;
-}
-</code></pre><h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>判断两个对象是否相等的原则：<strong><em>对象类型相同</em></strong>，而且<strong><em>属性值全部相等</em></strong></p>
-<p>1、如果两个对象地址相等，两个对象一定相等</p>
-<pre><code>if( this == o ) return true;
-</code></pre><p>2、两个对象类型不相等，两个一定不相等</p>
-<pre><code>if( getClass() != o.getClass() ) return false;
-养成一个好习惯，在使用对象前判断对象o是否为空
-考虑到如果比较对象o为空null，但当前对象this必然不为null，不相等，可以结合起来：
-if( o == null || getClass() != o.getClass() ) return false;
-</code></pre><p>3、如果两个对象所有属性相等，两个对象才相等，否则判定为不相等</p>
-<pre><code>类型强转:Employee employee = (Employee) o;
-如果属性不相等，return false
-if( !id.equals(employee.id) ) return false;
-同样，需要判断id是否为空。如果id为空，不能使用equals作为判断方法，如下
-if( id == null &amp;&amp; employee.id != null || id != null &amp;&amp; !id.equals(employee.id) ) return false;
-使用三目运算符让代码更加优雅：
-if( id != null ? !id.equals(employee.id) : employee.id != null) return false
-</code></pre>
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        Storm
+        <small>标签</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2017/04/20/[Storm]Storm入门/" itemprop="url">
+              
+                <span itemprop="name">Storm入门</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-20T17:34:00+08:00"
+              content="2017-04-20" >
+          04-20
+        </time>
+      </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/优雅代码/" rel="tag">#优雅代码</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/08/12/[Hibernate]Hibernate笔记/" rel="next" title="Hibernate笔记">
-                <i class="fa fa-chevron-left"></i> Hibernate笔记
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/18/[Maven]Maven安装及基础功能/" rel="prev" title="Maven安装及基础功能">
-                Maven安装及基础功能 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
+    
   </div>
+
+  
 
 
           </div>
@@ -455,14 +292,6 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/08/18/[Java]优雅代码解析/"
-           data-title="优雅代码解析" data-url="http://qianmingxs.com/2016/08/18/[Java]优雅代码解析/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -482,17 +311,8 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -503,7 +323,7 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">108</span>
+              <span class="site-state-item-count">109</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -511,7 +331,7 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -520,7 +340,7 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -542,17 +362,6 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断两个对象是否相等"><span class="nav-number">1.</span> <span class="nav-text">判断两个对象是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断两个对象是否相等代码"><span class="nav-number">1.1.</span> <span class="nav-text">判断两个对象是否相等代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码解析"><span class="nav-number">1.2.</span> <span class="nav-text">代码解析</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -649,10 +458,6 @@ if( id != null ? !id.equals(employee.id) : employee.id != null) return false
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 

@@ -84,44 +84,32 @@
 
 
 
-<meta name="description" content="书本源代码http://algs4.cs.princeton.edu/code/
-算法与数据结构课程介绍
-算法是解决问题的方法
-数据结构是存储数据的方法
+<meta name="description" content="输入Scanner in = new Scanner(System.in);
+Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些 
+Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:
 
-课程内容
-第一部分内容：
-
-基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
-排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序r">
+构造函数
+                BigInteger(String val)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法4笔记">
 <meta property="og:url" content="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="书本源代码http://algs4.cs.princeton.edu/code/
-算法与数据结构课程介绍
-算法是解决问题的方法
-数据结构是存储数据的方法
+<meta property="og:description" content="输入Scanner in = new Scanner(System.in);
+Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些 
+Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:
 
-课程内容
-第一部分内容：
-
-基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
-排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序r">
+构造函数
+                BigInteger(String val)">
 <meta property="og:image" content="http://i.imgur.com/GDFtowZ.png">
-<meta property="og:updated_time" content="2017-04-12T06:26:26.767Z">
+<meta property="og:updated_time" content="2017-04-24T08:39:47.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法4笔记">
-<meta name="twitter:description" content="书本源代码http://algs4.cs.princeton.edu/code/
-算法与数据结构课程介绍
-算法是解决问题的方法
-数据结构是存储数据的方法
+<meta name="twitter:description" content="输入Scanner in = new Scanner(System.in);
+Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些 
+Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:
 
-课程内容
-第一部分内容：
-
-基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）
-排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序r">
+构造函数
+                BigInteger(String val)">
 <meta name="twitter:image" content="http://i.imgur.com/GDFtowZ.png">
 
 
@@ -365,7 +353,482 @@
       
 
       
-        <h2 id="书本源代码"><a href="#书本源代码" class="headerlink" title="书本源代码"></a>书本源代码</h2><p><a href="http://algs4.cs.princeton.edu/code/" target="_blank" rel="external">http://algs4.cs.princeton.edu/code/</a></p>
+        <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><pre><code>Scanner in = new Scanner(System.in);
+Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些 
+</code></pre><p>Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:</p>
+<pre>
+构造函数
+                <font color="red">BigInteger(String val)</font>
+                将 BigInteger 的十进制字符串表示形式转换为 BigInteger。
+返回值              成员函数
+<font color="red">String          next(String pattern)</font>
+                    如果下一个标记与从指定字符串构造的模式匹配，则返回下一个标记,
+                    如果参数为空,就是读取一个字符串
+BigDecimal      nextBigDecimal()
+                    将输入信息的下一个标记    +扫描为一个 BigDecimal。
+BigInteger      nextBigInteger()
+                    将输入信息的下一个标记扫描为一个 BigInteger。
+boolean         nextBoolean()
+                    扫描解释为一个布尔值的输入标记并返回该值。
+byte            nextByte()
+                    将输入信息的下一个标记扫描为一个 byte。
+double          nextDouble()
+                    将输入信息的下一个标记扫描为一个 double。
+float           nextFloat()
+                    将输入信息的下一个标记扫描为一个 float。
+<font color="red">int             nextInt()</font>
+                    将输入信息的下一个标记扫描为一个 int。
+<font color="red">String          nextLine()</font>
+                    此扫描器执行当前行，并返回跳过的输入信息。
+long            nextLong()
+                    将输入信息的下一个标记扫描为一个 long。
+short           nextShort()
+</pre>
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>System.out.print(); // cout &lt;&lt; …;
+System.out.println(); // cout &lt;&lt; … &lt;&lt; endl;
+System.out.printf(); // 与C中的printf用法类似.
+</code></pre><pre>
+例：
+System.out.printf("%d%10.5f\n", a, b); // 输入b为字宽为10，右对齐，保留小数点后5位，<font color="red">四舍五入</font>.
+</pre>
+
+
+<p>规格化的输出：</p>
+<pre><code>函数：
+// 这里0指一位数字，#指除0以外的数字(如果是0，则不显示),四舍五入.
+DecimalFormat fd = new DecimalFormat(&quot;#.00#&quot;);
+DecimalFormat gd = new DecimalFormat(&quot;0.000&quot;);
+System.out.println(&quot;x =&quot; + fd.format(x));
+System.out.println(&quot;x =&quot; + gd.format(x))
+</code></pre><p>DecimalFormat详细：</p>
+<p>符号含义：</p>
+<pre><code>0 一个数字
+# 一个数字，不包括 0
+. 小数的分隔符的占位符
+, 分组分隔符的占位符
+; 分隔格式。
+- 缺省负数前缀。
+% 乘以 100 和作为百分比显示
+? 乘以 1000 和作为千进制货币符显示；用货币符号代替；如果双写，用
+国际货币符号代替。如果出现在一个模式中，用货币十进制分隔符代
+替十进制分隔符。
+X 前缀或后缀中使用的任何其它字符，用来引用前缀或后缀中的特殊字符。
+</code></pre><p>例子：    </p>
+<pre><code>public class TestNumberFormat {
+    public static void main(String[] args) {
+
+        double pi = 3.1415926;
+
+        // 取一位整数:3
+        System.out.println(new DecimalFormat(&quot;0&quot;).format(pi));
+
+        // 取一位整数和两位小数:3.14
+        System.out.println(new DecimalFormat(&quot;0.00&quot;).format(pi));
+
+        // 取两位整数和三位小数，整数不足部分以0填补:03.142
+        System.out.println(new DecimalFormat(&quot;00.000&quot;).format(pi));
+
+        // 取所有整数部分:3
+        System.out.println(new DecimalFormat(&quot;#&quot;).format(pi));
+
+        // 以百分比方式计数，并取两位小数:314.16%
+        System.out.println(new DecimalFormat(&quot;#.##%&quot;).format(pi));
+
+        long c = 299792458;
+
+        //显示为科学计数法，并取五位小数:2.99792E8
+        System.out.println(new DecimalFormat(&quot;#.#####E0&quot;).format(c));
+
+        //显示为两位整数的科学计数法，并取四位小数:29.9792E7 
+        System.out.println(new DecimalFormat(&quot;00.####E0&quot;).format(c));
+
+        //每三位以逗号进行分隔:299,792,458
+        System.out.println(new DecimalFormat(&quot;,###&quot;).format(c));
+
+        //将格式嵌入文本
+        System.out.println(new DecimalFormat(&quot;光速大小为每秒,###米。&quot;).format(c));
+
+        System.out.println(&quot;**************************************************&quot;);
+
+        double d = 299792458.546;
+
+        System.out.println(new DecimalFormat(&quot;#.00&quot;).format(d));
+    }
+}
+</code></pre><h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><pre><code>String st = Integer.toString(num, base); // 把num当做10进制的数转成base进制的st(base &lt;= 35).
+Integer.toHexString(255)//ff，16进制
+int num = Integer.parseInt(st, base); // 把st当做base进制，转成10进制的int(parseInt有两个参数,第一个为要转的字符串,第二个为说明是什么进制). 
+BigInterget m = new BigInteger(st, base); // st是字符串，base是st的进制.
+</code></pre><p>1、如果要将一个大数以2进制形式读入 可以使用 <code>cin.nextBigInteger(2);</code><br>当然也可以使用其他进制方式读入；<br>2、如果要将一个大数转换成其他进制形式的字符串 使用 <code>cin.toString(2);</code> //将它转换成2进制表示的字符串</p>
+<h2 id="Arrays-sort-Collections-sort"><a href="#Arrays-sort-Collections-sort" class="headerlink" title="Arrays.sort / Collections.sort"></a>Arrays.sort / Collections.sort</h2><h3 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h3><p>在 JDK 类库中，有一部分类实现了 Comparable 接口，如 Integer、Double 和 String 等。<br>Comparable 接口有一个 <code>comparTo(Object o)</code> 方法，它返回整数类型</p>
+<ul>
+<li>如果返回值为0，则表示 x 和 y 相等</li>
+<li>如果返回值大于0，则表示 x 大于 y</li>
+<li>如果返回值小于0，则表示 x 小于 y</li>
+</ul>
+<p>TreeSet 集合调用对象的 compareTo() 方法比较集合中的大小，注意了不是 TreeSet 调用它自己的 comparTo() 方法而是<strong>它调用集合中对象的 comparTo() 方法</strong>。TreeSet类本身并没有实现 Comparable 接口，然后<font color="red"><strong>进行升序排列</strong></font>，这种方式称为自然排序。</p>
+<p>JDK类库中实现了Comparable接口的一些类的排序方式 </p>
+<ul>
+<li>BigDecimal、BigInteger、Byte、Double、Float、Integer、Long、Short排序方式按数字大小排序</li>
+<li>Character 按字符的 Unicode 值的数字大小排序</li>
+<li>String 按字符中字符的 Unicode 值排序</li>
+</ul>
+<p>这里一定要灰常注意:使用自然排序时只能向集合中加入同类型的对象，并且这些对象的类必须实现<strong>Comparable</strong>接口</p>
+<pre>
+public class Solution {
+
+    public static void main(String[] args) {
+        Set<customer> set = new TreeSet<customer>();
+        Customer customer1 = new Customer("Tom", 17);
+        Customer customer2 = new Customer("Tom", 16);
+        Customer customer3 = new Customer("Som", 16);
+        set.add(customer1);
+        set.add(customer2);
+        set.add(customer3);
+        System.out.println(set);
+    }
+
+    public static class Customer implements Comparable {
+        private String name;
+        private int age;
+
+        public Customer(String name, int age) {
+            this.age = age;
+            this.name = name;
+        }
+
+<font color="red">
+        @Override
+        public int compareTo(Object o) {
+            if(o == null || !(o instanceof Customer)){
+                throw new IllegalArgumentException("对象必须是Customer");
+            }
+            Customer other = (Customer) o;
+            //先按姓名升序排序，如果姓名相等跳过
+            if (!this.name.equals(other.name)) {
+                return name.compareTo(other.name);
+            }
+            //再按年龄升序排序，如果年龄相等跳过
+            if (this.age != other.age) {
+                return age - other.age;
+            }
+            //相等
+            return 0;
+        }
+</font>
+        @Override
+        public String toString() {
+            return "Customer{" +
+                    "age=" + age +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+    }
+}
+
+</customer></customer></pre>
+
+<h3 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h3><p>TreeSet 按照 Customer 对象的 name 属性进行降序排列，然后按照 age 降序，可以先创建一个实现Comparator接口的类 </p>
+<pre>
+public class Solution {
+
+    public static void main(String[] args) {
+        <font color="red">Set<customer> set = new TreeSet<customer>(new CustomerComparator());</customer></customer></font>
+        Customer customer1 = new Customer("Tom", 17);
+        Customer customer2 = new Customer("Tom", 16);
+        Customer customer3 = new Customer("Som", 16);
+        set.add(customer1);
+        set.add(customer2);
+        set.add(customer3);
+        System.out.println(set);
+        //结果：[Customer{age=17, name='Tom'}, Customer{age=16, name='Tom'}, Customer{age=16, name='Som'}]
+    }
+
+<font color="red">
+    public static class CustomerComparator implements Comparator<customer> {
+
+        @Override
+        public int compare(Customer c1, Customer c2) {
+            /*1、如果Customer实现了Comparable接口，直接调用compareTo方法
+            return c1.compareTo(c2);*/
+
+            //2、自定义比较方法，降序
+            if (!c1.name.equals(c2.name)) {
+                return -c1.name.compareTo(c2.name);
+            }
+            if (c1.age != c2.age) {
+                return -(c1.age - c2.age);
+            }
+
+            return 0;
+        }
+    }
+</customer></font>
+}
+</pre>
+
+<h3 id="升序、逆序理解★★★★★"><a href="#升序、逆序理解★★★★★" class="headerlink" title="升序、逆序理解★★★★★"></a>升序、逆序理解★★★★★</h3><p>如果给定两个数A、B，按照<strong>数字大小</strong>进行排序，并且<strong>以A为基准与B比较</strong>，得到以下表达式：</p>
+<ul>
+<li>if ( A &gt; B ) return 1</li>
+<li>if ( A &lt; B ) return -1</li>
+<li>if ( A = B ) return 0</li>
+</ul>
+<p>三个表达式可以总结为：return A - B</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">        Integer[] a = &#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</div><div class="line">        Arrays.sort(a, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</div><div class="line">            @<span class="function">Override</span></div><div class="line">            <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span>(<span class="params">Integer o1, Integer o2</span>) &#123;</div><div class="line">                <span class="keyword">return</span> o1 - o2;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        System.<span class="keyword">out</span>.println(Arrays.toString(a));<span class="comment">//[1, 2, 3, 4, 5]</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>这样会按照升序排序</strong></p>
+<p>如果是逆序，直接在升序的基础上<strong>加上负号</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Solution</span> &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">        Integer[] a = &#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</div><div class="line">        Arrays.sort(a, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</div><div class="line">            @<span class="function">Override</span></div><div class="line">            <span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span>(<span class="params">Integer o1, Integer o2</span>) &#123;</div><div class="line">                <span class="keyword">return</span> -(o1 - o2);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        System.<span class="keyword">out</span>.println(Arrays.toString(a));<span class="comment">//[5, 4, 3, 2, 1]</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>这样会按照逆序排序</strong></p>
+<p><strong>进一步抽象：</strong></p>
+<p>如果给定两个元素A、B，<strong>按照一定规则</strong>进行排序，并且<strong>以A为基准与B比较</strong>，得到以下表达式：</p>
+<ul>
+<li>A在什么情况下大于B return 1</li>
+<li>A在什么情况下小于B return -1</li>
+<li>A在什么情况下等于B return 0</li>
+</ul>
+<p>之后会按照定义A、B之间的关系，得到升序的结果</p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>1、如果 Java 类重新定义了 equals 方法,那么这个类也必须重新定义 hashCode() 方法,并且保证当两个对象用 equals 方法比较结果为 true 时,这两个对象的 hashCode() 方法的返回值相等</p>
+<p>2、如果 Java 类实现了 Comparable 接口，那么这个类应该从新定义 compareTo()、equals()和hashCode()方法，保证 compareTo() 和 equals() 方法采用相同的比较规则来比较两个对象是否相等，并且保证当两个对象用 equals() 方法比较的结果为 true 时,这两个对象的 hashCode() 方法的返回值相等.</p>
+<p>3、HashSet 和 HashMap 具有较好的性能，是 Set 和 Map 首选实现类，只有在需要<strong>排序</strong>的场合，才考虑使用 TreeSet 和 TreeMap。LinkedList 和 ArrayList各有优缺点，如果经常对元素执行插入和删除操作，那么可以用 LinkedList，如果经常随机访问元素，那么可以用ArrayList</p>
+<p>Arrays.fill()<br>Arrays.sort()<br>Arrays.binarySearch()  </p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>先按第一列升序排序，再按第二列降序排序</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> Solution &#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line">        <span class="keyword">int</span>[][] a = &#123;&#123;<span class="number">3</span>,<span class="number">3</span>&#125;,&#123;<span class="number">2</span>,<span class="number">2</span>&#125;,&#123;<span class="number">1</span>,<span class="number">1</span>&#125;,&#123;<span class="number">4</span>,<span class="number">1</span>&#125;,&#123;<span class="number">4</span>,<span class="number">2</span>&#125;,&#123;<span class="number">4</span>,<span class="number">3</span>&#125;&#125;;</div><div class="line">        <span class="keyword">int</span> m = a.length;</div><div class="line">        <span class="keyword">int</span> n = a[<span class="number">0</span>].length;</div><div class="line"></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">"排序前"</span>);</div><div class="line">        <span class="built_in">print</span>(a);</div><div class="line">        Arrays.sort(a, <span class="keyword">new</span> Comparator&lt;<span class="keyword">int</span>[]&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            <span class="keyword">public</span> <span class="keyword">int</span> compare(<span class="keyword">int</span>[] o1, <span class="keyword">int</span>[] o2) &#123;</div><div class="line">                <span class="comment">/**</span></div><div class="line">                 * 先按第一列升序排序，再按第二列降序排序</div><div class="line">                 */</div><div class="line">                <span class="comment">//第一列升序</span></div><div class="line">                <span class="built_in">if</span>(o1[<span class="number">0</span>] != o2[<span class="number">0</span>])&#123;</div><div class="line">                    <span class="built_in">return</span> o1[<span class="number">0</span>] - o2[<span class="number">0</span>];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="comment">//第二列降序</span></div><div class="line">                <span class="built_in">if</span>(o1[<span class="number">1</span>] != o2[<span class="number">1</span>])&#123;</div><div class="line">                    <span class="built_in">return</span> -(o1[<span class="number">1</span>] - o2[<span class="number">1</span>]);</div><div class="line">                &#125;</div><div class="line">                <span class="built_in">return</span> <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">"排序后"</span>);</div><div class="line">        <span class="built_in">print</span>(a);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="built_in">print</span>(<span class="keyword">int</span>[][] a) &#123;</div><div class="line">        <span class="keyword">int</span> m = a.length;</div><div class="line">        <span class="keyword">int</span> n = a[<span class="number">0</span>].length;</div><div class="line">        <span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</div><div class="line">            <span class="built_in">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</div><div class="line">                System.out.<span class="built_in">print</span>(a[i][j] + <span class="string">" "</span>);</div><div class="line">            &#125;</div><div class="line">            System.out.<span class="built_in">println</span>();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果：</p>
+<pre><code>排序前
+3 3 
+2 2 
+1 1 
+4 1 
+4 2 
+4 3 
+排序后
+1 1 
+2 2 
+3 3 
+4 3 
+4 2 
+4 1 
+</code></pre><p>集合中元素实现Comparable进行<strong>升序排序</strong>，先按照姓名升序排序，再按照年龄顺序排序</p>
+<pre><code>public class Solution {
+
+    public static void main(String[] args) {
+        List&lt;Customer&gt; lists = new ArrayList&lt;Customer&gt;();
+        lists.add(new Customer(&quot;Tom&quot;, 17));
+        lists.add(new Customer(&quot;Tom&quot;, 16));
+        lists.add(new Customer(&quot;Som&quot;, 16));
+        lists.add(new Customer(&quot;Rom&quot;, 17));
+        //排序
+        Collections.sort(lists);
+        //输出
+        System.out.println(lists);//[Customer{age=17, name=&apos;Rom&apos;}, Customer{age=16, name=&apos;Som&apos;}, Customer{age=16, name=&apos;Tom&apos;}, Customer{age=17, name=&apos;Tom&apos;}]
+    }
+
+    public static class Customer implements Comparable {
+        private String name;
+        private int age;
+
+        public Customer(String name, int age) {
+            this.age = age;
+            this.name = name;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            if(o == null || !(o instanceof Customer)){
+                throw new IllegalArgumentException(&quot;对象必须是Customer&quot;);
+            }
+            Customer other = (Customer) o;
+            //先按姓名升序排序，如果姓名相等跳过
+            if (!this.name.equals(other.name)) {
+                return name.compareTo(other.name);
+            }
+            //再按年龄升序排序，如果年龄相等跳过
+            if (this.age != other.age) {
+                return age - other.age;
+            }
+            //相等
+            return 0;
+        }
+
+        @Override
+        public String toString() {
+            return &quot;Customer{&quot; +
+                    &quot;age=&quot; + age +
+                    &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +
+                    &apos;}&apos;;
+        }
+    }
+}
+</code></pre><p><strong>逆序排序</strong></p>
+<pre><code>Collections.sort(lists,Collections.&lt;Customer&gt;reverseOrder());
+</code></pre><p>原理：</p>
+<pre><code>public int compare(Comparable&lt;Object&gt; c1, Comparable&lt;Object&gt; c2) {
+    return c2.compareTo(c1);
+}
+</code></pre><p><strong>自定义排序方法</strong></p>
+<pre><code>Collections.sort(lists,new CustomerComparator());
+
+public class CustomerComparator implements Comparator&lt;Customer&gt; {
+
+    @Override
+    public int compare(Customer c1, Customer c2) {
+        //先按name升序，再按age降序
+        if (!c1.name.equals(c2.name)) {
+            return c1.name.compareTo(c2.name);
+        }
+        if (c1.age != c2.age) {
+            return -(c1.age - c2.age);
+        }
+
+        return 0;
+    }
+}
+</code></pre><h2 id="高精度"><a href="#高精度" class="headerlink" title="高精度"></a>高精度</h2><h3 id="Bignteger"><a href="#Bignteger" class="headerlink" title="Bignteger"></a>Bignteger</h3><pre>
+返回值                   成员函数
+BigInteger              add(BigInteger val)
+                        返回其值为 (this + val) 的 BigInteger。 
+
+BigInteger              subtract(BigInteger val)
+                        返回其值为 (this - val) 的 BigInteger。
+
+BigInteger              multiply(BigInteger val)
+                        返回其值为 (this * val) 的 BigInteger。
+
+BigInteger              divide(BigInteger val)
+                        返回其值为 (this / val) 的 BigInteger。
+
+BigInteger              mod(BigInteger m)
+                        返回其值为 (this mod m) 的 BigInteger。
+
+int                     compareTo(BigInteger val)
+                           将此 BigInteger 与指定的 BigInteger 进行比较。
+                        如果和val相等返回0,小于返回-1,大于返回1
+
+BigInteger              pow(int exponent)
+                        返回其值为 (this exponent) 的 BigInteger。
+
+String                  toString()
+                        返回此 BigInteger 的十进制字符串表示形式。
+
+String                  toString(int radix)
+                        返回此 BigInteger 的给定基数的字符串表示形式。
+
+static BigInteger       valueOf(long val)
+                        返回其值等于指定 long 的值的 BigInteger。
+
+BigInteger              gcd(BigInteger val)
+                        返回一个 BigInteger，其值是 abs(this) 和 abs(val) 的最大公约数。
+
+BigInteger              abs()
+                        返回其值是此 BigInteger 的绝对值的 BigInteger。
+
+int                     hashCode()
+                        返回此 BigInteger 的哈希码。
+
+boolean                 isProbablePrime(int certainty)
+                        如果此 BigInteger 可能为素数，则返回 true，如果它一定为合数，则返回 false。
+
+BigInteger              nextProbablePrime()
+                        返回大于此 BigInteger 的可能为素数的第一个整数。
+
+int                     signum()
+                        返回此 BigInteger 的正负号函数。
+
+除了以上成员函数,BigInteger还有几个非常常用的属性
+
+BigInteger.ZERO             BigInteger 的常量 0。
+BigInteger.ONE              BigInteger 的常量 1。
+BigInteger.TEN              BigInteger 的常量 10。
+</pre>
+
+<h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3><pre><code>返回值                   成员函数
+BigDecimal              add(BigDecimal augend)
+                        返回一个 BigDecimal，其值为 (this + augend)。
+
+BigDecimal              subtract(BigDecimal subtrahend)
+                        返回一个 BigDecimal，其值为 (this - subtrahend)。
+
+BigDecimal              multiply(BigDecimal multiplicand)
+                        返回一个 BigDecimal，其值为 (this × multiplicand).
+
+BigDecimal              divide(BigDecimal divisor)
+                        返回一个 BigDecimal，其值为 (this / divisor).
+
+BigDecimal              pow(int n)
+                        返回其值为 (thisn) 的 BigDecimal，准确计算该幂，使其具有无限精度。
+
+int                     compareTo(BigDecimal val)
+                        将此 BigDecimal 与指定的 BigDecimal 比较。
+
+static BigDecimal       valueOf(double val)
+                        使用 Double.toString(double) 方法提供的 double 规范的字符串
+                        表示形式将 double 转换为 BigDecimal。
+
+BigDecimal              stripTrailingZeros()
+                        返回数值上等于此小数，但从该表示形式移除所有尾部零的 BigDecimal。
+
+String                  toPlainString()
+                        返回不带指数字段的此 BigDecimal 的字符串表示形式。
+
+String                  toString()
+                        返回此 BigDecimal 的字符串表示形式，如果需要指数，则使用科学记数法。
+
+BigDecimal              abs()
+                        返回 BigDecimal，其值为此 BigDecimal 的绝对值，其标度为 this.scale()。
+
+int                     hashCode()
+                        返回此 BigDecimal 的哈希码。
+
+int                     signum()
+                        返回此 BigDecimal 的正负号函数。
+BigInteger的三个重要属性,BigDecimal同样也有,这里就不再复述了.
+</code></pre><h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><pre>
+返回值                   成员函数
+char                    charAt(int index)
+                        返回指定索引处的 char 值。
+
+char[]                  <font color="red">toCharArray() </font>
+                        将此字符串转换为一个新的字符数组。 
+
+String                  substring(int beginIndex)
+                        返回一个新的字符串，它是此字符串的一个子字符串。
+
+String                  substring(int beginIndex, int endIndex)
+                        返回一个新字符串，它是此字符串的一个子字符串。
+
+int                     length()
+                        返回此字符串的长度。
+
+String                  toLowerCase()
+                        使用默认语言环境的规则将此 String 中的所有字符都转换为小写。
+
+String                  toUpperCase()
+                        使用默认语言环境的规则将此 String 中的所有字符都转换为大写。
+
+int                     compareTo(String anotherString)
+                        按字典顺序比较两个字符串。
+
+String                  concat(String str)
+                        将指定字符串联到此字符串的结尾。
+
+boolean                 contains(CharSequence s)
+                        当且仅当此字符串包含 char 值的指定序列时，才返回 true。
+
+int                     hashCode()
+                        返回此字符串的哈希码。
+
+boolean                 startsWith(String prefix)
+                        测试此字符串是否以指定的前缀开始。
+
+boolean                 endsWith(String suffix)
+                        测试此字符串是否以指定的后缀结束。
+
+String                  trim()
+                        返回字符串的副本，忽略前导空白和尾部空白。
+</pre>
+
+<h2 id="书本源代码"><a href="#书本源代码" class="headerlink" title="书本源代码"></a>书本源代码</h2><p><a href="http://algs4.cs.princeton.edu/code/" target="_blank" rel="external">http://algs4.cs.princeton.edu/code/</a></p>
 <h2 id="算法与数据结构课程介绍"><a href="#算法与数据结构课程介绍" class="headerlink" title="算法与数据结构课程介绍"></a>算法与数据结构课程介绍</h2><ul>
 <li>算法是解决问题的方法</li>
 <li>数据结构是存储数据的方法</li>
@@ -793,7 +1256,7 @@ System.out.println(Arrays.toString(a));
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">108</span>
+              <span class="site-state-item-count">109</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -801,7 +1264,7 @@ System.out.println(Arrays.toString(a));
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -810,7 +1273,7 @@ System.out.println(Arrays.toString(a));
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -839,7 +1302,7 @@ System.out.println(Arrays.toString(a));
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">1.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">2.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">2.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">2.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">3.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">3.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">4.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">4.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">4.2.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序方法"><span class="nav-number">5.</span> <span class="nav-text">排序方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">6.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">7.</span> <span class="nav-text">归并排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入"><span class="nav-number">1.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出"><span class="nav-number">2.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进制转换"><span class="nav-number">3.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays-sort-Collections-sort"><span class="nav-number">4.</span> <span class="nav-text">Arrays.sort / Collections.sort</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable"><span class="nav-number">4.1.</span> <span class="nav-text">Comparable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator"><span class="nav-number">4.2.</span> <span class="nav-text">Comparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升序、逆序理解★★★★★"><span class="nav-number">4.3.</span> <span class="nav-text">升序、逆序理解★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范"><span class="nav-number">4.4.</span> <span class="nav-text">规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">4.5.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高精度"><span class="nav-number">5.</span> <span class="nav-text">高精度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bignteger"><span class="nav-number">5.1.</span> <span class="nav-text">Bignteger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigDecimal"><span class="nav-number">5.2.</span> <span class="nav-text">BigDecimal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">6.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">7.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">8.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">8.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">8.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">8.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">9.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">9.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">9.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">10.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">10.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">10.2.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序方法"><span class="nav-number">11.</span> <span class="nav-text">排序方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">12.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">13.</span> <span class="nav-text">归并排序</span></a></li></ol></div>
             
           </div>
         </section>

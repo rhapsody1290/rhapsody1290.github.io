@@ -1,0 +1,986 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Storm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="http://ifeve.com/getting-started-with-stom-index/
+专业术语spout：管理Storm集群的输入流，为bolt提供数据bolt：从spout或其它bolt接收数据，并处理数据，处理结果可作为其它bolt的数据源或最终结果nimbus：雨云，主节点的守护进程，负责为工作节点分发任务topology：拓扑结构，Storm的一个任务单元define fie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Storm入门">
+<meta property="og:url" content="http://qianmingxs.com/2017/04/20/[Storm]Storm入门/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="http://ifeve.com/getting-started-with-stom-index/
+专业术语spout：管理Storm集群的输入流，为bolt提供数据bolt：从spout或其它bolt接收数据，并处理数据，处理结果可作为其它bolt的数据源或最终结果nimbus：雨云，主节点的守护进程，负责为工作节点分发任务topology：拓扑结构，Storm的一个任务单元define fie">
+<meta property="og:image" content="http://i.imgur.com/Nsx7tMR.png">
+<meta property="og:image" content="http://i.imgur.com/Nsx7tMR.png">
+<meta property="og:updated_time" content="2017-04-21T03:23:14.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Storm入门">
+<meta name="twitter:description" content="http://ifeve.com/getting-started-with-stom-index/
+专业术语spout：管理Storm集群的输入流，为bolt提供数据bolt：从spout或其它bolt接收数据，并处理数据，处理结果可作为其它bolt的数据源或最终结果nimbus：雨云，主节点的守护进程，负责为工作节点分发任务topology：拓扑结构，Storm的一个任务单元define fie">
+<meta name="twitter:image" content="http://i.imgur.com/Nsx7tMR.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/04/20/[Storm]Storm入门/"/>
+
+
+  <title> Storm入门 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Storm入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-20T17:34:00+08:00" content="2017-04-20">
+              2017-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Storm/" itemprop="url" rel="index">
+                    <span itemprop="name">Storm</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/20/[Storm]Storm入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/20/[Storm]Storm入门/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://ifeve.com/getting-started-with-stom-index/" target="_blank" rel="external">http://ifeve.com/getting-started-with-stom-index/</a></p>
+<h2 id="专业术语"><a href="#专业术语" class="headerlink" title="专业术语"></a>专业术语</h2><p>spout：管理Storm集群的输入流，为bolt提供数据<br>bolt：从spout或其它bolt接收数据，并处理数据，处理结果可作为其它bolt的数据源或最终结果<br>nimbus：雨云，主节点的守护进程，负责为工作节点分发任务<br>topology：拓扑结构，Storm的一个任务单元<br>define field(s)：定义域，由spout或bolt提供，被bolt接收</p>
+<h2 id="Storm-概述"><a href="#Storm-概述" class="headerlink" title="Storm 概述"></a>Storm 概述</h2><p>Storm是一个分布式的，可靠的，容错的数据流处理系统。它会把工作任务委托给不同类型的组件，每个组件负责处理一项简单特定的任务。<strong>Storm集群的输入流由一个被称作spout的组件管理，spout把数据传递给bolt， bolt要么把数据保存到某种存储器，要么把数据传递给其它的bolt。</strong>你可以想象一下，一个Storm集群就是在一连串的bolt之间转换spout传过来的数据。</p>
+<h2 id="Storm-结构"><a href="#Storm-结构" class="headerlink" title="Storm 结构"></a>Storm 结构</h2><p>在Storm集群中，有两类节点：<strong>主节点master node</strong>和<strong>工作节点worker nodes</strong></p>
+<ul>
+<li>主节点运行着一个叫做Nimbus的守护进程。这个守护进程负责在集群中分发代码，为工作节点分配任务，并监控故障</li>
+<li>Supervisor守护进程作为拓扑的一部分运行在工作节点上。一个Storm拓扑结构在不同的机器上运行着众多的工作节点</li>
+</ul>
+<h2 id="Storm-操作模式"><a href="#Storm-操作模式" class="headerlink" title="Storm 操作模式"></a>Storm 操作模式</h2><ul>
+<li>本地模式：Storm拓扑结构运行在本地计算机的单一JVM进程上</li>
+<li>远程模式：在远程模式下，我们向Storm集群提交拓扑，它通常由许多运行在不同机器上的流程组成</li>
+</ul>
+<h2 id="Storm-快速入门"><a href="#Storm-快速入门" class="headerlink" title="Storm 快速入门"></a>Storm 快速入门</h2><p>创建一个简单的拓扑，数单词数量。要创建这个拓扑，我们要用一个spout读取文本，第一个bolt用来标准化单词，第二个bolt为单词计数，流程如下图所示：</p>
+<p><img src="http://i.imgur.com/Nsx7tMR.png" alt=""></p>
+<h3 id="创建工程"><a href="#创建工程" class="headerlink" title="创建工程"></a>创建工程</h3><p>1、执行git clone git@github.com:storm-book/examples-ch02-getting_started.git，把源码检出到你指定的目录，<font color="red"><strong>打开下载后的项目后有完整的源代码，各部分之后又详细解释</strong></font></p>
+<p>2、添加 Storm 依赖</p>
+<pre><code>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+         &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+         &lt;groupId&gt;storm.book&lt;/groupId&gt;
+         &lt;artifactId&gt;Getting-Started&lt;/artifactId&gt;
+         &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+         &lt;build&gt;
+             &lt;plugins&gt;
+                 &lt;plugin&gt;
+                     &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                     &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                     &lt;version&gt;2.3.2&lt;/version&gt;
+                     &lt;configuration&gt;
+                         &lt;source&gt;1.6&lt;/source&gt;
+                         &lt;target&gt;1.6&lt;/target&gt;
+                         &lt;compilerVersion&gt;1.6&lt;/compilerVersion&gt;
+                     &lt;/configuration&gt;
+                 &lt;/plugin&gt;
+             &lt;/plugins&gt;
+         &lt;/build&gt;
+         &lt;repositories&gt;
+             &lt;!-- Repository where we can found the storm dependencies --&gt;
+             &lt;repository&gt;
+                 &lt;id&gt;clojars.org&lt;/id&gt;
+                 &lt;url&gt;http://clojars.org/repo&lt;/url&gt;
+             &lt;/repository&gt;
+         &lt;/repositories&gt;
+         &lt;dependencies&gt;
+             &lt;!-- Storm Dependency --&gt;
+             &lt;dependency&gt;
+                 &lt;groupId&gt;storm&lt;/groupId&gt;
+                 &lt;artifactId&gt;storm&lt;/artifactId&gt;
+                 &lt;version&gt;0.6.0&lt;/version&gt;
+             &lt;/dependency&gt;
+         &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre><p>3、目录结构如下</p>
+<p>我们的应用目录</p>
+<pre><code>/
+├── pom.xml
+└── src
+   └── main
+      └── java
+   |  ├── spouts
+   |  └── bolts
+   └── resources
+</code></pre><p>java目录下的子目录包含我们的代码，我们把要统计单词数的文件保存在resource目录下</p>
+<h3 id="Spout"><a href="#Spout" class="headerlink" title="Spout"></a>Spout</h3><p>创建第一个Topology，包括Spout和Bolts</p>
+<p>创建一个Spout作为输入流，WordReader类实现了 IRichSpout 接口。WordReader负责从文件按行读取文本，并把文本行提供给第一个bolt，源代码如下：</p>
+<pre><code>package spouts;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Map;
+import backtype.storm.spout.SpoutOutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.topology.base.BaseRichSpout;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
+
+public class WordReader extends BaseRichSpout {
+
+    private SpoutOutputCollector collector;
+    private FileReader fileReader;
+    private boolean completed = false;
+
+    @Override
+    public void ack(Object msgId) {
+        System.out.println(&quot;OK:&quot;+msgId);
+    }
+
+    @Override
+    public void close() {}
+
+    @Override
+    public void fail(Object msgId) {
+        System.out.println(&quot;FAIL:&quot;+msgId);
+    }
+
+    /**
+     * 这个方法做的惟一一件事情就是分发文件中的文本行
+     */
+    @Override
+    public void nextTuple() {
+        /**
+         * 这个方法会不断的被调用，直到整个文件都读完了，我们将等待并返回。
+         */
+        if(completed){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                //什么也不做
+            }
+            return;
+        }
+        String str;
+        //创建reader
+        BufferedReader reader = new BufferedReader(fileReader);
+        try{
+            //读所有文本行
+            while((str = reader.readLine()) != null){
+                /**
+                  * 按行发布一个新值
+                  */
+                this.collector.emit(new Values(str),str);
+            }
+        }catch(Exception e){
+            throw new RuntimeException(&quot;Error reading tuple&quot;,e);
+        }finally{
+            completed = true;
+        }
+    }
+
+    /**
+      * 我们将创建一个文件并维持一个collector对象
+      */
+    @Override
+    public void open(Map conf, TopologyContext context,
+            SpoutOutputCollector collector) {
+        try {
+            this.fileReader = new FileReader(conf.get(&quot;wordsFile&quot;).toString());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(&quot;Error reading file [&quot;+conf.get(&quot;wordFile&quot;)+&quot;]&quot;);
+        }
+        this.collector = collector;
+    }
+
+    /**
+      * 声明输入域&quot;word&quot;
+      */
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declare(new Fields(&quot;line&quot;));
+    }
+}
+</code></pre><p>第一个被调用的spout方法都是</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">open</span>(Map conf, TopologyContext context, SpoutOutputCollector collector)</div></pre></td></tr></table></figure>
+<p>它接收如下参数：配置对象，在定义topology对象是创建；TopologyContext对象，包含所有拓扑数据；还有SpoutOutputCollector对象，它能让我们发布交给bolts处理的数据。下面的代码主是这个方法的实现</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">open</span>(Map conf, TopologyContext context,</div><div class="line">    SpoutOutputCollector collector) &#123;</div><div class="line">    <span class="built_in">try</span> &#123;</div><div class="line">        <span class="keyword">this</span>.context = context;</div><div class="line">        <span class="keyword">this</span>.fileReader = <span class="keyword">new</span> FileReader(conf.<span class="built_in">get</span>(<span class="string">"wordsFile"</span>).toString());</div><div class="line">    &#125; <span class="built_in">catch</span> (FileNotFoundException e) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Error reading file ["</span>+conf.<span class="built_in">get</span>(<span class="string">"wordFile"</span>)+<span class="string">"]"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">this</span>.collector = collector;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们在这个方法里创建了一个FileReader对象，用来读取文件。接下来我们要实现public void nextTuple()，我们要通过它向bolts发布待处理的数据。在这个例子里，这个方法要读取文件并逐行发布数据</p>
+<pre><code>@Override
+public void nextTuple() {
+    /**
+     * The nextuple it is called forever, so if we have been readed the file
+     * we will wait and then return
+     */
+    if(completed){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            //Do nothing
+        }
+        return;
+    }
+    String str;
+    //Open the reader
+    BufferedReader reader = new BufferedReader(fileReader);
+    try{
+        //Read all lines
+        while((str = reader.readLine()) != null){
+            /**
+             * By each line emmit a new value with the line as a their
+             */
+            this.collector.emit(new Values(str),str);
+        }
+    }catch(Exception e){
+        throw new RuntimeException(&quot;Error reading tuple&quot;,e);
+    }finally{
+        completed = true;
+    }
+}
+</code></pre><p>NOTE: Values是一个ArrarList实现，它的元素就是传入构造器的参数。</p>
+<p><strong>nextTuple()会在同一个循环内被ack()和fail()</strong>周期性的调用。没有任务时它必须释放对线程的控制，其它方法才有机会得以执行。因此nextTuple的第一行就要检查是否已处理完成。如果完成了，为了降低处理器负载，会在返回前休眠一毫秒。如果任务完成了，文件中的每一行都已被读出并分发了。</p>
+<p><strong>NOTE:</strong>元组(tuple)是一个具名值列表，它可以是任意java对象（只要它是可序列化的）。默认情况，Storm会序列化字符串、字节数组、ArrayList、HashMap和HashSet等类型。</p>
+<h3 id="Bolts"><a href="#Bolts" class="headerlink" title="Bolts"></a>Bolts</h3><p>现在我们有了一个spout，用来按行读取文件并每行发布一个元组，还要创建两个bolts，用来处理它们。bolts实现了接口backtype.storm.topology.IRichBolt</p>
+<p><img src="http://i.imgur.com/Nsx7tMR.png" alt=""></p>
+<p><strong>bolt最重要的方法是void execute(Tuple input)，每次接收到元组时都会被调用一次，还会再发布若干个元组。</strong></p>
+<p>第一个bolt，WordNormalizer，负责得到并标准化每行文本。它把文本行切分成单词，大写转化成小写，去掉头尾空白符，完整代码如下：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">package bolts;</div><div class="line"></div><div class="line"><span class="keyword">import</span> backtype.storm.topology.BasicOutputCollector;</div><div class="line"><span class="keyword">import</span> backtype.storm.topology.OutputFieldsDeclarer;</div><div class="line"><span class="keyword">import</span> backtype.storm.topology.base.BaseBasicBolt;</div><div class="line"><span class="keyword">import</span> backtype.storm.tuple.Fields;</div><div class="line"><span class="keyword">import</span> backtype.storm.tuple.Tuple;</div><div class="line"><span class="keyword">import</span> backtype.storm.tuple.Values;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> WordNormalizer extends BaseBasicBolt &#123;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> cleanup() &#123;&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * The bolt will receive the line from the</div><div class="line">	 * words file and process it to Normalize this line</div><div class="line">	 * </div><div class="line">	 * The normalize will be put the words in lower case</div><div class="line">	 * and split the line to get all words in this </div><div class="line">	 */</div><div class="line">    @Override</div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> execute(Tuple input, BasicOutputCollector collector) &#123;</div><div class="line">        <span class="keyword">String</span> sentence = input.getString(<span class="number">0</span>);</div><div class="line">        <span class="keyword">String</span>[] words = sentence.split(<span class="string">" "</span>);</div><div class="line">        <span class="built_in">for</span>(<span class="keyword">String</span> <span class="keyword">word</span> : words)&#123;</div><div class="line">            <span class="keyword">word</span> = <span class="keyword">word</span>.trim();</div><div class="line">            <span class="built_in">if</span>(!<span class="keyword">word</span>.isEmpty())&#123;</div><div class="line">                <span class="keyword">word</span> = <span class="keyword">word</span>.toLowerCase();</div><div class="line">                collector.emit(<span class="keyword">new</span> Values(<span class="keyword">word</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * The bolt will only emit the field "word" </div><div class="line">	 */</div><div class="line">    @Override</div><div class="line">	<span class="keyword">public</span> <span class="keyword">void</span> declareOutputFields(OutputFieldsDeclarer declarer) &#123;</div><div class="line">		declarer.declare(<span class="keyword">new</span> Fields(<span class="string">"word"</span>));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>首先我们要声明bolt的出参：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">declareOutputFields</span><span class="params">(OutputFieldsDeclarer declarer)</span></span>&#123;</div><div class="line">    declarer.<span class="keyword">declare</span>(<span class="keyword">new</span> Fields(<span class="string">"word"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Storm/" rel="tag">#Storm</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/15/[mybatis]mybatis generator/" rel="next" title="mybatis generator">
+                <i class="fa fa-chevron-left"></i> mybatis generator
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/21/[Java]如何优雅的处理异常（java）/" rel="prev" title="如何优雅的处理异常（java）">
+                如何优雅的处理异常（java） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/20/[Storm]Storm入门/"
+           data-title="Storm入门" data-url="http://qianmingxs.com/2017/04/20/[Storm]Storm入门/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">109</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#专业术语"><span class="nav-number">1.</span> <span class="nav-text">专业术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm-概述"><span class="nav-number">2.</span> <span class="nav-text">Storm 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm-结构"><span class="nav-number">3.</span> <span class="nav-text">Storm 结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm-操作模式"><span class="nav-number">4.</span> <span class="nav-text">Storm 操作模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm-快速入门"><span class="nav-number">5.</span> <span class="nav-text">Storm 快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建工程"><span class="nav-number">5.1.</span> <span class="nav-text">创建工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spout"><span class="nav-number">5.2.</span> <span class="nav-text">Spout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bolts"><span class="nav-number">5.3.</span> <span class="nav-text">Bolts</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+</body>
+</html>

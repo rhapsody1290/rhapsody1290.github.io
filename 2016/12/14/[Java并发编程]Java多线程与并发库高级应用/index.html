@@ -98,7 +98,7 @@
 多线程的应用不是为了提高运行效率，而是为了提高资源使用效率；当一个资源在等待I/O输入时，另一个线程可以使用处理器，提高了资源的利用率
 
 为什么使用多线程下载速度会变快？多线程下载：并不是自己电脑快了，而是抢到更多服务器资源。例：服务器为一个客户分配一个20K的线程下载，你用多个线程，服务器以为是多个用户就分配了多个20K的资源给你">
-<meta property="og:updated_time" content="2017-04-15T09:38:26.149Z">
+<meta property="og:updated_time" content="2017-04-19T02:26:12.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发库高级应用">
 <meta name="twitter:description" content="多线程与效率
@@ -500,8 +500,10 @@ new Timer().schedule(new TimerTask() {
 </ul>
 <pre><code>1、方法返回值前加synchronized，同步方法上边用的锁就是this对象
 2、静态同步方法使用的锁是该方法所在的class对象
-</code></pre><p>案例：output1和output2互斥，因为互斥变量都为当前对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">				<span class="keyword">int</span> len = name.length();</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">					System.out.print(name.charAt(i));</div><div class="line">				System.out.println();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<p>此时为静态函数，要实现互斥，使用Outputer的字节码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">synchronized</span> (Outputer.class) &#123;</div><div class="line">				<span class="keyword">int</span> len = name.length();</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">					System.out.print(name.charAt(i));</div><div class="line">				System.out.println();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line"></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+</code></pre><p>案例：output1和output2互斥，因为互斥变量都为当前对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> len = name.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			System.out.print(name.charAt(i));</div><div class="line">		System.out.println();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此时为静态函数，要实现互斥，使用Outputer的字节码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (Outputer.class) &#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> len = name.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			System.out.print(name.charAt(i));</div><div class="line">		System.out.println();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="传统线程同步通信技术"><a href="#传统线程同步通信技术" class="headerlink" title="传统线程同步通信技术"></a>传统线程同步通信技术</h2><p>线程同步就是线程按照<strong>先后的次序</strong>运行，即”我执行完之后然后你执行”</p>
 <p>面试题：子线程循环10次，接着主线程循环100，接着又回到子线程循环10次，接着再回到主线程又循环100，如此循环50次，请写出程序</p>
 <pre><code>/**
@@ -588,8 +590,7 @@ class Bussiness{
     }
 
 }
-</code></pre><h2 id="ThreadLocal实现线程范围内的数据共享"><a href="#ThreadLocal实现线程范围内的数据共享" class="headerlink" title="ThreadLocal实现线程范围内的数据共享"></a>ThreadLocal实现线程范围内的数据共享</h2><p><img src="" alt="搜狗截图20170123165837"></p>
-<p>什么是线程范围内的数据共享？一个线程内部的各个函数都能访问该共享变量，而其他线程不能访问（区别于静态变量，静态变量能被所有线程访问，但需要解决线程间数据同步的问题）</p>
+</code></pre><h2 id="ThreadLocal实现线程范围内的数据共享"><a href="#ThreadLocal实现线程范围内的数据共享" class="headerlink" title="ThreadLocal实现线程范围内的数据共享"></a>ThreadLocal实现线程范围内的数据共享</h2><p>什么是线程范围内的数据共享？<font color="red"><strong>一个线程内部的各个函数都能访问该共享变量，而其他线程不能访问</strong></font>（区别于静态变量，静态变量能被所有线程访问，但需要解决线程间数据同步的问题）</p>
 <p>应用：</p>
 <ul>
 <li>用户访问Web服务器，服务器启动一条线程处理用户请求，不同用户之间不受干扰</li>
@@ -1292,7 +1293,7 @@ public class ConcurrentLinkedQueueTest {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">108</span>
+              <span class="site-state-item-count">109</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1300,7 +1301,7 @@ public class ConcurrentLinkedQueueTest {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1309,7 +1310,7 @@ public class ConcurrentLinkedQueueTest {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
