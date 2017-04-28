@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://i.imgur.com/F5VGhOh.png">
 <meta property="og:image" content="http://i.imgur.com/hfZUs1B.jpg">
 <meta property="og:image" content="http://i.imgur.com/D8P7zwo.jpg">
-<meta property="og:updated_time" content="2017-04-11T10:12:57.645Z">
+<meta property="og:updated_time" content="2017-04-28T08:54:27.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式的艺术之道笔记">
 <meta name="twitter:description" content="Java反射Java反射(Java Reflection)是指在程序运行时获取已知名称的类或已有对象的相关信息的一种机制，包括类的方法、属性、父类等信息，还包括实例的创建和实例类型的判断等。
@@ -397,7 +397,64 @@ public class XMLUtil {
 &lt;config&gt;  
     &lt;className&gt;FileLoggerFactory&lt;/className&gt;  
 &lt;/config&gt;  
-</code></pre><h2 id="第4章：集中式工厂的实现——简单工厂模式"><a href="#第4章：集中式工厂的实现——简单工厂模式" class="headerlink" title="第4章：集中式工厂的实现——简单工厂模式"></a>第4章：集中式工厂的实现——简单工厂模式</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p>1、定义抽象产品类，将产品 <strong>公共的代码</strong> 移至抽象产品类，并在抽象产品类中声明一些 <strong>抽象方法</strong>，供不同的具体产品类来实现<br>2、具体产品类继承抽象产品类，实现抽象类中抽象方法<br>3、工厂类提供一个创建产品的工厂方法，根据传入参数不同创建不同具体产品的对象</p>
+</code></pre><h3 id="单例模式：确保一个类只有一个实例"><a href="#单例模式：确保一个类只有一个实例" class="headerlink" title="单例模式：确保一个类只有一个实例"></a>单例模式：确保一个类只有一个实例</h3><p>1、构造方法私有，外部不能通过new创建对象<br>2、静态变量保存唯一实例<br>3、静态的getInstance方法，是外部能够访问</p>
+<p>饿汉模式:在类加载的时候已经创建了单例对象</p>
+<pre><code>//staic final静态常量
+private static final Singleton instance = new Singleton();
+private Singleton(){}
+public static Singleton getInstance(){return instance;}
+</code></pre><p>懒汉模式：第一次调用的时候创建对象实例</p>
+<pre><code>private static Singleton instatnce = null;
+private Singleton(){}
+//注意同步控制关键字 Synchronized
+synchronized public Singleton getInstance(){
+    if(instance == null){
+        instance = new Singleton();
+    }
+    return instance;
+}
+</code></pre><p>方法二：synchronized同步控制代码块，双重检查锁定（单次判断实例不为空，如果一个线程正在创建对象但还未创建完成，另一个线程进入实例不为空的判断，最终产生两个实例，未被单一对象的原则）</p>
+<pre><code>//使用volatile保证可见性
+private volatile static Singleton instatnce = null;
+private Singleton(){}
+public static Singleton getInstance(){
+    //第一重判断
+    if(instance == null){
+        synchronized(Singleton.class){
+            //第二重判断
+            if(instance == null){
+                    instance = new Singleton();
+            }
+        }
+    }
+    return instance;
+}
+</code></pre><p>为什么需要使用volatile？不是同步快结束完之后，会将instance对象写入内存？</p>
+<p>答：<strong>主要在于instance = new Singleton()这句，这并非是一个原子操作，事实上在 JVM 中这句话大概做了下面 3 件事情。</strong></p>
+<ul>
+<li>给 instance 分配内存</li>
+<li>调用 Singleton 的构造函数来初始化成员变量</li>
+<li>将instance对象指向分配的内存空间（执行完这步 instance 就为非 null 了）</li>
+</ul>
+<p>但是在 JVM 的即时编译器中存在指令重排序的优化。也就是说上面的第二步和第三步的顺序是不能保证的，最终的执行顺序可能是 1-2-3 也可能是 1-3-2。如果是后者，则在 3 执行完毕、2 未执行之前，被线程二抢占了，这时 instance 已经是非 null了（但却没有初始化），所以线程二会直接返回 instance，然后使用，然后顺理成章地报错。</p>
+<font color="red"><strong>解析</strong>：</font>
+
+<pre><code>线程1创建调用getInstance（）方法执行到instance=new Singleton()，但是这条语句不是原子性的，他分为三个步骤：1、分配内存 2、初始化 3、instance对象指向内存空间，执行完这步后instance为非空了。
+
+但是jvm存在指令重排序的优化，如果指令按照1，3，2的执行方式，但是线程1在执行3之后，但未执行2之前，此时instance已经不为null了，这时候线程2调用getInstance（）方法（注意这时线程2可以调拥这个方法，因为只有进入一重检查锁之后才是临界区。）执行第一重判断if(instance == null){，此时instance不为null，直接调用return instance语句返回对象，但对象并没有真正得实例化完毕，调用就会出现错误
+</code></pre><p>我们只需要将 instance 变量声明成 volatile 就可以了。</p>
+<p>有些人认为使用 volatile 的原因是<strong>可见性</strong>，也就是可以保证线程在本地不会存有 instance 的副本，每次都是去主内存中读取。但其实是不对的。使用 volatile 的主要原因是其另一个特性：<strong>禁止指令重排序优化</strong>。也就是说，在 volatile 变量的<strong>赋值操作后面会有一个内存屏障</strong>（生成的汇编代码上），读操作不会被重排序到内存屏障之前。比如上面的例子，<strong>读操作必须在执行完 1-2-3 之后或者 1-3-2 之后，不存在执行到 1-3 然后取到值的情况。</strong>从「先行发生原则」的角度理解的话，就是对于一个 volatile 变量的写操作都先行发生于后面对这个变量的读操作（这里的“后面”是时间上的先后顺序）。</p>
+<p>方法三（最优）：静态内部类中保持对象的实例，在第一次调用的时候创建单例对象</p>
+<pre><code>private static class Hold{
+    private static final Singleton instance = new Singleton();
+}
+private Singleton(){}
+
+public static Singleton getInstance(){
+    return Hold.inistance;
+}
+</code></pre><p>饿汉式和懒汉式对比：饿汉式在类加载的时候创建，不管用不用，都占据内存；懒汉式在第一次使用的时候创建，必须加锁，多线程时性能受影响</p>
+<h2 id="第4章：集中式工厂的实现——简单工厂模式"><a href="#第4章：集中式工厂的实现——简单工厂模式" class="headerlink" title="第4章：集中式工厂的实现——简单工厂模式"></a>第4章：集中式工厂的实现——简单工厂模式</h2><h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p>1、定义抽象产品类，将产品 <strong>公共的代码</strong> 移至抽象产品类，并在抽象产品类中声明一些 <strong>抽象方法</strong>，供不同的具体产品类来实现<br>2、具体产品类继承抽象产品类，实现抽象类中抽象方法<br>3、工厂类提供一个创建产品的工厂方法，根据传入参数不同创建不同具体产品的对象</p>
 <h3 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h3><p><img src="http://i.imgur.com/EGuKZbM.png" alt=""></p>
 <p>抽象产品类</p>
 <pre><code>abstract class Product {  
@@ -1516,7 +1573,7 @@ abstract class Subject {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">109</span>
+              <span class="site-state-item-count">110</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1533,7 +1590,7 @@ abstract class Subject {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1562,7 +1619,7 @@ abstract class Subject {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java反射"><span class="nav-number">1.</span> <span class="nav-text">Java反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLUtil"><span class="nav-number">2.</span> <span class="nav-text">XMLUtil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章：集中式工厂的实现——简单工厂模式"><span class="nav-number">3.</span> <span class="nav-text">第4章：集中式工厂的实现——简单工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思想"><span class="nav-number">3.1.</span> <span class="nav-text">设计思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">3.2.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式的简化"><span class="nav-number">3.3.</span> <span class="nav-text">简单工厂模式的简化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象与使用对象"><span class="nav-number">3.4.</span> <span class="nav-text">创建对象与使用对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章：多态工厂的实现——工厂方法模式"><span class="nav-number">4.</span> <span class="nav-text">第5章：多态工厂的实现——工厂方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法模式结构图"><span class="nav-number">4.1.</span> <span class="nav-text">工厂方法模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用工厂方法模式设计的日志记录器"><span class="nav-number">4.2.</span> <span class="nav-text">使用工厂方法模式设计的日志记录器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章：产品族的创建——抽象工厂模式"><span class="nav-number">5.</span> <span class="nav-text">第6章：产品族的创建——抽象工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#产品等级结构与产品族"><span class="nav-number">5.1.</span> <span class="nav-text">产品等级结构与产品族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式结构图"><span class="nav-number">5.2.</span> <span class="nav-text">抽象工厂模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整解决方案"><span class="nav-number">5.3.</span> <span class="nav-text">完整解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第8章：复杂对象的组装与创建——建造者模式"><span class="nav-number">6.</span> <span class="nav-text">第8章：复杂对象的组装与创建——建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有Director的建造者模式"><span class="nav-number">6.1.</span> <span class="nav-text">有Director的建造者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#省略Director"><span class="nav-number">6.2.</span> <span class="nav-text">省略Director</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钩子方法的引入"><span class="nav-number">6.3.</span> <span class="nav-text">钩子方法的引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章：适配器模式"><span class="nav-number">7.</span> <span class="nav-text">第9章：适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">7.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">7.2.</span> <span class="nav-text">适配器模式的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图-1"><span class="nav-number">7.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电脑适配器的例子"><span class="nav-number">7.4.</span> <span class="nav-text">电脑适配器的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质"><span class="nav-number">7.5.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省适配器模式"><span class="nav-number">7.6.</span> <span class="nav-text">缺省适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12章：扩展系统功能——装饰模式"><span class="nav-number">8.</span> <span class="nav-text">第12章：扩展系统功能——装饰模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰模式结构图"><span class="nav-number">8.1.</span> <span class="nav-text">装饰模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只有一个具体构建类的装饰模式"><span class="nav-number">8.2.</span> <span class="nav-text">只有一个具体构建类的装饰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">8.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课后题"><span class="nav-number">8.4.</span> <span class="nav-text">课后题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章：提供统一入口——外观模式"><span class="nav-number">9.</span> <span class="nav-text">第13章：提供统一入口——外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章：代理模式"><span class="nav-number">10.</span> <span class="nav-text">第15章：代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">10.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-动态代理"><span class="nav-number">10.2.</span> <span class="nav-text">Java 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">10.2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么这么设计"><span class="nav-number">10.2.2.</span> <span class="nav-text">为什么这么设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的代理类型"><span class="nav-number">10.3.</span> <span class="nav-text">其他的代理类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第22章：对象间的联动——观察者模式"><span class="nav-number">11.</span> <span class="nav-text">第22章：对象间的联动——观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式示意代码"><span class="nav-number">11.1.</span> <span class="nav-text">观察者模式示意代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人联机对战游戏结构图"><span class="nav-number">11.2.</span> <span class="nav-text">多人联机对战游戏结构图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK对观察者模式的支持"><span class="nav-number">12.</span> <span class="nav-text">JDK对观察者模式的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal设计模式"><span class="nav-number">13.</span> <span class="nav-text">ThreadLocal设计模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java反射"><span class="nav-number">1.</span> <span class="nav-text">Java反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMLUtil"><span class="nav-number">2.</span> <span class="nav-text">XMLUtil</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式：确保一个类只有一个实例"><span class="nav-number">2.1.</span> <span class="nav-text">单例模式：确保一个类只有一个实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第4章：集中式工厂的实现——简单工厂模式"><span class="nav-number">3.</span> <span class="nav-text">第4章：集中式工厂的实现——简单工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计思想"><span class="nav-number">3.1.</span> <span class="nav-text">设计思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图"><span class="nav-number">3.2.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式的简化"><span class="nav-number">3.3.</span> <span class="nav-text">简单工厂模式的简化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象与使用对象"><span class="nav-number">3.4.</span> <span class="nav-text">创建对象与使用对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第5章：多态工厂的实现——工厂方法模式"><span class="nav-number">4.</span> <span class="nav-text">第5章：多态工厂的实现——工厂方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法模式结构图"><span class="nav-number">4.1.</span> <span class="nav-text">工厂方法模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用工厂方法模式设计的日志记录器"><span class="nav-number">4.2.</span> <span class="nav-text">使用工厂方法模式设计的日志记录器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6章：产品族的创建——抽象工厂模式"><span class="nav-number">5.</span> <span class="nav-text">第6章：产品族的创建——抽象工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#产品等级结构与产品族"><span class="nav-number">5.1.</span> <span class="nav-text">产品等级结构与产品族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式结构图"><span class="nav-number">5.2.</span> <span class="nav-text">抽象工厂模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整解决方案"><span class="nav-number">5.3.</span> <span class="nav-text">完整解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第8章：复杂对象的组装与创建——建造者模式"><span class="nav-number">6.</span> <span class="nav-text">第8章：复杂对象的组装与创建——建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有Director的建造者模式"><span class="nav-number">6.1.</span> <span class="nav-text">有Director的建造者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#省略Director"><span class="nav-number">6.2.</span> <span class="nav-text">省略Director</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钩子方法的引入"><span class="nav-number">6.3.</span> <span class="nav-text">钩子方法的引入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第9章：适配器模式"><span class="nav-number">7.</span> <span class="nav-text">第9章：适配器模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">7.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式的使用场景"><span class="nav-number">7.2.</span> <span class="nav-text">适配器模式的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类图-1"><span class="nav-number">7.3.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电脑适配器的例子"><span class="nav-number">7.4.</span> <span class="nav-text">电脑适配器的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本质"><span class="nav-number">7.5.</span> <span class="nav-text">本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺省适配器模式"><span class="nav-number">7.6.</span> <span class="nav-text">缺省适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第12章：扩展系统功能——装饰模式"><span class="nav-number">8.</span> <span class="nav-text">第12章：扩展系统功能——装饰模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰模式结构图"><span class="nav-number">8.1.</span> <span class="nav-text">装饰模式结构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只有一个具体构建类的装饰模式"><span class="nav-number">8.2.</span> <span class="nav-text">只有一个具体构建类的装饰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">8.3.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#课后题"><span class="nav-number">8.4.</span> <span class="nav-text">课后题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第13章：提供统一入口——外观模式"><span class="nav-number">9.</span> <span class="nav-text">第13章：提供统一入口——外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15章：代理模式"><span class="nav-number">10.</span> <span class="nav-text">第15章：代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现步骤"><span class="nav-number">10.1.</span> <span class="nav-text">实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-动态代理"><span class="nav-number">10.2.</span> <span class="nav-text">Java 动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">10.2.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么这么设计"><span class="nav-number">10.2.2.</span> <span class="nav-text">为什么这么设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他的代理类型"><span class="nav-number">10.3.</span> <span class="nav-text">其他的代理类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第22章：对象间的联动——观察者模式"><span class="nav-number">11.</span> <span class="nav-text">第22章：对象间的联动——观察者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式示意代码"><span class="nav-number">11.1.</span> <span class="nav-text">观察者模式示意代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人联机对战游戏结构图"><span class="nav-number">11.2.</span> <span class="nav-text">多人联机对战游戏结构图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK对观察者模式的支持"><span class="nav-number">12.</span> <span class="nav-text">JDK对观察者模式的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal设计模式"><span class="nav-number">13.</span> <span class="nav-text">ThreadLocal设计模式</span></a></li></ol></div>
             
           </div>
         </section>
