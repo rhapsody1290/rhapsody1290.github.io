@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="连接池," />
+  <meta name="keywords" content="连接池,动态代理," />
 
 
 
@@ -84,40 +84,22 @@
 
 
 
-<meta name="description" content="SQLHelper/**
- * 这是一个操作数据库的工作类
- */
-public class SqlHelperQM {
+<meta name="description" content="设计的时候需要考虑的几点 
 
-    private static final Logger logger = Logger.getLogger(SqlHelperQM.class);
-
-    private static String username = &amp;quot;&amp;quot;;
-    priv">
+首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
 <meta property="og:type" content="article">
-<meta property="og:title" content="连接池">
-<meta property="og:url" content="http://qianmingxs.com/2017/04/10/[数据库]连接池/index.html">
+<meta property="og:title" content="动态代理的连接池">
+<meta property="og:url" content="http://qianmingxs.com/2017/05/01/[数据库]2、动态代理的连接池/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="SQLHelper/**
- * 这是一个操作数据库的工作类
- */
-public class SqlHelperQM {
+<meta property="og:description" content="设计的时候需要考虑的几点 
 
-    private static final Logger logger = Logger.getLogger(SqlHelperQM.class);
-
-    private static String username = &amp;quot;&amp;quot;;
-    priv">
-<meta property="og:updated_time" content="2017-04-10T14:03:15.198Z">
+首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
+<meta property="og:updated_time" content="2017-05-01T15:00:56.460Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="连接池">
-<meta name="twitter:description" content="SQLHelper/**
- * 这是一个操作数据库的工作类
- */
-public class SqlHelperQM {
+<meta name="twitter:title" content="动态代理的连接池">
+<meta name="twitter:description" content="设计的时候需要考虑的几点 
 
-    private static final Logger logger = Logger.getLogger(SqlHelperQM.class);
-
-    private static String username = &amp;quot;&amp;quot;;
-    priv">
+首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
 
 
 
@@ -138,10 +120,10 @@ public class SqlHelperQM {
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/04/10/[数据库]连接池/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/05/01/[数据库]2、动态代理的连接池/"/>
 
 
-  <title> 连接池 | Mr.Qian's Home </title>
+  <title> 动态代理的连接池 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -294,7 +276,7 @@ public class SqlHelperQM {
             
             
               
-                连接池
+                动态代理的连接池
               
             
           </h1>
@@ -306,8 +288,8 @@ public class SqlHelperQM {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-10T20:36:00+08:00" content="2017-04-10">
-              2017-04-10
+            <time itemprop="dateCreated" datetime="2017-05-01T22:32:00+08:00" content="2017-05-01">
+              2017-05-01
             </time>
           </span>
 
@@ -336,8 +318,8 @@ public class SqlHelperQM {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/10/[数据库]连接池/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/10/[数据库]连接池/" itemprop="commentsCount"></span>
+                <a href="/2017/05/01/[数据库]2、动态代理的连接池/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/01/[数据库]2、动态代理的连接池/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -360,264 +342,164 @@ public class SqlHelperQM {
       
 
       
-        <h2 id="SQLHelper"><a href="#SQLHelper" class="headerlink" title="SQLHelper"></a>SQLHelper</h2><pre><code>/**
- * 这是一个操作数据库的工作类
+        <p>设计的时候需要考虑的几点 </p>
+<ol>
+<li><p>首先是数据库连接的存储，要能很容易的管理和获取数据库连接，<strong>将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接</strong>，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连接（优势在于，队列的头部就是目前使用时间最长的连接，方便进行检查，回收这个使用时间超过限制的数据库连接） </p>
+</li>
+<li><p>如何回收分配出去的连接，即当外部的连接调用了 close 方法之后，如何让它返回到数据库连接池中，而不是销毁？<br>答：使用动态代理，当请求一个 Connection 时，返回用户一个代理的 Connection 对象，这样就可以对 close 方法进行拦截，调用了 close 方法，会自动执行代理类中的 invoke 方法， 在 invoke 方法里面就可以实现对实际连接的一些操作了，具体实现请查看 getConnection() 方法。 </p>
+</li>
+<li><p>其实获取连接的时候应当首先检查空闲池是否有空闲连接，再检查空闲连接是否可用，<strong>当数据库连接池没有连接的时候，要进行一次性创建新的连接</strong>，同时要进行检查看是否能进行连接的创建，是否达到了最大值等， 所以数据库的一些配置属性需要在静态代码块中通过 Properties 类读取出来。</p>
+</li>
+</ol>
+<pre>
+/**
+ * 连接池
+ * 空闲队列：获取连接时从空闲队列中获取
+ * 已使用队列：监控正在使用的连接
+ * 连接对象代理：调用Connention对象时并不是真正关闭连接，而是将连接对象
+ *         放入空闲队列。使用了内部列可以直接访问外部列的空闲队列
  */
-public class SqlHelperQM {
+public class ProxyConnectionPool {
 
-    private static final Logger logger = Logger.getLogger(SqlHelperQM.class);
+    private LinkedList<connection> idlelist; // 使用LinkedList实现栈存储数据库连接,存放的空闲连接
+    private LinkedList<connection> usinglist; // 使用LinkedList实现队列存储数据库连接,存放的正在使用的连接
+    private static Properties props; // 读取配置文件信息
+    private static int initialPoolSize; // 初始连接池大小
+    private static int maxPoolSize; // 连接池最大连接数
+    private static int acquireIncrement; // 无连接时，一次性创建连接数
 
-    private static String username = &quot;&quot;;
-    private static String url = &quot;&quot;;
-    private static String driver = &quot;&quot;;
-    private static String password = &quot;&quot;;
-
-    // 加载驱动 只需一次
     static {
-        // 读配置文件
-        Properties pp = new Properties();
-        InputStream is = null;
+        props = new Properties();
         try {
-            is = new FileInputStream(&quot;config/dbInfo.properties&quot;);
-            pp.load(is);
-            url = pp.getProperty(&quot;url&quot;);
-            username = pp.getProperty(&quot;username&quot;);
-            driver = pp.getProperty(&quot;driver&quot;);
-            password = pp.getProperty(&quot;password&quot;);
-            Class.forName(driver);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
+            props.load(new FileInputStream("jdbc.properties"));
+            initialPoolSize = Integer.parseInt(props
+                    .getProperty("initialPoolSize"));
+            maxPoolSize = Integer.parseInt(props.getProperty("maxPoolSize"));
+            acquireIncrement = Integer.parseInt(props
+                    .getProperty("acquireIncrement"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    // 构造函数，在数据库连接池里先创建几个连接
+    // 我看了一下c3p0的源码，里面是用的代理连接 new ，而不是真实的物理连接
+    public ProxyConnectionPool() throws ClassNotFoundException, SQLException {
+        idlelist = new LinkedList<connection>();
+        usinglist = new LinkedList<connection>();
+        Class.forName(props.getProperty("MySQLdriverClass"));
+        for (int i = 0; i < initialPoolSize; i++) {
+            Connection conn = DriverManager.getConnection(props
+                    .getProperty("MySQLurl"), props
+                    .getProperty("MySQLusername"), props
+                    .getProperty("MySQLpassword"));
+            idlelist.addLast(conn);
+        }
+    }
+
+    // 获取数据库连接
+    public Connection getConnection() throws SQLException {
+        if (idlelist.size() > 0) {
+            usinglist.addFirst(idlelist.getLast()); // 只是获取第一个连接并没有删除
+            Connection conn = idlelist.removeLast(); // 获取第一个连接并删除
+            // return conn; //返回真实的物理连接
+
+            // 返回一个真实物理连接的动态代理连接对象
+            <font color="red">return (Connection) Proxy.newProxyInstance(ProxyConnection.class
+                    .getClassLoader(), new Class<?>[] { Connection.class },
+                    new ProxyConnection(conn));</font>
+        } else {
+            // 创建新的数据库连接
+            boolean flag = dynamicIncrement();
+            if (flag) {
+                usinglist.add(idlelist.getLast()); // 只是获取第一个连接并没有删除
+                Connection conn = idlelist.removeLast(); // 获取第一个连接并删除
+                // return conn; //返回真实的物理连接
+
+                // 返回一个真实物理连接的动态代理连接对象
+                return (Connection) Proxy.newProxyInstance(
+                        ProxyConnection.class.getClassLoader(),
+                        new Class[] { Connection.class }, new ProxyConnection(
+                                conn));
+            } else {
+                throw new SQLException("没连接了");
             }
         }
     }
 
-    // 得到连接
-    public static Connection getConnection() {
-        Connection ct = null;
-        try {
-            ct = DriverManager.getConnection(url, username, password);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+    // 连接池里无连接，动态增长
+    private boolean dynamicIncrement() throws SQLException {
+        int num = idlelist.size() + usinglist.size();
+        int num2 = maxPoolSize - num;
+        // 如果可以创建连接，而且创建的连接数就是acquireIncrement
+        if (num2 >= acquireIncrement) {
+            for (int i = 0; i < acquireIncrement; i++) {
+                Connection conn = DriverManager.getConnection(props
+                        .getProperty("MySQLurl"), props
+                        .getProperty("MySQLusername"), props
+                        .getProperty("MySQLpassword"));
+                idlelist.addLast(conn);
+            }
+            return true;
         }
-        return ct;
+        // 如果可以创建连接,但是创建的连接数只能是num2个
+        if (num2 > 0) {
+            for (int i = 0; i < num2; i++) {
+                Connection conn = DriverManager.getConnection(props
+                        .getProperty("MySQLurl"), props
+                        .getProperty("MySQLusername"), props
+                        .getProperty("MySQLpassword"));
+                idlelist.addLast(conn);
+            }
+            return true;
+        }
+        return false;
     }
 
-    // 统一的select语句，这种方法可以满足规则：哪里使用资源哪里关闭资源。
-    public static List executeQuery2(String sql, String[] parms) {
-        List list = new ArrayList();
-        Connection conn = null;
-        PreparedStatement psmt = null; 
-        ResultSet rs = null;
-        try{
-            //获得连接
-            conn = getConnection();
-            if(conn == null){
-                return list;
-            }
-            psmt = conn.prepareStatement(sql);    
-            if(psmt == null){
-                return list;
-            }
-            if (parms != null) {
-                for (int i = 0; i &lt; parms.length; i++) {
-                    psmt.setObject((i + 1), parms[i]);
-                }
-            }
-            rs = psmt.executeQuery();    
-            if(rs == null){
-                return list;
-            }
-            ResultSetMetaData rmd = rs.getMetaData();
-            if(rmd == null){
-                return list;
-            }
-            int column = rmd.getColumnCount(); // 得到查询语句会得到多少列
-            while (rs.next()) {
-                Object obj[] = new Object[column]; // 对象数组 一个数组对象代表一行数据
-                for (int i = 0; i &lt; column; i++) {
-                    obj[i] = rs.getObject(i + 1);
-                }
-                list.add(obj);
-            }
-        }catch (Exception e) {
-            logger.error(e.getMessage(),e);
-            return list;
-        }finally{
-            close(rs, psmt, conn); // 关闭资源
+    // Connection的动态代理类
+    class ProxyConnection implements InvocationHandler {
+        private Connection conn;
+
+        public ProxyConnection(Connection conn) {
+            this.conn = conn;
         }
 
-        return list;
-    }
-
-    public static List&lt;Map&gt; executeQuery3(String sql, String[] parms) {
-        List&lt;Map&gt; list = new ArrayList&lt;Map&gt;();
-        Connection conn = null;
-        PreparedStatement psmt = null; 
-        ResultSet rs = null;
-        try{
-            //获得连接
-            conn = getConnection();
-            if(conn == null){
-                return list;
-            }
-            psmt = conn.prepareStatement(sql);    
-            if(psmt == null){
-                return list;
-            }
-            if (parms != null) {
-                for (int i = 0; i &lt; parms.length; i++) {
-                    psmt.setObject((i + 1), parms[i]);
-                }
-            }
-            rs = psmt.executeQuery();    
-            if(rs == null){
-                return list;
-            }
-            //通过访问表数据来获取记录集元数据
-            ResultSetMetaData rmd = rs.getMetaData();
-            if(rmd == null){
-                return list;
-            }
-            // 得到查询结果会有多少列
-            int column = rmd.getColumnCount(); 
-            String[] lables = new String[column];
-            for(int i = 0; i &lt; column; i++){
-                lables[i] = rmd.getColumnName(i + 1);
-            }
-            while (rs.next()) {
-                // 一行数据用一个Map表示
-                Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
-                for (int i = 0; i &lt; column; i++) {
-                    Object value = rs.getObject(i + 1);
-                    map.put(lables[i], value);
-                }
-                list.add(map);
-            }
-        }catch (Exception e) {
-            logger.error(e.getMessage(),e);
-            return list;
-        }finally{
-            close(rs, psmt, conn); // 关闭资源
+        // 关闭数据库连接，放回到空闲池中
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args)
+                throws Throwable {
+            // TODO Auto-generated method stub
+            // 分配出去的代理连接调用了close方法，进行拦截，实现我们自己想要的操作
+            <font color="red">if (method.getName().equals("close")) {
+                // conn.close(); // 这一句的话就直接关闭连接了，所以不写
+                // 应该事先的操作是将 conn 放到空闲池中去，从使用池中移除
+                System.out.println(idlelist.size());
+                System.out.println(usinglist.size());
+                idlelist.addLast(conn);
+                usinglist.remove(conn);
+                System.out.println(idlelist.size());
+                System.out.println(usinglist.size());
+                return null;
+            }</font>
+            // 其他方法仍然调用真实对象的方法
+            return method.invoke(conn, args);
         }
-        return list;
-    }
-
-    public static boolean executeUpdate(String sql, String[] paras) {
-        boolean result = false;
-        // 创建一个ps
-        Connection ct = null;
-        PreparedStatement ps = null;
-        try {
-            ct = getConnection();
-            if(ct == null){
-                return result;
-            }
-            ps = ct.prepareStatement(sql);
-            if(ps == null){
-                return result;
-            }
-            // 给？赋值
-            if (paras != null) {
-                for (int i = 0; i &lt; paras.length; i++) {
-                    ps.setString(i + 1, paras[i]);
-                }
-            }
-            // 执行
-            int r = ps.executeUpdate();
-            if(r &gt; 0){
-                result = true;
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return result;
-        } finally {
-            close(null, ps, ct);
-        }
-        return result;
-
-    }
-
-    public static void close(ResultSet rs, Statement statement, Connection ct) {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage(), e);
-            }
-            rs = null;
-        }
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage(), e);
-            }
-            ct = null;
-        }
-
-        if (ct != null) {
-            try {
-                ct.close();
-            } catch (SQLException e) {
-                logger.error(e.getMessage(), e);
-            }
-            ct = null;
-        }
-    }
-
-    public static void main(String[] args) {
-        System.setProperty(&quot;CATALINA_HOME&quot;,System.getenv(&quot;CATALINA_HOME&quot;));
-        PropertyConfigurator.configure(&quot;config/log4j.properties&quot;);
-        boolean result = SqlHelperQM.executeUpdate(&quot;update audit_user set jctID = ? where userID = ? &quot;, new String[]{&quot;1&quot;,&quot;1&quot;});
-        System.out.println(result);
     }
 
 }
-</code></pre><h2 id="自己实现的简单连接池"><a href="#自己实现的简单连接池" class="headerlink" title="自己实现的简单连接池"></a>自己实现的简单连接池</h2><p>LinkedList作为连接池</p>
-<pre><code>public class SimpleConnectionPool {
-    //创建一个连接池
-    private static LinkedList&lt;Connection&gt; pool = new LinkedList&lt;Connection&gt;(); 
+</connection></connection></connection></connection></pre>
 
-    //初始化10个连接
-    static{
-        try {
-            for (int i = 0; i &lt; 10; i++) {
-                Connection conn = SqlHelperQM.getConnection();//得到一个连接
-                pool.add(conn);
-            }
-        } catch (Exception e) {
-            throw new ExceptionInInitializerError(&quot;数据库连接失败，请检查配置&quot;);
-        }
-    }
-
-    //从池中获取一个连接
-    public static Connection getConnectionFromPool(){
-        return pool.removeFirst();//移除一个连接对象
-    }
-
-    //释放资源
-    public static void release(Connection conn){
-        pool.addLast(conn);
-    }
-
-    public static void main(String[] args) throws SQLException {
-        SimpleConnectionPool pool = new SimpleConnectionPool();
-        Connection con = pool.getConnectionFromPool();
-        PreparedStatement ps = con.prepareStatement(&quot;select * from audit_user&quot;);
-        ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            System.out.println(rs.getString(4));
-        }
-        rs.close();
-    }
-}
+<p>配置文件 jdbc.properties</p>
+<pre><code># mysql database driver
+MySQLdriverClass=com.mysql.jdbc.Driver
+MySQLurl=jdbc:mysql://127.0.0.1/test?useSSL=false
+MySQLusername=root
+MySQLpassword=root
+initialPoolSize=3
+minPoolSize=2
+maxPoolSize=50
+acquireIncrement=3
 </code></pre>
       
     </div>
@@ -642,6 +524,8 @@ public class SqlHelperQM {
           
             <a href="/tags/连接池/" rel="tag">#连接池</a>
           
+            <a href="/tags/动态代理/" rel="tag">#动态代理</a>
+          
         </div>
       
 
@@ -649,16 +533,16 @@ public class SqlHelperQM {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/09/[Git]协作开发/" rel="next" title="协作开发">
-                <i class="fa fa-chevron-left"></i> 协作开发
+              <a href="/2017/04/27/[数据结构与算法]平衡二叉树最小节点个数/" rel="next" title="平衡二叉树最小节点个数">
+                <i class="fa fa-chevron-left"></i> 平衡二叉树最小节点个数
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/11/[Spring MVC]消息转换机制/" rel="prev" title="消息转换机制">
-                消息转换机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/01/[数据库]3、C3P0连接池的使用/" rel="prev" title="3、C3P0连接池的使用">
+                3、C3P0连接池的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -685,8 +569,8 @@ public class SqlHelperQM {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/10/[数据库]连接池/"
-           data-title="连接池" data-url="http://qianmingxs.com/2017/04/10/[数据库]连接池/">
+      <div class="ds-thread" data-thread-key="2017/05/01/[数据库]2、动态代理的连接池/"
+           data-title="动态代理的连接池" data-url="http://qianmingxs.com/2017/05/01/[数据库]2、动态代理的连接池/">
       </div>
     
   </div>
@@ -731,7 +615,7 @@ public class SqlHelperQM {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-count">112</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -748,7 +632,7 @@ public class SqlHelperQM {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -777,7 +661,7 @@ public class SqlHelperQM {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQLHelper"><span class="nav-number">1.</span> <span class="nav-text">SQLHelper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己实现的简单连接池"><span class="nav-number">2.</span> <span class="nav-text">自己实现的简单连接池</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

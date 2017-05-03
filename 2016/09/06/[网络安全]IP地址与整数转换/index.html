@@ -103,7 +103,7 @@ byte -&amp;gt; int
 这里有两种情况，一种是要求保持值不变，例如进行数值计算，可采用强制类型转换：int i = (int) aByte; 
 另一种是要求保持最低字节中">
 <meta property="og:image" content="http://i.imgur.com/TWMLfKy.png">
-<meta property="og:updated_time" content="2016-09-07T03:19:26.160Z">
+<meta property="og:updated_time" content="2017-04-29T06:57:17.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IP地址与整数转换">
 <meta name="twitter:description" content="Java中byte, int的转换int -&amp;gt; byte
@@ -396,7 +396,7 @@ System.out.println(b);
 public synchronized int read() {
     return (pos &lt; count) ? (buf[pos++] &amp; 0xff) : -1;
 }
-</code></pre><h3 id="int-lt-gt-byte"><a href="#int-lt-gt-byte" class="headerlink" title="int &lt;-&gt; byte[]"></a>int &lt;-&gt; byte[]</h3><p>方法一：（推荐）</p>
+</code></pre><h3 id="int-lt-gt-byte-（一个整数4个字节）"><a href="#int-lt-gt-byte-（一个整数4个字节）" class="headerlink" title="int &lt;-&gt; byte[]（一个整数4个字节）"></a>int &lt;-&gt; byte[]（一个整数4个字节）</h3><p>方法一：（推荐）</p>
 <pre>
 <font color="red">//将整数转为一个byte数组，字节数组的低位是整型的低字节位</font>
 public static byte[] toByteArray(int iSource, int iArrayLen) {
@@ -415,13 +415,13 @@ public static byte[] toByteArray(int iSource, int iArrayLen) {
 </ul>
 <p>方法二：</p>
 <pre><code>private static byte[] int2byte(int i) {
-        byte[] bytes = new byte[4];
-        bytes[0] = (byte) (0xff &amp; i);
-        bytes[1] = (byte) ((0xff00 &amp; i) &gt;&gt; 8);
-        bytes[2] = (byte) ((0xff0000 &amp; i) &gt;&gt; 16);
-        bytes[3] = (byte) ((0xff000000 &amp; i) &gt;&gt; 24);
-        return bytes;
-    }
+    byte[] bytes = new byte[4];
+    bytes[0] = (byte) (0xff &amp; i);
+    bytes[1] = (byte) ((0xff00 &amp; i) &gt;&gt; 8);
+    bytes[2] = (byte) ((0xff0000 &amp; i) &gt;&gt; 16);
+    bytes[3] = (byte) ((0xff000000 &amp; i) &gt;&gt; 24);
+    return bytes;
+}
 </code></pre><h3 id="byte-lt-gt-int"><a href="#byte-lt-gt-int" class="headerlink" title="byte[] &lt;-&gt; int"></a>byte[] &lt;-&gt; int</h3><p>方法一：（推荐）</p>
 <pre>
 <font color="red">// 将byte数组转为一个整数,字节数组的低位是整型的低字节位</font>
@@ -656,7 +656,7 @@ for(byte b : bytes){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">110</span>
+              <span class="site-state-item-count">112</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -673,7 +673,7 @@ for(byte b : bytes){
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -702,7 +702,7 @@ for(byte b : bytes){
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中byte-int的转换"><span class="nav-number">1.</span> <span class="nav-text">Java中byte, int的转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int-gt-byte"><span class="nav-number">1.1.</span> <span class="nav-text">int -> byte</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byte-gt-int"><span class="nav-number">1.2.</span> <span class="nav-text">byte -> int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解★★★★★"><span class="nav-number">1.3.</span> <span class="nav-text">理解★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int-InputStream-read-读取字节流内部实现"><span class="nav-number">1.4.</span> <span class="nav-text">int InputStream.read() 读取字节流内部实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int-lt-gt-byte"><span class="nav-number">1.5.</span> <span class="nav-text">int <-> byte[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byte-lt-gt-int"><span class="nav-number">1.6.</span> <span class="nav-text">byte[] <-> int</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IpUtil（IP地址与整数转换工具）"><span class="nav-number">2.</span> <span class="nav-text">IpUtil（IP地址与整数转换工具）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#框图"><span class="nav-number">2.1.</span> <span class="nav-text">框图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址转换为整数"><span class="nav-number">2.2.</span> <span class="nav-text">IP地址转换为整数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数转换为IP地址"><span class="nav-number">2.3.</span> <span class="nav-text">整数转换为IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接转换（不利用IpUtil，利于理解）★★★★★★"><span class="nav-number">2.4.</span> <span class="nav-text">直接转换（不利用IpUtil，利于理解）★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IpUtil（转换成字节数组）"><span class="nav-number">2.5.</span> <span class="nav-text">IpUtil（转换成字节数组）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文件"><span class="nav-number">3.</span> <span class="nav-text">参考文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中byte-int的转换"><span class="nav-number">1.</span> <span class="nav-text">Java中byte, int的转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int-gt-byte"><span class="nav-number">1.1.</span> <span class="nav-text">int -> byte</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byte-gt-int"><span class="nav-number">1.2.</span> <span class="nav-text">byte -> int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解★★★★★"><span class="nav-number">1.3.</span> <span class="nav-text">理解★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int-InputStream-read-读取字节流内部实现"><span class="nav-number">1.4.</span> <span class="nav-text">int InputStream.read() 读取字节流内部实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int-lt-gt-byte-（一个整数4个字节）"><span class="nav-number">1.5.</span> <span class="nav-text">int <-> byte[]（一个整数4个字节）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byte-lt-gt-int"><span class="nav-number">1.6.</span> <span class="nav-text">byte[] <-> int</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IpUtil（IP地址与整数转换工具）"><span class="nav-number">2.</span> <span class="nav-text">IpUtil（IP地址与整数转换工具）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#框图"><span class="nav-number">2.1.</span> <span class="nav-text">框图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址转换为整数"><span class="nav-number">2.2.</span> <span class="nav-text">IP地址转换为整数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数转换为IP地址"><span class="nav-number">2.3.</span> <span class="nav-text">整数转换为IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接转换（不利用IpUtil，利于理解）★★★★★★"><span class="nav-number">2.4.</span> <span class="nav-text">直接转换（不利用IpUtil，利于理解）★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IpUtil（转换成字节数组）"><span class="nav-number">2.5.</span> <span class="nav-text">IpUtil（转换成字节数组）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文件"><span class="nav-number">3.</span> <span class="nav-text">参考文件</span></a></li></ol></div>
             
           </div>
         </section>
