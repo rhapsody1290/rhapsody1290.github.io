@@ -1,0 +1,1094 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="备份和删除使用Java的 Runtime 类的 exec 方法来执行命令行
+Process process = Runtime.getRuntime().exec(command);
+但是命令行中无法识别管道符号 &amp;lt;，所以必须获得子进程的输入流和输出流写文件
+清空数据库通过 show tables 获得数据库中所有表，然后通过 truncate tableName 命令来清空数据库，由于项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java进行数据库备份、回复、删除">
+<meta property="og:url" content="http://qianmingxs.com/2017/05/05/[数据库]Java进行数据库备份、回复、删除/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="备份和删除使用Java的 Runtime 类的 exec 方法来执行命令行
+Process process = Runtime.getRuntime().exec(command);
+但是命令行中无法识别管道符号 &amp;lt;，所以必须获得子进程的输入流和输出流写文件
+清空数据库通过 show tables 获得数据库中所有表，然后通过 truncate tableName 命令来清空数据库，由于项目">
+<meta property="og:updated_time" content="2017-05-05T08:58:37.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java进行数据库备份、回复、删除">
+<meta name="twitter:description" content="备份和删除使用Java的 Runtime 类的 exec 方法来执行命令行
+Process process = Runtime.getRuntime().exec(command);
+但是命令行中无法识别管道符号 &amp;lt;，所以必须获得子进程的输入流和输出流写文件
+清空数据库通过 show tables 获得数据库中所有表，然后通过 truncate tableName 命令来清空数据库，由于项目">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/05/05/[数据库]Java进行数据库备份、回复、删除/"/>
+
+
+  <title> Java进行数据库备份、回复、删除 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java进行数据库备份、回复、删除
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-05T00:00:00+08:00" content="2017-05-05">
+              2017-05-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/05/[数据库]Java进行数据库备份、回复、删除/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/05/[数据库]Java进行数据库备份、回复、删除/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>备份和删除使用Java的 Runtime 类的 exec 方法来执行命令行</p>
+<pre><code>Process process = Runtime.getRuntime().exec(command);
+</code></pre><p>但是命令行中无法识别管道符号 <code>&lt;</code>，所以必须获得子进程的输入流和输出流写文件</p>
+<p>清空数据库通过 <code>show tables</code> 获得数据库中所有表，然后通过 <code>truncate tableName</code> 命令来清空数据库，由于项目中使用 Hibernate 框架，所以利用 Hibernate 执行原生sql语句</p>
+<h2 id="DatabaseBackupUtils"><a href="#DatabaseBackupUtils" class="headerlink" title="DatabaseBackupUtils"></a>DatabaseBackupUtils</h2><p>DatabaseBackupUtils 是数据库备份和还原的工具类，可以通用</p>
+<pre><code>public class DatabaseBackupUtils {  
+
+    /** MySQL安装目录的Bin目录的绝对路径 */  
+    private String mysqlBinPath;  
+    /** 访问MySQL数据库的用户名 */  
+    private String username;  
+    /** 访问MySQL数据库的密码 */  
+    private String password;  
+
+    public String getMysqlBinPath() {  
+        return mysqlBinPath;  
+    }  
+    public void setMysqlBinPath(String mysqlBinPath) {  
+        this.mysqlBinPath = mysqlBinPath;  
+    }  
+    public String getUsername() {  
+        return username;  
+    }  
+    public void setUsername(String username) {  
+        this.username = username;  
+    }  
+    public String getPassword() {  
+        return password;  
+    }  
+    public void setPassword(String password) {  
+        this.password = password;  
+    }  
+    public DatabaseBackupUtils(String mysqlBinPath, String username, String password) {  
+        if (!mysqlBinPath.endsWith(File.separator)) {  
+            mysqlBinPath = mysqlBinPath + File.separator;  
+        }  
+        this.mysqlBinPath = mysqlBinPath;  
+        this.username = username;  
+        this.password = password;  
+    }  
+    /** 
+     * 备份数据库 
+     *  
+     * @param output 
+     *            输出流 
+     * @param dbname 
+     *            要备份的数据库名 
+     */  
+    public void backup(OutputStream output, String dbname) {  
+
+        /**
+         * 相当于在运行中输入：
+         * cmd /c D:/MySQL/bin\mysqldump -uroot -proot --set-charset=utf8 audit
+         * 注意：/c表示运行完命令后关闭进程，可以测试cmd /c ping localhost与cmd ping localhost的区别
+         */
+        String command = &quot;cmd /c &quot; + mysqlBinPath + &quot;mysqldump -u&quot; + username  
+                + &quot; -p&quot; + password + &quot; --all-tablespaces --add-drop-database --set-charset=utf8 &quot; + dbname;  
+        System.out.println(command);
+        PrintWriter writer = null;  
+        BufferedReader reader = null;  
+        try {  
+            writer = new PrintWriter(new OutputStreamWriter(output, &quot;utf8&quot;));  
+            /**
+             * 执行mysqldump命令后会向子进程的缓存区写数据，以前在Dos命令行中通过重定向的方式将数据写入到文件中，
+             * 在这里必须从进程的读取数据，并写入sql文件，即生成备份文件 注：如果不对控制台信息进行读出，则会导致进程堵塞无法运行
+             * 把进程执行中的控制台输出信息写入.sql文件，即生成了备份文件。
+             */
+            Process process = Runtime.getRuntime().exec(command);  
+            //从缓存区中读数据
+            reader = new BufferedReader(new InputStreamReader(process.getInputStream(), &quot;utf8&quot;));  
+            String line = null;  
+            //边读边写
+            while ((line = reader.readLine()) != null) {  
+                writer.println(line);  
+            }  
+            writer.flush();  
+        } catch (UnsupportedEncodingException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } finally {  
+            try {  
+                if (reader != null) {  
+                    reader.close();  
+                }  
+                if (writer != null) {  
+                    writer.close();  
+                }  
+            } catch (IOException e) {  
+                e.printStackTrace();  
+            }  
+        }  
+    }  
+    /** 
+     * 备份数据库，如果指定路径的文件不存在会自动生成 
+     *  
+     * @param dest 
+     *            备份文件的路径 
+     * @param dbname 
+     *            要备份的数据库 
+     */  
+    public void backup(String dest, String dbname) {  
+        try {  
+            OutputStream out = new FileOutputStream(dest);  
+            backup(out, dbname);  
+            System.out.println(&quot;备份成功&quot;);
+        } catch (FileNotFoundException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+    /** 
+     * 恢复数据库 
+     *  
+     * @param input 
+     *            输入流 
+     * @param dbname 
+     *            数据库名 
+     */  
+    public void restore(InputStream input, String dbname) { 
+        /**
+         * 在命令行中使用如下命令来实现恢复 cmd /c D:/MySQL/bin\mysql -uroot -proot test &lt; test.sql
+         * 但是在Java中无法识别管道符号，于是向缓存区中写test.sql数据，来实现管道的效果
+         */
+        String command = &quot;cmd /c &quot; + mysqlBinPath + &quot;mysql -u&quot; + username  
+                + &quot; -p&quot; + password + &quot; &quot; + dbname;  
+        System.out.println(command);
+        try {  
+            Process process = Runtime.getRuntime().exec(command);  
+            OutputStream out = process.getOutputStream();  
+            String line = null;  
+            String outStr = null;  
+            StringBuffer sb = new StringBuffer(&quot;&quot;);  
+            BufferedReader br = new BufferedReader(new InputStreamReader(input,  
+                    &quot;utf8&quot;));  
+            while ((line = br.readLine()) != null) {  
+                sb.append(line + &quot;\r\n&quot;);  
+            }  
+            outStr = sb.toString();
+            //System.out.println(outStr);
+            OutputStreamWriter writer = new OutputStreamWriter(out, &quot;utf8&quot;);  
+            writer.write(outStr);  
+            writer.flush();  
+            out.close();  
+            br.close();  
+            writer.close();  
+        } catch (UnsupportedEncodingException e) {  
+            e.printStackTrace();  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+    /** 
+     * 恢复数据库 
+     *  
+     * @param dest 
+     *            备份文件的路径 
+     * @param dbname 
+     *            数据库名 
+     * @throws FileNotFoundException 
+     */  
+    public void restore(String dest, String dbname) throws FileNotFoundException {  
+        InputStream input = new FileInputStream(dest);  
+        restore(input, dbname);  
+        System.out.println(&quot;恢复成功&quot;);
+    }  
+
+    public static void main(String[] args) throws SQLException {  
+        String binPath = &quot;D:/MySQL/bin&quot;;  
+        String userName = &quot;root&quot;;  
+        String pwd = &quot;root&quot;;  
+        DatabaseBackupUtils bak = new DatabaseBackupUtils(binPath, userName, pwd);  
+        //bak.backup(&quot;c:/users/asus/desktop/test.sql&quot;, &quot;test&quot;);  
+        //bak.restore(&quot;c:/users/asus/desktop/test.sql&quot;, &quot;test&quot;); 
+    }  
+}  
+</code></pre><h2 id="IDatabaseBackupDao、DatabaseBackupDaoImpl"><a href="#IDatabaseBackupDao、DatabaseBackupDaoImpl" class="headerlink" title="IDatabaseBackupDao、DatabaseBackupDaoImpl"></a>IDatabaseBackupDao、DatabaseBackupDaoImpl</h2><p>DatabaseBackupDaoImpl 利用Hibernate执行sql语句清空数据库，分为两个步骤：</p>
+<p>1、获得表名<br>2、清空数据库</p>
+<p>IDatabaseBackupDao</p>
+<pre><code>public interface IDatabaseBackupDao extends ICommonDao&lt;AuditAlert&gt;{
+    List&lt;String&gt; getTables();
+    void clear(List&lt;String&gt; tables);
+}
+</code></pre><p>DatabaseBackupDaoImpl</p>
+<pre><code>@Component
+public class DatabaseBackupDaoImpl extends CommonDaoImpl&lt;AuditAlert&gt; implements
+        IDatabaseBackupDao {
+
+    @Override
+    public List&lt;String&gt; getTables() {
+
+        List&lt;String&gt; list = (List&lt;String&gt;) this.getHibernateTemplate().execute(
+                new HibernateCallback() {
+
+                    @Override
+                    public Object doInHibernate(Session session)
+                            throws HibernateException, SQLException {
+
+                        List list = session
+                                .createSQLQuery(
+                                        &quot;select table_name from information_schema.TABLES where TABLE_SCHEMA = &apos;audit&apos;;&quot;)
+                                .list();
+                        return list;
+                    }
+
+                });
+        return list;
+    }
+
+    @Override
+    public void clear(List&lt;String&gt; tables) {
+        final List&lt;String&gt; f = tables;
+        this.getHibernateTemplate().execute(new HibernateCallback() {
+
+            Set&lt;String&gt; ignore = new HashSet&lt;String&gt;(Arrays.asList(&quot;remote_ip&quot;,
+                    &quot;audit_user&quot;,&quot;audit_user_role&quot;,&quot;audit_role&quot;,&quot;audit_role_popedom&quot;,
+                    &quot;audit_popedom&quot;));
+
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+                for (String tableName : f) {
+                    if(ignore.contains(tableName)){
+                        continue;
+                    }
+                    session.createSQLQuery(&quot;truncate &quot; + tableName).executeUpdate();
+                }
+                return null;
+            }
+        });
+
+    }
+}
+</code></pre><h2 id="IDataBackupService、DataBackupServiceImpl"><a href="#IDataBackupService、DataBackupServiceImpl" class="headerlink" title="IDataBackupService、DataBackupServiceImpl"></a>IDataBackupService、DataBackupServiceImpl</h2><p>IDataBackupService 定义了三个方法</p>
+<p>1、备份数据库<br>2、恢复数据库<br>3、清空数据库</p>
+<p>其中备份数据库通过 DatabaseBackupUtils 工具类实现，恢复数据库由于需要连接数据库，采用 IDatabaseBackupDao 类来实现</p>
+<p>IDataBackupService</p>
+<pre><code>public interface IDataBackupService {
+    /**
+     * 备份数据库
+     * @throws IOException
+     */
+    void doBackup() throws IOException;
+    /**
+     * 恢复数据库
+     * @throws FileNotFoundException 
+     */
+    void doRestore() throws FileNotFoundException;
+    /**
+     * 清空数据库
+     */
+    void doClear();
+}
+</code></pre><p>DataBackupServiceImpl</p>
+<pre><code>@Service
+public class DataBackupServiceImpl implements IDataBackupService {
+
+    private static final String DB_USER = &quot;root&quot;;
+    private static final String DB_PWD = &quot;root&quot;;
+    private static final String DB_NAME = &quot;audit&quot;;
+    private static String MYSQL_BIN_PATH;
+
+    static{
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(&quot;c:/AuditMysqlBinPath.txt&quot;)));
+            MYSQL_BIN_PATH = br.readLine();
+            if(br != null){
+                br.close();
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    @Autowired
+    IDatabaseBackupDao iDatabaseBackupDao;
+    private static final DatabaseBackupUtils databaseBackupUtils = new DatabaseBackupUtils(MYSQL_BIN_PATH,DB_USER,DB_PWD);
+
+    /**
+     * 备份数据库
+     */
+    @Override
+    public void doBackup() throws IOException {
+        //如果audit.sql文件存在，可能是刚点击备份，所以不允许备份
+        File file = new File(&quot;c:/audit.sql&quot;);
+        if(file.exists()){
+            throw new IllegalStateException();
+        }
+        databaseBackupUtils.backup(&quot;c:/audit.sql&quot;, &quot;audit&quot;);
+    }
+
+    @Override
+    public void doClear() {
+        List&lt;String&gt; tables = iDatabaseBackupDao.getTables();
+        System.out.println(tables);
+        iDatabaseBackupDao.clear(tables);
+    }
+
+    @Override
+    public void doRestore() throws FileNotFoundException {
+        databaseBackupUtils.restore(&quot;c:/audit.sql&quot;, &quot;audit&quot;);
+    }
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag">#数据库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/[数据库]3、C3P0连接池的使用/" rel="next" title="3、C3P0连接池的使用">
+                <i class="fa fa-chevron-left"></i> 3、C3P0连接池的使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/05/[Maven]利用Maven下载Jar包/" rel="prev" title="利用Maven下载Jar包">
+                利用Maven下载Jar包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/05/[数据库]Java进行数据库备份、回复、删除/"
+           data-title="Java进行数据库备份、回复、删除" data-url="http://qianmingxs.com/2017/05/05/[数据库]Java进行数据库备份、回复、删除/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DatabaseBackupUtils"><span class="nav-number">1.</span> <span class="nav-text">DatabaseBackupUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDatabaseBackupDao、DatabaseBackupDaoImpl"><span class="nav-number">2.</span> <span class="nav-text">IDatabaseBackupDao、DatabaseBackupDaoImpl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDataBackupService、DataBackupServiceImpl"><span class="nav-number">3.</span> <span class="nav-text">IDataBackupService、DataBackupServiceImpl</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+</body>
+</html>

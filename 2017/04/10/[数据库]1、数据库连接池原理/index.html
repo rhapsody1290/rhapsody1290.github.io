@@ -110,7 +110,7 @@
 123456789101112131415161718192021public class JDBCTest &amp;#123;	public static void main(String[] args) throws ClassNotFo">
 <meta property="og:image" content="http://i.imgur.com/C3Ps0ly.png">
 <meta property="og:image" content="http://i.imgur.com/hJnhxUG.png">
-<meta property="og:updated_time" content="2017-05-01T15:09:35.582Z">
+<meta property="og:updated_time" content="2017-05-03T14:25:38.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1、数据库连接池原理">
 <meta name="twitter:description" content="早期我们怎么进行数据库操作一般来说，Java应用程序访问数据库的过程是：
@@ -433,12 +433,33 @@ public class Test2 {
 <p>这就是数据库连接池的原理，它大大提供了数据库连接的利用率，减小了内存吞吐的开销。我们在开发过程中，就不需要再关心数据库连接的问题，自然有数据库连接池帮助我们处理，这回放心了吧。但连接池需要考虑的问题不仅仅如此，下面我们就看看还有哪些问题需要考虑。</p>
 <h2 id="连接池还要考虑更多的问题"><a href="#连接池还要考虑更多的问题" class="headerlink" title="连接池还要考虑更多的问题"></a>连接池还要考虑更多的问题</h2><p>1、并发问题</p>
 <p>为了使连接管理服务具有最大的通用性，必须考虑多线程环境，即并发问题。这个问题相对比较好解决，因为java语言自身提供了对并发管理的支持，使用synchronized关键字即可确保线程是同步的。使用方法为直接在类方法前面加上synchronized关键字，如：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public synchronized Connection getConnection（）</div><div class="line"><span class="code">```</span> </div><div class="line"></div><div class="line">2、多数据库服务器和多用户</div><div class="line"></div><div class="line">对于大型的企业级应用，常常需要同时连接不同的数据库（如连接Oracle和sybase）。如何连接不同的数据库呢？我们采用的策略是：*<span class="strong">*设计一个符合单例模式的连接池管理类*</span>*</div><div class="line"></div><div class="line"><span class="bullet">* </span>在连接池管理类的唯一实例被创建时*<span class="strong">*读取一个资源文件*</span><span class="strong">*，其中资源文件中存放着*</span><span class="strong">*多个数据库的url地址等信息*</span>*</div><div class="line"><span class="bullet">* </span>根据资源文件提供的信息，*<span class="strong">*创建多个连接池类的实例*</span><span class="strong">*，每一个实例都是一个特定数据库的连接池。连接池管理类实例为*</span><span class="strong">*每个连接池实例取一个名字*</span><span class="strong">*，通过不同的名字来管理不同的连接池。</span></div><div class="line"></div><div class="line">对于同一个数据库有多个用户使用不同的名称和密码访问的情况，也可以通过资源文件处理，即在资源文件中设置多个具有相同url地址，但具有不同用户名和密码的数据库连接信息。</div><div class="line"><span class="code"> </span></div><div class="line">3、事务处理</div><div class="line"></div><div class="line">我们知道，事务具有原子性，此时要求对数据库的操作符合"all-all-nothing"原则，即*<span class="strong">*对于一组sql语句要么全做，要么全不做。*</span>*</div><div class="line"></div><div class="line">在 Java 语言中，*<span class="strong">*Connection 类本身提供了对事务的支持，可以通过设置 Connection 的 autocommit 属性为 false，然后显式的调用commit或rollback方法来实现*</span><span class="strong">*。但要高效的进行connection复用，就必须提供相应的事务支持机制。&lt;font color='red'&gt;可采用每一个事务独占一个连接来实现&lt;/font&gt;，这种方法可以大大降低事务管理的复杂性（使用ThreadLocal实现线程范围内的单例，每个线程一个）</span></div></pre></td></tr></table></figure>
-<p>/**</p>
+<pre><code>public synchronized Connection getConnection（）
+</code></pre><p>2、多数据库服务器和多用户</p>
+<p>对于大型的企业级应用，常常需要同时连接不同的数据库（如连接Oracle和sybase）。如何连接不同的数据库呢？我们采用的策略是：<strong>设计一个符合单例模式的连接池管理类</strong></p>
 <ul>
-<li>事务显示提交，出现异常回滚；</li>
-<li>事务中的sql语句要么全部执行，要不全部不执行<br>*/<br>connection.setAutoCommit(false);<br>try {<br> int result = statement.executeUpdate();//成功<br> int a = 1/0;//异常<br> connection.commit();<br>} catch (Exception e) {<br> e.printStackTrace();<br> connection.rollback();<br>}<br>```</li>
+<li>在连接池管理类的唯一实例被创建时<strong>读取一个资源文件</strong>，其中资源文件中存放着<strong>多个数据库的url地址等信息</strong></li>
+<li>根据资源文件提供的信息，<strong>创建多个连接池类的实例</strong>，每一个实例都是一个特定数据库的连接池。连接池管理类实例为<strong>每个连接池实例取一个名字</strong>，通过不同的名字来管理不同的连接池。</li>
 </ul>
+<p>对于同一个数据库有多个用户使用不同的名称和密码访问的情况，也可以通过资源文件处理，即在资源文件中设置多个具有相同url地址，但具有不同用户名和密码的数据库连接信息。</p>
+<p>3、事务处理</p>
+<p>我们知道，事务具有原子性，此时要求对数据库的操作符合”all-all-nothing”原则，即<strong>对于一组sql语句要么全做，要么全不做。</strong></p>
+<p>在 Java 语言中，<strong>Connection 类本身提供了对事务的支持，可以通过设置 Connection 的 autocommit 属性为 false，然后显式的调用commit或rollback方法来实现</strong>。但要高效的进行connection复用，就必须提供相应的事务支持机制。<font color="red">可采用每一个事务独占一个连接来实现</font>，这种方法可以大大降低事务管理的复杂性（使用ThreadLocal实现线程范围内的单例，每个线程一个）</p>
+<pre>
+/**
+ * 事务显示提交，出现异常回滚；
+ * 事务中的sql语句要么全部执行，要不全部不执行
+ */ 
+connection.setAutoCommit(false);
+try {
+    int result = statement.executeUpdate();//成功
+    int a = 1/0;//异常
+    connection.commit();
+} catch (Exception e) {
+    e.printStackTrace();
+    connection.rollback();
+}
+</pre>
+
 <p>4、连接池的分配与释放★★★</p>
 <p>连接池的分配与释放，对系统的性能有很大的影响。合理的分配与释放，可以提高连接的复用度，从而降低建立新连接的开销，同时还可以加快用户的访问速度。</p>
 <p>对于连接的管理可使用空闲池。即把已经创建但尚未分配出去的连接按创建时间存放到一个空闲池中。</p>
@@ -568,7 +589,7 @@ public class Test2 {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">112</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
