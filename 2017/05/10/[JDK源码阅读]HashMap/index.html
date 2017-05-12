@@ -95,7 +95,11 @@
 从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表
 1234567891011121314transient Entry&amp;lt;K,V&amp;gt;[] table;  static class Entry&amp;lt;K,V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt; &amp;#123;  	final K key;     //键	V val">
 <meta property="og:image" content="http://i.imgur.com/nYCSoQg.png">
-<meta property="og:updated_time" content="2017-05-10T14:03:38.284Z">
+<meta property="og:image" content="http://i.imgur.com/8PFB2wW.png">
+<meta property="og:image" content="http://i.imgur.com/GbZgrGm.png">
+<meta property="og:image" content="http://i.imgur.com/AlWEfbc.jpg">
+<meta property="og:image" content="http://i.imgur.com/Yk3AC54.jpg">
+<meta property="og:updated_time" content="2017-05-12T02:28:54.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
 <meta name="twitter:description" content="存储结构
@@ -561,6 +565,126 @@ final Entry<k,v> removeEntryForKey(Object key) {
 </k,v></k,v></k,v></k,v></pre>
 
 <p>删除节点需要两个指针pre和e，next可以不需要吧？</p>
+<h2 id="HashMap产生死锁的原因"><a href="#HashMap产生死锁的原因" class="headerlink" title="HashMap产生死锁的原因"></a>HashMap产生死锁的原因</h2><p>调用 PUT 函数时，当 HashMap 中的元素大于 Threshold 时，会调用 Resize 函数进行扩容，数组长度增大一倍，整个过程如下：</p>
+<ol>
+<li>对索引数组中的元素遍历</li>
+<li>对链表上的每一个节点遍历：用 next 取得要转移那个元素的下一个，将 e 转移到新 Hash 表的头部，因为可能有元素，所以先将 e.next 指向新 Hash 表的第一个元素（如果是第一次就是 null)，这时候新 Hash 的第一个元素是 e，但是 Hash 指向的却是 e 没转移时候的第一个，所以需要将 Hash 表的第一个元素指向 e</li>
+<li>循环2，直到链表节点全部转移</li>
+<li>循环1，直到所有索引数组全部转移 </li>
+</ol>
+<p>经过这几步，我们会发现<strong>链表转移的时候是逆序的</strong>。假如转移前链表顺序是1-&gt;2-&gt;3，那么转移后就会变成3-&gt;2-&gt;1。这时候就有点头绪了，死锁问题不就是因为1-&gt;2的同时2-&gt;1造成的吗？所以，<strong>HashMap 的死锁问题就出在这个transfer()函数上。</strong></p>
+<pre>
+public V put(K key, V value) {
+    if (table == EMPTY_TABLE) {
+    inflateTable(threshold);
+    }
+    if (key == null)
+        return putForNullKey(value);
+    int hash = hash(key);
+    int i = indexFor(hash, table.length);
+    //如果该 key 存在，就替换旧值
+    for (Entry<k,v> e = table[i]; e != null; e = e.next) {
+        Object k;
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+
+    modCount++;
+    //如果没有这个 key，就插入一个新元素！跟进去看看
+    addEntry(hash, key, value, i);
+    return null;
+}
+
+void addEntry(int hash, K key, V value, int bucketIndex) {
+    //查看当前的size是否超过了我们设定的阈值threshold，如果超过，需要resize
+    if ((size >= threshold) && (null != table[bucketIndex])) {
+        resize(2 * table.length);
+        hash = (null != key) ? hash(key) : 0;
+        bucketIndex = indexFor(hash, table.length);
+    }
+    createEntry(hash, key, value, bucketIndex);
+}
+
+//新建一个更大尺寸的hash表，把数据从老的Hash表中迁移到新的Hash表中。
+void resize(int newCapacity) {
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    //创建一个新的 Hash 表
+    Entry[] newTable = new Entry[newCapacity];
+    //转移！！！！跟进去
+    transfer(newTable, initHashSeedAsNeeded(newCapacity));
+    table = newTable;
+    threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
+}
+
+<font color="red">//高能预警！！！！重点全在这个函数中</font>
+void transfer(Entry[] newTable, boolean rehash) {
+    int newCapacity = newTable.length;
+    for (Entry<k,v> e : table) {
+        while(null != e) {
+            Entry<k,v> next = e.next;
+            if (rehash) {
+                e.hash = null == e.key ? 0 : hash(e.key);
+            }
+            int i = indexFor(e.hash, newCapacity);
+            e.next = newTable[i];
+            newTable[i] = e;
+            e = next;
+        }
+    }
+}
+</k,v></k,v></k,v></pre>
+
+<p>下面着重分析一下transfer方法，精简后得到如下代码★★★★★：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(null != e) &#123;</div><div class="line">	<span class="regexp">//</span>因为是单链表，如果要转移头指针，一定要保存下一个结点，不然转移后链表就丢了</div><div class="line">	Entry&lt;K,V&gt; <span class="keyword">next</span> = e.<span class="keyword">next</span>;</div><div class="line">	<span class="regexp">//</span>e 要插入到链表的头部，所以要先用 e.<span class="keyword">next</span> 指向新的 Hash 表第一个元素</div><div class="line">	e.<span class="keyword">next</span> = newTable[i];</div><div class="line">	<span class="regexp">//</span>将新 Hash 表的头指针指向 e</div><div class="line">	newTable[i] = e;</div><div class="line">	<span class="regexp">//</span>转移 e 的下一个结点 </div><div class="line">	e = <span class="keyword">next</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>死锁原因重现</strong></p>
+<p>假设这里有两个线程同时执行了 put() 操作，并进入了 transfer() 环节，现在假设线程1的工作情况如下代码所示，而线程2完成了整个 transfer() 过程，所以就完成了 rehash。</p>
+<pre>
+while(null != e) {
+    <font color="red">Entry<k,v> next = e.next; //线程1执行到这里被调度挂起了</k,v></font>
+    e.next = newTable[i];
+    newTable[i] = e;
+    e = next;
+}
+</pre>
+
+<p>那么现在的状态：</p>
+<p><img src="http://i.imgur.com/8PFB2wW.png" alt=""></p>
+<p>从上面的图我们可以看到，因为线程1的 e 指向了 key(3)，而 next 指向了 key(7)，在线程2 rehash 后，就指向了线程2 rehash 后的链表。</p>
+<p>然后线程1被唤醒了，执行：</p>
+<p>第一步 </p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p>链表状态如下图：</p>
+<p><img src="http://i.imgur.com/GbZgrGm.png" alt=""></p>
+<p>第二步</p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p>链表状态如下：</p>
+<p><img src="http://i.imgur.com/AlWEfbc.jpg" alt=""></p>
+<p>第三步</p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p><img src="http://i.imgur.com/Yk3AC54.jpg" alt=""></p>
+<p>很明显，环形链表出现了！！当然，现在还没有事情，因为下一个节点是 null，所以transfer()就完成了，等put()的其余过程搞定后，HashMap 的底层实现就是线程1的新 Hash 表了。</p>
+<p><strong>没错，put()过程虽然造成了环形链表，但是它没有发生错误。它静静的等待着get()这个冤大头的到来。</strong></p>
+<p>现在程序被执行了一个hashMap.get(11)，这时候会调用getEntry()，这个函数就是去找对应索引的链表中有没有这个 key。然后。。。。悲剧了</p>
+<p>因为 HashMap 为了性能考虑，没有使用锁机制。所以就是非线程安全的，而 ConcurrentHashMap 使用了锁机制，所以是线程安全的。<strong>要并发就使用 ConcurrentHashMap</strong></p>
+<p>参考：<a href="http://blog.csdn.net/luxia_24/article/details/52344367" target="_blank" rel="external">http://blog.csdn.net/luxia_24/article/details/52344367</a></p>
 
       
     </div>
@@ -720,7 +844,7 @@ final Entry<k,v> removeEntryForKey(Object key) {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUT方法"><span class="nav-number">3.</span> <span class="nav-text">PUT方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET方法"><span class="nav-number">4.</span> <span class="nav-text">GET方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containsKey"><span class="nav-number">5.</span> <span class="nav-text">containsKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containsValue"><span class="nav-number">6.</span> <span class="nav-text">containsValue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-Object-key"><span class="nav-number">7.</span> <span class="nav-text">remove(Object key)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUT方法"><span class="nav-number">3.</span> <span class="nav-text">PUT方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET方法"><span class="nav-number">4.</span> <span class="nav-text">GET方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containsKey"><span class="nav-number">5.</span> <span class="nav-text">containsKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containsValue"><span class="nav-number">6.</span> <span class="nav-text">containsValue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-Object-key"><span class="nav-number">7.</span> <span class="nav-text">remove(Object key)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap产生死锁的原因"><span class="nav-number">8.</span> <span class="nav-text">HashMap产生死锁的原因</span></a></li></ol></div>
             
           </div>
         </section>
