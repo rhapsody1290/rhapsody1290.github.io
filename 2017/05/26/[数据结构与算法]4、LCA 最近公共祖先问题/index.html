@@ -1,0 +1,840 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LCA," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方
+如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1
+
+另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1
+Tarjan(离线)算法原理（最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4、LCA 最近公共祖先问题">
+<meta property="og:url" content="http://qianmingxs.com/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/index.html">
+<meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方
+如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1
+
+另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1
+Tarjan(离线)算法原理（最">
+<meta property="og:image" content="http://i.imgur.com/KLZozPV.png">
+<meta property="og:image" content="http://i.imgur.com/BXMZV63.png">
+<meta property="og:image" content="http://i.imgur.com/uP9FUsk.png">
+<meta property="og:image" content="http://i.imgur.com/BXMZV63.png">
+<meta property="og:updated_time" content="2017-05-26T12:18:17.632Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4、LCA 最近公共祖先问题">
+<meta name="twitter:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方
+如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1
+
+另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1
+Tarjan(离线)算法原理（最">
+<meta name="twitter:image" content="http://i.imgur.com/KLZozPV.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/"/>
+
+
+  <title> 4、LCA 最近公共祖先问题 | Mr.Qian's Home </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Mr.Qian's Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                4、LCA 最近公共祖先问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-26T10:03:00+08:00" content="2017-05-26">
+              2017-05-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方</p>
+<p>如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1</p>
+<p><img src="http://i.imgur.com/KLZozPV.png" alt=""></p>
+<p>另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1</p>
+<h2 id="Tarjan-离线-算法"><a href="#Tarjan-离线-算法" class="headerlink" title="Tarjan(离线)算法"></a>Tarjan(离线)算法</h2><h3 id="原理（最浅显易懂的描述）"><a href="#原理（最浅显易懂的描述）" class="headerlink" title="原理（最浅显易懂的描述）"></a>原理（最浅显易懂的描述）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
+<p>用集合的角度去思考 LCA 问题：</p>
+<p>10 与 1，2，5，6 的 LCA 都为 1<br>10 与 3，7 的 LCA 都为 3<br>10 与 8，9，11 的 LCA 都为 8<br>10 与 10，12 的 LCA 都为 12</p>
+<p>Tarjan 算法可以批量查询，假设有求5，10的 LCA，3、10的LCA，9、10的LCA</p>
+<p>当 DFS 遍历到节点 10 时，查看查询语句中是否有与10相关的：<br>如果求 5、10 的 LCA，只要求当前5所在的集合的祖先就行了，结果就是8<br>如果求 3、10 的 LCA，只要求3所在集合的祖先就行了，结果是3<br>如果求 9、10 的 LCA，只要求9所在结合的祖先就行了，结果是8</p>
+<p>那么问题的关键就是 <font color="red"><strong>集合怎么表示，集合如何构建？</strong></font></p>
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>可以发现，当 <strong>一个数A</strong> 与 <strong>集合中的元素B</strong> 求 LCA 时，<font color="red">结果都是指向同一个祖先</font>，我们将设置一个数据结构将各个节点<strong>组成集合</strong>，并且能够根据集合中的点<strong>访问到祖先</strong>，可以使用 <strong>并查集</strong> 满足上述要求 。并查集维护了<strong>当前节点与父节点之间的关系，最终可以获得祖先节点</strong></p>
+<p><strong>并查集是当前节点与father节点的映射关系</strong>，是一个Key-Value的结构，可以用数组的下标和数组的值作为存储结构，按照上图左子树举个例子：</p>
+<p><img src="http://i.imgur.com/uP9FUsk.png" alt=""></p>
+<p>初始化的时候每个节点的父节点都是自己，如果<strong>当前节点的father就是自己本身</strong>，那么他就是集合的根节点</p>
+<p>并查集查集合根节点：</p>
+<pre><code>public int find(int x) {
+    int r = x;
+    while(father[r] != r){
+        r = father[r];
+    }
+    return r;
+}
+</code></pre><p>并查集基本介绍完毕，现在可以用并查集来表示集合了，并且找到集合的根节点，接下来的问题，<strong>哪些节点可以归为同一个集合？</strong></p>
+<h3 id="算法描述（思路）"><a href="#算法描述（思路）" class="headerlink" title="算法描述（思路）"></a>算法描述（思路）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
+<p>还是之前那张图，对于新搜索到的一个结点u，先创建由u构成的集合，再对u的每颗子树进行搜索，每搜索完一棵子树，将子节点归到集合u中</p>
+<p>1.任选一个点为根节点，从根节点开始。<br>2.遍历该点u所有子节点v，并标记这些子节点v已被访问过。<br>3.若是v还有子节点，返回2，否则下一步。<br>4.合并v到u上。<br>5.寻找与当前点u有询问关系的点v。<br>6.若是v已经被访问过了，则可以确认u和v的最近公共祖先为v被合并到的父亲节点a。</p>
+<p>伪代码</p>
+<pre><code>Tarjan(u)//marge和find为并查集合并函数和查找函数
+{
+    for each(u,v)    //访问所有u子节点v
+    {
+        Tarjan(v);        //继续往下遍历
+        marge(u,v);    //合并v到u上
+        标记v被访问过;
+    }
+    for each(u,e)    //访问所有和u有询问关系的e
+    {
+        如果e被访问过;
+        u,e的最近公共祖先为find(e);
+    }
+}
+</code></pre><h3 id="算法模拟"><a href="#算法模拟" class="headerlink" title="算法模拟"></a>算法模拟</h3><p><a href="http://www.cnblogs.com/JVxie/p/4854719.html" target="_blank" rel="external">http://www.cnblogs.com/JVxie/p/4854719.html</a></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h2 id="OJ"><a href="#OJ" class="headerlink" title="OJ"></a>OJ</h2><p><a href="http://www.cnblogs.com/JVxie/p/4854719.html" target="_blank" rel="external">http://www.cnblogs.com/JVxie/p/4854719.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LCA/" rel="tag">#LCA</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/23/[数据结构与算法]3、树状数组/" rel="next" title="3、树状数组">
+                <i class="fa fa-chevron-left"></i> 3、树状数组
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/01/[Redis]缓存更新的设计模式/" rel="prev" title="缓存更新的设计模式">
+                缓存更新的设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/"
+           data-title="4、LCA 最近公共祖先问题" data-url="http://qianmingxs.com/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">126</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan-离线-算法"><span class="nav-number">2.</span> <span class="nav-text">Tarjan(离线)算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理（最浅显易懂的描述）"><span class="nav-number">2.1.</span> <span class="nav-text">原理（最浅显易懂的描述）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-number">2.2.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述（思路）"><span class="nav-number">2.3.</span> <span class="nav-text">算法描述（思路）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法模拟"><span class="nav-number">2.4.</span> <span class="nav-text">算法模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">2.5.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OJ"><span class="nav-number">3.</span> <span class="nav-text">OJ</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rhapsody1290"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+</body>
+</html>
