@@ -93,7 +93,7 @@
 <meta property="og:description" content="树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn），相比之下就快得多
 总结：初始复杂度是nlogn，频繁对于单点和区间修改和查询操作，时间复杂度都是l">
 <meta property="og:image" content="http://i.imgur.com/XXDc88F.jpg">
-<meta property="og:updated_time" content="2017-05-26T02:01:55.109Z">
+<meta property="og:updated_time" content="2017-06-14T05:47:23.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3、树状数组">
 <meta name="twitter:description" content="树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn），相比之下就快得多
@@ -364,8 +364,74 @@
 <p>2、<strong>当数组中的元素有变更时，树状数组就发挥它的优势了，算法如下（修改为给某个节点 i 加上 x ）</strong></p>
 <p>（1）当 i&lt;=n 时，执行下一步；否则的话，算法结束;<br>（2）ci = ci+x ，i = i + lowbit（i）（在 i 的二进制表示的最后加零），返回第一步。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">while</span>(i &lt;= n)&#123;</div><div class="line">		c[i] = c[i] + x;</div><div class="line">		i = i + lowbit(i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>1、树状数组求逆序数</p>
-<p>参考：<br><a href="http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1" target="_blank" rel="external">http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1</a></p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="树状数组求逆序数"><a href="#树状数组求逆序数" class="headerlink" title="树状数组求逆序数"></a>树状数组求逆序数</h3><p>所谓逆序数，就是指一个序列S[i]，统计处于序列的每个数的比这个数大并且排在它前面的数的数目，然后对于所有数，把这个数目加起来求和就是了。<br>比如 4 3 1 2<br>4第一个，所以数目为0<br>3的前面是4，大于3的数目为1<br>1的前面是4 3 ，大于1的数目为2<br>2的前面是4 3 1，大于2的数目为2<br>所以逆序数为1+2+2 = 5</p>
+<p>求逆序数的两种方法<br>常规方法是按照逆序数的规则做，结果复杂度是O(n*n)，一般来说，有两种快速的求逆序数的方法，分别是<strong>归并排序和树状数组法</strong></p>
+<p><strong>树状数组法</strong></p>
+<p>当数据的范围较小时，比如maxn=100000，那么我们可以开一个数组c[maxn]，来记录前面数据的出现情况，初始化为0；<strong>当数据a出现时，就令c[a]=1。</strong>这样的话，<strong>欲求某个数a的逆序数，只需要算出在当前状态下c[a+1,maxn]中有多少个1，因为这些位置的数在a之前出现且比a大。</strong><font color="red">但是若每添加一个数据a时，就得从a+1到maxn搜一遍，复杂度太高了，树状数组却能很好的解决<strong>区间多次求和</strong>这个问题</font>。同样开一个数组d[maxn]，初始化为0，d[i]记录下i结点所管辖范围内当前状态有多少个数；当添加数据a时，就向上更新d,这样一来，欲求a的逆序数时，只需要算<strong>sum(maxn)-sum(a)；sum(i)表示第i个位置之前出现了多少个1</strong></p>
+<p>举个例子：有5个数，分别为5 3 4 2 1，当读入数据a=5时，c为：0，0，0，0，1；d为：0，0，0，0，1；当读入数据a=3时，c为：0，0，1，0，1；d为：0，0，1，1，1；当读入数据a=4时，c为：0，0，1，1，1；d为：0，0，1，2，1；…………</p>
+<p>此思想的关键在于，<strong>读入数据的最大值为maxn，由于maxn较小，所以可以用数组来记录状态</strong>。当maxn较大时，直接开数组显然是不行了，这是的解决办法就是离散化。<strong>所谓离散化，就是将连续问题的解用一组离散要素来表征而近似求解的方法</strong>，这个定义太抽象了，还是举个例子吧。</p>
+<p>假如现在有一些数：1234 98756 123456 99999 56782，由于1234是第一小的数，所以num[1]=1;依此，有num[5]=2，num[2]=3，num[4]=4，num[3]=5;这样转化后并不影响原来数据的相对大小关系，何乐而不为呢！！！</p>
+<p>还有一点值得注意，当有数据0出现时，由于0&amp;0=0，无法更新，此时我们可以采取<font color="red"><strong>加一个数的方法将所有的数据都变成大于0的。</strong></font></p>
+<p>当maxn较小时直接开数组代码如下：</p>
+<pre><code>public class InverseNumber {
+
+    //索引0不存放数据
+    private int[] c = new int[10];
+
+    private int sum(int n) {
+        int sum = 0;
+        for (int i = n; i &gt; 0; i = i - lowbit(i)) {
+            sum += c[i];
+        }
+        return sum;
+    }
+
+    private void update(int i, int addVal) {
+        for (int j = i; j &lt; c.length; j += lowbit(j)) {
+            c[j] += addVal;
+        }
+    }
+
+    private int lowbit(int i) {
+        return i &amp; (-i);
+    }
+
+    /**
+     * 求序列的逆序数
+     * 有两种方式，1、对于每个数，计算当前位置之前比它大的数的个数，求和（树状数组法）
+     * 2、对于每个数，计算当前位置之后比它小的数的个数，求和
+     */
+    public int solve(int[] sequence) {
+        Arrays.fill(c, 0);
+        //初始化树状数组，因为要表示1~len，所以数组长度为len+1
+        int inverseNum = 0;
+        for (int i = 0; i &lt; sequence.length; i++) {
+            update(sequence[i], 1);
+            inverseNum = inverseNum + sum(c.length - 1) - sum(sequence[i]);
+        }
+        return inverseNum;
+    }
+
+    public static void main(String[] args) {
+        InverseNumber inverseNumber = new InverseNumber();
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 4, 5}) == 0);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 5, 4}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 3, 5}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 5, 3}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 4, 3}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 3, 4}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 4, 5}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 5, 4}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 3, 5}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 5, 3}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 3, 4}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 4, 3}) == 4);
+    }
+}
+</code></pre><p>采用离散化求逆序数：</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>树状数组<br><a href="http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1" target="_blank" rel="external">http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1</a></p>
+<p>树状数组求逆序数的原理<br><a href="http://www.cnblogs.com/i-love-acm/p/3251036.html" target="_blank" rel="external">http://www.cnblogs.com/i-love-acm/p/3251036.html</a></p>
+<p>逆序数及其求法<br><a href="http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx" target="_blank" rel="external">http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx</a></p>
 
       
     </div>
@@ -399,16 +465,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" rel="next" title="1、Leetcode 简单题">
-                <i class="fa fa-chevron-left"></i> 1、Leetcode 简单题
+              <a href="/2017/05/22/[操作系统]操作系统笔记/" rel="next" title="操作系统笔记">
+                <i class="fa fa-chevron-left"></i> 操作系统笔记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/" rel="prev" title="4、LCA 最近公共祖先问题">
-                4、LCA 最近公共祖先问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" rel="prev" title="1、Leetcode 简单题">
+                1、Leetcode 简单题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -481,7 +547,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">126</span>
+              <span class="site-state-item-count">129</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -498,7 +564,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -527,7 +593,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组作用"><span class="nav-number">1.</span> <span class="nav-text">树状数组作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组结构图"><span class="nav-number">2.</span> <span class="nav-text">树状数组结构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组作用"><span class="nav-number">1.</span> <span class="nav-text">树状数组作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组结构图"><span class="nav-number">2.</span> <span class="nav-text">树状数组结构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树状数组求逆序数"><span class="nav-number">3.1.</span> <span class="nav-text">树状数组求逆序数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
         </section>
