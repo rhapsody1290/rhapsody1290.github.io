@@ -90,7 +90,7 @@
 Jedis连接工厂，提供 getConnection 方法从连接池中获取连接
 RedisTemplate，Redis操作类
 
-思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redsi 连接池，调用连接池的 getConnection 方法获得连接
+思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redis 连接池，调用连接池的 getConnection 方法获得连接
 1234567891011121">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RedisTemplate 使用及基本原理">
@@ -102,9 +102,12 @@ RedisTemplate，Redis操作类
 Jedis连接工厂，提供 getConnection 方法从连接池中获取连接
 RedisTemplate，Redis操作类
 
-思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redsi 连接池，调用连接池的 getConnection 方法获得连接
+思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redis 连接池，调用连接池的 getConnection 方法获得连接
 1234567891011121">
-<meta property="og:updated_time" content="2017-05-06T03:50:00.380Z">
+<meta property="og:image" content="http://i.imgur.com/7SNznwa.png">
+<meta property="og:image" content="http://i.imgur.com/RZt3oFl.png">
+<meta property="og:image" content="http://i.imgur.com/LnxjzkL.png">
+<meta property="og:updated_time" content="2017-06-19T15:04:14.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RedisTemplate 使用及基本原理">
 <meta name="twitter:description" content="RedisTemplate 配置在 Spring 配置文件中，配置的对象有：
@@ -113,8 +116,9 @@ RedisTemplate，Redis操作类
 Jedis连接工厂，提供 getConnection 方法从连接池中获取连接
 RedisTemplate，Redis操作类
 
-思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redsi 连接池，调用连接池的 getConnection 方法获得连接
+思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redis 连接池，调用连接池的 getConnection 方法获得连接
 1234567891011121">
+<meta name="twitter:image" content="http://i.imgur.com/7SNznwa.png">
 
 
 
@@ -363,10 +367,146 @@ RedisTemplate，Redis操作类
 <li>Jedis连接工厂，提供 getConnection 方法从连接池中获取连接</li>
 <li>RedisTemplate，Redis操作类</li>
 </ul>
-<p>思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redsi 连接池，调用连接池的 getConnection 方法获得连接</p>
+<p>思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redis 连接池，调用连接池的 getConnection 方法获得连接</p>
 <figure class="highlight dust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span></div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">       <span class="attr">xmlns:mvc</span>=<span class="string">"http://www.springframework.org/schema/mvc"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd</span></div><div class="line">        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"</div><div class="line">       <span class="attr">default-lazy-init</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.mk.util.redis"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 连接池配置 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jedisPoolConfig"</span> <span class="attr">class</span>=<span class="string">"redis.clients.jedis.JedisPoolConfig"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 连接池中最大空闲的连接数 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxIdle"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;jedis.maxIdle&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- 连接空闲的最小时间，达到此值后空闲连接将可能会被移除。负值(-1)表示不移除. --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"minEvictableIdleTimeMillis"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;jedis.minEvictableIdleTimeMillis&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- 对于“空闲链接”检测线程而言，每次检测的链接资源的个数。默认为3 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"numTestsPerEvictionRun"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;jedis.numTestsPerEvictionRun&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- “空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1. --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeBetweenEvictionRunsMillis"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;jedis.timeBetweenEvictionRunsMillis&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Spring提供的Redis连接工厂 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jedisConnectionFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.jedis.JedisConnectionFactory"</span> <span class="attr">destroy-method</span>=<span class="string">"destroy"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 连接池配置 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"poolConfig"</span> <span class="attr">ref</span>=<span class="string">"jedisPoolConfig"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- Redis服务主机 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hostName"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;redis.hostName&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- Redis服务端口号 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"port"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;redis.port&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- 连超时设置 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeout"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;redis.timeout&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- 是否使用连接池 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"usePool"</span> <span class="attr">value</span>=<span class="string">"$</span></span><span class="template-variable">&#123;redis.usePool&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span></div><div class="line">        <span class="comment">&lt;!-- Redis服务连接密码 --&gt;</span></div><div class="line">        <span class="comment">&lt;!--&lt;property name="password" value="$</span><span class="template-variable">&#123;redis.password&#125;</span><span class="xml"><span class="comment">"&gt;&lt;/property&gt;--&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Spring提供的访问Redis类 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"redisTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.core.RedisTemplate"</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- Redis连接工厂 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connectionFactory"</span> <span class="attr">ref</span>=<span class="string">"jedisConnectionFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"keySerializer"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.serializer.StringRedisSerializer"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- JdkSerializationRedisSerializer支持对所有实现了Serializable的类进行序列化 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"valueSerializer"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--下面是自己编写的监听器，用来实现发布订阅功能的，对于基础的redis使用不需要--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"redisMessageListener"</span> <span class="attr">class</span>=<span class="string">"com.mk.util.redis.listener.RedisMessageListener"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span>  <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.listener.RedisMessageListenerContainer"</span></span></div><div class="line">          <span class="attr">destroy-method</span>=<span class="string">"destroy"</span>&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connectionFactory"</span> <span class="attr">ref</span>=<span class="string">"jedisConnectionFactory"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"taskExecutor"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"corePoolSize"</span> <span class="attr">value</span>=<span class="string">"5"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"messageListeners"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key-ref</span>=<span class="string">"redisMessageListener"</span>&gt;</span></div><div class="line">                    <span class="comment">&lt;!--这里配置频道信息--&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.listener.ChannelTopic"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"notify"</span>/&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">entry</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">map</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="Redis操作工具类"><a href="#Redis操作工具类" class="headerlink" title="Redis操作工具类"></a>Redis操作工具类</h2><p>提供了set/get方法，删除缓存，缓存定时删除方法</p>
 <figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class RedisUtils &#123;</div><div class="line">    @Autowired</div><div class="line">    <span class="keyword">private</span> RedisTemplate&lt;<span class="keyword">String</span>,<span class="keyword">Object</span>&gt; redisTemplate;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="built_in">set</span>(<span class="keyword">String</span> <span class="built_in">key</span>, <span class="keyword">Object</span> val) &#123;</div><div class="line">        redisTemplate.boundValueOps(<span class="built_in">key</span>).<span class="built_in">set</span>(val);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">Object</span> <span class="built_in">get</span>(<span class="keyword">String</span> <span class="built_in">key</span>) &#123;</div><div class="line">        <span class="keyword">return</span> redisTemplate.boundValueOps(<span class="built_in">key</span>).<span class="built_in">get</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> delete(<span class="keyword">String</span> <span class="built_in">key</span>) &#123;</div><div class="line">        redisTemplate.delete(<span class="built_in">key</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> expire(<span class="keyword">String</span> <span class="built_in">key</span>, <span class="keyword">long</span> timeout)&#123;</div><div class="line">        <span class="comment">//单位为秒</span></div><div class="line">        redisTemplate.expire(<span class="built_in">key</span>, timeout, TimeUnit.SECONDS);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 发布消息</div><div class="line">     *</div><div class="line">     * @param channel 发布的频道，需要在redis配置文件中进行配置</div><div class="line">     * @param message</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> sendMessage(Serializable message) &#123;</div><div class="line">        sendMessage(<span class="string">"notify"</span>,message);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">void</span> sendMessage(<span class="keyword">String</span> channel, Serializable message) &#123;</div><div class="line">        redisTemplate.convertAndSend(channel,message);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Redis-订阅和发布"><a href="#Redis-订阅和发布" class="headerlink" title="Redis 订阅和发布"></a>Redis 订阅和发布</h2><p>Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息<br>Redis 客户端可以订阅任意数量的频道。</p>
+<p>下图展示了频道 channel1 ， 以及订阅这个频道的三个客户端 —— client2 、 client5 和 client1 之间的关系：</p>
+<p><img src="http://i.imgur.com/7SNznwa.png" alt=""></p>
+<p>当有新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端：</p>
+<p><img src="http://i.imgur.com/RZt3oFl.png" alt=""></p>
+<h3 id="redis-命令"><a href="#redis-命令" class="headerlink" title="redis 命令"></a>redis 命令</h3><p>1、创建频道名 redisChat</p>
+<pre><code>redis 127.0.0.1:6379&gt; SUBSCRIBE redisChat
+
+Reading messages... (press Ctrl-C to quit)
+1) &quot;subscribe&quot;
+2) &quot;redisChat&quot;
+3) (integer) 1
+</code></pre><p>2、发送消息</p>
+<p>现在，我们先重新开启个 redis 客户端，然后在同一个频道 redisChat 发布两次消息，订阅者就能接收到消息。</p>
+<pre><code>redis 127.0.0.1:6379&gt; PUBLISH redisChat &quot;Redis is a great caching technique&quot;
+
+(integer) 1
+
+redis 127.0.0.1:6379&gt; PUBLISH redisChat &quot;Learn redis by runoob.com&quot;
+
+(integer) 1
+
+# 订阅者的客户端会显示如下消息
+1) &quot;message&quot;
+2) &quot;redisChat&quot;
+3) &quot;Redis is a great caching technique&quot;
+1) &quot;message&quot;
+2) &quot;redisChat&quot;
+3) &quot;Learn redis by runoob.com&quot;
+</code></pre><h3 id="RedisTemplate-发布订阅"><a href="#RedisTemplate-发布订阅" class="headerlink" title="RedisTemplate 发布订阅"></a>RedisTemplate 发布订阅</h3><p><img src="http://i.imgur.com/LnxjzkL.png" alt=""></p>
+<p>1、发送sub指令</p>
+<p>Spring启动时加载配置文中配置的一个个bean，<strong>RedisMessageListenerContainer中配置事件监听器及当事件来临时做出的响应</strong></p>
+<pre><code>&lt;bean id=&quot;redisMessageListener&quot; class=&quot;com.mk.util.redis.listener.RedisMessageListener&quot;/&gt;
+&lt;bean  class=&quot;org.springframework.data.redis.listener.RedisMessageListenerContainer&quot;
+      destroy-method=&quot;destroy&quot;&gt;
+    &lt;property name=&quot;connectionFactory&quot; ref=&quot;jedisConnectionFactory&quot;/&gt;
+    &lt;property name=&quot;taskExecutor&quot;&gt;
+        &lt;bean class=&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor&quot;&gt;
+            &lt;property name=&quot;corePoolSize&quot; value=&quot;5&quot;/&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+    &lt;property name=&quot;messageListeners&quot;&gt;
+        &lt;map&gt;
+            &lt;!--可以配置多个订阅者(listener)，这里只配置一个--&gt;
+            &lt;entry key-ref=&quot;redisMessageListener&quot;&gt;
+                &lt;!--这里配置频道信息--&gt;
+                &lt;bean class=&quot;org.springframework.data.redis.listener.ChannelTopic&quot;&gt;
+                    &lt;constructor-arg value=&quot;notify&quot;/&gt;
+                &lt;/bean&gt;
+            &lt;/entry&gt;
+        &lt;/map&gt;
+
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre><p>其中自定义的 RedisMessageListener 实现 MessageListener 接口，这个由程序员实现，当某个特定消息来临时，该执行哪个操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisMessageListener</span> <span class="keyword">implements</span> <span class="title">MessageListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Message message, <span class="keyword">byte</span>[] bytes)</span> </span>&#123;</div><div class="line">        logger.info(<span class="string">"=============调用redis监听器onMessage===================="</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>加载 RedisMessageListenerContainer 类时，会调用setMessageListeners方法注入监听器</strong>；</p>
+<p>除了注入监听器，这个方法还完成了：</p>
+<ul>
+<li><strong>开启一个客户端与Redis通信的线程</strong>（不然程序整个程序就阻塞了，所以要开新线程）</li>
+<li>与Redis服务器建立长连接</li>
+<li>向Redis服务器发送SUBSCRIBE命令</li>
+<li>循环监听Redis服务器向客户端发送的消息，如果没有消息则阻塞线程；如果接收到一个消息，分派消息</li>
+<li><strong>启动一个新的线程，执行消息处理方法</strong></li>
+</ul>
+<p>整个执行过程的大致源码过程（删除无关代码）：</p>
+<p>RedisMessageListenerContainer：</p>
+<p>1、Spring框架注入属性时，调用setMessageListeners方法</p>
+<pre><code>public void setMessageListeners(Map&lt;? extends MessageListener, Collection&lt;? extends Topic&gt;&gt; listeners) {
+    initMapping(listeners);
+}
+</code></pre><p>2、启动监听</p>
+<pre><code>private void initMapping(Map&lt;? extends MessageListener, Collection&lt;? extends Topic&gt;&gt; listeners) {
+    //在发布者和订阅者中添加监听器
+    if (!CollectionUtils.isEmpty(listeners)) {
+        for (Map.Entry&lt;? extends MessageListener, Collection&lt;? extends Topic&gt;&gt; entry : listeners.entrySet()) {
+            addListener(entry.getKey(), entry.getValue());
+        }
+    }
+
+    //启动监听
+    if (initialized) {
+        start();
+    }
+}
+</code></pre><p>3、start中关键代码是lazyListen</p>
+<pre><code>public void start() {
+    lazyListen();
+}
+</code></pre><p>4、lazyListen中使用线程池开启一个线程用来客户端与redis服务器通信，并进行消息分派</p>
+<pre><code>private void lazyListen() {
+    subscriptionExecutor.execute(subscriptionTask);
+}
+</code></pre><p>5、执行SubscriptionTask的run方法</p>
+<pre><code>private class SubscriptionTask implements SchedulingAwareRunnable {
+    public void run() {
+                SubscriptionPresentCondition subscriptionPresent = eventuallyPerformSubscription();
+    }
+}
+</code></pre><p>6、调用connection的subscribe方法</p>
+<pre><code>private SubscriptionPresentCondition eventuallyPerformSubscription() {
+
+    connection.subscribe(new DispatchMessageListener(), unwrap(channelMapping.keySet()));
+
+}
+</code></pre><p>执行JedisConnection类的方法：</p>
+<p>7、调用JedisConnection的subscribe方法，将Spring中配置MessageListener参数传入</p>
+<pre><code>public void subscribe(MessageListener listener, byte[]... channels) {
+BinaryJedisPubSub jedisPubSub = new JedisMessageListener(listener);
+    jedis.subscribe(jedisPubSub, channels);
+}
+</code></pre><p>执行BinaryJedis类的方法：</p>
+<p>8、上层传入的MessageListener被封装在BinaryJedisPubSub中，执行jedisPubSub的proceed方法</p>
+<pre><code>public void subscribe(BinaryJedisPubSub jedisPubSub, byte[]... channels) {
+    jedisPubSub.proceed(client, channels);
+}
+</code></pre><p>执行BinaryJedisPubSub类的方法：</p>
+<p>9、<strong>核心代码</strong></p>
+<ul>
+<li>调用client的subscribe方法进行订阅，包括打开Socket与Redis Server建立长连接，并发送SUBSCRIBE命令</li>
+<li><p>process为消息分派</p>
+<p>  public void proceed(Client client, byte[]… channels) {</p>
+<pre><code>this.client = client;
+client.subscribe(channels);
+client.flush();
+process(client);
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p>10、消息分派</p>
+<p>do——while的结构</p>
+<p>其中：List<object> reply = client.getRawObjectMultiBulkReply();从底层读取服务器向客户端发送的消息，如果没有消息则阻塞，否则进行消息分派</object></p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">void</span> process(Client client) &#123;</div><div class="line">	do &#123;</div><div class="line">		List&lt;<span class="keyword">Object</span>&gt; reply = client.getRawObjectMultiBulkReply();</div><div class="line">		<span class="keyword">final</span> <span class="keyword">Object</span> firstObj = reply.<span class="built_in">get</span>(<span class="number">0</span>);</div><div class="line">		<span class="keyword">if</span> (!(firstObj <span class="keyword">instanceof</span> <span class="built_in">byte</span>[])) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> JedisException(<span class="string">"Unknown message type: "</span> + firstObj);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">final</span> <span class="built_in">byte</span>[] resp = (<span class="built_in">byte</span>[]) firstObj;</div><div class="line">		<span class="keyword">if</span> (Arrays.equals(SUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.<span class="built_in">get</span>(<span class="number">2</span>)).intValue();</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bchannel = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">			onSubscribe(bchannel, subscribedChannels);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Arrays.equals(UNSUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.<span class="built_in">get</span>(<span class="number">2</span>)).intValue();</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bchannel = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">			onUnsubscribe(bchannel, subscribedChannels);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Arrays.equals(MESSAGE.raw, resp)) &#123;</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bchannel = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bmesg = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">2</span>);</div><div class="line">			onMessage(bchannel, bmesg);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Arrays.equals(PMESSAGE.raw, resp)) &#123;</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bpattern = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bchannel = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">2</span>);</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bmesg = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">3</span>);</div><div class="line">			onPMessage(bpattern, bchannel, bmesg);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Arrays.equals(PSUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.<span class="built_in">get</span>(<span class="number">2</span>)).intValue();</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bpattern = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">			onPSubscribe(bpattern, subscribedChannels);</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (Arrays.equals(PUNSUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.<span class="built_in">get</span>(<span class="number">2</span>)).intValue();</div><div class="line">			<span class="keyword">final</span> <span class="built_in">byte</span>[] bpattern = (<span class="built_in">byte</span>[]) reply.<span class="built_in">get</span>(<span class="number">1</span>);</div><div class="line">			onPUnsubscribe(bpattern, subscribedChannels);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> JedisException(<span class="string">"Unknown message type: "</span> + firstObj);</div><div class="line">		&#125;</div><div class="line">	&#125; <span class="keyword">while</span> (isSubscribed());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考：<br>jedis的publish/subscribe[转]含有redis源码解析<br><a href="http://www.cnblogs.com/wxh04/p/4301291.html" target="_blank" rel="external">http://www.cnblogs.com/wxh04/p/4301291.html</a></p>
+<p>菜鸟教程 Redis 发布订阅<br><a href="http://www.runoob.com/redis/redis-pub-sub.html" target="_blank" rel="external">http://www.runoob.com/redis/redis-pub-sub.html</a></p>
+
       
     </div>
 
@@ -525,7 +665,7 @@ RedisTemplate，Redis操作类
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RedisTemplate-配置"><span class="nav-number">1.</span> <span class="nav-text">RedisTemplate 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis操作工具类"><span class="nav-number">2.</span> <span class="nav-text">Redis操作工具类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RedisTemplate-配置"><span class="nav-number">1.</span> <span class="nav-text">RedisTemplate 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis操作工具类"><span class="nav-number">2.</span> <span class="nav-text">Redis操作工具类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-订阅和发布"><span class="nav-number">3.</span> <span class="nav-text">Redis 订阅和发布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-命令"><span class="nav-number">3.1.</span> <span class="nav-text">redis 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RedisTemplate-发布订阅"><span class="nav-number">3.2.</span> <span class="nav-text">RedisTemplate 发布订阅</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
