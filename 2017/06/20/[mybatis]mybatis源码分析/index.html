@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mybatis," />
 
 
 
@@ -84,12 +84,31 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Qian's Home">
-<meta property="og:url" content="http://qianmingxs.com/tags/Redis/index.html">
+<meta name="description" content="摘自：http://blog.csdn.net/luanlouis/article/details/40422941
+mybatis优势
+面向接口编程，定义接口通过动态代理的方式生成一个mapper实例
+参数映射和动态SQL语句生成： 动态语句生成是 MyBatis 通过传入的参数值，使用 Ognl 来动态地构造SQL语句；参数映射指的是对于Java 数据类型和jdbc数据类型之间的转换
+SQL语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis源码分析">
+<meta property="og:url" content="http://qianmingxs.com/2017/06/20/[mybatis]mybatis源码分析/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="摘自：http://blog.csdn.net/luanlouis/article/details/40422941
+mybatis优势
+面向接口编程，定义接口通过动态代理的方式生成一个mapper实例
+参数映射和动态SQL语句生成： 动态语句生成是 MyBatis 通过传入的参数值，使用 Ognl 来动态地构造SQL语句；参数映射指的是对于Java 数据类型和jdbc数据类型之间的转换
+SQL语">
+<meta property="og:image" content="http://i.imgur.com/UjHifnz.png">
+<meta property="og:image" content="http://i.imgur.com/k6RCXIh.png">
+<meta property="og:updated_time" content="2017-06-20T07:08:37.881Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Qian's Home">
+<meta name="twitter:title" content="mybatis源码分析">
+<meta name="twitter:description" content="摘自：http://blog.csdn.net/luanlouis/article/details/40422941
+mybatis优势
+面向接口编程，定义接口通过动态代理的方式生成一个mapper实例
+参数映射和动态SQL语句生成： 动态语句生成是 MyBatis 通过传入的参数值，使用 Ognl 来动态地构造SQL语句；参数映射指的是对于Java 数据类型和jdbc数据类型之间的转换
+SQL语">
+<meta name="twitter:image" content="http://i.imgur.com/UjHifnz.png">
 
 
 
@@ -110,10 +129,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/tags/Redis/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/06/20/[mybatis]mybatis源码分析/"/>
 
 
-  <title> 标签: Redis | Mr.Qian's Home </title>
+  <title> mybatis源码分析 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +153,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -245,74 +264,190 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Redis
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/01/[Redis]缓存更新的设计模式/" itemprop="url">
-              
-                <span itemprop="name">缓存更新的设计模式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-01T23:08:00+08:00"
-              content="2017-06-01" >
-          06-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/06/[Redis]RedisTemplate 使用及基本原理/" itemprop="url">
-              
-                <span itemprop="name">RedisTemplate 使用及基本原理</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-06T11:24:00+08:00"
-              content="2017-05-06" >
-          05-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mybatis源码分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-20T14:09:00+08:00" content="2017-06-20">
+              2017-06-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/06/20/[mybatis]mybatis源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/20/[mybatis]mybatis源码分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘自：<a href="http://blog.csdn.net/luanlouis/article/details/40422941" target="_blank" rel="external">http://blog.csdn.net/luanlouis/article/details/40422941</a></p>
+<h2 id="mybatis优势"><a href="#mybatis优势" class="headerlink" title="mybatis优势"></a>mybatis优势</h2><ul>
+<li>面向接口编程，定义接口通过动态代理的方式生成一个mapper实例</li>
+<li>参数映射和动态SQL语句生成： 动态语句生成是 MyBatis 通过传入的参数值，使用 Ognl 来动态地构造SQL语句；参数映射指的是对于Java 数据类型和jdbc数据类型之间的转换</li>
+<li>SQL语句的执行以及封装查询结果集成List</li>
+<li>事务管理、连接池管理机制、缓存机制、QL语句的配置方式</li>
+</ul>
+<h2 id="动态代理生成mapper"><a href="#动态代理生成mapper" class="headerlink" title="动态代理生成mapper"></a>动态代理生成mapper</h2><p>MyBatis和数据库的交互有两种方式：</p>
+<p>1、使用传统的MyBatis提供的API；</p>
+<p><img src="http://i.imgur.com/UjHifnz.png" alt=""></p>
+<p>创建一个和数据库打交道的SqlSession对象，然后根据Statement Id 和参数来操作数据库</p>
+<p>2、使用Mapper接口</p>
+<p><img src="http://i.imgur.com/k6RCXIh.png" alt=""></p>
+<p>根据 MyBatis 的配置规范配置好后，通过SqlSession.getMapper(XXXMapper.class) 方法，MyBatis 会根据相应的接口声明的方法信息，<strong>通过动态代理机制生成一个 Mapper 实例</strong>，我们使用Mapper 接口的某一个方法时，MyBatis 会根据这个方法的<strong>方法名和参数类型，确定Statement Id</strong>，底层还是通过SqlSession.select(“statementId”,parameterObject);或者SqlSession.update(“statementId”,parameterObject); 等 <strong>SqlSession 的增删改查方法来实现对数据库的操作</strong></p>
+<h2 id="SqlSession-的工作过程分析"><a href="#SqlSession-的工作过程分析" class="headerlink" title="SqlSession 的工作过程分析"></a>SqlSession 的工作过程分析</h2><p>1、开启一个数据库访问会话—创建SqlSession对象：</p>
+<pre><code>SqlSession sqlSession = factory.openSession();  
+</code></pre><p>MyBatis封装了对数据库的访问，把对数据库的会话和事务控制放到了SqlSession对象中。</p>
+<p>2、为SqlSession传递一个配置的Sql语句 的Statement Id和参数，然后返回结果：</p>
+<pre><code>List&lt;Employee&gt; result = sqlSession.selectList(&quot;com.louis.mybatis.dao.EmployeesMapper.selectByMinSalary&quot;,params);  
+</code></pre><p><strong>MyBatis在初始化的时候，会将MyBatis的配置信息全部加载到内存中，使用 org.apache.ibatis.session.Configuration 实例来维护</strong>。使用者可以使用sqlSession.getConfiguration() 方法来获取</p>
+<pre><code>&lt;select id=&quot;selectByMinSalary&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;java.util.Map&quot; &gt;  
+  select   
+    EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, SALARY  
+    from LOUIS.EMPLOYEES  
+    &lt;if test=&quot;min_salary != null&quot;&gt;  
+        where SALARY &lt; #{min_salary,jdbcType=DECIMAL}  
+    &lt;/if&gt;  
+&lt;/select&gt;  
+</code></pre><p>加载到内存中会生成一个对应的 <strong>MappedStatement</strong> 对象，然后会以key=”com.louis.mybatis.dao.EmployeesMapper.selectByMinSalary” ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要<strong>通过Id值来获取就可以了。</strong></p>
+<p>从上述的代码中我们可以看到SqlSession的职能是：</p>
+<p>SqlSession根据Statement ID, 在mybatis配置对象Configuration中获取到对应的MappedStatement对象，然后调用mybatis执行器来执行具体的操作。</p>
+<p><strong>SqlSession的作用：</strong></p>
+<p>作为MyBatis工作的主要顶层API，表示和<strong>数据库交互的会话</strong>，完成必要数据库<strong>增删改查</strong>功能</p>
+<p>3、MyBatis执行器Executor根据SqlSession传递的参数执行query()方法</p>
+<p>Executor.query()方法几经转折，最后会创建一个StatementHandler对象，然后将必要的参数传递给StatementHandler，使用StatementHandler来完成对数据库的查询，最终返回List结果集。</p>
+<p><strong>Executor的功能和作用是：</strong></p>
+<p>(1、根据传递的参数，<strong>完成SQL语句的动态解析</strong>，生成BoundSql对象，供StatementHandler使用；<br>(2、为查询创建<strong>缓存</strong>，以提高性能<br>(3、<strong>创建JDBC的Statement连接对象，传递给StatementHandler对象，返回List查询结果。</strong></p>
+<p>4、StatementHandler对象负责设置Statement对象中的查询参数、处理JDBC返回的resultSet，将resultSet加工为List 集合返回：</p>
+<p><strong>StatementHandler对象主要完成两个工作：</strong></p>
+<p>(1、对于JDBC的PreparedStatement类型的对象，创建的过程中，我们使用的是SQL语句字符串会包含若干个 ? 占位符，我们其后再<strong>对占位符进行设值</strong>。StatementHandler通过parameterize(statement)方法对Statement进行设值；<br>(2、StatementHandler通过List<e> query(Statement statement, ResultHandler resultHandler)方法来完成执行Statement，和<strong>将Statement对象返回的resultSet封装成List；</strong></e></p>
+<p>对StatementHandler的query分析：</p>
+<p>StatementHandler 的 List<e> query(Statement statement, ResultHandler resultHandler)方法的实现，是调用了ResultSetHandler的handleResultSets(Statement) 方法。<strong>ResultSetHandler的handleResultSets(Statement) 方法会将Statement语句执行后生成的resultSet 结果集转换成List<e> 结果集：</e></strong></e></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.cnblogs.com/luoxn28/p/5932648.html" target="_blank" rel="external">http://www.cnblogs.com/luoxn28/p/5932648.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mybatis/" rel="tag">#mybatis</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/[数据库]4、SQL语句与索引/" rel="next" title="4、SQL语句与索引">
+                <i class="fa fa-chevron-left"></i> 4、SQL语句与索引
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -320,6 +455,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/06/20/[mybatis]mybatis源码分析/"
+           data-title="mybatis源码分析" data-url="http://qianmingxs.com/2017/06/20/[mybatis]mybatis源码分析/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -339,8 +482,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -390,6 +542,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis优势"><span class="nav-number">1.</span> <span class="nav-text">mybatis优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态代理生成mapper"><span class="nav-number">2.</span> <span class="nav-text">动态代理生成mapper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SqlSession-的工作过程分析"><span class="nav-number">3.</span> <span class="nav-text">SqlSession 的工作过程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -486,6 +649,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
