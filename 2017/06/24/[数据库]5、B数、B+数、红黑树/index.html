@@ -118,7 +118,15 @@ m阶B树的结构定义1、每个结点至多有m个子结点2、除根节点和
 <meta property="og:image" content="http://i.imgur.com/G6v7NrJ.png">
 <meta property="og:image" content="http://i.imgur.com/pSZFrHr.png">
 <meta property="og:image" content="http://i.imgur.com/JxhAKc6.png">
-<meta property="og:updated_time" content="2017-06-24T14:09:05.362Z">
+<meta property="og:image" content="http://i.imgur.com/yK13FBp.png">
+<meta property="og:image" content="http://i.imgur.com/CoU6eYL.png">
+<meta property="og:image" content="http://i.imgur.com/pFdZra1.jpg">
+<meta property="og:image" content="http://i.imgur.com/SWjSq7P.png">
+<meta property="og:image" content="http://i.imgur.com/DFBPxEe.png">
+<meta property="og:image" content="http://i.imgur.com/IQy3m4D.png">
+<meta property="og:image" content="http://i.imgur.com/Bsdyx8M.jpg">
+<meta property="og:image" content="http://i.imgur.com/x8PASHT.png">
+<meta property="og:updated_time" content="2017-06-25T07:49:40.604Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="5、B数、B+数、红黑树">
 <meta name="twitter:description" content="2-3树
@@ -421,7 +429,7 @@ m阶B树的结构定义1、每个结点至多有m个子结点2、除根节点和
 <p><img src="http://i.imgur.com/55g1tMJ.png" alt=""></p>
 <p>如果树高为h，则查找时访问外存的次数是h</p>
 <p>注意：<br><strong>每个关键码表示索引，找到索引后，每个关键码还对应一个指向外存的指针，这样通过索引才可以访问到完整的记录</strong></p>
-<h3 id="B树的插入"><a href="#B树的插入" class="headerlink" title="B树的插入"></a>B树的插入</h3><p>情况1：</p>
+<h3 id="B树的插入（分裂向上生长）"><a href="#B树的插入（分裂向上生长）" class="headerlink" title="B树的插入（分裂向上生长）"></a>B树的插入（分裂向上生长）</h3><p>情况1：</p>
 <p>首先判断关键码14是否存在，按照图中的轨迹查找，此时到15所在的节点，遍历后发现没有14，则在该节点中插入</p>
 <p>此时外存读的次数是3，写的次数是1</p>
 <p><img src="http://i.imgur.com/mbAsXfh.png" alt=""></p>
@@ -438,6 +446,58 @@ m阶B树的结构定义1、每个结点至多有m个子结点2、除根节点和
 <p><img src="http://i.imgur.com/pSZFrHr.png" alt=""></p>
 <p>最终的结果是：</p>
 <p><img src="http://i.imgur.com/JxhAKc6.png" alt=""></p>
+<h3 id="B数的删除（向左或向右合并）"><a href="#B数的删除（向左或向右合并）" class="headerlink" title="B数的删除（向左或向右合并）"></a>B数的删除（向左或向右合并）</h3><p>6阶B树删除45</p>
+<p>对于6阶B树，子节点树要求m/2~m，即 3~6，<strong>关键码的个数为2~5</strong>，在删除的过程中需要<strong>防止下溢出</strong>，即关键码的数量小于规定的个数</p>
+<p><img src="http://i.imgur.com/yK13FBp.png" alt=""></p>
+<p>在删除掉45后，当前节点只有110一个关键字，下溢出了。其中一种方案是<strong>向左右节点借关键码，同时要将父节点拉下来</strong>，这里演示向右节点借关键码。此时合并的关键码有110，112，135，143，212，需要进行分裂，根据二分分裂的方式，将135移到父节点，即用135替换123，然后子节点分裂，反别是110，112和142，212，结果是：</p>
+<p><img src="http://i.imgur.com/CoU6eYL.png" alt=""></p>
+<p>给出一个极限情况下删除的例子：</p>
+<p>删除的时候如果发生下溢出，即当前关键码个数小于定义的个数，则需要进行合并，向左节点或有节点合并</p>
+<p>如果删除后，节点为0仍保持0的状态，按照向左向右合并的方式进行操作</p>
+<p><img src="http://i.imgur.com/pFdZra1.jpg" alt=""></p>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>B+树是B树的一种变形，<strong>是在叶结点上存储信息的树</strong>：</p>
+<ul>
+<li>所有的管家那么均出现在叶结点上</li>
+<li>各层节点中的关键码均是下一层相应节点中最大关键码（或最小关键码）的复写</li>
+</ul>
+<h3 id="B-树的结构定义"><a href="#B-树的结构定义" class="headerlink" title="B+树的结构定义"></a>B+树的结构定义</h3><ul>
+<li>每个节点至多有m个子节点</li>
+<li>每个结点（除根外）至少有m/2（向上取整）个子结点</li>
+<li>根节点至少有两个子结点</li>
+<li><strong>有k个子结点的必有k个关键码</strong>（这个是与B树的差别）</li>
+</ul>
+<font color="red"><strong>QM总结：</strong></font>
+
+<ul>
+<li>根节点有2~m个子节点</li>
+<li>除根节点外有m/2（向上取整）~m个子结点</li>
+<li>有k个子结点的节点有k个关键字（这是与B树的结构差别，B树有k-1个关键字）</li>
+</ul>
+<p><img src="http://i.imgur.com/SWjSq7P.png" alt=""></p>
+<ul>
+<li>m阶B+树有m个子节点，也有m个关键字</li>
+<li>m个关键字是子结点的复写，当前层的关键码是其每个子结点关键码的最大关键码（也可以是最小）</li>
+<li>根节点是线性索引，可以顺序查找；再加上多分树形查找</li>
+<li>树形索引中不包含指向真实数据位置的指针，必须索引到树的叶子节点才算找到；<strong>好处是可以提高树的阶数，降低树的高度，加速索引速度</strong></li>
+</ul>
+<h3 id="B-树的插入"><a href="#B-树的插入" class="headerlink" title="B+树的插入"></a>B+树的插入</h3><p>如下3阶B+树，节点最多有3个关键码，当插入15后，查询到10 23这个节点，插入15。父节点不需要重写</p>
+<p><img src="http://i.imgur.com/DFBPxEe.png" alt=""></p>
+<p>3阶B+树插入16后，叶子节点的关键为16超过最大阶3，所以需要分类成10、15和16、23，并增加分类节点之间的线性链接，修改父节点的关键码，每个关键码是子结点关键码最大值的复写</p>
+<p><img src="http://i.imgur.com/IQy3m4D.png" alt=""></p>
+<p>多次分裂</p>
+<p><img src="http://i.imgur.com/Bsdyx8M.jpg" alt=""></p>
+<h3 id="B-树的删除"><a href="#B-树的删除" class="headerlink" title="B+树的删除"></a>B+树的删除</h3><p>如下B+树删除23，首先需要查找23；第一个节点判断，23&lt;=35，到第二个子结点查找；23&lt;=23，在第一个子结点中查找；删除关键码23；</p>
+<p>此时父节点中的23能够正确标识父节点的区间，所以不进行更新（类似线段树中的延迟更新）</p>
+<p><img src="http://i.imgur.com/x8PASHT.png" alt=""></p>
+<h2 id="B树与B-树的区别"><a href="#B树与B-树的区别" class="headerlink" title="B树与B+树的区别"></a>B树与B+树的区别</h2><p>节点结构：</p>
+<ul>
+<li>当前节点有k个子结点，B树有k-1个关键码，B+树有k个关键码</li>
+<li>B树当前节点的关键码类似BST是子结点关键码的分割，B+树当前节点的关键码是子结点的复写（子结点关键码的最大值或最小值）</li>
+</ul>
+<p>查找：</p>
+<p>B树每个节点保存了指向真实位置的指针，找到关键码就能找到真实位置；B+树必须索引到叶子节点；B+树提供了索性查找和顺序查找两种方式</p>
+<p>实际中使用B+树特别多</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>第10章 索引——2（B树,B树） 标清<br><a href="https://www.youtube.com/watch?v=vBD6Ve8VryY" target="_blank" rel="external">https://www.youtube.com/watch?v=vBD6Ve8VryY</a></p>
 
       
     </div>
@@ -593,7 +653,7 @@ m阶B树的结构定义1、每个结点至多有m个子结点2、除根节点和
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3树"><span class="nav-number">1.</span> <span class="nav-text">2-3树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B树（Balacned-Tree）"><span class="nav-number">2.</span> <span class="nav-text">B树（Balacned Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#m阶B树的结构定义"><span class="nav-number">2.1.</span> <span class="nav-text">m阶B树的结构定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的性质"><span class="nav-number">2.2.</span> <span class="nav-text">B树的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的节点结构"><span class="nav-number">2.3.</span> <span class="nav-text">B树的节点结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树结点抽象数据类型"><span class="nav-number">2.4.</span> <span class="nav-text">B树结点抽象数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的查找"><span class="nav-number">2.5.</span> <span class="nav-text">B树的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的插入"><span class="nav-number">2.6.</span> <span class="nav-text">B树的插入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3树"><span class="nav-number">1.</span> <span class="nav-text">2-3树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B树（Balacned-Tree）"><span class="nav-number">2.</span> <span class="nav-text">B树（Balacned Tree）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#m阶B树的结构定义"><span class="nav-number">2.1.</span> <span class="nav-text">m阶B树的结构定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的性质"><span class="nav-number">2.2.</span> <span class="nav-text">B树的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的节点结构"><span class="nav-number">2.3.</span> <span class="nav-text">B树的节点结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树结点抽象数据类型"><span class="nav-number">2.4.</span> <span class="nav-text">B树结点抽象数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的查找"><span class="nav-number">2.5.</span> <span class="nav-text">B树的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树的插入（分裂向上生长）"><span class="nav-number">2.6.</span> <span class="nav-text">B树的插入（分裂向上生长）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B数的删除（向左或向右合并）"><span class="nav-number">2.7.</span> <span class="nav-text">B数的删除（向左或向右合并）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">3.</span> <span class="nav-text">B+树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的结构定义"><span class="nav-number">3.1.</span> <span class="nav-text">B+树的结构定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的插入"><span class="nav-number">3.2.</span> <span class="nav-text">B+树的插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树的删除"><span class="nav-number">3.3.</span> <span class="nav-text">B+树的删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B树与B-树的区别"><span class="nav-number">4.</span> <span class="nav-text">B树与B+树的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
         </section>
