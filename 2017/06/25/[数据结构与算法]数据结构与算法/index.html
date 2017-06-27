@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="三次握手,四次挥手," />
+  <meta name="keywords" content="算法,数据结构," />
 
 
 
@@ -84,28 +84,48 @@
 
 
 
-<meta name="description" content="1、在TCP建立连接的三次握手阶段，如果客户端发送的第三个ACK包丢了，那么客户端和服务器端分别进行什么处理？
+<meta name="description" content="索引索引是把一个关键码与它对应的数据记录的位置相关联的过程
+索引文件记录了&amp;lt;关键码，指针&amp;gt;对，指针指向了文件的真实地址
+线性索引数据库中的记录是不等长的，而且无需存储的。但建立的索引文件是等长（Key，Point对）、按照关键字有序存储的，这样可以方便进行二分查找；索引文件的指针指向磁盘文件的地址
 
-当Client端收到Server的SYN+ACK应答后，其状态变为ESTABLISHED，并发送ACK包给Server；
-如果此时ACK在网络中丢失，那么Server端该TCP连接的状态为SYN_RECV，并且依次等待3秒、6秒、12秒后重新发送SYN+ACK包，以便Client重新发">
+如果线性索引太大，可以存储在磁盘中。但是一次检索过程中会有多次访问磁盘，从而影响检索的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP三次握手、四次挥手讨论">
-<meta property="og:url" content="http://qianmingxs.com/2017/04/13/[网络安全]TCP三次握手、四次挥手讨论/index.html">
+<meta property="og:title" content="数据结构与算法">
+<meta property="og:url" content="http://qianmingxs.com/2017/06/25/[数据结构与算法]数据结构与算法/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="1、在TCP建立连接的三次握手阶段，如果客户端发送的第三个ACK包丢了，那么客户端和服务器端分别进行什么处理？
+<meta property="og:description" content="索引索引是把一个关键码与它对应的数据记录的位置相关联的过程
+索引文件记录了&amp;lt;关键码，指针&amp;gt;对，指针指向了文件的真实地址
+线性索引数据库中的记录是不等长的，而且无需存储的。但建立的索引文件是等长（Key，Point对）、按照关键字有序存储的，这样可以方便进行二分查找；索引文件的指针指向磁盘文件的地址
 
-当Client端收到Server的SYN+ACK应答后，其状态变为ESTABLISHED，并发送ACK包给Server；
-如果此时ACK在网络中丢失，那么Server端该TCP连接的状态为SYN_RECV，并且依次等待3秒、6秒、12秒后重新发送SYN+ACK包，以便Client重新发">
-<meta property="og:image" content="http://i.imgur.com/VuuTfYn.png">
-<meta property="og:image" content="http://i.imgur.com/EJSyaAu.png">
-<meta property="og:updated_time" content="2017-04-13T08:46:48.132Z">
+如果线性索引太大，可以存储在磁盘中。但是一次检索过程中会有多次访问磁盘，从而影响检索的">
+<meta property="og:image" content="http://i.imgur.com/1DXYCvu.png">
+<meta property="og:image" content="http://i.imgur.com/5DF8sRQ.png">
+<meta property="og:image" content="http://i.imgur.com/OmgLiY6.png">
+<meta property="og:image" content="http://i.imgur.com/cCjGMrk.png">
+<meta property="og:image" content="http://i.imgur.com/7Ty52wU.png">
+<meta property="og:image" content="http://i.imgur.com/Ib1kiRz.png">
+<meta property="og:image" content="http://i.imgur.com/BGjZxHO.png">
+<meta property="og:image" content="http://i.imgur.com/VPBvjz0.png">
+<meta property="og:image" content="http://i.imgur.com/4kUY7zI.png">
+<meta property="og:image" content="http://i.imgur.com/zBKQlJG.png">
+<meta property="og:image" content="http://i.imgur.com/4alZl20.png">
+<meta property="og:image" content="http://i.imgur.com/tfK5H9S.png">
+<meta property="og:image" content="http://i.imgur.com/h9NsaHS.jpg">
+<meta property="og:image" content="http://i.imgur.com/zVVdLOn.jpg">
+<meta property="og:image" content="http://i.imgur.com/I6vDXgv.jpg">
+<meta property="og:image" content="http://i.imgur.com/vckMLrR.jpg">
+<meta property="og:image" content="http://i.imgur.com/7WY6ERj.jpg">
+<meta property="og:image" content="http://i.imgur.com/ivnDQpp.jpg">
+<meta property="og:image" content="http://i.imgur.com/1TST6pV.jpg">
+<meta property="og:updated_time" content="2017-06-26T10:13:20.820Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP三次握手、四次挥手讨论">
-<meta name="twitter:description" content="1、在TCP建立连接的三次握手阶段，如果客户端发送的第三个ACK包丢了，那么客户端和服务器端分别进行什么处理？
+<meta name="twitter:title" content="数据结构与算法">
+<meta name="twitter:description" content="索引索引是把一个关键码与它对应的数据记录的位置相关联的过程
+索引文件记录了&amp;lt;关键码，指针&amp;gt;对，指针指向了文件的真实地址
+线性索引数据库中的记录是不等长的，而且无需存储的。但建立的索引文件是等长（Key，Point对）、按照关键字有序存储的，这样可以方便进行二分查找；索引文件的指针指向磁盘文件的地址
 
-当Client端收到Server的SYN+ACK应答后，其状态变为ESTABLISHED，并发送ACK包给Server；
-如果此时ACK在网络中丢失，那么Server端该TCP连接的状态为SYN_RECV，并且依次等待3秒、6秒、12秒后重新发送SYN+ACK包，以便Client重新发">
-<meta name="twitter:image" content="http://i.imgur.com/VuuTfYn.png">
+如果线性索引太大，可以存储在磁盘中。但是一次检索过程中会有多次访问磁盘，从而影响检索的">
+<meta name="twitter:image" content="http://i.imgur.com/1DXYCvu.png">
 
 
 
@@ -126,10 +146,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/04/13/[网络安全]TCP三次握手、四次挥手讨论/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/06/25/[数据结构与算法]数据结构与算法/"/>
 
 
-  <title> TCP三次握手、四次挥手讨论 | Mr.Qian's Home </title>
+  <title> 数据结构与算法 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +302,7 @@
             
             
               
-                TCP三次握手、四次挥手讨论
+                数据结构与算法
               
             
           </h1>
@@ -294,8 +314,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T15:59:00+08:00" content="2017-04-13">
-              2017-04-13
+            <time itemprop="dateCreated" datetime="2017-06-25T17:13:00+08:00" content="2017-06-25">
+              2017-06-25
             </time>
           </span>
 
@@ -308,8 +328,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/网络安全/" itemprop="url" rel="index">
-                    <span itemprop="name">网络安全</span>
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
                   </a>
                 </span>
 
@@ -324,8 +344,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/13/[网络安全]TCP三次握手、四次挥手讨论/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[网络安全]TCP三次握手、四次挥手讨论/" itemprop="commentsCount"></span>
+                <a href="/2017/06/25/[数据结构与算法]数据结构与算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/25/[数据结构与算法]数据结构与算法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -348,17 +368,89 @@
       
 
       
-        <p>1、<strong>在TCP建立连接的三次握手阶段，如果客户端发送的第三个ACK包丢了，那么客户端和服务器端分别进行什么处理？</strong></p>
-<p><img src="http://i.imgur.com/VuuTfYn.png" alt=""></p>
-<p>当Client端收到Server的SYN+ACK应答后，其状态变为ESTABLISHED，并发送ACK包给Server；</p>
-<p>如果此时ACK在网络中丢失，<strong>那么Server端该TCP连接的状态为SYN_RECV，并且依次等待3秒、6秒、12秒后重新发送SYN+ACK包，以便Client重新发送ACK包，以便Client重新发送ACK包。</strong></p>
-<p>Server重发SYN+ACK包的次数，可以通过设置/proc/sys/net/ipv4/tcp_synack_retries修改，默认值为5。</p>
-<p>如果重发指定次数后，仍然<strong>未收到ACK应答</strong>，那么<strong>一段时间后，Server自动关闭这个连接。</strong></p>
-<p>但是Client认为这个连接已经建立，如果Client端向Server写数据，Server端将以<strong>RST</strong>包响应，方能感知到Server的错误。</p>
-<p>下图是服务器端状态为SYN-RECV状态时，接收到数据包后采取的反应；</p>
-<p><img src="http://i.imgur.com/EJSyaAu.png" alt=""></p>
-<p>总结：<br>第三个ACK丢了，服务器端超时后重新发送SYN+ACK包；如果超过重发次数后，仍未收到ACK，则关闭这个链接；但此时客户端认为连接已经建立，如果客户端向服务器发送数据，服务器端将以RST包响应</p>
-<p><strong>为什么是三次握手，而不是两次握手？</strong></p>
+        <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引是把一个关键码与它对应的数据记录的位置相关联的过程</p>
+<p>索引文件记录了&lt;关键码，指针&gt;对，指针指向了文件的真实地址</p>
+<h3 id="线性索引"><a href="#线性索引" class="headerlink" title="线性索引"></a>线性索引</h3><p>数据库中的记录是不等长的，而且无需存储的。但建立的索引文件是<strong>等长（Key，Point对）、按照关键字有序存储的</strong>，这样可以方便进行二分查找；索引文件的指针指向磁盘文件的地址</p>
+<p><img src="http://i.imgur.com/1DXYCvu.png" alt=""></p>
+<p>如果线性索引太大，可以存储在磁盘中。但是一次检索过程中会有多次访问磁盘，从而影响检索的效率，可以使用<strong>二级线性索引</strong></p>
+<h3 id="二级线性索引"><a href="#二级线性索引" class="headerlink" title="二级线性索引"></a>二级线性索引</h3><p>如果一级索引太大无法直接读入内存，可以存入磁盘中，存在<strong>连续的磁盘块中</strong>。二级线性对磁盘块进行索引</p>
+<p><img src="http://i.imgur.com/5DF8sRQ.png" alt=""></p>
+<p>二级线性索引能快速索引到<strong>磁盘块</strong>：</p>
+<ul>
+<li>二级线性索引的关键码与磁盘块第一条记录的值相等</li>
+<li>指针指向响应磁盘块的其实位置</li>
+</ul>
+<p><img src="http://i.imgur.com/OmgLiY6.png" alt="">、、</p>
+<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p>对某属性按属性值建立索引；因为不是由记录关键码来确定属性值，而是由属性值来确定记录的位置，因此成为倒排索引</p>
+<p>这些属性往往是<strong>离散型</strong>的，对于连续型的用B树</p>
+<p>举个例子，假设EMP是主键，其余的是属性。如果不建立属性倒排索引，如果需要查找属性为某个值的记录，那么需要从头开始读取记录，判断每条记录的属性是否是查询的值，非常耗时</p>
+<p><img src="http://i.imgur.com/cCjGMrk.png" alt=""></p>
+<p>倒排文件的索引项是（key，point[]）：</p>
+<ul>
+<li>一个具体的索引值</li>
+<li>一组指针（因为属性值不是唯一的，一个属性会对应多条记录）</li>
+</ul>
+<p>对上述记录建立的倒排文件如下，可以根据属性获得主键ID，然后再通过主键查询记录</p>
+<p><img src="http://i.imgur.com/7Ty52wU.png" alt=""></p>
+<h3 id="正文索引"><a href="#正文索引" class="headerlink" title="正文索引"></a>正文索引</h3><p>对文本内容进行快速检索</p>
+<ul>
+<li>词索引：从正文中抽出关键词，对关键词进行快速索引</li>
+<li>全文索引：把正文看做一个长的字符串，对每一个字符建立索引，使查找不再限于关键词，需要更大的空间</li>
+</ul>
+<p>建立正文倒排索引步骤：</p>
+<p>1、把正文分成多条记录<br>2、每条记录赋予一个关键词<br>3、建立正文倒排文件</p>
+<p>倒排文件的索引结构：</p>
+<p><img src="http://i.imgur.com/Ib1kiRz.png" alt=""></p>
+<h2 id="高级树结构"><a href="#高级树结构" class="headerlink" title="高级树结构"></a>高级树结构</h2><h3 id="Trie树"><a href="#Trie树" class="headerlink" title="Trie树"></a>Trie树</h3><p>Trie来源于retrieval，即检索</p>
+<p>基于关键码分解的数据结构，常应用于信息检索、存储英文字符串</p>
+<p>下面展示的Trie结构的树，<strong>人为指定左右节点的范围</strong>，使树的分布相对均匀；如在根节点，将小于32的树放在左子树，大于32的树放入右子树</p>
+<p><img src="http://i.imgur.com/BGjZxHO.png" alt=""></p>
+<h3 id="英文字符树"><a href="#英文字符树" class="headerlink" title="英文字符树"></a>英文字符树</h3><p>按照英文字幕的索引建立索引，即前缀树</p>
+<p><img src="http://i.imgur.com/VPBvjz0.png" alt=""></p>
+<p>对于不等长的字符串，比如规定字符串的长度是3，那么对于字符串an，可以转换成an*；检索时检索到*表示检索结束</p>
+<p><img src="http://i.imgur.com/4kUY7zI.png" alt=""></p>
+<h3 id="平衡的二叉搜索树（AVL）"><a href="#平衡的二叉搜索树（AVL）" class="headerlink" title="平衡的二叉搜索树（AVL）"></a>平衡的二叉搜索树（AVL）</h3><p>平衡的二叉搜索树定义：左右节点的高度小于等于1</p>
+<p><strong>插入节点后，根节点的变化大致有三类：</strong></p>
+<ul>
+<li>原来节点时平衡的，现在成为左重或右重的</li>
+<li>节点原来是某一边重，而现在成为平衡的了</li>
+<li>节点原来是左重或右重的，又加到重的一边，<strong>现在不平衡了</strong>，需要进行调整！！！</li>
+</ul>
+<p><strong>举个例子：</strong></p>
+<p>如下图，插入17前是平衡树，节点2的平衡因子是+1，即右子树比左子树高度大1；节点15是平衡的；<br>插入17后，节点2的平衡因子变成2，节点1的平衡因子变成1，失衡了，<strong>需要调整节点2，节点15，节点7之间的关系</strong></p>
+<p>很简单，用中间值15作为根节点，12小于15作为左节点，17大于15作为右节点，调整后如下：</p>
+<p><img src="http://i.imgur.com/zBKQlJG.png" alt=""></p>
+<font color="red">可以发现，调整之前，节点2的高度是2，调整之后，节点2的高度还是2，没有变化，所以不影响其他节点</font>
+
+<p><strong>插入节点时平衡因子变化</strong></p>
+<ul>
+<li>不平衡的情况发生在插入新节点后</li>
+<li><strong>BST把新节点插入到叶结点</strong>★★★（根节点与叶节点交换，然后插入）</li>
+<li>假设a是离插入节点最近，且平衡因子绝对值不等于0的节点（如果节点的平衡因子等于0不需要调整结构）<ul>
+<li>插入的关键码要么在它的左子树中，要么在其右子树中</li>
+<li><strong>假设插入在右边</strong>，此时a的平衡因子有三种情况：-1，0，1，如下图</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://i.imgur.com/4alZl20.png" alt=""></p>
+<p>1、原来a的平衡因子是-1，即左子树的高度比右子树的高度大1。右边插入节点后，平衡因子变成0，左右子树高度相等，变平衡了<br>2、原来a的平衡因子是0，左右子树高度相等。右边插入节点后，右子树的高度比左子树高度大1，平衡因子变为1<br>3、左图a的平衡因子变成2，b的平衡因子为1，<font color="red">需要调整</font>；右图a的平衡因子变成，b的平衡因子编程-1，<font color="red">需要调整</font>；</p>
+<p><strong>不平衡的情况总结★★★★</strong></p>
+<p><img src="http://i.imgur.com/tfK5H9S.png" alt=""></p>
+<p>分为四种：LL，LR，RL，RR，其中LL和RR比较相似，LR和RL相似</p>
+<p><strong>LL</strong></p>
+<p>如下图有一颗平衡树，其中T1、T2、T3都表示子树，他们的高度都是h。那么节点B的平衡因子是0，节点A的平衡因子是-1，中序遍历的结果是：T1、B、T2、A、T3</p>
+<p>此时如果在A的左子树中插入一个节点，会造成节点A的平衡因子变成-2，造成树不平衡</p>
+<p><img src="http://i.imgur.com/h9NsaHS.jpg" alt=""></p>
+<p>LL主要节点是A、B、T1，三者的大小关系是T1&lt;B&lt;A， B为A和T1的分割节点，调整时保持B不变，将A右旋</p>
+<p><strong>先确定T、B、A的位置，T1和A各自的子节点保持不变；在A右旋的时候，替换了B的右节点，所以将B的有节点T2挂载挂在A的左节点上</strong></p>
+<p><img src="http://i.imgur.com/zVVdLOn.jpg" alt=""></p>
+<p>调整后中序遍历结果没有变化，树保持平衡</p>
+<p><img src="http://i.imgur.com/I6vDXgv.jpg" alt=""></p>
+<p><strong>RL</strong></p>
+<p><img src="http://i.imgur.com/vckMLrR.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/7WY6ERj.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/ivnDQpp.jpg" alt=""></p>
+<p><img src="http://i.imgur.com/1TST6pV.jpg" alt=""></p>
 
       
     </div>
@@ -381,9 +473,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/三次握手/" rel="tag">#三次握手</a>
+            <a href="/tags/算法/" rel="tag">#算法</a>
           
-            <a href="/tags/四次挥手/" rel="tag">#四次挥手</a>
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
           
         </div>
       
@@ -392,16 +484,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/" rel="next" title="Linux视频教程第20讲.Linux启动过程分析">
-                <i class="fa fa-chevron-left"></i> Linux视频教程第20讲.Linux启动过程分析
+              <a href="/2017/06/24/[数据库]5、B数、B+数、红黑树/" rel="next" title="5、B数、B+数、红黑树">
+                <i class="fa fa-chevron-left"></i> 5、B数、B+数、红黑树
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/" rel="prev" title="Intellij IDEA创建 Web 项目">
-                Intellij IDEA创建 Web 项目 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/26/[分布式架构]构建高可用的系统/" rel="prev" title="构建高可用的系统">
+                构建高可用的系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -428,8 +520,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/13/[网络安全]TCP三次握手、四次挥手讨论/"
-           data-title="TCP三次握手、四次挥手讨论" data-url="http://qianmingxs.com/2017/04/13/[网络安全]TCP三次握手、四次挥手讨论/">
+      <div class="ds-thread" data-thread-key="2017/06/25/[数据结构与算法]数据结构与算法/"
+           data-title="数据结构与算法" data-url="http://qianmingxs.com/2017/06/25/[数据结构与算法]数据结构与算法/">
       </div>
     
   </div>
@@ -474,7 +566,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">133</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -491,7 +583,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">92</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -520,7 +612,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">1.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性索引"><span class="nav-number">1.1.</span> <span class="nav-text">线性索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二级线性索引"><span class="nav-number">1.2.</span> <span class="nav-text">二级线性索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒排索引"><span class="nav-number">1.3.</span> <span class="nav-text">倒排索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正文索引"><span class="nav-number">1.4.</span> <span class="nav-text">正文索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级树结构"><span class="nav-number">2.</span> <span class="nav-text">高级树结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trie树"><span class="nav-number">2.1.</span> <span class="nav-text">Trie树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#英文字符树"><span class="nav-number">2.2.</span> <span class="nav-text">英文字符树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平衡的二叉搜索树（AVL）"><span class="nav-number">2.3.</span> <span class="nav-text">平衡的二叉搜索树（AVL）</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
