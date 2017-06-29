@@ -89,7 +89,7 @@ Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁
 并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ConcurrentHashMap">
-<meta property="og:url" content="http://qianmingxs.com/2017/06/27/[Java]ConcurrentHashMap/index.html">
+<meta property="og:url" content="http://qianmingxs.com/2017/06/27/[JDK源码阅读]ConcurrentHashMap/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
 <meta property="og:description" content="结构
 Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。
@@ -101,7 +101,7 @@ Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁
 <meta property="og:image" content="http://i.imgur.com/jO3Ir3q.jpg">
 <meta property="og:image" content="http://i.imgur.com/aNjCXWM.jpg">
 <meta property="og:image" content="http://i.imgur.com/Y2duLzx.jpg">
-<meta property="og:updated_time" content="2017-06-27T08:04:36.554Z">
+<meta property="og:updated_time" content="2017-06-29T05:30:33.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConcurrentHashMap">
 <meta name="twitter:description" content="结构
@@ -128,7 +128,7 @@ Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/06/27/[Java]ConcurrentHashMap/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/06/27/[JDK源码阅读]ConcurrentHashMap/"/>
 
 
   <title> ConcurrentHashMap | Mr.Qian's Home </title>
@@ -310,8 +310,8 @@ Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/JDK源码阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">JDK源码阅读</span>
                   </a>
                 </span>
 
@@ -326,8 +326,8 @@ Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/06/27/[Java]ConcurrentHashMap/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/27/[Java]ConcurrentHashMap/" itemprop="commentsCount"></span>
+                <a href="/2017/06/27/[JDK源码阅读]ConcurrentHashMap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/27/[JDK源码阅读]ConcurrentHashMap/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -529,6 +529,10 @@ public static int generateSerialNumber(){
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/06/29/[JDK源码阅读]LinkedHashMap/" rel="prev" title="LinkedHashMap">
+                LinkedHashMap <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -553,8 +557,8 @@ public static int generateSerialNumber(){
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/06/27/[Java]ConcurrentHashMap/"
-           data-title="ConcurrentHashMap" data-url="http://qianmingxs.com/2017/06/27/[Java]ConcurrentHashMap/">
+      <div class="ds-thread" data-thread-key="2017/06/27/[JDK源码阅读]ConcurrentHashMap/"
+           data-title="ConcurrentHashMap" data-url="http://qianmingxs.com/2017/06/27/[JDK源码阅读]ConcurrentHashMap/">
       </div>
     
   </div>
@@ -599,7 +603,7 @@ public static int generateSerialNumber(){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
