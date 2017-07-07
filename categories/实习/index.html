@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="操作系统," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,55 +84,12 @@
 
 
 
-<meta name="description" content="进程管理
-进程与线程1、进程概念
-进程几部分组成：
-
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻塞
-进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
-<meta property="og:type" content="article">
-<meta property="og:title" content="操作系统">
-<meta property="og:url" content="http://qianmingxs.com/2017/03/31/[Java并发编程]操作系统/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr.Qian's Home">
+<meta property="og:url" content="http://qianmingxs.com/categories/实习/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="进程管理
-进程与线程1、进程概念
-进程几部分组成：
-
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻塞
-进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
-<meta property="og:image" content="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://i.imgur.com/M8giTeg.jpg">
-<meta property="og:updated_time" content="2017-04-01T09:11:57.856Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="操作系统">
-<meta name="twitter:description" content="进程管理
-进程与线程1、进程概念
-进程几部分组成：
-
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻塞
-进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="Mr.Qian's Home">
 
 
 
@@ -153,10 +110,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/03/31/[Java并发编程]操作系统/"/>
+  <link rel="canonical" href="http://qianmingxs.com/categories/实习/"/>
 
 
-  <title> 操作系统 | Mr.Qian's Home </title>
+  <title> 分类: 实习 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -177,7 +134,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -288,203 +245,47 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                操作系统
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-31T16:38:00+08:00" content="2017-03-31">
-              2017-03-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java并发编程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/31/[Java并发编程]操作系统/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/31/[Java并发编程]操作系统/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p><img src="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p><strong>1、进程概念</strong></p>
-<p>进程几部分组成：</p>
-<ul>
-<li>进程控制块（PCB）：标识进程的存在，描述进程的执行状态</li>
-<li>程序段：能够被进程调度程序调度到CPU上执行的程序代码段</li>
-<li>数据段：进程中处理的原始数据或者计算的中间结果、结果数据</li>
-</ul>
-<p>进程控制块组成：</p>
-<ul>
-<li>进程标识符（PID）</li>
-<li>进程当前状态：就绪/执行/阻塞</li>
-<li>进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻塞队列</li>
-<li>程序和数据地址</li>
-<li>进程优先级</li>
-<li><strong>CPU现场保护</strong></li>
-<li>通信信息：记录进程执行过程中与别的进程发生的信息交换情况</li>
-<li>家族联系：进程创建子进程，形成进程家族树。PCB中指明了子进程和父进程的标识</li>
-<li>占有资源清单</li>
-</ul>
-<p>为什么PCB是进程存在的标志？<br>系统通过PCB对进程进行控制：1、当系统调度到某进程后，根据其PCB中保存的处理机状态信息，恢复运行的现场，并根据PCB中的程序和数据的内存地址，找到其程序和数据 2、 当进程暂停执行时，将处理机环境保存在PCB中 3、进程间同步、通信时都要访问PCB</p>
-<p><strong>2、进程状态与转换：</strong></p>
-<p>1、三种状态</p>
-<ul>
-<li>就绪：<strong>获得除处理器之外的所有资源</strong>，一旦获得处理器就立刻可以执行</li>
-<li>执行：进程在CPU上执行</li>
-<li>阻塞：由于发生某事件（例如IO等待）而无法执行下去</li>
-</ul>
-<p>就绪和阻塞的区别：<br>处于就绪状态，当分配处理器时，进程能够立刻执行；阻塞状态时，即使把处理器分配给该进程，它也无法进行</p>
-<p>2、进程状态的相互转换</p>
-<p><img src="http://i.imgur.com/M8giTeg.jpg" alt=""></p>
-<p>注意：线程进行阻塞状态后，若等到期望的事件发生，先进入就绪状态，等调度程序选中该进程时，进程才能执行</p>
-<p><strong>3、进程控制</strong></p>
-<p>进程的控制包括进程的<strong>创建、撤销、阻塞和唤醒</strong>，这些功能一般由<strong>操作系统的内核</strong>来实现</p>
-<p>操作系统内核：把一些与硬件紧密联系的模块，或运行频率较高的模块，以及许多公用的模块安排在靠近硬件的软件层次中，并使他们常驻内存，提高操作系统的效率</p>
-<p><strong>4、进程组织</strong></p>
-<p><strong>5、进程通信：共享存储系统、消息传递系统、管道通信</strong></p>
-<p><strong>6、进程概念与多线程模型</strong></p>
-<h3 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h3><p><strong>1、调度的基本概念</strong></p>
-<p><strong>2、调度时机、切换与过程</strong></p>
-<p><strong>3、调度的基本原则</strong></p>
-<p><strong>4、调度方式</strong></p>
-<p><strong>5、典型调度算法</strong></p>
-<h3 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h3><p><strong>1、进程同步的基本概念</strong></p>
-<p><strong>2、实现临界区互斥的基本方法</strong></p>
-<p><strong>3、信号量</strong></p>
-<p><strong>4、管程</strong></p>
-<p><strong>5、经典同步问题</strong></p>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p><strong>1、死锁概念</strong></p>
-<p><strong>2、死锁处理策略</strong></p>
-<p><strong>3、死锁预防</strong></p>
-<p><strong>4、死锁避免</strong></p>
-<h3 id="死锁检测和解除"><a href="#死锁检测和解除" class="headerlink" title="死锁检测和解除"></a>死锁检测和解除</h3>
-      
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        实习
+        <small>分类</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2017/07/06/[实习]DIDI日报/" itemprop="url">
+              
+                <span itemprop="name">DIDI日报</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-07-06T15:48:00+08:00"
+              content="2017-07-06" >
+          07-06
+        </time>
+      </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/操作系统/" rel="tag">#操作系统</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/03/31/[Java并发编程]Java编程思想——并发/" rel="next" title="Java编程思想——并发">
-                <i class="fa fa-chevron-left"></i> Java编程思想——并发
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/01/[JVM]JVM性能调优/" rel="prev" title="JVM性能调优">
-                JVM性能调优 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+
 
 
           </div>
@@ -492,14 +293,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2017/03/31/[Java并发编程]操作系统/"
-           data-title="操作系统" data-url="http://qianmingxs.com/2017/03/31/[Java并发编程]操作系统/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -519,17 +312,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -540,7 +324,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -548,7 +332,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -557,7 +341,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -579,17 +363,6 @@
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程管理"><span class="nav-number">1.</span> <span class="nav-text">进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器调度"><span class="nav-number">1.2.</span> <span class="nav-text">处理器调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步与互斥"><span class="nav-number">1.3.</span> <span class="nav-text">同步与互斥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">1.4.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁检测和解除"><span class="nav-number">1.5.</span> <span class="nav-text">死锁检测和解除</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -686,10 +459,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 

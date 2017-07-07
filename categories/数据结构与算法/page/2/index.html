@@ -84,46 +84,12 @@
 
 
 
-<meta name="description" content="并发编程的挑战
-并发编程的 目的 是让程序运行得更快，但是并不是启动越多的线程就能让程序跑的更快
-如果希望多线程执行任务使程序运行得更快，需要面临许多挑战，比如：上下文切换、死锁、资源限制问题
-
-上下文切换多线程
-
-CPU为每个线程划分 时间片，每个线程在给定的时间片上交替运行。因为时间片非常短，从宏观上我们感觉多个线程同时运行
-单核 处理器也支持多线程执行代码
-
-上下文切换概念
-每个线程在给定的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java并发编程的艺术笔记">
-<meta property="og:url" content="http://qianmingxs.com/2017/01/13/[Java并发编程]Java并发编程的艺术笔记/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr.Qian's Home">
+<meta property="og:url" content="http://qianmingxs.com/categories/数据结构与算法/page/2/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="并发编程的挑战
-并发编程的 目的 是让程序运行得更快，但是并不是启动越多的线程就能让程序跑的更快
-如果希望多线程执行任务使程序运行得更快，需要面临许多挑战，比如：上下文切换、死锁、资源限制问题
-
-上下文切换多线程
-
-CPU为每个线程划分 时间片，每个线程在给定的时间片上交替运行。因为时间片非常短，从宏观上我们感觉多个线程同时运行
-单核 处理器也支持多线程执行代码
-
-上下文切换概念
-每个线程在给定的">
-<meta property="og:updated_time" content="2017-01-25T07:43:56.026Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java并发编程的艺术笔记">
-<meta name="twitter:description" content="并发编程的挑战
-并发编程的 目的 是让程序运行得更快，但是并不是启动越多的线程就能让程序跑的更快
-如果希望多线程执行任务使程序运行得更快，需要面临许多挑战，比如：上下文切换、死锁、资源限制问题
-
-上下文切换多线程
-
-CPU为每个线程划分 时间片，每个线程在给定的时间片上交替运行。因为时间片非常短，从宏观上我们感觉多个线程同时运行
-单核 处理器也支持多线程执行代码
-
-上下文切换概念
-每个线程在给定的">
+<meta name="twitter:title" content="Mr.Qian's Home">
 
 
 
@@ -144,10 +110,10 @@ CPU为每个线程划分 时间片，每个线程在给定的时间片上交替�
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/01/13/[Java并发编程]Java并发编程的艺术笔记/"/>
+  <link rel="canonical" href="http://qianmingxs.com/categories/数据结构与算法/page/2/"/>
 
 
-  <title> Java并发编程的艺术笔记 | Mr.Qian's Home </title>
+  <title> 分类: 数据结构与算法 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +134,7 @@ CPU为每个线程划分 时间片，每个线程在给定的时间片上交替�
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -279,198 +245,163 @@ CPU为每个线程划分 时间片，每个线程在给定的时间片上交替�
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Java并发编程的艺术笔记
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-13T17:29:00+08:00" content="2017-01-13">
-              2017-01-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java并发编程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/01/13/[Java并发编程]Java并发编程的艺术笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/13/[Java并发编程]Java并发编程的艺术笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><ul>
-<li>并发编程的 <strong>目的</strong> 是让程序运行得更快，<strong>但是并不是启动越多的线程就能让程序跑的更快</strong></li>
-<li>如果希望多线程执行任务使程序运行得更快，需要面临许多挑战，比如：<strong>上下文切换、死锁、资源限制问题</strong></li>
-</ul>
-<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p><strong><em>多线程</em></strong></p>
-<ul>
-<li>CPU为每个线程划分 <strong>时间片</strong>，每个线程在给定的时间片上交替运行。因为时间片非常短，从宏观上我们感觉多个线程同时运行</li>
-<li><strong>单核</strong> 处理器也支持多线程执行代码</li>
-</ul>
-<p><strong><em>上下文切换概念</em></strong></p>
-<p>每个线程在给定的时间片上运行，执行结束后会 <strong>切换</strong> 到下一个任务。<strong>但是在切换前会保存上一个任务的状态</strong>，以便下次切换回来后可以 <strong>继续加载</strong> 这个任务的状态，从保存到加载的过程称为一次上下文切换</p>
-<p><strong><em>多线程速度一定快？</em></strong></p>
-<p>不一定，用得得当多线程的任务执行速度比串行快；但是线程有<strong>创建和上下文切换</strong>的开销，有时候并发执行速度比串行慢</p>
-<p><strong><em>如何减小上下文切换</em></strong></p>
-<ul>
-<li>无锁并发编程：多线程竞争锁时会引起上下文切换，可以用一些方法来避免使用锁，如数据分段，每个线程处理不同段的数据</li>
-<li>CAS算法：Java的Atomic包使用CAS算法来更新数据，而不需要使用锁</li>
-<li>使用最少线程：避免创造不需要的线程，比如任务少，线程多，造成大量线程处于等待状态</li>
-<li>协程：在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换</li>
-</ul>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>举个例子</p>
-<pre><code>Thread t1 = new Thread(new Runnable(){
-    @Override
-    public void run(){
-        synchronized(A){
-            Thread.sleep(2000);
-            synchronized(B){}
-        }
-    }
-});
-
-Thread t2 = new Thread(new Runnable(){
-    @Override
-    public void run(){
-        synchronized(B){
-            Thread.sleep(2000);
-            synchronized(A){}
-        }
-    }
-});
-</code></pre><p>线程1：持有锁A，等待锁B<br>线程2：持有锁B，等待锁A</p>
-<p>线程1和线程2互相等待对方释放锁，引起死锁</p>
-<p><strong><em>避免死锁的一些方法</em></strong></p>
-<ul>
-<li>避免一个线程同时获取多个锁</li>
-<li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源</li>
-<li>尝试使用定时锁，使用lock.tryLock(timeout)来替代使用内部锁机制</li>
-<li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况</li>
-</ul>
-<h3 id="资源限制的挑战"><a href="#资源限制的挑战" class="headerlink" title="资源限制的挑战"></a>资源限制的挑战</h3><p>资源限制指的是在进行并发编程时，程序的执行速度受限于 <strong>计算机硬件资源</strong> 或者 <strong>软件资源</strong> 。硬件资源有带宽、硬盘读写速度、CPU处理速度，软件资源有数据库的连接数和socket连接数等</p>
-<p>资源限制会使原来并发执行的代码仍串行执行，由于增加了上下文切换和资源调度的时间，执行速度反而更慢</p>
-<p>如何解决资源限制问题？对于硬件资源限制，可以考虑使用集群并行执行程序，对于软件资源限制，可以考虑使用资源池将资源服用</p>
-<h2 id="Java并发编程的底层实现原理"><a href="#Java并发编程的底层实现原理" class="headerlink" title="Java并发编程的底层实现原理"></a>Java并发编程的底层实现原理</h2><p>Java的并发机制依赖于</p>
-<h3 id="volatile-的应用"><a href="#volatile-的应用" class="headerlink" title="volatile 的应用"></a>volatile 的应用</h3><h3 id="synchronized-的实现原理与应用"><a href="#synchronized-的实现原理与应用" class="headerlink" title="synchronized 的实现原理与应用"></a>synchronized 的实现原理与应用</h3><h3 id="原子操作的实现原理"><a href="#原子操作的实现原理" class="headerlink" title="原子操作的实现原理"></a>原子操作的实现原理</h3>
-      
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        数据结构与算法
+        <small>分类</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2017/05/23/[数据结构与算法]3、树状数组/" itemprop="url">
+              
+                <span itemprop="name">3、树状数组</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-05-23T22:37:00+08:00"
+              content="2017-05-23" >
+          05-23
+        </time>
+      </div>
 
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/01/11/[论文]论文技术方向/" rel="next" title="论文技术方向">
-                <i class="fa fa-chevron-left"></i> 论文技术方向
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/17/[Servlet]JSTL常用语法/" rel="prev" title="JSTL常用语法">
-                JSTL常用语法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
+    
       
-    </div>
-  </div>
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" itemprop="url">
+              
+                <span itemprop="name">1、Leetcode 简单题</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-05-23T22:37:00+08:00"
+              content="2017-05-23" >
+          05-23
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/04/27/[数据结构与算法]2、平衡二叉树最小节点个数/" itemprop="url">
+              
+                <span itemprop="name">2、平衡二叉树最小节点个数</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-27T22:27:00+08:00"
+              content="2017-04-27" >
+          04-27
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/12/13/[数据结构与算法]面试总结/" itemprop="url">
+              
+                <span itemprop="name">面试总结</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-12-13T20:09:00+08:00"
+              content="2016-12-13" >
+          12-13
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/10/08/[数据结构与算法]算法4笔记/" itemprop="url">
+              
+                <span itemprop="name">算法4笔记</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-10-08T19:07:00+08:00"
+              content="2016-10-08" >
+          10-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/categories/数据结构与算法/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/categories/数据结构与算法/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
 
           </div>
@@ -478,14 +409,6 @@ Thread t2 = new Thread(new Runnable(){
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2017/01/13/[Java并发编程]Java并发编程的艺术笔记/"
-           data-title="Java并发编程的艺术笔记" data-url="http://qianmingxs.com/2017/01/13/[Java并发编程]Java并发编程的艺术笔记/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -505,17 +428,8 @@ Thread t2 = new Thread(new Runnable(){
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -526,7 +440,7 @@ Thread t2 = new Thread(new Runnable(){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -534,7 +448,7 @@ Thread t2 = new Thread(new Runnable(){
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -543,7 +457,7 @@ Thread t2 = new Thread(new Runnable(){
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -565,17 +479,6 @@ Thread t2 = new Thread(new Runnable(){
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程的挑战"><span class="nav-number">1.</span> <span class="nav-text">并发编程的挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">1.1.</span> <span class="nav-text">上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">1.2.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源限制的挑战"><span class="nav-number">1.3.</span> <span class="nav-text">资源限制的挑战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java并发编程的底层实现原理"><span class="nav-number">2.</span> <span class="nav-text">Java并发编程的底层实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile-的应用"><span class="nav-number">2.1.</span> <span class="nav-text">volatile 的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized-的实现原理与应用"><span class="nav-number">2.2.</span> <span class="nav-text">synchronized 的实现原理与应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子操作的实现原理"><span class="nav-number">2.3.</span> <span class="nav-text">原子操作的实现原理</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -672,10 +575,6 @@ Thread t2 = new Thread(new Runnable(){
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 

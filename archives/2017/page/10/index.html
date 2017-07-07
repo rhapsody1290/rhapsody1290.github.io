@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,Volatile," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,28 +84,12 @@
 
 
 
-<meta name="description" content="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html#ibm-pcon
-锁提供了两种主要的特性：互斥和可见性
-
-互斥：一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据
-可见性：可见性要更加复杂一些，它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个">
-<meta property="og:type" content="article">
-<meta property="og:title" content="正确使用 Volatile 变量">
-<meta property="og:url" content="http://qianmingxs.com/2016/12/20/[Java并发编程]正确使用 Volatile 变量/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr.Qian's Home">
+<meta property="og:url" content="http://qianmingxs.com/archives/2017/page/10/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html#ibm-pcon
-锁提供了两种主要的特性：互斥和可见性
-
-互斥：一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据
-可见性：可见性要更加复杂一些，它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个">
-<meta property="og:updated_time" content="2017-01-22T13:39:19.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正确使用 Volatile 变量">
-<meta name="twitter:description" content="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html#ibm-pcon
-锁提供了两种主要的特性：互斥和可见性
-
-互斥：一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据
-可见性：可见性要更加复杂一些，它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个">
+<meta name="twitter:title" content="Mr.Qian's Home">
 
 
 
@@ -126,10 +110,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2016/12/20/[Java并发编程]正确使用 Volatile 变量/"/>
+  <link rel="canonical" href="http://qianmingxs.com/archives/2017/page/10/"/>
 
 
-  <title> 正确使用 Volatile 变量 | Mr.Qian's Home </title>
+  <title> 归档 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -150,7 +134,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -261,182 +245,106 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+       
+        
+      非常好! 目前共计 139 篇日志。 继续努力。
+    </span>
+
     
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                正确使用 Volatile 变量
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-20T15:00:00+08:00" content="2016-12-20">
-              2016-12-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java并发编程</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/20/[Java并发编程]正确使用 Volatile 变量/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/20/[Java并发编程]正确使用 Volatile 变量/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
-      
-        <p><a href="http://www.ibm.com/developerworks/cn/java/j-jtp06197.html#ibm-pcon" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-jtp06197.html#ibm-pcon</a></p>
-<p>锁提供了两种主要的特性：<strong>互斥</strong>和<strong>可见性</strong></p>
-<ul>
-<li>互斥：一次只允许一个线程持有某个特定的锁，因此可使用该特性实现对共享数据的协调访问协议，这样，一次就只有一个线程能够使用该共享数据</li>
-<li>可见性：可见性要更加复杂一些，它必须确保释放锁之前对共享数据做出的更改对于随后获得该锁的另一个线程是可见的 —— 如果没有同步机制提供的这种可见性保证，线程看到的共享变量可能是修改前的值或不一致的值，这将引发许多严重问题</li>
-</ul>
-<h2 id="Volatile-变量"><a href="#Volatile-变量" class="headerlink" title="Volatile 变量"></a>Volatile 变量</h2><p>Volatile 变量具有 synchronized 的可见性特性，但是不具备原子特性。这就是说<strong>线程能够自动发现 volatile 变量的最新值</strong></p>
-<p>Volatile 变量可用于提供线程安全，但是只能应用于非常有限的一组用例：多个变量之间或者某个变量的当前值与修改后值之间没有约束</p>
-<h2 id="正确使用-volatile-变量的条件"><a href="#正确使用-volatile-变量的条件" class="headerlink" title="正确使用 volatile 变量的条件"></a>正确使用 volatile 变量的条件</h2><p>您只能在有限的一些情形下使用 volatile 变量替代锁。要使 volatile 变量提供理想的线程安全，必须同时满足下面两个条件：</p>
-<ul>
-<li>对变量的写操作不依赖于当前值。</li>
-<li>该变量没有包含在具有其他变量的不变式中。</li>
-</ul>
-<p>实际上，这些条件表明，<strong>可以被写入 volatile 变量的这些有效值独立于任何程序的状态，包括变量的当前状态。</strong></p>
-<p>第一个条件的限制使 volatile 变量不能用作线程安全计数器。虽然增量操作（x++）看上去类似一个单独操作，实际上它是一个由读取－修改－写入操作序列组成的组合操作，必须以原子方式执行，而 volatile 不能提供必须的原子特性</p>
-<h2 id="正确使用-volatile-的模式"><a href="#正确使用-volatile-的模式" class="headerlink" title="正确使用 volatile 的模式"></a>正确使用 volatile 的模式</h2><p>模式 #1：状态标志</p>
-<p>也许实现 volatile 变量的规范使用仅仅是使用一个布尔状态标志，用于指示发生了一个重要的一次性事件，例如完成初始化或请求停机</p>
-<pre><code>volatile boolean shutdownRequested;
-...
-public void shutdown() { shutdownRequested = true; }
-public void doWork() { 
-    while (!shutdownRequested) { 
-        // do stuff
-    }
-}
-</code></pre><p>很可能会从循环外部调用 shutdown() 方法 —— 即在<strong>另一个线程</strong>中 —— 因此，<strong>需要执行某种同步来确保正确实现 shutdownRequested 变量的可见</strong></p>
-<p>这种类型的状态标记的一个公共特性是：通常只有一种状态转换；shutdownRequested 标志从 false 转换为 true，然后程序停止。这种模式可以扩展到来回转换的状态标志，但是只有在转换周期不被察觉的情况下才能扩展（从 false 到 true，再转换到 false）。此外，还需要某些原子状态转换机制，例如原子变量。</p>
-<p>模式 #3：独立观察（independent observation）</p>
-<p>安全使用 volatile 的另一种简单模式是：定期 “发布” 观察结果供程序内部使用。例如，假设有一种环境传感器能够感觉环境温度。一个后台线程可能会每隔几秒读取一次该传感器，并更新包含当前文档的 volatile 变量。然后，<strong>其他线程可以读取这个变量，从而随时能够看到最新的温度值</strong>。</p>
-
-      
-    </div>
-
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java/" rel="tag">#Java</a>
-          
-            <a href="/tags/Volatile/" rel="tag">#Volatile</a>
-          
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
         </div>
       
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/12/14/[Java并发编程]Java多线程与并发库高级应用/" rel="next" title="Java多线程与并发库高级应用">
-                <i class="fa fa-chevron-left"></i> Java多线程与并发库高级应用
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/30/[Java]Java反射/" rel="prev" title="Java反射">
-                Java反射 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/01/07/[论文]论文/" itemprop="url">
+              
+                <span itemprop="name">论文</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-01-07T11:30:00+08:00"
+              content="2017-01-07" >
+          01-07
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
+    
+
       
-    </div>
-  </div>
+      
+      
+
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/01/03/[Java]实习/" itemprop="url">
+              
+                <span itemprop="name">实习</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-01-03T11:52:00+08:00"
+              content="2017-01-03" >
+          01-03
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2017/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2017/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/9/">9</a><span class="page-number current">10</span>
+  </nav>
+
+
 
 
           </div>
@@ -444,14 +352,6 @@ public void doWork() {
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2016/12/20/[Java并发编程]正确使用 Volatile 变量/"
-           data-title="正确使用 Volatile 变量" data-url="http://qianmingxs.com/2016/12/20/[Java并发编程]正确使用 Volatile 变量/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -471,17 +371,8 @@ public void doWork() {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -492,7 +383,7 @@ public void doWork() {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -500,7 +391,7 @@ public void doWork() {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -509,7 +400,7 @@ public void doWork() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -531,17 +422,6 @@ public void doWork() {
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Volatile-变量"><span class="nav-number">1.</span> <span class="nav-text">Volatile 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正确使用-volatile-变量的条件"><span class="nav-number">2.</span> <span class="nav-text">正确使用 volatile 变量的条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正确使用-volatile-的模式"><span class="nav-number">3.</span> <span class="nav-text">正确使用 volatile 的模式</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -638,9 +518,11 @@ public void doWork() {
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   

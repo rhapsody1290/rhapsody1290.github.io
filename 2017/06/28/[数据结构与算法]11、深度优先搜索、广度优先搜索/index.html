@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="算法,数据结构," />
 
 
 
@@ -84,21 +84,37 @@
 
 
 
-<meta name="description" content="Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。
-Future模式在请求发生时，会先产生一个Futur">
+<meta name="description" content="迷宫问题（深度优先搜索解法）题目从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，求所有路径
+
+几个关键点：
+1、深度优先模版
+如果下一个路径没有越界，而且可以访问（数组中的值是0），那么继续在下一个节点上继续进行深度优先搜索
+public void DFS(int[][] map, Point current, Point start, Point end) {
+    //遍历">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发编程设计模式">
-<meta property="og:url" content="http://qianmingxs.com/2017/01/25/[Java并发编程]并发编程设计模式/index.html">
+<meta property="og:title" content="11、深度优先搜索、广度优先搜索">
+<meta property="og:url" content="http://qianmingxs.com/2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。
-Future模式在请求发生时，会先产生一个Futur">
-<meta property="og:image" content="http://i.imgur.com/487kq32.jpg">
-<meta property="og:updated_time" content="2017-02-06T07:30:40.063Z">
+<meta property="og:description" content="迷宫问题（深度优先搜索解法）题目从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，求所有路径
+
+几个关键点：
+1、深度优先模版
+如果下一个路径没有越界，而且可以访问（数组中的值是0），那么继续在下一个节点上继续进行深度优先搜索
+public void DFS(int[][] map, Point current, Point start, Point end) {
+    //遍历">
+<meta property="og:image" content="http://i.imgur.com/ztTNOdD.jpg">
+<meta property="og:image" content="http://i.imgur.com/5LTdjLJ.jpg">
+<meta property="og:updated_time" content="2017-07-07T15:33:04.556Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发编程设计模式">
-<meta name="twitter:description" content="Future 模式考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以我们希望在文件开启之后，会有一个默认背景（可以是纯色图片，也可以是正在加载的图片），与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。
-Future模式在请求发生时，会先产生一个Futur">
-<meta name="twitter:image" content="http://i.imgur.com/487kq32.jpg">
+<meta name="twitter:title" content="11、深度优先搜索、广度优先搜索">
+<meta name="twitter:description" content="迷宫问题（深度优先搜索解法）题目从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，求所有路径
+
+几个关键点：
+1、深度优先模版
+如果下一个路径没有越界，而且可以访问（数组中的值是0），那么继续在下一个节点上继续进行深度优先搜索
+public void DFS(int[][] map, Point current, Point start, Point end) {
+    //遍历">
+<meta name="twitter:image" content="http://i.imgur.com/ztTNOdD.jpg">
 
 
 
@@ -119,10 +135,10 @@ Future模式在请求发生时，会先产生一个Futur">
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/01/25/[Java并发编程]并发编程设计模式/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/"/>
 
 
-  <title> 并发编程设计模式 | Mr.Qian's Home </title>
+  <title> 11、深度优先搜索、广度优先搜索 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +291,7 @@ Future模式在请求发生时，会先产生一个Futur">
             
             
               
-                并发编程设计模式
+                11、深度优先搜索、广度优先搜索
               
             
           </h1>
@@ -287,8 +303,8 @@ Future模式在请求发生时，会先产生一个Futur">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-01-25T22:44:00+08:00" content="2017-01-25">
-              2017-01-25
+            <time itemprop="dateCreated" datetime="2017-06-28T20:30:00+08:00" content="2017-06-28">
+              2017-06-28
             </time>
           </span>
 
@@ -301,8 +317,8 @@ Future模式在请求发生时，会先产生一个Futur">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
-                    <span itemprop="name">Java并发编程</span>
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
                   </a>
                 </span>
 
@@ -317,8 +333,8 @@ Future模式在请求发生时，会先产生一个Futur">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/01/25/[Java并发编程]并发编程设计模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/25/[Java并发编程]并发编程设计模式/" itemprop="commentsCount"></span>
+                <a href="/2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,24 +357,97 @@ Future模式在请求发生时，会先产生一个Futur">
       
 
       
-        <h2 id="Future-模式"><a href="#Future-模式" class="headerlink" title="Future 模式"></a>Future 模式</h2><p>考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以<strong>我们希望在文件开启之后，会有一个默认背景</strong>（可以是纯色图片，也可以是正在加载的图片），<strong>与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。</strong></p>
-<p>Future模式在请求发生时，会先产生一个Future物件给发出请求的客户，而同时间，真正的目标物件之生成，由一个新的执行持续进行（即 Worker Thread），真正的目标物件生成之后，将之设定至Future之中，而当客户端真正需要目标物件时，目标物件也已经准备好，可以让客户提取使用。 </p>
-<p><img src="http://i.imgur.com/487kq32.jpg" alt=""></p>
-<p>一个简单的Java程式片段示范可能像是这样：</p>
-<pre><code>public Future request() {
-    final Future future = new Future();
+        <h2 id="迷宫问题（深度优先搜索解法）"><a href="#迷宫问题（深度优先搜索解法）" class="headerlink" title="迷宫问题（深度优先搜索解法）"></a>迷宫问题（深度优先搜索解法）</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，求所有路径</p>
+<p><img src="http://i.imgur.com/ztTNOdD.jpg" alt=""></p>
+<p>几个关键点：</p>
+<p>1、深度优先模版</p>
+<p>如果下一个路径没有越界，而且可以访问（数组中的值是0），那么继续在下一个节点上继续进行深度优先搜索</p>
+<pre><code>public void DFS(int[][] map, Point current, Point start, Point end) {
+    //遍历方向
+    int[] x = {0, 1, 1, 1, 0, -1, -1, -1};
+    int[] y = {1, 1, 0, -1, -1, -1, 0, 1};
 
-    new Thread() {
-        public void run() {
-            // 下面這個動作可能是耗時的
-            RealSubject subject = new RealSubject();
-            future.setRealSubject(subject);
+    for (int i = 0; i &lt; x.length; i++) {
+        Point next = new Point(current.x + x[i], current.y + y[i]);
+        //剪枝
+        if (next.x &gt;= 0 &amp;&amp; next.x &lt;= end.x &amp;&amp; next.y &gt;= 0 &amp;&amp; next.y &lt;= end.y
+                &amp;&amp; map[next.x][next.y] == 0) {
+            DFS(map, next, start, end);
         }
-    }.start();
+    }
+}
+</code></pre><p>运行程序的时候发现一个问题，会出现<strong>相邻路径来回走</strong>，导致栈溢出，所以需要设置<strong>在当前遍历的路径中做上标记，在往前搜索的过程中不走回头路</strong></p>
+<p>2、标记访问路径</p>
+<p><img src="http://i.imgur.com/5LTdjLJ.jpg" alt=""></p>
+<p>上图所示的就是来回走的一个案例，这个的解决方法就是在访问到节点后，设置标志位为1。</p>
+<p>但是这会出现一个问题：如果这条路不通，换条路径访问的时候这个节点应该还是需要可以访问的，所以在这条路径回溯的时候，需要重新标注节点为未访问</p>
+<p><strong>貌似标记的地方每次都是的DFS（）这个函数之前、之后</strong></p>
+<pre><code>map[next.x][next.y] = 1;
+DFS(map, next, start, end);
+map[next.x][next.y] = 0;
+</code></pre><p>3、记录路径</p>
+<p>貌似每次也都是在DFS之前添加路径，在DFS之后删除路径</p>
+<pre><code>path.add(next);
+DFS(map, next, start, end);
+path.remove(path.size() - 1);
+</code></pre><p>4、</p>
+<p>5、小技巧，防止起始点和终点被遍历到，初始化时将开头和结尾置为1</p>
+<pre><code>int[][] map = {
+        {0, 1, 0, 1, 0, 0, 0, 1},
+        {1, 0, 0, 1, 1, 0, 1, 0},
+        {0, 1, 1, 0, 0, 1, 1, 1},
+        {1, 0, 0, 1, 1, 0, 0, 1},
+        {1, 0, 0, 0, 1, 1, 0, 1},
+        {0, 1, 1, 1, 0, 0, 0, 0}
+};
+map[0][0] = 1;
+map[5][7] = 1;    
+</code></pre><p>完整代码</p>
+<pre><code>//current参数是重点，别的只是信息传递
+public void DFS(int[][] map, Point current, Point start, Point end) {
+    //遍历方向
+    int[] x = {0, 1, 1, 1, 0, -1, -1, -1};
+    int[] y = {1, 1, 0, -1, -1, -1, 0, 1};
 
-    return future;
-} 
-</code></pre>
+    for (int i = 0; i &lt; x.length; i++) {
+        Point next = new Point(current.x + x[i], current.y + y[i]);
+
+        //找到了
+        if (next.x == end.x &amp;&amp; next.y == end.y) {
+            System.out.println(&quot;找到了：&quot; + ++count);
+            System.out.println(path);
+            continue;
+        }
+
+        //剪枝
+        if (next.x &gt;= 0 &amp;&amp; next.x &lt;= end.x &amp;&amp; next.y &gt;= 0 &amp;&amp; next.y &lt;= end.y
+                &amp;&amp; map[next.x][next.y] == 0) {
+            System.out.println(next);
+            path.add(next);
+            map[next.x][next.y] = 1;
+            DFS(map, next, start, end);
+            map[next.x][next.y] = 0;
+            path.remove(path.size() - 1);
+        }
+    }
+}
+
+public static void main(String[] args) {
+    int[][] map = {
+            {0, 1, 0, 1, 0, 0, 0, 1},
+            {1, 0, 0, 1, 1, 0, 1, 0},
+            {0, 1, 1, 0, 0, 1, 1, 1},
+            {1, 0, 0, 1, 1, 0, 0, 1},
+            {1, 0, 0, 0, 1, 1, 0, 1},
+            {0, 1, 1, 1, 0, 0, 0, 0}
+    };
+    Solution s = new Solution();
+    //s.BFS(map, new Point(0, 0), new Point(map.length - 1, map[0].length - 1));
+    map[0][0] = 1;
+    map[5][7] = 1;
+    s.DFS(map, new Point(0, 0), new Point(0, 0), new Point(map.length - 1, map[0].length - 1));
+}
+</code></pre><h2 id="迷宫问题（广度优先搜索解法）"><a href="#迷宫问题（广度优先搜索解法）" class="headerlink" title="迷宫问题（广度优先搜索解法）"></a>迷宫问题（广度优先搜索解法）</h2>
       
     </div>
 
@@ -380,7 +469,9 @@ Future模式在请求发生时，会先产生一个Futur">
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
           
         </div>
       
@@ -389,16 +480,16 @@ Future模式在请求发生时，会先产生一个Futur">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/18/[mybatis]通用mapper/" rel="next" title="通用mapper">
-                <i class="fa fa-chevron-left"></i> 通用mapper
+              <a href="/2017/06/28/[数据结构与算法]11、迷宫问题-最短路径/" rel="next" title="11、迷宫问题-最短路径">
+                <i class="fa fa-chevron-left"></i> 11、迷宫问题-最短路径
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/09/[Maven]Maven聚合与继承/" rel="prev" title="Maven聚合与继承">
-                Maven聚合与继承 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/29/[JDK源码阅读]LinkedHashMap/" rel="prev" title="LinkedHashMap">
+                LinkedHashMap <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -425,8 +516,8 @@ Future模式在请求发生时，会先产生一个Futur">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/25/[Java并发编程]并发编程设计模式/"
-           data-title="并发编程设计模式" data-url="http://qianmingxs.com/2017/01/25/[Java并发编程]并发编程设计模式/">
+      <div class="ds-thread" data-thread-key="2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/"
+           data-title="11、深度优先搜索、广度优先搜索" data-url="http://qianmingxs.com/2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/">
       </div>
     
   </div>
@@ -471,7 +562,7 @@ Future模式在请求发生时，会先产生一个Futur">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">136</span>
+              <span class="site-state-item-count">139</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -479,7 +570,7 @@ Future模式在请求发生时，会先产生一个Futur">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -488,7 +579,7 @@ Future模式在请求发生时，会先产生一个Futur">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">92</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -517,7 +608,7 @@ Future模式在请求发生时，会先产生一个Futur">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Future-模式"><span class="nav-number">1.</span> <span class="nav-text">Future 模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#迷宫问题（深度优先搜索解法）"><span class="nav-number">1.</span> <span class="nav-text">迷宫问题（深度优先搜索解法）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迷宫问题（广度优先搜索解法）"><span class="nav-number">2.</span> <span class="nav-text">迷宫问题（广度优先搜索解法）</span></a></li></ol></div>
             
           </div>
         </section>
