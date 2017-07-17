@@ -103,8 +103,11 @@
 <meta property="og:image" content="http://i.imgur.com/kM5NQqK.jpg">
 <meta property="og:image" content="http://i.imgur.com/ktTa3m6.png">
 <meta property="og:image" content="http://i.imgur.com/lOd5Awk.png">
+<meta property="og:image" content="http://i.imgur.com/lZcMbIg.jpg">
+<meta property="og:image" content="http://i.imgur.com/LjiZ5eX.jpg">
+<meta property="og:image" content="http://i.imgur.com/oTjvfpw.jpg">
 <meta property="og:image" content="http://i.imgur.com/487kq32.jpg">
-<meta property="og:updated_time" content="2017-07-07T15:21:12.068Z">
+<meta property="og:updated_time" content="2017-07-11T09:55:20.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java多线程与并发库高级应用">
 <meta name="twitter:description" content="多线程与效率
@@ -410,7 +413,8 @@ Thread t2 = new Thread(new Runnable(){
 <ul>
 <li>避免一个线程同时获取多个锁</li>
 <li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源</li>
-<li>尝试使用定时锁，使用lock.tryLock(timeout)来替代使用内部锁机制</li>
+<li>尝试使用定时锁，使用</li>
+<li>.tryLock(timeout)来替代使用内部锁机制</li>
 <li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况</li>
 </ul>
 <h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><ul>
@@ -570,6 +574,45 @@ new Timer().schedule(new TimerTask() {
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> len = name.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			System.out.print(name.charAt(i));</div><div class="line">		System.out.println();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>此时为静态函数，要实现互斥，使用Outputer的字节码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (Outputer.class) &#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> len = name.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			System.out.print(name.charAt(i));</div><div class="line">		System.out.println();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="锁对象Lock-同步问题更完美的处理方式"><a href="#锁对象Lock-同步问题更完美的处理方式" class="headerlink" title="锁对象Lock-同步问题更完美的处理方式"></a>锁对象Lock-同步问题更完美的处理方式</h2><h3 id="读写锁-ReadWriteLock"><a href="#读写锁-ReadWriteLock" class="headerlink" title="读写锁(ReadWriteLock)"></a>读写锁(ReadWriteLock)</h3><p>我们会有一种需求，在对数据进行读写的时候，为了保证数据的一致性和完整性，<strong>需要读和写是互斥的，写和写是互斥的，但是读和读是不需要互斥的</strong>，这样读和读不互斥性能更高些</p>
+<pre><code>class Data {      
+    private int data;// 共享数据  
+    private ReadWriteLock rwl = new ReentrantReadWriteLock();     
+    public void set(int data) {  
+        rwl.writeLock().lock();// 取到写锁  
+        try {  
+            System.out.println(Thread.currentThread().getName() + &quot;准备写入数据&quot;);  
+            try {  
+                Thread.sleep(20);  
+            } catch (InterruptedException e) {  
+                e.printStackTrace();  
+            }  
+            this.data = data;  
+            System.out.println(Thread.currentThread().getName() + &quot;写入&quot; + this.data);  
+        } finally {  
+            rwl.writeLock().unlock();// 释放写锁  
+        }  
+    }     
+    public void get() {  
+        rwl.readLock().lock();// 取到读锁  
+        try {  
+            System.out.println(Thread.currentThread().getName() + &quot;准备读取数据&quot;);  
+            try {  
+                Thread.sleep(20);  
+            } catch (InterruptedException e) {  
+                e.printStackTrace();  
+            }  
+            System.out.println(Thread.currentThread().getName() + &quot;读取&quot; + this.data);  
+        } finally {  
+            rwl.readLock().unlock();// 释放读锁  
+        }  
+    }  
+}
+</code></pre><h3 id="Synchronized和Lock的区别"><a href="#Synchronized和Lock的区别" class="headerlink" title="Synchronized和Lock的区别"></a>Synchronized和Lock的区别</h3><p>1、用sychronized修饰的方法或者语句块在代码执行完之后<strong>锁自动释放</strong>，而用Lock需要我们<strong>手动释放锁</strong>，所以为了保证锁最终被释放(发生异常情况)，要把互斥区放在try内，释放锁放在finally内。</p>
+<p>2、synchronized简单，简单意味着不灵活，而ReentrantLock的锁机制给用户的使用提供了极大的灵活性。这点在Hashtable和ConcurrentHashMap中体现得淋漓尽致。synchronized一锁就锁整个Hash表，而ConcurrentHashMap则利用ReentrantLock实现了锁分离，锁的知识segment而不是整个Hash表</p>
+<p>3、synchronized是不公平锁，而ReentrantLock可以指定锁是公平的还是非公平的</p>
+<p>4、synchronized实现等待/通知机制通知的线程是随机的，ReentrantLock实现等待/通知机制可以有选择性地通知</p>
+<p>5、和synchronized相比，ReentrantLock提供给用户多种方法用于锁信息的获取，比如可以知道lock是否被当前线程获取、lock被同一个线程调用了几次、lock是否被任意线程获取等等</p>
 <h2 id="传统线程同步通信技术（wait、notify、notifyAll）"><a href="#传统线程同步通信技术（wait、notify、notifyAll）" class="headerlink" title="传统线程同步通信技术（wait、notify、notifyAll）"></a>传统线程同步通信技术（wait、notify、notifyAll）</h2><h3 id="双重检查"><a href="#双重检查" class="headerlink" title="双重检查"></a>双重检查</h3><p>调用Object的wait方法可以让当前线程<strong>进入等待状态，程序不能往下执行</strong>，只有调用了<strong>此Object</strong>的<strong>notify、或notifyAll方法，或者wait到达了指定的时间</strong>后，才会<strong>激活继续执行</strong></p>
 <p>notify只是随机找处于<strong>等待此Object</strong>的<strong>一个线程</strong>；notifyAll是通知wait<strong>此Object</strong>的<strong>所有线程</strong></p>
 <p>为了防止<strong>假唤醒</strong>，提高程序的<strong>可靠性</strong>，wait被唤醒后，需要再次判断等待的状态是否被更改了，如果未更改，则继续进入wait状态，这种做法称作<strong>双重检查</strong>。查看一下代码，即<strong>加上了while进行双重检查</strong>，而且wait操作写在最前面</p>
@@ -1330,7 +1373,78 @@ public class BlockingQueueTest2 {
 
 }
 </code></pre><p>原理：<br>1、双向链表，队列中维持头指针和为指针，元素个数的类型是 AtomicInteger<br>2、put的时候使用重入锁，可以被中断；</p>
-<h3 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h3><p>ConcurrentLinkedQueue是Queue的一个安全实现．Queue中元素按FIFO原则进行排序，采用<strong>CAS</strong>操作，来保证元素的一致性。<br>LinkedBlockingQueue是一个线程安全的阻塞队列，它实现了BlockingQueue接口，BlockingQueue接口继承自java.util.Queue接口，并在这个接口的基础上增加了take和put方法，这两个方法正是队列操作的阻塞版本。</p>
+<h3 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h3><p>ConcurrentLinkedQueue是Queue的一个安全实现．Queue中元素按FIFO原则进行排序，采用<strong>CAS</strong>操作，来保证元素的一致性。</p>
+<p>原理：<br>1、<strong>tail节点不一定指向最后一个元素，也有可能是倒数第二个节点</strong>。</p>
+<p><img src="http://i.imgur.com/lZcMbIg.jpg" alt=""></p>
+<p>为什么这么设计？</p>
+<ul>
+<li><strong>在单线程中，插入节点后，将新插入的节点设置为tail</strong>。但是在多线程的情况下，假设有多个插入节点操作A，B，可能会先将B插入的节点设置为tail，然后再将A插入的节点设置为tail，导致tail不是严格的指向尾部指针(如下图)。<strong>所以设置tail指针也需要CAS操作</strong></li>
+</ul>
+<p><img src="http://i.imgur.com/LjiZ5eX.jpg" alt=""></p>
+<ul>
+<li><font color="red"><strong>插入节点操作必须使用CAS操作，如果每次移动tail指针也要采用CAS，移动tail指针操作也会影响插入节点的CAS操作（因为在插入节点的CAS操作时，要保证tail为最后一个节点），那样会特别影响性能，导致操作容易失败，所以采用延时移动tail指针</strong></font></li>
+<li>如果tail指针离最后一个节点的距离很大，<strong>每次要遍历到最后一个节点</strong>，特别耗时，所以<strong>当tail指针离最后一个节点的距离超过2，让tail节点指向最后一个节点</strong></li>
+</ul>
+<p>2、如何插入节点★★★★★★</p>
+<ul>
+<li>如果tail为最后一个节点，采用CAS操作加入新节点（预期p的next节点为null，如果是则将p的next设置为新节点；否则重试）</li>
+<li>如果tail不是最后一个节点，p后移一位指向最后一个元素，<strong>继续循环</strong></li>
+<li>如果tail指针与新插入的指针距离相差2（代码中由p！=t体现），则CAS更新tail指针</li>
+</ul>
+<p><strong><font color="red">总结：</font></strong><br>1、插入节点必须采用CAS操作，更新tail也必须采用CAS操作，影响性能，所以延迟tail节点更新<br>2、tail指针距离最后一个节点太远，需要遍历。所以当tail指针距离最后一个节点大于等于2时，CAS移动tail指针为最后一个节点<br>3、插入节点时，如果tail指针指向最后一个节点，则CAS增加节点；如果不是，则移动p为下一个节点，然后循环增加节点；如果距离超过2，才CAS更新tail指针</p>
+<p>源码：</p>
+<pre>
+public boolean offer(E e) {
+    checkNotNull(e);
+    final Node<e> newNode = new Node<e>(e);
+
+    for (Node<e> t = tail, p = t;;) {
+        Node<e> q = p.next;
+        <font color="red">if (q == null) {//最后一个节点</font>
+            // p is last node
+            if (p.casNext(null, newNode)) {
+                // Successful CAS is the linearization point
+                // for e to become an element of this queue,
+                // and for newNode to become "live".
+                if (p != t) // hop two nodes at a time
+                    casTail(t, newNode);  // Failure is OK.
+                return true;
+            }
+            // Lost CAS race to another thread; re-read next
+        }
+        else if (p == q)
+            // We have fallen off list.  If tail is unchanged, it
+            // will also be off-list, in which case we need to
+            // jump to head, from which all live nodes are always
+            // reachable.  Else the new tail is a better bet.
+            p = (t != (t = tail)) ? t : head;
+        else
+            // Check for tail updates after two hops.
+            <font color="red">p = (p != t && t != (t = tail)) ? t : q;//p不是最后一个节点，后移一位</font>
+    }
+}
+</e></e></e></e></pre>
+
+<p>出队：</p>
+<p><img src="http://i.imgur.com/oTjvfpw.jpg" alt=""></p>
+<p>从上图可知，并不是每次出队时都更新head节点，当head节点里有元素时，直接弹出head节点里的元素，而不会更新head节点。只有当head节点里没有元素时，出队操作才会更新head节点。这种做法也是通过hops变量来减少使用CAS更新head节点的消耗，从而提高出队效率。让我们再通过源码来深入分析下出队过程。</p>
+<p>队列判空：</p>
+<p>有些人在判断队列是否为空时喜欢用queue.size()==0，让我们来看看size方法：</p>
+<pre><code>public int size() 
+{
+    int count = 0;
+    for (Node&lt;E&gt; p = first(); p != null; p = succ(p))
+        if (p.item != null)
+            // Collection.size() spec says to max out
+            if (++count == Integer.MAX_VALUE)
+                break;
+    return count;
+}
+</code></pre><p>可以看到这样在队列在结点较多时会依次遍历所有结点，这样的性能会有较大影响，因而可以考虑empty函数，它只要判断第一个结点(注意不一定是head指向的结点)。</p>
+<pre><code>public boolean isEmpty() {
+    return first() == null;
+}
+</code></pre><p>应用：</p>
 <pre><code>import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -1380,6 +1494,70 @@ public class ConcurrentLinkedQueueTest {
     }
 }
 </code></pre><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>Java线程(九)：Condition-线程通信更高效的方式<br><a href="http://blog.csdn.net/ghsau/article/details/7481142" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/7481142</a></p>
+<p>Java并发编程（七）ConcurrentLinkedQueue的实现原理和源码分析<br><a href="http://blog.csdn.net/itachi85/article/details/52205256" target="_blank" rel="external">http://blog.csdn.net/itachi85/article/details/52205256</a></p>
+<p>聊聊并发（六）——ConcurrentLinkedQueue的实现原理分析<br><a href="http://www.infoq.com/cn/articles/ConcurrentLinkedQueue/" target="_blank" rel="external">http://www.infoq.com/cn/articles/ConcurrentLinkedQueue/</a></p>
+<p>无锁队列的实现<br><a href="http://coolshell.cn/articles/8239.html" target="_blank" rel="external">http://coolshell.cn/articles/8239.html</a></p>
+<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>1、读取当前内存值，作为预估值<br>2、当执行CAS指令时，如果内存当前值等于预估值，则更新；否则不执行，重试</p>
+<p>示例：</p>
+<p>1、读取 ——&gt; 2、执行+1操作，指令1和指令2不是原子操作，所以在指令1的时候有个<strong>预估值</strong>，在<strong>执行</strong>的时候，<strong>判断当前值和预估值是否一样，如果一样说明之前没有别的线程对该变量操作</strong>，可以更改当前值</p>
+<p>代码如下：</p>
+<pre><code>if (this == expect) {
+    this = update
+    return true;
+} else {
+    return false;
+}
+</code></pre><h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p>JAVA CAS原理深度分析<br><a href="http://blog.csdn.net/hsuxu/article/details/9467651" target="_blank" rel="external">http://blog.csdn.net/hsuxu/article/details/9467651</a></p>
+<h2 id="线程中断、线程让步、线程睡眠、线程合并"><a href="#线程中断、线程让步、线程睡眠、线程合并" class="headerlink" title="线程中断、线程让步、线程睡眠、线程合并"></a>线程中断、线程让步、线程睡眠、线程合并</h2><h3 id="线程中断-interrupt"><a href="#线程中断-interrupt" class="headerlink" title="线程中断 interrupt()"></a>线程中断 interrupt()</h3><p>interrupt()方法并不是中断线程的执行，而是为调用该方法的线程对象<strong>打上一个标记，设置其中断状态为true，通过isInterrupted()方法可以得到这个线程状态</strong></p>
+<pre>
+public class InterruptTest {  
+    public static void main(String[] args) throws InterruptedException {  
+        MyThread t = new MyThread("MyThread");  
+        t.start();  
+        Thread.sleep(100);// 睡眠100毫秒  
+        <font color="red">t.interrupt();//中断t线程</font>
+    }  
+}  
+class MyThread extends Thread {  
+    int i = 0;  
+    public MyThread(String name) {  
+        super(name);  
+    }  
+    public void run() {  
+        <font color="red">while(!isInterrupted()) {// 当前线程没有被中断，则执行  </font>
+            System.out.println(getName() + getId() + "执行了" + ++i + "次");  
+        }  
+    }  
+}  
+</pre>
+
+<p>这样的话，线程被顺利的中断执行了。很多人实现一个线程类时，都会再加一个 flag 标记，以便控制线程停止执行，其实完全没必要，<strong>通过线程自身的中断状态，就可以完美实现该功能</strong></p>
+<p>Thread.interrupted()方法是一个静态方法，它是判断当前线程的中断状态，需要注意的是，<strong>线程的中断状态会由该方法清除</strong>。换句话说，<strong>如果连续两次调用该方法，则第二次调用将返回 false</strong>（在第一次调用已清除了其中断状态之后，且第二次调用检验完中断状态前，当前线程再次中断的情况除外）。</p>
+<h3 id="线程让步-yield"><a href="#线程让步-yield" class="headerlink" title="线程让步 yield()"></a>线程让步 yield()</h3><p>程让步用于正在执行的线程，在某些情况下让出CPU资源，让给其它线程执行<br>注意，如果存在synchronized线程同步的话，线程让步不会释放锁(监视器对象)。</p>
+<h3 id="线程睡眠-sleep"><a href="#线程睡眠-sleep" class="headerlink" title="线程睡眠 sleep"></a>线程睡眠 sleep</h3><p>线程睡眠的过程中，如果是在synchronized线程同步内，是持有锁(监视器对象)的，也就是说，线程是关门睡觉的，别的线程进不来</p>
+<h3 id="线程合并-join"><a href="#线程合并-join" class="headerlink" title="线程合并 join"></a>线程合并 join</h3><p>线程合并是优先执行调用该方法的线程，再执行当前线程，来看一个小例子：</p>
+<pre><code>public class JoinTest {  
+    public static void main(String[] args) throws InterruptedException {  
+        JoinThread t1 = new JoinThread(&quot;t1&quot;);  
+        JoinThread t2 = new JoinThread(&quot;t2&quot;);  
+        t1.start();  
+        t2.start();  
+        t1.join();  
+        t2.join();  
+        System.out.println(&quot;主线程开始执行！&quot;);  
+    }  
+}  
+class JoinThread extends Thread {  
+    public JoinThread(String name) {  
+        super(name);  
+    }  
+    public void run() {  
+        for(int i = 1; i &lt;= 10; i++)  
+            System.out.println(getName() + getId() + &quot;执行了&quot; + i + &quot;次&quot;);  
+    }  
+} 
+</code></pre><p>t1和t2都执行完才继续主线程的执行，所谓合并，就是等待其它线程执行完，再执行当前线程，执行起来的效果就好像把其它线程合并到当前线程执行一样。</p>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/ghsau/article/details/17560467" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/17560467</a></p>
 <h2 id="并发编程的设计模式"><a href="#并发编程的设计模式" class="headerlink" title="并发编程的设计模式"></a>并发编程的设计模式</h2><h3 id="Future-模式"><a href="#Future-模式" class="headerlink" title="Future 模式"></a>Future 模式</h3><p>考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以<strong>我们希望在文件开启之后，会有一个默认背景</strong>（可以是纯色图片，也可以是正在加载的图片），<strong>与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。</strong></p>
 <p>Future模式在请求发生时，会先产生一个Future物件给发出请求的客户，而同时间，真正的目标物件之生成，由一个新的执行持续进行（即 Worker Thread），真正的目标物件生成之后，将之设定至Future之中，而当客户端真正需要目标物件时，目标物件也已经准备好，可以让客户提取使用。 </p>
 <p><img src="http://i.imgur.com/487kq32.jpg" alt=""></p>
@@ -1516,7 +1694,7 @@ public class ConcurrentLinkedQueueTest {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1562,7 +1740,7 @@ public class ConcurrentLinkedQueueTest {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程的挑战"><span class="nav-number">3.</span> <span class="nav-text">并发编程的挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">3.1.</span> <span class="nav-text">上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">3.2.</span> <span class="nav-text">死锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程状态"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线程的两种传统方式"><span class="nav-number">5.</span> <span class="nav-text">创建线程的两种传统方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread"><span class="nav-number">5.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">5.2.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题★★★"><span class="nav-number">5.3.</span> <span class="nav-text">面试题★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">6.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型"><span class="nav-number">7.</span> <span class="nav-text">Java内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">8.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术（wait、notify、notifyAll）"><span class="nav-number">9.</span> <span class="nav-text">传统线程同步通信技术（wait、notify、notifyAll）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双重检查"><span class="nav-number">9.1.</span> <span class="nav-text">双重检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wait-notify机制原理"><span class="nav-number">9.2.</span> <span class="nav-text">wait/notify机制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">9.3.</span> <span class="nav-text">面试题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程间通信-Condition-await、signal-★★★★★"><span class="nav-number">10.</span> <span class="nav-text">线程间通信(Condition:await、signal)★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者消费者模式"><span class="nav-number">10.1.</span> <span class="nav-text">生产者消费者模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">11.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">11.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">11.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">11.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal-设计"><span class="nav-number">11.4.</span> <span class="nav-text">ThreadLocal 设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal原理分析"><span class="nav-number">11.5.</span> <span class="nav-text">ThreadLocal原理分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">12.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">13.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的作用"><span class="nav-number">13.1.</span> <span class="nav-text">线程池的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见线程池"><span class="nav-number">13.2.</span> <span class="nav-text">常见线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA线程池shutdown和shutdownNow的区别"><span class="nav-number">13.3.</span> <span class="nav-text">JAVA线程池shutdown和shutdownNow的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池定时器"><span class="nav-number">14.</span> <span class="nav-text">线程池定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Callable和Future"><span class="nav-number">15.</span> <span class="nav-text">Callable和Future</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发队列-ConcurrentLinkedQueue-和阻塞队列-LinkedBlockingQueue-用法"><span class="nav-number">16.</span> <span class="nav-text">并发队列 ConcurrentLinkedQueue 和阻塞队列 LinkedBlockingQueue 用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedBlockingQueue"><span class="nav-number">16.1.</span> <span class="nav-text">LinkedBlockingQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentLinkedQueue"><span class="nav-number">16.2.</span> <span class="nav-text">ConcurrentLinkedQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">16.3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程的设计模式"><span class="nav-number">17.</span> <span class="nav-text">并发编程的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Future-模式"><span class="nav-number">17.1.</span> <span class="nav-text">Future 模式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程与效率"><span class="nav-number">1.</span> <span class="nav-text">多线程与效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行与并发"><span class="nav-number">2.</span> <span class="nav-text">并行与并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程的挑战"><span class="nav-number">3.</span> <span class="nav-text">并发编程的挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">3.1.</span> <span class="nav-text">上下文切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">3.2.</span> <span class="nav-text">死锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程状态"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建线程的两种传统方式"><span class="nav-number">5.</span> <span class="nav-text">创建线程的两种传统方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Thread"><span class="nav-number">5.1.</span> <span class="nav-text">继承Thread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Runnable接口"><span class="nav-number">5.2.</span> <span class="nav-text">实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题★★★"><span class="nav-number">5.3.</span> <span class="nav-text">面试题★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">6.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java内存模型"><span class="nav-number">7.</span> <span class="nav-text">Java内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程互斥技术"><span class="nav-number">8.</span> <span class="nav-text">传统线程互斥技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#锁对象Lock-同步问题更完美的处理方式"><span class="nav-number">9.</span> <span class="nav-text">锁对象Lock-同步问题更完美的处理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读写锁-ReadWriteLock"><span class="nav-number">9.1.</span> <span class="nav-text">读写锁(ReadWriteLock)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Synchronized和Lock的区别"><span class="nav-number">9.2.</span> <span class="nav-text">Synchronized和Lock的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统线程同步通信技术（wait、notify、notifyAll）"><span class="nav-number">10.</span> <span class="nav-text">传统线程同步通信技术（wait、notify、notifyAll）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双重检查"><span class="nav-number">10.1.</span> <span class="nav-text">双重检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wait-notify机制原理"><span class="nav-number">10.2.</span> <span class="nav-text">wait/notify机制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试题"><span class="nav-number">10.3.</span> <span class="nav-text">面试题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程间通信-Condition-await、signal-★★★★★"><span class="nav-number">11.</span> <span class="nav-text">线程间通信(Condition:await、signal)★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者消费者模式"><span class="nav-number">11.1.</span> <span class="nav-text">生产者消费者模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal实现线程范围内的数据共享"><span class="nav-number">12.</span> <span class="nav-text">ThreadLocal实现线程范围内的数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的实现的线程范围内的数据共享"><span class="nav-number">12.1.</span> <span class="nav-text">自己的实现的线程范围内的数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现的线程间数据共享"><span class="nav-number">12.2.</span> <span class="nav-text">使用 ThreadLocal 实现的线程间数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-ThreadLocal-实现线程范围内的单例"><span class="nav-number">12.3.</span> <span class="nav-text">使用 ThreadLocal 实现线程范围内的单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal-设计"><span class="nav-number">12.4.</span> <span class="nav-text">ThreadLocal 设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal原理分析"><span class="nav-number">12.5.</span> <span class="nav-text">ThreadLocal原理分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个线程之间共享数据的方式探讨"><span class="nav-number">13.</span> <span class="nav-text">多个线程之间共享数据的方式探讨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">14.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的作用"><span class="nav-number">14.1.</span> <span class="nav-text">线程池的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见线程池"><span class="nav-number">14.2.</span> <span class="nav-text">常见线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA线程池shutdown和shutdownNow的区别"><span class="nav-number">14.3.</span> <span class="nav-text">JAVA线程池shutdown和shutdownNow的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池定时器"><span class="nav-number">15.</span> <span class="nav-text">线程池定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Callable和Future"><span class="nav-number">16.</span> <span class="nav-text">Callable和Future</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发队列-ConcurrentLinkedQueue-和阻塞队列-LinkedBlockingQueue-用法"><span class="nav-number">17.</span> <span class="nav-text">并发队列 ConcurrentLinkedQueue 和阻塞队列 LinkedBlockingQueue 用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedBlockingQueue"><span class="nav-number">17.1.</span> <span class="nav-text">LinkedBlockingQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentLinkedQueue"><span class="nav-number">17.2.</span> <span class="nav-text">ConcurrentLinkedQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">17.3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS操作"><span class="nav-number">18.</span> <span class="nav-text">CAS操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考-1"><span class="nav-number">18.1.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程中断、线程让步、线程睡眠、线程合并"><span class="nav-number">19.</span> <span class="nav-text">线程中断、线程让步、线程睡眠、线程合并</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程中断-interrupt"><span class="nav-number">19.1.</span> <span class="nav-text">线程中断 interrupt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程让步-yield"><span class="nav-number">19.2.</span> <span class="nav-text">线程让步 yield()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程睡眠-sleep"><span class="nav-number">19.3.</span> <span class="nav-text">线程睡眠 sleep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程合并-join"><span class="nav-number">19.4.</span> <span class="nav-text">线程合并 join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考-2"><span class="nav-number">19.5.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程的设计模式"><span class="nav-number">20.</span> <span class="nav-text">并发编程的设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Future-模式"><span class="nav-number">20.1.</span> <span class="nav-text">Future 模式</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

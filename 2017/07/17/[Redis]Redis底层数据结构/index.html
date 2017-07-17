@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -84,12 +84,30 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.Qian's Home">
-<meta property="og:url" content="http://qianmingxs.com/categories/mybatis/index.html">
+<meta name="description" content="Redis单进程单线程执行速度快的原因总体来说快速的原因如下：
+1）绝大部分请求是纯粹的内存操作（非常快速）2）采用单线程,避免了不必要的上下文切换和竞争条件3）非阻塞IO
+内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间    
+这3个条件不是相互独立的，特别是第一条，如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis底层数据结构">
+<meta property="og:url" content="http://qianmingxs.com/2017/07/17/[Redis]Redis底层数据结构/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
+<meta property="og:description" content="Redis单进程单线程执行速度快的原因总体来说快速的原因如下：
+1）绝大部分请求是纯粹的内存操作（非常快速）2）采用单线程,避免了不必要的上下文切换和竞争条件3）非阻塞IO
+内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间    
+这3个条件不是相互独立的，特别是第一条，如">
+<meta property="og:image" content="http://i.imgur.com/u4CAMEI.jpg">
+<meta property="og:image" content="http://i.imgur.com/cb0jdYP.png">
+<meta property="og:image" content="http://i.imgur.com/kGPk6LE.png">
+<meta property="og:image" content="http://i.imgur.com/udIIoGc.png">
+<meta property="og:updated_time" content="2017-07-17T15:22:08.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.Qian's Home">
+<meta name="twitter:title" content="Redis底层数据结构">
+<meta name="twitter:description" content="Redis单进程单线程执行速度快的原因总体来说快速的原因如下：
+1）绝大部分请求是纯粹的内存操作（非常快速）2）采用单线程,避免了不必要的上下文切换和竞争条件3）非阻塞IO
+内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间    
+这3个条件不是相互独立的，特别是第一条，如">
+<meta name="twitter:image" content="http://i.imgur.com/u4CAMEI.jpg">
 
 
 
@@ -110,10 +128,10 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/categories/mybatis/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/07/17/[Redis]Redis底层数据结构/"/>
 
 
-  <title> 分类: mybatis | Mr.Qian's Home </title>
+  <title> Redis底层数据结构 | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -134,7 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -245,159 +263,185 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        mybatis
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/06/20/[mybatis]mybatis源码分析/" itemprop="url">
-              
-                <span itemprop="name">mybatis源码分析</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-06-20T14:09:00+08:00"
-              content="2017-06-20" >
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/15/[mybatis]mybatis generator/" itemprop="url">
-              
-                <span itemprop="name">mybatis generator</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-15T12:39:00+08:00"
-              content="2017-04-15" >
-          04-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/" itemprop="url">
-              
-                <span itemprop="name">Mybatis - 动态SQL语句</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-27T13:03:00+08:00"
-              content="2017-03-27" >
-          03-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/01/18/[mybatis]通用mapper/" itemprop="url">
-              
-                <span itemprop="name">通用mapper</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-18T09:23:00+08:00"
-              content="2017-01-18" >
-          01-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/08/11/[mybatis]mybatis笔记/" itemprop="url">
-              
-                <span itemprop="name">mybatis笔记</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-11T00:00:00+08:00"
-              content="2016-08-11" >
-          08-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Redis底层数据结构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-17T21:45:00+08:00" content="2017-07-17">
+              2017-07-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index">
+                    <span itemprop="name">Redis</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/17/[Redis]Redis底层数据结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/17/[Redis]Redis底层数据结构/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Redis单进程单线程执行速度快的原因"><a href="#Redis单进程单线程执行速度快的原因" class="headerlink" title="Redis单进程单线程执行速度快的原因"></a>Redis单进程单线程执行速度快的原因</h2><p>总体来说快速的原因如下：</p>
+<p>1）绝大部分请求是纯粹的内存操作（非常快速）<br>2）采用单线程,避免了不必要的上下文切换和竞争条件<br>3）非阻塞IO</p>
+<p>内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间    </p>
+<p>这3个条件不是相互独立的，特别是第一条，如果请求都是耗时的，采用单线程吞吐量及性能可想而知了。应该说redis为特殊的场景选择了合适的技术方案。</p>
+<h2 id="Redis数据结构"><a href="#Redis数据结构" class="headerlink" title="Redis数据结构"></a>Redis数据结构</h2><h3 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h3><p>首先，Redis没有MySQL那样的索引机制，因为其内建一个基于hash的字典，如下图：</p>
+<p><img src="http://i.imgur.com/u4CAMEI.jpg" alt=""></p>
+<p>Redis 计算哈希值和索引值的方法如下：</p>
+<p># 使用字典设置的哈希函数，计算键 key 的哈希值<br>hash = dict-&gt;type-&gt;hashFunction(key);</p>
+<p># 使用哈希表的 sizemask 属性和哈希值，计算出索引值<br># 根据情况不同， ht[x] 可以是 ht[0] 或者 ht[1]<br>index = hash &amp; dict-&gt;ht[x].sizemask;<br>插入数据时，根据以上算出index，然后根据index值放入table表中相应位置即可。</p>
+<p><strong>QM注释：</strong><br>1、每个dictht为一个map结构，字典dict中有两个map<br>2、map为key、value的结构，value可以为各种数据类型，包括字符串、链表…</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>例如：Set hello world </p>
+<p><img src="http://i.imgur.com/cb0jdYP.png" alt=""></p>
+<p>字符串类似Java中的String对象，存储类似HashMap，key为字符串的名字，value为String对象</p>
+<h3 id="list类型"><a href="#list类型" class="headerlink" title="list类型"></a>list类型</h3><p>例如：Lpush list aaaa bbb ccc</p>
+<p><img src="http://i.imgur.com/kGPk6LE.png" alt=""></p>
+<pre><code>// 双向链表
+typedef struct listNode {
+    struct listNode *prev;
+    struct listNode *next;
+    void *value;
+} listNode;
+
+//数据结构 + 操作
+typedef struct list {
+    listNode *head;
+    listNode *tail;
+    ...
+} list;
+</code></pre><p>链表类似Java中的LinkedList，定义每个链表时取一个名称；存储类似HashMap，key为链表的名称，value为list对象</p>
+<h3 id="hash类型"><a href="#hash类型" class="headerlink" title="hash类型"></a>hash类型</h3><p>例如：Hset test hello world</p>
+<p><img src="http://i.imgur.com/udIIoGc.png" alt=""></p>
+<p>存储类似HashMap，key为hash表的名称，value为hash表</p>
+<p>注：新建一个hash对象时开始是用zipmap(又称为small hash)来存储的。这个zipmap其实并不是hash table，但是zipmap相比正常的hash实现可以节省不少hash本身需要的一些元数据存储开销。尽管zipmap的添加，删除，查找都是O(n)，但是由于一般对象的field数量都不太多。所以使用zipmap也是很快的,也就是说添加删除平均还是O(1)。如果field或者value的大小超出一定限制后，Redis会在内部自动将zipmap替换成正常的hash实现（一个key对应一个hash表）。</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>集合，常用来存储不重复数据的数据结构，底层基于hashtable；在redis中为了优化存储，set的编码类型可以为：intset，hashtable。</p>
+<h3 id="Sorted-Set-ZSet"><a href="#Sorted-Set-ZSet" class="headerlink" title="Sorted Set(ZSet)"></a>Sorted Set(ZSet)</h3><p>链表+跳跃表</p>
+<p><a href="https://mp.weixin.qq.com/s/RDHebf6IfLWfw38dPvfiZQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/RDHebf6IfLWfw38dPvfiZQ</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.cnblogs.com/renzherushe/p/4779390.html" target="_blank" rel="external">http://www.cnblogs.com/renzherushe/p/4779390.html</a><br><a href="http://shift-alt-ctrl.iteye.com/blog/1874693" target="_blank" rel="external">http://shift-alt-ctrl.iteye.com/blog/1874693</a></p>
+<h2 id="Redis过期检测"><a href="#Redis过期检测" class="headerlink" title="Redis过期检测"></a>Redis过期检测</h2><p>Redis对于过期检测，有2种方式，一个主动检测，一个是被动检测；在redis和client交互过程中，对于任何数据的操作，都会首先检测key是否已经过期，这是被动检测；主动检测是Redis启动的后台线程中，不间断的随机扫描一定量的key（randomKey），并对key进行过期检测</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag">#Redis</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/06/[实习]DIDI日报/" rel="next" title="DIDI日报">
+                <i class="fa fa-chevron-left"></i> DIDI日报
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -405,6 +449,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/17/[Redis]Redis底层数据结构/"
+           data-title="Redis底层数据结构" data-url="http://qianmingxs.com/2017/07/17/[Redis]Redis底层数据结构/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -424,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -436,7 +497,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">140</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -475,6 +536,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis单进程单线程执行速度快的原因"><span class="nav-number">1.</span> <span class="nav-text">Redis单进程单线程执行速度快的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis数据结构"><span class="nav-number">2.</span> <span class="nav-text">Redis数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总体设计"><span class="nav-number">2.1.</span> <span class="nav-text">总体设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list类型"><span class="nav-number">2.3.</span> <span class="nav-text">list类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash类型"><span class="nav-number">2.4.</span> <span class="nav-text">hash类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set"><span class="nav-number">2.5.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sorted-Set-ZSet"><span class="nav-number">2.6.</span> <span class="nav-text">Sorted Set(ZSet)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">2.7.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis过期检测"><span class="nav-number">3.</span> <span class="nav-text">Redis过期检测</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -571,6 +643,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
