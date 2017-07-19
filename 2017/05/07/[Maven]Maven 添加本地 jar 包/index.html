@@ -96,7 +96,7 @@
 方法二：添加scope为system的依赖，解决编译、运行问题
 &amp;lt;dependency&amp;gt;
     &amp;lt;">
-<meta property="og:updated_time" content="2017-05-14T16:20:04.621Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven 添加本地 jar 包">
 <meta name="twitter:description" content="方法一：将jar包安装到本地repository中1mvn install:install-file -Dfile=my-jar.jar -DgroupId=org.richard -DartifactId=my-jar -Dversion=1.0 -Dpackaging=jar
@@ -345,7 +345,7 @@
       
 
       
-        <h2 id="方法一：将jar包安装到本地repository中"><a href="#方法一：将jar包安装到本地repository中" class="headerlink" title="方法一：将jar包安装到本地repository中"></a>方法一：将jar包安装到本地repository中</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn install:install-file <span class="attr">-Dfile=my-jar.jar</span> <span class="attr">-DgroupId=org.richard</span> <span class="attr">-DartifactId=my-jar</span> <span class="attr">-Dversion=1.0</span> <span class="attr">-Dpackaging=jar</span></div></pre></td></tr></table></figure>
+        <h2 id="方法一：将jar包安装到本地repository中"><a href="#方法一：将jar包安装到本地repository中" class="headerlink" title="方法一：将jar包安装到本地repository中"></a>方法一：将jar包安装到本地repository中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn install:install-file -Dfile=my-jar.jar -DgroupId=org.richard -DartifactId=my-jar -Dversion=1.0 -Dpackaging=jar</div></pre></td></tr></table></figure>
 <h2 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h2><p>添加scope为system的依赖，解决编译、运行问题</p>
 <pre><code>&lt;dependency&gt;
     &lt;groupId&gt;com.microsoft.sqlserver&lt;/groupId&gt;

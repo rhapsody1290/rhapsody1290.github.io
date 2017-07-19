@@ -103,7 +103,7 @@ ln 建立符">
 ##常用命令
 ln 建立符">
 <meta property="og:image" content="http://img.blog.csdn.net/20151227194314714">
-<meta property="og:updated_time" content="2017-04-13T02:43:02.957Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux视频教程第19讲.补充Linux重要内容find alias">
 <meta name="twitter:description" content="运行级别init [0123456]，指定系统运行级别，类似windows的正常运行模式或安全模式
@@ -357,17 +357,17 @@ ln 建立符">
 
       
         <h2 id="运行级别"><a href="#运行级别" class="headerlink" title="运行级别"></a>运行级别</h2><p>init [0123456]，指定系统运行级别，类似windows的正常运行模式或安全模式</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span>：关机 </div><div class="line"><span class="number">1</span>：单用户</div><div class="line"><span class="number">2</span>：多用户状态没有网络服务 </div><div class="line"><span class="number">3</span>：多用户状态有网络服务 </div><div class="line"><span class="number">4</span>：系统未使用保留给用户 </div><div class="line"><span class="number">5</span>：图形界面 </div><div class="line"><span class="number">6</span>：系统重启</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">0：关机 </div><div class="line">1：单用户</div><div class="line">2：多用户状态没有网络服务 </div><div class="line">3：多用户状态有网络服务 </div><div class="line">4：系统未使用保留给用户 </div><div class="line">5：图形界面 </div><div class="line">6：系统重启</div></pre></td></tr></table></figure>
 <p>常用运行级别是3和5，要修改默认的运行级别可改文件</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/etc/</span>inittab的<span class="string">id:</span><span class="number">5</span>:<span class="string">initdefault:</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/inittab的id:5:initdefault:</div></pre></td></tr></table></figure>
 <p>这一行中的数字</p>
 <p>##常用命令</p>
-<h3 id="ln-建立符号连接-和windows的快捷方式"><a href="#ln-建立符号连接-和windows的快捷方式" class="headerlink" title="ln 建立符号连接(和windows的快捷方式)"></a><strong>ln 建立符号连接(和windows的快捷方式)</strong></h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">a</span>) <span class="built_in">ln</span> –s 源目标</div><div class="line">b) <span class="built_in">ln</span> –s /etc/inittab inittab <span class="comment">#（inittab指向实际文件/etc/inittab）</span></div></pre></td></tr></table></figure>
+<h3 id="ln-建立符号连接-和windows的快捷方式"><a href="#ln-建立符号连接-和windows的快捷方式" class="headerlink" title="ln 建立符号连接(和windows的快捷方式)"></a><strong>ln 建立符号连接(和windows的快捷方式)</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a) ln –s 源目标</div><div class="line">b) ln –s /etc/inittab inittab #（inittab指向实际文件/etc/inittab）</div></pre></td></tr></table></figure>
 <h3 id="搜索文件及目录——find"><a href="#搜索文件及目录——find" class="headerlink" title="搜索文件及目录——find"></a><strong>搜索文件及目录——find</strong></h3><p>在Linux中，因为文件系统是以级别式的结构组成的，所以要在整个系统中找到特定的文件和目录并不是件容易的事。而“find”命令可以解决上述问题。 </p>
 <p>1、在特定的目录下搜索并显示指定名称的文件和目录</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /root/ -<span class="built_in">name</span> Hello.java    <span class="comment">#查找文件</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /root/ -name Hello.java    #查找文件</div></pre></td></tr></table></figure>
 <p>2、搜索一段时间内被存取/变更的文件或目录</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">find</span> /<span class="built_in">home</span> –amin <span class="number">-10</span> 十分钟内存取的文件和目录 </div><div class="line"><span class="built_in">find</span> /<span class="built_in">home</span> -amin +<span class="number">10</span> 十分钟前存取的文件和目录</div><div class="line"><span class="built_in">find</span> /<span class="built_in">home</span> –atime <span class="number">-10</span> 十小时内存取的文件和目录 </div><div class="line"><span class="built_in">find</span> /<span class="built_in">home</span> –cmin <span class="number">-10</span> 十分钟内更改过的文件和目录 </div><div class="line"><span class="built_in">find</span> /<span class="built_in">home</span> –ctime <span class="number">-10</span> 十小时前更改过的文件和目录 </div><div class="line"><span class="built_in">find</span> /<span class="built_in">home</span> –<span class="built_in">size</span> +<span class="number">10</span>k 意思是说查找/<span class="built_in">home</span>目录下大小为<span class="number">10</span>k的文件</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">find /home –amin -10 十分钟内存取的文件和目录 </div><div class="line">find /home -amin +10 十分钟前存取的文件和目录</div><div class="line">find /home –atime -10 十小时内存取的文件和目录 </div><div class="line">find /home –cmin -10 十分钟内更改过的文件和目录 </div><div class="line">find /home –ctime -10 十小时前更改过的文件和目录 </div><div class="line">find /home –size +10k 意思是说查找/home目录下大小为10k的文件</div></pre></td></tr></table></figure>
 <h3 id="shell使用"><a href="#shell使用" class="headerlink" title="shell使用"></a><strong>shell使用</strong></h3><p>shell脚本文件：</p>
 <pre>
 a) 是一个文本文件
@@ -381,11 +381,11 @@ d) 执行方式（./文件名）
 <p><img src="http://img.blog.csdn.net/20151227194314714" alt="这里写图片描述"></p>
 <p><strong>用户登录后自动执行的shell脚本文件</strong></p>
 <p>配置 .bashrc 文件可以指定某些程序在用户登录的时候就自动启动。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如：<span class="regexp">/home/</span>tomcat<span class="regexp">/bin/</span>startup.sh start</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如：/home/tomcat/bin/startup.sh start</div></pre></td></tr></table></figure>
 <h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><p>a) 命令：alias显示系统当前定义的所有alias<br>b)去别名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> llh=<span class="string">'ls -l /home'</span></div><div class="line"><span class="built_in">alias</span> lm = <span class="string">'-al | more'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias llh=&apos;ls -l /home&apos;</div><div class="line">alias lm = &apos;-al | more&apos;</div></pre></td></tr></table></figure>
 <p>c)去别名</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">ualias lm</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ualias lm</div></pre></td></tr></table></figure>
 
       
     </div>

@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://i.imgur.com/cb0jdYP.png">
 <meta property="og:image" content="http://i.imgur.com/kGPk6LE.png">
 <meta property="og:image" content="http://i.imgur.com/udIIoGc.png">
-<meta property="og:updated_time" content="2017-07-17T15:22:08.318Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis底层数据结构">
 <meta name="twitter:description" content="Redis单进程单线程执行速度快的原因总体来说快速的原因如下：
@@ -386,7 +386,7 @@ typedef struct list {
 <h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>集合，常用来存储不重复数据的数据结构，底层基于hashtable；在redis中为了优化存储，set的编码类型可以为：intset，hashtable。</p>
 <h3 id="Sorted-Set-ZSet"><a href="#Sorted-Set-ZSet" class="headerlink" title="Sorted Set(ZSet)"></a>Sorted Set(ZSet)</h3><p>链表+跳跃表</p>
 <p><a href="https://mp.weixin.qq.com/s/RDHebf6IfLWfw38dPvfiZQ" target="_blank" rel="external">https://mp.weixin.qq.com/s/RDHebf6IfLWfw38dPvfiZQ</a></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.cnblogs.com/renzherushe/p/4779390.html" target="_blank" rel="external">http://www.cnblogs.com/renzherushe/p/4779390.html</a><br><a href="http://shift-alt-ctrl.iteye.com/blog/1874693" target="_blank" rel="external">http://shift-alt-ctrl.iteye.com/blog/1874693</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://www.cnblogs.com/renzherushe/p/4779390.html" target="_blank" rel="external">http://www.cnblogs.com/renzherushe/p/4779390.html</a></p>
 <h2 id="Redis过期检测"><a href="#Redis过期检测" class="headerlink" title="Redis过期检测"></a>Redis过期检测</h2><p>Redis对于过期检测，有2种方式，一个主动检测，一个是被动检测；在redis和client交互过程中，对于任何数据的操作，都会首先检测key是否已经过期，这是被动检测；主动检测是Redis启动的后台线程中，不间断的随机扫描一定量的key（randomKey），并对key进行过期检测</p>
 
       

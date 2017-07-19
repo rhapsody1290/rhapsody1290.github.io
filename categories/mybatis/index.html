@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="定时器," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,28 +84,12 @@
 
 
 
-<meta name="description" content="配置文件xmlns 多加下面的内容、
-xmlns:task=&amp;quot;http://www.springframework.org/schema/task&amp;quot;  
-然后xsi:schemaLocation多加下面的内容
-http://www.springframework.org/schema/task  
-http://www.springframework.org/schema/ta">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spring 定时器的使用">
-<meta property="og:url" content="http://qianmingxs.com/2017/05/05/[Spring]Spring 定时器的使用/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mr.Qian's Home">
+<meta property="og:url" content="http://qianmingxs.com/categories/mybatis/index.html">
 <meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="配置文件xmlns 多加下面的内容、
-xmlns:task=&amp;quot;http://www.springframework.org/schema/task&amp;quot;  
-然后xsi:schemaLocation多加下面的内容
-http://www.springframework.org/schema/task  
-http://www.springframework.org/schema/ta">
-<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring 定时器的使用">
-<meta name="twitter:description" content="配置文件xmlns 多加下面的内容、
-xmlns:task=&amp;quot;http://www.springframework.org/schema/task&amp;quot;  
-然后xsi:schemaLocation多加下面的内容
-http://www.springframework.org/schema/task  
-http://www.springframework.org/schema/ta">
+<meta name="twitter:title" content="Mr.Qian's Home">
 
 
 
@@ -126,10 +110,10 @@ http://www.springframework.org/schema/ta">
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/05/05/[Spring]Spring 定时器的使用/"/>
+  <link rel="canonical" href="http://qianmingxs.com/categories/mybatis/"/>
 
 
-  <title> Spring 定时器的使用 | Mr.Qian's Home </title>
+  <title> 分类: mybatis | Mr.Qian's Home </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -150,7 +134,7 @@ http://www.springframework.org/schema/ta">
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -261,175 +245,159 @@ http://www.springframework.org/schema/ta">
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Spring 定时器的使用
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-05T21:29:00+08:00" content="2017-05-05">
-              2017-05-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/05/[Spring]Spring 定时器的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/05/[Spring]Spring 定时器的使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>xmlns 多加下面的内容、</p>
-<pre><code>xmlns:task=&quot;http://www.springframework.org/schema/task&quot;  
-</code></pre><p>然后xsi:schemaLocation多加下面的内容</p>
-<pre><code>http://www.springframework.org/schema/task  
-http://www.springframework.org/schema/task/spring-task-3.1.xsd  
-</code></pre><p>最后是我们的task任务扫描注解</p>
-<pre><code>&lt;task:annotation-driven/&gt;  
-</code></pre><p>我的配置扫描位置是：</p>
-<pre><code>&lt;context:component-scan base-package=&quot;com.test&quot;/&gt;  
-</code></pre><h2 id="基于注解方式定时器"><a href="#基于注解方式定时器" class="headerlink" title="基于注解方式定时器"></a>基于注解方式定时器</h2><pre><code>@Component  
-public class MyTest{  
-      @Scheduled(cron=&quot;0/5 * *  * * ? &quot;)   //每5秒执行一次  
-      @Override  
-      public void myTest(){  
-            System.out.println(&quot;进入测试&quot;);  
-      }  
-}  
-</code></pre><h2 id="常用CRON表达式"><a href="#常用CRON表达式" class="headerlink" title="常用CRON表达式"></a>常用CRON表达式</h2><p>一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。<br>按顺序依次为<br>秒（0~59）<br>分钟（0~59）<br>小时（0~23）<br>天（月）（0~31，但是你需要考虑你月的天数）<br>月（0~11）<br>天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）<br>7.年份（1970－2099）</p>
-<p>其中每个元素可以是一个值(如6),一个连续区间(9-12),一个间隔时间(8-18/4)(/表示每隔4小时),一个列表(1,3,5),通配符。由于”月份中的日期”和”星期中的日期”这两个元素互斥的,必须要对其中一个设置?.<br>0 0 10,14,16 <em> </em> ? 每天上午10点，下午2点，4点<br>0 0/30 9-17 <em> </em> ?   朝九晚五工作时间内每半小时<br>0 0 12 ? <em> WED 表示每个星期三中午12点<br>“0 0 12 </em> <em> ?” 每天中午12点触发<br>“0 15 10 ? </em> <em>“ 每天上午10:15触发<br>“0 15 10 </em> <em> ?” 每天上午10:15触发<br>“0 15 10 </em> <em> ? </em>“ 每天上午10:15触发<br>“0 15 10 <em> </em> ? 2005” 2005年的每天上午10:15触发<br>“0 <em> 14 </em> <em> ?” 在每天下午2点到下午2:59期间的每1分钟触发<br>“0 0/5 14 </em> <em> ?” 在每天下午2点到下午2:55期间的每5分钟触发<br>“0 0/5 14,18 </em> <em> ?” 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发<br>“0 0-5 14 </em> <em> ?” 在每天下午2点到下午2:05期间的每1分钟触发<br>“0 10,44 14 ? 3 WED” 每年三月的星期三的下午2:10和2:44触发<br>“0 15 10 ? </em> MON-FRI” 周一至周五的上午10:15触发<br>“0 15 10 15 <em> ?” 每月15日上午10:15触发<br>“0 15 10 L </em> ?” 每月最后一日的上午10:15触发<br>“0 15 10 ? <em> 6L” 每月的最后一个星期五上午10:15触发<br>“0 15 10 ? </em> 6L 2002-2005” 2002年至2005年的每月的最后一个星期五上午10:15触发<br>“0 15 10 ? <em> 6#3” 每月的第三个星期五上午10:15触发<br>有些子表达式能包含一些范围或列表<br>例如：子表达式（天（星期））可以为 “MON-FRI”，“MON，WED，FRI”，“MON-WED,SAT”<br>“</em>”字符代表所有可能的值<br>因此，“<em>”在子表达式（月）里表示每个月的含义，“</em>”在子表达式（天（星期））表示星期的每一天</p>
-<p>“/”字符用来指定数值的增量<br>例如：在子表达式（分钟）里的“0/15”表示从第0分钟开始，每15分钟<br>         在子表达式（分钟）里的“3/20”表示从第3分钟开始，每20分钟（它和“3，23，43”）的含义一样</p>
-<p>“？”字符仅被用于天（月）和天（星期）两个子表达式，表示不指定值<br>当2个子表达式其中之一被指定了值以后，为了避免冲突，需要将另一个子表达式的值设为“？”</p>
-<p>“L” 字符仅被用于天（月）和天（星期）两个子表达式，它是单词“last”的缩写<br>但是它在两个子表达式里的含义是不同的。<br>在天（月）子表达式中，“L”表示一个月的最后一天<br>在天（星期）自表达式中，“L”表示一个星期的最后一天，也就是SAT<br>如果在“L”前有具体的内容，它就具有其他的含义了<br>例如：“6L”表示这个月的倒数第６天，“ＦＲＩＬ”表示这个月的最一个星期五<br>注意：在使用“L”参数时，不要指定列表或范围，因为这会导致问题</p>
-<p>字段   允许值   允许的特殊字符<br>秒         0-59         , - <em> /<br>分         0-59         , - </em> /<br>小时         0-23         , - <em> /<br>日期         1-31         , - </em> ? / L W C<br>月份         1-12 或者 JAN-DEC         , - <em> /<br>星期         1-7 或者 SUN-SAT         , - </em> ? / L C #<br>年（可选）         留空, 1970-2099         , - * /</p>
-<p>参考：<a href="http://luanxiyuan.iteye.com/blog/2297329" target="_blank" rel="external">http://luanxiyuan.iteye.com/blog/2297329</a></p>
-
-      
+  <section id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        mybatis
+        <small>分类</small>
+      </h2>
     </div>
 
-    <div>
+    
       
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-
-      
-    </div>
-
-    <div>
-      
+            <a class="post-title-link" href="/2017/06/20/[mybatis]mybatis源码分析/" itemprop="url">
+              
+                <span itemprop="name">mybatis源码分析</span>
+              
+            </a>
         
+      </h1>
 
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-06-20T14:09:00+08:00"
+              content="2017-06-20" >
+          06-20
+        </time>
+      </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/定时器/" rel="tag">#定时器</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/05/05/[Maven]利用Maven下载Jar包/" rel="next" title="利用Maven下载Jar包">
-                <i class="fa fa-chevron-left"></i> 利用Maven下载Jar包
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/06/[Redis]RedisTemplate 使用及基本原理/" rel="prev" title="RedisTemplate 使用及基本原理">
-                RedisTemplate 使用及基本原理 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
+    
       
-    </div>
-  </div>
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/04/15/[mybatis]mybatis generator/" itemprop="url">
+              
+                <span itemprop="name">mybatis generator</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-15T12:39:00+08:00"
+              content="2017-04-15" >
+          04-15
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/" itemprop="url">
+              
+                <span itemprop="name">Mybatis - 动态SQL语句</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-03-27T13:03:00+08:00"
+              content="2017-03-27" >
+          03-27
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/01/18/[mybatis]通用mapper/" itemprop="url">
+              
+                <span itemprop="name">通用mapper</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-01-18T09:23:00+08:00"
+              content="2017-01-18" >
+          01-18
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/08/11/[mybatis]mybatis笔记/" itemprop="url">
+              
+                <span itemprop="name">mybatis笔记</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-08-11T00:00:00+08:00"
+              content="2016-08-11" >
+          08-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+  </section>
+
+  
+
 
 
           </div>
@@ -437,14 +405,6 @@ public class MyTest{
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2017/05/05/[Spring]Spring 定时器的使用/"
-           data-title="Spring 定时器的使用" data-url="http://qianmingxs.com/2017/05/05/[Spring]Spring 定时器的使用/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -464,17 +424,8 @@ public class MyTest{
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -524,17 +475,6 @@ public class MyTest{
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件"><span class="nav-number">1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于注解方式定时器"><span class="nav-number">2.</span> <span class="nav-text">基于注解方式定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用CRON表达式"><span class="nav-number">3.</span> <span class="nav-text">常用CRON表达式</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -631,10 +571,6 @@ public class MyTest{
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
-
-
 
   
 

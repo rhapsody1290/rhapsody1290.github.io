@@ -93,7 +93,7 @@ shell编程其实作为命令语言互动式地解释和执行用户输入的命
 <meta property="og:description" content="概述每个人在成功登陆linux后，系统会出现不同的提示符号，例如$、~、#等，然后你就可以开始输入需要的命令，若是命令正确，系统就会依据命令的要求来执行，直到注销系统为止；在登录到注销期间，输入的每个命令都会经过解释及执行。而这个负责的机制就是shell
 shell编程其实作为命令语言互动式地解释和执行用户输入的命令只是shell功能的一个方面。shell还可以用来进行程序设计。它提供了定义变量和">
 <meta property="og:image" content="http://img.blog.csdn.net/20151224102611018">
-<meta property="og:updated_time" content="2017-04-12T14:46:40.694Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux视频教程第10讲.shell介绍">
 <meta name="twitter:description" content="概述每个人在成功登陆linux后，系统会出现不同的提示符号，例如$、~、#等，然后你就可以开始输入需要的命令，若是命令正确，系统就会依据命令的要求来执行，直到注销系统为止；在登录到注销期间，输入的每个命令都会经过解释及执行。而这个负责的机制就是shell
@@ -360,14 +360,14 @@ shell编程其实作为命令语言互动式地解释和执行用户输入的命
 <h2 id="shell的使用"><a href="#shell的使用" class="headerlink" title="shell的使用"></a>shell的使用</h2><p>命令历史和互动：用上下箭头键可以重复以前所输入的命令</p>
 <p>命令完成功能：用tab键能自动完成相关命令，再次按tab可得到清单</p>
 <p>shell命令历史记录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">history</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history</div></pre></td></tr></table></figure>
 <h2 id="shell脚本文件"><a href="#shell脚本文件" class="headerlink" title="shell脚本文件"></a>shell脚本文件</h2><p>是一个文本文件，为一系列命令的集合，有执行的权限，<strong>执行方式（./文件名）</strong></p>
 <p>用户登录后自动执行的shell脚本文件 <strong>.bashrc</strong>  位于主目录下，</p>
 <p>系统的脚本<code>/etc/bashrc</code>，里面是基本配置数据</p>
 <p><strong>配置.bashrc文件可以指定某些程序在用户登录的时候就自动启动</strong></p>
 <p>.bash_profile 位于主目录下，它为系统的每个用户设置环境信息<br><strong>/etc/ 中 profile 主要是配置环境变量</strong></p>
 <p>用export可以临时加入一个系统路径，如</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span><span class="regexp">/bin:/</span>root<span class="regexp">/test/</span>t1，</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=$PATH:$HOME/bin:/root/test/t1，</div></pre></td></tr></table></figure>
 <p>输出环境PATH，引用原来的值<code>$PATH</code>，<code>$HOME</code>表示工作主目录，:是路径分隔符</p>
 <p>总结：</p>
 <pre><code>/etc/profile，/etc/bashrc 是系统全局环境变量设定
@@ -375,10 +375,10 @@ shell编程其实作为命令语言互动式地解释和执行用户输入的命
 </code></pre><p><strong>已经定义好的环境变量</strong></p>
 <p>SHELL：默认shell PATH：路径<br>USER：当前登录用户的用户名</p>
 <p><strong>显示变量内容</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="variable">$SHELL</span> <span class="built_in">echo</span> <span class="variable">$USER</span></div><div class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo $SHELL echo $USER</div><div class="line">echo $PATH</div></pre></td></tr></table></figure>
 <p><strong>shell通配符</strong></p>
 <p>【案例】export NAME=Michael -</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> Welcome $<span class="built_in">NAME</span>, the <span class="built_in">date</span> is <span class="built_in">date</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo Welcome $NAME, the date is date</div></pre></td></tr></table></figure>
 <p><strong>单引号</strong>：不处理任何变量和命令</p>
 <p>【案例】echo ‘Welcome $NAME, the date is date ’ </p>
 <p><strong>双引号</strong>：处理变量但不处理命令</p>

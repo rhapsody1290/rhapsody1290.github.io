@@ -95,7 +95,7 @@
 每个Internet上的主机和路由器都有一个IP地址，它包括网络号和主机号，现在所用的IP地址都是32位的。IP地址按照国际标准划分为A、B、C、D、E五种类型
 人与人之间交流是用语言，计算机">
 <meta property="og:image" content="http://img.blog.csdn.net/20151224190309198">
-<meta property="og:updated_time" content="2017-04-12T15:22:42.195Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux视频教程第11讲.tcp.ip基础">
 <meta name="twitter:description" content="概述TCP/IP是unix/linux世界的网络基础，在某种意义上，unix网络就是TCP/IP，而且TCP/IP就是网络互联的标准。它不是一个独立的协议，而是一组协议（TCP、IP、UDP、ARP等协议）
@@ -370,7 +370,7 @@ TCP段，再经过IP层，会加一个ip头，是指发送到哪个地址。这�
 <p><img src="http://img.blog.csdn.net/20151224190309198" alt="这里写图片描述"></p>
 <p>内部IP：外面电脑无法访问到 192.168.0.2<br>外部IP：公网IP，电脑都可以访问到<br>如何查看外网ip ping -t<br>追踪路由命令；tracert</p>
 <p>1、追踪路由</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">tracert</span> 目标<span class="built_in">IP</span>或域名</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tracert 目标IP或域名</div></pre></td></tr></table></figure>
 <p>2、ping命令测试两个IP是否畅通<br>3、在windows下查看IP的命令 ipconfig<br>4、在linux/unix查看ip的命令 ifconfig</p>
 <p>局域网广播全播：<br>对一个子网广播网络号+后面全1</p>
 <pre><code>netsend “不要玩CS” 192.168.255.255

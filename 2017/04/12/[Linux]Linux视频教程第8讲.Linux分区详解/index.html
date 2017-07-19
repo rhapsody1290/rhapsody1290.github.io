@@ -97,7 +97,7 @@
 
 对w">
 <meta property="og:image" content="http://i.imgur.com/gke7XfC.png">
-<meta property="og:updated_time" content="2017-04-12T14:19:42.099Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux视频教程第8讲.Linux分区详解">
 <meta name="twitter:description" content="概述硬盘的分区主要分为d分区（Primary Portion）和扩展分区（Extension Portion）两种。只是针对一个硬盘来讲，主分区和扩展分区的数目之和不能大于4个。
@@ -365,18 +365,18 @@
 </ol>
 <h2 id="内存置换空间（swap）之建置"><a href="#内存置换空间（swap）之建置" class="headerlink" title="内存置换空间（swap）之建置"></a>内存置换空间（swap）之建置</h2><pre><code>p289
 swap的功能就是在物理内存不足的情况下，内存中暂不使用的数据就会被挪到swap中，此时内存就会空出来给所需要执行的程序加载
-</code></pre><h2 id="几个重要命令"><a href="#几个重要命令" class="headerlink" title="几个重要命令"></a>几个重要命令</h2><h3 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h3><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount <span class="string">[-parameters]</span> <span class="string">[设备名称]</span> <span class="string">[挂载点]</span></div><div class="line">mount /dev/sda1 /test/  #将sda1挂载到/test</div></pre></td></tr></table></figure>
+</code></pre><h2 id="几个重要命令"><a href="#几个重要命令" class="headerlink" title="几个重要命令"></a>几个重要命令</h2><h3 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mount [-parameters] [设备名称] [挂载点]</div><div class="line">mount /dev/sda1 /test/  #将sda1挂载到/test</div></pre></td></tr></table></figure>
 <p>特别说明：在挂载光驱时，可直接使用 mount /mnt/cdrom </p>
 <p>###卸载命令 </p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">umount [挂载点] </div><div class="line">umount <span class="regexp">/test/</span>   <span class="comment">#卸载分区</span></div></pre></td></tr></table></figure>
-<h3 id="查看Linux系统分区具体情况"><a href="#查看Linux系统分区具体情况" class="headerlink" title="查看Linux系统分区具体情况"></a>查看Linux系统分区具体情况</h3><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df -h </div><div class="line">df <span class="string">[目录全路径]</span>，查看某个目录是在哪个分区</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">umount [挂载点] </div><div class="line">umount /test/   #卸载分区</div></pre></td></tr></table></figure>
+<h3 id="查看Linux系统分区具体情况"><a href="#查看Linux系统分区具体情况" class="headerlink" title="查看Linux系统分区具体情况"></a>查看Linux系统分区具体情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df -h </div><div class="line">df [目录全路径]，查看某个目录是在哪个分区</div></pre></td></tr></table></figure>
 <p>###分区</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">fdisk</span> ‐l    <span class="comment">#查看系统有哪些分区</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fdisk ‐l    #查看系统有哪些分区</div></pre></td></tr></table></figure>
 <p>fdisk只有root可以执行，使用的装置名不要加上数字，因为partition是针对整个硬盘装置，而不是分区。例：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fdisk <span class="regexp">/dev/</span>hdc</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/hdc</div></pre></td></tr></table></figure>
 <p>###磁盘格式化</p>
 <p>mkfs:make filesystem</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkfs -t ext3 <span class="regexp">/dev/</span>hdc6    <span class="comment">#将/dev/hdc6格式化ext3文件系统</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkfs -t ext3 /dev/hdc6    #将/dev/hdc6格式化ext3文件系统</div></pre></td></tr></table></figure>
       
     </div>
 

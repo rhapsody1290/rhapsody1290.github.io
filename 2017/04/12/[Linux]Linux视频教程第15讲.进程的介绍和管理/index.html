@@ -99,7 +99,7 @@
 每个进程都可能以两种方式存在的:前台与后台。所谓前台进程就是用户目前的屏幕上可以进行操作的，后台进程则是实际在操作，但由于屏幕上无法看到的进程，通常使用后台方式执行
 一般系统的服务都是以后台进程的方式存在，而且都会常驻在系统中，直到关">
 <meta property="og:image" content="http://img.blog.csdn.net/20151226153756930">
-<meta property="og:updated_time" content="2017-04-13T04:01:14.823Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux视频教程第15讲.进程的介绍和管理">
 <meta name="twitter:description" content="概述
@@ -359,7 +359,7 @@
 <h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><p>进程：就是正在执行的程序<br>线程：轻量级的进程</p>
 <p>进程有独立的地址空间，线程没有<br>线程不能独立存在，它是由进程创建（Linux下用fork函数，Java里用Thread或实现Runnable）</p>
 <h2 id="进程的管理"><a href="#进程的管理" class="headerlink" title="进程的管理"></a>进程的管理</h2><p>ps命令是用来查看目前系统中，有哪些正在执行，以及它们执行的情况，可以不加任何参数，显示详细的进程信息</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">使用案例：</div><div class="line"><span class="keyword">a</span>) ps ‐<span class="keyword">a</span>：显示当前终端的所有进程信息 </div><div class="line">b) ps ‐u：以用户的格式显示进程信息 </div><div class="line">c) ps ‐x：显示后台进程运行的参数 </div><div class="line">d) pa –aux【看的全面，信息也全面】 <span class="comment">#1号进程是所有进程的父进程</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">使用案例：</div><div class="line">a) ps ‐a：显示当前终端的所有进程信息 </div><div class="line">b) ps ‐u：以用户的格式显示进程信息 </div><div class="line">c) ps ‐x：显示后台进程运行的参数 </div><div class="line">d) pa –aux【看的全面，信息也全面】 #1号进程是所有进程的父进程</div></pre></td></tr></table></figure>
 <pre><code>各列的解释：
 
 USER 进程的用户；
@@ -388,7 +388,7 @@ s 进程的领导者（在它之下有子进程）；
 l 多进程的（使用 CLONE_THREAD, 类似 NPTL pthreads）；
 + 位于后台的进程组；
 </code></pre><h2 id="终止进程"><a href="#终止进程" class="headerlink" title="终止进程"></a>终止进程</h2><p>若是某个进程执行一半需要停止时，或是已消了很大的系统资源时，此时可以考虑停止该进程，使用kill命令来完成此项任务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">kill</span> 进程号         <span class="comment">#终止某个进程</span></div><div class="line"><span class="built_in">kill</span> -9 进程号      <span class="comment">#强制关闭</span></div><div class="line">killall            <span class="comment">#杀死此进程和所有其子进程</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">kill 进程号         #终止某个进程</div><div class="line">kill -9 进程号      #强制关闭</div><div class="line">killall            #杀死此进程和所有其子进程</div></pre></td></tr></table></figure>
 <p>##动态监控进程</p>
 <p>top命令与ps命令很相似。它们都用来显示正在执行的进程。top与ps最大的不同之处，<strong>在于top在执行一段时间可以更新正在运行的进程</strong></p>
 <h3 id="top显示选项解释"><a href="#top显示选项解释" class="headerlink" title="top显示选项解释"></a>top显示选项解释</h3><p><img src="http://img.blog.csdn.net/20151226153756930" alt="这里写图片描述"></p>
@@ -447,14 +447,14 @@ COMMAND
 
 </pre>
 
-<h3 id="监视特定用户"><a href="#监视特定用户" class="headerlink" title="监视特定用户"></a>监视特定用户</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">top</span>：输入此命令，按回车键，查看执行的进程 </div><div class="line">然后输入<span class="string">"u"</span>回车，再输入用户名，即可</div></pre></td></tr></table></figure>
-<h3 id="终止指定的用户"><a href="#终止指定的用户" class="headerlink" title="终止指定的用户"></a>终止指定的用户</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">top</span>：输入此命令，按回车键，查看执行的进程</div><div class="line">k：然后输入<span class="string">"k"</span>回车，再输入要结束的进程ID号</div></pre></td></tr></table></figure>
-<h3 id="指定系统状态更新的时间"><a href="#指定系统状态更新的时间" class="headerlink" title="指定系统状态更新的时间"></a>指定系统状态更新的时间</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top ‐d <span class="number">10</span>：指定系统更新进程的时间为<span class="number">10</span>秒</div></pre></td></tr></table></figure>
+<h3 id="监视特定用户"><a href="#监视特定用户" class="headerlink" title="监视特定用户"></a>监视特定用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">top：输入此命令，按回车键，查看执行的进程 </div><div class="line">然后输入&quot;u&quot;回车，再输入用户名，即可</div></pre></td></tr></table></figure>
+<h3 id="终止指定的用户"><a href="#终止指定的用户" class="headerlink" title="终止指定的用户"></a>终止指定的用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">top：输入此命令，按回车键，查看执行的进程</div><div class="line">k：然后输入&quot;k&quot;回车，再输入要结束的进程ID号</div></pre></td></tr></table></figure>
+<h3 id="指定系统状态更新的时间"><a href="#指定系统状态更新的时间" class="headerlink" title="指定系统状态更新的时间"></a>指定系统状态更新的时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top ‐d 10：指定系统更新进程的时间为10秒</div></pre></td></tr></table></figure>
 <h3 id="设置系统时间"><a href="#设置系统时间" class="headerlink" title="设置系统时间"></a>设置系统时间</h3><p>date命令：显示系统的时间，可以在直接输入”date”命令来查看系统的时间 </p>
 <p>利用date命令来更改系统的时间</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">date</span> MMDDHHMMCCYY.SS：月月日日时时分分年年.秒秒</div></pre></td></tr></table></figure>
-<h3 id="查看月历"><a href="#查看月历" class="headerlink" title="查看月历"></a>查看月历</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cal <span class="number">3</span> <span class="number">2002</span>：查看<span class="number">2002</span>年<span class="number">3</span>月的月历</div></pre></td></tr></table></figure>
-<h2 id="查看年历"><a href="#查看年历" class="headerlink" title="查看年历"></a>查看年历</h2><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cal <span class="number">2008</span>：查看<span class="number">2008</span>的年历</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">date MMDDHHMMCCYY.SS：月月日日时时分分年年.秒秒</div></pre></td></tr></table></figure>
+<h3 id="查看月历"><a href="#查看月历" class="headerlink" title="查看月历"></a>查看月历</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cal 3 2002：查看2002年3月的月历</div></pre></td></tr></table></figure>
+<h2 id="查看年历"><a href="#查看年历" class="headerlink" title="查看年历"></a>查看年历</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cal 2008：查看2008的年历</div></pre></td></tr></table></figure>
 
       
     </div>
