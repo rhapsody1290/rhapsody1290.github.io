@@ -253,6 +253,141 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/08/09/[Java]命令行编译Java程序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/09/[Java]命令行编译Java程序/" itemprop="url">命令行编译Java程序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-09T00:00:00+08:00">
+                2016-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>先说下.java和.class文件，.java文件可以放在任何位置，只要运行javac时，指定你要编译的源文件位置就好，然后javac还有另一个参数是指定.class文件输出到哪个目录。另外javac还有一个option叫 -d，表示编译出来的.class文件，按照包名放进相应层级的目录中去。<br>所以，假设你的.java文件在D:\code\src\com\company\Hello.java，（因为Java要求源文件中的public类与源文件名要相同，类名通常首字母大写，所以源文件通常是Hello.java这样的），并且假如你的Hello.java里写明package com.company;<br>假如你当前置身于D:\code\目录下，执行javac .\src\com\company\Hello.java -d .\bin\<br>表示编译.\src\com\company\Hello.java，将编译好的.class文件按包名层级结构放到.\bin\目录下。<br>于是在D:\code\bin\com\company\下会出现一个Hello.class文件。这时，运行Hello时，跟.java文件就没有关系了。<br>这时如果你置身于D:\code\bin\目录下，最好了，因为我们通常配置环境变量时，CLASSPATH会配置.，也就是当前路径，那你就在D:\code\bin\下执行java，那class也就在当前路径找了：<br>java com.company.Hello，这里java是启动虚拟机的命令，启动时运行哪个类呢？com.company.Hello，这是类名，带着包名，叫全限定名，也就是类的全名，这跟它在哪个目录下没关系，是类名，虚拟机会在CLASSPATH下，也就是当前目录下，去找com.company.Hello这个类，并加载运行。<br>至于它怎么找，你就不用管了。<br>如果你当前正置身于D:\code\下，那你执行java com.company.Hello就失败了，因为虚拟机在CLASSPATH下找不到这个类。那怎么办呢，就要告诉虚拟机，去哪找，也就是要指定CLASSPATH，可以执行：java -classpath .\bin com.company.Hello<br>不知道你能不能理解，你要运行的是com.company.Hello这个类，这是类名，不是目录名，去哪找这个类？用-classpath告诉虚拟机，所以，不能java .\bin\com.company.Hello，这就不伦不类了。</p>
+<p>参考<br><a href="http://bbs.csdn.net/topics/390865848" target="_blank" rel="external">http://bbs.csdn.net/topics/390865848</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/08/08/[Java]Log4j笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1121,6 +1256,191 @@ student 18
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/29/[Java]Java集合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/29/[Java]Java集合/" itemprop="url">Java集合</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+08:00">
+                2016-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="集合框架–使用"><a href="#集合框架–使用" class="headerlink" title="集合框架–使用"></a>集合框架–使用</h2><p><img src="http://img.blog.csdn.net/20160416165357245" alt="这里写图片描述"></p>
+<h3 id="开发常用"><a href="#开发常用" class="headerlink" title="开发常用"></a><em>开发常用</em></h3><p>　　●　在实际开发过程中，比较常用的是Vector、Stack、ArrayList、LinkedList、HashMap、HashTable<br>　　●　集合类基本上在util包中</p>
+<h3 id="集合分类"><a href="#集合分类" class="headerlink" title="集合分类"></a><em>集合分类</em></h3><p>　　Java集合类主要有以下几种<br>　 　●　List结构的集合类：ArrayList、LinkedList、Vector、Stack<br>　 　●　Map结构的集合类：HashMap、HashTable<br>　 　●　Set结构的集合类：HashSet、TreeSet<br>　 　●　Queue结构的集合：Queue接口</p>
+<h2 id="List结构的集合类"><a href="#List结构的集合类" class="headerlink" title="List结构的集合类"></a>List结构的集合类</h2><h3 id="ArrayList类的使用-无同步性，线程不安全"><a href="#ArrayList类的使用-无同步性，线程不安全" class="headerlink" title="ArrayList类的使用(无同步性，线程不安全)"></a><em>ArrayList类的使用(无同步性，线程不安全)</em></h3><ul>
+<li>基于动态数组的数据结构，随机访问优于LinkedList<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class ArrayList</div><div class="line"></div><div class="line">1. 往list中插入元素 </div><div class="line">    ● boolean add(E e) 元素添加到列表的尾部 </div><div class="line">    ● void    add(int index, E element) 元素插入到列表的指定位置</div><div class="line">2. 返回列表中的元素数 </div><div class="line">    ● int size() 返回列表中的元素数 </div><div class="line">3. 如果此列表中没有元素，则返回 true </div><div class="line">    ● boolean isEmpty() </div><div class="line">4. 返回此列表中指定位置上的元素 </div><div class="line">    ● E get(int index) </div><div class="line">5. 用指定的元素替代此列表中指定位置上的元素,返回值是以前位于该位上的元素 </div><div class="line">    ● E set(int index, E element) </div><div class="line">6. 移除列表上的元素 </div><div class="line">    ● E remove(int index) 移除此列表中指定位置上的元素 </div><div class="line">    ● boolean remove(Object o) 移除此列表中首次出现的指定元素（如果存在） </div><div class="line">    ● protected void removeRange(int fromIndex, int toIndex) 移除列表中索引在 fromIndex（包括）和 toIndex（不包括）之间的所有元素。 </div><div class="line">    ● void clear() 移除列表中所有元素</div><div class="line">7. 查找元素 </div><div class="line">    ● contains(Object o) 判断list中是否含有指定元素 </div><div class="line">    ● int indexOf(Object o) 返回list中元素第一次出现的位置,若没有则返回-1 </div><div class="line">    ● int lastIndexOf(Object o) 返回arraylist中元素最后一次出现的位置,若没有则返回-1</div><div class="line">8. 返回包含此列表中所有元素的数组（按顺序），相当于数组API和collection API的桥梁,返回一个object的数组 </div><div class="line">    ● Object[] toArray()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="LinkedList类的使用"><a href="#LinkedList类的使用" class="headerlink" title="LinkedList类的使用"></a><em>LinkedList类的使用</em></h3><ul>
+<li>基于链表的数据结构，新增add和删除remove操作优于ArrayList<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 将指定元素插入此列表的开头</div><div class="line">    ● void addFirst(E e) </div><div class="line">2. 将指定元素添加到此列表的结尾</div><div class="line">    ● void addLast(E e)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Vector同理-线程安全具有同步性"><a href="#Vector同理-线程安全具有同步性" class="headerlink" title="Vector同理(线程安全具有同步性)"></a><em>Vector同理(线程安全具有同步性)</em></h3><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a><em>Stack</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 测试堆栈是否为空 </div><div class="line">    boolean empty() </div><div class="line">2. 查看堆栈顶部的对象，但不从堆栈中移除它 </div><div class="line">    E peek() </div><div class="line">3. 移除堆栈顶部的对象，并作为此函数的值返回该对象</div><div class="line">    E pop() </div><div class="line">4. 把项压入堆栈顶部</div><div class="line">    E push(E item) </div><div class="line">5. 返回对象在堆栈中的位置，以 1 为基数  </div><div class="line">    int search(Object o)</div></pre></td></tr></table></figure>
+<h3 id="ArrayList和Vector的区别"><a href="#ArrayList和Vector的区别" class="headerlink" title="ArrayList和Vector的区别"></a>ArrayList和Vector的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ArrayList和Vector的区别</div><div class="line">    ArrayList与Vector都是java的集合类，都可以用来存放java对象，这是他们的相同点，但是他们也有区别：</div><div class="line">1、同步性</div><div class="line">    Vector是线程同步的。这个类中的一些方法保证了Vector中的对象是线程安全的。而ArrayList则是线程异步的，因此ArrayList中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用ArrayList是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销。</div><div class="line">2、数据增长</div><div class="line">    从内部实现机制来讲ArrayList和Vector都是使用数组(Array)来控制集合中的对象。当你向这两种类型中增加元素的时候，如果元素的数目超出了内部数组目前的长度它们都需要扩展内部数组的长度，Vector缺省情况下自动增长原来一倍的数组长度，ArrayList是原来的50%，所以最后你获得的这个集合所占的空间总是比你实际需要的要大。所以如果你要在集合中保存大量的数据那么使用Vector有一些优势，因为你可以通过设置集合的初始化大小来避免不必要的资源开销。</div></pre></td></tr></table></figure>
+<h2 id="Map结构的集合类"><a href="#Map结构的集合类" class="headerlink" title="Map结构的集合类"></a>Map结构的集合类</h2><h3 id="HashMap（线程不同步），HashTable（线程同步）集合类"><a href="#HashMap（线程不同步），HashTable（线程同步）集合类" class="headerlink" title="HashMap（线程不同步），HashTable（线程同步）集合类"></a><em>HashMap（线程不同步），HashTable（线程同步）集合类</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">void clear() </div><div class="line">      从此映射中移除所有映射关系。 </div><div class="line">V get(Object key) </div><div class="line">      返回指定键所映射的值；如果对于该键来说，此映射不包含任何映射关系，则返回 null。 </div><div class="line">boolean isEmpty() </div><div class="line">      如果此映射不包含键-值映射关系，则返回 true。 </div><div class="line">V put(K key, V value) </div><div class="line">      在此映射中关联指定值与指定键。 </div><div class="line">V remove(Object key) </div><div class="line">      从此映射中移除指定键的映射关系（如果存在）。 </div><div class="line">int size() </div><div class="line">      返回此映射中的键-值映射关系数。</div></pre></td></tr></table></figure>
+<h3 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a><em>Map遍历</em></h3><pre><code>1. Map.Entry&lt;String, String&gt;的数据类型为键值对。
+
+2. map.entrySet(),返回类型为Set&lt;Entry&lt;String, String&gt;&gt; ，即map中非空元素组成的键值对Set集合，可以用图例（key1,value1）,(key2,value2)...(keyn,valuen)表示。
+
+3. Map.Entry&lt;String, String&gt;类型分别通过getKey()、getValue()方法取出键和值。
+
+4. 可以通过map.keySet()方法取出全部键的Set集合，从而通过map.get(Object key)方法取出值，即方法一。
+
+5. 可以通过map.value()得到Collection&lt;String&gt;集合，得到所有值。即方法四
+
+6、方法二中使用迭代器对数据遍历，类型是Map.Entry&lt;String, String&gt;，即仍旧是键值对，集合是map.entrySet().iterator()，比方法三麻烦。
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">  Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">  map.put(<span class="string">"1"</span>, <span class="string">"value1"</span>);</div><div class="line">  map.put(<span class="string">"2"</span>, <span class="string">"value2"</span>);</div><div class="line">  map.put(<span class="string">"3"</span>, <span class="string">"value3"</span>);</div><div class="line">  </div><div class="line">  <span class="comment">//第一种：普遍使用，二次取值</span></div><div class="line">  System.out.println(<span class="string">"通过Map.keySet遍历key和value："</span>);</div><div class="line">  <span class="keyword">for</span> (String key : map.keySet()) &#123;</div><div class="line">   System.out.println(<span class="string">"key= "</span>+ key + <span class="string">" and value= "</span> + map.get(key));</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//第二种</span></div><div class="line">  System.out.println(<span class="string">"通过Map.entrySet使用iterator遍历key和value："</span>);</div><div class="line">  Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();</div><div class="line">  <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">   Map.Entry&lt;String, String&gt; entry = it.next();</div><div class="line">   System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//第三种：推荐，尤其是容量大时</span></div><div class="line">  System.out.println(<span class="string">"通过Map.entrySet遍历key和value"</span>);</div><div class="line">  <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</div><div class="line">   System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//第四种</span></div><div class="line">  System.out.println(<span class="string">"通过Map.values()遍历所有的value，但不能遍历key"</span>);</div><div class="line">  <span class="keyword">for</span> (String v : map.values()) &#123;</div><div class="line">   System.out.println(<span class="string">"value= "</span> + v);</div><div class="line">  &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h3 id="HashMap和Hashtable集合类的区别"><a href="#HashMap和Hashtable集合类的区别" class="headerlink" title="HashMap和Hashtable集合类的区别"></a><em>HashMap和Hashtable集合类的区别</em></h3><pre><code>HashMap与Hashtable都是java的集合类，都可以用来存放java对象，这是他们的相同点，但是他们也有区别。
+1、历史原因
+    Hashtable是基于陈旧的Dictionary类的，HashMap是java 1.2引进的Map接口的一个实现。
+2、同步性
+    Hashtable是线程同步的。这个类中的一些方法保证了Hashtable中的对象是线程安全的。而HashMap则是线程异步的，因此HashMap中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用HashMap是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销，从而提高效率。
+3、值
+    HashMap可以让你将空值作为一个表的条目的key或value但是Hashtable是不能放入空值的(null)
+</code></pre><h2 id="List、Map集合框架的选择★（常用）★★★★"><a href="#List、Map集合框架的选择★（常用）★★★★" class="headerlink" title="List、Map集合框架的选择★（常用）★★★★"></a>List、Map集合框架的选择★（常用）★★★★</h2><pre><code>如何选用集合类？
+1、要求线程安全，使用Vector、Hashtable
+2、不要求线程安全，使用ArrayList,LinkedList,HashMap
+3、要求key和value键值，则使用HashMap,Hashtable
+4、数据量很大，又要线程安全，则使用Vector
+</code></pre><h2 id="Set结构的集合类"><a href="#Set结构的集合类" class="headerlink" title="Set结构的集合类"></a>Set结构的集合类</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a><em>用法</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#添加</div><div class="line">add(Object)</div><div class="line"></div><div class="line">#遍历</div><div class="line">Iterator&lt;String&gt; iterator = hashSet.iterator();</div><div class="line">while(iterator.hasNext())&#123;</div><div class="line">	System.out.println(iterator.next());</div><div class="line">&#125;</div><div class="line"></div><div class="line">#删除元素</div><div class="line">删除一个元素 remove(Object)</div><div class="line">删除所有元素 clear()</div><div class="line"></div><div class="line">#包含</div><div class="line">contain(Object)</div></pre></td></tr></table></figure>
+<h3 id="HashSet与TreeSet区别"><a href="#HashSet与TreeSet区别" class="headerlink" title="HashSet与TreeSet区别"></a><em>HashSet与TreeSet区别</em></h3><ul>
+<li>HashSet随机存储对象，不能保证先插入的元素出现在前面；TreeSet中元素默认按照元素自然序进行排列，使用compareTo()方法自定义排序</li>
+<li>HashSet内部依靠HashMap，而TreeSet依靠TreeMap</li>
+<li>HashSet可以存储空对象，但TreeSet不允许</li>
+<li>性能，HashSet对基本操作add，remove，size有常数的时间复杂度，TreeSet有log(n)的时间复杂度</li>
+<li>TreeSet比起HashSet具有更多丰富的功能，例如pollFirst(),pollLast(),first(),last(),celling(),lower()等</li>
+<li>比较，HashSet使用equals()方法进行比较，而TreeSet使用compareTo()方法获得排列顺序</li>
+</ul>
+<h3 id="HashSet与TreeSet相同点"><a href="#HashSet与TreeSet相同点" class="headerlink" title="HashSet与TreeSet相同点"></a><em>HashSet与TreeSet相同点</em></h3><ul>
+<li>只能存储独一无二的元素，不允许任何重复的元素</li>
+<li>不是线程安全</li>
+<li>Clone方法有相同的实现技术</li>
+</ul>
+<h2 id="Queue结构的集合"><a href="#Queue结构的集合" class="headerlink" title="Queue结构的集合"></a>Queue结构的集合</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/29/[Java]Java类加载器深入讲解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1233,6 +1553,152 @@ student 18
 <p>运行结果：<br><img src="http://my.csdn.net/uploads/201207/12/1342057844_5083.jpg" alt="此处输入图片的描述"></p>
 <h2 id="一个类加载器的高级问题"><a href="#一个类加载器的高级问题" class="headerlink" title="一个类加载器的高级问题:"></a>一个类加载器的高级问题:</h2><p>　　我们知道tomcat服务器，是一个大大的java程序，那么它就必须在JVM上运行.这个大大的java程序内部也写了很多类加载器，它用这些类加载器去加载一些特定的类.注入servlet类.<br>下面我们新建一个javaweb工程，新建一个servlet程序.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request， HttpServletResponse response)</span></span></div><div class="line">        <span class="keyword">throws</span> ServletException， IOException &#123;</div><div class="line">    response.setContentType(<span class="string">"text/html"</span>);</div><div class="line">    PrintWriter out = response.getWriter();</div><div class="line">    ClassLoader classload = <span class="keyword">this</span>.getClass().getClassLoader();</div><div class="line">    <span class="keyword">while</span> (classload != <span class="keyword">null</span>) &#123;</div><div class="line">        out.println(classload.getClass().getName()+<span class="string">"&lt;br&gt;"</span>);</div><div class="line">        classload = classload.getParent();</div><div class="line">    &#125;</div><div class="line">    out.println();</div><div class="line">    out.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>　　然后配置服务器，部署应用程序，启动tomcat服务器.在页面访问我们这个servlet，在页面打印的<br>结果如下图所示:<br><img src="http://my.csdn.net/uploads/201207/12/1342057884_8748.png" alt="此处输入图片的描述"><br>这是从小到大排序的.<br>现在呢?我想把该servlet打成jar包，放在ExtClassLoad类加载器加载的路径.<br>通过Eclipse即可完成<br><img src="http://my.csdn.net/uploads/201207/12/1342057935_6368.png" alt="此处输入图片的描述"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/29/[Java]Java面向对象编程的四大特征/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/29/[Java]Java面向对象编程的四大特征/" itemprop="url">Java面向对象编程的四大特征</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+08:00">
+                2016-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h2><p>　　我们在前面去定义一个类时候，实际上就是把一类事物的共有的属性和行为提取出来，形成一个物理模型(模版)。这种研究问题的方法称为抽象。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>　　封装就是把抽象出来的数据和对数据的操作封装在一起。数据被保护在内部，程序的其它部分只有通过被授权的操作(成员方法)，才能对数据进行操作。</p>
+<p>###<em>访问控制修饰符</em><br><img src="http://img.blog.csdn.net/20160416152720709" alt="这里写图片描述"></p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>　　继承可以解决代码复用，让我们的编程更加靠近人类思维。(变量)和方法时，可以从这些类中抽象出父类(比如刚才的Student)，在父类中定义这些相同的当多个类存在相同的属性属性和方法，所有的子类不需要重新定义这些属性和方法，只需要继承父类,这样子类就会自动拥有父类定义的某些属性和方法。
+　　</p>
+<h3 id="父类哪些属性、方法被子类继承"><a href="#父类哪些属性、方法被子类继承" class="headerlink" title="父类哪些属性、方法被子类继承"></a><em>父类哪些属性、方法被子类继承</em></h3><p>　　父类的public修饰符的属性和方法；protected修饰符的属性和方法；默认修饰符属性和方法被子类继承了，父类的private修饰符的属性和方法不能被子类继承。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><em>注意事项</em></h3><p>　　1. 子类最多只能继承一个父类(指直接继承)<br>　　2. java所有类都是Object类的子类 </p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h3 id="方法重载（overload）"><a href="#方法重载（overload）" class="headerlink" title="方法重载（overload）"></a><em>方法重载（overload）</em></h3><p>　　简单的说：方法重载就是在类的同一种功能的多种实现方式，具有相同的方法名，但方法的参数类型、个数、顺序不同。<strong>到底采用哪种方式，取决于调用者给出的参数</strong>。<br>　　<br>注意事项</p>
+<p>　　1. 方法返回类型可以不同(只是返回类型不一样，不能构成重载)<br>　　2. 方法的修饰符可以不同(只是控制访问修饰符不同，不能构成重载)</p>
+<h3 id="方法覆盖（override）"><a href="#方法覆盖（override）" class="headerlink" title="方法覆盖（override）"></a><em>方法覆盖（override）</em></h3><p>　简单的说：方法覆盖就是<strong>子类</strong>有一个方法，和<strong>父类</strong>的某个方法的名称、返回类型、参数一样，那么我们就说子类的这个方法覆盖了父类的那个方法。</p>
+<p>注意事项：</p>
+<p>　　1、子类的方法的返回类型，参数，方法名称，要和父类的返回类型，参数，方法名称完全一样，否则编译出错。<br>　　2、子类方法不能缩小父类方法的访问权限，可以放大访问权限。★★★★</p>
+<h3 id="多态概念"><a href="#多态概念" class="headerlink" title="多态概念"></a><em>多态概念</em></h3><p>　　所谓多态，就是指一个引用(类型)在不同情况下的多种状态。也可以理解成：多态是指通过指向父类的指针，来调用在不同子类中实现的方法。<br>　　实现多态有两种方式：1、继承；2、接口</p>
 
           
         
@@ -1450,337 +1916,6 @@ value changed to:10
 </li>
 </ul>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1]. <a href="http://www.jcodecraeer.com/a/chengxusheji/java/2012/0822/371.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/chengxusheji/java/2012/0822/371.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/29/[Java]Java集合/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Qian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.Qian's Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/29/[Java]Java集合/" itemprop="url">Java集合</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+08:00">
-                2016-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="集合框架–使用"><a href="#集合框架–使用" class="headerlink" title="集合框架–使用"></a>集合框架–使用</h2><p><img src="http://img.blog.csdn.net/20160416165357245" alt="这里写图片描述"></p>
-<h3 id="开发常用"><a href="#开发常用" class="headerlink" title="开发常用"></a><em>开发常用</em></h3><p>　　●　在实际开发过程中，比较常用的是Vector、Stack、ArrayList、LinkedList、HashMap、HashTable<br>　　●　集合类基本上在util包中</p>
-<h3 id="集合分类"><a href="#集合分类" class="headerlink" title="集合分类"></a><em>集合分类</em></h3><p>　　Java集合类主要有以下几种<br>　 　●　List结构的集合类：ArrayList、LinkedList、Vector、Stack<br>　 　●　Map结构的集合类：HashMap、HashTable<br>　 　●　Set结构的集合类：HashSet、TreeSet<br>　 　●　Queue结构的集合：Queue接口</p>
-<h2 id="List结构的集合类"><a href="#List结构的集合类" class="headerlink" title="List结构的集合类"></a>List结构的集合类</h2><h3 id="ArrayList类的使用-无同步性，线程不安全"><a href="#ArrayList类的使用-无同步性，线程不安全" class="headerlink" title="ArrayList类的使用(无同步性，线程不安全)"></a><em>ArrayList类的使用(无同步性，线程不安全)</em></h3><ul>
-<li>基于动态数组的数据结构，随机访问优于LinkedList<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class ArrayList</div><div class="line"></div><div class="line">1. 往list中插入元素 </div><div class="line">    ● boolean add(E e) 元素添加到列表的尾部 </div><div class="line">    ● void    add(int index, E element) 元素插入到列表的指定位置</div><div class="line">2. 返回列表中的元素数 </div><div class="line">    ● int size() 返回列表中的元素数 </div><div class="line">3. 如果此列表中没有元素，则返回 true </div><div class="line">    ● boolean isEmpty() </div><div class="line">4. 返回此列表中指定位置上的元素 </div><div class="line">    ● E get(int index) </div><div class="line">5. 用指定的元素替代此列表中指定位置上的元素,返回值是以前位于该位上的元素 </div><div class="line">    ● E set(int index, E element) </div><div class="line">6. 移除列表上的元素 </div><div class="line">    ● E remove(int index) 移除此列表中指定位置上的元素 </div><div class="line">    ● boolean remove(Object o) 移除此列表中首次出现的指定元素（如果存在） </div><div class="line">    ● protected void removeRange(int fromIndex, int toIndex) 移除列表中索引在 fromIndex（包括）和 toIndex（不包括）之间的所有元素。 </div><div class="line">    ● void clear() 移除列表中所有元素</div><div class="line">7. 查找元素 </div><div class="line">    ● contains(Object o) 判断list中是否含有指定元素 </div><div class="line">    ● int indexOf(Object o) 返回list中元素第一次出现的位置,若没有则返回-1 </div><div class="line">    ● int lastIndexOf(Object o) 返回arraylist中元素最后一次出现的位置,若没有则返回-1</div><div class="line">8. 返回包含此列表中所有元素的数组（按顺序），相当于数组API和collection API的桥梁,返回一个object的数组 </div><div class="line">    ● Object[] toArray()</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="LinkedList类的使用"><a href="#LinkedList类的使用" class="headerlink" title="LinkedList类的使用"></a><em>LinkedList类的使用</em></h3><ul>
-<li>基于链表的数据结构，新增add和删除remove操作优于ArrayList<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 将指定元素插入此列表的开头</div><div class="line">    ● void addFirst(E e) </div><div class="line">2. 将指定元素添加到此列表的结尾</div><div class="line">    ● void addLast(E e)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="Vector同理-线程安全具有同步性"><a href="#Vector同理-线程安全具有同步性" class="headerlink" title="Vector同理(线程安全具有同步性)"></a><em>Vector同理(线程安全具有同步性)</em></h3><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a><em>Stack</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 测试堆栈是否为空 </div><div class="line">    boolean empty() </div><div class="line">2. 查看堆栈顶部的对象，但不从堆栈中移除它 </div><div class="line">    E peek() </div><div class="line">3. 移除堆栈顶部的对象，并作为此函数的值返回该对象</div><div class="line">    E pop() </div><div class="line">4. 把项压入堆栈顶部</div><div class="line">    E push(E item) </div><div class="line">5. 返回对象在堆栈中的位置，以 1 为基数  </div><div class="line">    int search(Object o)</div></pre></td></tr></table></figure>
-<h3 id="ArrayList和Vector的区别"><a href="#ArrayList和Vector的区别" class="headerlink" title="ArrayList和Vector的区别"></a>ArrayList和Vector的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ArrayList和Vector的区别</div><div class="line">    ArrayList与Vector都是java的集合类，都可以用来存放java对象，这是他们的相同点，但是他们也有区别：</div><div class="line">1、同步性</div><div class="line">    Vector是线程同步的。这个类中的一些方法保证了Vector中的对象是线程安全的。而ArrayList则是线程异步的，因此ArrayList中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用ArrayList是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销。</div><div class="line">2、数据增长</div><div class="line">    从内部实现机制来讲ArrayList和Vector都是使用数组(Array)来控制集合中的对象。当你向这两种类型中增加元素的时候，如果元素的数目超出了内部数组目前的长度它们都需要扩展内部数组的长度，Vector缺省情况下自动增长原来一倍的数组长度，ArrayList是原来的50%，所以最后你获得的这个集合所占的空间总是比你实际需要的要大。所以如果你要在集合中保存大量的数据那么使用Vector有一些优势，因为你可以通过设置集合的初始化大小来避免不必要的资源开销。</div></pre></td></tr></table></figure>
-<h2 id="Map结构的集合类"><a href="#Map结构的集合类" class="headerlink" title="Map结构的集合类"></a>Map结构的集合类</h2><h3 id="HashMap（线程不同步），HashTable（线程同步）集合类"><a href="#HashMap（线程不同步），HashTable（线程同步）集合类" class="headerlink" title="HashMap（线程不同步），HashTable（线程同步）集合类"></a><em>HashMap（线程不同步），HashTable（线程同步）集合类</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">void clear() </div><div class="line">      从此映射中移除所有映射关系。 </div><div class="line">V get(Object key) </div><div class="line">      返回指定键所映射的值；如果对于该键来说，此映射不包含任何映射关系，则返回 null。 </div><div class="line">boolean isEmpty() </div><div class="line">      如果此映射不包含键-值映射关系，则返回 true。 </div><div class="line">V put(K key, V value) </div><div class="line">      在此映射中关联指定值与指定键。 </div><div class="line">V remove(Object key) </div><div class="line">      从此映射中移除指定键的映射关系（如果存在）。 </div><div class="line">int size() </div><div class="line">      返回此映射中的键-值映射关系数。</div></pre></td></tr></table></figure>
-<h3 id="Map遍历"><a href="#Map遍历" class="headerlink" title="Map遍历"></a><em>Map遍历</em></h3><pre><code>1. Map.Entry&lt;String, String&gt;的数据类型为键值对。
-
-2. map.entrySet(),返回类型为Set&lt;Entry&lt;String, String&gt;&gt; ，即map中非空元素组成的键值对Set集合，可以用图例（key1,value1）,(key2,value2)...(keyn,valuen)表示。
-
-3. Map.Entry&lt;String, String&gt;类型分别通过getKey()、getValue()方法取出键和值。
-
-4. 可以通过map.keySet()方法取出全部键的Set集合，从而通过map.get(Object key)方法取出值，即方法一。
-
-5. 可以通过map.value()得到Collection&lt;String&gt;集合，得到所有值。即方法四
-
-6、方法二中使用迭代器对数据遍历，类型是Map.Entry&lt;String, String&gt;，即仍旧是键值对，集合是map.entrySet().iterator()，比方法三麻烦。
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">  Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">  map.put(<span class="string">"1"</span>, <span class="string">"value1"</span>);</div><div class="line">  map.put(<span class="string">"2"</span>, <span class="string">"value2"</span>);</div><div class="line">  map.put(<span class="string">"3"</span>, <span class="string">"value3"</span>);</div><div class="line">  </div><div class="line">  <span class="comment">//第一种：普遍使用，二次取值</span></div><div class="line">  System.out.println(<span class="string">"通过Map.keySet遍历key和value："</span>);</div><div class="line">  <span class="keyword">for</span> (String key : map.keySet()) &#123;</div><div class="line">   System.out.println(<span class="string">"key= "</span>+ key + <span class="string">" and value= "</span> + map.get(key));</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//第二种</span></div><div class="line">  System.out.println(<span class="string">"通过Map.entrySet使用iterator遍历key和value："</span>);</div><div class="line">  Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();</div><div class="line">  <span class="keyword">while</span> (it.hasNext()) &#123;</div><div class="line">   Map.Entry&lt;String, String&gt; entry = it.next();</div><div class="line">   System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">//第三种：推荐，尤其是容量大时</span></div><div class="line">  System.out.println(<span class="string">"通过Map.entrySet遍历key和value"</span>);</div><div class="line">  <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</div><div class="line">   System.out.println(<span class="string">"key= "</span> + entry.getKey() + <span class="string">" and value= "</span> + entry.getValue());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//第四种</span></div><div class="line">  System.out.println(<span class="string">"通过Map.values()遍历所有的value，但不能遍历key"</span>);</div><div class="line">  <span class="keyword">for</span> (String v : map.values()) &#123;</div><div class="line">   System.out.println(<span class="string">"value= "</span> + v);</div><div class="line">  &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<h3 id="HashMap和Hashtable集合类的区别"><a href="#HashMap和Hashtable集合类的区别" class="headerlink" title="HashMap和Hashtable集合类的区别"></a><em>HashMap和Hashtable集合类的区别</em></h3><pre><code>HashMap与Hashtable都是java的集合类，都可以用来存放java对象，这是他们的相同点，但是他们也有区别。
-1、历史原因
-    Hashtable是基于陈旧的Dictionary类的，HashMap是java 1.2引进的Map接口的一个实现。
-2、同步性
-    Hashtable是线程同步的。这个类中的一些方法保证了Hashtable中的对象是线程安全的。而HashMap则是线程异步的，因此HashMap中的对象并不是线程安全的。因为同步的要求会影响执行的效率，所以如果你不需要线程安全的集合那么使用HashMap是一个很好的选择，这样可以避免由于同步带来的不必要的性能开销，从而提高效率。
-3、值
-    HashMap可以让你将空值作为一个表的条目的key或value但是Hashtable是不能放入空值的(null)
-</code></pre><h2 id="List、Map集合框架的选择★（常用）★★★★"><a href="#List、Map集合框架的选择★（常用）★★★★" class="headerlink" title="List、Map集合框架的选择★（常用）★★★★"></a>List、Map集合框架的选择★（常用）★★★★</h2><pre><code>如何选用集合类？
-1、要求线程安全，使用Vector、Hashtable
-2、不要求线程安全，使用ArrayList,LinkedList,HashMap
-3、要求key和value键值，则使用HashMap,Hashtable
-4、数据量很大，又要线程安全，则使用Vector
-</code></pre><h2 id="Set结构的集合类"><a href="#Set结构的集合类" class="headerlink" title="Set结构的集合类"></a>Set结构的集合类</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a><em>用法</em></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">#添加</div><div class="line">add(Object)</div><div class="line"></div><div class="line">#遍历</div><div class="line">Iterator&lt;String&gt; iterator = hashSet.iterator();</div><div class="line">while(iterator.hasNext())&#123;</div><div class="line">	System.out.println(iterator.next());</div><div class="line">&#125;</div><div class="line"></div><div class="line">#删除元素</div><div class="line">删除一个元素 remove(Object)</div><div class="line">删除所有元素 clear()</div><div class="line"></div><div class="line">#包含</div><div class="line">contain(Object)</div></pre></td></tr></table></figure>
-<h3 id="HashSet与TreeSet区别"><a href="#HashSet与TreeSet区别" class="headerlink" title="HashSet与TreeSet区别"></a><em>HashSet与TreeSet区别</em></h3><ul>
-<li>HashSet随机存储对象，不能保证先插入的元素出现在前面；TreeSet中元素默认按照元素自然序进行排列，使用compareTo()方法自定义排序</li>
-<li>HashSet内部依靠HashMap，而TreeSet依靠TreeMap</li>
-<li>HashSet可以存储空对象，但TreeSet不允许</li>
-<li>性能，HashSet对基本操作add，remove，size有常数的时间复杂度，TreeSet有log(n)的时间复杂度</li>
-<li>TreeSet比起HashSet具有更多丰富的功能，例如pollFirst(),pollLast(),first(),last(),celling(),lower()等</li>
-<li>比较，HashSet使用equals()方法进行比较，而TreeSet使用compareTo()方法获得排列顺序</li>
-</ul>
-<h3 id="HashSet与TreeSet相同点"><a href="#HashSet与TreeSet相同点" class="headerlink" title="HashSet与TreeSet相同点"></a><em>HashSet与TreeSet相同点</em></h3><ul>
-<li>只能存储独一无二的元素，不允许任何重复的元素</li>
-<li>不是线程安全</li>
-<li>Clone方法有相同的实现技术</li>
-</ul>
-<h2 id="Queue结构的集合"><a href="#Queue结构的集合" class="headerlink" title="Queue结构的集合"></a>Queue结构的集合</h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/29/[Java]Java面向对象编程的四大特征/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Qian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.Qian's Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/29/[Java]Java面向对象编程的四大特征/" itemprop="url">Java面向对象编程的四大特征</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-29T00:00:00+08:00">
-                2016-07-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h2><p>　　我们在前面去定义一个类时候，实际上就是把一类事物的共有的属性和行为提取出来，形成一个物理模型(模版)。这种研究问题的方法称为抽象。</p>
-<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>　　封装就是把抽象出来的数据和对数据的操作封装在一起。数据被保护在内部，程序的其它部分只有通过被授权的操作(成员方法)，才能对数据进行操作。</p>
-<p>###<em>访问控制修饰符</em><br><img src="http://img.blog.csdn.net/20160416152720709" alt="这里写图片描述"></p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>　　继承可以解决代码复用，让我们的编程更加靠近人类思维。(变量)和方法时，可以从这些类中抽象出父类(比如刚才的Student)，在父类中定义这些相同的当多个类存在相同的属性属性和方法，所有的子类不需要重新定义这些属性和方法，只需要继承父类,这样子类就会自动拥有父类定义的某些属性和方法。
-　　</p>
-<h3 id="父类哪些属性、方法被子类继承"><a href="#父类哪些属性、方法被子类继承" class="headerlink" title="父类哪些属性、方法被子类继承"></a><em>父类哪些属性、方法被子类继承</em></h3><p>　　父类的public修饰符的属性和方法；protected修饰符的属性和方法；默认修饰符属性和方法被子类继承了，父类的private修饰符的属性和方法不能被子类继承。</p>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a><em>注意事项</em></h3><p>　　1. 子类最多只能继承一个父类(指直接继承)<br>　　2. java所有类都是Object类的子类 </p>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><h3 id="方法重载（overload）"><a href="#方法重载（overload）" class="headerlink" title="方法重载（overload）"></a><em>方法重载（overload）</em></h3><p>　　简单的说：方法重载就是在类的同一种功能的多种实现方式，具有相同的方法名，但方法的参数类型、个数、顺序不同。<strong>到底采用哪种方式，取决于调用者给出的参数</strong>。<br>　　<br>注意事项</p>
-<p>　　1. 方法返回类型可以不同(只是返回类型不一样，不能构成重载)<br>　　2. 方法的修饰符可以不同(只是控制访问修饰符不同，不能构成重载)</p>
-<h3 id="方法覆盖（override）"><a href="#方法覆盖（override）" class="headerlink" title="方法覆盖（override）"></a><em>方法覆盖（override）</em></h3><p>　简单的说：方法覆盖就是<strong>子类</strong>有一个方法，和<strong>父类</strong>的某个方法的名称、返回类型、参数一样，那么我们就说子类的这个方法覆盖了父类的那个方法。</p>
-<p>注意事项：</p>
-<p>　　1、子类的方法的返回类型，参数，方法名称，要和父类的返回类型，参数，方法名称完全一样，否则编译出错。<br>　　2、子类方法不能缩小父类方法的访问权限，可以放大访问权限。★★★★</p>
-<h3 id="多态概念"><a href="#多态概念" class="headerlink" title="多态概念"></a><em>多态概念</em></h3><p>　　所谓多态，就是指一个引用(类型)在不同情况下的多种状态。也可以理解成：多态是指通过指向父类的指针，来调用在不同子类中实现的方法。<br>　　实现多态有两种方式：1、继承；2、接口</p>
 
           
         
@@ -3117,470 +3252,6 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/14/[Servlet]JSP笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Qian">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.Qian's Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/14/[Servlet]JSP笔记/" itemprop="url">JSP笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-14T11:09:00+08:00">
-                2016-07-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Servlet/" itemprop="url" rel="index">
-                    <span itemprop="name">Servlet</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><p><strong><em>Java片段</em></strong>  </p>
-<pre><code>&lt;%!  %&gt; jsp声明，在这里面声明的变量是全局变量，也可以函数定义
-&lt;%  %&gt; Java片段，在这里面声明的变量是局部变量，
-注释 &lt;%-- --%&gt;，&lt;%// % &gt;，&lt;%/* */% &gt;
-&lt;%=  %&gt; 表达式
-</code></pre><h2 id="JSP简介"><a href="#JSP简介" class="headerlink" title="JSP简介"></a>JSP简介</h2><ul>
-<li>在web开发过程中，发现servlet做界面比较麻烦（out.println），于是又有一个新的技术JSP</li>
-<li>JSP（Java Servlet Page）运行在服务器的语言，响应客户端请求，动态生成网页的技术</li>
-</ul>
-<h2 id="JSP原理"><a href="#JSP原理" class="headerlink" title="JSP原理"></a>JSP原理</h2><p><img src="http://i.imgur.com/WeHcjuc.png" alt=""></p>
-<ul>
-<li>如果是第一次访问jsp文件，web服务器就会把showTime.jsp <strong><em>翻译</em></strong> 成一个showTime_jsp.java（IDEA中showTIme_jsp.java的目录：<pre>C:\Users\Asus\.IntelliJIdea15\system\tomcat\Unnamed_JSP_Study\work\Catalina\localhost\JSP_Study\org\apache\jsp\showTime_jsp.java）</pre></li>
-<li><font color="red">再将其编译成一个showTime_jsp.class，并把class加载到内存</font></li>
-<li>然后创建一个该Servlet的实例，调用其jspInit方法，该方法在Servlet生命周期中只被执行一次，并调用实例的jspService()方法</li>
-<li>如果是第二次或者以后，就直接访问内存中的实例的jspService()方法。JSP也是单例，所以第一次访问JSP网站速度比较慢，后面访问JSP的速度就变快了</li>
-<li>如果某个JSP文件被修改了，就相当于重新访问JSP（相当于第一次访问）</li>
-</ul>
-<h2 id="JSP显示页面"><a href="#JSP显示页面" class="headerlink" title="JSP显示页面"></a>JSP显示页面</h2><p>Jsp页面中的html排版标签是如何被发送到客户端的？答：JSP中被翻译成Servlet时，HTML标签会<font color="red"><strong><em>以out.write()的形式打印出来</em></strong>，</font>例如：</p>
-<pre><code>out.write(&quot;&lt;table border=1&gt;\r\n&quot;);
-out.write(&quot;&lt;tr&gt;&lt;td&gt;apple&lt;/td&gt;&lt;td&gt;melon&lt;/td&gt;&lt;td&gt;orange&lt;/td&gt;&lt;/tr&gt;\r\n&quot;);
-out.write(&quot;&lt;tr&gt;&lt;td&gt;apple&lt;/td&gt;&lt;td&gt;melon&lt;/td&gt;&lt;td&gt;orange&lt;/td&gt;&lt;/tr&gt;\r\n&quot;);
-out.write(&quot;&lt;tr&gt;&lt;td&gt;apple&lt;/td&gt;&lt;td&gt;melon&lt;/td&gt;&lt;td&gt;orange&lt;/td&gt;&lt;/tr&gt;\r\n&quot;);
-out.write(&quot;&lt;tr&gt;&lt;td&gt;apple&lt;/td&gt;&lt;td&gt;melon&lt;/td&gt;&lt;td&gt;orange&lt;/td&gt;&lt;/tr&gt;\r\n&quot;);
-out.write(&quot;&lt;/table&gt;\r\n&quot;);
-</code></pre><h2 id="JSP中的Java片段"><a href="#JSP中的Java片段" class="headerlink" title="JSP中的Java片段"></a>JSP中的Java片段</h2><p>Jsp页面中的java代码，服务器是如何执行的？比如JSP中的Java代码:</p>
-<pre><code>&lt;%
-    int i=90;
-    int j=i+90;
-%&gt;
-&lt;h1&gt;测试.&lt;/h1&gt;
-&lt;%
-    out.println(&quot;j=&quot;+j);
-%&gt;
-</code></pre><p>  当被翻译成Servlet后，格式如下</p>
-<pre><code>public void _jspService(HttpServletRequest request, HttpServletResponse response)
-    throws java.io.IOException, ServletException {
-    int i=90;
-    int j=i+90;
-    out.println(&quot;j=&quot;+j);
-}
-</code></pre><ol>
-<li>就是有多个&lt;% %&gt; 其实相当于是一个大的 &lt;% %&gt;，所有代码会<strong><em>放在一个_jspService函数中</em></strong></li>
-<li>在&lt;% %&gt; 中定义的变量，会成为service函数的局部变量.</li>
-</ol>
-<h2 id="JSP九大内置对象"><a href="#JSP九大内置对象" class="headerlink" title="JSP九大内置对象"></a>JSP九大内置对象</h2><p>Web服务器在调用jsp时，会给jsp提供一些内置对象，<strong><em>这些内置对象无需创建可直接使用</em></strong>。前五个较常用，分别与Servlet中的几个对象对应</p>
-<table>
-<thead>
-<tr>
-<th>对象名</th>
-<th>类型</th>
-<th>作用域</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>request：请求对象</td>
-<td>javax.servlet.ServletRequest的子类</td>
-<td>Request</td>
-</tr>
-<tr>
-<td>response：响应对象</td>
-<td>javax.servlet.ServletResponse的子类</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>pageContext：页面上下文对象，也是一个域对象，可以setAttribute，其作用范围只是本页面</td>
-<td>javax.servlet.jsp.PageContext</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>session：会话对象，用于保存用户信息，跟踪用户行为</td>
-<td>javax.servlet.http.HttpSession</td>
-<td>Session</td>
-</tr>
-<tr>
-<td>application：应用程序对象，多个用户共享该对象，可以做计数器</td>
-<td>javax.servlet.ServletContext</td>
-<td>Application</td>
-</tr>
-<tr>
-<td>out：输出对象</td>
-<td>javax.servlet.jsp.JspWriter</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>config：配置对象</td>
-<td>javax.servlet.ServletConfig</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>page：页面对象，代表JSP实例本身，使用较少</td>
-<td>java.lang.Object</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>exception：异常对象</td>
-<td>java.lang.Throwable</td>
-<td>Page</td>
-</tr>
-</tbody>
-</table>
-<h2 id="JSP的语法"><a href="#JSP的语法" class="headerlink" title="JSP的语法"></a>JSP的语法</h2><h3 id="指令元素"><a href="#指令元素" class="headerlink" title="指令元素"></a>指令元素</h3><p>　　概念: 用于从jsp发送一个信息到容器，比如设置全局变量,文字编码,引入包</p>
-<h4 id="①page指令"><a href="#①page指令" class="headerlink" title="①page指令"></a>①page指令</h4><pre><code>&lt;%@ page contentType=&quot;text/html;charset=utf-8&quot;%&gt;    
-</code></pre><p><strong><em>常用的属性</em></strong>  </p>
-<pre><code>language = &quot;xx&quot;，jsp中嵌入代码语言，通常是java
-import = &quot;包.类名&quot;，在jsp页面引入类
-errorPage=&quot;err.jsp&quot;，当JSP页面出现错误时，自动跳转到指定页面
-
-contentType 和 pageEncoding的区别：
-    contentType = &quot;text/html;charset=utf-8&quot; 指定网页以什么方式显示页面
-    pageEncoding=&quot;utf-8&quot; 指定Servlet引擎以什么方法翻译jsp-&gt;servlet并指定网页以什么方式显示页面
-</code></pre><h4 id="②include指令"><a href="#②include指令" class="headerlink" title="②include指令"></a>②include指令</h4><pre>
-&lt;%@ include file="文件路径" %&gt;
-</pre>
-
-<ul>
-<li>该指令用于引入一个文件（通常是JSP文件），JSP引擎会把两个JSP文件翻译成一个Servlet文件，因此也称为静态引入</li>
-<li>被引入的JSP文件，只需保留page指令即可，html，body等均可省略★★★</li>
-</ul>
-<h4 id="③taglib指令"><a href="#③taglib指令" class="headerlink" title="③taglib指令"></a>③taglib指令</h4><p>　　允许在JSP页面使用自定义的标签</p>
-<pre><code>&lt;mytag:yourTag num1 = &quot;123&quot; /&gt; 
-</code></pre><h3 id="脚本元素-理解为脚本片段"><a href="#脚本元素-理解为脚本片段" class="headerlink" title="脚本元素(理解为脚本片段)"></a>脚本元素(理解为脚本片段)</h3><h4 id="java片段"><a href="#java片段" class="headerlink" title="java片段"></a>java片段</h4><pre><code>&lt;% java 代码 %&gt;
-</code></pre><h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><pre><code>&lt;%=表达式 %&gt;，例如&lt;%=i*78-23%&gt;
-</code></pre><h4 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h4><p>全局变量</p>
-<pre><code>&lt;%! int i=90; %&gt;
-</code></pre><p>局部变量</p>
-<pre><code>&lt;% int i=90;%&gt;
-</code></pre><h4 id="定义函数★★★★★"><a href="#定义函数★★★★★" class="headerlink" title="定义函数★★★★★"></a>定义函数★★★★★</h4><pre><code>&lt;%!
-    public int getResult(int a,int b){
-        return a+b;
-    }
-%&gt;
-注意：函数不能在&lt;% %&gt; 定义.
-</code></pre><h3 id="动作元素"><a href="#动作元素" class="headerlink" title="动作元素"></a>动作元素</h3><p><strong><em>jsp:forward</em></strong></p>
-<pre><code>&lt;jsp:forword file=&quot;xxx&quot;&gt;&lt;/jsp:forword&gt;页面跳转
-</code></pre><p>　　在开发JSP的过程中，我们通常把JSP放入WEB-INF目录，目的是为了防止用户直接访问这些jsp文件.<br>　　在WebRoot下我们有一个入口页面,它的主要转发</p>
-<pre><code>&lt;jsp:forword file=&quot;/WEB-INF/xx.jsp&quot;&gt;&lt;/jsp:forword&gt;
-</code></pre><p><strong><em>jsp:incluce</em></strong>  </p>
-<pre><code>&lt;%@ include file=&quot;&quot;%&gt; 静态引入
-&lt;jsp:incluce  file=&quot;&quot;&gt;&lt;/jsp:incule&gt; 动态引入
-相同点： 把一个文件引入到另外一个文件
-区别：
-    静态引入，把两个jsp翻译成一个Servlet,所以被引入的文件不要包含&lt;body&gt;&lt;html&gt;
-    动态引入，把两个jsp分别翻译,所以被引入的jsp包含有&lt;html&gt;&lt;body&gt;也可以
-</code></pre><h2 id="EL表达式语言"><a href="#EL表达式语言" class="headerlink" title="EL表达式语言"></a>EL表达式语言</h2><ul>
-<li>EL表达式语言可以<strong><em>方便读取应用程序中的数据</em></strong>，JSP2.0以上版本即使没有JSTL（JSP标准标签库）也能使用EL</li>
-<li>EL表达式以 <code>${</code> 开头，并以 <code>}</code> 结束，如${x + y}，从左向右取值，返回结果类型为String</li>
-<li>EL表达式写在JSP的HTML代码中，而不能写在”&lt;%%&gt;”引起的JSP脚本中</li>
-<li><font color="red"><strong>使用 <code>[]</code> 和 <code>.</code> 运算符来访问对象的属性，形式可以是${object.peopertyName}或${object[“peopertyName”]}</strong></font>
-
-
-</li>
-</ul>
-<h3 id="EL内置对象"><a href="#EL内置对象" class="headerlink" title="EL内置对象"></a>EL内置对象</h3><p>我们知道jsp有九个内置对象，而EL表达式有11个对象，这些内置对象无需创建可直接使用</p>
-<h4 id="pageContext"><a href="#pageContext" class="headerlink" title="pageContext"></a>pageContext</h4><p>pageContext对象表示当前JSP页面的javax.servlet.jsp.PageContext，包含了9大JSP内置对象</p>
-<table>
-<thead>
-<tr>
-<th>对象名</th>
-<th>类型</th>
-<th>作用域</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>request：请求对象</td>
-<td>javax.servlet.ServletRequest的子类</td>
-<td>Request</td>
-</tr>
-<tr>
-<td>response：响应对象</td>
-<td>javax.servlet.ServletResponse的子类</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>pageContext：页面上下文对象，也是一个域对象，可以setAttribute，其作用范围只是本页面</td>
-<td>javax.servlet.jsp.PageContext</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>session：会话对象，用于保存用户信息，跟踪用户行为</td>
-<td>javax.servlet.http.HttpSession</td>
-<td>Session</td>
-</tr>
-<tr>
-<td>application：应用程序对象，多个用户共享该对象，可以做计数器</td>
-<td>javax.servlet.ServletContext</td>
-<td>Application</td>
-</tr>
-<tr>
-<td>out：输出对象</td>
-<td>javax.servlet.jsp.JspWriter</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>config：配置对象</td>
-<td>javax.servlet.ServletConfig</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>page：页面对象，代表JSP实例本身，使用较少</td>
-<td>java.lang.Object</td>
-<td>Page</td>
-</tr>
-<tr>
-<td>exception：异常对象</td>
-<td>java.lang.Throwable</td>
-<td>Page</td>
-</tr>
-</tbody>
-</table>
-<p>例：获得客户端IP</p>
-<pre><code>${pageContext.request.remoteAddr}
-</code></pre><h4 id="initParam"><a href="#initParam" class="headerlink" title="initParam"></a>initParam</h4><p>包含所有初始化参数的Map，可以获取初始化参数</p>
-<p>例，设置初始化参数</p>
-<pre><code>&lt;context-param&gt;
-    &lt;param-name&gt;encoding&lt;/param-name&gt;
-    &lt;param-value&gt;utf-8&lt;/param-value&gt;
-&lt;/context-param&gt;
-</code></pre><p>获得初始化参数</p>
-<pre><code>${initParam.encoding}
-</code></pre><h4 id="param"><a href="#param" class="headerlink" title="param"></a>param</h4><p>包含所有参数的Map，可以获取参数，返回String</p>
-<p>例：url</p>
-<pre><code>http://localhost:8080/SpringMVC_study/?name=xxx
-</code></pre><p>获得参数</p>
-<pre><code>${param.name}    
-</code></pre><h4 id="paramValues"><a href="#paramValues" class="headerlink" title="paramValues"></a>paramValues</h4><p>包含所有参数的Map，可获取参数数组，返回String[]</p>
-<p>例：请求url</p>
-<pre><code>http://localhost:8080/SpringMVC_study/?name=aaa&amp;name=bbb
-</code></pre><p>提交的参数name有多个值{“aaa”,”bbb”}，使用param只能获取第一个值，二使用paramValues能够获得其他的值</p>
-<pre><code>${paramValues.name[0]}
-${paramValues.name[1]}
-</code></pre><h4 id="header"><a href="#header" class="headerlink" title="header"></a>header</h4><p>包含所有头信息的Map，可以获取头信息</p>
-<p>例：获得请求主机</p>
-<pre><code>${header.host}
-</code></pre><h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><p>包含所有Cookie的Map，key为Cookie的name</p>
-<pre><code>${cookie.JSESSIONID.value}
-</code></pre><h4 id="applicationScope，sessionScope，requestScope，pageScope"><a href="#applicationScope，sessionScope，requestScope，pageScope" class="headerlink" title="applicationScope，sessionScope，requestScope，pageScope"></a>applicationScope，sessionScope，requestScope，pageScope</h4><p>分别是包含application，session，request，page作用域变量的Map</p>
-<p>以requestScope为例：</p>
-<p>使用<jsp:usebean id="person" class="com.jsp.bean.Person">声明person对象后，${pageScope.person.age}将输出person的age属性，useBean域默认的作用域为request</jsp:usebean></p>
-<p>若输出session域中的变量，声明使<jsp:usebean id="person" class="com.jsp.bean.Person" scope="session"></jsp:usebean></p>
-<h2 id="JSTL"><a href="#JSTL" class="headerlink" title="JSTL"></a>JSTL</h2><p>JSP标准标签库，用来解决遍历map或集合，格式化数字和日期等常见问题</p>
-<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;jstl&lt;/groupId&gt;
-    &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-    &lt;version&gt;1.2&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><h3 id="JSTL核心标签库"><a href="#JSTL核心标签库" class="headerlink" title="JSTL核心标签库"></a>JSTL核心标签库</h3><p>JSTL 核心标签库标签共有13个，功能上分为4类：</p>
-<ol>
-<li>表达式控制标签：out、set、remove、catch</li>
-<li>流程控制标签：if、choose、when、otherwise</li>
-<li>循环标签：forEach、forTokens</li>
-<li>URL操作标签：import、url、redirect</li>
-</ol>
-<h3 id="JSTL核心库"><a href="#JSTL核心库" class="headerlink" title="JSTL核心库"></a>JSTL核心库</h3><p><font color="red"><strong><em>使用标签时，一定要在jsp文件头加入以下代码：</em></strong></font></p>
-
-<pre><code>&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;
-</code></pre><h3 id="完整JSTL标签使用"><a href="#完整JSTL标签使用" class="headerlink" title="完整JSTL标签使用"></a>完整JSTL标签使用</h3><p><a href="http://www.cnblogs.com/lihuiyy/archive/2012/02/24/2366806.html" target="_blank" rel="external">http://www.cnblogs.com/lihuiyy/archive/2012/02/24/2366806.html</a></p>
-<h3 id="遍历行为：-lt-c-forEach-gt"><a href="#遍历行为：-lt-c-forEach-gt" class="headerlink" title="遍历行为：&lt;c:forEach&gt;"></a>遍历行为：&lt;c:forEach&gt;</h3><p>语法：<br>&lt;c:forEach var=”name” items=”Collection” varStatus=”statusName” begin=”begin” end=”end” step=”step”&gt;&lt;/c:forEach&gt;</p>
-<p>该标签根据循环条件遍历集合 Collection 中的元素。 var 用于存储从集合中取出的元素；items 指定要遍历的集合；</p>
-<p><strong><em>遍历list</em></strong></p>
-<pre>
-&lt;%
-    List a=new ArrayList();
-    a.add("贝贝");
-    a.add("晶晶");
-    a.add("欢欢");
-    a.add("莹莹");
-    a.add("妮妮");
-    request.setAttribute("a",a);
-%>
-
-<font color="red">&lt;c:forEach var="fuwa" items="${a}">
-    &nbsp;&lt;c:out value="${fuwa}"/>&lt;br>
-&lt;/c:forEach></font>
-</pre>
-
-<p><strong><em>遍历Map</em></strong></p>
-<pre><code>&lt;%
-    Map&lt;String, String&gt; capitals = new HashMap&lt;String,String&gt;();
-    capitals.put(&quot;Indonesia&quot;,&quot;Jakarta&quot;);
-    capitals.put(&quot;Malaysia&quot;,&quot;Kuala Lumpur&quot;);
-    capitals.put(&quot;Thailand&quot;,&quot;Bangkok&quot;);
-    request.setAttribute(&quot;capitals&quot;,capitals);
-%&gt;
-
-&lt;c:forEach var=&quot;capital&quot; items=&quot;${capitals}&quot;&gt;
-    ${capital.key} ${capital.value} &lt;br/&gt;
-&lt;/c:forEach&gt;
-</code></pre><p><strong><em>forEach嵌套</em></strong></p>
-<pre><code>&lt;%
-    Map&lt;String, String[]&gt; bigCities = new HashMap&lt;String,String[]&gt;();
-    bigCities.put(&quot;Australia&quot;,new String[]{&quot;Sydney&quot;,&quot;Melbourne&quot;,&quot;Perth&quot;});
-    bigCities.put(&quot;New Zealand&quot;,new String[]{&quot;Auckland&quot;,&quot;Christchurch&quot;,&quot;Wellington&quot;});
-    bigCities.put(&quot;Indonesia&quot;,new String[]{&quot;Jakarta&quot;,&quot;Surabaya&quot;,&quot;Medan&quot;});
-    request.setAttribute(&quot;bigCities&quot;,bigCities);
-%&gt;
-
-&lt;c:forEach var=&quot;mapItem&quot; items=&quot;${bigCities}&quot;&gt;
-    ${mapItem.key} :
-        &lt;c:forEach var=&quot;city&quot; items=&quot;${mapItem.value}&quot;&gt;
-            ${city}
-        &lt;/c:forEach&gt;
-    &lt;br/&gt;
-&lt;/c:forEach&gt;
-</code></pre><h3 id="格式化日期和时间"><a href="#格式化日期和时间" class="headerlink" title="格式化日期和时间"></a>格式化日期和时间</h3><pre><code>&lt;b&gt;格式化日期&lt;/b&gt;&lt;br/&gt;
-default：&lt;fmt:formatDate value=&quot;${now}&quot;/&gt; &lt;br/&gt;
-short：&lt;fmt:formatDate value=&quot;${now}&quot; dateStyle=&quot;short&quot;/&gt; &lt;br/&gt;
-medium：&lt;fmt:formatDate value=&quot;${now}&quot; dateStyle=&quot;medium&quot;/&gt; &lt;br/&gt;
-long：&lt;fmt:formatDate value=&quot;${now}&quot; dateStyle=&quot;long&quot;/&gt; &lt;br/&gt;
-full：&lt;fmt:formatDate value=&quot;${now}&quot; dateStyle=&quot;full&quot;/&gt; &lt;br/&gt;&lt;br/&gt;
-
-&lt;b&gt;格式化时间&lt;/b&gt;&lt;/br/&gt;
-default：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;time&quot;/&gt; &lt;br/&gt;
-short：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;time&quot; timeStyle=&quot;short&quot;/&gt; &lt;br/&gt;
-medium：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;time&quot; timeStyle=&quot;medium&quot;/&gt; &lt;br/&gt;
-long：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;time&quot; timeStyle=&quot;long&quot;/&gt; &lt;br/&gt;
-full：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;time&quot; timeStyle=&quot;full&quot;/&gt; &lt;br/&gt;&lt;br/&gt;
-
-&lt;b&gt;格式化日期和时间&lt;/b&gt;&lt;/br/&gt;
-default：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot;/&gt; &lt;br/&gt;
-short：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; timeStyle=&quot;short&quot;/&gt; &lt;br/&gt;
-medium：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; timeStyle=&quot;medium&quot;/&gt; &lt;br/&gt;
-long：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; timeStyle=&quot;long&quot;/&gt; &lt;br/&gt;
-full：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; timeStyle=&quot;full&quot;/&gt; &lt;br/&gt;&lt;br/&gt;
-
-&lt;b&gt;定制格式化日期和时间&lt;/b&gt;&lt;/br/&gt;
-&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;/&gt; &lt;br/&gt;
-&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; pattern=&quot;yy/MM/dd HH:mm:ss&quot;/&gt; &lt;br/&gt;
-</code></pre><p>浏览器显示：</p>
-<p><img src="http://i.imgur.com/4NLTcOv.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -3631,7 +3302,7 @@ full：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; timeSty
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-count">139</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -3653,7 +3324,7 @@ full：&lt;fmt:formatDate value=&quot;${now}&quot; type=&quot;both&quot; timeSty
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
