@@ -103,7 +103,7 @@ NIO是什么Java NIO(New IO)是一个可以替代标准Java IO API的IO API（�
 <meta property="og:image" content="http://i.imgur.com/5gzGOOT.png">
 <meta property="og:image" content="http://i.imgur.com/oP8lagL.png">
 <meta property="og:image" content="http://i.imgur.com/LXlI8Ux.png">
-<meta property="og:updated_time" content="2017-04-01T09:57:46.660Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java NIO 系列教程">
 <meta name="twitter:description" content="转自 http://ifeve.com/java-nio-all/
@@ -447,7 +447,7 @@ aFile.close();
 <p>当向buffer写入数据时，buffer会记录下写了多少数据。一旦要读取数据，需要<strong>通过flip()方法将Buffer从写模式切换到读模式</strong>。在读模式下，可以读取之前写入到buffer的所有数据。(不能反过来)</p>
 <p>一旦读完了所有的数据，就需要<strong>清空缓冲区，让它可以再次被写入</strong>。有两种方式能清空缓冲区：调用clear()或compact()方法。clear()方法会清空整个缓冲区。compact()方法只会清除已经读过的数据。任何未读的数据都被移到缓冲区的起始处，新写入的数据将放到缓冲区未读数据的后面。</p>
 <p>下面是一个使用Buffer的例子：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">RandomAccessFile</span> aFile = new RandomAccessFile(<span class="string">"data/nio-data.txt"</span>, <span class="string">"rw"</span>)<span class="comment">;</span></div><div class="line"><span class="symbol">FileChannel</span> inChannel = aFile.getChannel()<span class="comment">;</span></div><div class="line">//create <span class="keyword">buffer </span>with capacity of <span class="number">48</span> <span class="keyword">bytes</span></div><div class="line"><span class="keyword">ByteBuffer </span><span class="keyword">buf </span>= <span class="keyword">ByteBuffer.allocate(48);</span></div><div class="line"><span class="symbol">int</span> <span class="keyword">bytesRead </span>= inChannel.read(<span class="keyword">buf); </span>//read into <span class="keyword">buffer.</span></div><div class="line"><span class="symbol">while</span> (<span class="keyword">bytesRead </span>!= -<span class="number">1</span>) &#123;</div><div class="line">  <span class="keyword">buf.flip(); </span> //make <span class="keyword">buffer </span>ready for read</div><div class="line">  <span class="meta">while</span>(<span class="keyword">buf.hasRemaining())&#123;</span></div><div class="line">      System.out.print((char) <span class="keyword">buf.get()); </span>// read <span class="number">1</span> <span class="keyword">byte </span>at a time</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">buf.clear(); </span>//make <span class="keyword">buffer </span>ready for writing</div><div class="line">  <span class="keyword">bytesRead </span>= inChannel.read(<span class="keyword">buf);</span></div><div class="line">&#125;</div><div class="line"><span class="symbol">aFile.close</span>()<span class="comment">;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">RandomAccessFile aFile = new RandomAccessFile(&quot;data/nio-data.txt&quot;, &quot;rw&quot;);</div><div class="line">FileChannel inChannel = aFile.getChannel();</div><div class="line">//create buffer with capacity of 48 bytes</div><div class="line">ByteBuffer buf = ByteBuffer.allocate(48);</div><div class="line">int bytesRead = inChannel.read(buf); //read into buffer.</div><div class="line">while (bytesRead != -1) &#123;</div><div class="line">  buf.flip();  //make buffer ready for read</div><div class="line">  while(buf.hasRemaining())&#123;</div><div class="line">      System.out.print((char) buf.get()); // read 1 byte at a time</div><div class="line">  &#125;</div><div class="line">  buf.clear(); //make buffer ready for writing</div><div class="line">  bytesRead = inChannel.read(buf);</div><div class="line">&#125;</div><div class="line">aFile.close();</div></pre></td></tr></table></figure>
 <h3 id="Buffer的capacity-position和limit"><a href="#Buffer的capacity-position和limit" class="headerlink" title="Buffer的capacity,position和limit"></a>Buffer的capacity,position和limit</h3><p>缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存。</p>
 <p>为了理解Buffer的工作原理，需要熟悉它的三个属性：</p>
 <ul>
@@ -480,17 +480,17 @@ aFile.close();
 <p>如你所见，这些Buffer类型代表了不同的数据类型。换句话说，就是可以通过char，short，int，long，float 或 double类型来操作缓冲区中的字节。</p>
 <p>MappedByteBuffer 有些特别，在涉及它的专门章节中再讲。</p>
 <h3 id="Buffer的分配"><a href="#Buffer的分配" class="headerlink" title="Buffer的分配"></a>Buffer的分配</h3><p>要想获得一个Buffer对象首先要进行分配。 每一个Buffer类都有一个allocate方法</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//分配<span class="number">48</span>字节capacity的<span class="keyword">ByteBuffer的</span></div><div class="line"><span class="keyword">ByteBuffer </span><span class="keyword">buf </span>= <span class="keyword">ByteBuffer.allocate(48);</span></div></pre></td></tr></table></figure>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//分配一个可存储1024个字符的CharBuffer</span></div><div class="line">CharBuffer buf = CharBuffer.allocate<span class="comment">(1024)</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//分配48字节capacity的ByteBuffer的</div><div class="line">ByteBuffer buf = ByteBuffer.allocate(48);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//分配一个可存储1024个字符的CharBuffer</div><div class="line">CharBuffer buf = CharBuffer.allocate(1024);</div></pre></td></tr></table></figure>
 <h3 id="向Buffer中写数据"><a href="#向Buffer中写数据" class="headerlink" title="向Buffer中写数据"></a>向Buffer中写数据</h3><p>写数据到Buffer有两种方式：</p>
 <ul>
 <li>从Channel写到Buffer。</li>
 <li>通过Buffer的put()方法写到Buffer里。</li>
 </ul>
 <p>从Channel写到Buffer的例子</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ByteBuffer </span><span class="keyword">buf </span>= <span class="keyword">ByteBuffer.allocate(48);</span></div><div class="line"><span class="symbol">int</span> <span class="keyword">bytesRead </span>= inChannel.read(<span class="keyword">buf); </span>//read into <span class="keyword">buffer.</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ByteBuffer buf = ByteBuffer.allocate(48);</div><div class="line">int bytesRead = inChannel.read(buf); //read into buffer.</div></pre></td></tr></table></figure>
 <p>通过put方法写Buffer的例子：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buf.put(<span class="number">127</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buf.put(127);</div></pre></td></tr></table></figure>
 <p>put方法有很多版本，允许你以不同的方式把数据写入到Buffer中。例如，写到一个指定的位置，或者把一个字节数组写入到Buffer。 更多Buffer实现的细节参考JavaDoc。</p>
 <h3 id="flip-方法"><a href="#flip-方法" class="headerlink" title="flip()方法"></a>flip()方法</h3><p>flip方法将Buffer<strong>从写模式切换到读模式</strong>。调用flip()方法会<strong>将position设回0</strong>，并<strong>将limit设置成之前position的值</strong>。</p>
 <p>换句话说，position现在用于标记读的位置，limit表示之前写进了多少个byte、char等 —— 现在能读取多少个byte、char等。</p>
@@ -500,9 +500,9 @@ aFile.close();
 <li>使用get()方法从Buffer中读取数据。</li>
 </ul>
 <p>从Buffer读取数据到Channel的例子：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//read from buffer into channel.</span></div><div class="line"><span class="keyword">int</span> bytesWritten = inChannel.<span class="built_in">write</span>(buf);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//read from buffer into channel.</div><div class="line">int bytesWritten = inChannel.write(buf);</div></pre></td></tr></table></figure>
 <p>使用get()方法从Buffer中读取数据的例子</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span> aByte = buf.<span class="built_in">get</span>();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">byte aByte = buf.get();</div></pre></td></tr></table></figure>
 <p>get方法有很多版本，允许你以不同的方式从Buffer中读取数据。例如，从指定position读取，或者从Buffer中读取数据到字节数组。更多Buffer实现的细节参考JavaDoc。</p>
 <h3 id="rewind-方法"><a href="#rewind-方法" class="headerlink" title="rewind()方法"></a>rewind()方法</h3><p>Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。</p>
 <h3 id="clear-与compact-方法"><a href="#clear-与compact-方法" class="headerlink" title="clear()与compact()方法"></a>clear()与compact()方法</h3><p>一旦读完Buffer中的数据，需要让Buffer准备好再次被写入。可以通过clear()或compact()方法来完成。</p>
@@ -511,7 +511,7 @@ aFile.close();
 <p><strong>如果Buffer中仍有未读的数据，且后续还需要这些数据，但是此时想要先先写些数据，那么使用compact()方法。</strong></p>
 <p>compact()方法将所有未读的数据拷贝到Buffer起始处。然后将position设到最后一个未读元素正后面。limit属性依然像clear()方法一样，设置成capacity。现在Buffer准备好写数据了，但是<strong>不会覆盖未读的数据</strong>。</p>
 <h3 id="mark-与reset-方法"><a href="#mark-与reset-方法" class="headerlink" title="mark()与reset()方法"></a>mark()与reset()方法</h3><p>通过调用Buffer.mark()方法，可以标记Buffer中的一个特定position。之后可以通过调用Buffer.reset()方法恢复到这个position。(注意，使用flip方法会重置mark为-1)例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buffer.mark();</div><div class="line">//<span class="keyword">call</span> buffer.get() a couple <span class="keyword">of</span> times, e.g. during parsing.</div><div class="line">buffer.reset();  //<span class="keyword">set</span> <span class="keyword">position</span> back <span class="keyword">to</span> mark.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buffer.mark();</div><div class="line">//call buffer.get() a couple of times, e.g. during parsing.</div><div class="line">buffer.reset();  //set position back to mark.</div></pre></td></tr></table></figure>
 <h3 id="equals-与compareTo-方法"><a href="#equals-与compareTo-方法" class="headerlink" title="equals()与compareTo()方法"></a>equals()与compareTo()方法</h3><p>可以使用equals()和compareTo()方法两个Buffer。</p>
 <p>equals()</p>
 <p>当满足下列条件时，表示两个Buffer相等：</p>
@@ -535,12 +535,12 @@ aFile.close();
 <p>scatter / gather经常用于需要将传输的数据分开处理的场合，例如传输一个由消息头和消息体组成的消息，你可能会将消息体和消息头分散到不同的buffer中，这样你可以方便的处理消息头和消息体。</p>
 <h3 id="Scattering-Reads"><a href="#Scattering-Reads" class="headerlink" title="Scattering Reads"></a>Scattering Reads</h3><p>Scattering Reads是指数据从一个channel读取到多个buffer中。如下图描述：</p>
 <p><img src="http://i.imgur.com/5gzGOOT.png" alt=""></p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ByteBuffer </span>header = <span class="keyword">ByteBuffer.allocate(128);</span></div><div class="line"><span class="keyword">ByteBuffer </span><span class="keyword">body </span>  = <span class="keyword">ByteBuffer.allocate(1024);</span></div><div class="line"><span class="keyword">ByteBuffer[] </span><span class="keyword">bufferArray </span>= &#123; header, <span class="keyword">body </span>&#125;<span class="comment">;</span></div><div class="line">channel.read(<span class="keyword">bufferArray);</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ByteBuffer header = ByteBuffer.allocate(128);</div><div class="line">ByteBuffer body   = ByteBuffer.allocate(1024);</div><div class="line">ByteBuffer[] bufferArray = &#123; header, body &#125;;</div><div class="line">channel.read(bufferArray);</div></pre></td></tr></table></figure>
 <p>注意buffer首先被插入到数组，然后再将数组作为channel.read() 的输入参数。read()方法按照buffer在数组中的顺序将从channel中读取的数据写入到buffer，<strong>当一个buffer被写满后，channel紧接着向另一个buffer中写。</strong></p>
 <p>Scattering Reads在移动下一个buffer前，必须填满当前的buffer，这也意味着它不适用于动态消息(译者注：消息大小不固定)。换句话说，如果存在消息头和消息体，消息头必须完成填充（例如 128byte），Scattering Reads才能正常工作。</p>
 <h3 id="Gathering-Writes"><a href="#Gathering-Writes" class="headerlink" title="Gathering Writes"></a>Gathering Writes</h3><p>Gathering Writes是指数据从多个buffer写入到同一个channel。如下图描述：</p>
 <p><img src="http://i.imgur.com/oP8lagL.png" alt=""></p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ByteBuffer </span>header = <span class="keyword">ByteBuffer.allocate(128);</span></div><div class="line"><span class="keyword">ByteBuffer </span><span class="keyword">body </span>  = <span class="keyword">ByteBuffer.allocate(1024);</span></div><div class="line">//write <span class="meta">data</span> into <span class="keyword">buffers</span></div><div class="line"><span class="keyword">ByteBuffer[] </span><span class="keyword">bufferArray </span>= &#123; header, <span class="keyword">body </span>&#125;<span class="comment">;</span></div><div class="line"><span class="symbol">channel.write</span>(<span class="keyword">bufferArray);</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ByteBuffer header = ByteBuffer.allocate(128);</div><div class="line">ByteBuffer body   = ByteBuffer.allocate(1024);</div><div class="line">//write data into buffers</div><div class="line">ByteBuffer[] bufferArray = &#123; header, body &#125;;</div><div class="line">channel.write(bufferArray);</div></pre></td></tr></table></figure>
 <p>buffers数组是write()方法的入参，write()方法会按照buffer在数组中的顺序，将数据写入到channel，注意只有position和limit之间的数据才会被写入。因此，如果一个buffer的容量为128byte，但是仅仅包含58byte的数据，那么这58byte的数据将被写入到channel中。因此与Scattering Reads相反，Gathering Writes能较好的处理动态消息。</p>
 <h2 id="通道之间的数据传输"><a href="#通道之间的数据传输" class="headerlink" title="通道之间的数据传输"></a>通道之间的数据传输</h2><p>在Java NIO中，如果两个通道中有一个是FileChannel，那你可以直接将数据从一个channel（译者注：channel中文常译作通道）传输到另外一个channel。</p>
 <h3 id="transferFrom"><a href="#transferFrom" class="headerlink" title="transferFrom()"></a>transferFrom()</h3><p>FileChannel的transferFrom()方法可以将数据从源通道传输到FileChannel中（译者注：这个方法在JDK文档中的解释为将字节从给定的可读取字节通道传输到此通道的文件中）。下面是一个简单的例子：</p>
@@ -687,7 +687,7 @@ fromChannel.transferTo(position, count, toChannel);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">138</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -695,7 +695,7 @@ fromChannel.transferTo(position, count, toChannel);
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -704,7 +704,7 @@ fromChannel.transferTo(position, count, toChannel);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

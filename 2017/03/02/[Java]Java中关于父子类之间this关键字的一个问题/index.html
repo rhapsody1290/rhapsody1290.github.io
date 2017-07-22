@@ -96,7 +96,7 @@ Parent类：
 java中关于父子类之间this关键字的一个问题https://my.oschina.net/mlongbo/blog/90047
 Parent类：
 12345678public class Parent &amp;#123;	publ">
-<meta property="og:updated_time" content="2017-04-17T02:39:21.972Z">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中关于父子类之间this关键字的一个问题">
 <meta name="twitter:description" content="父类方法中使用this，那么这个this指的是谁？http://blog.csdn.net/sinat_31311947/article/details/50619467
@@ -348,11 +348,11 @@ Parent类：
         <p>父类方法中使用this，那么这个this指的是谁？<br><a href="http://blog.csdn.net/sinat_31311947/article/details/50619467" target="_blank" rel="external">http://blog.csdn.net/sinat_31311947/article/details/50619467</a></p>
 <p>java中关于父子类之间this关键字的一个问题<br><a href="https://my.oschina.net/mlongbo/blog/90047" target="_blank" rel="external">https://my.oschina.net/mlongbo/blog/90047</a></p>
 <p>Parent类：</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Parent</span> &#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Parent</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>.getClass());</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class Parent &#123;</div><div class="line">	public Parent()&#123;</div><div class="line">		System.out.println(this.getClass());</div><div class="line">	&#125;</div><div class="line">	public void info()&#123;</div><div class="line">		System.out.println(this);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Child类：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class Child extends Parent &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>测试类：</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Test</span> &#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">		Parent p = <span class="keyword">new</span> Parent();</div><div class="line">		p.info();</div><div class="line">		System.<span class="keyword">out</span>.println();</div><div class="line">		Child c = <span class="keyword">new</span> Child();</div><div class="line">		c.info();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		Parent p = new Parent();</div><div class="line">		p.info();</div><div class="line">		System.out.println();</div><div class="line">		Child c = new Child();</div><div class="line">		c.info();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Child类继承Parent类，在Parent类的info方法中会输出对象的内存地址。</p>
 <pre><code>class demo.test.Parent
 demo.test.Parent@544a5ab2
@@ -478,7 +478,7 @@ demo.test.Child@2e6e1408
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">139</span>
+              <span class="site-state-item-count">138</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -486,7 +486,7 @@ demo.test.Child@2e6e1408
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -495,7 +495,7 @@ demo.test.Child@2e6e1408
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
