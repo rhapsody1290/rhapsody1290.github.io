@@ -205,6 +205,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -343,38 +353,18 @@
       
         
           
-            <p>转载：<a href="http://www.cnblogs.com/chenssy/p/3264214.html" target="_blank" rel="external">http://www.cnblogs.com/chenssy/p/3264214.html</a></p>
-<p>对map集合进行排序</p>
-<p>今天做统计时需要对X轴的地区按照地区代码（areaCode）进行排序，由于在构建XMLData使用的map来进行数据统计的，所以在统计过程中就需要对map进行排序。</p>
-<h2 id="简单介绍Map"><a href="#简单介绍Map" class="headerlink" title="简单介绍Map"></a>简单介绍Map</h2><p>在讲解Map排序之前，我们先来稍微了解下map。map是键值对的集合接口，它的实现类主要包括：HashMap,TreeMap,Hashtable以及LinkedHashMap等。其中这四者的区别如下（简单介绍）：</p>
-<p>HashMap：我们最常用的Map，它根据key的HashCode 值来存储数据,根据key可以直接获取它的Value，同时它具有很快的访问速度。HashMap<strong>最多只允许一条记录的key值为Null</strong>(多条会覆盖);允许多条记录的Value为 Null。<strong>非同步</strong>的。</p>
-<p>TreeMap: 能够把它保存的记录<strong>根据key排序</strong>,默认是按升序排序，也可以指定排序的<strong>比较器</strong>，当用Iterator 遍历TreeMap时，得到的记录是排过序的。<strong>TreeMap 不允许key的值为null</strong>。<strong>非同步</strong>的。</p>
-<p>Hashtable: 与 HashMap类似，不同的是:<strong>key和value的值均不允许为null</strong>;<strong>继承Dictionary类</strong>，它支持<strong>线程的同步</strong>，即任一时刻只有一个线程能写Hashtable，因此也导致了Hashtale在写入时会比较慢。</p>
-<p>LinkedHashMap: 保存了记录的插入顺序，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的.在遍历的时候会比HashMap慢。key和value均允许为空，非同步的。</p>
-<h2 id="Map排序"><a href="#Map排序" class="headerlink" title="Map排序"></a>Map排序</h2><h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>TreeMap默认是升序的，如果我们需要改变排序方式，则需要使用比较器：Comparator。</p>
-<p>Comparator可以对集合对象或者数组进行排序的比较器接口，实现该接口的public compare(T o1,To2)方法即可实现排序，该方法主要是根据第一个参数o1,小于、等于或者大于o2分别返回负整数、0或者正整数。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class TreeMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;(</div><div class="line">                new Comparator&lt;String&gt;() &#123;</div><div class="line">                    public int compare(String obj1, String obj2) &#123;</div><div class="line">                        // 降序排序</div><div class="line">                        return obj2.compareTo(obj1);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        </div><div class="line">        Set&lt;String&gt; keySet = map.keySet();</div><div class="line">        Iterator&lt;String&gt; iter = keySet.iterator();</div><div class="line">        while (iter.hasNext()) &#123;</div><div class="line">            String key = iter.next();</div><div class="line">            System.out.println(key + &quot;:&quot; + map.get(key));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果如下：</p>
-<pre><code>d:ddddd 
-c:ccccc 
-b:bbbbb 
-a:aaaaa
-</code></pre><p>上面例子是对根据TreeMap的key值来进行排序的，但是有时我们需要根据TreeMap的value来进行排序。对value排序我们就需要借助于Collections的sort(List<t> list, Comparator&lt;? super T&gt; c)方法，该方法根据指定比较器产生的顺序对指定列表进行排序。但是有一个前提条件，那就是所有的元素都必须能够根据所提供的比较器来进行比较。如下：</t></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class TreeMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;();</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        </div><div class="line">        //这里将map.entrySet()转换成list</div><div class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = new ArrayList&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</div><div class="line">        //然后通过比较器来实现排序</div><div class="line">        Collections.sort(list,new Comparator&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</div><div class="line">            //升序排序</div><div class="line">            public int compare(Entry&lt;String, String&gt; o1,</div><div class="line">                    Entry&lt;String, String&gt; o2) &#123;</div><div class="line">                return o1.getValue().compareTo(o2.getValue());</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        for(Map.Entry&lt;String,String&gt; mapping:list)&#123; </div><div class="line">               System.out.println(mapping.getKey()+&quot;:&quot;+mapping.getValue()); </div><div class="line">          &#125; </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果</p>
-<pre><code>a:aaaaa 
-b:bbbbb 
-c:ccccc 
-d:ddddd
-</code></pre><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>我们都是HashMap的值是没有顺序的，他是按照key的HashCode来实现的。对于这个无序的HashMap我们要怎么来实现排序呢？参照TreeMap的value排序，我们一样的也可以实现HashMap的排序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class HashMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        </div><div class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = new ArrayList&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</div><div class="line">        Collections.sort(list,new Comparator&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</div><div class="line">            //升序排序</div><div class="line">            public int compare(Entry&lt;String, String&gt; o1,</div><div class="line">                    Entry&lt;String, String&gt; o2) &#123;</div><div class="line">                return o1.getValue().compareTo(o2.getValue());</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        for(Map.Entry&lt;String,String&gt; mapping:list)&#123; </div><div class="line">               System.out.println(mapping.getKey()+&quot;:&quot;+mapping.getValue()); </div><div class="line">          &#125; </div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果</p>
-<pre><code>a:aaaaa 
-b:bbbbb 
-c:ccccc 
-d:ddddd
-</code></pre>
-          
+          转载：http://www.cnblogs.com/chenssy/p/3264214.html
+对map集合进行排序
+今天做统计时需要对X轴的地区按照地区代码（areaCode）进行排序，由于在构建XMLData使用的map来进行数据统计的，所以在统计过程中就需要对map进行排序。
+简单介绍Map
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/26/[Java]Java集合 - 对map集合进行排序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -506,229 +496,17 @@ d:ddddd
       
         
           
-            <p>转自 <a href="http://ifeve.com/java-nio-all/" target="_blank" rel="external">http://ifeve.com/java-nio-all/</a></p>
-<h2 id="NIO是什么"><a href="#NIO是什么" class="headerlink" title="NIO是什么"></a>NIO是什么</h2><p>Java NIO(<strong>New IO</strong>)是一个可以替代标准Java IO API的IO API（从Java 1.4开始)，<strong>Java NIO提供了与标准IO不同的IO工作方式</strong>。</p>
-<p>1、Java NIO: Channels and Buffers（通道和缓冲区）</p>
-<p>标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。</p>
-<p>2、Java NIO: Non-blocking IO（非阻塞IO）<br>Java NIO可以让你非阻塞的使用IO，例如：当线程从通道读取数据到缓冲区时，线程还是可以进行其他事情。当数据被写入到缓冲区时，线程可以继续处理它。从缓冲区写入通道也类似。</p>
-<p>3、Java NIO: Selectors（选择器）<br>Java NIO引入了选择器的概念，选择器用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个的线程可以监听多个数据通道。</p>
-<h2 id="Java-NIO-概述"><a href="#Java-NIO-概述" class="headerlink" title="Java NIO 概述"></a>Java NIO 概述</h2><p>Java NIO 由以下几个核心部分组成：</p>
-<ul>
-<li>Channels</li>
-<li>Buffers</li>
-<li>Selectors</li>
-</ul>
-<h3 id="Channel-和-Buffer"><a href="#Channel-和-Buffer" class="headerlink" title="Channel 和 Buffer"></a>Channel 和 Buffer</h3><p>基本上，所有的 IO 在NIO 中都从一个Channel 开始。Channel 有点象流。 数据可以从Channel读到Buffer中，也可以从Buffer 写到Channel中。这里有个图示：</p>
-<p><img src="http://i.imgur.com/OMUe99f.png" alt=""></p>
-<p>Channel和Buffer有好几种类型。下面是JAVA NIO中的一些主要Channel的实现：</p>
-<ul>
-<li>FileChannel</li>
-<li>DatagramChannel</li>
-<li>SocketChannel</li>
-<li>ServerSocketChannel</li>
-</ul>
-<p>正如你所看到的，这些通道涵盖了 UDP 和 TCP <strong>网络IO</strong>，以及<strong>文件IO</strong>。</p>
-<p>与这些类一起的有一些有趣的接口，但为简单起见，我尽量在概述中不提到它们。本教程其它章节与它们相关的地方我会进行解释。</p>
-<p>以下是Java NIO里关键的Buffer实现：</p>
-<ul>
-<li>ByteBuffer</li>
-<li>CharBuffer</li>
-<li>DoubleBuffer</li>
-<li>FloatBuffer</li>
-<li>IntBuffer</li>
-<li>LongBuffer</li>
-<li>ShortBuffer</li>
-</ul>
-<p>这些Buffer覆盖了你能通过IO发送的基本数据类型：byte, short, int, long, float, double 和 char。</p>
-<p>Java NIO 还有个 MappedByteBuffer，用于表示内存映射文件，我也不打算在概述中说明。</p>
-<h3 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h3><p><strong>Selector允许单线程处理多个 Channel</strong>。如果你的应用打开了多个连接（通道），但每个连接的流量都很低，使用Selector就会很方便。例如，在一个聊天服务器中。</p>
-<p>这是在一个单线程中使用一个Selector处理3个Channel的图示：</p>
-<p><img src="http://i.imgur.com/LXlI8Ux.png" alt=""></p>
-<p>要使用Selector，得<strong>向Selector注册Channel，然后调用它的select()方法</strong>。这个方法会一直阻塞到某个注册的通道有事件就绪。一旦这个方法返回，线程就可以处理这些事件，事件的例子有如新连接进来，数据接收等。</p>
-<h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><h3 id="Channel与流的区别"><a href="#Channel与流的区别" class="headerlink" title="Channel与流的区别"></a>Channel与流的区别</h3><font color="red"><strong>Java NIO的通道类似流，但又有些不同：</strong></font>
-
-<ul>
-<li>既可以从通道中<strong>读取</strong>数据，又可以<strong>写数据</strong>到通道。但流的读写通常是<strong>单向的</strong></li>
-<li>通道可以<strong>异步</strong>地读写</li>
-<li>通道中的数据总是要先读到一个<strong>Buffer</strong>，或者总是要从一个Buffer中写入</li>
-</ul>
-<p>正如上面所说，从通道读取数据到缓冲区，从缓冲区写入数据到通道。如下图所示：</p>
-<p><img src="http://i.imgur.com/OMUe99f.png" alt=""></p>
-<h3 id="Channel的实现"><a href="#Channel的实现" class="headerlink" title="Channel的实现"></a>Channel的实现</h3><p>这些是Java NIO中最重要的通道的实现：</p>
-<ul>
-<li>FileChannel</li>
-<li>DatagramChannel</li>
-<li>SocketChannel</li>
-<li>ServerSocketChannel</li>
-<li>FileChannel 从文件中读写数据。</li>
-</ul>
-<p>DatagramChannel 能通过UDP读写网络中的数据。</p>
-<p>SocketChannel 能通过TCP读写网络中的数据。</p>
-<p>ServerSocketChannel可以监听新进来的TCP连接，像Web服务器那样。对每一个新进来的连接都会创建一个SocketChannel。</p>
-<h3 id="基本的-Channel-示例"><a href="#基本的-Channel-示例" class="headerlink" title="基本的 Channel 示例"></a>基本的 Channel 示例</h3><p>下面是一个使用FileChannel读取数据到Buffer中的示例：</p>
-<pre><code>//文件通道
-String path = APP.class.getClassLoader().getResource(&quot;nio-data.txt&quot;).getPath();
-RandomAccessFile aFile = new RandomAccessFile(path, &quot;rw&quot;);
-FileChannel inChannel = aFile.getChannel();
-//缓冲区
-ByteBuffer buf = ByteBuffer.allocate(48);
-//通道向缓冲区写数据，每次循环得到ByteBuffer -&gt; byte[] -&gt; ByteArrayOutputStream把每段byte[]拼接起来 -&gt;byte[]
-int bytesRead = -1;
-ByteArrayOutputStream result = new ByteArrayOutputStream();
-while ((bytesRead =  inChannel.read(buf)) != -1) {
-    //注意 buf.flip() 的调用，首先读取数据到Buffer，然后反转Buffer,接着再从Buffer中读取数据（指针移到开始位置）
-    buf.flip();
-    result.write(buf.array(),0, bytesRead);
-    //一旦读完了所有的数据，就需要清空缓冲区，让它可以再次被写入
-    buf.clear();
-}
-//输出结果
-System.out.println(result.toString());
-//关闭资源
-result.close();
-inChannel.close();
-aFile.close();
-</code></pre><h2 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h2><p>Java NIO中的Buffer用于和NIO通道进行交互。如你所知，数据是从通道读入缓冲区，从缓冲区写入到通道中的。</p>
-<p><strong>缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存。</strong></p>
-<h3 id="Buffer的基本用法"><a href="#Buffer的基本用法" class="headerlink" title="Buffer的基本用法"></a>Buffer的基本用法</h3><p>使用Buffer读写数据一般遵循以下四个步骤：</p>
-<ul>
-<li>写入数据到Buffer</li>
-<li>调用flip()方法</li>
-<li>从Buffer中读取数据</li>
-<li>调用clear()方法或者compact()方法</li>
-</ul>
-<p>当向buffer写入数据时，buffer会记录下写了多少数据。一旦要读取数据，需要<strong>通过flip()方法将Buffer从写模式切换到读模式</strong>。在读模式下，可以读取之前写入到buffer的所有数据。(不能反过来)</p>
-<p>一旦读完了所有的数据，就需要<strong>清空缓冲区，让它可以再次被写入</strong>。有两种方式能清空缓冲区：调用clear()或compact()方法。clear()方法会清空整个缓冲区。compact()方法只会清除已经读过的数据。任何未读的数据都被移到缓冲区的起始处，新写入的数据将放到缓冲区未读数据的后面。</p>
-<p>下面是一个使用Buffer的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">RandomAccessFile aFile = new RandomAccessFile(&quot;data/nio-data.txt&quot;, &quot;rw&quot;);</div><div class="line">FileChannel inChannel = aFile.getChannel();</div><div class="line">//create buffer with capacity of 48 bytes</div><div class="line">ByteBuffer buf = ByteBuffer.allocate(48);</div><div class="line">int bytesRead = inChannel.read(buf); //read into buffer.</div><div class="line">while (bytesRead != -1) &#123;</div><div class="line">  buf.flip();  //make buffer ready for read</div><div class="line">  while(buf.hasRemaining())&#123;</div><div class="line">      System.out.print((char) buf.get()); // read 1 byte at a time</div><div class="line">  &#125;</div><div class="line">  buf.clear(); //make buffer ready for writing</div><div class="line">  bytesRead = inChannel.read(buf);</div><div class="line">&#125;</div><div class="line">aFile.close();</div></pre></td></tr></table></figure>
-<h3 id="Buffer的capacity-position和limit"><a href="#Buffer的capacity-position和limit" class="headerlink" title="Buffer的capacity,position和limit"></a>Buffer的capacity,position和limit</h3><p>缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存。</p>
-<p>为了理解Buffer的工作原理，需要熟悉它的三个属性：</p>
-<ul>
-<li>capacity</li>
-<li>position</li>
-<li>limit</li>
-</ul>
-<p><strong>position和limit的含义取决于Buffer处在读模式还是写模式。</strong>不管Buffer处在什么模式，capacity的含义总是一样的。</p>
-<p>这里有一个关于capacity，position和limit在读写模式中的说明，详细的解释在插图后面。</p>
-<p><img src="http://i.imgur.com/EVfAOgu.png" alt=""></p>
-<p>capacity</p>
-<p>作为一个内存块，<strong>Buffer有一个固定的大小值</strong>，也叫”capacity”。你只能往里写capacity个byte、long，char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清除数据）才能继续写数据往里写数据。</p>
-<p>position</p>
-<p>当你写数据到Buffer中时，position表示当前的位置。初始的position值为0。当一个byte、long等数据写到Buffer后，<strong>position会向前移动到下一个可插入数据的Buffer单元</strong>。position最大可为capacity – 1.</p>
-<p>当读取数据时，也是从某个特定位置读。<strong>当将Buffer从写模式切换到读模式，position会被重置为0</strong>。 当从Buffer的position处读取数据时，position向前移动到<strong>下一个可读的位置</strong>。</p>
-<p>limit</p>
-<p>在写模式下，Buffer的limit表示你<strong>最多能往Buffer里写多少数据</strong>。 写模式下，limit等于Buffer的capacity。</p>
-<p>当切换Buffer到读模式时， limit表示你<strong>最多能读到多少数据</strong>。因此，当切换Buffer到读模式时，limit会被设置成写模式下的position值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是position）</p>
-<h3 id="Buffer的类型"><a href="#Buffer的类型" class="headerlink" title="Buffer的类型"></a>Buffer的类型</h3><p>Java NIO 有以下Buffer类型</p>
-<ul>
-<li>ByteBuffer</li>
-<li>MappedByteBuffer</li>
-<li>CharBuffer</li>
-<li>DoubleBuffer</li>
-<li>FloatBuffer</li>
-<li>IntBuffer</li>
-<li>LongBuffer</li>
-<li>ShortBuffer</li>
-</ul>
-<p>如你所见，这些Buffer类型代表了不同的数据类型。换句话说，就是可以通过char，short，int，long，float 或 double类型来操作缓冲区中的字节。</p>
-<p>MappedByteBuffer 有些特别，在涉及它的专门章节中再讲。</p>
-<h3 id="Buffer的分配"><a href="#Buffer的分配" class="headerlink" title="Buffer的分配"></a>Buffer的分配</h3><p>要想获得一个Buffer对象首先要进行分配。 每一个Buffer类都有一个allocate方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//分配48字节capacity的ByteBuffer的</div><div class="line">ByteBuffer buf = ByteBuffer.allocate(48);</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//分配一个可存储1024个字符的CharBuffer</div><div class="line">CharBuffer buf = CharBuffer.allocate(1024);</div></pre></td></tr></table></figure>
-<h3 id="向Buffer中写数据"><a href="#向Buffer中写数据" class="headerlink" title="向Buffer中写数据"></a>向Buffer中写数据</h3><p>写数据到Buffer有两种方式：</p>
-<ul>
-<li>从Channel写到Buffer。</li>
-<li>通过Buffer的put()方法写到Buffer里。</li>
-</ul>
-<p>从Channel写到Buffer的例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ByteBuffer buf = ByteBuffer.allocate(48);</div><div class="line">int bytesRead = inChannel.read(buf); //read into buffer.</div></pre></td></tr></table></figure>
-<p>通过put方法写Buffer的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">buf.put(127);</div></pre></td></tr></table></figure>
-<p>put方法有很多版本，允许你以不同的方式把数据写入到Buffer中。例如，写到一个指定的位置，或者把一个字节数组写入到Buffer。 更多Buffer实现的细节参考JavaDoc。</p>
-<h3 id="flip-方法"><a href="#flip-方法" class="headerlink" title="flip()方法"></a>flip()方法</h3><p>flip方法将Buffer<strong>从写模式切换到读模式</strong>。调用flip()方法会<strong>将position设回0</strong>，并<strong>将limit设置成之前position的值</strong>。</p>
-<p>换句话说，position现在用于标记读的位置，limit表示之前写进了多少个byte、char等 —— 现在能读取多少个byte、char等。</p>
-<h3 id="从Buffer中读取数据"><a href="#从Buffer中读取数据" class="headerlink" title="从Buffer中读取数据"></a>从Buffer中读取数据</h3><p>从Buffer中读取数据有两种方式：</p>
-<ul>
-<li>从Buffer读取数据到Channel。</li>
-<li>使用get()方法从Buffer中读取数据。</li>
-</ul>
-<p>从Buffer读取数据到Channel的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//read from buffer into channel.</div><div class="line">int bytesWritten = inChannel.write(buf);</div></pre></td></tr></table></figure>
-<p>使用get()方法从Buffer中读取数据的例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">byte aByte = buf.get();</div></pre></td></tr></table></figure>
-<p>get方法有很多版本，允许你以不同的方式从Buffer中读取数据。例如，从指定position读取，或者从Buffer中读取数据到字节数组。更多Buffer实现的细节参考JavaDoc。</p>
-<h3 id="rewind-方法"><a href="#rewind-方法" class="headerlink" title="rewind()方法"></a>rewind()方法</h3><p>Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。</p>
-<h3 id="clear-与compact-方法"><a href="#clear-与compact-方法" class="headerlink" title="clear()与compact()方法"></a>clear()与compact()方法</h3><p>一旦读完Buffer中的数据，需要让Buffer准备好再次被写入。可以通过clear()或compact()方法来完成。</p>
-<p>如果调用的是clear()方法，position将被设回0，limit被设置成 capacity的值。换句话说，Buffer 被清空了。<strong>Buffer中的数据并未清除，只是这些标记告诉我们可以从哪里开始往Buffer里写数据。</strong></p>
-<p>如果Buffer中有一些未读的数据，调用clear()方法，数据将”被遗忘”，意味着不再有任何标记会告诉你哪些数据被读过，哪些还没有。</p>
-<p><strong>如果Buffer中仍有未读的数据，且后续还需要这些数据，但是此时想要先先写些数据，那么使用compact()方法。</strong></p>
-<p>compact()方法将所有未读的数据拷贝到Buffer起始处。然后将position设到最后一个未读元素正后面。limit属性依然像clear()方法一样，设置成capacity。现在Buffer准备好写数据了，但是<strong>不会覆盖未读的数据</strong>。</p>
-<h3 id="mark-与reset-方法"><a href="#mark-与reset-方法" class="headerlink" title="mark()与reset()方法"></a>mark()与reset()方法</h3><p>通过调用Buffer.mark()方法，可以标记Buffer中的一个特定position。之后可以通过调用Buffer.reset()方法恢复到这个position。(注意，使用flip方法会重置mark为-1)例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buffer.mark();</div><div class="line">//call buffer.get() a couple of times, e.g. during parsing.</div><div class="line">buffer.reset();  //set position back to mark.</div></pre></td></tr></table></figure>
-<h3 id="equals-与compareTo-方法"><a href="#equals-与compareTo-方法" class="headerlink" title="equals()与compareTo()方法"></a>equals()与compareTo()方法</h3><p>可以使用equals()和compareTo()方法两个Buffer。</p>
-<p>equals()</p>
-<p>当满足下列条件时，表示两个Buffer相等：</p>
-<ul>
-<li>有相同的类型（byte、char、int等）。</li>
-<li>Buffer中剩余的byte、char等的个数相等。</li>
-<li>Buffer中所有剩余的byte、char等都相同。</li>
-</ul>
-<p>如你所见，equals只是比较Buffer的一部分，不是每一个在它里面的元素都比较。实际上，它只<strong>比较Buffer中的剩余元素。</strong></p>
-<p>compareTo()方法</p>
-<p>compareTo()方法<strong>比较两个Buffer的剩余元素(byte、char等)</strong>， 如果满足下列条件，则认为一个Buffer”小于”另一个Buffer：</p>
-<ul>
-<li>第一个不相等的元素小于另一个Buffer中对应的元素 。</li>
-<li>所有元素都相等，但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)。<br>（译注：剩余元素是从 position到limit之间的元素）</li>
-</ul>
-<h2 id="Scatter-Gather"><a href="#Scatter-Gather" class="headerlink" title="Scatter/Gather"></a>Scatter/Gather</h2><p>Java NIO开始支持scatter/gather，scatter/gather用于描述从Channel（译者注：Channel在中文经常翻译为通道）中读取或者写入到Buffer中的操作。</p>
-<ul>
-<li>分散（scatter）从Channel中读取是指在读操作时<strong>将读取的数据写入多个buffer中</strong>。因此，Channel将从Channel中读取的数据“分散（scatter）”到多个Buffer中。</li>
-<li>聚集（gather）写入Channel是指在写操作时<strong>将多个buffer的数据写入同一个Channel</strong>，因此，Channel 将多个Buffer中的数据“聚集（gather）”后发送到Channel。</li>
-</ul>
-<p>scatter / gather经常用于需要将传输的数据分开处理的场合，例如传输一个由消息头和消息体组成的消息，你可能会将消息体和消息头分散到不同的buffer中，这样你可以方便的处理消息头和消息体。</p>
-<h3 id="Scattering-Reads"><a href="#Scattering-Reads" class="headerlink" title="Scattering Reads"></a>Scattering Reads</h3><p>Scattering Reads是指数据从一个channel读取到多个buffer中。如下图描述：</p>
-<p><img src="http://i.imgur.com/5gzGOOT.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ByteBuffer header = ByteBuffer.allocate(128);</div><div class="line">ByteBuffer body   = ByteBuffer.allocate(1024);</div><div class="line">ByteBuffer[] bufferArray = &#123; header, body &#125;;</div><div class="line">channel.read(bufferArray);</div></pre></td></tr></table></figure>
-<p>注意buffer首先被插入到数组，然后再将数组作为channel.read() 的输入参数。read()方法按照buffer在数组中的顺序将从channel中读取的数据写入到buffer，<strong>当一个buffer被写满后，channel紧接着向另一个buffer中写。</strong></p>
-<p>Scattering Reads在移动下一个buffer前，必须填满当前的buffer，这也意味着它不适用于动态消息(译者注：消息大小不固定)。换句话说，如果存在消息头和消息体，消息头必须完成填充（例如 128byte），Scattering Reads才能正常工作。</p>
-<h3 id="Gathering-Writes"><a href="#Gathering-Writes" class="headerlink" title="Gathering Writes"></a>Gathering Writes</h3><p>Gathering Writes是指数据从多个buffer写入到同一个channel。如下图描述：</p>
-<p><img src="http://i.imgur.com/oP8lagL.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ByteBuffer header = ByteBuffer.allocate(128);</div><div class="line">ByteBuffer body   = ByteBuffer.allocate(1024);</div><div class="line">//write data into buffers</div><div class="line">ByteBuffer[] bufferArray = &#123; header, body &#125;;</div><div class="line">channel.write(bufferArray);</div></pre></td></tr></table></figure>
-<p>buffers数组是write()方法的入参，write()方法会按照buffer在数组中的顺序，将数据写入到channel，注意只有position和limit之间的数据才会被写入。因此，如果一个buffer的容量为128byte，但是仅仅包含58byte的数据，那么这58byte的数据将被写入到channel中。因此与Scattering Reads相反，Gathering Writes能较好的处理动态消息。</p>
-<h2 id="通道之间的数据传输"><a href="#通道之间的数据传输" class="headerlink" title="通道之间的数据传输"></a>通道之间的数据传输</h2><p>在Java NIO中，如果两个通道中有一个是FileChannel，那你可以直接将数据从一个channel（译者注：channel中文常译作通道）传输到另外一个channel。</p>
-<h3 id="transferFrom"><a href="#transferFrom" class="headerlink" title="transferFrom()"></a>transferFrom()</h3><p>FileChannel的transferFrom()方法可以将数据从源通道传输到FileChannel中（译者注：这个方法在JDK文档中的解释为将字节从给定的可读取字节通道传输到此通道的文件中）。下面是一个简单的例子：</p>
-<pre><code>String fromFilePath = TransferToDemo.class.getClassLoader().getResource(&quot;fromFile.txt&quot;).getPath();
-String toFilePath = TransferToDemo.class.getClassLoader().getResource(&quot;toFile.txt&quot;).getPath();
-
-RandomAccessFile fromFile = new RandomAccessFile(fromFilePath, &quot;rw&quot;);
-FileChannel fromChannel = fromFile.getChannel();
-RandomAccessFile toFile = new RandomAccessFile(toFilePath, &quot;rw&quot;);
-FileChannel toChannel = toFile.getChannel();
-
-long position = 0;
-long count = fromChannel.size();
-toChannel.transferFrom(fromChannel, position, count);
-</code></pre><p>方法的输入参数position表示从position处开始向目标文件写入数据，count表示最多传输的字节数。如果源通道的剩余空间小于 count 个字节，则所传输的字节数要小于请求的字节数。<br>此外要注意，在SoketChannel的实现中，SocketChannel只会传输此刻准备好的数据（可能不足count字节）。因此，SocketChannel可能不会将请求的所有数据(count个字节)全部传输到FileChannel中。</p>
-<h3 id="transferTo"><a href="#transferTo" class="headerlink" title="transferTo()"></a>transferTo()</h3><p>transferTo()方法将数据从FileChannel传输到其他的channel中。下面是一个简单的例子：</p>
-<pre><code>String fromFilePath = TransferToDemo.class.getClassLoader().getResource(&quot;fromFile.txt&quot;).getPath();
-String toFilePath = TransferToDemo.class.getClassLoader().getResource(&quot;toFile.txt&quot;).getPath();
-//打开通道
-RandomAccessFile fromFile = new RandomAccessFile(fromFilePath, &quot;rw&quot;);
-FileChannel fromChannel = fromFile.getChannel();
-RandomAccessFile toFile = new RandomAccessFile(toFilePath, &quot;rw&quot;);
-FileChannel toChannel = toFile.getChannel();
-//传输数据
-long position = 0;
-long count = fromChannel.size();
-fromChannel.transferTo(position, count, toChannel);
-</code></pre><p>是不是发现这个例子和前面那个例子特别相似？除了调用方法的FileChannel对象不一样外，其他的都一样。<br>上面所说的关于SocketChannel的问题在transferTo()方法中同样存在。SocketChannel会一直传输数据直到目标buffer被填满。</p>
-<h2 id="Selector-1"><a href="#Selector-1" class="headerlink" title="Selector"></a>Selector</h2><p>Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能够知晓通道是否为诸如读写事件做好准备的组件。这样，<strong>一个单独的线程可以管理多个channel，从而管理多个网络连接</strong>。</p>
-<h3 id="为什么使用Selector"><a href="#为什么使用Selector" class="headerlink" title="为什么使用Selector?"></a>为什么使用Selector?</h3><p>仅用单个线程来处理多个Channels的好处是，只需要更少的线程来处理通道。事实上，<strong>可以只用一个线程处理所有的通道</strong>。对于操作系统来说，线程之间上下文切换的开销很大，而且每个线程都要占用系统的一些资源（如内存）。因此，使用的线程越少越好。</p>
-<p>但是，需要记住，现代的操作系统和CPU在多任务方面表现的越来越好，所以多线程的开销随着时间的推移，变得越来越小了。实际上，如果一个CPU有多个内核，不使用多任务可能是在浪费CPU能力。不管怎么说，关于那种设计的讨论应该放在另一篇不同的文章中。在这里，只要知道使用Selector能够处理多个通道就足够了。</p>
-<p>下面是单线程使用一个Selector处理3个channel的示例图：</p>
-<p><img src="http://i.imgur.com/LXlI8Ux.png" alt=""></p>
-<h3 id="Selector的创建"><a href="#Selector的创建" class="headerlink" title="Selector的创建"></a>Selector的创建</h3>
-          
+          转自 http://ifeve.com/java-nio-all/
+NIO是什么Java NIO(New IO)是一个可以替代标准Java IO API的IO API（从Java 1.4开始)，Java NIO提供了与标准IO不同的IO工作方式。
+1、Java NIO: Channels and B
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/09/[NIO]Java NIO 系列教程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -860,21 +638,20 @@ fromChannel.transferTo(position, count, toChannel);
       
         
           
-            <h2 id="同步、异步区别-阻塞、非阻塞区别"><a href="#同步、异步区别-阻塞、非阻塞区别" class="headerlink" title="同步、异步区别/阻塞、非阻塞区别"></a>同步、异步区别/阻塞、非阻塞区别</h2><p>老张爱喝茶，废话不说，煮开水。</p>
-<p>出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。</p>
-<p>1、老张把水壶放到火上，立等水开。（同步阻塞）</p>
-<p>老张觉得自己有点傻</p>
-<p>2、老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）</p>
-<p>老张还是觉得自己有点傻，于是变高端了，买了把会响笛的那种水壶。水开之后，能大声发出嘀~~~~的噪音。</p>
-<p>3、老张把响水壶放到火上，立等水开。（异步阻塞）</p>
-<p>老张觉得这样傻等意义不大</p>
-<p>4、老张把响水壶放到火上，去客厅看电视，水壶响之前不再去看它了，响了再去拿壶。（异步非阻塞）</p>
-<p>老张觉得自己聪明了。</p>
-<p><strong>所谓同步异步，只是对于水壶而言。</strong><br>普通水壶，同步；响水壶，异步。<br>虽然都能干活，但响水壶可以在自己完工之后，<strong>提示老张水开了</strong>。这是普通水壶所不能及的。<br>同步只能让<strong>调用者去轮询自己</strong>（情况2中），造成老张效率的低下。</p>
-<p><strong>所谓阻塞非阻塞，仅仅对于老张而言。</strong><br>立等的老张，阻塞；看电视的老张，非阻塞。<br>情况1和情况3中老张就是阻塞的，媳妇喊他都不知道。虽然3中响水壶是异步的，可对于立等的老张没有太大的意义。所以一般<strong>异步是配合非阻塞</strong>使用的，这样才能发挥异步的效用。</p>
-<p><strong>Java中的NIO是同步非阻塞</strong>，即程序可以做别的事情，但时不时去看是否有IO操作</p>
-
-          
+          同步、异步区别/阻塞、非阻塞区别老张爱喝茶，废话不说，煮开水。
+出场人物：老张，水壶两把（普通水壶，简称水壶；会响的水壶，简称响水壶）。
+1、老张把水壶放到火上，立等水开。（同步阻塞）
+老张觉得自己有点傻
+2、老张把水壶放到火上，去客厅看电视，时不时去厨房看看水开没有。（同步非阻塞）
+老张还是觉得自
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/06/[NIO]同步异步、阻塞非阻塞/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1006,227 +783,19 @@ fromChannel.transferTo(position, count, toChannel);
       
         
           
-            <p>思维导图</p>
-<p><img src="http://i.imgur.com/es8HuS8.jpg" alt=""></p>
-<h2 id="Java代码的执行"><a href="#Java代码的执行" class="headerlink" title="Java代码的执行"></a>Java代码的执行</h2><p>讨论三个问题，JDK如何将代码<strong>编译为class文件</strong>、如何<strong>装载class文件</strong>、如何<strong>执行class</strong></p>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>编译器将源码编译成class文件，使用 javac 工具进行编译</p>
-<p>编译过程：<br>1、分析和输入到符号表。Parse过程将代码字符串转变成token序列，再由token序列生成抽象语法树；Enter过程将符号输入到符号表<br>2、注解处理<br>3、语法分析和生成class文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">javac -g Foo.java 生成所有调试信息</div><div class="line">javap -c -s -l -verbose Foo来查看编译后的class文件</div></pre></td></tr></table></figure>
-<h3 id="装载"><a href="#装载" class="headerlink" title="装载"></a>装载</h3><p>class文件由类加载器（ClassLoader）加载进内存，并形成Class对象，之后就可以对Class对象进行实例化并调用</p>
-<p>Java类加载机制的特点：<br>1、类加载机制可在<strong>运行时动态加载</strong>外部的类、远程网络下载过来的class文件<br>2、可以通过JVM的类加载机制来实现<strong>类隔离</strong>的效果</p>
-<p>类加载过程步骤：装载、链接、初始化</p>
-<p><font color="red">JVM通过<strong>类的全限定名</strong>和<strong>类加载器实例</strong>来标识一个被加载的类</font>，类的命名方式如下：</p>
-<ul>
-<li>对于<strong>接口或非数组型的类</strong>，其名称即为类名，由类所在的 ClassLoader 负责加载</li>
-<li><strong>数组型</strong>的类，其名称为[ + 基本类型或 L+引用类型;</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//接口或非数组性的类</div><div class="line">String a = &quot;123&quot;;</div><div class="line">System.out.println(a.getClass().getName());//java.lang.String</div><div class="line">//数组型的类</div><div class="line">int[] a = new int[10];</div><div class="line">System.out.println(a.getClass().getName());//[I</div><div class="line"></div><div class="line">Object[] a = new Object[10];</div><div class="line">System.out.println(a.getClass().getName());//[Ljava.lang.Object;</div></pre></td></tr></table></figure>
-<p>JVM中类加载器的树状层次结构：</p>
-<p><img src="http://my.csdn.net/uploads/201207/12/1342057661_9458.png" alt="类加载器之间的父子关系和管辖范围图"></p>
-<ul>
-<li><p>引导类加载器（bootstrap class loader）：它用来加载 Java 的<strong>核心库</strong>(jre/lib/rt.jar)，是用原生C++代码来实现的，并不继承自java.lang.ClassLoader。加载扩展类和应用程序类加载器，并指定他们的父类加载器，<strong>在java中获取不到</strong>。 </p>
-</li>
-<li><p>扩展类加载器（extensions class loader）：它用来加载 Java 的<strong>扩展库</strong>(jre/ext/*.jar)。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。 对应Sun JDK中的ExtClassLoader</p>
-</li>
-<li><p>系统类加载器（system class loader）：它根据 Java 应用的<strong>类路径</strong>（CLASSPATH）来加载 Java 类。<strong>一般来说，Java 应用的类都是由它来完成加载的</strong>。可以通过 ClassLoader.getSystemClassLoader()来获取它。对应Sun JDK中的AppClassLoader</p>
-</li>
-<li><p>自定义类加载器（custom class loader）：除了系统提供的类加载器以外，开发人员可以通过继承 java.lang.ClassLoader类的方式<strong>实现自己的类加载器</strong>。自定义的ClassLoader可用于加载非Classpath中的jar（如网络上加载的jar或二进制），还可以在加载之前对class文件做一些动作，比如解密等</p>
-</li>
-</ul>
-<p>类加载的双亲委派机制：</p>
-<p>某个特定的类加载器在接到加载类的请求时，首先将加载任务委托交给<strong>父类加载器</strong>，父类加载器又将加载任务<strong>向上委托</strong>，直到最父类加载器，如果最父类加载器<strong>可以完成</strong>类加载任务，就<strong>成功返回</strong>，如果不行就<strong>向下传递</strong>委托任务，由其子类加载器进行加载。如果该类加载器的父类不能完成加载，则<strong>由该类进行加载</strong></p>
-<p>双亲委派机制的好处：</p>
-<p>保证Java<strong>核心库的安全性</strong>。例如：如果用户自己写了一个java.lang.String类就会因为双亲委派机制交由Bootstrap ClassLoader加载，但Bootstrap已经加载过 java.lang.String 类，导致加载不能被加载，不会破坏原生的String类的加载）</p>
-<p>代理模式：</p>
-<p>与双亲委派机制相反，代理模式是<strong>先自己尝试加载</strong>，如果<strong>无法加载则向上传递</strong>，这样会造成<strong>多个不同的Classloader都加载了某Class</strong>，并且这些Class的实例对象<strong>都不相同</strong>。</p>
-<p><strong>由于JVM采用类名+ClassLoader实例作为Class加载的判断</strong>，JVM会保证同一个ClassLoader实例对象只能加载一次同样名称的Class，因此可以借此实现<strong>类隔离</strong>的需求。<strong>Tomcat就是代理模式</strong></p>
-<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><p>class的执行有<strong>解释执行</strong>和<strong>编译为机器码执行</strong>两种方式，其中编译为机器码又分为client和server两种模式</p>
-<p>字节码解释执行：<br>字节码是一种中间代码的方式，要由JVM<strong>在运行时对其进行解释并执行</strong>，这种方式称为字节码解释执行方式</p>
-<p>JVM 是基于栈的体系结构来执行 class 字节码的。<strong>线程创建后，都会产生程序计数器（PC）和栈（Stack）</strong>，程序计数器存放<strong>下一条要执行的指令在方法内的偏移量</strong>，栈中存放一个个<strong>栈帧</strong>，每个栈帧对应着<strong>每个方法的每次调用</strong>，而栈帧又是有<strong>局部变量区</strong>和<strong>操作数栈</strong>两部分组成，局部变量区用于存放<strong>方法中的局部变量和参数</strong>，操作数栈中用于存放<strong>方法执行过程中产生的中间结果</strong>。栈的结构如下图所示：</p>
-<p><img src="http://i.imgur.com/4cDnolx.jpg" alt=""></p>
-<p>对于方法的指令解释执行，执行方式为冯诺依曼体系中的FDX循环方式，即<strong>获取下一条指令，解码并分派，然后执行</strong></p>
-<p>编译执行：<br>解释执行的效率较低，为提升代码的执行性能，Sun JDK提供了<strong>将字节码编译为机器码</strong>的支持，<strong>编译在运行时进行</strong>，通常称为<strong>JIT编译器</strong>。</p>
-<p>Sun JDK在执行过程中，对执行<strong>频率高的代码进行编译</strong>，对执行<strong>不频繁额代码则继续采用解释的方式</strong></p>
-<p>编译分为Client compiler和Server compiler。C1较轻量级，只做少量性能开销高的优化，占用内存少，适合桌面交互式应用；C2较为重量级，采用大量的传统编译优化技巧，占用内存相对多一点，适合服务端的应用</p>
-<p>反射执行：</p>
-<p>反射可以<strong>动态</strong>调用某<strong>对象实例</strong>中对应的方法、访问对象的属性，可以灵活得实现对象的调用</p>
-<p>要实现动态的调用，最直接的方式就是<strong>动态得生成字节码，并加载到JVM中执行</strong>，Sun采用的即为这种方式</p>
-<p>采用反射的方式，提升了代码编写的灵活性，但比直接编译成字节码方式，调用复杂的多，因此性能比直接执行的慢一点</p>
-<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>主要内容是JVM如何进行内存的分配和回收</p>
-<p>JVM<strong>自动管理</strong>内存的分配与回收，大大<strong>降低了开发人员编程序的难度</strong>，但副作用是可能在不知不觉中<strong>浪费了很多内存</strong>，导致JVM花费很多时间进行内存的回收；另外还可能由于不清楚内存的分配和回收机制，造成<strong>内存泄漏</strong></p>
-<h3 id="JVM内存空间"><a href="#JVM内存空间" class="headerlink" title="JVM内存空间"></a>JVM内存空间</h3><p><img src="http://i.imgur.com/BMNPnYQ.jpg" alt=""></p>
-<p>JVM的内存结构分为以下部分：</p>
-<ul>
-<li>程序计数器：每个线程拥有一个PC寄存器，记录了<strong>下一条指令在方法中的偏移</strong></li>
-<li>虚拟机栈：每个线程私有，栈中存放了栈帧，<strong>每次方法调用都会产生栈帧</strong>，栈帧主要分为<strong>局部变量区</strong>和<strong>操作数栈</strong>两部分；通过-Xss指定其大小</li>
-<li>本地方法栈：用于<strong>支持native方法的执行，存储了每个native方法调用的状态</strong>，在Sun JDK的实现中本地方法栈和JVM方法栈是同一个</li>
-<li>堆：用于存储<strong>对象实例及数组值</strong>，所有new创建出来的对象的内存都在此分配；通过-Xms和-Xmx来设定最小值和最大值，为避免频繁调整Heap的大小，通常将两个值设置成一样</li>
-<li>方法区：存放了要加载<strong>类的信息</strong>（类的版本，属性、方法，接口信息）、<strong>即时编译器编译后的代码</strong>、<strong>静态变量</strong>、<strong>常量</strong>。<strong>运行时常量</strong>位于方法区，用于存放编译时的<strong>字面值</strong>和<strong>符号引用</strong>；在Sun JDK中这块区域对应Permanet Generation，又称为持久代，可通过-XX:PermSize及-XX:MaxPermSize来指定最小值和最大值</li>
-</ul>
-<p>其中，程序计数器、虚拟机栈和本地方法栈是<strong>线程隔离</strong>的；方法区、堆是<strong>所有线程共享</strong>的</p>
-<p><strong>内存的各个区域详细解释<br>————————————————————————————————————————</strong></p>
-<p>堆的分代：</p>
-<p>为了让内存回收更加高效，对堆采用了分代管理的方式</p>
-<p><img src="http://i.imgur.com/wE9zCQ9.jpg" alt=""></p>
-<ul>
-<li>新生代：大多数情况下Java程序中新建的对象都从新生代分配，新生代由<strong>Eden Space</strong>和<strong>两块相同大小的Survivor Space</strong>（又称S0和S1或From和To）构成</li>
-<li>老年代：1、用于存放新生代中经过多次垃圾回收<strong>仍然存活</strong>的对象；2、大对象在老年代<strong>直接分配</strong>内存；3、动态对象年龄判断，如果Survivor相同年龄所有对象大小大于Survivor空间大小的一半，年龄大于等于该年龄的对象直接进入老年代；老年代占用的内存大小为-Xmx减去-Xmn的值</li>
-</ul>
-<p>虚拟机栈：</p>
-<p><img src="http://i.imgur.com/NZcvXVd.jpg" alt=""></p>
-<p>栈中存放了栈帧，每个方法调用都会产生栈帧。栈帧主要分为<strong>局部变量区</strong>和操作数栈两部分</p>
-<ul>
-<li>局部变量存放方法中的局部变量和参数</li>
-<li>操作数栈用于存放方法<strong>执行过程中产生的中间结果</strong>，计算完成后将数据放入局部变量区</li>
-</ul>
-<h3 id="内存分配策略★★★★★"><a href="#内存分配策略★★★★★" class="headerlink" title="内存分配策略★★★★★"></a>内存分配策略★★★★★</h3><ul>
-<li>对象优先在Eden分配</li>
-<li><strong>大对象直接进入老年代</strong>（需要大量连续内存空间的Java对象，最典型的大对象就是那种很长的字符串及数组）</li>
-<li>长期存活的对象将进入老年代</li>
-<li>动态年龄判断：如果在Survivor区中<strong>相同年龄所有对象大小的总和大于Survivor空间的一半</strong>，年龄大于或等于该年龄的对象就可以直接进入老年代</li>
-<li>空间分配担保:在发生Minor GC前，虚拟机先检查老年代最大可用的连续空间是否大于新生代所有对象的总和，若大于这Minor GC是可以确保安全的。若不大于，则虚拟机检查HandlePromotionFailure的值，若<strong>允许担保失败</strong>继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小(经验值)，若大于，则尝试进行一次Minor GC，虽然是有风险的；若小于或HandlePromotionFailure不允许担保失败则进行一次Full  GC</li>
-</ul>
-<p>新生代内存分配：</p>
-<p>1、Java对象所占用的内存<strong>主要从堆上进行分配</strong>，堆是所有<strong>线程共享</strong>的，因此在堆上分配内存时需要<strong>加锁</strong>，这导致了创建对象<strong>开销比较大</strong>；</p>
-<p>2、Sun JDK为了提升内存分配的效率，会为每个新创建的线程在新生代的<strong>Eden Space</strong>分配一块独立的空间，这块空间称为TLAB（ThreadLocal Allocation Buffer，<strong>线程局部分配缓存</strong>）</p>
-<p>在TLAB上分配内存时不需要加锁，因此JVM在给线程中的对象分配内存时会<strong>尽量在TLAB上分配</strong>，如果对象过大或TLAB空间已用完，则仍然在堆上进行分配，通常<strong>多个小的对象比大的对象更加高效</strong></p>
-<p>3、除了从堆上分配及从TLAB上分配外，还要一种是基于逃逸分析直接在栈上进行分配的方式</p>
-<pre><code>逃逸分析优化JVM原理
-我们知道Java对象是在堆里分配的，在调用栈中，只保存了对象的指针。
-当对象不再使用后，需要依靠GC来遍历引用树并回收内存，如果对象数量较多，将给GC带来较大压力，也间接影响了应用的性能。减少临时对象在堆内分配的数量，无疑是最有效的优化方法。
-怎么减少临时对象在堆内的分配数量呢？不可能不实例化对象吧！
-场景介绍
-其实，在Java应用里普遍存在一种场景。一般是在方法体内，声明了一个局部变量，且该变量在方法执行生命周期内未发生逃逸（在方法体内，未将引用暴露给外面）。
-按照JVM内存分配机制，首先会在堆里创建变量类的实例，然后将返回的对象指针压入调用栈，继续执行。
-这是优化前，JVM的处理方式。
-逃逸分析优化 - 栈上分配
-优化原理：分析找到未逃逸的变量，将变量类的实例化内存直接在栈里分配(无需进入堆)，分配完成后，继续在调用栈内执行，最后线程结束，栈空间被回收，局部变量对象也被回收。
-这是优化后的处理方式，对比可以看出，主要区别在栈空间直接作为临时对象的存储介质。从而减少了临时对象在堆内的分配数量。
-逃逸分析的原理很简单，但JVM在应用过程中，还是有诸多考虑。
-比如，逃逸分析不能在静态编译时进行，必须在JIT里完成。原因是，与Java的动态性有冲突。因为你可以在运行时，通过动态代理改变一个类的行为，此时，逃逸分析是无法得知类已经变化了。
-</code></pre><p>逃逸分析—-在计算机语言编译器语言优化管理中，分析指针动态范围的方法称之为逃逸分析（通俗点讲，<strong>当一个对象的指针被多个方法或线程引用时</strong>），我们称这个指针发生了逃逸</p>
-<p>在这个例子中，一共举了3种常见的指针逃逸场景。分别是 全局变量赋值，方法返回值，实例引用传递。<strong>对于每一个方法中都创建了new了一个局部变量，但都将该变量暴露给外部引用</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class G &#123;</div><div class="line">	public static B b;</div><div class="line">	</div><div class="line">	public void globalVariablePointerEscape()&#123;//给全局变量赋值，发生逃逸</div><div class="line">		b=new B();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public B methodPointerEscape()&#123;//方法返回值，发生逃逸</div><div class="line">		return new B();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public void instancePassPointerEscape()&#123;</div><div class="line">		methodPointerEscape().printClassName(this);//实例引用发生逃逸</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line">class B&#123;</div><div class="line">	public void printClassName(G g)&#123;</div><div class="line">		System.out.println(g.getClass().getName());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="内存回收"><a href="#内存回收" class="headerlink" title="内存回收"></a>内存回收</h3><p><strong>如何判断对象是否该回收：</strong></p>
-<ul>
-<li>引用计数算法：采用<strong>分散式</strong>的管理方式，每个对象都有一个计数器，当<strong>计数器为零</strong>时，说明此对象已经不再被使用，可被回收；每次对象<strong>赋值</strong>进行引用计数器的增减。但对<strong>循环引用</strong>的场景没办法实现回收，例如下图对象A释放了B、C的引用，但B和C互相引用，也无法回收BC，对于Java这种有<strong>复杂引用关系</strong>的语言而言，<strong>引用计数器不是非常合适</strong></li>
-</ul>
-<p><img src="http://i.imgur.com/7u4tVeC.jpg" alt=""></p>
-<ul>
-<li><p><strong>可达性分析算法</strong>★★★</p>
-<p>  <img src="http://i.imgur.com/E2VlX8P.jpg" alt=""></p>
-</li>
-</ul>
-<p>采用<strong>集中式</strong>的管理方式，<strong>全局记录数据的引用状态</strong>。基于一定条件的触发（定时、空间不足），执行时需要<strong>从根集合扫描对象的引用关系</strong></p>
-<p>在主流的商用程序语言（Java、C#，甚至包括前面提到的古老的Lisp）的主流实现中，都是称通过可达性分析（Reachability Analysis）来判定对象是否存活的。这个算法的基本思路就是通过一系列的称为<strong>“GC Roots”的对象作为起始点</strong>，从这些节点开始<strong>向下搜索</strong>，搜索所走过的路径称为引用链（Reference Chain），当一个<strong>对象到GC Roots没有任何引用链相连</strong>（用图论的话来说，就是从GC Roots到这个对象不可达）时，则证明<strong>此对象是不可用的</strong>。如图3-1所示，对象object 5、object 6、object 7虽然互相有关联，但是它们到GC Roots是不可达的，所以它们将会被判定为是可回收的对象。</p>
-<p>在Java语言中，可作为GC Roots的对象包括下面几种：</p>
-<ul>
-<li>虚拟机栈（栈帧中的本地变量表）中引用的对象</li>
-<li>本地方法栈中JNI（即一般说的Native方法）引用的对象</li>
-<li>方法区中类静态属性引用的对象、常量引用的对象</li>
-</ul>
-<p><strong>垃圾收集算法：</strong></p>
-<ul>
-<li>复制：从根集合中扫描出存活的对象，并将<strong>存活的对象</strong>复制到一块新的<strong>完全未使用的空间中</strong>。回收的空间中存活对象较少时复制算法会比较高效，但需要增加一块新的空间及进行对象的移动</li>
-<li>标记-清除算法：从<strong>根集合</strong>中开始扫描，对<strong>存活的对象进行标记</strong>，标记完毕后对<strong>未标记</strong>的对象进行回收。缺点是会造成内存碎片</li>
-<li>标记-整理：从<strong>根集合</strong>中开始扫描，对存活的对象进行标记，在回收不存活对象后，会将所有<strong>存活的对象</strong>都往<strong>左端空闲的空间进行移动</strong>，并更新引用对象的指针</li>
-</ul>
-<p><strong>分代收集算法</strong></p>
-<ul>
-<li>把 Java 堆分为新生代和老年代</li>
-<li>新生代对象的<strong>生命周期短</strong>，采用<strong>复制算法</strong>，垃圾收集时将Eden和Survivor中存活的对象一次性复制到另一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。只需要付出少量存活对象的复制成本就可以完成收集，当Survivor对象不够用时，需要老年代进行<strong>分配担保</strong></li>
-<li>老年代对象存活率高，没有额外的空间对它进行分配担保，必须使用<strong>“标记-清理”</strong>或<strong>“标记-整理”算法</strong></li>
-</ul>
-<p><strong>对象引用关系：</strong>（记住弱引用和虚引用的区别）</p>
-<ul>
-<li>强引用：new的方式，主动释放才会被GC</li>
-<li>弱引用：JVM内存不足时会被回收，适合做缓存</li>
-<li>虚引用：强引用释放后，GC时会被自动释放</li>
-</ul>
-<p><strong>垃圾收集器</strong></p>
-<p><img src="http://i.imgur.com/DlW4pGD.jpg" alt=""></p>
-<p>上图中共有HotSpot 1.6中共有7种垃圾回收器，如果两个垃圾回收器之间有连线，说明二者可以搭配使用。</p>
-<ul>
-<li>CMS可以搭配 Serial和 ParNew</li>
-<li>Serial Old 搭配 Serial、ParNew、Parallel Scavenge</li>
-<li>Parallel Old 搭配 Parallel Scavenge</li>
-</ul>
-<p>Serial收集器(新生代) / Serial Old收集器（老年代）</p>
-<ul>
-<li>Serial垃圾收集器是一个<strong>单线程的收集器</strong>。它在进行垃圾收集时，必须<strong>暂停其他工作线程</strong>，直到它收集结束</li>
-<li>Serial收集器在新生代采用<strong>复制算法</strong>，暂停所有用户线程；在老年代采用<strong>标记-整理算法</strong>，暂停所有用户线程</li>
-<li>Serial收集器简单高效，适用于<strong>客户端</strong>桌面程序，稍微有点卡顿可以接受</li>
-</ul>
-<p>ParNew收集器</p>
-<ul>
-<li>ParNew收集器其实就是Serial收集器的<strong>多线程版本</strong>，多个垃圾回收线程<strong>并行</strong>进行，但此时垃圾收集时必须<strong>暂停用户线程</strong></li>
-<li>新生代采用<strong>复制算法</strong>，暂停所有用户线程</li>
-<li>ParNew是许多运行<strong>在Server模式</strong>下的虚拟机中首选的新生代收集器，其中一个重要原因是，<strong>除Serial收集器外，只有它能与CMS收集器配合工作</strong>。CMS是HotSpot虚拟机中第一款真正意义上的并发收集器</li>
-</ul>
-<p>Parallel Scavenge收集器(新生代) / Parallel Old收集器(老年代)</p>
-<ul>
-<li>Parallel Scavenge与ParNew<strong>很类似</strong>，是一个使用<strong>复制算法</strong>的新生代的<strong>并行多线程</strong>收集器，老年代采用<strong>标记-整理算法</strong>,垃圾回收时<strong>暂停用户线程</strong></li>
-<li>他们之间最大的区别是关注点不一样，ParNew等收集器的关注点在于尽可能地<strong>缩短垃圾收集时用户线程的停顿时间</strong>，而Parallel Scavenge收集器的目标是达到一个<strong>可控制的吞吐量</strong>（吞吐量指用于运行用户代码的CPU时间与总CPU时间的比值）</li>
-</ul>
-<pre><code>垃圾收集器中的并发与并行
-并行（Parallel）：指多头垃圾收集器线程并行工作，但此时用户线程仍处于等待状态。
-并发（Concurrent）：指用户线程与回收器线程同时工作。
-</code></pre><p>CMS收集器</p>
-<ul>
-<li>CMS（Concurrent Mark Sweep）收集器是基于”<strong>标记 - 清除</strong>“算法的<strong>并发收集器</strong>，其设计目标为获取<strong>最短回收停顿时间</strong></li>
-<li>整个过程分为四个步骤，包括：初始标记、并发标记、重新标记、并发清除</li>
-</ul>
-<p><strong>初始标记和重新标记仍需暂停所有用户线程</strong>，即Stop the World，但初始标记只是<strong>标记GC Roots能直接关联的对象</strong>，而重新标记则只是为了修正并发标记期间，因用户<strong>程序继续运行而产生变动那一部分对象</strong>，这个阶段的停顿时间比前面介绍的Stop the World的时间要短得多。整个收集过程中耗时最久的<strong>并发标记和并发清除则和用户线程一起工作</strong>，所以总地来讲，CMS中GC线程是和用户线程一起并发执行的。下图可以比较清楚地解释这个过程：</p>
-<p><img src="http://i.imgur.com/iw9P4K4.jpg" alt=""></p>
-<p>CMS是一款突破性的收集器，它极大地缩短了用户线程停顿时间，可以认为其实现了并发垃圾回收，但金无足赤，人无完人，CMS还是具有这几个缺陷：</p>
-<ul>
-<li>对CPU资源非常敏感。几乎所有的并行/并发系统都对CPU敏感。虽然它很少导致用户卡顿，但是会因为占用了一部分线程而导致应用程序变慢，总吞吐量变低。</li>
-<li>无法处理浮动垃圾（Floating Garbage），可能出现”Concurrent Mode Failure”失败而导致另一次Full GC的产生。由于CMS并发清理阶段用户线程还在同时执行，因此此时这些线程产生的这部分垃圾CMS无法处理，只好留在下一次GC时再清理，这一部分垃圾就被称为”浮动垃圾”。因为在垃圾收集阶段用户线程还在运行，因此CMS需要预留足够的空间供这些线程使用，而不能向其他收集器那样hex等老年代几乎被完全充满时再进行回收。默认CMS收集器在老年代使用68%之后就被激活。</li>
-<li>这个缺点来自于CMS所采用的”标记 - 清除”算法。这种方式容易产生大量碎片，当碎片过多时，容易出现老年代空间有很大剩余，但找不到连续空间进行分配给大对象，从而不得不提前触发一次GC。</li>
-</ul>
-<p>G1 收集器</p>
-<p>G1（Garbage First）收集器是当前收集器技术发展的最前沿成果，它与CMS相比会有两个显著改进：</p>
-<ul>
-<li>采用”<strong>标记 - 整理</strong>“算法，避免产生碎片</li>
-<li>可以精确地控制卡顿。这是通过让使用指定一个参数来控制在一个长度为M的时间片内垃圾回收的时间N。</li>
-<li>G1之所以可以在基本不牺牲吞吐量的前提下完成垃圾回收，是因为它能够尽量<strong>避免全区域的垃圾回收</strong>。之前的收集器是进行收集的范围是整个新生代或老年代，而G1将整个Java堆（包括新生代、老年代）划分为多个大小固定的独立区域，并且跟踪这些区域的堆积成都，在后台维护一个优先列表，每次根据优先级从列表中挑选区域进行收集。</li>
-</ul>
-<h2 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h2><h3 id="从编写源代码到程序运行的过程"><a href="#从编写源代码到程序运行的过程" class="headerlink" title="从编写源代码到程序运行的过程"></a>从编写源代码到程序运行的过程</h3><ul>
-<li><p>第一步(编译)：创建完源文件之后，使用javac命令，程序会先被编译为.class文件</p>
-</li>
-<li><p>第二步（运行)：java类运行的过程大概可分为两个过程：1、类的加载  2、类的执行。</p>
-</li>
-</ul>
-<p>需要说明的是：JVM主要在程序<strong>第一次主动使用类的时候，才会去加载该类</strong>。也就是说，JVM并不是在一开始就把一个程序就所有的类都加载到内存中，而是到不得不用的时候才把它加载进来，而且只加载一次。</p>
-<p>1、（java命令）在编译好java程序得到MainApp.class文件后，在命令行上敲java AppMain。系统就会启动一个jvm进程，jvm进程从classpath路径中找到一个名为AppMain.class的二进制文件，将 MainApp的类信息加载到运行时数据区的方法区内，这个过程叫做<strong>MainApp类的加载</strong>，然后JVM找到AppMain的主函数入口，开始<strong>执行main函数</strong></p>
-<p>2、（类加载器）执行过程中，会<strong>创建对象</strong>。JVM会首先<strong>从方法区加载类信息和相关常量</strong>，class加载完毕之后,<strong>在堆上为对象分配内存</strong>，然后调用初始化实例，当然这时候实例保持指向class类型信息，这个信息保存在方法区中。</p>
-<p>3、（执行引擎）<strong>调用实例方法</strong>时，会根据引用找到对象信息，进而可定位对应的class类型信息，和方法表。</p>
-<p>4、（执行引擎）<strong>执行方法时</strong>，在<strong>虚拟机栈</strong>中进行，分配栈帧，随着入栈出栈，完成方法调用操作。</p>
-<p>执行引擎</p>
-<p>运行Java的<strong>每一个线程都是一个独立的虚拟机执行引擎的实例</strong>。从线程生命周期的开始到结束，他要么在执行字节码，要么在执行本地方法。一个线程可能通过解释或者使用芯片级指令直接执行字节码，或者间接通过JIT执行编译过的本地代码。我们上文讲到的main函数，也就是<strong>执行引擎的操作入口。</strong></p>
-<h3 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h3><p>1、检查 </p>
-<p>虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在<strong>常量池</strong>中定位到一个类的<strong>符号引用</strong>，并且检查这个符号引用代表的类是否已经被<strong>加载、解析和初始化过</strong>。如果没有，那必须先执行相应的类加载过程</p>
-<p>2、分配内存 </p>
-<p>接下来将为新生对象分配内存，为对象分配内存空间的任务等同于把一块确定的大小的内存从Java堆中划分出来。</p>
-<p>假设Java堆中内存是绝对规整的，所有用过的内存放在一遍，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针指向空闲空间那边挪动一段与对象大小相等的距离，这个分配方式叫做”指针碰撞”</p>
-<p>如果Java堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，那就没办法简单地进行指针碰撞了，虚拟机就必须维护一个列表，记录上哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录，这种分配方式成为”空闲列表”</p>
-<p>选择那种分配方式由Java堆是否规整决定，而Java堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。</p>
-<p>3、Init</p>
-<p>执行new指令之后会接着执行Init方法，进行初始化，这样一个对象才算产生出来</p>
-<h3 id="垃圾回收（GC-在什么时候，对什么东西，做了什么事情"><a href="#垃圾回收（GC-在什么时候，对什么东西，做了什么事情" class="headerlink" title="垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　"></a>垃圾回收（GC 在什么时候，对什么东西，做了什么事情)　</h3><p><strong>在什么时候</strong>，即什么时候触发垃圾回收</p>
-<p>首先需要知道，GC又分为 minor GC 和 Full GC (也称为 Major GC )。Java 堆内存分为新生代和老年代，新生代中又分为1个 Eden 区域和两个 Survivor 区域。</p>
-<p>那么对于 Minor GC 的触发条件：大多数情况下，直接在 Eden 区中进行分配。<strong>如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC；</strong>对于 Full GC（Major GC）的触发条件：1、如果老年代没有足够空间的话（在新生代多次清理未被清理的晋升到老年代或直接在老年代分配的大对象，大数组），2、持久带被写满 3、System.gc()被显示调用 4、上一次GC之后堆分配策略动态变化，那么就会进行一次 Full GC。</p>
-<p>Ps：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：</p>
-<p><strong>在发生Minor GC之前</strong>，虚拟机会先检查<strong>老年代最大可用的连续空间</strong>是否大于<strong>新生代所有对象的总空间</strong>。如果<strong>大于</strong>则进行Minor GC，如果<strong>小于</strong>则看HandlePromotionFailure设置<strong>是否允许担保失败</strong>。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的<strong>平均大小</strong>，如果大于则尝试Minor GC（<strong>如果尝试失败也会触发Full GC</strong>），如果小于后不允许担保失败，则进行Full GC。</p>
-<p>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</p>
-<p><strong>对什么东西</strong>，什么对象判定为需要垃圾回收：<br>主要根据<strong>可达性分析算法</strong>，如果一个对象不可达，那么就是可以回收的；如果一个对象可达，那么这个对象就不可以回收。对于可达性分析算法，它是通过一系列称为”GC Roots” 的对象作为起始点，当一个对象到 GC Roots 没有任何引用链相接的时候，那么这个对象就是不可达，就可以被回收。如下图:</p>
-<p><img src="http://img.blog.csdn.net/20170323193113437?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>根集合：虚拟机栈上引用的对象、本地方法引用的对象、静态变量及常量</p>
-<p><strong>做什么事情</strong></p>
-<p>主要做了清理对象，整理内存的工作。Java堆分为新生代和老年代，采用了不同的回收方式。例如新生代采用了复制算法，老年代采用了标记整理法。在新生代中，分为一个Eden 区域和两个Survivor区域，真正使用的是一个Eden区域和一个Survivor区域，GC的时候，会把存活的对象放入到另外一个Survivor区域中，然后再把这个Eden区域和Survivor区域清除。那么对于老年代，采用的是标记整理法，首先标记出存活的对象，然后再移动到一端。这样也有利于减少内存碎片。</p>
-<p>接着继续问你为什么要在这种时候对象才会被GC？　　接着继续问你GC策略都有哪些分类？　　你如果说出来了，继续问你这些策略分别都有什么优劣势？都适用于什么场景？　　你继续说出来了以后，给你举个实际的场景，让你选择一个GC策略？　　你如果选出来了，继续问你，为什么要选择这个策略？下面是关于类加载机制的简单连环炮。首先肯定是先问你Java的类加载器都有哪些？　　回答了这些以后，可能会问你每个类加载器都加载哪些类？　　说完以后，可能会问你这些类加载之间的父子关系是怎样的？　　你在回答的时候可能会提到双亲委派模型，那么可以继续问你什么是双亲委派模型？　　你解释完了以后，可能会继续问你，为什么Java的类加载器要使用双亲委派模型？　　你回答完以后，可能会继续问你如何自定义自己的类加载器，自己的类加载器和Java自带的类加载器关系如何处理？再来一个关于内存的连环炮。首先肯定就是问你内存分为哪几部分，这些部分分别都存储哪些数据？　　然后继续问你一个对象从创建到销毁都是怎么在这些部分里存活和转移的？　　接着可能会问你，内存的哪些部分会参与GC的回收？　　完事以后，可能还会问你Java的内存模型是怎么设计的？　　你回答了以后，还会继续问你为什么要这么设计？　　问完以后，还可能会让你结合内存模型的设计谈谈validate关键字的作用？　　你在谈的时候，肯定会提到可见性，那么接着可见性这三个字，还可以继续问你并发的内容。</p>
+          思维导图
 
-          
+Java代码的执行讨论三个问题，JDK如何将代码编译为class文件、如何装载class文件、如何执行class
+编译编译器将源码编译成class文件，使用 javac 工具进行编译
+编译过程：1、分析和输入到符号表。Parse过程将代码字符串转变成token序列，再由token序列生成
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/03/[JVM]JVM重点知识总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1358,28 +927,16 @@ fromChannel.transferTo(position, count, toChannel);
       
         
           
-            <p>父类方法中使用this，那么这个this指的是谁？<br><a href="http://blog.csdn.net/sinat_31311947/article/details/50619467" target="_blank" rel="external">http://blog.csdn.net/sinat_31311947/article/details/50619467</a></p>
-<p>java中关于父子类之间this关键字的一个问题<br><a href="https://my.oschina.net/mlongbo/blog/90047" target="_blank" rel="external">https://my.oschina.net/mlongbo/blog/90047</a></p>
-<p>Parent类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class Parent &#123;</div><div class="line">	public Parent()&#123;</div><div class="line">		System.out.println(this.getClass());</div><div class="line">	&#125;</div><div class="line">	public void info()&#123;</div><div class="line">		System.out.println(this);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Child类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">public class Child extends Parent &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>测试类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		Parent p = new Parent();</div><div class="line">		p.info();</div><div class="line">		System.out.println();</div><div class="line">		Child c = new Child();</div><div class="line">		c.info();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Child类继承Parent类，在Parent类的info方法中会输出对象的内存地址。</p>
-<pre><code>class demo.test.Parent
-demo.test.Parent@544a5ab2
-
-class demo.test.Child
-demo.test.Child@2e6e1408
-</code></pre><p>结论：</p>
-<ul>
-<li>this指的是当前对象</li>
-<li>在new子类的时候，<font color="red"><strong>会先调用父类的构造方法。但是只会new一个子类对象，不会new父类对象</strong></font>，所以<strong>在继承关系中只有子类一个对象，this也就指的是子类对象</strong></li>
-<li>在继承关系中，this指的是子类，或者说谁调用的方法就是指谁。多重继承也是如此。</li>
-</ul>
-
-          
+          父类方法中使用this，那么这个this指的是谁？http://blog.csdn.net/sinat_31311947/article/details/50619467
+java中关于父子类之间this关键字的一个问题https://my.oschina.net/mlongbo/blog/9004
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/02/[Java]Java中关于父子类之间this关键字的一个问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1511,18 +1068,17 @@ demo.test.Child@2e6e1408
       
         
           
-            <p>1、”.”、”|”、”<em>“都是转义字符，<em>*必须得加”<code>\\</code>“</em></em></p>
-<pre><code>如果用&quot;.&quot;作为分隔的话，必须是如下写法：String.split(&quot;\\.&quot;)，这样才能正确的分隔开，不能用String.split(&quot;.&quot;)；
-如果用&quot;|&quot;作为分隔的话，必须是如下写法：String.split(&quot;\\|&quot;)，这样才能正确的分隔开，不能用String.split(&quot;|&quot;);
-</code></pre><p>2、如果在一个字符串中有多个分隔符，可以用”|”作为连字符</p>
-<pre><code>比如：&quot;acount=? and uu =? or n=&quot;，把三个都分隔出来，可以用String.split(&quot;and|or&quot;);
-</code></pre><p>3、public String[] split(String regex，int limit)根据匹配给定的正则表达式来拆分此字符串。</p>
-<p>此方法返回的数组包含此字符串的每个<strong>子字符串</strong>，这些子字符串由<strong>另一个匹配给定的表达式的子字符串</strong>终止或由<strong>字符串结束符</strong>来终止。数组中的子字符串按它们在此字符串中的顺序排列。如果表达式不匹配输入的任何部分，则结果数组只具有一个元素，即<strong>此字符串</strong>。</p>
-<p>4、public string[] split(string regex)</p>
-<p>这里的参数的名称是 regex ，也就是 regular expression （正则表达式）。这个参数并不是一个简单的分割用的字符，而是一个正则表达式，<br>他对一些特殊的字符可能会出现你预想不到的结果，比如测试下面的代码： </p>
-<h2 id="正则表达式案例"><a href="#正则表达式案例" class="headerlink" title="正则表达式案例"></a>正则表达式案例</h2><p>多关键词<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String s=&quot;utf-8#&#123;gb2312&#125;utf-8#&#123;iso8859-1&#125;gbk#&#123;zzz&#125;&quot;;//[&apos;utf-8&apos;,&apos;gbk&apos;,&apos;gb2312&apos;,&apos;iso8859-1&apos;]</div><div class="line">Pattern pattern = Pattern.compile(&quot;utf-8|gbk|gb2312|iso8859-1&quot;);</div><div class="line">Matcher m = pattern.matcher(s);</div><div class="line">while(m.find())&#123;</div><div class="line">    System.out.println(m.group());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-          
+          1、”.”、”|”、”“都是转义字符，*必须得加”\\“
+如果用&quot;.&quot;作为分隔的话，必须是如下写法：String.split(&quot;\\.&quot;)，这样才能正确的分隔开，不能用String.split(&quot;.&quot;)；
+如果用&quot;|&quot;作
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/01/[Java]Java正则表达式(未完待续)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1654,14 +1210,16 @@ demo.test.Child@2e6e1408
       
         
           
-            <p>Fastjson API入口类是com.alibaba.fastjson.JSON，常用的序列化操作都可以在JSON类上的静态方法直接完成。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static final Object parse(String text); // 把JSON文本parse为JSONObject或者JSONArray </div><div class="line">public static final JSONObject parseObject(String text)； // 把JSON文本parse成JSONObject    </div><div class="line">public static final &lt;T&gt; T parseObject(String text, Class&lt;T&gt; clazz); // 把JSON文本parse为JavaBean </div><div class="line">public static final JSONArray parseArray(String text); // 把JSON文本parse成JSONArray </div><div class="line">public static final &lt;T&gt; List&lt;T&gt; parseArray(String text, Class&lt;T&gt; clazz); //把JSON文本parse成JavaBean集合 </div><div class="line">public static final String toJSONString(Object object); // 将JavaBean序列化为JSON文本 </div><div class="line">public static final String toJSONString(Object object, boolean prettyFormat); // 将JavaBean序列化为带格式的JSON文本 </div><div class="line">public static final Object toJSON(Object javaObject); 将JavaBean转换为JSONObject或者JSONArray。</div></pre></td></tr></table></figure>
-<p>Demo</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//1、反序列化，JSON字符串-&gt;对象</div><div class="line">String recvObject = &quot;&#123;\&quot;name\&quot;:\&quot;qm\&quot;,\&quot;password\&quot;:\&quot;123\&quot;&#125;&quot;;</div><div class="line">String recvArray = &quot;[\&quot;qm\&quot;,\&quot;tr\&quot;,\&quot;hj\&quot;]&quot;;</div><div class="line"></div><div class="line">JSONObject jsonObject = JSON.parseObject(recvObject);</div><div class="line">JSONArray jsonArray = JSON.parseArray(recvArray);</div><div class="line"></div><div class="line">    //JSONObject、JSONArray操作</div><div class="line">System.out.println(jsonObject.getString(&quot;name&quot;) + &quot; &quot; + jsonObject.getString(&quot;password&quot;));</div><div class="line">System.out.println(jsonArray.getString(0) + &quot; &quot; + jsonArray.getString(1) + &quot; &quot; + jsonArray.getString(2));</div><div class="line"></div><div class="line">//2、序列化，对象(数组，List，Map，bean等)-&gt;JSON字符串</div><div class="line">String sendObject = JSON.toJSONString(jsonObject);</div><div class="line">String sendArray = JSON.toJSONString(jsonArray);</div></pre></td></tr></table></figure>
-<p>更详细的Fastjson使用方法</p>
-<p><a href="http://www.cnblogs.com/Jie-Jack/p/3758046.html" target="_blank" rel="external">http://www.cnblogs.com/Jie-Jack/p/3758046.html</a></p>
-
-          
+          Fastjson API入口类是com.alibaba.fastjson.JSON，常用的序列化操作都可以在JSON类上的静态方法直接完成。
+12345678public static final Object parse(String text); // 把JSON文本parse为JSONObje
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/01/[Java]Fastjson使用指南/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1793,11 +1351,15 @@ demo.test.Child@2e6e1408
       
         
           
-            <p>hexo引用自定义js文件和css样式<br><a href="http://longhaoteng.com/2016/08/01/hexo%E5%BC%95%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89js%E6%96%87%E4%BB%B6%E5%92%8Ccss%E6%A0%B7%E5%BC%8F/" target="_blank" rel="external">http://longhaoteng.com/2016/08/01/hexo%E5%BC%95%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89js%E6%96%87%E4%BB%B6%E5%92%8Ccss%E6%A0%B7%E5%BC%8F/</a></p>
-<p>在 Hexo 博客中跳过渲染，创建自定义网页<br><a href="http://www.jianshu.com/p/f89428fce8d5" target="_blank" rel="external">http://www.jianshu.com/p/f89428fce8d5</a></p>
-<p>hexo干货系列：（六）hexo提交搜索引擎（百度+谷歌）<br><a href="http://www.jianshu.com/p/619dab2d3c08" target="_blank" rel="external">http://www.jianshu.com/p/619dab2d3c08</a></p>
-
-          
+          hexo引用自定义js文件和css样式http://longhaoteng.com/2016/08/01/hexo%E5%BC%95%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89js%E6%96%87%E4%BB%B6%E5%92%8Ccss%E6%A0%B7%E5%BC%
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/28/[Hexo]Hexo新特性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1929,51 +1491,21 @@ demo.test.Child@2e6e1408
       
         
           
-            <p><a href="http://www.jb51.net/article/30864.htm" target="_blank" rel="external">http://www.jb51.net/article/30864.htm</a></p>
-<p>查看Mysql的编码设置，在命令行中输入：</p>
-<pre><code>show variables like &quot;char%&quot;;
-</code></pre><p>MySQL字符集设置 </p>
-<ul>
-<li>character_set_server：默认的内部操作字符集 </li>
-<li>character_set_database：当前选中数据库的默认字符集 </li>
-<li>character_set_client：客户端来源数据使用的字符集 </li>
-<li>character_set_connection：连接层字符集 </li>
-<li>character_set_results：查询结果字符集 </li>
-<li>character_set_system：系统元数据(字段名等)字符集</li>
-</ul>
-<p>MySQL中的字符集转换过程<br>1、MySQL Server收到请求时将请求数据从character_set_client转换为character_set_connection； （qm解析：发送端将字符用A进行编码，Mysql接收到字节用character_set_client解码）<br>2、进行内部操作前将请求数据从character_set_connection转换为内部操作字符集，其确定方法如下：<br>• 使用每个数据字段的CHARACTER SET设定值；<br>• 若上述值不存在，则使用对应数据表的DEFAULT CHARACTER SET设定值(MySQL扩展，非SQL标准)；<br>• 若上述值不存在，则使用对应数据库的DEFAULT CHARACTER SET设定值；<br>• 若上述值不存在，则使用character_set_server设定值。 </p>
-<ol>
-<li>将操作结果从内部操作字符集转换为character_set_results。 </li>
-</ol>
-<p><img src="http://i.imgur.com/6gWJtFs.jpg" alt=""></p>
-<h2 id="Mysql的编码转换"><a href="#Mysql的编码转换" class="headerlink" title="Mysql的编码转换"></a>Mysql的编码转换</h2><p>在Tomcat中接收的</p>
-<h2 id="使用-useUnicode-true-amp-characterEncoding-utf-8-作用"><a href="#使用-useUnicode-true-amp-characterEncoding-utf-8-作用" class="headerlink" title="使用 useUnicode=true&amp;characterEncoding=utf-8 作用"></a>使用 useUnicode=true&amp;characterEncoding=utf-8 作用</h2><p>useUnicode：是否使用Unicode字符集，如果参数characterEncoding设置为gb2312或gbk，本参数值必须设置为true，默认false<br>characterEncoding：当useUnicode设置为true时，指定字符编码。比如可设置为gb2312或gbk，默认false</p>
-<h2 id="Java-连接-Mysql-数据库"><a href="#Java-连接-Mysql-数据库" class="headerlink" title="Java 连接 Mysql 数据库"></a>Java 连接 Mysql 数据库</h2><p>1、引入mysql-connector-java</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;mysql&lt;/groupId&gt;
-    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-    &lt;version&gt;5.1.38&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre><p>2、Java连接数据库代码</p>
-<pre><code>//1、加载驱动
-Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-//2、获得连接
-Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=utf-8&quot;, &quot;root&quot;, &quot;root&quot;);
-//3、创建Statement
-String sql = &quot;select * from tb_user&quot;;
-PreparedStatement statement = connection.prepareStatement(sql);
-//4、执行sql语句
-ResultSet resultSet = statement.executeQuery();
-//5、处理结果集
-while (resultSet.next()) {
-    System.out.println(resultSet.getString(1) + &quot; &quot; + resultSet.getString(2));
-}
-//6、关闭资源
-if (connection != null) {
-    connection.close();
-}
-</code></pre>
-          
+          http://www.jb51.net/article/30864.htm
+查看Mysql的编码设置，在命令行中输入：
+show variables like &quot;char%&quot;;
+MySQL字符集设置 
+
+character_set_server：默认的内部操作字符集 
+chara
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/27/[编码]Mysql编码分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2105,22 +1637,17 @@ if (connection != null) {
       
         
           
-            <h2 id="服务化"><a href="#服务化" class="headerlink" title="服务化"></a>服务化</h2><p><strong>本质是模块划分，每一个模块有特定的职责，这样做的好处可以做到系统解耦，方便维护</strong></p>
-<p>当系统大到一定程度时，系统越来越臃肿，业务的耦合性越来越高，开发效率低下，你写一段代码编译一下要半天；业务耦合大，修改一些代码影响别处的正确使用</p>
-<p>比如可以划分为核心模块、登录模块、短信模块等基本模块，系统这么拆分的好处：</p>
-<ul>
-<li>每个系统可以单独部署，业务简单，方便扩容</li>
-<li>有大量的可重用的模块可以<strong>复用，便于维护</strong></li>
-<li>能够做到专人专事，让技术人员更加专注于一个领域</li>
-</ul>
-<p>拆分后的系统如何通信？需要两种中间件系统，<strong>一种是实时调用的中间件（淘宝的HSP，高性能服务框架），一种是异步消息通知的中间件（淘宝的Notify）</strong></p>
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>淘宝HSF框架是一个分布式的标准Service方式的RPC（远程过程调用）框架，Service的定义是基于OSGI的方式，通讯层采用TCP/IP协议</p>
-<p>消息中间件Notify：为了保证消息一定能够通知到，把要发出的通知存放到<strong>数据库</strong>中，如果实时发送失败，再用一个时间程序来<strong>周期性</strong>得发送这些通知，<strong>系统记下消息的中间状态和时间戳</strong>，这样保证<strong>消息一定能够发出，也一定能够通知到</strong></p>
-<p>分布式数据访问层TDDL：让上层用户操作一个数据库一样操作多个库，TDDL主要实现了三个主要特性<br>1、数据访问路由，将数据的读写请求发送到合适的地方<br>2、数据复制，一次写入多点读取<br>3、数据存储的自由扩展</p>
-<h2 id="Session框架"><a href="#Session框架" class="headerlink" title="Session框架"></a>Session框架</h2><p>Http协议是无状态的，需要通过Session来解决服务器和浏览器的保持状态</p>
-<p>要不用客户端Cookie来解决问题，要不用服务端的集中缓存区（Tair）的Session来解决登录问题</p>
-
-          
+          服务化本质是模块划分，每一个模块有特定的职责，这样做的好处可以做到系统解耦，方便维护
+当系统大到一定程度时，系统越来越臃肿，业务的耦合性越来越高，开发效率低下，你写一段代码编译一下要半天；业务耦合大，修改一些代码影响别处的正确使用
+比如可以划分为核心模块、登录模块、短信模块等基本模块，系统这么拆分的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/27/[分布式架构]淘宝技术这十年——分布式架构电子商务操作系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -205,6 +205,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -343,345 +353,17 @@
       
         
           
-            <h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><p><img src="http://i.imgur.com/nYCSoQg.png" alt=""></p>
-<p>从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">transient Entry&lt;K,V&gt;[] table;  </div><div class="line">static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;  </div><div class="line">	final K key;     //键</div><div class="line">	V value;         //值</div><div class="line">	Entry&lt;K,V&gt; next; //指向下一个节点  </div><div class="line">	int hash;        //散列值</div><div class="line">	</div><div class="line">	Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;  </div><div class="line">		value = v;  </div><div class="line">		next = n;  </div><div class="line">		key = k;  </div><div class="line">		hash = h;  </div><div class="line">	&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>HashMap有一个属性是Entry的数组table。Entry就是table数组中的元素，Map.Entry保存一个键值对<br>和这个键值对持有指向下一个键值对的引用，如此就构成了链表了</p>
-<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>一些属性：</p>
-<ul>
-<li>capacity：数组的长度，默认是16</li>
-<li>loadFactor：HashMap元素的个数除以数组的长度，当元素个数大于threshold时，需要扩容。默认负载因子是0.75</li>
-<li>threashold：数组的长度乘以负载因子，当元素大于threshold时，需要扩容。默认threshold = 16*0.75 = 12</li>
-<li>size：HashMap中元素的个数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">/**根据指定容量和负载因子构造HashMap*/   </div><div class="line">public HashMap(int initialCapacity, float loadFactor) &#123;  </div><div class="line">    if (initialCapacity &lt; 0)  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +  </div><div class="line">                                           initialCapacity);  </div><div class="line">	/**</div><div class="line">	 * 数组最大容量是 static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30，即32位最大2的整数次</div><div class="line">	 * 如果传入初始容量太大，真实设置的的最大</div><div class="line">	 */</div><div class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)  </div><div class="line">        initialCapacity = MAXIMUM_CAPACITY;  </div><div class="line">    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +  </div><div class="line">                                           loadFactor);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 找到大于给出的初始容量的2的乘方</div><div class="line">	 */</div><div class="line">    // Find a power of 2 &gt;= initialCapacity  </div><div class="line">    int capacity = 1;  </div><div class="line">    while (capacity &lt; initialCapacity)  </div><div class="line">        capacity &lt;&lt;= 1;  </div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 负载因子是链表的长度除以数组的长度，当链表的长度大于threshold时，需要扩容</div><div class="line">	 */</div><div class="line">    this.loadFactor = loadFactor;  </div><div class="line">    threshold = (int)Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 初始化 Entry 数组</div><div class="line">	 */</div><div class="line">    table = new Entry[capacity];  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 空函数，子类可扩展</div><div class="line">	 */</div><div class="line">    init();  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">/**根据指定的容量和默认的负载因子构造HashMap*/  </div><div class="line">public HashMap(int initialCapacity) &#123;  </div><div class="line">    this(initialCapacity, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">//默认的空的构造器  </div><div class="line">public HashMap() &#123;  </div><div class="line">    this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line">/**通过指定一个Map对象进行构造*/  </div><div class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;  </div><div class="line">    this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,  </div><div class="line">                  DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);  </div><div class="line">    putAllForCreate(m);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="PUT方法"><a href="#PUT方法" class="headerlink" title="PUT方法"></a>PUT方法</h2><p>当存入的key是null的时候将调用putForNUllKey方法，暂时将这段逻辑放一边，看key不为null的情况。先调用了hash(int h)方法获取了一个hash值。<br><br></p>
-<font color="red"><strong>遍历table[i]上的元素，如果存在键相等，则替换它的值。否则以头插法的方式插入链表</strong></font>
-
-<p>之后判断size是否到达了需要扩充table数组容量的界限并让size自增1，如果达到了则调用resize(int capacity)方法将数组容量拓展为原来的两倍。</p>
-<pre>
-public V put(K key, V value) {  
-    // HashMap允许存放null键和null值。  
-    // 当key为null时，调用putForNullKey方法，将value放置在数组第一个位置。  
-    if (key == null)  
-        return putForNullKey(value);  
-    <font color="red">// 根据key的keyCode重新计算hash值。 </font> 
-    int hash = hash(key);//注意这里的实现是jdk1.7和以前的版本有区别的  
-    <font color="red">// 搜索指定hash值在对应table中的索引。</font>  
-    int i = indexFor(hash, table.length);  
-    // 如果 i 索引处的 Entry 不为 null，通过循环不断遍历 e 元素的下一个元素。如果键的Hash值一样，而且equal相等  
-    for (Entry<k,v> e = table[i]; e != null; e = e.next) {  
-        Object k;  
-        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {  
-            V oldValue = e.value;  
-            e.value = value;  
-            e.recordAccess(this);  
-            return oldValue;  
-        }  
-    }  
-    // 如果i索引处的Entry为null，表明此处还没有Entry。  
-    modCount++;  
-    // 将key、value添加到i索引处。  
-    addEntry(hash, key, value, i);  
-    return null;  
-}  
-
-/**
- * <font color="red">采用头插法，即使头结点是空也没有关系！！</font>
- * 数组上的元素为刚插入的节点
- */
-void addEntry(int hash, K key, V value, int bucketIndex) {
-    Entry<k,v> e = table[bucketIndex];
-    table[bucketIndex] = new Entry<k,v>(hash, key, value, e);
-    if (size++ >= threshold)
-        resize(2 * table.length);
-}
-</k,v></k,v></k,v></pre>
-
-<p><strong>为什么要进行两次Hash？</strong></p>
-<p>防止质量较差的哈希函数带来过多的冲突（碰撞）问题。Java中int值占4个字节，即32位。根据这32位值进行移位、异或运算得到一个值。</p>
-<p><strong>如何确定元素在数组的位置？</strong></p>
-<pre><code>static int indexFor(int h, int length) {
-    return h &amp; (length-1);     
-}
-</code></pre><p>这样可以保证结果的最大值是length-1，而且均匀分布在数组中，异或的操作效率比取余的效率高</p>
-<p><strong>HashMap中如何判断两个键相等？</strong></p>
-<p>两个对象的HashCode相等， 而且equals相等。所以如果使用对象的作为键，需要重写HashCode和equals方法</p>
-<p>String已经重写了HashCode，String中的数据结构是char[] s，Hash 值的计算方法是 s[0]<em>31^(n-1) + s[1]</em>31^(n-2) + ….. + s[0]*31^0</p>
-<p>可以采用迭代的方法计算：h = h * 31 + s[i]</p>
-<pre><code>int h = 0;
-for(int i = 0; i &lt; n; i++){
-    h = h * 31 + s[i];
-}
-</code></pre><p><strong>链表扩容</strong></p>
-<p>当链表内元素大于threashold时，新建一个新的数组，数组长度变成原来的两倍，并将原来的元素复制到新数组上</p>
-<pre>
-void resize(int newCapacity) {
-    Entry[] oldTable = table;
-    int oldCapacity = oldTable.length;
-    // 这个if块表明，如果容量已经到达允许的最大值，即MAXIMUN_CAPACITY，则不再拓展容量，而将装载拓展的界限值设为计算机允许的最大值。
-    // 不会再触发resize方法，而是不断的向map中添加内容，即table数组中的链表可以不断变长，但数组长度不再改变
-    if (oldCapacity == MAXIMUM_CAPACITY) {
-        threshold = Integer.MAX_VALUE;
-        return;
-    }
-    // 创建新数组，容量为指定的容量
-    Entry[] newTable = new Entry[newCapacity];
-    transfer(newTable);
-    table = newTable;
-    // 设置下一次需要调整数组大小的界限
-    threshold = (int)(newCapacity * loadFactor);
-}
-</pre>
-
-<p>将old数组上的元素复制到新数组上的操作在transfer上完成，主要步骤是：</p>
-<ul>
-<li>遍历原来的Entry数组</li>
-<li>遍历链表</li>
-<li>将链表元素依次按照插入到新的数组中(头插法)，<font color="red"><strong>链表反置</strong></font></li>
-</ul>
-<pre>
-void transfer(Entry[] newTable) {
-    // 保留原数组的引用到src中，
-    Entry[] src = table;
-    // 新容量使新数组的长度
-    int newCapacity = newTable.length;
-    // 遍历原数组
-    for (int j = 0; j < src.length; j++) {
-        // 获取元素e
-        Entry<k,v> e = src[j];
-        if (e != null) {
-            // 将原数组中的元素置为null
-            src[j] = null;
-            // 遍历原数组中j位置指向的链表
-            do {
-                Entry<k,v> next = e.next;
-                // 根据新的容量计算e在新数组中的位置
-                int i = indexFor(e.hash, newCapacity);
-                // 将e插入到newTable[i]指向的链表的头部
-                e.next = newTable[i];
-                newTable[i] = e;
-                e = next;
-            } while (e != null);
-        }
-    }
-}
-</k,v></k,v></pre>
-
-<p><strong>HashMap允许键null、值null，怎么处理？</strong></p>
-<p>从源码可以看到，key为null的对象放在数组<strong>索引0的位置</strong>。<strong>put的方式和put普通元素一样</strong>，首先遍历链表，是否有相同key的元素，如果有则替换并返回原来的值。否则头插入的方式将元素插入链表</p>
-<pre>
-private V putForNullKey(V value) {
-    for (Entry<k,v> e = table[0]; e != null; e = e.next) {
-        if (e.key == null) {
-            V oldValue = e.value;
-            e.value = value;
-            e.recordAccess(this);
-            return oldValue;
-        }
-    }
-    modCount++;
-    addEntry(0, null, value, 0);
-    return null;
-}
-</k,v></pre>
-
-<h2 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法"></a>GET方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">	/**</div><div class="line">	 * 如果key为null，从table[0]所在的链表进行搜索，如果存在元素且元素的key为null，返回元素的值；如果之前没有传入key为null的元素，那么返回null</div><div class="line">	 */</div><div class="line">    if (key == null)</div><div class="line">        return getForNullKey();</div><div class="line">    int hash = hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</div><div class="line">            return e.value;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该方法分为key为null和不为null两块。先看不为null的情况。先获取key的hash值，之后通过hash值及table.length获取key对应的table数组的索引，遍历索引的链表，所找到key相同的元素，则返回元素的value，否者返回null。不为null的情况调用了getForNullKey()方法。</p>
-<pre><code>private V getForNullKey() {
-    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) {
-        if (e.key == null)
-            return e.value;
-    }
-    return null;
-}
-</code></pre><p>参考：<a href="http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html" target="_blank" rel="external">http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html</a></p>
-<h2 id="containsKey"><a href="#containsKey" class="headerlink" title="containsKey"></a>containsKey</h2><p>containsKey(Object key)方法很简单，只是判断getEntry(key)的结果是否为null，是则返回false，否返回true</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getEntry(key) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>getEntry(Object key)也没什么内容，只是根据key对应的hash值计算在table数组中的索引位置，然后遍历该链表判断是否存在相同的key值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final Entry&lt;K,V&gt; getEntry(Object key) &#123;</div><div class="line">    int hash = (key == null) ? 0 : hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp;</div><div class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return e;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="containsValue"><a href="#containsValue" class="headerlink" title="containsValue"></a>containsValue</h2><p>判断一个value是否存在比判断key是否存在还要简单，就是遍历所有元素判断是否有相等的值。这里分为两种情况处理，value为null何不为null的情况，但内容差不多，只是判断相等的方式不同。</p>
-<pre>
-public boolean containsValue(Object value) {
-    if (value == null)
-            return containsNullValue();
-
-    Entry[] tab = table;
-    for (int i = 0; i < tab.length ; i++)
-        for (Entry e = tab[i] ; e != null ; e = e.next)
-            <font color="red">if (value.equals(e.value))</font>
-                return true;
-    return false;
-}
-
-private boolean containsNullValue() {
-    Entry[] tab = table;
-    for (int i = 0; i < tab.length ; i++)
-        for (Entry e = tab[i] ; e != null ; e = e.next)
-            <font color="red">if (e.value == null)</font>
-                return true;
-    return false;
-}
-</pre>
-
-<h2 id="remove-Object-key"><a href="#remove-Object-key" class="headerlink" title="remove(Object key)"></a>remove(Object key)</h2><pre><code>public V remove(Object key) {
-    Entry&lt;K,V&gt; e = removeEntryForKey(key);
-    return (e == null ? null : e.value);
-}
-</code></pre><p>看这个方法，removeEntryKey(key)的返回结果应该是被移除的元素，如果不存在这个元素则返回为null。remove方法根据removeEntryKey返回的结果e是否为null返回null或e.value。</p>
-<pre>
-final Entry<k,v> removeEntryForKey(Object key) {
-    int hash = (key == null) ? 0 : hash(key.hashCode());
-    int i = indexFor(hash, table.length);
-    Entry<k,v> prev = table[i];
-    Entry<k,v> e = prev;
-
-    while (e != null) {
-        Entry<k,v> next = e.next;
-        Object k;
-        if (e.hash == hash &&
-            ((k = e.key) == key || (key != null && key.equals(k)))) {
-            modCount++;
-            size--;
-            <font color="red">//临界情况，如果是第一个节点</font>
-            if (prev == e)
-                table[i] = next;
-            else
-                prev.next = next;
-            e.recordRemoval(this);
-            return e;
-        }
-        prev = e;
-        e = next;
-    }
-
-    return e;
-}
-</k,v></k,v></k,v></k,v></pre>
-
-<p>删除节点需要两个指针pre和e，next可以不需要吧？</p>
-<h2 id="HashMap产生死锁的原因"><a href="#HashMap产生死锁的原因" class="headerlink" title="HashMap产生死锁的原因"></a>HashMap产生死锁的原因</h2><p>调用 PUT 函数时，当 HashMap 中的元素大于 Threshold 时，会调用 Resize 函数进行扩容，数组长度增大一倍，整个过程如下：</p>
-<ol>
-<li>对索引数组中的元素遍历</li>
-<li>对链表上的每一个节点遍历：用 next 取得要转移那个元素的下一个，将 e 转移到新 Hash 表的头部，因为可能有元素，所以先将 e.next 指向新 Hash 表的第一个元素（如果是第一次就是 null)，这时候新 Hash 的第一个元素是 e，但是 Hash 指向的却是 e 没转移时候的第一个，所以需要将 Hash 表的第一个元素指向 e</li>
-<li>循环2，直到链表节点全部转移</li>
-<li>循环1，直到所有索引数组全部转移 </li>
-</ol>
-<p>经过这几步，我们会发现<strong>链表转移的时候是逆序的</strong>。假如转移前链表顺序是1-&gt;2-&gt;3，那么转移后就会变成3-&gt;2-&gt;1。这时候就有点头绪了，死锁问题不就是因为1-&gt;2的同时2-&gt;1造成的吗？所以，<strong>HashMap 的死锁问题就出在这个transfer()函数上。</strong></p>
-<pre>
-public V put(K key, V value) {
-    if (table == EMPTY_TABLE) {
-    inflateTable(threshold);
-    }
-    if (key == null)
-        return putForNullKey(value);
-    int hash = hash(key);
-    int i = indexFor(hash, table.length);
-    //如果该 key 存在，就替换旧值
-    for (Entry<k,v> e = table[i]; e != null; e = e.next) {
-        Object k;
-        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
-            V oldValue = e.value;
-            e.value = value;
-            e.recordAccess(this);
-            return oldValue;
-        }
-    }
-
-    modCount++;
-    //如果没有这个 key，就插入一个新元素！跟进去看看
-    addEntry(hash, key, value, i);
-    return null;
-}
-
-void addEntry(int hash, K key, V value, int bucketIndex) {
-    //查看当前的size是否超过了我们设定的阈值threshold，如果超过，需要resize
-    if ((size >= threshold) && (null != table[bucketIndex])) {
-        resize(2 * table.length);
-        hash = (null != key) ? hash(key) : 0;
-        bucketIndex = indexFor(hash, table.length);
-    }
-    createEntry(hash, key, value, bucketIndex);
-}
-
-//新建一个更大尺寸的hash表，把数据从老的Hash表中迁移到新的Hash表中。
-void resize(int newCapacity) {
-    Entry[] oldTable = table;
-    int oldCapacity = oldTable.length;
-    if (oldCapacity == MAXIMUM_CAPACITY) {
-        threshold = Integer.MAX_VALUE;
-        return;
-    }
-    //创建一个新的 Hash 表
-    Entry[] newTable = new Entry[newCapacity];
-    //转移！！！！跟进去
-    transfer(newTable, initHashSeedAsNeeded(newCapacity));
-    table = newTable;
-    threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
-}
-
-<font color="red">//高能预警！！！！重点全在这个函数中</font>
-void transfer(Entry[] newTable, boolean rehash) {
-    int newCapacity = newTable.length;
-    for (Entry<k,v> e : table) {
-        while(null != e) {
-            Entry<k,v> next = e.next;
-            if (rehash) {
-                e.hash = null == e.key ? 0 : hash(e.key);
-            }
-            int i = indexFor(e.hash, newCapacity);
-            e.next = newTable[i];
-            newTable[i] = e;
-            e = next;
-        }
-    }
-}
-</k,v></k,v></k,v></pre>
-
-<p>下面着重分析一下transfer方法，精简后得到如下代码★★★★★：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">while(null != e) &#123;</div><div class="line">	//因为是单链表，如果要转移头指针，一定要保存下一个结点，不然转移后链表就丢了</div><div class="line">	Entry&lt;K,V&gt; next = e.next;</div><div class="line">	//e 要插入到链表的头部，所以要先用 e.next 指向新的 Hash 表第一个元素</div><div class="line">	e.next = newTable[i];</div><div class="line">	//将新 Hash 表的头指针指向 e</div><div class="line">	newTable[i] = e;</div><div class="line">	//转移 e 的下一个结点 </div><div class="line">	e = next;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>死锁原因重现</strong></p>
-<p>假设这里有两个线程同时执行了 put() 操作，并进入了 transfer() 环节，现在假设线程1的工作情况如下代码所示，而线程2完成了整个 transfer() 过程，所以就完成了 rehash。</p>
-<pre>
-while(null != e) {
-    <font color="red">Entry<k,v> next = e.next; //线程1执行到这里被调度挂起了</k,v></font>
-    e.next = newTable[i];
-    newTable[i] = e;
-    e = next;
-}
-</pre>
-
-<p>那么现在的状态：</p>
-<p><img src="http://i.imgur.com/8PFB2wW.png" alt=""></p>
-<p>从上面的图我们可以看到，因为线程1的 e 指向了 key(3)，而 next 指向了 key(7)，在线程2 rehash 后，就指向了线程2 rehash 后的链表。</p>
-<p>然后线程1被唤醒了，执行：</p>
-<p>第一步 </p>
-<pre><code>Entry&lt;K,V&gt; next = e.next;
-e.next = newTable[i];
-newTable[i] = e;
-e = next;
-</code></pre><p>链表状态如下图：</p>
-<p><img src="http://i.imgur.com/GbZgrGm.png" alt=""></p>
-<p>第二步</p>
-<pre><code>Entry&lt;K,V&gt; next = e.next;
-e.next = newTable[i];
-newTable[i] = e;
-e = next;
-</code></pre><p>链表状态如下：</p>
-<p><img src="http://i.imgur.com/AlWEfbc.jpg" alt=""></p>
-<p>第三步</p>
-<pre><code>Entry&lt;K,V&gt; next = e.next;
-e.next = newTable[i];
-newTable[i] = e;
-e = next;
-</code></pre><p><img src="http://i.imgur.com/Yk3AC54.jpg" alt=""></p>
-<p>很明显，环形链表出现了！！当然，现在还没有事情，因为下一个节点是 null，所以transfer()就完成了，等put()的其余过程搞定后，HashMap 的底层实现就是线程1的新 Hash 表了。</p>
-<p><strong>没错，put()过程虽然造成了环形链表，但是它没有发生错误。它静静的等待着get()这个冤大头的到来。</strong></p>
-<p>现在程序被执行了一个hashMap.get(11)，这时候会调用getEntry()，这个函数就是去找对应索引的链表中有没有这个 key。然后。。。。悲剧了</p>
-<p>因为 HashMap 为了性能考虑，没有使用锁机制。所以就是非线程安全的，而 ConcurrentHashMap 使用了锁机制，所以是线程安全的。<strong>要并发就使用 ConcurrentHashMap</strong></p>
-<p>参考：<a href="http://blog.csdn.net/luxia_24/article/details/52344367" target="_blank" rel="external">http://blog.csdn.net/luxia_24/article/details/52344367</a></p>
-
-          
+          存储结构
+从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表
+1234567891011121314transient Entry&lt;K,V&gt;[] table;  static class Entry&lt;K,V&gt; implements Map.En
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/10/[JDK源码阅读]HashMap/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -813,38 +495,16 @@ e = next;
       
         
           
-            <h2 id="方法一：将jar包安装到本地repository中"><a href="#方法一：将jar包安装到本地repository中" class="headerlink" title="方法一：将jar包安装到本地repository中"></a>方法一：将jar包安装到本地repository中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn install:install-file -Dfile=my-jar.jar -DgroupId=org.richard -DartifactId=my-jar -Dversion=1.0 -Dpackaging=jar</div></pre></td></tr></table></figure>
-<h2 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h2><p>添加scope为system的依赖，解决编译、运行问题</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;com.microsoft.sqlserver&lt;/groupId&gt;
-    &lt;artifactId&gt;sqljdbc&lt;/artifactId&gt;
-    &lt;version&gt;3.0&lt;/version&gt;
-    &lt;scope&gt;system&lt;/scope&gt;
-    &lt;systemPath&gt;${project.basedir}/lib/sqljdbc-3.0.jar&lt;/systemPath&gt;
-&lt;/dependency&gt;
-</code></pre><p>打包时将自定义的jar包复制到web/lib下</p>
-<pre><code>&lt;!--war打包--&gt;
-&lt;plugin&gt;
-    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
-    &lt;version&gt;2.1.1&lt;/version&gt;
-    &lt;configuration&gt;
-        &lt;webResources&gt;
-            &lt;resource&gt;
-                &lt;directory&gt;${project.basedir}/lib&lt;/directory&gt;
-                &lt;targetPath&gt;WEB-INF/lib&lt;/targetPath&gt;
-                &lt;filtering&gt;false&lt;/filtering&gt;
-                &lt;includes&gt;
-                    &lt;include&gt;**/*.jar&lt;/include&gt;
-                &lt;/includes&gt;
-            &lt;/resource&gt;
-        &lt;/webResources&gt;
-    &lt;/configuration&gt;
-&lt;/plugin&gt;
-</code></pre><p>方法三：建立自己的仓库</p>
-<pre><code>http://blog.csdn.net/chagaostu/article/details/50056427
-</code></pre>
-          
+          方法一：将jar包安装到本地repository中1mvn install:install-file -Dfile=my-jar.jar -DgroupId=org.richard -DartifactId=my-jar -Dversion=1.0 -Dpackaging=jar
+方法二：添加sco
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/07/[Maven]Maven 添加本地 jar 包/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -976,155 +636,21 @@ e = next;
       
         
           
-            <h2 id="RedisTemplate-配置"><a href="#RedisTemplate-配置" class="headerlink" title="RedisTemplate 配置"></a>RedisTemplate 配置</h2><p>在 Spring 配置文件中，配置的对象有：</p>
-<ul>
-<li>连接池配置对象</li>
-<li>Jedis连接工厂，提供 getConnection 方法从连接池中获取连接</li>
-<li>RedisTemplate，Redis操作类</li>
-</ul>
-<p>思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redis 连接池，调用连接池的 getConnection 方法获得连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</div><div class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd</div><div class="line">        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;</div><div class="line">       default-lazy-init=&quot;true&quot;&gt;</div><div class="line"></div><div class="line">    &lt;context:component-scan base-package=&quot;com.mk.util.redis&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;!-- 连接池配置 --&gt;</div><div class="line">    &lt;bean id=&quot;jedisPoolConfig&quot; class=&quot;redis.clients.jedis.JedisPoolConfig&quot;&gt;</div><div class="line">        &lt;!-- 连接池中最大空闲的连接数 --&gt;</div><div class="line">        &lt;property name=&quot;maxIdle&quot; value=&quot;$&#123;jedis.maxIdle&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- 连接空闲的最小时间，达到此值后空闲连接将可能会被移除。负值(-1)表示不移除. --&gt;</div><div class="line">        &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;$&#123;jedis.minEvictableIdleTimeMillis&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- 对于“空闲链接”检测线程而言，每次检测的链接资源的个数。默认为3 --&gt;</div><div class="line">        &lt;property name=&quot;numTestsPerEvictionRun&quot; value=&quot;$&#123;jedis.numTestsPerEvictionRun&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- “空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1. --&gt;</div><div class="line">        &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;$&#123;jedis.timeBetweenEvictionRunsMillis&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;!-- Spring提供的Redis连接工厂 --&gt;</div><div class="line">    &lt;bean id=&quot;jedisConnectionFactory&quot; class=&quot;org.springframework.data.redis.connection.jedis.JedisConnectionFactory&quot; destroy-method=&quot;destroy&quot;&gt;</div><div class="line">        &lt;!-- 连接池配置 --&gt;</div><div class="line">        &lt;property name=&quot;poolConfig&quot; ref=&quot;jedisPoolConfig&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- Redis服务主机 --&gt;</div><div class="line">        &lt;property name=&quot;hostName&quot; value=&quot;$&#123;redis.hostName&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- Redis服务端口号 --&gt;</div><div class="line">        &lt;property name=&quot;port&quot; value=&quot;$&#123;redis.port&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- 连超时设置 --&gt;</div><div class="line">        &lt;property name=&quot;timeout&quot; value=&quot;$&#123;redis.timeout&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- 是否使用连接池 --&gt;</div><div class="line">        &lt;property name=&quot;usePool&quot; value=&quot;$&#123;redis.usePool&#125;&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;!-- Redis服务连接密码 --&gt;</div><div class="line">        &lt;!--&lt;property name=&quot;password&quot; value=&quot;$&#123;redis.password&#125;&quot;&gt;&lt;/property&gt;--&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line">    &lt;!-- Spring提供的访问Redis类 --&gt;</div><div class="line">    &lt;bean id=&quot;redisTemplate&quot; class=&quot;org.springframework.data.redis.core.RedisTemplate&quot;&gt;</div><div class="line">        &lt;!-- Redis连接工厂 --&gt;</div><div class="line">        &lt;property name=&quot;connectionFactory&quot; ref=&quot;jedisConnectionFactory&quot;&gt;&lt;/property&gt;</div><div class="line">        &lt;property name=&quot;keySerializer&quot;&gt;</div><div class="line">            &lt;bean class=&quot;org.springframework.data.redis.serializer.StringRedisSerializer&quot;/&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">        &lt;!-- JdkSerializationRedisSerializer支持对所有实现了Serializable的类进行序列化 --&gt;</div><div class="line">        &lt;property name=&quot;valueSerializer&quot;&gt;</div><div class="line">            &lt;bean class=&quot;org.springframework.data.redis.serializer.JdkSerializationRedisSerializer&quot;/&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;!--下面是自己编写的监听器，用来实现发布订阅功能的，对于基础的redis使用不需要--&gt;</div><div class="line">    &lt;bean id=&quot;redisMessageListener&quot; class=&quot;com.mk.util.redis.listener.RedisMessageListener&quot;/&gt;</div><div class="line">    &lt;bean  class=&quot;org.springframework.data.redis.listener.RedisMessageListenerContainer&quot;</div><div class="line">          destroy-method=&quot;destroy&quot;&gt;</div><div class="line">        &lt;property name=&quot;connectionFactory&quot; ref=&quot;jedisConnectionFactory&quot;/&gt;</div><div class="line">        &lt;property name=&quot;taskExecutor&quot;&gt;</div><div class="line">            &lt;bean class=&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor&quot;&gt;</div><div class="line">                &lt;property name=&quot;corePoolSize&quot; value=&quot;5&quot;/&gt;</div><div class="line">            &lt;/bean&gt;</div><div class="line">        &lt;/property&gt;</div><div class="line">        &lt;property name=&quot;messageListeners&quot;&gt;</div><div class="line">            &lt;map&gt;</div><div class="line">                &lt;entry key-ref=&quot;redisMessageListener&quot;&gt;</div><div class="line">                    &lt;!--这里配置频道信息--&gt;</div><div class="line">                    &lt;bean class=&quot;org.springframework.data.redis.listener.ChannelTopic&quot;&gt;</div><div class="line">                        &lt;constructor-arg value=&quot;notify&quot;/&gt;</div><div class="line">                    &lt;/bean&gt;</div><div class="line">                &lt;/entry&gt;</div><div class="line">            &lt;/map&gt;</div><div class="line"></div><div class="line">        &lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
-<h2 id="Redis操作工具类"><a href="#Redis操作工具类" class="headerlink" title="Redis操作工具类"></a>Redis操作工具类</h2><p>提供了set/get方法，删除缓存，缓存定时删除方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">public class RedisUtils &#123;</div><div class="line">    @Autowired</div><div class="line">    private RedisTemplate&lt;String,Object&gt; redisTemplate;</div><div class="line"></div><div class="line">    public void set(String key, Object val) &#123;</div><div class="line">        redisTemplate.boundValueOps(key).set(val);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Object get(String key) &#123;</div><div class="line">        return redisTemplate.boundValueOps(key).get();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void delete(String key) &#123;</div><div class="line">        redisTemplate.delete(key);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void expire(String key, long timeout)&#123;</div><div class="line">        //单位为秒</div><div class="line">        redisTemplate.expire(key, timeout, TimeUnit.SECONDS);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 发布消息</div><div class="line">     *</div><div class="line">     * @param channel 发布的频道，需要在redis配置文件中进行配置</div><div class="line">     * @param message</div><div class="line">     */</div><div class="line">    public void sendMessage(Serializable message) &#123;</div><div class="line">        sendMessage(&quot;notify&quot;,message);</div><div class="line">    &#125;</div><div class="line">    public void sendMessage(String channel, Serializable message) &#123;</div><div class="line">        redisTemplate.convertAndSend(channel,message);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="RedisTemplate源码"><a href="#RedisTemplate源码" class="headerlink" title="RedisTemplate源码"></a>RedisTemplate源码</h2><p>1、获得连接<br>2、调用action.doRedis<br>3、连接创建动态代理<br>4、释放连接</p>
-<p>序列化：<br>String channerl =&gt; byte[]<br>Object message</p>
-<h2 id="Redis-订阅和发布"><a href="#Redis-订阅和发布" class="headerlink" title="Redis 订阅和发布"></a>Redis 订阅和发布</h2><p>Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息<br>Redis 客户端可以订阅任意数量的频道。</p>
-<p>下图展示了频道 channel1 ， 以及订阅这个频道的三个客户端 —— client2 、 client5 和 client1 之间的关系：</p>
-<p><img src="http://i.imgur.com/7SNznwa.png" alt=""></p>
-<p>当有新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端：</p>
-<p><img src="http://i.imgur.com/RZt3oFl.png" alt=""></p>
-<h3 id="redis-命令"><a href="#redis-命令" class="headerlink" title="redis 命令"></a>redis 命令</h3><p>1、创建频道名 redisChat</p>
-<pre><code>redis 127.0.0.1:6379&gt; SUBSCRIBE redisChat
+          RedisTemplate 配置在 Spring 配置文件中，配置的对象有：
 
-Reading messages... (press Ctrl-C to quit)
-1) &quot;subscribe&quot;
-2) &quot;redisChat&quot;
-3) (integer) 1
-</code></pre><p>2、发送消息</p>
-<p>现在，我们先重新开启个 redis 客户端，然后在同一个频道 redisChat 发布两次消息，订阅者就能接收到消息。</p>
-<pre><code>redis 127.0.0.1:6379&gt; PUBLISH redisChat &quot;Redis is a great caching technique&quot;
+连接池配置对象
+Jedis连接工厂，提供 getConnection 方法从连接池中获取连接
+RedisTemplate，Redis操作类
 
-(integer) 1
-
-redis 127.0.0.1:6379&gt; PUBLISH redisChat &quot;Learn redis by runoob.com&quot;
-
-(integer) 1
-
-# 订阅者的客户端会显示如下消息
-1) &quot;message&quot;
-2) &quot;redisChat&quot;
-3) &quot;Redis is a great caching technique&quot;
-1) &quot;message&quot;
-2) &quot;redisChat&quot;
-3) &quot;Learn redis by runoob.com&quot;
-</code></pre><h3 id="RedisTemplate-发布订阅"><a href="#RedisTemplate-发布订阅" class="headerlink" title="RedisTemplate 发布订阅"></a>RedisTemplate 发布订阅</h3><p><img src="http://i.imgur.com/LnxjzkL.png" alt=""></p>
-<p>1、发送sub指令</p>
-<p>Spring启动时加载配置文中配置的一个个bean，<strong>RedisMessageListenerContainer中配置事件监听器及当事件来临时做出的响应</strong></p>
-<pre><code>&lt;bean id=&quot;redisMessageListener&quot; class=&quot;com.mk.util.redis.listener.RedisMessageListener&quot;/&gt;
-&lt;bean  class=&quot;org.springframework.data.redis.listener.RedisMessageListenerContainer&quot;
-      destroy-method=&quot;destroy&quot;&gt;
-    &lt;property name=&quot;connectionFactory&quot; ref=&quot;jedisConnectionFactory&quot;/&gt;
-    &lt;property name=&quot;taskExecutor&quot;&gt;
-        &lt;bean class=&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor&quot;&gt;
-            &lt;property name=&quot;corePoolSize&quot; value=&quot;5&quot;/&gt;
-        &lt;/bean&gt;
-    &lt;/property&gt;
-    &lt;property name=&quot;messageListeners&quot;&gt;
-        &lt;map&gt;
-            &lt;!--可以配置多个订阅者(listener)，这里只配置一个--&gt;
-            &lt;entry key-ref=&quot;redisMessageListener&quot;&gt;
-                &lt;!--这里配置频道信息--&gt;
-                &lt;bean class=&quot;org.springframework.data.redis.listener.ChannelTopic&quot;&gt;
-                    &lt;constructor-arg value=&quot;notify&quot;/&gt;
-                &lt;/bean&gt;
-            &lt;/entry&gt;
-        &lt;/map&gt;
-
-    &lt;/property&gt;
-&lt;/bean&gt;
-</code></pre><p>其中自定义的 RedisMessageListener 实现 MessageListener 接口，这个由程序员实现，当某个特定消息来临时，该执行哪个操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public class RedisMessageListener implements MessageListener &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onMessage(Message message, byte[] bytes) &#123;</div><div class="line">        logger.info(&quot;=============调用redis监听器onMessage====================&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>加载 RedisMessageListenerContainer 类时，会调用setMessageListeners方法注入监听器</strong>；</p>
-<p>除了注入监听器，这个方法还完成了：</p>
-<ul>
-<li><strong>开启一个客户端与Redis通信的线程</strong>（不然程序整个程序就阻塞了，所以要开新线程）</li>
-<li>与Redis服务器建立长连接</li>
-<li>向Redis服务器发送SUBSCRIBE命令</li>
-<li>循环监听Redis服务器向客户端发送的消息，如果没有消息则阻塞线程；如果接收到一个消息，分派消息</li>
-<li><strong>启动一个新的线程，执行消息处理方法</strong></li>
-</ul>
-<p>整个执行过程的大致源码过程（删除无关代码）：</p>
-<p>RedisMessageListenerContainer：</p>
-<p>1、Spring框架注入属性时，调用setMessageListeners方法</p>
-<pre><code>public void setMessageListeners(Map&lt;? extends MessageListener, Collection&lt;? extends Topic&gt;&gt; listeners) {
-    initMapping(listeners);
-}
-</code></pre><p>2、启动监听</p>
-<pre><code>private void initMapping(Map&lt;? extends MessageListener, Collection&lt;? extends Topic&gt;&gt; listeners) {
-    //在发布者和订阅者中添加监听器
-    if (!CollectionUtils.isEmpty(listeners)) {
-        for (Map.Entry&lt;? extends MessageListener, Collection&lt;? extends Topic&gt;&gt; entry : listeners.entrySet()) {
-            addListener(entry.getKey(), entry.getValue());
-        }
-    }
-
-    //启动监听
-    if (initialized) {
-        start();
-    }
-}
-</code></pre><p>3、start中关键代码是lazyListen</p>
-<pre><code>public void start() {
-    lazyListen();
-}
-</code></pre><p>4、lazyListen中使用线程池开启一个线程用来客户端与redis服务器通信，并进行消息分派</p>
-<pre><code>private void lazyListen() {
-    subscriptionExecutor.execute(subscriptionTask);
-}
-</code></pre><p>5、执行SubscriptionTask的run方法</p>
-<pre><code>private class SubscriptionTask implements SchedulingAwareRunnable {
-    public void run() {
-                SubscriptionPresentCondition subscriptionPresent = eventuallyPerformSubscription();
-    }
-}
-</code></pre><p>6、调用connection的subscribe方法</p>
-<pre><code>private SubscriptionPresentCondition eventuallyPerformSubscription() {
-
-    connection.subscribe(new DispatchMessageListener(), unwrap(channelMapping.keySet()));
-
-}
-</code></pre><p>执行JedisConnection类的方法：</p>
-<p>7、调用JedisConnection的subscribe方法，将Spring中配置MessageListener参数传入</p>
-<pre><code>public void subscribe(MessageListener listener, byte[]... channels) {
-BinaryJedisPubSub jedisPubSub = new JedisMessageListener(listener);
-    jedis.subscribe(jedisPubSub, channels);
-}
-</code></pre><p>执行BinaryJedis类的方法：</p>
-<p>8、上层传入的MessageListener被封装在BinaryJedisPubSub中，执行jedisPubSub的proceed方法</p>
-<pre><code>public void subscribe(BinaryJedisPubSub jedisPubSub, byte[]... channels) {
-    jedisPubSub.proceed(client, channels);
-}
-</code></pre><p>执行BinaryJedisPubSub类的方法：</p>
-<p>9、<strong>核心代码</strong></p>
-<ul>
-<li>调用client的subscribe方法进行订阅，包括打开Socket与Redis Server建立长连接，并发送SUBSCRIBE命令</li>
-<li><p>process为消息分派</p>
-<p>  public void proceed(Client client, byte[]… channels) {</p>
-<pre><code>this.client = client;
-client.subscribe(channels);
-client.flush();
-process(client);
-</code></pre><p>  }</p>
-</li>
-</ul>
-<p>10、消息分派</p>
-<p>do——while的结构</p>
-<p>其中：List<object> reply = client.getRawObjectMultiBulkReply();从底层读取服务器向客户端发送的消息，如果没有消息则阻塞，否则进行消息分派</object></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">private void process(Client client) &#123;</div><div class="line">	do &#123;</div><div class="line">		List&lt;Object&gt; reply = client.getRawObjectMultiBulkReply();</div><div class="line">		final Object firstObj = reply.get(0);</div><div class="line">		if (!(firstObj instanceof byte[])) &#123;</div><div class="line">			throw new JedisException(&quot;Unknown message type: &quot; + firstObj);</div><div class="line">		&#125;</div><div class="line">		final byte[] resp = (byte[]) firstObj;</div><div class="line">		if (Arrays.equals(SUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.get(2)).intValue();</div><div class="line">			final byte[] bchannel = (byte[]) reply.get(1);</div><div class="line">			onSubscribe(bchannel, subscribedChannels);</div><div class="line">		&#125; else if (Arrays.equals(UNSUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.get(2)).intValue();</div><div class="line">			final byte[] bchannel = (byte[]) reply.get(1);</div><div class="line">			onUnsubscribe(bchannel, subscribedChannels);</div><div class="line">		&#125; else if (Arrays.equals(MESSAGE.raw, resp)) &#123;</div><div class="line">			final byte[] bchannel = (byte[]) reply.get(1);</div><div class="line">			final byte[] bmesg = (byte[]) reply.get(2);</div><div class="line">			onMessage(bchannel, bmesg);</div><div class="line">		&#125; else if (Arrays.equals(PMESSAGE.raw, resp)) &#123;</div><div class="line">			final byte[] bpattern = (byte[]) reply.get(1);</div><div class="line">			final byte[] bchannel = (byte[]) reply.get(2);</div><div class="line">			final byte[] bmesg = (byte[]) reply.get(3);</div><div class="line">			onPMessage(bpattern, bchannel, bmesg);</div><div class="line">		&#125; else if (Arrays.equals(PSUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.get(2)).intValue();</div><div class="line">			final byte[] bpattern = (byte[]) reply.get(1);</div><div class="line">			onPSubscribe(bpattern, subscribedChannels);</div><div class="line">		&#125; else if (Arrays.equals(PUNSUBSCRIBE.raw, resp)) &#123;</div><div class="line">			subscribedChannels = ((Long) reply.get(2)).intValue();</div><div class="line">			final byte[] bpattern = (byte[]) reply.get(1);</div><div class="line">			onPUnsubscribe(bpattern, subscribedChannels);</div><div class="line">		&#125; else &#123;</div><div class="line">			throw new JedisException(&quot;Unknown message type: &quot; + firstObj);</div><div class="line">		&#125;</div><div class="line">	&#125; while (isSubscribed());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>参考：<br>jedis的publish/subscribe[转]含有redis源码解析<br><a href="http://www.cnblogs.com/wxh04/p/4301291.html" target="_blank" rel="external">http://www.cnblogs.com/wxh04/p/4301291.html</a></p>
-<p>菜鸟教程 Redis 发布订阅<br><a href="http://www.runoob.com/redis/redis-pub-sub.html" target="_blank" rel="external">http://www.runoob.com/redis/redis-pub-sub.html</a></p>
-
-          
+思路：1、首先必须有 Redis 操作类 2、然后为了提高性能，加入 Redi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/06/[Redis]RedisTemplate 使用及基本原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1256,32 +782,18 @@ process(client);
       
         
           
-            <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>xmlns 多加下面的内容、</p>
-<pre><code>xmlns:task=&quot;http://www.springframework.org/schema/task&quot;  
-</code></pre><p>然后xsi:schemaLocation多加下面的内容</p>
-<pre><code>http://www.springframework.org/schema/task  
-http://www.springframework.org/schema/task/spring-task-3.1.xsd  
-</code></pre><p>最后是我们的task任务扫描注解</p>
-<pre><code>&lt;task:annotation-driven/&gt;  
-</code></pre><p>我的配置扫描位置是：</p>
-<pre><code>&lt;context:component-scan base-package=&quot;com.test&quot;/&gt;  
-</code></pre><h2 id="基于注解方式定时器"><a href="#基于注解方式定时器" class="headerlink" title="基于注解方式定时器"></a>基于注解方式定时器</h2><pre><code>@Component  
-public class MyTest{  
-      @Scheduled(cron=&quot;0/5 * *  * * ? &quot;)   //每5秒执行一次  
-      @Override  
-      public void myTest(){  
-            System.out.println(&quot;进入测试&quot;);  
-      }  
-}  
-</code></pre><h2 id="常用CRON表达式"><a href="#常用CRON表达式" class="headerlink" title="常用CRON表达式"></a>常用CRON表达式</h2><p>一个cron表达式有至少6个（也可能7个）有空格分隔的时间元素。<br>按顺序依次为<br>秒（0~59）<br>分钟（0~59）<br>小时（0~23）<br>天（月）（0~31，但是你需要考虑你月的天数）<br>月（0~11）<br>天（星期）（1~7 1=SUN 或 SUN，MON，TUE，WED，THU，FRI，SAT）<br>7.年份（1970－2099）</p>
-<p>其中每个元素可以是一个值(如6),一个连续区间(9-12),一个间隔时间(8-18/4)(/表示每隔4小时),一个列表(1,3,5),通配符。由于”月份中的日期”和”星期中的日期”这两个元素互斥的,必须要对其中一个设置?.<br>0 0 10,14,16 <em> </em> ? 每天上午10点，下午2点，4点<br>0 0/30 9-17 <em> </em> ?   朝九晚五工作时间内每半小时<br>0 0 12 ? <em> WED 表示每个星期三中午12点<br>“0 0 12 </em> <em> ?” 每天中午12点触发<br>“0 15 10 ? </em> <em>“ 每天上午10:15触发<br>“0 15 10 </em> <em> ?” 每天上午10:15触发<br>“0 15 10 </em> <em> ? </em>“ 每天上午10:15触发<br>“0 15 10 <em> </em> ? 2005” 2005年的每天上午10:15触发<br>“0 <em> 14 </em> <em> ?” 在每天下午2点到下午2:59期间的每1分钟触发<br>“0 0/5 14 </em> <em> ?” 在每天下午2点到下午2:55期间的每5分钟触发<br>“0 0/5 14,18 </em> <em> ?” 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发<br>“0 0-5 14 </em> <em> ?” 在每天下午2点到下午2:05期间的每1分钟触发<br>“0 10,44 14 ? 3 WED” 每年三月的星期三的下午2:10和2:44触发<br>“0 15 10 ? </em> MON-FRI” 周一至周五的上午10:15触发<br>“0 15 10 15 <em> ?” 每月15日上午10:15触发<br>“0 15 10 L </em> ?” 每月最后一日的上午10:15触发<br>“0 15 10 ? <em> 6L” 每月的最后一个星期五上午10:15触发<br>“0 15 10 ? </em> 6L 2002-2005” 2002年至2005年的每月的最后一个星期五上午10:15触发<br>“0 15 10 ? <em> 6#3” 每月的第三个星期五上午10:15触发<br>有些子表达式能包含一些范围或列表<br>例如：子表达式（天（星期））可以为 “MON-FRI”，“MON，WED，FRI”，“MON-WED,SAT”<br>“</em>”字符代表所有可能的值<br>因此，“<em>”在子表达式（月）里表示每个月的含义，“</em>”在子表达式（天（星期））表示星期的每一天</p>
-<p>“/”字符用来指定数值的增量<br>例如：在子表达式（分钟）里的“0/15”表示从第0分钟开始，每15分钟<br>         在子表达式（分钟）里的“3/20”表示从第3分钟开始，每20分钟（它和“3，23，43”）的含义一样</p>
-<p>“？”字符仅被用于天（月）和天（星期）两个子表达式，表示不指定值<br>当2个子表达式其中之一被指定了值以后，为了避免冲突，需要将另一个子表达式的值设为“？”</p>
-<p>“L” 字符仅被用于天（月）和天（星期）两个子表达式，它是单词“last”的缩写<br>但是它在两个子表达式里的含义是不同的。<br>在天（月）子表达式中，“L”表示一个月的最后一天<br>在天（星期）自表达式中，“L”表示一个星期的最后一天，也就是SAT<br>如果在“L”前有具体的内容，它就具有其他的含义了<br>例如：“6L”表示这个月的倒数第６天，“ＦＲＩＬ”表示这个月的最一个星期五<br>注意：在使用“L”参数时，不要指定列表或范围，因为这会导致问题</p>
-<p>字段   允许值   允许的特殊字符<br>秒         0-59         , - <em> /<br>分         0-59         , - </em> /<br>小时         0-23         , - <em> /<br>日期         1-31         , - </em> ? / L W C<br>月份         1-12 或者 JAN-DEC         , - <em> /<br>星期         1-7 或者 SUN-SAT         , - </em> ? / L C #<br>年（可选）         留空, 1970-2099         , - * /</p>
-<p>参考：<a href="http://luanxiyuan.iteye.com/blog/2297329" target="_blank" rel="external">http://luanxiyuan.iteye.com/blog/2297329</a></p>
-
-          
+          配置文件xmlns 多加下面的内容、
+xmlns:task=&quot;http://www.springframework.org/schema/task&quot;  
+然后xsi:schemaLocation多加下面的内容
+http://www.springframework.org/sche
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/05/[Spring]Spring 定时器的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1413,30 +925,20 @@ public class MyTest{
       
         
           
-            <p>在任意目录下新建一个批处理文件 exec.bat</p>
-<pre><code>call mvn -f pom.xml dependency:copy-dependencies
+          在任意目录下新建一个批处理文件 exec.bat
+call mvn -f pom.xml dependency:copy-dependencies
 @pause
-</code></pre><p>然后再同目录下新建一个pom.xml文件</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-    &lt;groupId&gt;temp.download&lt;/groupId&gt;
-    &lt;artifactId&gt;temp-download&lt;/artifactId&gt;
-    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt; 
-    &lt;dependencies&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
-            &lt;version&gt;1.2.7&lt;/version&gt;
-        &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre><p>每次只要修改<code>&lt;dependencies&gt;&lt;/dependencies&gt;</code>中的内容就行了</p>
-<p>点击运行后，会自动下载到Maven仓库中，而且在同级目录下的target文件也会有下载完成的Jar包</p>
-<p>完整目录结构如下：</p>
-<p><img src="http://i.imgur.com/X6ZfaGj.png" alt=""></p>
-
-          
+然后再同目录下新建一个pom.xml文件
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;projec
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/05/[Maven]利用Maven下载Jar包/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1568,313 +1070,18 @@ public class MyTest{
       
         
           
-            <p>备份和删除使用Java的 Runtime 类的 exec 方法来执行命令行</p>
-<pre><code>Process process = Runtime.getRuntime().exec(command);
-</code></pre><p>但是命令行中无法识别管道符号 <code>&lt;</code>，所以必须获得子进程的输入流和输出流写文件</p>
-<p>清空数据库通过 <code>show tables</code> 获得数据库中所有表，然后通过 <code>truncate tableName</code> 命令来清空数据库，由于项目中使用 Hibernate 框架，所以利用 Hibernate 执行原生sql语句</p>
-<h2 id="DatabaseBackupUtils"><a href="#DatabaseBackupUtils" class="headerlink" title="DatabaseBackupUtils"></a>DatabaseBackupUtils</h2><p>DatabaseBackupUtils 是数据库备份和还原的工具类，可以通用</p>
-<pre><code>public class DatabaseBackupUtils {  
-
-    /** MySQL安装目录的Bin目录的绝对路径 */  
-    private String mysqlBinPath;  
-    /** 访问MySQL数据库的用户名 */  
-    private String username;  
-    /** 访问MySQL数据库的密码 */  
-    private String password;  
-
-    public String getMysqlBinPath() {  
-        return mysqlBinPath;  
-    }  
-    public void setMysqlBinPath(String mysqlBinPath) {  
-        this.mysqlBinPath = mysqlBinPath;  
-    }  
-    public String getUsername() {  
-        return username;  
-    }  
-    public void setUsername(String username) {  
-        this.username = username;  
-    }  
-    public String getPassword() {  
-        return password;  
-    }  
-    public void setPassword(String password) {  
-        this.password = password;  
-    }  
-    public DatabaseBackupUtils(String mysqlBinPath, String username, String password) {  
-        if (!mysqlBinPath.endsWith(File.separator)) {  
-            mysqlBinPath = mysqlBinPath + File.separator;  
-        }  
-        this.mysqlBinPath = mysqlBinPath;  
-        this.username = username;  
-        this.password = password;  
-    }  
-    /** 
-     * 备份数据库 
-     *  
-     * @param output 
-     *            输出流 
-     * @param dbname 
-     *            要备份的数据库名 
-     */  
-    public void backup(OutputStream output, String dbname) {  
-
-        /**
-         * 相当于在运行中输入：
-         * cmd /c D:/MySQL/bin\mysqldump -uroot -proot --set-charset=utf8 audit
-         * 注意：/c表示运行完命令后关闭进程，可以测试cmd /c ping localhost与cmd ping localhost的区别
-         */
-        String command = &quot;cmd /c &quot; + mysqlBinPath + &quot;mysqldump -u&quot; + username  
-                + &quot; -p&quot; + password + &quot; --all-tablespaces --add-drop-database --set-charset=utf8 &quot; + dbname;  
-        System.out.println(command);
-        PrintWriter writer = null;  
-        BufferedReader reader = null;  
-        try {  
-            writer = new PrintWriter(new OutputStreamWriter(output, &quot;utf8&quot;));  
-            /**
-             * 执行mysqldump命令后会向子进程的缓存区写数据，以前在Dos命令行中通过重定向的方式将数据写入到文件中，
-             * 在这里必须从进程的读取数据，并写入sql文件，即生成备份文件 注：如果不对控制台信息进行读出，则会导致进程堵塞无法运行
-             * 把进程执行中的控制台输出信息写入.sql文件，即生成了备份文件。
-             */
-            Process process = Runtime.getRuntime().exec(command);  
-            //从缓存区中读数据
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream(), &quot;utf8&quot;));  
-            String line = null;  
-            //边读边写
-            while ((line = reader.readLine()) != null) {  
-                writer.println(line);  
-            }  
-            writer.flush();  
-        } catch (UnsupportedEncodingException e) {  
-            e.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } finally {  
-            try {  
-                if (reader != null) {  
-                    reader.close();  
-                }  
-                if (writer != null) {  
-                    writer.close();  
-                }  
-            } catch (IOException e) {  
-                e.printStackTrace();  
-            }  
-        }  
-    }  
-    /** 
-     * 备份数据库，如果指定路径的文件不存在会自动生成 
-     *  
-     * @param dest 
-     *            备份文件的路径 
-     * @param dbname 
-     *            要备份的数据库 
-     */  
-    public void backup(String dest, String dbname) {  
-        try {  
-            OutputStream out = new FileOutputStream(dest);  
-            backup(out, dbname);  
-            System.out.println(&quot;备份成功&quot;);
-        } catch (FileNotFoundException e) {  
-            e.printStackTrace();  
-        }  
-    }  
-    /** 
-     * 恢复数据库 
-     *  
-     * @param input 
-     *            输入流 
-     * @param dbname 
-     *            数据库名 
-     */  
-    public void restore(InputStream input, String dbname) { 
-        /**
-         * 在命令行中使用如下命令来实现恢复 cmd /c D:/MySQL/bin\mysql -uroot -proot test &lt; test.sql
-         * 但是在Java中无法识别管道符号，于是向缓存区中写test.sql数据，来实现管道的效果
-         */
-        String command = &quot;cmd /c &quot; + mysqlBinPath + &quot;mysql -u&quot; + username  
-                + &quot; -p&quot; + password + &quot; &quot; + dbname;  
-        System.out.println(command);
-        try {  
-            Process process = Runtime.getRuntime().exec(command);  
-            OutputStream out = process.getOutputStream();  
-            String line = null;  
-            String outStr = null;  
-            StringBuffer sb = new StringBuffer(&quot;&quot;);  
-            BufferedReader br = new BufferedReader(new InputStreamReader(input,  
-                    &quot;utf8&quot;));  
-            while ((line = br.readLine()) != null) {  
-                sb.append(line + &quot;\r\n&quot;);  
-            }  
-            outStr = sb.toString();
-            //System.out.println(outStr);
-            OutputStreamWriter writer = new OutputStreamWriter(out, &quot;utf8&quot;);  
-            writer.write(outStr);  
-            writer.flush();  
-            out.close();  
-            br.close();  
-            writer.close();  
-        } catch (UnsupportedEncodingException e) {  
-            e.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-    }  
-    /** 
-     * 恢复数据库 
-     *  
-     * @param dest 
-     *            备份文件的路径 
-     * @param dbname 
-     *            数据库名 
-     * @throws FileNotFoundException 
-     */  
-    public void restore(String dest, String dbname) throws FileNotFoundException {  
-        InputStream input = new FileInputStream(dest);  
-        restore(input, dbname);  
-        System.out.println(&quot;恢复成功&quot;);
-    }  
-
-    public static void main(String[] args) throws SQLException {  
-        String binPath = &quot;D:/MySQL/bin&quot;;  
-        String userName = &quot;root&quot;;  
-        String pwd = &quot;root&quot;;  
-        DatabaseBackupUtils bak = new DatabaseBackupUtils(binPath, userName, pwd);  
-        //bak.backup(&quot;c:/users/asus/desktop/test.sql&quot;, &quot;test&quot;);  
-        //bak.restore(&quot;c:/users/asus/desktop/test.sql&quot;, &quot;test&quot;); 
-    }  
-}  
-</code></pre><h2 id="IDatabaseBackupDao、DatabaseBackupDaoImpl"><a href="#IDatabaseBackupDao、DatabaseBackupDaoImpl" class="headerlink" title="IDatabaseBackupDao、DatabaseBackupDaoImpl"></a>IDatabaseBackupDao、DatabaseBackupDaoImpl</h2><p>DatabaseBackupDaoImpl 利用Hibernate执行sql语句清空数据库，分为两个步骤：</p>
-<p>1、获得表名<br>2、清空数据库</p>
-<p>IDatabaseBackupDao</p>
-<pre><code>public interface IDatabaseBackupDao extends ICommonDao&lt;AuditAlert&gt;{
-    List&lt;String&gt; getTables();
-    void clear(List&lt;String&gt; tables);
-}
-</code></pre><p>DatabaseBackupDaoImpl</p>
-<pre><code>@Component
-public class DatabaseBackupDaoImpl extends CommonDaoImpl&lt;AuditAlert&gt; implements
-        IDatabaseBackupDao {
-
-    @Override
-    public List&lt;String&gt; getTables() {
-
-        List&lt;String&gt; list = (List&lt;String&gt;) this.getHibernateTemplate().execute(
-                new HibernateCallback() {
-
-                    @Override
-                    public Object doInHibernate(Session session)
-                            throws HibernateException, SQLException {
-
-                        List list = session
-                                .createSQLQuery(
-                                        &quot;select table_name from information_schema.TABLES where TABLE_SCHEMA = &apos;audit&apos;;&quot;)
-                                .list();
-                        return list;
-                    }
-
-                });
-        return list;
-    }
-
-    @Override
-    public void clear(List&lt;String&gt; tables) {
-        final List&lt;String&gt; f = tables;
-        this.getHibernateTemplate().execute(new HibernateCallback() {
-
-            Set&lt;String&gt; ignore = new HashSet&lt;String&gt;(Arrays.asList(&quot;remote_ip&quot;,
-                    &quot;audit_user&quot;,&quot;audit_user_role&quot;,&quot;audit_role&quot;,&quot;audit_role_popedom&quot;,
-                    &quot;audit_popedom&quot;));
-
-            @Override
-            public Object doInHibernate(Session session)
-                    throws HibernateException, SQLException {
-                for (String tableName : f) {
-                    if(ignore.contains(tableName)){
-                        continue;
-                    }
-                    session.createSQLQuery(&quot;truncate &quot; + tableName).executeUpdate();
-                }
-                return null;
-            }
-        });
-
-    }
-}
-</code></pre><h2 id="IDataBackupService、DataBackupServiceImpl"><a href="#IDataBackupService、DataBackupServiceImpl" class="headerlink" title="IDataBackupService、DataBackupServiceImpl"></a>IDataBackupService、DataBackupServiceImpl</h2><p>IDataBackupService 定义了三个方法</p>
-<p>1、备份数据库<br>2、恢复数据库<br>3、清空数据库</p>
-<p>其中备份数据库通过 DatabaseBackupUtils 工具类实现，恢复数据库由于需要连接数据库，采用 IDatabaseBackupDao 类来实现</p>
-<p>IDataBackupService</p>
-<pre><code>public interface IDataBackupService {
-    /**
-     * 备份数据库
-     * @throws IOException
-     */
-    void doBackup() throws IOException;
-    /**
-     * 恢复数据库
-     * @throws FileNotFoundException 
-     */
-    void doRestore() throws FileNotFoundException;
-    /**
-     * 清空数据库
-     */
-    void doClear();
-}
-</code></pre><p>DataBackupServiceImpl</p>
-<pre><code>@Service
-public class DataBackupServiceImpl implements IDataBackupService {
-
-    private static final String DB_USER = &quot;root&quot;;
-    private static final String DB_PWD = &quot;root&quot;;
-    private static final String DB_NAME = &quot;audit&quot;;
-    private static String MYSQL_BIN_PATH;
-
-    static{
-        BufferedReader br;
-        try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(&quot;c:/AuditMysqlBinPath.txt&quot;)));
-            MYSQL_BIN_PATH = br.readLine();
-            if(br != null){
-                br.close();
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-    }
-
-    @Autowired
-    IDatabaseBackupDao iDatabaseBackupDao;
-    private static final DatabaseBackupUtils databaseBackupUtils = new DatabaseBackupUtils(MYSQL_BIN_PATH,DB_USER,DB_PWD);
-
-    /**
-     * 备份数据库
-     */
-    @Override
-    public void doBackup() throws IOException {
-        //如果audit.sql文件存在，可能是刚点击备份，所以不允许备份
-        File file = new File(&quot;c:/audit.sql&quot;);
-        if(file.exists()){
-            throw new IllegalStateException();
-        }
-        databaseBackupUtils.backup(&quot;c:/audit.sql&quot;, &quot;audit&quot;);
-    }
-
-    @Override
-    public void doClear() {
-        List&lt;String&gt; tables = iDatabaseBackupDao.getTables();
-        System.out.println(tables);
-        iDatabaseBackupDao.clear(tables);
-    }
-
-    @Override
-    public void doRestore() throws FileNotFoundException {
-        databaseBackupUtils.restore(&quot;c:/audit.sql&quot;, &quot;audit&quot;);
-    }
-}
-</code></pre>
-          
+          备份和删除使用Java的 Runtime 类的 exec 方法来执行命令行
+Process process = Runtime.getRuntime().exec(command);
+但是命令行中无法识别管道符号 &lt;，所以必须获得子进程的输入流和输出流写文件
+清空数据库通过 show tabl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/05/[数据库]Java进行数据库备份、回复、删除/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2006,20 +1213,15 @@ public class DataBackupServiceImpl implements IDataBackupService {
       
         
           
-            <h2 id="利用C3PO进行配置实现数据库连接池的使用"><a href="#利用C3PO进行配置实现数据库连接池的使用" class="headerlink" title="利用C3PO进行配置实现数据库连接池的使用"></a>利用C3PO进行配置实现数据库连接池的使用</h2><p>第一步： 导入jar包 c3p0-0.9.2.1.jar 和 mchange-commons-java-0.2.3.4.jar<br>第二步： 书写配置文件 c3p0-config.xml; 里面有一个参数是需要注意的，可以详细看看下面的配置文件<br>注意的是：<br>1、文件名必须为c3p0-config.xml， 这是因为C3P0会默认读取文件名为c3p0-config.xml的配置文件进而对数据库连接池进行配置。<br>2、c3p0-config.xml 必须和你写的java代码在同一个目录下，<strong>一般就是放在项目的 src 目录下</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;c3p0-config&gt;</div><div class="line">	&lt;!-- c3p0也可以指定配置文件，而且配置文件可以是properties，也可骒xml的。</div><div class="line">		当然xml的高级一些了。但是c3p0的配置文件名必须为c3p0-config.xml，</div><div class="line">		并且必须放在类路径下 --&gt;</div><div class="line"></div><div class="line">	&lt;!--  默认的配置这里我们默认使用mysql数据库 --&gt;</div><div class="line">	&lt;default-config&gt;</div><div class="line">		&lt;!--  设置数据库的驱动，url， 用户名， 密码 --&gt;</div><div class="line">		&lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;jdbcUrl&quot;&gt;</div><div class="line">			jdbc:mysql://127.0.0.1:3306/audit</div><div class="line">		&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;</div><div class="line">		&lt;property name=&quot;password&quot;&gt;root&lt;/property&gt;</div><div class="line">		&lt;!--  建立连接池时初始分配的连接池数 = 3--&gt;</div><div class="line">		&lt;property name=&quot;initialPoolSize&quot;&gt;3&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;!--  连接池中的最少连接数 = 2 --&gt;</div><div class="line">		&lt;property name=&quot;minPoolSize&quot;&gt;2&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;!--  连接池中的最大连接数 = 50--&gt;</div><div class="line">		&lt;property name=&quot;maxPoolSize&quot;&gt;50&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;!--  当连接池中连接耗尽时再一次新生成多少个连接 Default: 3 --&gt;</div><div class="line">		&lt;property name=&quot;acquireIncrement&quot;&gt;3&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 --&gt;  </div><div class="line">		&lt;property name=&quot;maxIdleTime&quot;&gt;60&lt;/property&gt; 	</div><div class="line"></div><div class="line">		&lt;!--每60秒检查所有连接池中的空闲连接。Default: 0 --&gt;</div><div class="line">		&lt;property name=&quot;idleConnectionTestPeriod&quot;&gt;60&lt;/property&gt;</div><div class="line"></div><div class="line">		&lt;!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException,如设为0则无限期等待。单位毫秒。Default: 0 --&gt;  </div><div class="line">		&lt;property name=&quot;checkoutTimeout&quot;&gt;0&lt;/property&gt;  </div><div class="line">	&lt;/default-config&gt;</div><div class="line">&lt;/c3p0-config&gt;</div></pre></td></tr></table></figure>
-<p>第三步:创建一个连接池，连接池为单例模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line">public class C3P0ConnectionPool&#123;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * C3P0连接池工具类</div><div class="line">	 */</div><div class="line">	private ComboPooledDataSource ds;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 连接池单例模式</div><div class="line">	 */</div><div class="line">	private static final C3P0ConnectionPool instance = new C3P0ConnectionPool();</div><div class="line">	public static C3P0ConnectionPool getInstance()&#123;</div><div class="line">		return instance;</div><div class="line">	&#125;</div><div class="line">	private C3P0ConnectionPool()&#123;</div><div class="line">		System.setProperty(&quot;com.mchange.v2.c3p0.cfg.xml&quot;,&quot;config/c3p0-config.xml&quot;);  </div><div class="line">		/**</div><div class="line">		 * 多种读取C3P0连接池参数的方法</div><div class="line">		 */</div><div class="line">		//第一种： 使用配置文件中的默认配置&lt;default-config&gt;</div><div class="line">		ds = new ComboPooledDataSource();</div><div class="line">		</div><div class="line">		// 第二种： 使用配置文件中设置的其他配置名字的配置 name-config</div><div class="line">        // ds = new ComboPooledDataSource(&quot;Oracle-config&quot;);</div><div class="line"></div><div class="line">        // 第三种： 我们可以显式的在程序中进行设置数据库连接池的信息</div><div class="line">		</div><div class="line">		/*// 连接数据库驱动类</div><div class="line">		ds.setDriverClass(&quot;com.mysql.jdbc.Driver&quot;);</div><div class="line">		// 数据库访问地址</div><div class="line">		ds.setJdbcUrl(&quot;jdbc:mysql:///audit&quot;);</div><div class="line">		// 数据库用户名</div><div class="line">		ds.setUser(&quot;root&quot;);</div><div class="line">		// 数据库密码</div><div class="line">		ds.setPassword(&quot;root&quot;);</div><div class="line">		// 初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3</div><div class="line">		// initialPoolSize</div><div class="line">		ds.setInitialPoolSize(50);</div><div class="line">		// 连接池中保留的最大连接数。Default: 15 maxPoolSize</div><div class="line">		ds.setMaxPoolSize(100);</div><div class="line">		// 连接池中保留的最小连接数。</div><div class="line">		ds.setMinPoolSize(2);</div><div class="line">		// 获得连接的最大等待毫秒数。Default: 1000</div><div class="line">		ds.setAcquireRetryDelay(1000);</div><div class="line">		// 最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0</div><div class="line">		ds.setMaxIdleTime(600);*/</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 连接池的主要方法：获取连接</div><div class="line">	 * @throws SQLException </div><div class="line">	 */</div><div class="line">	public Connection getConnection() throws SQLException &#123;</div><div class="line">		Connection conn = null;</div><div class="line">		try &#123;</div><div class="line">			conn = ds.getConnection();</div><div class="line">		&#125; catch (Exception e) &#123;</div><div class="line">			// TODO Auto-generated catch block</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		//System.out.println(&quot;正在使用：&quot; + ds.getThreadPoolNumActiveThreads());</div><div class="line">		return conn;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 测试</div><div class="line">	 */</div><div class="line">	public static void main(String[] args) throws PropertyVetoException, SQLException &#123;</div><div class="line">		final C3P0ConnectionPool pool = C3P0ConnectionPool.getInstance();</div><div class="line">		//检测是否是单例模式</div><div class="line">		System.out.println(C3P0ConnectionPool.getInstance());</div><div class="line">		System.out.println(C3P0ConnectionPool.getInstance());</div><div class="line">		System.out.println(C3P0ConnectionPool.getInstance());</div><div class="line">		System.out.println(C3P0ConnectionPool.getInstance());</div><div class="line">		System.out.println(C3P0ConnectionPool.getInstance());</div><div class="line">		System.out.println(C3P0ConnectionPool.getInstance());</div><div class="line">		</div><div class="line">		for (int i = 0; i &lt; 10000; i++) &#123;</div><div class="line">			new Thread(new Runnable()&#123;</div><div class="line"></div><div class="line">				@Override</div><div class="line">				public void run()  &#123;</div><div class="line">					try &#123;</div><div class="line">						Connection connection = pool.getConnection();</div><div class="line">						System.out.println(connection);//返回的是代理类，每次对象都不一样</div><div class="line">			            PreparedStatement pstmt = connection.prepareStatement(&quot;SELECT * FROM logs&quot;);</div><div class="line">			            ResultSet rs = pstmt.executeQuery();</div><div class="line">			            while (rs.next()) &#123;</div><div class="line">			            &#125;</div><div class="line">			            rs.close();</div><div class="line">			            pstmt.close();</div><div class="line">			            // 注意的是，即使使用了数据库连接池之后，这里也必须显式的调用close语句，</div><div class="line">			            // 此时的close语句并不会关闭与数据库的TCP连接，而是将连接归还回到池中去，变为空闲状态</div><div class="line">			            // 如果不close掉的话，这个连接将会一直被占用</div><div class="line">			            connection.close();</div><div class="line">					&#125; catch (Exception e) &#123;</div><div class="line">						e.printStackTrace();</div><div class="line">					&#125;</div><div class="line">					</div><div class="line">					</div><div class="line">				&#125;</div><div class="line">				</div><div class="line">			&#125;).start();</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="C3P0自定义配置文件目录"><a href="#C3P0自定义配置文件目录" class="headerlink" title="C3P0自定义配置文件目录"></a>C3P0自定义配置文件目录</h2><p>将配置文件c3p0-config.xml放在自己定义的目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/加载c3p0连接池配置  </div><div class="line">System.setProperty(&quot;com.mchange.v2.c3p0.cfg.xml&quot;,&quot;configs/c3p0-config.xml&quot;);</div></pre></td></tr></table></figure>
-<h2 id="C3P0的源代码的一些关键解析："><a href="#C3P0的源代码的一些关键解析：" class="headerlink" title="C3P0的源代码的一些关键解析："></a>C3P0的源代码的一些关键解析：</h2><p>几个关键的类：<br>C3P0PooledConnectionPoolManager是连接池的管理类，<br>C3P0PooledConnectionPool是连接池类，<br>BasicResourcePool是真正管理数据库连接池的类</p>
-<p>获取一个连接的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public Connection getConnection() throws SQLException&#123;</div><div class="line">    PooledConnection pc = getPoolManager().getPool().checkoutPooledConnection();</div><div class="line">    return pc.getConnection();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>1) 关键步骤代码：Object resc = prelimCheckoutResource(timeout);<br>查看池中是否有未使用的connection,有就返回（还要判断是否空闲、是否过期）；没有，如果没有达到最大数，就生成一个，或者就等待。<br>2) 关键步骤代码：<br>boolean refurb = attemptRefurbishResourceOnCheckout (resc);<br>得到连接后，检测连接的可用性。<br>3) 连接可用，接着判断连接是否处于管理中，不在就再调用本方法获取一个，在就返回本连接。</p>
-<p>C3P0<strong>从连接池拿到的连接都是代理的连接，一个对PooledConnection类型对象的代理对象，所以可以放心调用close方法，只是连接进行了归还，不会关闭物理连接 而且C3p0中实际创建的对象是实现了PooledConnection（接口，位于javax.sql）， 它本身包含Connection,和这个connection相关的所有Statement,Result，可以实现对连接的一些管理，添加监听器等， 所做的所有数据库操作，都被PooledConnection所管理。</strong>c3p0默认的实现是NewPooledConnection</p>
-<p>C3P0使用了LinkedList来存放空闲池中的连接，每次取连接的时候是get(0), 然后remove(0) 应该是使用的队列来实现的空闲池<br>C3P0 使用的HashMap 来存放的正在使用的连接，这样方便进行查找，连接返回的时候，根据连接可以快速的定位到要remove的那个连接<br>C3P0 使用HashSet来存储一些失效的，但是仍旧被使用或者检查的资源。<br>这些数据结构可以在 BasicResourcePool 类中查看到</p>
-
-          
+          利用C3PO进行配置实现数据库连接池的使用第一步： 导入jar包 c3p0-0.9.2.1.jar 和 mchange-commons-java-0.2.3.4.jar第二步： 书写配置文件 c3p0-config.xml; 里面有一个参数是需要注意的，可以详细看看下面的配置文件注意的是：1、文件名
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/01/[数据库]3、C3P0连接池的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2151,166 +1353,17 @@ public class DataBackupServiceImpl implements IDataBackupService {
       
         
           
-            <p>设计的时候需要考虑的几点 </p>
-<ol>
-<li><p>首先是数据库连接的存储，要能很容易的管理和获取数据库连接，<strong>将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接</strong>，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连接（优势在于，队列的头部就是目前使用时间最长的连接，方便进行检查，回收这个使用时间超过限制的数据库连接） </p>
-</li>
-<li><p>如何回收分配出去的连接，即当外部的连接调用了 close 方法之后，如何让它返回到数据库连接池中，而不是销毁？<br>答：使用动态代理，当请求一个 Connection 时，返回用户一个代理的 Connection 对象，这样就可以对 close 方法进行拦截，调用了 close 方法，会自动执行代理类中的 invoke 方法， 在 invoke 方法里面就可以实现对实际连接的一些操作了，具体实现请查看 getConnection() 方法。 </p>
-</li>
-<li><p>其实获取连接的时候应当首先检查空闲池是否有空闲连接，再检查空闲连接是否可用，<strong>当数据库连接池没有连接的时候，要进行一次性创建新的连接</strong>，同时要进行检查看是否能进行连接的创建，是否达到了最大值等， 所以数据库的一些配置属性需要在静态代码块中通过 Properties 类读取出来。</p>
-</li>
-</ol>
-<pre>
-/**
- * 连接池
- * 空闲队列：获取连接时从空闲队列中获取
- * 已使用队列：监控正在使用的连接
- * 连接对象代理：调用Connention对象时并不是真正关闭连接，而是将连接对象
- *         放入空闲队列。使用了内部列可以直接访问外部列的空闲队列
- */
-public class ProxyConnectionPool {
+          设计的时候需要考虑的几点 
 
-    private LinkedList<connection> idlelist; // 使用LinkedList实现栈存储数据库连接,存放的空闲连接
-    private LinkedList<connection> usinglist; // 使用LinkedList实现队列存储数据库连接,存放的正在使用的连接
-    private static Properties props; // 读取配置文件信息
-    private static int initialPoolSize; // 初始连接池大小
-    private static int maxPoolSize; // 连接池最大连接数
-    private static int acquireIncrement; // 无连接时，一次性创建连接数
-
-    static {
-        props = new Properties();
-        try {
-            props.load(new FileInputStream("jdbc.properties"));
-            initialPoolSize = Integer.parseInt(props
-                    .getProperty("initialPoolSize"));
-            maxPoolSize = Integer.parseInt(props.getProperty("maxPoolSize"));
-            acquireIncrement = Integer.parseInt(props
-                    .getProperty("acquireIncrement"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    // 构造函数，在数据库连接池里先创建几个连接
-    // 我看了一下c3p0的源码，里面是用的代理连接 new ，而不是真实的物理连接
-    public ProxyConnectionPool() throws ClassNotFoundException, SQLException {
-        idlelist = new LinkedList<connection>();
-        usinglist = new LinkedList<connection>();
-        Class.forName(props.getProperty("MySQLdriverClass"));
-        for (int i = 0; i < initialPoolSize; i++) {
-            Connection conn = DriverManager.getConnection(props
-                    .getProperty("MySQLurl"), props
-                    .getProperty("MySQLusername"), props
-                    .getProperty("MySQLpassword"));
-            idlelist.addLast(conn);
-        }
-    }
-
-    // 获取数据库连接
-    public Connection getConnection() throws SQLException {
-        if (idlelist.size() > 0) {
-            usinglist.addFirst(idlelist.getLast()); // 只是获取第一个连接并没有删除
-            Connection conn = idlelist.removeLast(); // 获取第一个连接并删除
-            // return conn; //返回真实的物理连接
-
-            // 返回一个真实物理连接的动态代理连接对象
-            <font color="red">return (Connection) Proxy.newProxyInstance(ProxyConnection.class
-                    .getClassLoader(), new Class<?>[] { Connection.class },
-                    new ProxyConnection(conn));</font>
-        } else {
-            // 创建新的数据库连接
-            boolean flag = dynamicIncrement();
-            if (flag) {
-                usinglist.add(idlelist.getLast()); // 只是获取第一个连接并没有删除
-                Connection conn = idlelist.removeLast(); // 获取第一个连接并删除
-                // return conn; //返回真实的物理连接
-
-                // 返回一个真实物理连接的动态代理连接对象
-                return (Connection) Proxy.newProxyInstance(
-                        ProxyConnection.class.getClassLoader(),
-                        new Class[] { Connection.class }, new ProxyConnection(
-                                conn));
-            } else {
-                throw new SQLException("没连接了");
-            }
-        }
-    }
-
-    // 连接池里无连接，动态增长
-    private boolean dynamicIncrement() throws SQLException {
-        int num = idlelist.size() + usinglist.size();
-        int num2 = maxPoolSize - num;
-        // 如果可以创建连接，而且创建的连接数就是acquireIncrement
-        if (num2 >= acquireIncrement) {
-            for (int i = 0; i < acquireIncrement; i++) {
-                Connection conn = DriverManager.getConnection(props
-                        .getProperty("MySQLurl"), props
-                        .getProperty("MySQLusername"), props
-                        .getProperty("MySQLpassword"));
-                idlelist.addLast(conn);
-            }
-            return true;
-        }
-        // 如果可以创建连接,但是创建的连接数只能是num2个
-        if (num2 > 0) {
-            for (int i = 0; i < num2; i++) {
-                Connection conn = DriverManager.getConnection(props
-                        .getProperty("MySQLurl"), props
-                        .getProperty("MySQLusername"), props
-                        .getProperty("MySQLpassword"));
-                idlelist.addLast(conn);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    // Connection的动态代理类
-    class ProxyConnection implements InvocationHandler {
-        private Connection conn;
-
-        public ProxyConnection(Connection conn) {
-            this.conn = conn;
-        }
-
-        // 关闭数据库连接，放回到空闲池中
-        @Override
-        public Object invoke(Object proxy, Method method, Object[] args)
-                throws Throwable {
-            // TODO Auto-generated method stub
-            // 分配出去的代理连接调用了close方法，进行拦截，实现我们自己想要的操作
-            <font color="red">if (method.getName().equals("close")) {
-                // conn.close(); // 这一句的话就直接关闭连接了，所以不写
-                // 应该事先的操作是将 conn 放到空闲池中去，从使用池中移除
-                System.out.println(idlelist.size());
-                System.out.println(usinglist.size());
-                idlelist.addLast(conn);
-                usinglist.remove(conn);
-                System.out.println(idlelist.size());
-                System.out.println(usinglist.size());
-                return null;
-            }</font>
-            // 其他方法仍然调用真实对象的方法
-            return method.invoke(conn, args);
-        }
-    }
-
-}
-</connection></connection></connection></connection></pre>
-
-<p>配置文件 jdbc.properties</p>
-<pre><code># mysql database driver
-MySQLdriverClass=com.mysql.jdbc.Driver
-MySQLurl=jdbc:mysql://127.0.0.1/test?useSSL=false
-MySQLusername=root
-MySQLpassword=root
-initialPoolSize=3
-minPoolSize=2
-maxPoolSize=50
-acquireIncrement=3
-</code></pre>
-          
+首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/01/[数据库]2、动态代理的连接池/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2442,26 +1495,19 @@ acquireIncrement=3
       
         
           
-            <p>构建高度为n的二叉平衡树，设f（n）为高度为n时最小需要的节点数，那么：</p>
-<pre><code>f（n） = f（n-1） + f（n-2） + 1，其中 f（1）=1，f（2） = 2
-</code></pre><p>则 f（3）=4，f（4）=7，f（5）=12，f（6）=20</p>
-<p>公式解析：</p>
-<p>当计算高度为n的二叉平衡树节点时，那么其左右子树的高度不相差1，并且<strong>左、右子树都是二叉平衡树</strong>。因为要求节点最少，我们可以规定<strong>左子树的高度比右子树的高度大1</strong>，则</p>
-<pre><code>深度n的二叉平衡树的最小节点数 = 左平衡树的最小节点数 + 右平衡树的最小节点数 + 当前树的根节点树（也就是1）
-</code></pre><p>但是右子树的高度比左子树的高度少1</p>
-<ul>
-<li>用f（n）表示深度n的二叉平衡树的最小节点数</li>
-<li>f（n-1）表示左平衡树的最小节点数（左子树高度当然比当前树的深度小1）</li>
-<li>f（n-2）表示右平衡树的最小节点数，比左子树高度少1的平衡树</li>
-<li>后面的+1表示当前根节点</li>
-</ul>
-<p>得到公式：</p>
-<pre><code>f（n） = f（n-1） + f（n-2） + 1
-</code></pre><p>图文解析：</p>
-<p><img src="http://i.imgur.com/VZWbBLr.png" alt=""></p>
-<p>上图表示构建高度6的平衡树，从左向右逐层构建，注意到高度为5的时候，左子树为高度为4的平衡树，右子树的高度比左子树少1，为高度为3的平衡树。图中两个黄色圈出的是节点为3的平衡树，树的结构一致</p>
-
-          
+          构建高度为n的二叉平衡树，设f（n）为高度为n时最小需要的节点数，那么：
+f（n） = f（n-1） + f（n-2） + 1，其中 f（1）=1，f（2） = 2
+则 f（3）=4，f（4）=7，f（5）=12，f（6）=20
+公式解析：
+当计算高度为n的二叉平衡树节点时，那么其左右子树的高度不相
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/27/[数据结构与算法]2、平衡二叉树最小节点个数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2593,62 +1639,22 @@ acquireIncrement=3
       
         
           
-            <p><a href="https://www.zhihu.com/question/28254987" target="_blank" rel="external">https://www.zhihu.com/question/28254987</a></p>
-<p>Java中异常提供了一种识别及响应错误情况的一致性机制，有效地异常处理能使程序更加健壮、易于调试。异常之所以是一种强大的调试手段，在于其回答了以下三个问题：</p>
-<ul>
-<li>什么出了错?</li>
-<li>在哪出的错?</li>
-<li>为什么出错?</li>
-</ul>
-<p>在有效使用异常的情况下，异常类型回答了”什么”被抛出，异常堆栈跟踪回答了”在哪”抛出，异常信息回答了”为什么”会抛出，如果你的异常没有回答以上全部问题，那么可能你没有很好地使用它们。有三个原则可以帮助你在调试过程中最大限度地使用好异常，这三个原则是：</p>
-<ul>
-<li>具体明确</li>
-<li>提早抛出</li>
-<li>延迟捕获</li>
-</ul>
-<p>为了阐述有效异常处理的这三个原则，本文通过杜撰个人财务管理器类JCheckbook进行讨论，JCheckbook用于记录及追踪诸如存取款,票据开具之类的银行账户活动。</p>
-<h2 id="具体明确"><a href="#具体明确" class="headerlink" title="具体明确"></a>具体明确</h2><p>Java定义了一个异常类的层次结构,其以Throwable开始，扩展出Error和Exception，而Exception又扩展出RuntimeException.如图1所示.</p>
-<p><img src="http://i.imgur.com/VJN2tPZ.gif" alt=""></p>
-<p>图1.Java异常层次结构</p>
-<p><strong>这四个类是泛化的，并不提供多少出错信息</strong>，虽然实例化这几个类是语法上合法的(如:new Throwable())，但是最好还是把它们当虚基类看，使用它们更加特化的子类。<strong>Java已经提供了大量异常子类，如需更加具体，你也可以定义自己的异常类。</strong></p>
-<p>例如：<a href="http://java.io" target="_blank" rel="external">http://java.io</a> package包中定义了Exception类的子类IOException，更加特化确的是 FileNotFoundException，EOFException和ObjectStreamException这些IOException的子 类。每一种都描述了一类特定的I/O错误：分别是文件丢失,异常文件结尾和错误的序列化对象流.异常越具体，我们的程序就能更好地回答”什么出了错”这个问题。</p>
-<p>捕获异常时尽量明确也很重要。例如：JCheckbook可以通过重新询问用户文件名来处理FileNotFoundException，对于 EOFException，它可以根据异常抛出前读取的信息继续运行。如果抛出的是ObjectStreamException，则程序应该提示用户文件已损坏，应当使用备份文件或者其他文件。</p>
-<p>Java让明确捕获异常变得容易,因为我们可以对同一try块定义多个catch块，从而对每种异常分别进行恰当的处理。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">File prefsFile = new File(prefsFilename);</div><div class="line"> </div><div class="line">try&#123;</div><div class="line">    readPreferences(prefsFile);</div><div class="line">&#125;</div><div class="line">catch (FileNotFoundException e)&#123;</div><div class="line">    // alert the user that the specified file</div><div class="line">    // does not exist</div><div class="line">&#125;</div><div class="line">catch (EOFException e)&#123;</div><div class="line">    // alert the user that the end of the file</div><div class="line">    // was reached</div><div class="line">&#125;</div><div class="line">catch (ObjectStreamException e)&#123;</div><div class="line">     // alert the user that the file is corrupted</div><div class="line">&#125;</div><div class="line">catch (IOException e)&#123;</div><div class="line">    // alert the user that some other I/O</div><div class="line">    // error occurred</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>JCheckbook 通过使用多个catch块来给用户提供捕获到异常的明确信息。举例来说：如果捕获了FileNotFoundException，它可以提示用户指定另一 个文件，某些情况下多个catch块带来的额外编码工作量可能是非必要的负担，但在这个例子中，额外的代码的确帮助程序提供了对用户更友好的响应。</p>
-<p>除前三个catch块处理的异常之外，最后一个catch块在IOException抛出时给用户提供了更泛化的错误信息.这样一来，程序就可以尽可能提供具体的信息，但也有能力处理未预料到的其他异常。</p>
-<p><strong>有时开发人员会捕获范化异常，并显示异常类名称或者打印堆栈信息以求＂具体＂。千万别这么干！</strong>用户看到java.io.EOFException或者堆栈信息 只会头疼而不是获得帮助。应当捕获具体的异常并且用＂人话＂给用户提示确切的信息。不过，异常堆栈倒是可以在你的日志文件里打印。记住，异常和堆栈信息是用来帮助开发人员而不是用户的。</p>
-<p>最后，应该注意到JCheckbook并没有在readPreferences()中捕获异常，而是将捕获和处理异常留到用户界面层来做，这样就能用对话框或其他方式来通知用户。这被称为＂延迟捕获＂，下文就会谈到。</p>
-<h2 id="提早抛出"><a href="#提早抛出" class="headerlink" title="提早抛出"></a>提早抛出</h2><p>异常堆栈信息提供了导致异常出现的方法调用链的精确顺序，包括每个方法调用的类名，方法名，代码文件名甚至行数，以此来精确定位异常出现的现场。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">java.lang.NullPointerException</div><div class="line">at java.io.FileInputStream.open(Native Method)</div><div class="line">at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:103)</div><div class="line">at jcheckbook.JCheckbook.readPreferences(JCheckbook.java:225)</div><div class="line">at jcheckbook.JCheckbook.startup(JCheckbook.java:116)</div><div class="line">at jcheckbook.JCheckbook.&lt;init&gt;(JCheckbook.java:27)</div><div class="line">at jcheckbook.JCheckbook.main(JCheckbook.java:318)</div></pre></td></tr></table></figure>
-<p>以上展示了FileInputStream类的open()方法抛出NullPointerException的情况。不过注意 FileInputStream.close()是标准Java类库的一部分，很可能导致这个异常的问题原因在于我们的代码本身而不是Java API。所以问题很可能出现在前面的其中一个方法，幸好它也在堆栈信息中打印出来了。</p>
-<p>不幸的是，NullPointerException是Java中信息量最少的（却也是最常遭遇且让人崩溃的）异常。它压根不提我们最关心的事情：到底哪里是null。所以我们不得不回退几步去找哪里出了错。</p>
-<p>通过逐步回退跟踪堆栈信息并检查代码，我们可以确定错误原因是向readPreferences()传入了一个空文件名参数。既然readPreferences()知道它不能处理空文件名，所以马上检查该条件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void readPreferences(String filename)</div><div class="line">throws IllegalArgumentException&#123;</div><div class="line">    if (filename == null)&#123;</div><div class="line">         throw new IllegalArgumentException(&quot;filename is null&quot;);</div><div class="line">    &#125;  //if</div><div class="line"> </div><div class="line">   //...perform other operations...</div><div class="line"> </div><div class="line">   InputStream in = new FileInputStream(filename);</div><div class="line"> </div><div class="line">   //...read the preferences file...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过提早抛出异常（又称＂迅速失败＂），异常得以清晰又准确。堆栈信息立即反映出什么出了错（提供了非法参数值），为什么出错（文件名不能为空值），以及哪里出的错（readPreferences()的前部分）。这样我们的堆栈信息就能如实提供：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">java.lang.IllegalArgumentException: filename is null</div><div class="line">at jcheckbook.JCheckbook.readPreferences(JCheckbook.java:207)</div><div class="line">at jcheckbook.JCheckbook.startup(JCheckbook.java:116)</div><div class="line">at jcheckbook.JCheckbook.&lt;init&gt;(JCheckbook.java:27)</div><div class="line">at jcheckbook.JCheckbook.main(JCheckbook.java:318)</div></pre></td></tr></table></figure>
-<p>另外，其中包含的异常信息（＂文件名为空＂）通过明确回答什么为空这一问题使得异常提供的信息更加丰富，而这一答案是我们之前代码中抛出的NullPointerException所无法提供的。</p>
-<p>通过在检测到错误时立刻抛出异常来实现迅速失败，可以有效避免不必要的对象构造或资源占用，比如文件或网络连接。同样，打开这些资源所带来的清理操作也可以省却。</p>
-<h3 id="延迟捕获"><a href="#延迟捕获" class="headerlink" title="延迟捕获"></a>延迟捕获</h3><p>菜鸟和高手都可能犯的一个错是，在程序有能力处理异常之前就捕获它。Java编译器通过要求检查出的异常必须被捕获或抛出而间接助长了这种行为。自然而然的做法就是立即将代码用try块包装起来，并使用catch捕获异常，以免编译器报错。</p>
-<p>问题在于，捕获之后该拿异常怎么办？<strong>最不该做的就是什么都不做。空的catch块等于把整个异常丢进黑洞，能够说明何时何处为何出错的所有信息都会永远丢失。把异常写到日志中还稍微好点，至少还有记录可查。</strong>但我们总不能指望用户去阅读或者理解日志文件和异常信息。让readPreferences()显示错误信息对话框也不合适，因为虽然JCheckbook目前是桌面应用程序，但我们还计划将它变成基于HTML的Web应用。那样的话，显示错误对话框显然不是个选择。同时，不管HTML还是C/S版本，配置信息都是在服务器上读取的，而错误信息需要显示给Web浏览器或者客户端程序。 readPreferences()应当在设计时将这些未来需求也考虑在内。适当分离用户界面代码和程序逻辑可以提高我们代码的可重用性。</p>
-<p>在有条件处理异常之前过早捕获它，通常会导致更严重的错误和其他异常。例如，如果上文的readPreferences()方法在调用FileInputStream构造方法时立即捕获和记录可能抛出的FileNotFoundException，代码会变成下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public void readPreferences(String filename)&#123;</div><div class="line">   //...</div><div class="line"> </div><div class="line">   InputStream in = null;</div><div class="line"> </div><div class="line">   // DO NOT DO THIS!!!</div><div class="line">try&#123;</div><div class="line">    in = new FileInputStream(filename);</div><div class="line">&#125;</div><div class="line">catch (FileNotFoundException e)&#123;</div><div class="line">    logger.log(e);</div><div class="line">&#125;</div><div class="line"> </div><div class="line">in.read(...);</div><div class="line"> </div><div class="line">//...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>上面的代码在完全没有能力从FileNotFoundException中恢复过来的情况下就捕获了它</strong>。如果文件无法找到，下面的方法显然无法读取它。如果 readPreferences()被要求读取不存在的文件时会发生什么情况？当然，FileNotFoundException会被记录下来，如果我们 当时去看日志文件的话，就会知道。然而当程序尝试从文件中读取数据时会发生什么？<strong>既然文件不存在，变量in就是空的，一个 NullPointerException就会被抛出。</strong></p>
-<p>调试程序时，本能告诉我们要看日志最后面的信息。那将会是NullPointerException，非常让人讨厌的是这个异常非常不具体。错误信息不仅误导我们什么出了错（真正的错误是FileNotFoundException而不是NullPointerException），还误导了错误的出处。真正的问题出在抛出NullPointerException处的数行之外，这之间有可能存在好几次方法的调用和类的销毁。我们的注意力被这条小鱼从真正的错误处吸引了过来，一直到我们往回看日志才能发现问题的源头。</p>
-<p>既然readPreferences() 真正应该做的事情不是捕获这些异常，那应该是什么？看起来有点有悖常理，通常最合适的做法其实是什么都不做，不要马上捕获异常。把责任交给 readPreferences()的调用者，让它来研究处理配置文件缺失的恰当方法，它有可能会提示用户指定其他文件，或者使用默认值，实在不行的话也许警告用户并退出程序。</p>
-<p>把异常处理的责任往调用链的上游传递的办法，就是在方法的throws子句声明异常。在声明可能抛出的异常时，注意越具体越好。这用于标识出调用你方法的程序需要知晓并且准备处理的异常类型。例如，”延迟捕获”版本的readPreferences()可能是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public void readPreferences(String filename)</div><div class="line">throws IllegalArgumentException,</div><div class="line">FileNotFoundException, IOException&#123;</div><div class="line">    if (filename == null)&#123;</div><div class="line">           throw new IllegalArgumentException(&quot;filename is null&quot;);</div><div class="line">     &#125;  //if</div><div class="line"> </div><div class="line">     //...</div><div class="line"> </div><div class="line">     InputStream in = new FileInputStream(filename);</div><div class="line"> </div><div class="line">//...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>技术上来说，我们唯一需要声明的异常是IOException，但我们明确声明了方法可能抛出FileNotFoundException。 IllegalArgumentException不是必须声明的，因为它是非检查性异常（即RuntimeException的子类）。然而声明它是为 了文档化我们的代码（这些异常也应该在方法的JavaDocs中标注出来）。</p>
-<p>当然，最终你的程序需要捕获异常，否则会意外终止。但这里的技巧是<font color="red"><strong>在合适的层面捕获异常，以便你的程序要么可以从异常中有意义地恢复并继续下去，而不导致更深入的错误</strong></font>；要么能够为用户提供明确的信息，包括引导他们从错误中恢复过来。如果你的方法无法胜任，那么就不要处理异常，把它留到后面捕获和在恰当的层面处理。</p>
-<h2 id="一些例子"><a href="#一些例子" class="headerlink" title="一些例子"></a>一些例子</h2><h3 id="SQLHelper"><a href="#SQLHelper" class="headerlink" title="SQLHelper"></a>SQLHelper</h3><p>没法处理的异常不要捕获，抛到上层再处理（如Action层甚至框架层）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class UserDao &#123;</div><div class="line">    public void addUser(String name, String pass) throws SQLException &#123;</div><div class="line">        Connection conn = DBUtils.getConnection();</div><div class="line">        try &#123;</div><div class="line">            String sql = &quot;insert into user(name, pass) values(?, ?)&quot;;</div><div class="line">            PreparedStatement stmt = conn.prepareStatement(sql);</div><div class="line">            stmt.setString(1, name);</div><div class="line">            stmt.setString(2, pass);</div><div class="line">            stmt.executeUpdate();</div><div class="line">            user.setId(DBUtils.getLastInsertId());</div><div class="line">        &#125; finally &#123;</div><div class="line">            DBUtils.closeConnection();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="异常控制流程"><a href="#异常控制流程" class="headerlink" title="异常控制流程"></a>异常控制流程</h3><p>在一个动作（action）中，包含了若干个业务逻辑操作，出于对用户友好的目的，假如在某操作调用失败的时候提示对应的消息并终止接下来的操作。</p>
-<p>整体的 Try-Catch 还可以写一个拦截器，把捕捉异常的操作都放在里面，这样 action 非常干净</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">public class MainAction &#123;</div><div class="line">	@Autowired</div><div class="line">	MyService myService;</div><div class="line"></div><div class="line">	public void doSth1() &#123;</div><div class="line">		try &#123;</div><div class="line">			if (!myService.operationA()) &#123;</div><div class="line">				throw new OperationFailedException(&quot;operationA failed&quot;);</div><div class="line">			&#125;</div><div class="line">			if (!myService.operationB()) &#123;</div><div class="line">				throw new OperationFailedException(&quot;operationB failed&quot;);</div><div class="line">			&#125;</div><div class="line">			if (!myService.operationC()) &#123;</div><div class="line">				throw new OperationFailedException(&quot;operationC failed&quot;);</div><div class="line">			&#125;</div><div class="line">			myService.operationD();</div><div class="line">		&#125; catch (OperationFailedException e) &#123;</div><div class="line">			tip(e.getMessage());</div><div class="line">		&#125; catch(Exception e)&#123;</div><div class="line">			tip(&quot;eat shit&quot;);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	private class OperationFailedException extends Exception &#123;</div><div class="line">		public OperationFailedException(String message) &#123;</div><div class="line">			super(message);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void tip(String msg) &#123;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>经验丰富的开发人员都知道，调试程序的最大难点不在于修复缺陷，而在于从海量的代码中找出缺陷的藏身之处。只要遵循本文的三个原则，就能让你的异常协助你跟踪和消灭缺陷，使你的程序更加健壮，对用户更加友好。</p>
-<p>英文原文：Jim Cushing，编译：ImportNew - 郑玮</p>
+          https://www.zhihu.com/question/28254987
+Java中异常提供了一种识别及响应错误情况的一致性机制，有效地异常处理能使程序更加健壮、易于调试。异常之所以是一种强大的调试手段，在于其回答了以下三个问题：
 
-          
+什么出了错?
+在哪出的错?
+为什么出错?
+
+在有效使用异常的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/21/[Java]如何优雅的处理异常（java）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

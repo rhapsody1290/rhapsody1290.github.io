@@ -205,6 +205,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -343,17 +353,18 @@
       
         
           
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>各种各样的网络攻击对互联网的安全造成了重大影响</p>
-<p>DDoS是一种常见、危害大的网络攻击 —— ddos介绍（DDoS攻击的根源）、危害（服务器崩溃，正常用户提供正常的服务），DDoS攻击类型：不同攻击速率，流量大小，隐藏源IP地址</p>
-<p>DDoS攻击检测研究现状，检测方法分类：包分析和流量分析</p>
-<p>为什么要大数据分析？进入大数据时代，越来越多的公司使用虚拟化数据中心和云服务，DDoS攻击开始移师云计算。尽管当前针对DDoS攻击的入侵检测模型的研究已经较为成熟，但由于云主机所具有的一些有别于普通主机的特性，所以不能将已有的入侵检测技术直接应用到云计算中。</p>
-<p>传统的可行的方案在数据量变大时难以处理，需要使用大数据技术对对DDoS攻击检测</p>
-<p>DDoS攻击原理，ddos攻击工具源码分析，DDoS数据库</p>
-<p>研究目的：构建一个检测DDos系统模型，具有较高的准确性和实时性</p>
-<p>研究内容：目前，对 DDoS 攻击检测技术的研究已经较为成熟，但随着云技术的发展，DDoS 攻击在云环境中又呈现出新的特性。云环境所拥有的强大计算能力和存储资源使得 DDoS 攻击在云环境中具有更强的破坏力。本文先对现有 DDoS 攻击原理、检测技术进行充分研究，又对云环境所具有的虚拟化、分布式特定进行分析。在综合以上二者的基础上，设计出基于云环境的 DDoS 攻击入侵检测模型。该模型具有传统入侵检测系统的优点，并加入了资源调度、容错等更适于云环境攻击检测的功能模块。</p>
-<p>云计算-数据泄露等数据安全问题-入侵检测-DDoS攻击检测-传统技术无法处理大型数据-大数据平台Spark-DDos攻击工具源码分析-流量统计[趋势分析，总的应该是上升；]+包分析（负载检查，比如数据包大小，内容是否一致，及其他包特征来判定是否是DDos攻击）-用户行为分析（不同时间访问量不同，设定的阈值不同，回归模型，历史数据生成关联规则算法、序列模式算法、BP神经网络（深度学习）-训练处阈值进行检测（阈值动态变化）） - 当前与历史误差多少判断为遭遇DDos攻击</p>
-
-          
+          背景各种各样的网络攻击对互联网的安全造成了重大影响
+DDoS是一种常见、危害大的网络攻击 —— ddos介绍（DDoS攻击的根源）、危害（服务器崩溃，正常用户提供正常的服务），DDoS攻击类型：不同攻击速率，流量大小，隐藏源IP地址
+DDoS攻击检测研究现状，检测方法分类：包分析和流量分析
+为什么要
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/11/[论文]论文技术方向/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -485,140 +496,16 @@
       
         
           
-            <h2 id="基于数据挖掘的网络安全审计技术的研究与实现-辛义忠-caj"><a href="#基于数据挖掘的网络安全审计技术的研究与实现-辛义忠-caj" class="headerlink" title="基于数据挖掘的网络安全审计技术的研究与实现_辛义忠.caj"></a>基于数据挖掘的网络安全审计技术的研究与实现_辛义忠.caj</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>网络攻击问题随着网络的普及而日益突出。</p>
-<h3 id="目前的解决方案"><a href="#目前的解决方案" class="headerlink" title="目前的解决方案"></a>目前的解决方案</h3><p>1、入侵检测技术通过对网络安全审计数据进行分析和处理来发现网络中的入侵活动和入侵者,在网络安全领域起到了重要的作用。其关键和核心内容是进行网络安全审计。<br>2、网络安全审计的目的是实时地、不间断地监视整个网络系统以及应用程序的运行状态,及时发现系统中可疑的、违规的或危险的行为,进行报警和采取阻断措施,并留下记录。</p>
-<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><p>1、目前的审计系统可以高效地实现安全审计数据的输入、查询、统计等功能,但无法发现数据中存在的关联、关系和规则,无法根据现有的数据预测未来的发展趋势,缺乏挖掘数据背后隐藏的知识的手段。</p>
-<p>2、目前入侵检测系统或安全审计系统中普遍采用的特征检测l的方法是由安全专家预先定义一系列特征模式来识别入侵。这种方法的问题是模式库得不到及时的更新,这样在安全审计的过程中系统不能自适应地识别出新型攻击,使误报警和漏报警问题不断发生。另外,一方面随着网络应用的普及,网络数据流量急剧增加,另一方面有些审计记录本身包含了大量的无关信息,于是,数据过载与检测速度过慢的问题也不无出现。可见，目前在安全审计的过程中普遍存在的问题主要有:</p>
-<p>（1）准确率低<br>准确率低主要体现在误报警和漏报警两个方面。误报警是指将正常的用户行为及模式判断为入侵并发出警告。误报警是在安全审计过程中亟待解决的问题之一。由于事先定义的模式很难精确地划分正常行为和入侵行为之间的界限,因此虚警率一直居高不下。误报情况不仅使得安全管理员疲于人工应对出现的警报,也降低了安全管理员对真正报警的敏感度。而将入侵行为错判为正常行为的漏报情况也会严重影响入侵检测系统的可用性。</p>
-<p>（2）检测速度过慢<br>入侵检测系统事后反映的本质决定了将入侵检测的延迟最小化对于入侵检测系统来说是至关重要的。而入侵检测延迟又取决于处理数据的效率。随着网络应用的普及,网络数据流量急剧增加,一个网站每天可能会产生上百万条的事件记录。面对如此庞大的数据,入侵检测系统如何有效地完成数据审计以便做出及时反应成为一个难题。</p>
-<p>（3）自适应性差<br>网络上的数据是随着网络应用的变化而改变的,而特征检测是基于预先定义的模式,这就意味着它不可能根据网络数据的变化自适应地修改检测模式。因此,对于现有攻击手段的简单变种,特征检测是无能为力的,更不用说新型的攻击技术了。另外,有些审计记录包含了大量的无关信息,有些则显得过于精简,缺乏审计子系统的说明文档,这些都是目前的商业产品中审计子系统存在的问题。</p>
-<p>3、目前大多数服务器操作系统都有日志，但是这些日志往往只是记录一些零碎的信息(如用户登录的时间信息),从这些日志中无法看到用户到底做了些什么操作,整个入侵的步骤是如何发生的。而且分散在各个操作系统中的日志需要用户管理员分别查看,进行人工的综合、分析、判断,实际上是很难奏效的。特别值得重视的是,这些服务器往扫一是处于无人看守状况下自动运行的,所以被攻克或者违规操作的时候管理员不在现场,日志文件很有可能被黑客删除或者修改,在这些被修改的日志卜进行侦破可能根本没有效果,甚至有一可能产生误导,起到相反的作用。目前在国际互联网上几已经有各种修改操作系统日志的工具,用这些工具就可以轻松修改操作系统的日志,所以这些功能和安全测评规范中的安全审计要求也有很大的差距。</p>
-<p>4、有此Sniff类的工具(如Netxray、Snoop、Sniffit、Tcpdump)能够显示网络上流过的数抓包,并将包头和包的内部信息标识出来,这些工具从一定意义使得网络上传输的数抓变得可见,能够观察到一些网络用户正在进行的操作和传输的数据,所以这此工具对正在发生的违规操作能够起到一定的检测作用。但是仅仅是这些工具还不能承担日常的安全审计工作,因为这些工具只是对单个包进行解码,缺乏分析能力,无法判断是否是重要的信息和违规的信息,此外它们不具备上下文相关的网络操作行为判断的能力,也缺乏报警响应的能力。目前网络的实际流量是非常大的,如果不加分析全部记录的话,子任何磁盘也会在很短的时间内充满。所以这些只是些辅助判断网络故障的工具,目前还没有哪个系统真正将这些工具收集的数据长时间安全记录下来。</p>
-<h3 id="审计系统关键"><a href="#审计系统关键" class="headerlink" title="审计系统关键"></a>审计系统关键</h3><p>1、如何在大量的审计数据中提取出具有代表性的系统特征模式,并对程序或用户行为做出描述,是实现安全事件审计系统的关键。<br>2、为了对审计数据进行全面、高速和准确地分析,需要利用数据挖掘等方法来处理安全事件数据,从包含大量冗余信息的数据中提取出尽可能多的隐藏的安全信息,抽象出有利于进行判断和比较的特征模型并用相应的算法由计算机判断出当前网络行为的性质。<br>3、数据挖掘作为一种从大量数据中发现有用模式的一种新兴知识发现技术,在特征和规则的提取方面有非常大的优势。</p>
-<h3 id="研究目标、内容、重点、拟解决的问题"><a href="#研究目标、内容、重点、拟解决的问题" class="headerlink" title="研究目标、内容、重点、拟解决的问题"></a>研究目标、内容、重点、拟解决的问题</h3><p>(1)研究目标</p>
-<p>用数据挖掘技术解决目前在安全审计过程中存在的不足,找出数据挖掘和网络安全审计在技术上的结合点,建立基于数据挖掘的网络安全审计模型。</p>
-<p>(2)研究内容与工作重点</p>
-<p>本文试图将数据挖掘技术应用于网络安全审计领域,利用数据挖掘中的分类技术、关联分析、序列模式分析和聚类技术等方法提取与安全有关的系统体征属性,并根据系统特征属性生成安全事件的分类模型,用于对安全事件的自动鉴别。目的是要建立一套完整的基于数据挖掘的网络安全审计模型,在这个模型中包括了针对安全事件审计数据的数据采集、数据预处理、特征变换与选取、数据挖掘、规则生成、挖掘结果处理等系列过程。</p>
-<p>(3)拟解决的关键问题</p>
-<p>1、安全审计的速度;<br>2、安全审计的准确率;<br>3、安全审计的自适应能力。</p>
-<p>但目前在安全审计过程中普遍存在着检测准确率低、检测速度慢和自适应性差等问题。为了解决这些问题,本文提出了基于数据挖掘的网络安全审计系统的方案并加以实现。</p>
-<h3 id="数据挖掘"><a href="#数据挖掘" class="headerlink" title="数据挖掘"></a>数据挖掘</h3><p>数据挖掘是一种新兴的、并且在很短时间内得到了广泛应用的先进的智能化数据分析厅法。数据挖掘旨在从大量的数据中提取隐藏的预测性信息,发掘数据间潜在的模式,找出某些常常被忽略的信息,用便于理解和观察的方式反映给用户,作为决策的依据</p>
-<h4 id="数据挖掘的功能及内容"><a href="#数据挖掘的功能及内容" class="headerlink" title="数据挖掘的功能及内容"></a>数据挖掘的功能及内容</h4><p>1、数据预处理<br>2、概念/类描述：用汇总的、简洁的、精确的方式描述每个类和概念称为概念/类描述<br>3、分类：</p>
-<p>分类(classification)是找出描述并区分数据类或概念的模型,以便能够使用模型预测类标记末知的对象类的过程。数据分类的目的是提取数据记录的特征属性,生成分类模型,该模型可以把数据库中的数据项映射到给定类别中的一个,导出模型是基于对训练数据集的分析。数据分类的处理步骤如下:<strong>获得训练数据集;定义类标识;分析训练数据集,生成分类描述模型;使用得到的类型描述模型对目标数据进行分类</strong>。数据分类算法如C4.5,。RIPER等。</p>
-<p>4、关联分析<br>5、演变分析<br>6、聚类分析<br>7、孤立点分析</p>
-<h4 id="数据挖掘的应用"><a href="#数据挖掘的应用" class="headerlink" title="数据挖掘的应用"></a>数据挖掘的应用</h4><p>(l)针对生物医学和DNA数据分析的数据挖掘<br>(2)针对金融数据分析的数据挖掘<br>(3)零售业中的数据挖掘<br>(4)电信业中的数据挖掘</p>
-<h3 id="基于数据挖掘的网络安全审计系统的方案"><a href="#基于数据挖掘的网络安全审计系统的方案" class="headerlink" title="基于数据挖掘的网络安全审计系统的方案"></a>基于数据挖掘的网络安全审计系统的方案</h3><p>通过以上研究,本文一认为将数据挖掘技术应用一于网络安全审计系统中可以较好地解决目前在安全审计过程中出现的问题。而且,在这一领域的研究人员的试验和测试结果表明,将数据挖掘技术应用于网络安全审计在理论上是可行的,在技术上建立这样套系统是可能的。因此,本文试图通过实践将数据挖掘技术应用于网络安全领域,利用数据挖掘中的分类、聚类、关联分析、序列模式分析等技术提取与安全相关的系统特征属性,并根据系统特征属性生成安全事件的分类模型,用于对安全事件的自动鉴别。目的是要建立一套完整的基于数据挖掘的网络安全审计模型。</p>
-<p>本着去粗取精、去伪存真的原则,我们将网络安全审计作为一种数据分析的过程,着眼于对大量的安全审计数据应用数据挖掘算法,综合运用数据挖掘中的预处理、关联、序列、分类、聚类等技术,并通过系统运行过程中不断修改和扩充知识库,以一种自动和系统的手段建立一套自适应的、具备良好扩展性的网络安全审计系统[42,43]。基于以下思想,本文确定了如下方案:</p>
-<p>1、系统中保存的数据分为当前审计数据和用户的历史行为数据。当前数据通过网络抓包工具和系统主机日志监视工具获取,历史数据是当前数据的历史记录。</p>
-<p>2、当前审计信息和用户历史行为数据都需要经过数据的预处理,去除其中的不一致和冗余数据,对网络数据和主机数据进行集成,并对数据进行变换和归约将原始数据转换成易于挖掘的格式,形成具有特定格式的事件序列。</p>
-<p>3、为了形成知识库模型需要构造训练数据。对于历史数据或训练数据,由数据挖掘引擎对事件序列进行分析学习,挖掘出审计数据中蕴藏的用户的正常行为模式和异常行为模式,并将正常或异常规则存入知识库中。</p>
-<p>4、根据知识库中的规则,入侵检测模块对当前审计数据进行分析,当某用户的行为知识库中定义的异常规则相一致时,我们判定其为入侵。但当前一行为与知识库中的仁何规则都不匹配时,系统将判断当前用户行为与异常规则的相似性是否超过某一阈值,或不在正常行为之列,并认定该行为具有威胁。将这些数据加以存储,并利用聚类挖掘技术将这些数据抽象成为由类似的模式组成的多个类,再利用分类技术将数据转变为观则、添加到知识库中。这样可以通过不断修改知识库来发现未知攻击或已知攻击的变种。</p>
-<h2 id="基于流量行为特征的DoS＆DDoS攻击检测与异常流识别"><a href="#基于流量行为特征的DoS＆DDoS攻击检测与异常流识别" class="headerlink" title="基于流量行为特征的DoS＆DDoS攻击检测与异常流识别"></a>基于流量行为特征的DoS＆DDoS攻击检测与异常流识别</h2><p>按照数据源的不同，现有DoS攻击和DDoS攻击的检测方法主要可以分为两类:基于包信息的检测方法和基于网络流量行为特征的检测方法</p>
-<p>1)基于包信息的检测方法通过分析数据包中的特定信息或是<strong>用户日志等，建立判定规则</strong>，并根据实际的流量数据和这些规则的匹配关系来检测DoS攻击和DDoS攻击典型的研究有:<br>文献［1］提出一种<strong>基于主机日志分析的统计方法</strong>，通过分析主机的日志数据，利用统计理论对正常行为建模，并比较待检测行为与正常行为的偏离来检测网络DoS攻击<br>文献［2］提出了一种基于数据包包头信息综合分析的异常检测技术，通过分析目的IP地址或端口号在边沿路由器出口流量的关联检测异常<br>文献［3］利用TCP协议不同的控制报文在交互时呈现出的<strong>数学约束关系</strong>，提出了一种评价TCP流宏观平衡性的系统测度，并将之应用于异常检测</p>
-<p>2)基于网络流量行为特征的检测方法通过分析流量行为特征参数，如各种数据包包头信息(如IP地址端口号等)聚合后计算得到的统计量，来进行异常检测 典型的研究有:</p>
-<p>使用美国Abilence网络［13］Losa汇接点上的流量数据进行仿真实验 </p>
-<h2 id="抗Dos攻击模型研究-刘雅林-caj"><a href="#抗Dos攻击模型研究-刘雅林-caj" class="headerlink" title="抗Dos攻击模型研究_刘雅林.caj"></a>抗Dos攻击模型研究_刘雅林.caj</h2><p>在本文中，作者重点将建立一个抗 DOS 攻击的模型，该模型利用数据挖掘（DM）原理，采用关联规则算法、序列模式算法和 BP 网络算法作为判断攻击的主要理论依据。该模型通过感应模块，获取网络流量信息；<strong>采用 BP 网络算法，训练出神经网络模型，建立网络流量趋势曲线，设立一个可以动态变化的阀值，和日志库中的网络流量进行对比分析，对异常流量进行判别</strong>；将感应模块抓取的网络连接信息利用关联规则算法、序列模式算法挖掘出关联模型和序列模式模型，作为判断攻击是否发生的重要方法。</p>
-<h3 id="Dos攻击的危害"><a href="#Dos攻击的危害" class="headerlink" title="Dos攻击的危害"></a>Dos攻击的危害</h3><p>第九页</p>
-<p>19页</p>
-<h3 id="入侵检测"><a href="#入侵检测" class="headerlink" title="入侵检测"></a>入侵检测</h3><p>入侵检测系统的实现方法有基于概率统计模型的检测、基于神经网络的检测、基于专家系统的检测、基于模型推理的检测和基于免疫的检测等技术。</p>
-<h3 id="数据挖掘-1"><a href="#数据挖掘-1" class="headerlink" title="数据挖掘"></a>数据挖掘</h3><p>数据挖掘(DM:DataMining)一般指从大量的数据中自动地提取有效的未知新模式的探索、分析过程。它是一种从数据仓库中发现并提取潜在的、有用的知识的新技术，其作用是<strong>寻找数据间潜在的关联，做出归纳推理，以此为基础自动做出预测决策。</strong></p>
-<h3 id="为什么在网络攻击中使用数据挖掘"><a href="#为什么在网络攻击中使用数据挖掘" class="headerlink" title="为什么在网络攻击中使用数据挖掘"></a>为什么在网络攻击中使用数据挖掘</h3><p>在入侵检测系统中，数据挖掘通常是指从大量的数据中自动提取出模型的过程。数据挖掘采取以数据为中心的观点，把攻击检测看作是一个数据分析过程，在异常检测过程中，数据挖掘主要是从审计数据中发现正常的使用模式；而在滥用检测过程中主要是实现审计数据编码并与攻击模式匹配的过程。数据挖掘技术能应用于入侵检测系统中，主要是由于它具有以下特点</p>
-<p>1、处理的数据规模十分巨大；由于用户不能形成精确的查询要求，因此需要靠数据挖掘技术来寻找其可能感兴趣的东西；<br>2、数据挖掘可对数据的迅速变化做出快速响应，以提供决策支持信息；<br>3、数据挖掘能发现潜在规则，还可以管理和维护规则，随着新数据的不断加人，规则可随之更新；数据挖掘中规则的发现基于统计规律，发现的规则不必适合于所有数据，而且，当达到某一阀值时，便认为有此规则。因此，在攻击检测系统中利用数据挖掘技术可能会发现大量的规则。数据挖掘技术迅速发展，己经从统计学、模式识别、机器学习和数据库等领域中得到了多种算法，与攻击检测相关的算法主要有分类分析、聚类分析、关联分析和序列模式分析等。将数据挖掘用于网络攻击检测中的主要优点：它能从大量的审计数据中自动生成简洁而精确的检测模型，因此为大量的计算环境建立攻击检测系统。</p>
-<h3 id="DOS-攻击的特征与数据挖掘特征的关联"><a href="#DOS-攻击的特征与数据挖掘特征的关联" class="headerlink" title="DOS 攻击的特征与数据挖掘特征的关联"></a>DOS 攻击的特征与数据挖掘特征的关联</h3><p>DoS 攻击手法虽然简单，但现有的技术和手段对这种攻击几乎没有什么好的对应策略。DoS之所以难于防范和跟踪就在于它是一种自然、简单、通过“正常”渠道发起的攻击方法。由于DoS攻击是利用TCP/IP协议自身的缺陷，产生大量“合法”的数据包来攻击目标，因此对该攻击的防范相当困难。</p>
-<p>如果仅仅是检测分析数据包，试图从中区分出合法与非法的数据包是非常困难的。我们认为对 DoS 防护的关键是检测分析由<strong> DoS 攻击数据包形成的流特征</strong>。在深入分析 DoS 攻击的各种工具及其源码，并在分析收集的模拟 DoS 攻击通信数据包后，总结出其通信数据包及其流特征如下：</p>
-<p>1、大多数攻击的 TCP 数据包利用了 TCP/IP 协议的 3 次握手机制，通过使用了“SYN”的状态标志，向被攻击者发送连接请求，但却不真正建立一个连接，即使得被攻击者维护大量所谓的<strong>半打开状态连接</strong>；<br>2、利用 UDP Flood 或 TCP Flood 或 Smurf 攻击建立与被攻击方的大量连接，消耗服务器的带宽、CPU 或内存等资源；<br>3、利用 TCP/IP 协议中允许某些怪异数据包的存在，发起攻击。其中包括以下的数据包：<br>（1）在 TCP 数据包中同时加入 SYN 和 ACK 两种状态标志，这就使目标机器出现混乱，要花一些时间来处理这些异常情况。<br>（2）特大型的 TCP 和 UDP 数据包，或数据包内容为固定的信息。<br>（3）其它怪异的数据包，如错误的分段，混乱的 header 偏移量等。<br>（4）DoS 支持对连接速率的限制。在某些情况下，连接可以被高速建立，目标主机上会被快速打开成千上万的端口，在连接超时之前所有的资源就被耗尽了。而在另一种情况下，连接也可以以一种较慢的速率建立，以避免触发目标主机上或(防火墙)的SYN Flood 保护机制。<strong>但总体上其发送速率是一种上升的趋势。</strong></p>
-<p>从 DDoS 的攻击特征中可以看出，作为 DoS 攻击的升级，此类攻击<strong>从单个数据包或通信连接上很像正常的通信</strong>，单纯检查单个数据包或通信连接往往不能发现该攻击，这使得检测和防护 DDoS 攻击至今仍缺乏有效的手段，只能是结合各方面有关证据辅助对 DDoS 的检测。作者在研究中发现<br>DDoS 攻击的最终表现在于<strong>大量数据涌向受攻击站点，引发流量异常</strong>，因此结合<strong>流量分析</strong>来检测 DDoS 攻击是非常必要的。</p>
-<p>在 DoS 攻击流特征分析中已经给出通过流量发现 DoS 攻击的例子，但是流量的分析远不止这样简单。因为各网络情况的不同，仅仅将网络流量数据作为 DoS 检测规则属性是不够的，而需要<strong>将网络实际流量以及它和理论中的正常(没有任何攻击行为的情况下的)流量的比较结果均作为关键属性</strong>。这样才能完整的反映出当前网络的流量真实情况。</p>
-<p>那么理论中的正常流量是否可以获得的，这又如何得到的呢？这里举一个例子：一个专门提供邮箱服务的网站，一般情况下每天上午 8: 00-9: 30<br>期间网络访问量达到一天的最高峰。这是因为大部分人习惯每天上班打开电脑的第一件事就是查看自己的信箱。正是因为每个人的行为都带有一种习惯性，<strong>这也使得网络的访问量产生规律性。既然有规律可寻，那么网络的流量就是可以预测的</strong>。<font color="red"><strong>本文利用趋势分析算法从大量正常通信的流量数据挖掘出网络流量(出、入、IP 段等)的趋势，预测正常流量曲线。</strong></font>因此本文研究的挖掘 DoS 攻击特征的数据挖掘算法除<font color="blue"><strong>关联分析</strong></font>和<font color="blue"><strong>序列分析</strong></font>外还有<font color="blue"><strong>趋势分析</strong></font>，它利用历史数据找出变化规律，建立模型，并用此模型来预测未来数据的种类、特征等。<strong>回归分析</strong>是一种典型的方法，即利用大量的历史数据，以时间为变量建立线性或非线性回归方程。预测时，只要输入任意的时间值，通过回归方程就可求出该时间的状态。近年来，发展起来的<strong>神经网络方法</strong>，如 BP 模型，它实现了非线性样本的学习，能进行非线性函数的判别。</p>
-<h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><p>为了抗 DOS 攻击，我设计了一个模型，该模型将用到关联规则算法、序列模式算法以及神经网络算法。在本节里，将对这三种算法进行简介。</p>
-<p><strong>关联规则算法</strong>：关联规则挖掘是数据挖掘中最活跃的研究方法之一，最初提出的动机是针对<strong>购物篮分析问题</strong>提出的，其目的是为了发现交易<br>数据库中<strong>不同商品之间的联系规则</strong>。这些规则刻画了<strong>顾客购买的行为模式</strong>，可以用来指导商家科学地安排进货、库存以及货架设计等。</p>
-<p><strong>序列算法</strong>：如果说关联规则算法试图发现审计数据内模式，那么序列算法能用来发现审计数据间模式。序列模式挖掘是指挖掘相对时间或其他模式出现频率高的模式。一个序列模式的经典例子是“9个月前以购买奔腾 PC 的客户很可能在一个月内订购新的 CPU 芯片</p>
-<h3 id="基于数据挖掘的抗-DoS-攻击模型"><a href="#基于数据挖掘的抗-DoS-攻击模型" class="headerlink" title="基于数据挖掘的抗 DoS 攻击模型"></a>基于数据挖掘的抗 DoS 攻击模型</h3><p>将采取上一章介绍的数据挖掘算法，并结合 BP 网络算法，建立一个基于数据挖掘的抗 DoS 攻击的防范模型（Data  Mining-Based  Anti-Do S  Attack Model），本模型可以从网络中抓取<strong>网络流量信息</strong>和<strong>数据包信息</strong>，然后根据<strong>知识库中已经建立的模型</strong>和<strong>训练好的流量趋势曲线</strong>，对网络信息进行判别，看是否有攻击产生。将感应模块抓取的网络连接信息<strong>利用关联规则算法、序列模式算法挖掘出关联模型和序列模式模型，作为判断攻击是否发生的重要方法</strong>。同时，为了保证某些模型难以正确判断的复杂情况（如重大事件发生时网络访问量剧增），增加了人工判断情况，对知识库中没有建立的新模型进行更新；针对某些特征比较明显的攻击，本模型用端口挖掘模块和 IP 挖掘模块进行直接处理，并不对其进行过深的分析，一定程序上避免了模型本身遭受 DoS 攻击。本模型由 8 个模块组成，它们分别是：感应模块、开采模块、分析模块、IP 挖掘模块、端口挖掘模块、控制模块、执行模块。我对这些模块分别进行了实验，其抗 DoS 攻击效果比较显著。</p>
-<p>模型综述</p>
-<p>在本模型中，首先要根据长时间的网络日志，建立 BP 网络，利用以前的数据训练 BP 网络，形成网络流量趋势曲线。这是对异常流量的判别标准。同时，还要利用数据挖掘的序列模式算法（frenquent  episode  arithmetic  ）、关联规则算法（Association rules arithmetic）建立模型，作为比较的标准。</p>
-<h2 id="基于云计算的入侵检测技术研究-齐玉珠★★★"><a href="#基于云计算的入侵检测技术研究-齐玉珠★★★" class="headerlink" title="基于云计算的入侵检测技术研究_齐玉珠★★★"></a>基于云计算的入侵检测技术研究_齐玉珠★★★</h2><h3 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h3><p>近几年来,随着网络技术的高速发展和社交网络、在线视频、电子商务、搜索引擎等新一代大规模互联网的应用迅速发展下,云计算[1]应运而生。云计算逐渐出现在互联网应用和服务的各个方面,并且已经成为信息产业发展的新方向和促进经济增长的动力[2]。云计算是一项新兴的技术,是虚拟化技术[3]、并行计算[4]、网格计算[5]、效用计算[6]、储存技术[7]、负载均衡[8]等这些传统技术与网络融合的产物。云计算是一种依赖互联网的服务形式,它通过虚拟化技术将底层的计算、存储等基础资源整合起来,以按需的、便捷的服务形式提供给企业和用户,实现了可伸缩扩展、灵活、可靠、高效的 IT 服务交付平台。这种新平台使得企业用户能够最大最优化地将资源切换到需要的应用和系统上,根据需求访问计算机和存储系统,并且可以很好地解决大数据时代的各种问题,从而使云计算有着广阔的应用前景[9]。以 Google 的应用程序引擎<a href="Google App Engine,GAE">10</a>、亚马逊的 E2C[11]、IBM 的蓝云(Blue Cloud)[12]、微软的 Azure 为代表的云计算服务已经开始大规模商用化,越来越多的公司开始使用云计算,云计算已经成为信息技术领域新的发展方向[13]。</p>
-<p>然而随着云计算技术广泛深入应用,其强大的计算和存储能力对入侵者有着巨大的诱惑力,云计算安全问题[14]越来越受到业界的关注,云计算环境相应的安全问题也呈现直线上升趋势。近几年,大型云服务提供商不断爆出云安全事故,如 2009 年 Google 云文档服务发生用户的个人文件外泄事件;2011 年,亚马逊云计算服务多次中断,导致第三方网站如回答服务 Quora、 跟踪服务 FourSquare 瘫痪;2009 年,微软的 SIDEKICK 服务宕机中断了一个星期,导致用户不可以访问自己的邮箱等个人数据;2012 年 ,微软云计算平台 Windows azure部分服务因闰年设置问题导致所有集群的服务管理功能被禁用。目前云计算安全问题已成为制约其发展的主要障碍[15],云环境中的安全防护措施将成为研究的热点。</p>
-<p>入侵检测系统[16]迄今发展已有二十几年的历史,它通过对计算机网络系统中的许多关键点进行收集信息,如操作系统的审计数据,系统日志及网络数据包等。然后分析收集到的信息,进而发现违反安全规则和危害系统安全的行为,以此来保护系统和资源的安全性,机密性,完整性和可用性。入侵检测系统作为一种主动的、行之有效的网络安全防护措施,在网络安全防护中发挥着举足轻重的作用,是新一代网络安全防护体系的重要组成部分,也是继防火墙之后的网络安全系统的第二道闸门。</p>
-<p>现在的入侵检测系统还存在许多需要解决的问题,如在高速千兆级网络下,网络流量极大,网络数据也呈现海量性,这些情况使目前的入侵检测系统满足不了对实时性和有效性的需求。目前针对以上的问题,一些研究人员着眼于算法的不断改进。然而云计算丰富的计算能力正好可以被利用来处理检测数据量大的问题,目前关于云计算的入侵检测研究还处于起步阶段,本文研究基于云计算的入侵检测系统将非常有意义。</p>
-<p>本文首先设计了一个云计算环境下的入侵检测系统模型 CIDS,该模型可以实时采集和检测云环境数据,同时利用云计算技术进行检测数据的分析处理。在该检测系统中,使用<strong>改进的 K-means 聚类方法对检测数据进行分析,同时引入主成份分析 PCA 作为特征提取模块,达到不失特征精度和检测率的情况下对海量检测数据进行线性降维的效果</strong>。最后本文在 Hadoop 平台上进行整个分析模块检测算法的并行化设计,充分利用了云计算平台的计算资源进行入侵检测的分析,验证了云计算入侵检测系统利用其云资源时,有较好的检测率和实时性,也验证了本文 CIDS 的合理性。</p>
-<p>总体来说,入侵检测技术发展到现在是比较成熟的技术,目前也已有很多检测方法,但随着网络数据量的海增和数据的复杂化,检测系统的性能处于了瓶颈状态。云计算作为一项新型的技术,一方面其强大的资源正好可以为入侵检测系统服务,另一方面入侵检测系统也可以检测出云计算遭受的入侵威胁,使云环境能及时做出响应,将损失降到最低,所以基于云计算的入侵检测技术是当前比较热门的研究方向。</p>
-<p>主要的检测方法有：<br>（1）基于特征选择的异常检测，从一组特征属性中选出能检测入侵行为的属性，并用它来对入侵行为进行分类（主成分特征分析、独立成分分析）<br><strong>（2）基于统计的异常检测：当前特征与数据库特征进行比较（平均值分析、基于贝叶斯网络推理方法、基于马尔科夫链方法、基于序列分析方法）</strong><br>（3）基于机器学习方法：系统可以通过监督式学习、死记硬背式学习或归纳学习等方式,获取个体、系统和网络的行为特征<br>（4）基于神经网络学习方法：通过神经元权值状态的调整变化分布式计算检测数据,并将检测数据分到不同的类中,实现无监督检测<br>（5）数据挖掘检测方法：从检测数据中挖掘出有用的关联知识,然后用这些知识检测入侵行为</p>
-<h2 id="Detection-DDos-Attacks-Based-on-Neural-Network-Using-Apache-Spark"><a href="#Detection-DDos-Attacks-Based-on-Neural-Network-Using-Apache-Spark" class="headerlink" title="Detection DDos Attacks Based on Neural-Network Using Apache Spark"></a>Detection DDos Attacks Based on Neural-Network Using Apache Spark</h2><p>Seven feature are used to DDoS Attack</p>
-<ul>
-<li>Number of Packets</li>
-<li>Average of Packet Size</li>
-<li>Time Interval Variance</li>
-<li>Packet Size Variance </li>
-<li>Number of Bytes</li>
-<li>Packet Rate</li>
-<li>Bite Rate</li>
-</ul>
-<p>数据库</p>
-<p>2000 DARPA LLDOS 1.0 ： 攻击流量</p>
-<h2 id="Frequency-based-DDoS-attack-detection-approach-using-naive-Bayes-classification"><a href="#Frequency-based-DDoS-attack-detection-approach-using-naive-Bayes-classification" class="headerlink" title="Frequency based DDoS attack detection approach using naive Bayes classification"></a>Frequency based DDoS attack detection approach using naive Bayes classification</h2><p>Frequency domain analysis would be a promising alternative for conventinal methods of detection. In this paper we provide a naive Bayes classifier with two frequency based methods of discrete Fourier transform and discrete wavelet transform in order to separate between attack and normal traffics.</p>
-<h3 id="背景-2"><a href="#背景-2" class="headerlink" title="背景"></a>背景</h3><p>Most intrusion detection systems (IDS) utilize one of two methods of detection: signature-based (misuse)[基于特征检测的入侵检测] and anomaly analysis [6]. In a signature-based method, the system is trained by a set of known malicious threats. During the analysis, IDS compare the pattern of ongoing traffic with its database and any match reports as intrusion. This method suffers from incapability of detecting new unknown intrusions [7][不能检测未知入侵]</p>
-<p>In anomaly-based approach, the normal pattern is determined and any activity out of this model is reported as anomalous. Although, this method can detect new intrusions, the detection probability rate is low [6]. [归纳正常情况下的模式，其他异常情况判定为入侵]</p>
-<p>Packet level analysis and payload examination are the dominant methods which are implemented in most traditional detection systems [8][包等级分析]</p>
-<h3 id="DDos攻击数据库"><a href="#DDos攻击数据库" class="headerlink" title="DDos攻击数据库"></a>DDos攻击数据库</h3><p>UDP-based attack dataset<br><img src="http://i.imgur.com/ulYg4M6.png" alt=""></p>
-<h2 id="大数据、云计算技术对审计的影响研究"><a href="#大数据、云计算技术对审计的影响研究" class="headerlink" title="大数据、云计算技术对审计的影响研究"></a>大数据、云计算技术对审计的影响研究</h2><p>大数据或称巨量资料，指的是所涉及的数据量规模大到无法利用现行主流软件工具，在一定的时间内实现收集、分析、处理或转化成为帮助决策者决策的可用信息。互联网数据中心认为大数据(是为了更经济、更有效地从高频率、大容量、不同结构和类型的数据中获取价值而设计的新一代架构和技术，用它来描述和定义信息爆炸时代产生的海量数据，并命名与之相关的技术发展与创新。</p>
-<p>大数据具有 4 个特点:<br>第一，数据体量巨大，从 TB 级别跃升到 PB 级<br>第二，处理速度快，这与传统的数据挖掘技术有着本质的不同<br>第三，数据种类多，有图片、地理位置信息、视频、网络日志等多种形式<br>第四，价值密度低，商业价值高，存在单一数据的价值并不大，但将相关数据聚集在一起，就会有很高的商业价值</p>
-<h3 id="大数据与云计算的关系"><a href="#大数据与云计算的关系" class="headerlink" title="大数据与云计算的关系"></a>大数据与云计算的关系</h3><p>从整体上看，大数据与云计算是相辅相成的。大数据主要专注实际业务，着眼于”数据”，提供数据<br>采集、挖掘、分析的技术和方法，强调的是数据存储能力。云计算主要关注”计算”，关注 IT 架构，提供 IT 解决方案，强调的是计算能力，即数据处理能力。如果没有大数据的数据存储，那么云计算的计算能力再强大，也难以找到用武之地; 如果没有云计算的数据处理能力，则大数据的数据存储再丰富，也终究难以用于实践中去。</p>
-<p>从技术上看，大数据依赖于云计算。海量数据存储技术、海量数据管理技术、MapReduce编程模型都是云计算的关键技术，也都是大数据的技术基础。而数据之所以会变”大”，最重要的便是云计算提供的技术平台。<strong>数据被放到”云”上之后，打破了过去那种各自分割的数据存储</strong>，更容易被收集和获得，大数据才能呈现在人们眼前”而巨量的数据也只能依靠云计算强大的数据处理能力，才能够 “淘尽黄沙始得金”。</p>
-<h2 id="基于大数据技术的安全审计系统-刘大地"><a href="#基于大数据技术的安全审计系统-刘大地" class="headerlink" title="基于大数据技术的安全审计系统_刘大地"></a>基于大数据技术的安全审计系统_刘大地</h2><p>一、传统安全审计技术面临的困境随着信息化程度的不断提高，信息系统越来越庞大，越来越复杂，随之而来的是系统中需要安全审计的对象和审计内容更多更复杂，单位时间内需要审计信息增长巨大。在国家重要的行业中，大型信息系统的管理节点动辄达到几十万个，需要审计的重要节点常常会超过上千个，这其中包括服务器、网络设备、安全设备、数据库、应用系统等不同的节点类型，每天的访问、操作日志可达到数亿甚至几百亿条，<strong>数据量达到TB数量级 ，这对于传统的安全审计系统的数据采集及分析能力都构成了极大挑战。</strong>同时，由于审计的对象种类繁多，不同对象间日志格式可能会有很大差异，使用传统的关系型数据库去保存这些海量的异构数据，数据的有效管理、快速检索以及利用数据挖掘技术对数据进行分析时都会面临诸多较难克服的问题。</p>
-<p>二、大数据技术带来的曙光</p>
-<p>Google 的 Google File System、Google Bigtable和 Google MapReduce这三篇论文的发表，业界利用廉价的分布式系统进行大数据处理奠定了基础，各种相关的技术和实现不断被提出，形成了蓬勃发展的大数据技术生态系统，越来越多的应用构建其上。人们以比以往低得多的成本，获取了比以往强大得多的计算和存储能力，并且仍在继续快速地提升这一能力。作为一种需要对海量数据进行采集、分析和展现的应用系统，安全审计系统天然地对能够高性能地处理海量异构数据的技术有着强烈的需求。大数据相关技术的出现与不断发展成熟，为其适应网络发展的需求提供了新的技术支撑。使用大数据相关技术改造或开发新的安全审计系统，相对于传统技术的安全审计系统，可以在以下几个方面得到显著改善：</p>
-<p>（1）<strong>系统在采集、检索、分析和存储方面的性能瓶颈将被打破；</strong><br>（2）可以更好地同时应对结构化数据和非结构化数据；<br>（3）<strong>可以利用大数据分析的相关算法和模型，对历史数据进行更广泛和更深入的分析，从海量数据中挖掘出更多对用户有价值的信息</strong>；<br>（4）由于系统部署在更加便宜的硬件设备上，采购和维护的费用更加低廉，并可根据用户网络应用的发展而灵活实现水平扩展，有效降低了系统的总拥有成本，提高了灵活性，更好地保护了用户投资。</p>
-<p>三、基于大数据技术的安全审计系统的设计</p>
-<p>使用大数据相关技术解决审计过程中遇到的几方面问题：</p>
-<p>（一）大数据量的审计数据采集与存储</p>
-<p>（二）数据归一化和关联分析</p>
-<p>审计数据采集后首先需要<strong>对这些海量数据进行分类，按照一定的标准进行归一化，并且可以对数据进行一些简单的清洗和预处理工作</strong>。这些与传统的审计产品所采取的事件处理流程一致，所不同的是要处理的数据量非常大，数据量可能会达到500万EPS（Events Per Second，每秒事件数），峰值可能达到1000万EPS。这种性能要求不是传统的审计产品能够做到的，必须要<strong>依赖大数据集群并发处理的能力</strong>。传统产品在进行实时关联分析时一般使用内存数据库的方式，因单机版内存资源以及SQL语句效率的问题导致事件量大时，规则引擎的并发性以及处理能力均会有较大下降，导致规则引擎无法检测出异常。而<strong>使用基于大数据集群的分布式计算框架同时结合基于大数据集群的复杂事件处理流程作为实时规则分析引擎，能够高效并行地运行多种规则，并能够实时检测异常事件</strong>。具体实现上可采用Storm+Esper的方式，Storm非常适合对海量数据进行实时的统计计算，并能够快速地反馈统计结果。Storm框架利用严格且高效的事件处理流程保证运算时数据的准确性，并提供多种实时统计接口供使用。利用Storm的内存数据迭代计算框架进行关联分析运算，利用Esper实现的复杂事件处理功能作为实时关联分析的引擎，可提升系统关联分析的实时性及准确性。</p>
-<p>（三）历史数据统计分析</p>
-<p>对于存储在集群中的海量数据进行离线统计分析是审计系统要解决的另一个重要问题。基于大数据技术的审计系统的离线统计与分析功能主要<strong>利用分布式计算集群来对存储于其内的海量数据进行普通的分析和分类汇总等，可以满足大多数常见的分析需求</strong>。在Hadoop上层部署Hive+Hbase框架，Hive和Hbase有各自不同的特征，hive是高延迟、结构化和面向分析的，Hbase是低延迟、非结构化和面向编程的。Hive数据仓库在Hadoop上是高延迟的，Hive集成Hbase就是为了使用Hbase的一些特性，使用Hive提供的HiveSQL来简化对Map/Reduce任务的编写，利用Hive与Hbase互补加速对事件分析结果的运算效率，将通过核心模块将该命令解析为Map-Reduce，提交给Hadoop集群之后，生成报表供报表中心展示，从而对存储在HDFS上面的数据进行离线统计分析。</p>
-<p>（四）数据挖掘</p>
-<p>通过数据挖掘技术，可以发现一些较隐蔽的网络攻击、违规访问和一些系统配置的误配情况。目前，已有很多公开的数据挖掘算法，在技术实现上已无难度，但算法与信息安全行业的模型相结合，仍需要较长时间的训练及调试。</p>
-<p>（五）高效便捷的海量事件追溯</p>
-<p>追溯系统是审计系统中非常重要的一环，目的是为了在海量数据分析的基础上最终定位并解决用<br>户实际问题，追溯系统可对平台分析出来的各种结果进行事件源定位。</p>
-<h2 id="面向云计算的DDoS攻击检测研究-许艺枢★★★★★"><a href="#面向云计算的DDoS攻击检测研究-许艺枢★★★★★" class="headerlink" title="面向云计算的DDoS攻击检测研究_许艺枢★★★★★"></a>面向云计算的DDoS攻击检测研究_许艺枢★★★★★</h2><h3 id="研究内容，包括DDoS与大数据结合的原因"><a href="#研究内容，包括DDoS与大数据结合的原因" class="headerlink" title="研究内容，包括DDoS与大数据结合的原因"></a>研究内容，包括DDoS与大数据结合的原因</h3><p>本文的主要研究内容为 DDoS 攻击的检测技术。目前，<strong>对 DDoS 攻击检测技术的研究已经较为成熟</strong>，但随着云技术的发展，<strong>DDoS 攻击在云环境中又呈现出新的特性</strong>。云环境所拥有的<strong>强大计算能力</strong>和<strong>存储资源</strong>使得 DDoS 攻击在云环境中具有<strong>更强的破坏力</strong>。本文先对现有 DDoS 攻击原理、检测技术进行充分研究，又对云环境所具有的虚拟化、分布式特定进行分析。在综合以上二者的基础上，设计出基于云环境的 DDoS 攻击入侵检测模型。该模型具有传统入侵检测系统的优点，并加入了资源调度、容错等更适于云环境攻击检测的功能模块。另外，本文对传统 BP 神经网络算法进行改进，并将改进后的算法用于检测模型中，最后通过仿真实验证明其具有更为优越的检测性能。</p>
-<h3 id="DDos攻击概述"><a href="#DDos攻击概述" class="headerlink" title="DDos攻击概述"></a>DDos攻击概述</h3><p>1、攻击原理<br>2、典型DDoS攻击<br>3、DDoS攻击常用工具<br>4、DDoS攻击防御与检测<br>5、僵尸网络</p>
-<h3 id="DDoS攻击与大数据结合的原因"><a href="#DDoS攻击与大数据结合的原因" class="headerlink" title="DDoS攻击与大数据结合的原因"></a>DDoS攻击与大数据结合的原因</h3><p>DDoS（Distributed Denial of Service，分布式拒绝服务）攻击是通过耗尽受害者主机资源使其丧失提供正常网络服务能力的一种攻击。该攻击具有<strong>易实施、难防范、隐蔽性强等特点</strong>，是当今网络安全领域的研究热点。 <strong>随着越来越多的公司使用虚拟化数据中心和云服务，DDoS 攻击开始移师云计算，并且攻击方式由数据暴力泛滥转向为向应用基础设施发起攻击。</strong>尽管当前针对 DDoS 攻击的入侵检测系统的研究已经较为成熟，但由于云服务器所具有的一些有别于普通主机的特性，所以不能将已有的入侵检测技术直接应用到云计算中，这就需要对云计算中的分布式拒绝服务攻击入侵检测技术展开专门的研究。</p>
-<h3 id="DDoS攻击检测方法"><a href="#DDoS攻击检测方法" class="headerlink" title="DDoS攻击检测方法"></a>DDoS攻击检测方法</h3><p>DDoS攻击检测时需要注意的问题有：一是这类<strong>攻击使用的数据包与合法数据包相似</strong>，因而检测过程中容易把合法数据包误报成攻击数据包；二是难以区分<strong>网络流量瞬时拥塞和 DDoS 攻击</strong>。因此对于 DDoS 攻击检测来说尽早检测到攻击和减少误报成为当前研究的重点。目前常用的入侵检测可分为<strong>基于特征的检测</strong>与<strong>基于异常的检测两类</strong>：</p>
-<ul>
-<li>基于特征的检测方法是根据已知的攻击行为建立特征库，当出现这些攻击特征时，就认为是发生了攻击。但这种方法只能对已知的攻击模式具有检测力，对未知的攻击则无能为力。常用的基于特征的基于特征的检测技术有专家系统、模式匹配等。</li>
-<li>基于异常的检测方法是通过建立主体的正常行为模型，来发现其异常行为，从而对未知攻击也具有检测能力。常用的基于异常的检测技术有量化分析、统计方法、神经网络、遗传算法等</li>
-</ul>
-<p>(1) 基于流量自相似性的 DDoS 攻击检测</p>
-<p>90 年代初，Leland 等人[13]通过对大量网络数据进行监测与分析发现<strong>正常的网络流量具有自相似性</strong>。当 DDoS 攻击发生时，会对网络流量的自相似特性产生较大影响，因而可以通过网络流量的自相似程度的变化来对 DDoS 攻击进行检测。</p>
-<h3 id="云计算中的-DDoS-攻击防御"><a href="#云计算中的-DDoS-攻击防御" class="headerlink" title="云计算中的 DDoS 攻击防御"></a>云计算中的 DDoS 攻击防御</h3><p><strong>云计算的概念始于 2007 年</strong>，在 Amazon、Google 等 IT 巨头的推动下，在短短几年内便产生了巨大的影响力并成为了当前炙手可热的技术之一。<strong>“云”就像一个庞大的资源池，为客户提供许多功能强大、使用方便的服务</strong>，云用户可以根据自己的需要来使用这些资源并根据使用量付费。但是在云计算带来诸多好处之时，<strong>在云安全方面也面临许多挑战</strong>。由于云计算的一些技术还不完善，且在公有云中的云计算服务主要通过互联网提供，便大大增加了遭受 DDoS 攻击的可能性。但是由于云计算本身所具有的一些特点，使其在应对 DDoS 方面也显露了一些优势。如维基解密网站(WikiLeaks)在遭受 DDoS 攻击后，便通过使用亚马逊的云计算服务保护自己远离 DDoS 攻击。本章中，将首先对云计算以及云计算中主要的 DDoS 攻击防御技术做了简要介绍，并在此基础上提出一种将MPLS 技术运用到云计算中的方法，以提高云计算安全性能。</p>
-<h3 id="云计算概述"><a href="#云计算概述" class="headerlink" title="云计算概述"></a>云计算概述</h3><p>1、云计算概念及特点<br>2、云计算架构<br>3、云计算模式</p>
-<h3 id="DDoS攻击给云计算带来的威胁"><a href="#DDoS攻击给云计算带来的威胁" class="headerlink" title="DDoS攻击给云计算带来的威胁"></a>DDoS攻击给云计算带来的威胁</h3><p>随着云计算的发展及云技术的日趋成熟，云安全问题的重要性呈现逐步上升趋势并成为制约云计算发展的重要因素[30]。很多企业选择使用云服务及虚拟化数据中心，与此同时，企业基础设施及存储大量虚拟数据的数据中心成为 DDoS 攻击的重要目标，DDoS攻击成为了云计算所需面临的新威胁</p>
-<p>DDoS工具升级具有更大的破坏性</p>
-<h3 id="云环境的需求分析★★★★★"><a href="#云环境的需求分析★★★★★" class="headerlink" title="云环境的需求分析★★★★★"></a>云环境的需求分析★★★★★</h3><p>云计算所具有的超大规模、资源共享及海量数据存储能力，使得云成为攻击者们新的乐土。相较于普通的攻击，在云环境中实施的<strong>攻击速度更快，破坏力也更强</strong>。根据云环境的特性，所设计的入侵检测模型应满足已下几点基本要求：<br>(1) 可靠性：为了使服务质量得到保障，云计算中的数据采用多副本容错和计算节点同构可互换的措施。因此，所设计的模型必需考虑到云环境的容错特性。<br>(2) 动态性：“云”为用户所提供的资源是动态的，而“云”用户的规模也是动态的，因此，模型需要具有动态性。<br>(3) 完整性：模型除了能够应对普通的 DDoS 攻击，还能检测出针对云环境的一些新的变种攻击，如 H-DoS、X-DoS 等。</p>
-<p>除需满足以上需求外，还要考虑<strong>云资源所具有的分布式存储特点</strong>，因此云计算中的入侵检测模型需采用非集中的管理模式。“云”通过虚拟技术将分布的资源组织起来并实现资源的共享。虚拟机作为云环境中的基本管理单元来处理云用户所提交的任务。因此，入侵检测模型将这些虚拟机作为检测对象，同时作为这些虚拟机的安全管理者，入侵检测模型也通过虚拟技术来实现。</p>
-<h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><h2 id="基于活跃熵的-D-o-S-攻击检测模型★★★★"><a href="#基于活跃熵的-D-o-S-攻击检测模型★★★★" class="headerlink" title="基于活跃熵的 D o S 攻击检测模型★★★★"></a>基于活跃熵的 D o S 攻击检测模型★★★★</h2><p>建立系统正常通信的情况时呈现的活跃熵特性，分析系统在遭受Dos攻击下所呈现的奇异性进行检测</p>
-<p>通过数据包中的 I P 地址和端口等信息确定该动作所作用的主体 , 并且更新系统的活跃状态 </p>
-<h2 id="SYNFlood型DDoS攻击检测与防御研究-李铮★★★"><a href="#SYNFlood型DDoS攻击检测与防御研究-李铮★★★" class="headerlink" title="SYNFlood型DDoS攻击检测与防御研究_李铮★★★"></a>SYNFlood型DDoS攻击检测与防御研究_李铮★★★</h2><p><strong>基于阈值的攻击检测方法</strong>：设定一个阈值，大于这个阈值判断为遭受到Dos攻击。最大的优点是简单，不需要历史访问流量进行学习，缺点是使得部分攻击得逞（攻击流量没有超过阈值的情况下不能检测，使得服务器为正常访问流量提供的服务减少）</p>
-<p><strong>基于流量统计的攻击检测方法</strong>：tcp协议定义每接收一个数据包就会返回一个数据包，即通信双方传输的数据量是成比例的。如果返回的数据包少（被丢弃），则</p>
-<h2 id="2分钟读懂Hadoop和Spark的异同"><a href="#2分钟读懂Hadoop和Spark的异同" class="headerlink" title="2分钟读懂Hadoop和Spark的异同"></a>2分钟读懂Hadoop和Spark的异同</h2><p><a href="http://www.techweb.com.cn/network/system/2016-01-25/2267414.shtml" target="_blank" rel="external">http://www.techweb.com.cn/network/system/2016-01-25/2267414.shtml</a></p>
-<h3 id="解决问题的层面不一样"><a href="#解决问题的层面不一样" class="headerlink" title="解决问题的层面不一样"></a>解决问题的层面不一样</h3><p>1、Hadoop 将巨大的数据集分派到一个由普通计算机组成的集群中的多个节点进行存储，意味着您不需要购买和维护昂贵的服务器硬件</p>
-<p>2、Spark 是一个专门用来对那些分布式存储的大数据进行处理的工具，它并不会进行分布式数据的存储</p>
-<h3 id="两者可合可分"><a href="#两者可合可分" class="headerlink" title="两者可合可分"></a>两者可合可分</h3><p>1、Hadoop除了提供为大家所共识的<strong>HDFS分布式数据存储</strong>功能之外，还提供了叫做<strong>MapReduce</strong>的数据处理功能。所以这里我们完全可以抛开Spark，使用Hadoop自身的MapReduce来完成数据的处理。</p>
-<p>2、Spark也不是非要依附在Hadoop身上才能生存，但如上所述，毕竟它<strong>没有提供文件管理系统</strong>，所以，它必须和其他的分布式文件系统进行集成才能运作。里我们可以选择Hadoop的HDFS,也可以选择其他的基于云的数据系统平台。但<strong>Spark默认来说还是被用在Hadoop上面的</strong>，毕竟，大家都认为它们的结合是最好的。</p>
-<h2 id="★Detection-DDoS-attacks-based-on-neural-network-using-Apache-Spark"><a href="#★Detection-DDoS-attacks-based-on-neural-network-using-Apache-Spark" class="headerlink" title="★Detection DDoS attacks based on neural-network using Apache Spark"></a>★Detection DDoS attacks based on neural-network using Apache Spark</h2><p>The key objective of this study is to <strong>construct a detection system</strong> have high accuracy and immedaite, <strong>The Artificial neural network(ANNs)</strong> is used to identify and detect abnormal traffic, and used famous DDos tools like <strong>ARPA 2000 LLDOS 1.0</strong> and self-generated to training ANNs, make our detection system be able to identify the characteristic of abnormal traffic, the feature of ANN is their network will not expand by data volumes, so it is suitable for the huge volume analysis like DDoS detection, and we used <strong>Apache Spark</strong> an open source <strong>cluster computing framework</strong>, The feature of this framework is <strong>In-Memory computing</strong>, break through the <strong>bottleneck of hard disk</strong>,make run programs up to <strong>100x faster</strong> than Hadoop MapReduce in memory.</p>
-<h3 id="Artificial-neural-network-ANNs"><a href="#Artificial-neural-network-ANNs" class="headerlink" title="Artificial neural network(ANNs)"></a>Artificial neural network(ANNs)</h3><p>神经网络介绍</p>
-<p>Artificial neural networks are abstract mathematical models of brain structures and fucntions, ANNs could be a <strong>prediction ability</strong> AI machine, througe high performance computing, the feature of ANNs is <strong>their structure will not expand with the number of input and output does not change</strong>,so the memory used will be under control, and <strong>have high reliability that ability to predict unknow input data</strong>.</p>
-<p>神经网络种类</p>
-<p>Back-propagation Network, Hopfield Network, Radial Basis Function Network</p>
-<p>相关研究</p>
-<p>Detection of known and unknown DDoS attacks using Artificial Neural Networks<br>使用神经网络-成功率98%</p>
-<p>An Anomaly-Based Method for DDoS Attacks Detection using RBF Neural Networks<br>基于包特征-神经网络</p>
-<p>MLlib： machine learning in apache spark<br>spark介绍</p>
-<h2 id="SYNFlood型DDoS攻击检测与防御研究-李铮"><a href="#SYNFlood型DDoS攻击检测与防御研究-李铮" class="headerlink" title="SYNFlood型DDoS攻击检测与防御研究_李铮"></a>SYNFlood型DDoS攻击检测与防御研究_李铮</h2><p>开发的防DDoS攻击的系统特点：<br>（1）基于信息熵值得实时攻击检测<br>（2）黑白名单技术<br>（3）自学习子系统：包含蜜罐系统和数据挖掘系统，蜜罐系统旁路收集异常网络流量，通过数据挖掘生成防御规则动态更新异常检测阈值、黑白名单列表和协议分析规则，及时调整系统对后续攻击的相应策略</p>
-<p>常见的检测方法：<br>1、基于阈值的攻击检测方法：设置一个阈值，高于阈值认定为发生了DDoS攻击。优点是简单，缺点是若低于阈值，即使存在攻击分组也让其通过，使得部分攻击得逞，消耗了带宽资源。</p>
-<p>2、基于流量统计的攻击检测方法：TCP协议每接受一个数据包就会返回一个数据包，因此可以认为发送方和接收方传输的数据量是成比例的。如果返回的数据包数量过少，这类数据包应该是被认为是恶意的然后被丢弃，</p>
-<p>基于滑动分组的熵检测方法</p>
-
-          
+          基于数据挖掘的网络安全审计技术的研究与实现_辛义忠.caj背景网络攻击问题随着网络的普及而日益突出。
+目前的解决方案1、入侵检测技术通过对网络安全审计数据进行分析和处理来发现网络中的入侵活动和入侵者,在网络安全领域起到了重要的作用。其关键和核心内容是进行网络安全审计。2、网络安全审计的目的是实时地、
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/07/[论文]论文/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -750,144 +637,16 @@
       
         
           
-            <h2 id="系统总体架构"><a href="#系统总体架构" class="headerlink" title="系统总体架构"></a>系统总体架构</h2><p><img src="http://i.imgur.com/pKPNhhK.png" alt=""><br>源文件：<a href="https://note.youdao.com/yws/res/8735/WEBRESOURCEb9e23c0741530726b0124ee5d3bfd729" target="_blank" rel="external">https://note.youdao.com/yws/res/8735/WEBRESOURCEb9e23c0741530726b0124ee5d3bfd729</a></p>
-<p>1、一个基于Thrift的微服务需要创建三个模块（最终打包成三个Jar包），分别是Core、Server和Adapter</p>
-<ul>
-<li>core：定义接口。用接口描述语言定义并创建服务</li>
-<li>server：Thrift的服务端。依赖core模块，实现core中定义的接口，<strong>主要的业务逻辑部分，分为Service层、Dao层、缓存和数据库</strong>。微服务就是进行分模块，把各模块放到不同的位置提供服务</li>
-<li>adapter：Thrift的客户端。依赖core模块，<strong>其他模块如需调用Serve的接口，需引入此jar包</strong></li>
-</ul>
-<p>以论坛项目为例，整个论坛项目分为四个模块：</p>
-<ul>
-<li>bp-forum-core:数据定义和服务创建</li>
-<li>bp-forum-server:服务实现</li>
-<li>bp-forum-adapter:客户端，与服务器交互</li>
-<li>bp-forum-wap:页面显示，通过调用adapter，获取服务</li>
-</ul>
-<p>对于每一个微服务都有其各自的core、server、adapter模块</p>
-<p>注意：虽然Server和Adapter在同一个工程下，但在实际运行环境中，一般Server运行在A主机，而B主机上的应用程序需要调用A主机上的Server，需要引入Adapter依赖，实现远程服务调用</p>
-<p>2、前端数据显示：Freemarker——模板+数据=输出网页</p>
-<h2 id="Thrift"><a href="#Thrift" class="headerlink" title="Thrift"></a>Thrift</h2><p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-apachethrift/#ibm-pcon" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-lo-apachethrift/#ibm-pcon</a><br>目前流行的服务调用方式有很多种，例如基于 SOAP 消息格式的 Web Service，基于 JSON 消息格式的 RESTful 服务等。其中所用到的数据传输方式包括 XML，JSON 等，然而 XML 相对体积太大，传输效率低，JSON 体积较小，新颖，但还不够完善。本文将介绍由 Facebook 开发的远程服务调用框架 Apache Thrift，它采用接口描述语言定义并创建服务，支持可扩展的跨语言服务开发，所包含的代码生成引擎可以在多种语言中，如 C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, Smalltalk 等创建高效的、无缝的服务，其传输数据采用二进制格式，相对 XML 和 JSON 体积更小，对于高并发、大数据量和多语言的环境更有优势</p>
-<h2 id="Guava-Cache"><a href="#Guava-Cache" class="headerlink" title="Guava Cache"></a>Guava Cache</h2><p><a href="http://www.cnblogs.com/parryyang/p/5777019.html" target="_blank" rel="external">http://www.cnblogs.com/parryyang/p/5777019.html</a></p>
-<p>当某些值会被多次调用时，将数据缓存在内存中提升速度</p>
-<p>Guava Cache是一个全内存的本地缓存实现，它提供了线程安全的实现机制。整体上来说Guava cache 是本地缓存的不二之选，简单易用，性能好。</p>
-<h3 id="Guava-Cache与ConcurrentMap区别"><a href="#Guava-Cache与ConcurrentMap区别" class="headerlink" title="Guava Cache与ConcurrentMap区别"></a>Guava Cache与ConcurrentMap区别</h3><p>最基本的区别是ConcurrentMap会一直保存所添加的元素，直到显式的移除；Guava Cache为了限制内存的占用，通常都是设定为自动回收元素</p>
-<h3 id="创建方式"><a href="#创建方式" class="headerlink" title="创建方式"></a>创建方式</h3><ul>
-<li>CacheLoader</li>
-<li>Callable</li>
-</ul>
-<p>相同点：从缓存中取key X的值，如果该值已经缓存过了，则返回缓存中的值，如果没有缓存过，可以通过某个方法来获取这个值。</p>
-<p>不同点：</p>
-<ul>
-<li>cacheloader的定义比较宽泛， 是<strong>针对整个cache定义的</strong>，可以认为是<strong>统一的根据key值获取value的方法</strong></li>
-<li>callable的方式较为灵活，允许你在get的时候，针对特定key值指定获取方式</li>
-</ul>
-<p>1、CacheLoader</p>
-<pre><code>public class AppkeyInfoLocalCache {
-
-    /*在创建cache时指定所有key获取value的方法！！！*/
-    static LoadingCache&lt;String, AppkeyInfoBasic&gt; cache = CacheBuilder.newBuilder().refreshAfterWrite(3, TimeUnit.HOURS)// 给定时间内没有被读/写访问，则回收。
-            .expireAfterAccess(APIConstants.TOKEN_VALID_TIME, TimeUnit.HOURS)// 缓存过期时间和redis缓存时长一样
-            .maximumSize(1000).// 设置缓存个数
-            build(new CacheLoader&lt;String, AppkeyInfoBasic&gt;() {
-                @Override
-                /** 当本地缓存命没有中时，调用load方法获取结果并将结果缓存 **/
-                public AppkeyInfoBasic load(String appKey) throws DaoException {
-                    return getAppkeyInfo(appKey);
-                }
-
-                /** 数据库进行查询 **/
-                private AppkeyInfoBasic getAppkeyInfo(String appKey) throws DaoException {
-                    //从数据库取值
-                    return ((AppkeyInfoMapper) SpringContextHolder.getBean(&quot;appkeyInfoMapper&quot;))
-                            .selectAppkeyInfoByAppKey(appKey);
-                }
-            });
-
-}
-</code></pre><p>2、Callable</p>
-<pre><code>@Test
-public void testcallableCache() throws Exception{
-    Cache&lt;String, String&gt; cache = CacheBuilder.newBuilder().maximumSize(1000).build();  
-
-    //设置键jerry取值方式
-    String resultVal = cache.get(&quot;jerry&quot;, new Callable&lt;String&gt;() {  
-        public String call() {  
-            String strProValue=&quot;hello &quot;+&quot;jerry&quot;+&quot;!&quot;;                
-            return strProValue;
-        }  
-    });  
-    System.out.println(&quot;jerry value : &quot; + resultVal);
-
-    //设置键peida取值方式
-    resultVal = cache.get(&quot;peida&quot;, new Callable&lt;String&gt;() {  
-        public String call() {  
-            String strProValue=&quot;hello &quot;+&quot;peida&quot;+&quot;!&quot;;                
-            return strProValue;
-        }  
-    });  
-    System.out.println(&quot;peida value : &quot; + resultVal);  
-}
-</code></pre><h2 id="Mavan多模块"><a href="#Mavan多模块" class="headerlink" title="Mavan多模块"></a>Mavan多模块</h2><p><a href="http://juvenshun.iteye.com/blog/305865?page=2#comments" target="_blank" rel="external">http://juvenshun.iteye.com/blog/305865?page=2#comments</a></p>
-<p>所有用Maven管理的真实的项目都应该是分模块的，每个模块都对应着一个pom.xml。它们之间通过继承和聚合相互关联</p>
-<h3 id="简单的Maven模块结构"><a href="#简单的Maven模块结构" class="headerlink" title="简单的Maven模块结构"></a>简单的Maven模块结构</h3><p>一个简单的Maven模块结构是这样的：</p>
-<pre><code>app-parent
-    |-- pom.xml (pom)
-    |
-    |-- app-util
-    |        |-- pom.xml (jar)
-    |
-    |-- app-dao
-    |        |-- pom.xml (jar)
-    |
-    |-- app-service
-    |        |-- pom.xml (jar)
-    |
-    |-- app-web
-             |-- pom.xml (war)   
-</code></pre><p>上述简单示意图中，有一个父项目(app-parent)聚合很多子项目（app-util, app-dao, app-service, app-web）。每个项目，不管是父子，<strong>都含有一个pom.xml文件</strong>。而且要注意的是，小括号中标出了每个项目的打包类型。<strong>父项目是pom,也只能是pom</strong>。<strong>子项目有jar，或者war。</strong></p>
-<h3 id="多模块的好处"><a href="#多模块的好处" class="headerlink" title="多模块的好处"></a>多模块的好处</h3><p>用项目层次的划分替代包层次的划分能给我们带来如下好处：</p>
-<ul>
-<li><strong>方便重用</strong>，如果你有一个新的swing项目需要用到app-dao和app-service，添加对它们的依赖即可，你不再需要去依赖一个WAR。而有些模块，如app-util，完全可以渐渐进化成公司的一份基础工具类库，供所有项目使用。这是模块化最重要的一个目的。</li>
-<li>由于你现在划分了模块，每个模块的配置都在各自的pom.xml里，不用再到一个混乱的纷繁复杂的总的POM中寻找自己的配置。</li>
-<li>如果你只是在app-dao上工作，<strong>你不再需要build整个项目</strong>，只要在app-dao目录运行mvn命令进行build即可，这样可以节省时间，尤其是当项目越来越复杂，build越来越耗时后。</li>
-<li>某些模块，如app-util被所有人依赖，但你不想给所有人修改，现在你完全可以从这个项目结构出来，做成另外一个项目，svn只给特定的人访问，但仍提供jar给别人使用</li>
-<li></li>
-</ul>
-<h2 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h2><p>GRPC<br>Thrift</p>
-<h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="获取ApplicationContext"><a href="#获取ApplicationContext" class="headerlink" title="获取ApplicationContext"></a>获取ApplicationContext</h3><p>需要将ApplicationContext保存至某个静态类中提供接口获取，那必须要在某一个地方将ApplicationContext设置进来。无法直接获取，因为获取ApplicationContext是需要上下文条件限制的。在Web环境下可以直接通过ServletContext获取。如果Bean对象本身被IoC容器所管理可直接通过注解获取。</p>
-<p>方法一：非spring管理的类中要获得applicationcontext</p>
-<pre><code>//获取ServletConetxt实例
-HttpServletRequest   httprequest = (HttpServletRequest)ServletActionContext.getRequest(); 
-ServletContext sc = httprequest.getSession().getServletContext(); 
-//使用 WebApplicationContextUtils.getWebApplicationContext(ServletContext)
-ApplicationContext  wac = WebApplicationContextUtils.getWebApplicationContext(sc); 
-</code></pre><p>方法二：新建一个ApplicationContextHolder类，保存ApplicationContext实例</p>
-<pre><code>@Autowired
-private ApplicationContext applicationContext;
-</code></pre><p>方法三：在自己定义的bean中获得 applicationcontext，可以让该bean实现<strong>applicationcontextaware</strong>接口，记得把这个bean 配置在spring的配置文件里</p>
-<pre><code>public class MyApplicationContext implements ApplicationContextAware { 
-
-    private ApplicationContext applicationContext; 
-
-    public void setApplicationContext(ApplicationContext ac) 
-    throws BeansException { 
-        this.applicationContext = ac; 
-    } 
-
-    public  ApplicationContext  getApplicationContext(){ 
-        return applicationContext; 
-    } 
-} 
-</code></pre><p>spring 的配置如下 </p>
-<pre><code>&lt;bean  id=&quot;myapplicationcontext&quot;  class=&quot;com.my.utils.MyApplicationContext&quot;&gt; 
-&lt;/bean&gt; 
-</code></pre><p>通过上面2种方式都可以获取到ApplicationContext如果楼主需要将ApplicationContext保存至某个静态类中提供接口获取，那必须要在某一个地方将ApplicationContext设置进来。无法直接获取。因为获取ApplicationContext是需要上下文条件限制的。在Web环境下可以直接通过ServletContext获取。如果Bean对象本身被IoC容器所管理可直接通过注解获取。</p>
-<h2 id="翻墙工具"><a href="#翻墙工具" class="headerlink" title="翻墙工具"></a>翻墙工具</h2><p>ShadowSocket<br>lantern</p>
-<h2 id="全局gitignore"><a href="#全局gitignore" class="headerlink" title="全局gitignore"></a>全局gitignore</h2><p>$ git config –global core.excludesFile /c/gitignore<br>$ git config –list</p>
-<h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><p>cd /opt/nuc_git/bp-salt-deploy/<br>服务器ip：10.16.5.231<br>账号：root<br>密码：LXRoxqIqV4</p>
-
-          
+          系统总体架构源文件：https://note.youdao.com/yws/res/8735/WEBRESOURCEb9e23c0741530726b0124ee5d3bfd729
+1、一个基于Thrift的微服务需要创建三个模块（最终打包成三个Jar包），分别是Core、Server和Adapte
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/03/[Java]实习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1019,74 +778,16 @@ private ApplicationContext applicationContext;
       
         
           
-            <h2 id="反射的基石-gt-Class"><a href="#反射的基石-gt-Class" class="headerlink" title="反射的基石-&gt;Class"></a>反射的基石-&gt;Class</h2><p>Java类用于描述一类事物的共性，该类事物有什么属性，没有什么属性，至于这个属性的值是什么，则是由这个类的实例对象来确定，不同的实例对象有不同的属性值。Java程序中的各个Java类属于同一类事物，描述这类事物的Java类名就是Class。</p>
-<p>例：众多的人可以用一个Person类来表示，那么众多的Java类也就可以用一个Class类来表示。</p>
-<p>Person类代表人，它的实例对象就是张三，李四这样的一个个具体的人，<strong>Class类代表Java类，它的各个实例对象又分别对应各个类的内存中的字节码</strong>，例如，Person类的字节码，ArrayList类的字节码，等等。</p>
-<p>####<strong>什么是字节码</strong><br>　　一个类被类加载器加载到内存中，占用一片内存空间，这个空间里面的内容就是类的字节码，不同的类的字节码是不同的，所以它们在内存中的内容是不同的，这个一个个的空间可以分别用一个个的对象来表示，这些对象显然具有相同的类型，这个类型是什么呢？Class类型</p>
-<p>####<strong>如何得到各个字节码对应的实例对象（Class类型）</strong></p>
-<blockquote>
-<ul>
-<li>类名.class,例如，System.class</li>
-<li>对象.getClass(),例如，new Date().getClass()</li>
-<li>Class.forName(“类名”),例如，Class.forName(“java.util.Date”);</li>
-</ul>
-</blockquote>
-<p>　　开发中使用较多的是Class.forName（”类名”）的方式，按参数中指定的字符串形式的类名去搜索并加载相应的类，如果该类字节码已经被加载过，则返回代表该字节码的Class实例对象，否则，按类加载器的委托机制去搜索和加载该类，如果所有的类加载器都无法加载到该类，则抛出ClassNotFoundException。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String str1 = <span class="string">"abc"</span>;</div><div class="line">Class c1s1 = str1.getClass();</div><div class="line">Class c1s2 = String.class;</div><div class="line">Class c1s3 = Class.forName(<span class="string">"java.lang.String"</span>);</div><div class="line">System.out.println(c1s1 == c1s2);<span class="comment">//true</span></div><div class="line">System.out.println(c1s2 == c1s3);<span class="comment">//true</span></div></pre></td></tr></table></figure></p>
-<p>结果说明：<br>　　1. 一份字节码可以得到多个实例对象<br>　　2. 各个实例对象都将得到同一份字节码</p>
-<p>####<strong>九个预定义Class实例对象</strong><br>　　isPrimitive() : 字节码是否是基本类型<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">System.out.println(String.class.isPrimitive());<span class="comment">//false</span></div><div class="line">System.out.println(<span class="keyword">int</span>.class.isPrimitive());<span class="comment">//true</span></div><div class="line">System.out.println(Integer.class.isPrimitive());<span class="comment">//false</span></div><div class="line">System.out.println(<span class="keyword">int</span>.class == Integer.TYPE);<span class="comment">//true</span></div><div class="line">System.out.println(<span class="keyword">int</span>[].class.isPrimitive());<span class="comment">//false</span></div><div class="line">System.out.println(<span class="keyword">int</span>[].class.isArray());<span class="comment">//true</span></div></pre></td></tr></table></figure></p>
-<p>####<strong>总结</strong></p>
-<blockquote>
-<p>　　Java类被类加载器加载到内存中，开辟一段内存空间，这段空间的内容就是类的字节码。不同的类生成不同的字节码，每个字节码可以用一个个对象表示，这些对象具有相同的类型，即Class类型。</p>
-<p>###2. <strong>理解反射的概念</strong><br>　　反射就是把Java类中的各种成分映射成相应的Java类。例如，一个Java类中用Class类的对象来表示，一个类中的组成部分：成员变量、方法、构造方法、包等信息也用一个个的Java类来表示。表示Java类的Class类显然要提供一系列的方法，来获取其中的变量、方法、构造方法、修饰符、包等信息，这些信息就是用相应的实例对象来表示，它们是Field、Method、Constructor、Package等等。<br>　　例如，System.exit和System.getProperties()方法，分别可以用Method类的methodObj1，methodOjb2表示。</p>
-<p>###3. <strong>Constructor类</strong><br>　　Constructor类代表某个类中的一个构造方法。</p>
-<p>####<strong>得到某个类所有的构造方法</strong><br>　　<code>Constructor [] constructors　=　Class.forName(&quot;java.lang.String&quot;).getConstructors();</code></p>
-<p>####<strong>得到某一个构造方法（根据参数来获取）</strong><br>　　<code>Constructor constructor = Class.forName(“java.lang.String”).getConstructor(StringBuffer.class);</code></p>
-<p>####<strong>创建实例对象</strong><br>　　通常方式：<code>String str = new String(new StringBuffer(&quot;abc&quot;));</code><br>　　反射方式：<code>String str = (String)constructor.newInstance(new StringBuffer(&quot;abc&quot;));</code></p>
-</blockquote>
-<p>####<strong>Class.newInstance()方法</strong><br>　　例子:<code>String obj = (String)Class.forName(&quot;java.lang.String&quot;).newInstance();</code><br>　　该方法内部先得到<strong>默认</strong>的构造方法，然后用该构造方法创建实例对象。<br>　　该方法内部的具体代码用到了缓存机制来保存默认构造方法的实例对象。</p>
-<p>###<strong>4.成员变量的反射(Field类)</strong><br>　　1. Field类代表某个类中的一个成员变量<br>　　2. 问题：得到的Field对象是对应到类上面的成员变量，还是对应到对象上的成员变量？<br>　　类只有一个，而该类的实例对象有多个，如果是与对象关联，那关联那个对象呢？所以字段Field代表的是类的成员变量，而不是具体的变量。<br>　　<code>Field getDeclaredField(String name)</code>返回一个 Field 对象，该对象反映此 Class 对象所表示的类或接口的指定已声明字段。<br>　　<code>Field[] getDeclaredFields()</code>返回 Field 对象的一个数组，这些对象反映此 Class 对象所表示的类或接口所声明的所有字段。<br>　　<code>Field getField(String name)</code>返回一个 Field 对象，它反映此 Class 对象所表示的类或接口的指定公共成员字段。<br>　　<code>Field[] getFields()</code>返回一个包含某些 Field 对象的数组，这些对象反映此 Class 对象所表示的类或接口的所有可访问公共字段。</p>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        ReflectPoint pt1 = <span class="keyword">new</span> ReflectPoint(<span class="number">3</span>,<span class="number">5</span>);</div><div class="line">        Field fieldY = pt1.getClass().getField(<span class="string">"y"</span>);</div><div class="line">        <span class="comment">//fieldY的值是多少？是5？错，fieldY不是对象身上的变量，而是类上的，要用它去取某个对象上对应的值</span></div><div class="line">        System.out.println(fieldY.get(pt1));<span class="comment">//5</span></div><div class="line">        <span class="comment">//fieldX为私有的，.getField("x")取不到，得用.getDeclaredField("x")</span></div><div class="line">        Field fieldX = pt1.getClass().getDeclaredField(<span class="string">"x"</span>);</div><div class="line">        <span class="comment">//由于私有，不可访问，使用setAccessible(true)，可以表示可以取</span></div><div class="line">        fieldX.setAccessible(<span class="keyword">true</span>);</div><div class="line">        <span class="comment">//能够取到x的值</span></div><div class="line">        System.out.println(fieldX.get(pt1));<span class="comment">//3</span></div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReflectPoint</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> y;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReflectPoint</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.x = x;</div><div class="line">        <span class="keyword">this</span>.y = y;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>####<strong>成员变量反射的综合案例</strong><br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        ReflectPoint pt1 = <span class="keyword">new</span> ReflectPoint(<span class="number">3</span>,<span class="number">5</span>);</div><div class="line">        changeStringValue(pt1);</div><div class="line">        System.out.println(pt1);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">changeStringValue</span><span class="params">(Object obj)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Field[] fields = obj.getClass().getFields();</div><div class="line">        <span class="keyword">for</span>(Field field : fields)&#123;</div><div class="line">            <span class="comment">//对应同一份字节码，所以用==</span></div><div class="line">            <span class="keyword">if</span>(field.getType()==String.class)&#123;</div><div class="line">                String oldValue = (String)field.get(obj);</div><div class="line">                String newValue = oldValue.replace(<span class="string">'b'</span>, <span class="string">'a'</span>);</div><div class="line">                field.set(obj,newValue);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReflectPoint</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> x;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> y;</div><div class="line">    <span class="keyword">public</span> String str1 = <span class="string">"ball"</span>;</div><div class="line">    <span class="keyword">public</span> String str2 = <span class="string">"basketball"</span>;</div><div class="line">    <span class="keyword">public</span> String str3 = <span class="string">"itcast"</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReflectPoint</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.x = x;</div><div class="line">        <span class="keyword">this</span>.y = y;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> str1+<span class="string">":"</span>+str2+<span class="string">":"</span>+str3;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>###<strong>5. 成员方法的反射</strong><br>　　Method类代表某个类中的一个成员方法<br>　　得到类中的某一个方法：<br>　　<code>Method charAt = Class.forName(&quot;java.lang.String&quot;).getMethod(&quot;charAt&quot;, int.class);</code><br>　　调用方法：<br>　　　　通常方式：System.out.println(str.charAt(1));<br>　　　　反射方式：System.out.println(charAt.invoke(str, 1));<br>　　如果传递给Method对象的invoke()方法的第一个参数为null，这有着什么样的意义呢？说明该Method对象对应的是一个<strong>静态方法</strong>！</p>
-<p>####<strong>jdk1.4和jdk1.5的invoke方法的区别</strong></p>
-<blockquote>
-<ul>
-<li>Jdk1.5：public Object invoke(Object obj,Object… args)</li>
-<li>Jdk1.4：public Object invoke(Object obj,Object[] args)</li>
-</ul>
-</blockquote>
-<p>　　即按jdk1.4的语法，需要将一个数组作为参数传递给invoke方法时，数组中的每个元素分别对应被调用方法中的一个参数，所以，调用charAt方法的代码也可以用Jdk1.4改写为 charAt.invoke(“str”, new Object[]{1})形式。<br>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        Method methodCharAt = String.class.getMethod(<span class="string">"charAt"</span>, <span class="keyword">int</span>.class);</div><div class="line">        System.out.println(methodCharAt.invoke(<span class="string">"abc"</span>,<span class="number">1</span> ));</div><div class="line">        <span class="comment">//System.out.println(methodCharAt.invoke(null,1 ));如果为null则为静态方法</span></div><div class="line">        <span class="comment">//System.out.println(methodCharAt.invoke("abc",new Object[]&#123;2&#125; ));1.5以前，没有可变参数，这么写</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>###<strong>6. 对接收数组参数的成员方法进行反射</strong><br>　　问题：平时如何调用一个类的main方法？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">		TestArgument.main(<span class="keyword">new</span> String[]&#123;<span class="string">"aa"</span>, <span class="string">"bb"</span>, <span class="string">"cc"</span>&#125;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestArgument</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">		<span class="keyword">for</span>(String arg : args)&#123;</div><div class="line">			System.out.println(arg);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>　　问题：当不知道类的名字时（类的名字作为参数），如何调用该类的main方法？<br>　　用反射的方式，这就是反射的作用，可以将类的名字作为参数传入，启动main方法。<br>　　启动Java程序的main方法的参数是一个字符串数组，即<code>public static void main(String[] args)</code>，通过反射方式来调用这个main方法时，如何为invoke方法传递参数呢？<br>　　按jdk1.5的语法，<strong>整个数组是一个参数</strong>，而按jdk1.4的语法，数组中的<strong>每个元素对应一个参数</strong>，当把一个字符串数组作为参数传递给invoke方法时，javac会到底按照哪种语法进行处理呢？<br>　　jdk1.5肯定要兼容jdk1.4的语法，会按jdk1.4的语法进行处理，<strong>即把数组打散成为若干个单独的参数</strong>。所以，在给main方法传递参数时，不能使用代码mainMethod.invoke(null,new String[]{“xxx”})，javac只把它当作jdk1.4的语法进行理解，而不把它当作jdk1.5的语法解释，因此会出现参数类型不对的问题。</p>
-<p>　　解决办法：</p>
-<blockquote>
-<ul>
-<li>mainMethod.invoke(null,new Object[]{new String[]{“xxx”}});</li>
-<li>mainMethod.invoke(null,(Object)new String[]{“xxx”}); //编译器会作特殊处理，编译时不把参数当作数组看待，也就不会数组打散成若干个参数了</li>
-</ul>
-</blockquote>
-<p>代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        TestArguments.main(<span class="keyword">new</span> String[]&#123;<span class="string">"sadfds"</span>,<span class="string">"hjhgj"</span>&#125;);</div><div class="line">        System.out.println(<span class="string">"-----------------------------"</span>);</div><div class="line">        </div><div class="line">        String startingClassName = args[<span class="number">0</span>];</div><div class="line">        Method mainMethod = Class.forName(startingClassName).getMethod(<span class="string">"main"</span>, String[].class);</div><div class="line">        mainMethod.invoke(<span class="keyword">null</span>, (Object)<span class="keyword">new</span> String[]&#123;<span class="string">"sadfds"</span>,<span class="string">"hjhgj"</span>&#125;);</div><div class="line">        System.out.println(<span class="string">"-----------------------------"</span>);</div><div class="line">        <span class="comment">//不只是main方法，普通方法也一样</span></div><div class="line">        Method testMethod = Class.forName(startingClassName).getMethod(<span class="string">"test"</span>, String[].class);</div><div class="line">        testMethod.invoke(<span class="keyword">null</span>, <span class="keyword">new</span> String[]&#123;<span class="string">"sadfds"</span>,<span class="string">"hjhgj"</span>&#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestArguments</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">for</span>(String arg : args)&#123;</div><div class="line">            System.out.println(arg);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">for</span>(String arg : args)&#123;</div><div class="line">            System.out.println(arg);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>###<strong>7. 数组与Object的关系及其反射类型</strong></p>
-<blockquote>
-<ul>
-<li>具有<strong>相同维数</strong>和<strong>元素类型</strong>的数组属于同一个类型，即具有相同的Class实例对象。</li>
-<li>代表数组的Class实例对象的getSuperClass()方法返回的父类为Object类对应的Class。</li>
-<li>基本类型的一维数组可以被当作Object类型使用，不能当作Object[]类型使用。</li>
-<li>非基本类型的一维数组，既可以当做Object类型使用，又可以当做Object[]类型使用。</li>
-</ul>
-</blockquote>
-<p>代码举例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.reflect.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        <span class="keyword">int</span>[] a1 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</div><div class="line">        <span class="keyword">int</span>[] a2 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</div><div class="line">        <span class="keyword">int</span>[][] a3 = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][<span class="number">3</span>];</div><div class="line">        String[] a4 = <span class="keyword">new</span> String[<span class="number">3</span>];</div><div class="line">        </div><div class="line">        System.out.println(a1.getClass()==a2.getClass());<span class="comment">//true</span></div><div class="line">        System.out.println(a1.getClass().getName());<span class="comment">//[I(数组整形)</span></div><div class="line">        <span class="comment">//父类的名字</span></div><div class="line">        System.out.println(a1.getClass().getSuperclass().getName());<span class="comment">//java.lang.Object</span></div><div class="line">        System.out.println(a2.getClass().getSuperclass().getName());<span class="comment">//java.lang.Object</span></div><div class="line">        System.out.println(a3.getClass().getSuperclass().getName());<span class="comment">//java.lang.Object</span></div><div class="line">        System.out.println(a4.getClass().getSuperclass().getName());<span class="comment">//java.lang.Object</span></div><div class="line">        System.out.println(String.class.getSuperclass().getName());<span class="comment">//java.lang.Object</span></div><div class="line">        System.out.println(StringBuffer.class.getSuperclass().getName());<span class="comment">//java.lang.Object</span></div><div class="line">        <span class="comment">//发现a1，a2，a3，a4的super都是objcet所以可以类型转换</span></div><div class="line">        <span class="comment">//结论：int[]一维数组是Object,String是Object，int是基本类型，不是Object</span></div><div class="line">        Object aObj1 = a1;</div><div class="line">        Object aObj2 = a4;</div><div class="line">        <span class="comment">//Object[] aObj3 = a1;不对 int 不可以直接转为object</span></div><div class="line">        Object[] aObj4 = a3;</div><div class="line">        Object[] aObj5 = a4;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>　　Arrays.asList()方法处理int[]和String[]时的差异。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(Arrays.asList(a1)); <span class="comment">//[[I@55f33675]</span></div><div class="line">System.out.println(Arrays.asList(a4)); <span class="comment">//[aa, bb, cc]</span></div></pre></td></tr></table></figure></p>
-<p>####<strong>数组的反射应用</strong><br>　　Array工具类用于完成对数组的反射操作。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">printObject(a4);<span class="comment">//aa bb cc  </span></div><div class="line">printObject(<span class="string">"zyz"</span>);<span class="comment">//zyz## 标题 ##</span></div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printObject</span><span class="params">(Object obj)</span></span>&#123;  </div><div class="line">    Class clazz = obj.getClass();  </div><div class="line">    <span class="keyword">if</span>(clazz.isArray())&#123;  </div><div class="line">        <span class="keyword">int</span> len  = Array.getLength(obj);  </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;len;i++)&#123;  </div><div class="line">            System.out.println(Array.get(obj, i));  </div><div class="line">        &#125;  </div><div class="line">    &#125;<span class="keyword">else</span>&#123;  </div><div class="line">        System.out.println(obj);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="获取类的泛型类型"><a href="#获取类的泛型类型" class="headerlink" title="获取类的泛型类型"></a>获取类的泛型类型</h2><pre><code>public static Class getActualType(Class entity){
-    //ParameterizedType:参数类型
-    ParameterizedType parameterizedType = (ParameterizedType) entity.getGenericSuperclass();
-    //获得真实类型参数数组  [0]表示第一个
-    Class entityClass = (Class) parameterizedType.getActualTypeArguments()[0];
-    return entityClass;
-}
-</code></pre>
-          
+          反射的基石-&gt;ClassJava类用于描述一类事物的共性，该类事物有什么属性，没有什么属性，至于这个属性的值是什么，则是由这个类的实例对象来确定，不同的实例对象有不同的属性值。Java程序中的各个Java类属于同一类事物，描述这类事物的Java类名就是Class。
+例：众多的人可以用一个Per
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/30/[Java]Java反射/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1218,1225 +919,19 @@ private ApplicationContext applicationContext;
       
         
           
-            <h2 id="多线程与效率"><a href="#多线程与效率" class="headerlink" title="多线程与效率"></a>多线程与效率</h2><ul>
-<li>多线程并不一定会提高程序的运行效率，反而会降低效率</li>
-<li>多线程的应用不是为了提高运行效率，而是为了提高资源使用效率；当一个资源在等待I/O输入时，另一个线程可以使用处理器，提高了资源的利用率</li>
-</ul>
-<p>为什么使用多线程下载速度会变快？<br>多线程下载：并不是自己电脑快了，而是<strong>抢到更多服务器资源</strong>。例：服务器为一个客户分配一个20K的线程下载，你用多个线程，服务器以为是多个用户就分配了多个20K的资源给你</p>
-<h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><ul>
-<li>并行指多个事件在<strong>同一时刻发生</strong>，并行需要有多个CPU</li>
-<li>并行是在同一个CPU上按照时间片的划分运行多个程序，在宏观上看两个任务同时执行，但是<strong>在同一时刻只有一个任务在执行</strong></li>
-</ul>
-<h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><ul>
-<li>并发编程的 <strong>目的</strong> 是让程序运行得更快，<strong>但是并不是启动越多的线程就能让程序跑的更快</strong></li>
-<li>如果希望多线程执行任务使程序运行得更快，需要面临许多挑战，比如：<strong>上下文切换、死锁、资源限制问题</strong></li>
-</ul>
-<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p><strong><em>多线程</em></strong></p>
-<ul>
-<li>CPU为每个线程划分 <strong>时间片</strong>，每个线程在给定的时间片上交替运行。因为时间片非常短，从宏观上我们感觉多个线程同时运行</li>
-<li><strong>单核</strong> 处理器也支持多线程执行代码</li>
-</ul>
-<p><strong><em>上下文切换概念</em></strong></p>
-<p>每个线程在给定的时间片上运行，执行结束后会 <strong>切换</strong> 到下一个任务。<strong>但是在切换前会保存上一个任务的状态</strong>，以便下次切换回来后可以 <strong>继续加载</strong> 这个任务的状态，从保存到加载的过程称为一次上下文切换</p>
-<p><strong><em>多线程速度一定快？</em></strong></p>
-<p>不一定，用得得当多线程的任务执行速度比串行快；但是线程有<strong>创建和上下文切换</strong>的开销，有时候并发执行速度比串行慢</p>
-<p><strong><em>如何减小上下文切换</em></strong></p>
-<ul>
-<li>无锁并发编程：多线程竞争锁时会引起上下文切换，可以用一些方法来避免使用锁，如数据分段，每个线程处理不同段的数据</li>
-<li>CAS算法：Java的Atomic包使用CAS算法来更新数据，而不需要使用锁</li>
-<li>使用最少线程：避免创造不需要的线程，比如任务少，线程多，造成大量线程处于等待状态</li>
-<li>协程：在单线程里实现多任务的调度，并在单线程里维持多个任务间的切换</li>
-</ul>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>举个例子</p>
-<pre><code>Thread t1 = new Thread(new Runnable(){
-    @Override
-    public void run(){
-        synchronized(A){
-            Thread.sleep(2000);
-            synchronized(B){}
-        }
-    }
-});
-
-Thread t2 = new Thread(new Runnable(){
-    @Override
-    public void run(){
-        synchronized(B){
-            Thread.sleep(2000);
-            synchronized(A){}
-        }
-    }
-});
-</code></pre><p>线程1：持有锁A，等待锁B<br>线程2：持有锁B，等待锁A</p>
-<p>线程1和线程2互相等待对方释放锁，引起死锁</p>
-<p><strong><em>避免死锁的一些方法</em></strong></p>
-<ul>
-<li>避免一个线程同时获取多个锁</li>
-<li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源</li>
-<li>尝试使用定时锁，使用</li>
-<li>.tryLock(timeout)来替代使用内部锁机制</li>
-<li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况</li>
-</ul>
-<h2 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h2><ul>
-<li>线程创建完毕后进入<strong>new</strong>状态</li>
-<li>调用了线程的start方法后，线程进入<strong>Runnable</strong>状态，放入jVM的<strong>可运行线程队列</strong>中，等待CPU的执行权</li>
-<li>当线程执行时，线程状态变为<strong>Running</strong></li>
-<li>线程执行sleep、wait、join或者进入了IO阻塞、锁等待时，则进入<strong>Wait或Block</strong>状态</li>
-</ul>
-<h2 id="创建线程的两种传统方式"><a href="#创建线程的两种传统方式" class="headerlink" title="创建线程的两种传统方式"></a>创建线程的两种传统方式</h2><p>传统是相对于 JDK 1.5 而言的</p>
-<h3 id="继承Thread"><a href="#继承Thread" class="headerlink" title="继承Thread"></a>继承Thread</h3><p>创建Thread的子类，覆盖其中的run方法，运行这个子类的 start 方法即可开启线程</p>
-<pre><code>public class ThreadTest1 {
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    // 获取当前线程对象 获取线程名字
-                    System.out.println(Thread.currentThread().getName());
-                    // 让线程暂停，休眠，此方法会抛出中断异常InterruptedException
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        thread.start();
-    }
-}
-</code></pre><h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><p>创建Thread时传递一个实现Runnable接口的对象实例(用的比较多，因为符合面向对象编程的思路)</p>
-<pre><code>public class ThreadTest1 {
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    System.out.println(Thread.currentThread().getName());
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
-    }
-}
-</code></pre><h3 id="面试题★★★"><a href="#面试题★★★" class="headerlink" title="面试题★★★"></a>面试题★★★</h3><p>问题：下边的线程运行的是Thread子类中的run方法还是实现Runnable接口类的run方法</p>
-<pre><code>public class ThreadTest1 {
-
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        new Thread(new Runnable() {////b、传递实现Runnable接口的对象
-
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                System.out.println(&quot;2&quot;);
-            }
-        }){//a、覆盖Thread子类run方法
-            @Override
-            public void run() {
-                System.out.println(&quot;1&quot;);
-            }
-        }.start();
-    }
-}
-</code></pre><p>分析：查看Thread的源代码，注意run方法，在如果传入的Runnable对象不为空，则去执行Runnable对象的run方法</p>
-<pre><code>public class Thread implements Runnable {
-
-    private Runnable target;
-
-       public Thread(Runnable target) {
-        init(null, target, &quot;Thread-&quot; + nextThreadNum(), 0);
-    }
-
-    public void run() {
-        if (target != null) {
-            target.run();
-        }
-    }
-}
-</code></pre><p>但是在这里，<strong>子类run方法实际就是覆盖父类中的run方法</strong>，如果覆盖了就用子类的run方法，不会再找Runnable中的run方法了，所以运行的是子类中的run方法</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由Thread类中的run方法源代码中看出，两种传统创建线程的方式都是在<strong>调用Thread对象的run方法</strong></p>
-<ul>
-<li>如果子类重写父类的run方法，则调用子类的run方法</li>
-<li>如果Thread对象的run方法没有被覆盖，并且像为Thread对象传递了一个Runnable对象，就会调用Runnable对象的run方法</li>
-</ul>
-<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>定时器在游戏上很常用，例如俄罗斯方块下降，贪吃蛇往前移动等</p>
-<p>定时器的使用</p>
-<ul>
-<li>一段时间后执行，第一个参数为任务，第二个参数为等待时间，单位是毫秒</li>
-</ul>
-<pre><code>new Timer().schedule(new TimerTask() {
-    @Override
-    public void run() {
-        System.out.println(&quot;boom!&quot;);
-    }
-}, 1000);
-</code></pre><ul>
-<li>一段时间后执行，以后每隔多少时间再次执行，第一个参数为任务，第二个参数为等待多长时间，第三个参数为每隔多长时间执行一次</li>
-</ul>
-<pre><code>new Timer().schedule(new TimerTask() {
-    @Override
-    public void run() {
-        System.out.println(&quot;boom!&quot;);
-    }
-}, 0, 1000);
-</code></pre><p>显示计时信息：</p>
-<pre><code>//计时
-new Timer().schedule(new TimerTask() {
-
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        while(true){
-            System.out.println(new Date().getSeconds());
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                // TODO: handle exception
-            }
-        }
-    }
-}, 0);
-</code></pre><h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><p><img src="http://i.imgur.com/1rVbVZp.png" alt=""></p>
-<p>线程之间的<strong>共享变量存储在主内存（main memory）</strong>中，每个线程都有一个<strong>私有的本地内存</strong>（local memory），本地内存中存储了该线程以读/写共享变量的<strong>副本</strong>。</p>
-<h2 id="传统线程互斥技术"><a href="#传统线程互斥技术" class="headerlink" title="传统线程互斥技术"></a>传统线程互斥技术</h2><p><br></p>
-<font color="red"><strong>如果多个线程对同一个资源操作，会引起安全问题（多卖票），使出现的结果和预期的不一样</strong></font>
-
-<p><strong>代码实现原子性：有一个线程正在使用这个方法的代码，别的线程就不能再使用</strong>。就和厕所里的坑一样，已经有人在用了，别人就不能再去用了。Java中某段代码要实现<strong>排他性</strong>，就将这段代码用<strong>synchronized</strong>关键字保护起来</p>
-<pre><code>synchronized（this）｛
-    for (int i=0; i&lt;len; i++)
-        System.out.println(name.charAt(i));//逐个字符打印
-    System.out.println();
-}
-</code></pre><p>注意：要实现互斥，在这个位置必须使用的<strong>锁必须是同一个对象</strong>，即在同一个对象上进行同步，这样的话，有一个线程进入保护区域后，没出来的话，别的线程就不能进入保护区域</p>
-<p>互斥方法：</p>
-<ul>
-<li>a、同步代码块</li>
-</ul>
-<pre><code>synchronized (lock){}
-</code></pre><ul>
-<li>b、同步方法</li>
-</ul>
-<pre><code>1、方法返回值前加synchronized，同步方法上边用的锁就是this对象
-2、静态同步方法使用的锁是该方法所在的class对象
-</code></pre><p>案例：output1和output2互斥，因为互斥变量都为当前对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> len = name.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			System.out.print(name.charAt(i));</div><div class="line">		System.out.println();</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>此时为静态函数，要实现互斥，使用Outputer的字节码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Outputer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">output1</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">synchronized</span> (Outputer.class) &#123;</div><div class="line">			<span class="keyword">int</span> len = name.length();</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">				System.out.print(name.charAt(i));</div><div class="line">			System.out.println();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">output2</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> len = name.length();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">			System.out.print(name.charAt(i));</div><div class="line">		System.out.println();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="锁对象Lock-同步问题更完美的处理方式"><a href="#锁对象Lock-同步问题更完美的处理方式" class="headerlink" title="锁对象Lock-同步问题更完美的处理方式"></a>锁对象Lock-同步问题更完美的处理方式</h2><h3 id="读写锁-ReadWriteLock"><a href="#读写锁-ReadWriteLock" class="headerlink" title="读写锁(ReadWriteLock)"></a>读写锁(ReadWriteLock)</h3><p>我们会有一种需求，在对数据进行读写的时候，为了保证数据的一致性和完整性，<strong>需要读和写是互斥的，写和写是互斥的，但是读和读是不需要互斥的</strong>，这样读和读不互斥性能更高些</p>
-<pre><code>class Data {      
-    private int data;// 共享数据  
-    private ReadWriteLock rwl = new ReentrantReadWriteLock();     
-    public void set(int data) {  
-        rwl.writeLock().lock();// 取到写锁  
-        try {  
-            System.out.println(Thread.currentThread().getName() + &quot;准备写入数据&quot;);  
-            try {  
-                Thread.sleep(20);  
-            } catch (InterruptedException e) {  
-                e.printStackTrace();  
-            }  
-            this.data = data;  
-            System.out.println(Thread.currentThread().getName() + &quot;写入&quot; + this.data);  
-        } finally {  
-            rwl.writeLock().unlock();// 释放写锁  
-        }  
-    }     
-    public void get() {  
-        rwl.readLock().lock();// 取到读锁  
-        try {  
-            System.out.println(Thread.currentThread().getName() + &quot;准备读取数据&quot;);  
-            try {  
-                Thread.sleep(20);  
-            } catch (InterruptedException e) {  
-                e.printStackTrace();  
-            }  
-            System.out.println(Thread.currentThread().getName() + &quot;读取&quot; + this.data);  
-        } finally {  
-            rwl.readLock().unlock();// 释放读锁  
-        }  
-    }  
-}
-</code></pre><h3 id="Synchronized和Lock的区别"><a href="#Synchronized和Lock的区别" class="headerlink" title="Synchronized和Lock的区别"></a>Synchronized和Lock的区别</h3><p>1、用sychronized修饰的方法或者语句块在代码执行完之后<strong>锁自动释放</strong>，而用Lock需要我们<strong>手动释放锁</strong>，所以为了保证锁最终被释放(发生异常情况)，要把互斥区放在try内，释放锁放在finally内。</p>
-<p>2、synchronized简单，简单意味着不灵活，而ReentrantLock的锁机制给用户的使用提供了极大的灵活性。这点在Hashtable和ConcurrentHashMap中体现得淋漓尽致。synchronized一锁就锁整个Hash表，而ConcurrentHashMap则利用ReentrantLock实现了锁分离，锁的知识segment而不是整个Hash表</p>
-<p>3、synchronized是不公平锁，而ReentrantLock可以指定锁是公平的还是非公平的</p>
-<p>4、synchronized实现等待/通知机制通知的线程是随机的，ReentrantLock实现等待/通知机制可以有选择性地通知</p>
-<p>5、和synchronized相比，ReentrantLock提供给用户多种方法用于锁信息的获取，比如可以知道lock是否被当前线程获取、lock被同一个线程调用了几次、lock是否被任意线程获取等等</p>
-<h2 id="传统线程同步通信技术（wait、notify、notifyAll）"><a href="#传统线程同步通信技术（wait、notify、notifyAll）" class="headerlink" title="传统线程同步通信技术（wait、notify、notifyAll）"></a>传统线程同步通信技术（wait、notify、notifyAll）</h2><h3 id="双重检查"><a href="#双重检查" class="headerlink" title="双重检查"></a>双重检查</h3><p>调用Object的wait方法可以让当前线程<strong>进入等待状态，程序不能往下执行</strong>，只有调用了<strong>此Object</strong>的<strong>notify、或notifyAll方法，或者wait到达了指定的时间</strong>后，才会<strong>激活继续执行</strong></p>
-<p>notify只是随机找处于<strong>等待此Object</strong>的<strong>一个线程</strong>；notifyAll是通知wait<strong>此Object</strong>的<strong>所有线程</strong></p>
-<p>为了防止<strong>假唤醒</strong>，提高程序的<strong>可靠性</strong>，wait被唤醒后，需要再次判断等待的状态是否被更改了，如果未更改，则继续进入wait状态，这种做法称作<strong>双重检查</strong>。查看一下代码，即<strong>加上了while进行双重检查</strong>，而且wait操作写在最前面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">while (current == connections.length) &#123;</div><div class="line">    System.out.println(Thread.currentThread().getName() + &quot;在等待&quot;);</div><div class="line">    this.wait();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="wait-notify机制原理"><a href="#wait-notify机制原理" class="headerlink" title="wait/notify机制原理"></a>wait/notify机制原理</h3><p>当调用了对象的wait方法后，JVM程序<strong>执行引擎</strong>将<strong>此线程放入一个wait集合中</strong>，<font color="red"><strong>并释放此对象的锁</strong></font>（本来加上了synchronized只能有一个线程处于等待状态，现在可以多个线程处于等待状态）</p>
-<ul>
-<li><p>当其他线程调用此对象的notify方法时，会从wait集合中随机找<strong>一个</strong>等待的此对象上的线程，并将其从wait集合中删除，<strong>JVM线程执行引擎</strong>就可以再次<strong>调度</strong>此线程了</p>
-</li>
-<li><p>当使用 notifyAll 方法时，则会删除 wait 集合中所有等待此对象的线程</p>
-</li>
-</ul>
-<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>线程同步就是线程按照<strong>先后的次序</strong>运行，即”我执行完之后然后你执行”</p>
-<p>面试题：子线程循环10次，接着主线程循环100，接着又回到子线程循环10次，接着再回到主线程又循环100，如此循环50次，请写出程序</p>
-<pre><code>/**
- * 面试题：子线程循环10次，接着主线程循环100，
- * 接着又回到子线程循环10次，接着再回到主线程又循环100，
- * 如此循环50次，请写出程序
- */
-
-/** 解题思路：线程交替运行，这是一个线程同步问题
- * 1、首先保证子任务和主任务执行过程中不冲突：将子任务和主任务封装在business类中，使用关键词Synchronized保证代码块的原子性
- * 2、子任务、主任务前后执行顺序控制：使用wait/notify机制，使用boolean类型的isSub变量控制当前应该执行哪个任务，如果不该执
- *    行则休眠，否则执行；执行结束后必须反转isSub变量，然后通知阻塞进程继续执行
- * 3、交替执行50次：子任务和主任务各自循环50次，在第2步时已经保证子任务和主任务的交替运行，完成要求
- */
-
-class TwoThreadSynchronized {
-    public static void main(String[] args){
-        final Bussiness bussiness = new Bussiness();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i = 0; i &lt; 50; i++)
-                    bussiness.main(i+1);
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i = 0; i &lt; 50; i++)
-                    bussiness.sub(i+1);
-            }
-        }).start();
-    }
-}
-
-class Bussiness{
-
-    //共享变量，子任务先开始
-    boolean isSub = true;
-
-    public synchronized void main(int loop){
-        while(isSub){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println(&quot;第&quot; + loop + &quot;次循环：&quot;);
-
-        System.out.print(&quot;main：&quot;);
-        for(int i = 0; i &lt; 100; i++){
-            System.out.print(i + &quot; &quot;);
-        }
-        System.out.println();
-
-        isSub = true;
-        notify();
-    }
-
-    public synchronized void sub(int loop){
-
-        while(!isSub){
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println(&quot;第&quot; + loop + &quot;次循环：&quot;);
-
-        System.out.print(&quot;sub：&quot;);
-        for(int i = 0; i &lt; 10; i++){
-            System.out.print(i + &quot; &quot;);
-        }
-        System.out.println();
-
-        isSub = false;
-        notify();
-    }
-
-}
-</code></pre><h2 id="线程间通信-Condition-await、signal-★★★★★"><a href="#线程间通信-Condition-await、signal-★★★★★" class="headerlink" title="线程间通信(Condition:await、signal)★★★★★"></a>线程间通信(Condition:await、signal)★★★★★</h2><p>需求：要求线程1和线程2互不干扰，并且交替执行</p>
-<p>设计：</p>
-<ul>
-<li>互不干扰干扰可以让两个线程在同一个对象上同步，通过Synchronized或者Lock对象。<ul>
-<li>方案一：两个方法都用Synchronized修饰，两个方法互斥</li>
-<li>方案二：同一个Lock成员变量，每个方法开始的时候使用lock.lock()，try-finally格式，finally执行lock.unlock();  </li>
-</ul>
-</li>
-<li>交替运行可以设置一个标志位，如果为true执行A，如果为false执行B；如果条件标志位不符，线程处于阻塞状态<ul>
-<li>创建Condition，调用conditon的await、signal方法。当方法不满足条件时，await；满足条件后更改标志位，并且signal唤醒</li>
-</ul>
-</li>
-</ul>
-<pre><code>class Business {  
-    private boolean bool = true;  
-    private Lock lock = new ReentrantLock();  
-    private Condition condition = lock.newCondition();   
-    public /*synchronized*/ void main(int loop) throws InterruptedException {  
-        lock.lock();  
-        try {  
-            while(bool) {                 
-                condition.await();//this.wait();  
-            }  
-            for(int i = 0; i &lt; 100; i++) {  
-                System.out.println(&quot;main thread seq of &quot; + i + &quot;, loop of &quot; + loop);  
-            }  
-            bool = true;  
-            condition.signal();//this.notify();  
-        } finally {  
-            lock.unlock();  
-        }  
-    }     
-    public /*synchronized*/ void sub(int loop) throws InterruptedException {  
-        lock.lock();  
-        try {  
-            while(!bool) {  
-                condition.await();//this.wait();  
-            }  
-            for(int i = 0; i &lt; 10; i++) {  
-                System.out.println(&quot;sub thread seq of &quot; + i + &quot;, loop of &quot; + loop);  
-            }  
-            bool = false;  
-            condition.signal();//this.notify();  
-        } finally {  
-            lock.unlock();  
-        }  
-    }  
-}  
-</code></pre><p>在Condition中，用await()替换wait()，用signal()替换notify()，用signalAll()替换notifyAll()，传统线程的通信方式，Condition都可以实现，这里注意，Condition是被绑定到Lock上的，要创建一个Lock的Condition必须用newCondition()方法。</p>
-<h3 id="生产者消费者模式"><a href="#生产者消费者模式" class="headerlink" title="生产者消费者模式"></a>生产者消费者模式</h3><p>设计+互斥操作：</p>
-<p><img src="http://i.imgur.com/D0lMvMW.jpg" alt=""></p>
-<p>线程间通信：</p>
-<p><img src="http://i.imgur.com/kM5NQqK.jpg" alt=""></p>
-<p>这是一个处于多线程工作环境下的缓存区，缓存区提供了两个方法，put和take，put是存数据，take是取数据，内部有个缓存队列，这个缓存区类实现的功能：有多个线程往里面存数据和从里面取数据，其缓存队列(先进先出后进后出)能缓存的最大数值是100，<strong>多个线程间是互斥的</strong>，<strong>当缓存队列中存储的值达到100时，将写线程阻塞，并唤醒读线程，当缓存队列中存储的值为0时，将读线程阻塞，并唤醒写线程，这也是ArrayBlockingQueue的内部实现</strong></p>
-<p><br></p>
-<font color="red"><strong>多个Condition的好处：</strong></font>
-
-<p><strong>假设缓存队列中已经存满，那么阻塞的肯定是写线程，唤醒的肯定是读线程，相反，阻塞的肯定是读线程，唤醒的肯定是写线程</strong>。那么假设只有一个Condition会有什么效果呢，缓存队列中已经存满，<strong>这个Lock不知道唤醒的是读线程还是写线程了</strong>，如果唤醒的是读线程，皆大欢喜，如果唤醒的是写线程，那么线程刚被唤醒，又被阻塞了，这时又去唤醒，这样就浪费了很多时间。</p>
-<p>代码：</p>
-<pre><code>class BoundedBuffer{
-    final Locklock = newReentrantLock();//锁对象
-    final Condition notFull = lock.newCondition();//写线程条件
-    final Condition notEmpty = lock.newCondition();//读线程条件
-
-    final Object[] items = new Object[100];//缓存队列
-    intputptr/*写索引*/,takeptr/*读索引*/,count/*队列中存在的数据个数*/;
-
-    public void put(Object x) throws InterruptedException{
-        lock.lock();
-        try{
-            while(count == items.length)//如果队列满了
-                notFull.await();//阻塞写线程
-            items[putptr] = x;//赋值
-            if(++putptr == items.length) putptr = 0;//如果写索引写到队列的最后一个位置了，那么置为0
-            ++count;//个数++
-            notEmpty.signal();//唤醒读线程
-        }finally{
-            lock.unlock();
-        }
-    }
-
-    public Object take() throws InterruptedException{
-        lock.lock();
-        try{
-            while(count == 0)//如果队列为空
-                notEmpty.await();//阻塞读线程
-            Objectx = items[takeptr];//取值
-            if(++takeptr == items.length) takeptr = 0;//如果读索引读到队列的最后一个位置了，那么置为0
-            --count;//个数--
-            notFull.signal();//唤醒写线程
-            return x;
-        }finally{
-            lock.unlock();
-        }
-    }
-}
-</code></pre><h2 id="ThreadLocal实现线程范围内的数据共享"><a href="#ThreadLocal实现线程范围内的数据共享" class="headerlink" title="ThreadLocal实现线程范围内的数据共享"></a>ThreadLocal实现线程范围内的数据共享</h2><p>什么是线程范围内的数据共享？<font color="red"><strong>一个线程内部的各个函数都能访问该共享变量，而其他线程不能访问</strong></font>（区别于静态变量，静态变量能被所有线程访问，但需要解决线程间数据同步的问题）</p>
-<p>应用：</p>
-<ul>
-<li>用户访问Web服务器，服务器启动一条线程处理用户请求，不同用户之间不受干扰</li>
-<li>用户访问数据库，每个用户使用独立的connection。不然会出现A用户开启事务，操作还没有结束，B用户使用的是相同的connection，提交事务，导致A用户还未完成操作但事务提交了</li>
-</ul>
-<h3 id="自己的实现的线程范围内的数据共享"><a href="#自己的实现的线程范围内的数据共享" class="headerlink" title="自己的实现的线程范围内的数据共享"></a>自己的实现的线程范围内的数据共享</h3><p>使用全局的map，键为线程，值为该线程中需要共享的变量。每次取值时，传入当前的线程，即可取到当前线程共享的变量</p>
-<pre><code>public class ThreadLocalTest {
-    //键为当前线程，值为线程范围内的共享变量
-    static Map&lt;Thread, Integer&gt; map = new HashMap&lt;Thread, Integer&gt;();
-
-    public static void main(String[] args){
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                map.put(Thread.currentThread(),1);
-                System.out.println(&quot;A:&quot; + new A().get());
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                map.put(Thread.currentThread(),2);
-                System.out.println(&quot;B:&quot; + new A().get());
-            }
-        }).start();
-
-
-    }
-
-    static class A{
-        public Integer get(){
-            return map.get(Thread.currentThread());
-        }
-    }
-}
-</code></pre><h3 id="使用-ThreadLocal-实现的线程间数据共享"><a href="#使用-ThreadLocal-实现的线程间数据共享" class="headerlink" title="使用 ThreadLocal 实现的线程间数据共享"></a>使用 ThreadLocal 实现的线程间数据共享</h3><pre><code>public class ThreadLocalTest {
-
-    static ThreadLocal&lt;Integer&gt; threadLocal = new ThreadLocal&lt;Integer&gt;();
-
-    public static void main(String[] args){
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                threadLocal.set(1);
-                System.out.println(&quot;A:&quot; + new A().get());
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                threadLocal.set(2);
-                System.out.println(&quot;B:&quot; + new A().get());
-            }
-        }).start();
-
-    }
-
-    static class A{
-        public Integer get(){
-            return threadLocal.get();
-        }
-    }
-}
-</code></pre><p>原理：</p>
-<p>1、1个ThreadLocal代表一个与线程绑定的值<br>2、线程中存储多个ThreadLocal的值，用Map存储</p>
-<pre><code>public class ThreadLocal&lt;T&gt; {
-
-    public void set(T value) {
-        Thread t = Thread.currentThread();
-        ThreadLocalMap map = getMap(t);
-        if (map != null)
-            map.set(this, value);
-        else
-            createMap(t, value);
-    }
-
-    public T get() {
-        Thread t = Thread.currentThread();
-        ThreadLocalMap map = getMap(t);
-        if (map != null) {
-            ThreadLocalMap.Entry e = map.getEntry(this);
-            if (e != null)
-                return (T)e.value;
-        }
-        return setInitialValue();
-    }
-
-    ThreadLocalMap getMap(Thread t) {
-        return t.threadLocals;
-    }
-
-}
-</code></pre><h3 id="使用-ThreadLocal-实现线程范围内的单例"><a href="#使用-ThreadLocal-实现线程范围内的单例" class="headerlink" title="使用 ThreadLocal 实现线程范围内的单例"></a>使用 ThreadLocal 实现线程范围内的单例</h3><ul>
-<li>每个线程都使用一个类的实例，实现这个功能需要结合ThreadLocal，与线程绑定</li>
-<li>单例模式无法实现，是在整个应用中保持单例</li>
-</ul>
-<p>应用：对于每一个用户请求，对应一个线程，为之创建一个容器，仅供该用户使用。该容器可以使用线程范围内的单例来实现</p>
-<pre>
-public class ThreadLocalTest {
-
-    public static void main(String[] args){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
-                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
-                System.out.println(Thread.currentThread() + " " + Person.getThreadLocalInstance());
-            }
-        }).start();
-    }
-}
-
-class Person{
-
-    <font color="red">private static ThreadLocal<person> threadLocal = new ThreadLocal<person>();
-    public static Person getThreadLocalInstance(){
-        Person person = threadLocal.get();
-        if(person == null){
-            person = new Person();
-            threadLocal.set(person);
-        }
-        return person;
-    }</person></person></font>
-
-    private String name;
-    private Integer age;
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-}
-</pre>
-
-<h3 id="ThreadLocal-设计"><a href="#ThreadLocal-设计" class="headerlink" title="ThreadLocal 设计"></a>ThreadLocal 设计</h3><p><img src="http://i.imgur.com/ktTa3m6.png" alt=""></p>
-<h3 id="ThreadLocal原理分析"><a href="#ThreadLocal原理分析" class="headerlink" title="ThreadLocal原理分析"></a>ThreadLocal原理分析</h3><p><a href="http://blog.csdn.net/huachao1001/article/details/51970237" target="_blank" rel="external">http://blog.csdn.net/huachao1001/article/details/51970237</a></p>
-<p>ThreadLocal里面的实现，主要涉及到以下几个重要类：</p>
-<ul>
-<li>Thread：大家很熟悉的线程类，一个Thread类自然代表一个线程</li>
-<li>ThreadLocal：既然本文是要解析ThreadLocal类，自然就离不开这个类啦</li>
-<li>ThreadLocalMap：可以看成一个HashMap，但是它本身具体的实现并没有实现继承HashMap甚至跟java.util.Map都沾不上一点关系。只是内部的实现跟HashMap类似（通过哈希表的方式存储）</li>
-<li>ThreadLocalMap.Entry：把它看成是保存键值对的对象，其本质上是一个WeakReference<threadlocal>对象</threadlocal></li>
-</ul>
-<p>ThreadLocal的存取机制可以用下图表示：</p>
-<p><img src="http://i.imgur.com/lOd5Awk.png" alt=""></p>
-<p>1、<strong>Thread中有一个ThreadLocalMap属性，存放线程局部变量</strong>，是键值对的存储方式，以ThreadLocal对象为键，要保存的变量为值（ThreadLocalMap.Entry是保存键值对的对象）</p>
-<p>2、<font color="red"><strong>ThreadLocal可以看做是ThreadLocalMap的操作类</strong></font>，在当前线程中通过ThreadLocal的set/get操作，对当前线程中的ThreadLocalMap进行操作</p>
-<ul>
-<li>set方法：首先获取当前线程的ThreadLocalMap的引用，然后以ThreadLocal实例作为key，保存的变量为value，保存到当前线程的ThreadLocalMap中</li>
-<li>get方法：以当前ThreadLocal实例作为key，取出当前线程的ThreadLocalMap变量中该key的值</li>
-</ul>
-<p>3、<strong>每个线程都拥有自己的ThreadLocalMap属性，每个线程都是从自己的ThreadLocalMap中取值，所以互不影响</strong></p>
-<p>4、作用：可以实现线程范围内的单例、线程范围内数据共享</p>
-<pre><code>private static ThreadLocal&lt;Person&gt; threadLocal = new ThreadLocal&lt;Person&gt;();
-public static Person getThreadLocalInstance(){
-    Person person = threadLocal.get();
-    if(person == null){
-        person = new Person();
-        threadLocal.set(person);
-    }
-    return person;
-}
-</code></pre><h2 id="多个线程之间共享数据的方式探讨"><a href="#多个线程之间共享数据的方式探讨" class="headerlink" title="多个线程之间共享数据的方式探讨"></a>多个线程之间共享数据的方式探讨</h2><p>1、两个线程的操作一致，可以使用同一个Runnable对象。火车站买票适用这种情况</p>
-<pre><code>public class Method1 {
-
-    public static void main(String[] args){
-
-        Runnable runnable = new sell();
-
-        new Thread(runnable).start();
-        new Thread(runnable).start();
-    }
-}
-
-class sell implements Runnable{
-
-    private int ticket = 1000000;
-
-    public synchronized void sell(){
-        if(ticket &gt; 0){
-            ticket--;
-            System.out.println(Thread.currentThread() + &quot; 剩余票&quot; + ticket);
-        }
-    }
-
-    @Override
-    public void run() {
-        while (true){
-            sell();
-        }
-    }
-}
-</code></pre><p>2、两个线程操作不一样。此时必须设置第三方共享数据，并调用他的方法进行数据操作（推荐）</p>
-<pre><code>public class Method1 {
-
-    public static void main(String[] args){
-
-        final TrainCenter trainCenter = new TrainCenter();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true)
-                   trainCenter.sell();
-            }
-        }).start();
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true)
-                    trainCenter.sell();
-            }
-        }).start();
-    }
-}
-
-
-
-class TrainCenter{
-    private int ticket = 100000;
-
-    public int getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(int ticket) {
-        this.ticket = ticket;
-    }
-
-    public synchronized void sell(){
-        if(ticket &gt; 0){
-            ticket--;
-            System.out.println(Thread.currentThread() + &quot; 剩余 &quot; + ticket);
-        }
-    }
-}
-</code></pre><p>3、共享数据传入Runnable对象中，进行操作</p>
-<pre><code>public class Method1 {
-
-    public static void main(String[] args){
-
-        TrainCenter trainCenter = new TrainCenter();
-
-        new Thread(new Train1(trainCenter)).start();
-        new Thread(new Train2(trainCenter)).start();
-
-    }
-}
-
-
-class Train1 implements Runnable{
-
-    private TrainCenter trainCenter;
-
-    public Train1(TrainCenter trainCenter){
-        this.trainCenter = trainCenter;
-    }
-
-    @Override
-    public void run() {
-        while(true){
-            trainCenter.sell();
-        }
-    }
-}
-
-class Train2 implements Runnable{
-
-    private TrainCenter trainCenter;
-
-    public Train2(TrainCenter trainCenter){
-        this.trainCenter = trainCenter;
-    }
-
-    @Override
-    public void run() {
-        while(true){
-            trainCenter.sell();
-        }
-    }
-}
-
-
-
-class TrainCenter{
-    private int ticket = 100000;
-
-    public int getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(int ticket) {
-        this.ticket = ticket;
-    }
-
-    public synchronized void sell(){
-        if(ticket &gt; 0){
-            ticket--;
-            System.out.println(Thread.currentThread() + &quot; 剩余 &quot; + ticket);
-        }
-    }
-}
-</code></pre><h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="线程池的作用"><a href="#线程池的作用" class="headerlink" title="线程池的作用"></a>线程池的作用</h3><ul>
-<li>根据系统自身的环境情况，<strong>有效的限制执行线程的数量</strong>，超出数量的任务排队等候，等待有任务执行完毕，再从队列最前面取出任务执行</li>
-<li>减少创建和销毁线程的次数，每个工作线程可以多次使用</li>
-</ul>
-<h3 id="常见线程池"><a href="#常见线程池" class="headerlink" title="常见线程池"></a>常见线程池</h3><p>1、newSingleThreadExecutor</p>
-<p>单个线程的线程池，即线程池中每次只有一个线程工作，单线程串行执行任务</p>
-<p>2、newFixedThreadExecutor(n)</p>
-<p>固定数量的线程池，没提交一个任务就是一个线程，直到达到线程池的最大数量，然后后面<strong>进入等待队列</strong>直到前面的任务完成才继续执行</p>
-<p><strong>3、newCacheThreadExecutor（推荐使用）</strong></p>
-<p>可缓存线程池，当线程池大小超过了处理任务所需的线程，那么就会<strong>回收部分空闲</strong>（一般是60秒无执行）的线程，当有任务来时，又<strong>智能的添加</strong>新线程来执行。</p>
-<p>4、newScheduleThreadExecutor</p>
-<p>大小无限制的线程池，支持定时和周期性的执行线程</p>
-<p>实例：</p>
-<p>1、newSingleThreadExecutor</p>
-<pre><code>public class TestSingleThreadExecutor {
-    public static void main(String[] args){
-        //创建一个单个线程的线程池
-        ExecutorService pool = Executors.newSingleThreadExecutor();
-        //将任务放入池中并执行
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        //关闭
-        pool.shutdown();
-    }
-}
-
-class Task implements Runnable{
-
-    @Override
-    public void run() {
-        System.out.println(Thread.currentThread().getName() + &quot;执行中。。。&quot;);
-    }
-}
-</code></pre><p>result：</p>
-<pre><code>pool-1-thread-1执行中。。。
-pool-1-thread-1执行中。。。
-pool-1-thread-1执行中。。。
-pool-1-thread-1执行中。。。
-pool-1-thread-1执行中。。。
-</code></pre><p>2、newFixedThreadExecutor(n)</p>
-<pre><code>public class TestFixedThreadPool {
-    public static void main(String[] args){
-        //创建一个固定线程数的线程池
-        ExecutorService pool = Executors.newFixedThreadPool(2);
-        //将任务放入池中并执行
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        //关闭
-        pool.shutdown();
-    }
-}
-</code></pre><p>result：</p>
-<pre><code>pool-1-thread-1执行中。。。
-pool-1-thread-2执行中。。。
-pool-1-thread-1执行中。。。
-pool-1-thread-2执行中。。。
-pool-1-thread-1执行中。。。
-</code></pre><p>3、newCacheThreadExecutor</p>
-<pre><code>public class TestCachedThreadPool {
-    public static void main(String[] args) {
-        //创建一个可重用固定线程数的线程池
-        ExecutorService pool = Executors.newCachedThreadPool();
-        //将任务放入池中并执行
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        pool.execute(new Task());
-        //关闭
-        pool.shutdown();
-    }
-}
-</code></pre><p>result：</p>
-<pre><code>pool-1-thread-1执行中。。。
-pool-1-thread-2执行中。。。
-pool-1-thread-4执行中。。。
-pool-1-thread-3执行中。。。
-pool-1-thread-5执行中。。。
-</code></pre><h3 id="JAVA线程池shutdown和shutdownNow的区别"><a href="#JAVA线程池shutdown和shutdownNow的区别" class="headerlink" title="JAVA线程池shutdown和shutdownNow的区别"></a>JAVA线程池shutdown和shutdownNow的区别</h3><p>shutDown() </p>
-<p>当线程池调用该方法时，线程池的状态则立刻变成SHUTDOWN状态。此时，则<strong>不能再往线程池中添加任何任务</strong>，否则将会抛出RejectedExecutionException异常。但是，此时线程池不会立刻退出，直到添加到线程池中的任务都<strong>已经处理完成，才会退出</strong>。 </p>
-<p>shutdownNow() </p>
-<p>根据JDK文档描述，大致意思是：执行该方法，<strong>线程池的状态立刻变成STOP状态，并试图停止所有正在执行的线程，不再处理还在池队列中等待的任务</strong>，当然，它会返回那些未执行的任务。 </p>
-<p>它试图终止线程的方法是通过调用Thread.interrupt()方法来实现的，但是大家知道，这种方法的作用有限，如果线程中没有sleep 、wait、Condition、定时锁等应用, interrupt()方法是无法中断当前的线程的。所以，ShutdownNow()并不代表线程池就一定立即就能退出，它可能必须要<strong>等待所有正在执行的任务都执行完成了才能退出</strong>。 </p>
-<h2 id="线程池定时器"><a href="#线程池定时器" class="headerlink" title="线程池定时器"></a>线程池定时器</h2><p>这种做法从性能方面讲相对于传统的定时器要好</p>
-<pre><code>public static void main(String[] args){
-    Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
-        @Override
-        public void run() {
-            System.out.println(&quot;测试开始&quot;);
-        }
-    },0,1, TimeUnit.SECONDS);
-}
-</code></pre><h2 id="Callable和Future"><a href="#Callable和Future" class="headerlink" title="Callable和Future"></a>Callable和Future</h2><p>Callable和Future，一个产生结果，一个拿到结果。 Callable接口类似于Runnable，从名字就可以看出来了，但是Runnable不会返回结果，并且无法抛出返回结果的异常，而Callable功能更强大一些，<strong>被线程执行后，可以返回值，这个返回值可以被Future拿到</strong>，也就是说，<strong>Future可以拿到异步执行任务的返回值</strong>，下面来看一个简单的例子：</p>
-<pre><code>public class CallableAndFuture {
-    private FutureTask&lt;Integer&gt; future;
-
-    public static void main(String[] args) {
-
-        //复杂操作，需要耗费很长时间，但结果不是立刻需要
-        Callable&lt;Integer&gt; callable = new Callable&lt;Integer&gt;() {
-            public Integer call() throws Exception {
-                Thread.sleep(10000);
-                return new Random().nextInt(100);
-            }
-        };
-
-        FutureTask&lt;Integer&gt; future = new FutureTask&lt;Integer&gt;(callable);
-        new Thread(future).start();
-
-        try {
-            Thread.sleep(5000);// 可能做一些事情
-
-            if(!future.isDone()){
-                System.out.println(&quot;任务还没有执行完，先返回默认值0&quot;);
-            }
-
-            //用户有足够的耐心等待任务执行结束
-            System.out.println(&quot;任务执行结束：&quot; + future.get());
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre><p>FutureTask实现了两个接口，Runnable和Future，所以它<strong>既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值</strong>，那么这个组合的使用有什么好处呢？假设有一个很耗时的返回值需要计算，并且这个返回值不是立刻需要的话，那么就可以使用这个组合，<strong>用另一个线程去计算返回值，而当前线程在使用这个返回值之前可以做其它的操作，等到需要这个返回值时，再通过Future得到</strong>，岂不美哉！这里有一个Future模式的介绍：<a href="http://openhome.cc/Gossip/DesignPattern/FuturePattern.htm。" target="_blank" rel="external">http://openhome.cc/Gossip/DesignPattern/FuturePattern.htm。</a> </p>
-<h2 id="并发队列-ConcurrentLinkedQueue-和阻塞队列-LinkedBlockingQueue-用法"><a href="#并发队列-ConcurrentLinkedQueue-和阻塞队列-LinkedBlockingQueue-用法" class="headerlink" title="并发队列 ConcurrentLinkedQueue 和阻塞队列 LinkedBlockingQueue 用法"></a>并发队列 ConcurrentLinkedQueue 和阻塞队列 LinkedBlockingQueue 用法</h2><p>在Java多线程应用中，队列的使用率很高，多数生产消费模型的首选数据结构就是队列(先进先出)。Java提供的线程安全的Queue可以分为阻塞队列和非阻塞队列，其中阻塞队列的典型例子是BlockingQueue，非阻塞队列的典型例子是ConcurrentLinkedQueue，在实际应用中要根据实际需要选用阻塞队列或者非阻塞队列。</p>
-<h3 id="LinkedBlockingQueue"><a href="#LinkedBlockingQueue" class="headerlink" title="LinkedBlockingQueue"></a>LinkedBlockingQueue</h3><p>由于LinkedBlockingQueue实现是线程安全的，实现了先进先出等特性，是作为生产者消费者的首选，LinkedBlockingQueue 可以指定容量，也可以不指定，不指定的话，默认最大是Integer.MAX_VALUE，其中主要用到put和take方法，put方法在队列满的时候会阻塞直到有队列成员被消费，take方法在队列空的时候会阻塞，直到有队列成员被放进来。</p>
-<pre><code>package cn.thread;
-
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-
-/**
- * 多线程模拟实现生产者／消费者模型
- */
-public class BlockingQueueTest2 {
-    /**
-     * 
-     * 定义装苹果的篮子
-     * 
-     */
-    public class Basket {
-        // 篮子，能够容纳3个苹果
-        BlockingQueue&lt;String&gt; basket = new LinkedBlockingQueue&lt;String&gt;(3);
-
-        // 生产苹果，放入篮子
-        public void produce() throws InterruptedException {
-            // put方法放入一个苹果，若basket满了，等到basket有位置
-            basket.put(&quot;An apple&quot;);
-        }
-
-        // 消费苹果，从篮子中取走
-        public String consume() throws InterruptedException {
-            // take方法取出一个苹果，若basket为空，等到basket有苹果为止(获取并移除此队列的头部)
-            return basket.take();
-        }
-    }
-
-    // 定义苹果生产者
-    class Producer implements Runnable {
-        private String instance;
-        private Basket basket;
-
-        public Producer(String instance, Basket basket) {
-            this.instance = instance;
-            this.basket = basket;
-        }
-
-        public void run() {
-            try {
-                while (true) {
-                    // 生产苹果
-                    System.out.println(&quot;生产者准备生产苹果：&quot; + instance);
-                    basket.produce();
-                    System.out.println(&quot;!生产者生产苹果完毕：&quot; + instance);
-                    // 休眠300ms
-                    Thread.sleep(300);
-                }
-            } catch (InterruptedException ex) {
-                System.out.println(&quot;Producer Interrupted&quot;);
-            }
-        }
-    }
-
-    // 定义苹果消费者
-    class Consumer implements Runnable {
-        private String instance;
-        private Basket basket;
-
-        public Consumer(String instance, Basket basket) {
-            this.instance = instance;
-            this.basket = basket;
-        }
-
-        public void run() {
-            try {
-                while (true) {
-                    // 消费苹果
-                    System.out.println(&quot;消费者准备消费苹果：&quot; + instance);
-                    System.out.println(basket.consume());
-                    System.out.println(&quot;!消费者消费苹果完毕：&quot; + instance);
-                    // 休眠1000ms
-                    Thread.sleep(1000);
-                }
-            } catch (InterruptedException ex) {
-                System.out.println(&quot;Consumer Interrupted&quot;);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        BlockingQueueTest2 test = new BlockingQueueTest2();
-
-        // 建立一个装苹果的篮子
-        Basket basket = test.new Basket();
-
-        ExecutorService service = Executors.newCachedThreadPool();
-        Producer producer = test.new Producer(&quot;生产者001&quot;, basket);
-        Producer producer2 = test.new Producer(&quot;生产者002&quot;, basket);
-        Consumer consumer = test.new Consumer(&quot;消费者001&quot;, basket);
-        service.submit(producer);
-        service.submit(producer2);
-        service.submit(consumer);
-        // 程序运行5s后，所有任务停止
-//        try {
-//            Thread.sleep(1000 * 5);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        service.shutdownNow();
-    }
-
-}
-</code></pre><p>原理：<br>1、双向链表，队列中维持头指针和为指针，元素个数的类型是 AtomicInteger<br>2、put的时候使用重入锁，可以被中断；</p>
-<h3 id="ConcurrentLinkedQueue"><a href="#ConcurrentLinkedQueue" class="headerlink" title="ConcurrentLinkedQueue"></a>ConcurrentLinkedQueue</h3><p>ConcurrentLinkedQueue是Queue的一个安全实现．Queue中元素按FIFO原则进行排序，采用<strong>CAS</strong>操作，来保证元素的一致性。</p>
-<p>原理：<br>1、<strong>tail节点不一定指向最后一个元素，也有可能是倒数第二个节点</strong>。</p>
-<p><img src="http://i.imgur.com/lZcMbIg.jpg" alt=""></p>
-<p>为什么这么设计？</p>
-<ul>
-<li><strong>在单线程中，插入节点后，将新插入的节点设置为tail</strong>。但是在多线程的情况下，假设有多个插入节点操作A，B，可能会先将B插入的节点设置为tail，然后再将A插入的节点设置为tail，导致tail不是严格的指向尾部指针(如下图)。<strong>所以设置tail指针也需要CAS操作</strong></li>
-</ul>
-<p><img src="http://i.imgur.com/LjiZ5eX.jpg" alt=""></p>
-<ul>
-<li><font color="red"><strong>插入节点操作必须使用CAS操作，如果每次移动tail指针也要采用CAS，移动tail指针操作也会影响插入节点的CAS操作（因为在插入节点的CAS操作时，要保证tail为最后一个节点），那样会特别影响性能，导致操作容易失败，所以采用延时移动tail指针</strong></font></li>
-<li>如果tail指针离最后一个节点的距离很大，<strong>每次要遍历到最后一个节点</strong>，特别耗时，所以<strong>当tail指针离最后一个节点的距离超过2，让tail节点指向最后一个节点</strong></li>
-</ul>
-<p>2、如何插入节点★★★★★★</p>
-<ul>
-<li>如果tail为最后一个节点，采用CAS操作加入新节点（预期p的next节点为null，如果是则将p的next设置为新节点；否则重试）</li>
-<li>如果tail不是最后一个节点，p后移一位指向最后一个元素，<strong>继续循环</strong></li>
-<li>如果tail指针与新插入的指针距离相差2（代码中由p！=t体现），则CAS更新tail指针</li>
-</ul>
-<p><strong><font color="red">总结：</font></strong><br>1、插入节点必须采用CAS操作，更新tail也必须采用CAS操作，影响性能，所以延迟tail节点更新<br>2、tail指针距离最后一个节点太远，需要遍历。所以当tail指针距离最后一个节点大于等于2时，CAS移动tail指针为最后一个节点<br>3、插入节点时，如果tail指针指向最后一个节点，则CAS增加节点；如果不是，则移动p为下一个节点，然后循环增加节点；如果距离超过2，才CAS更新tail指针</p>
-<p>源码：</p>
-<pre>
-public boolean offer(E e) {
-    checkNotNull(e);
-    final Node<e> newNode = new Node<e>(e);
-
-    for (Node<e> t = tail, p = t;;) {
-        Node<e> q = p.next;
-        <font color="red">if (q == null) {//最后一个节点</font>
-            // p is last node
-            if (p.casNext(null, newNode)) {
-                // Successful CAS is the linearization point
-                // for e to become an element of this queue,
-                // and for newNode to become "live".
-                if (p != t) // hop two nodes at a time
-                    casTail(t, newNode);  // Failure is OK.
-                return true;
-            }
-            // Lost CAS race to another thread; re-read next
-        }
-        else if (p == q)
-            // We have fallen off list.  If tail is unchanged, it
-            // will also be off-list, in which case we need to
-            // jump to head, from which all live nodes are always
-            // reachable.  Else the new tail is a better bet.
-            p = (t != (t = tail)) ? t : head;
-        else
-            // Check for tail updates after two hops.
-            <font color="red">p = (p != t && t != (t = tail)) ? t : q;//p不是最后一个节点，后移一位</font>
-    }
-}
-</e></e></e></e></pre>
-
-<p>出队：</p>
-<p><img src="http://i.imgur.com/oTjvfpw.jpg" alt=""></p>
-<p>从上图可知，并不是每次出队时都更新head节点，当head节点里有元素时，直接弹出head节点里的元素，而不会更新head节点。只有当head节点里没有元素时，出队操作才会更新head节点。这种做法也是通过hops变量来减少使用CAS更新head节点的消耗，从而提高出队效率。让我们再通过源码来深入分析下出队过程。</p>
-<p>队列判空：</p>
-<p>有些人在判断队列是否为空时喜欢用queue.size()==0，让我们来看看size方法：</p>
-<pre><code>public int size() 
-{
-    int count = 0;
-    for (Node&lt;E&gt; p = first(); p != null; p = succ(p))
-        if (p.item != null)
-            // Collection.size() spec says to max out
-            if (++count == Integer.MAX_VALUE)
-                break;
-    return count;
-}
-</code></pre><p>可以看到这样在队列在结点较多时会依次遍历所有结点，这样的性能会有较大影响，因而可以考虑empty函数，它只要判断第一个结点(注意不一定是head指向的结点)。</p>
-<pre><code>public boolean isEmpty() {
-    return first() == null;
-}
-</code></pre><p>应用：</p>
-<pre><code>import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-public class ConcurrentLinkedQueueTest {
-    private static ConcurrentLinkedQueue&lt;Integer&gt; queue = new ConcurrentLinkedQueue&lt;Integer&gt;();
-    private static int count = 2; // 线程个数
-    //CountDownLatch，一个同步辅助类，在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。
-    private static CountDownLatch latch = new CountDownLatch(count);
-
-    public static void main(String[] args) throws InterruptedException {
-        long timeStart = System.currentTimeMillis();
-        ExecutorService es = Executors.newFixedThreadPool(4);
-        ConcurrentLinkedQueueTest.offer();
-        for (int i = 0; i &lt; count; i++) {
-            es.submit(new Poll());
-        }
-        latch.await(); //使得主线程(main)阻塞直到latch.countDown()为零才继续执行
-        System.out.println(&quot;cost time &quot; + (System.currentTimeMillis() - timeStart) + &quot;ms&quot;);
-        es.shutdown();
-    }
-
-    /**
-     * 生产
-     */
-    public static void offer() {
-        for (int i = 0; i &lt; 100000; i++) {
-            queue.offer(i);
-        }
-    }
-
-
-    /**
-     * 消费
-     * @author 林计钦
-     * @version 1.0 2013-7-25 下午05:32:56
-     */
-    static class Poll implements Runnable {
-        public void run() {
-            // while (queue.size()&gt;0) {
-            while (!queue.isEmpty()) {
-                System.out.println(queue.poll());
-            }
-            latch.countDown();
-        }
-    }
-}
-</code></pre><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>Java线程(九)：Condition-线程通信更高效的方式<br><a href="http://blog.csdn.net/ghsau/article/details/7481142" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/7481142</a></p>
-<p>Java并发编程（七）ConcurrentLinkedQueue的实现原理和源码分析<br><a href="http://blog.csdn.net/itachi85/article/details/52205256" target="_blank" rel="external">http://blog.csdn.net/itachi85/article/details/52205256</a></p>
-<p>聊聊并发（六）——ConcurrentLinkedQueue的实现原理分析<br><a href="http://www.infoq.com/cn/articles/ConcurrentLinkedQueue/" target="_blank" rel="external">http://www.infoq.com/cn/articles/ConcurrentLinkedQueue/</a></p>
-<p>无锁队列的实现<br><a href="http://coolshell.cn/articles/8239.html" target="_blank" rel="external">http://coolshell.cn/articles/8239.html</a></p>
-<h2 id="CAS操作"><a href="#CAS操作" class="headerlink" title="CAS操作"></a>CAS操作</h2><p>1、读取当前内存值，作为预估值<br>2、当执行CAS指令时，如果内存当前值等于预估值，则更新；否则不执行，重试</p>
-<p>示例：</p>
-<p>1、读取 ——&gt; 2、执行+1操作，指令1和指令2不是原子操作，所以在指令1的时候有个<strong>预估值</strong>，在<strong>执行</strong>的时候，<strong>判断当前值和预估值是否一样，如果一样说明之前没有别的线程对该变量操作</strong>，可以更改当前值</p>
-<p>代码如下：</p>
-<pre><code>if (this == expect) {
-    this = update
-    return true;
-} else {
-    return false;
-}
-</code></pre><h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p>JAVA CAS原理深度分析<br><a href="http://blog.csdn.net/hsuxu/article/details/9467651" target="_blank" rel="external">http://blog.csdn.net/hsuxu/article/details/9467651</a></p>
-<h2 id="线程中断、线程让步、线程睡眠、线程合并"><a href="#线程中断、线程让步、线程睡眠、线程合并" class="headerlink" title="线程中断、线程让步、线程睡眠、线程合并"></a>线程中断、线程让步、线程睡眠、线程合并</h2><h3 id="线程中断-interrupt"><a href="#线程中断-interrupt" class="headerlink" title="线程中断 interrupt()"></a>线程中断 interrupt()</h3><p>interrupt()方法并不是中断线程的执行，而是为调用该方法的线程对象<strong>打上一个标记，设置其中断状态为true，通过isInterrupted()方法可以得到这个线程状态</strong></p>
-<pre>
-public class InterruptTest {  
-    public static void main(String[] args) throws InterruptedException {  
-        MyThread t = new MyThread("MyThread");  
-        t.start();  
-        Thread.sleep(100);// 睡眠100毫秒  
-        <font color="red">t.interrupt();//中断t线程</font>
-    }  
-}  
-class MyThread extends Thread {  
-    int i = 0;  
-    public MyThread(String name) {  
-        super(name);  
-    }  
-    public void run() {  
-        <font color="red">while(!isInterrupted()) {// 当前线程没有被中断，则执行  </font>
-            System.out.println(getName() + getId() + "执行了" + ++i + "次");  
-        }  
-    }  
-}  
-</pre>
-
-<p>这样的话，线程被顺利的中断执行了。很多人实现一个线程类时，都会再加一个 flag 标记，以便控制线程停止执行，其实完全没必要，<strong>通过线程自身的中断状态，就可以完美实现该功能</strong></p>
-<p>Thread.interrupted()方法是一个静态方法，它是判断当前线程的中断状态，需要注意的是，<strong>线程的中断状态会由该方法清除</strong>。换句话说，<strong>如果连续两次调用该方法，则第二次调用将返回 false</strong>（在第一次调用已清除了其中断状态之后，且第二次调用检验完中断状态前，当前线程再次中断的情况除外）。</p>
-<h3 id="线程让步-yield"><a href="#线程让步-yield" class="headerlink" title="线程让步 yield()"></a>线程让步 yield()</h3><p>程让步用于正在执行的线程，在某些情况下让出CPU资源，让给其它线程执行<br>注意，如果存在synchronized线程同步的话，线程让步不会释放锁(监视器对象)。</p>
-<h3 id="线程睡眠-sleep"><a href="#线程睡眠-sleep" class="headerlink" title="线程睡眠 sleep"></a>线程睡眠 sleep</h3><p>线程睡眠的过程中，如果是在synchronized线程同步内，是持有锁(监视器对象)的，也就是说，线程是关门睡觉的，别的线程进不来</p>
-<h3 id="线程合并-join"><a href="#线程合并-join" class="headerlink" title="线程合并 join"></a>线程合并 join</h3><p>线程合并是优先执行调用该方法的线程，再执行当前线程，来看一个小例子：</p>
-<pre><code>public class JoinTest {  
-    public static void main(String[] args) throws InterruptedException {  
-        JoinThread t1 = new JoinThread(&quot;t1&quot;);  
-        JoinThread t2 = new JoinThread(&quot;t2&quot;);  
-        t1.start();  
-        t2.start();  
-        t1.join();  
-        t2.join();  
-        System.out.println(&quot;主线程开始执行！&quot;);  
-    }  
-}  
-class JoinThread extends Thread {  
-    public JoinThread(String name) {  
-        super(name);  
-    }  
-    public void run() {  
-        for(int i = 1; i &lt;= 10; i++)  
-            System.out.println(getName() + getId() + &quot;执行了&quot; + i + &quot;次&quot;);  
-    }  
-} 
-</code></pre><p>t1和t2都执行完才继续主线程的执行，所谓合并，就是等待其它线程执行完，再执行当前线程，执行起来的效果就好像把其它线程合并到当前线程执行一样。</p>
-<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.csdn.net/ghsau/article/details/17560467" target="_blank" rel="external">http://blog.csdn.net/ghsau/article/details/17560467</a></p>
-<h2 id="并发编程的设计模式"><a href="#并发编程的设计模式" class="headerlink" title="并发编程的设计模式"></a>并发编程的设计模式</h2><h3 id="Future-模式"><a href="#Future-模式" class="headerlink" title="Future 模式"></a>Future 模式</h3><p>考虑这样一个情况，使用者可能快速翻页浏览文件中，而图片档案很大，如此在浏览到有图片的页数时，就会导致图片的载入，因而造成使用者浏览文件时会有停顿的现象，所以<strong>我们希望在文件开启之后，会有一个默认背景</strong>（可以是纯色图片，也可以是正在加载的图片），<strong>与此同时，程序开始加载图片的工作，如此使用者在快速浏览页面时，所造成的停顿可以获得改善。</strong></p>
-<p>Future模式在请求发生时，会先产生一个Future物件给发出请求的客户，而同时间，真正的目标物件之生成，由一个新的执行持续进行（即 Worker Thread），真正的目标物件生成之后，将之设定至Future之中，而当客户端真正需要目标物件时，目标物件也已经准备好，可以让客户提取使用。 </p>
-<p><img src="http://i.imgur.com/487kq32.jpg" alt=""></p>
-<p>一个简单的Java程式片段示范可能像是这样：</p>
-<pre><code>public Future request() {
-    final Future future = new Future();
-
-    new Thread() {
-        public void run() {
-            // 下面這個動作可能是耗時的
-            RealSubject subject = new RealSubject();
-            future.setRealSubject(subject);
-        }
-    }.start();
-
-    return future;
-} 
-</code></pre>
-          
+          多线程与效率
+多线程并不一定会提高程序的运行效率，反而会降低效率
+多线程的应用不是为了提高运行效率，而是为了提高资源使用效率；当一个资源在等待I/O输入时，另一个线程可以使用处理器，提高了资源的利用率
+
+为什么使用多线程下载速度会变快？多线程下载：并不是自己电脑快了，而是抢到更多服务器资源。例：服务
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/14/[Java并发编程]Java多线程与并发库高级应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2568,70 +1063,18 @@ class JoinThread extends Thread {
       
         
           
-            <p>TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议</p>
-<h2 id="可靠数据传输的原理"><a href="#可靠数据传输的原理" class="headerlink" title="可靠数据传输的原理"></a>可靠数据传输的原理</h2><h3 id="完全可靠信道上的可靠数据传输：rdt1-0"><a href="#完全可靠信道上的可靠数据传输：rdt1-0" class="headerlink" title="完全可靠信道上的可靠数据传输：rdt1.0"></a>完全可靠信道上的可靠数据传输：rdt1.0</h3><ul>
-<li>rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态</li>
-<li>rdt接收方只有一个状态，通过rdt_rcv（packet）从底层信道接收一个分组，提取数据，并将数据上传给高层，状态又回到等待下层调用</li>
-</ul>
-<p>因为信道完全可靠，接收方不需要提供任何反馈信息给发送方</p>
-<h3 id="具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）"><a href="#具有比特差错信道上的可靠数据传输：rdt2-0（不丢包，但包可能受损）" class="headerlink" title="具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）"></a>具有比特差错信道上的可靠数据传输：rdt2.0（不丢包，但包可能受损）</h3><p>人类处理这类情形：报文接受者在听到每句话后会说OK，如果消息接受者听到一句含糊不清的话，他可能要求你重复刚才那句话。这种口述消息协议使用了<strong>肯定确认</strong>（OK）与<strong>否定确认</strong>（请重复一遍）</p>
-<p>在计算机网络中，基于这种重传机制的可靠数据传输协议称为<strong>自动重传请求</strong>（ARQ），需要三种协议来处理比特差错：</p>
-<ul>
-<li>差错检测</li>
-<li>接收方反馈：肯定确认（ACK），否定确认（NAK）</li>
-<li>重传</li>
-</ul>
-<p>rdt2.0发送方两个状态：</p>
-<p>1、等待上层调用：rdt_send事件发生，产生数据包，发送该分组，状态跳到2<br>2、等待接收方的ACK或NAK</p>
-<ul>
-<li>如果收到ACK分组，则发送发知道最近传输的分组已经被正确接收，因此状态返回<strong>等待上层调用</strong></li>
-<li>如果收到一个NAK分组，重传最后一个分组，并<strong>等待接受方的ACK或NAK</strong></li>
-</ul>
-<p>rdt2.0接收方的只有一个状态：当分组到达时，接收方要么回答一个ACK，要么回答一个NAK</p>
-<p><strong>问题：</strong></p>
-<p>1、停等协议：只有当上一个分组发送成功，才能发送下一个分组，效率低<br>2、没有考虑ACK或NAK分组受损<font color="red"><strong>（假设分组不丢失）</strong></font>，发送方无法知道接收方是否正确接收了上一块发送的数据</p>
-<p><strong>rdt2.1：引入序列号解决冗余分组</strong></p>
-<p>解决ACK或NAK受损的一种方式是：当发送方收到含糊不清的ACK或NAK分组时，直接重发当前数据分组，但这引入了<strong>冗余分组</strong>，接收方不知道上次发送的ACK或NAK是否被发送方正确接收到，导致接收方无法知道接收到的分组是<strong>新的</strong>，还是一次<strong>重传</strong>（重传的数据包保证该数据包中的数据只提取一次）</p>
-<p>解决这个问题的一个简单方法是在数据分组中 <strong>添加一个新字段</strong>，对于停等协议，1比特就够了，如果接收到的分组序号与最近收到的分组序号<strong>相同</strong>，知道是在<strong>重发</strong>，<strong>不相同</strong>则是一个<strong>新分组</strong></p>
-<p>发送方状态：<br>当发送完<strong>分组0</strong>，处于等待ACK或NAK的状态，如果<strong>分组受损</strong>或收到<strong>NAK</strong>，重发分组；如果收到ACK，说明接收方正确接收到分组0，状态跳转到等待发送<strong>分组1</strong>的状态</p>
-<p>接收方状态：如果接收到受损包，直接发送NAK；如果收到分组的序号与上一次收到的序号一致，说明是重传包，直接发送ACK；如果收到的分组序号与上一次收到的不一致，发送NAk。具体的，划分出<strong>两个状态</strong>：<strong>等待数据0</strong>和<strong>等待数据包1</strong></p>
-<p><strong>rdt2.2：冗余ACK来代替NAK</strong></p>
-<p>rdt2.1中接收到受损分组时发送一个NAK，通知发送端重发。如果不发送NAK，而是发送一个对上次正确接收的分组的ACK（即<strong>冗余ACK</strong>），发送方接收到对同一个分组的两个ACK，就知道接受方没有正确接收到跟在被确认两次的分组后面的分组</p>
-<p>发送方状态：<br>在等待ACK0时，若收到损坏的分组或ACK1，则重传，否则状态跳到等待上层调用1</p>
-<p>接收方状态：<br>如果接收到受损包，或收到分组的序号与上一次收到的序号一致，说明是重传包，直接发送以上一次的发送的ACK（冗余ACK）；如果收到的分组序号和上一次收到的不一致，则提取数据，发送ACk</p>
-<h3 id="具有比特差错的丢包信道上的可靠数据传输：rdt3-0"><a href="#具有比特差错的丢包信道上的可靠数据传输：rdt3-0" class="headerlink" title="具有比特差错的丢包信道上的可靠数据传输：rdt3.0"></a>具有比特差错的丢包信道上的可靠数据传输：rdt3.0</h3><p>需要考虑两个问题：</p>
-<ul>
-<li>如何检测丢包</li>
-<li>发生丢包后该做什么</li>
-</ul>
-<p>利用校验和、序号、ACK分组和重传可以解决后一个问题，即<strong>重传</strong>，所以重点是解决如何检测丢包问题</p>
-<p>在发送方负责检测和恢复丢包，增加一个<strong>倒计时定时器</strong>，发送一个分组后（包括重传），便启动一个定时器</p>
-<p>发送方状态：上层调用rdt_send(data)时，发送数据包，并<strong>开启定时器</strong>，状态转移到等待ACK的状态。<strong>如果接收到破损包或者上一个分组包的ACK，先不采取任何操作，等到定时器超时后进行重传，这种方式也考虑到包丢失的情况</strong></p>
-<p>接收方状态：如果接收到受损包，或收到分组的序号与上一次收到的序号一致，说明是重传包，直接发送以上一次的发送的ACK（冗余ACK）；如果收到的分组序号和上一次收到的不一致，则提取数据，发送ACk（<strong>与rdt2.2一样</strong>）</p>
-<h3 id="流水线可靠数据传输协议"><a href="#流水线可靠数据传输协议" class="headerlink" title="流水线可靠数据传输协议"></a>流水线可靠数据传输协议</h3><p>停等协议的是一个功能正确的协议，但是它的性能低下，吞吐量低，是网络协议限制底层网络硬件所提供功能的形象示例</p>
-<p>解决性能问题的一个简单方法是<strong>采用流水线技术</strong>，允许发送方发送多个分组而无须等待确认，解决流水线的差错恢复有两种基本方法：</p>
-<ul>
-<li>回退N步</li>
-<li>选择重传</li>
-</ul>
-<h4 id="回退N步（GBN）"><a href="#回退N步（GBN）" class="headerlink" title="回退N步（GBN）"></a>回退N步（GBN）</h4><p>将<strong>基序号（base）</strong>定义为最早的未被确认分组的序号，将<strong>下一个序号（nextseqnum）</strong>定义为下一个待发送的分组序号</p>
-<p><img src="http://i.imgur.com/aVtCxCl.png" alt=""></p>
-<p>序号分为4部分：</p>
-<ul>
-<li>[0，base-1]内的序号对应于已经发送并确认过的序号</li>
-<li>[base，nextseqnum-1]内的序号对应已经发送但未被确认的分组</li>
-<li>[nextseqnum，base+N-1]内的序号可用于那些要被立刻发送的分组，其数据来自上层</li>
-<li>大于或等于base+N的序号是不能使用的，知道当前流水线中未被确认的分组已得到确认为止</li>
-</ul>
-<p>GBN发送方响应的三种类型事件：</p>
-<ul>
-<li>上层的调用：如果发送窗口未满，则创建一个分组并发送，否则不传送</li>
-<li>收到ACK：采用累积确认，表示接收方已正确接收序号n之前的所有分组</li>
-<li>超时时间：GBN协议中，使用的一个定时器当做是<strong>最早的已发送但未被确认的分组</strong>所使用过的定时器（即base分组），如果超时将重传所有已发送但未被确认的分组（即图中灰色的分组）；如果收到一个ACK，但仍有未被确认的分组，则定时器被重新启动，如果没有已发送但未被确认的分组，则定时器终止</li>
-</ul>
-<p>接收方：<strong>丢弃所有失序分组</strong>。如果期望n分组，而n+1分组却到了，不需要缓存n+1分组，因为如果n分组丢失，发送方将会重新发送n分组和n+1分组，这样设计，接收方<strong>不需要缓存任何失序分组</strong>，接收方只需要维护<strong>下一个按需接收的分组的序号</strong>。</p>
-<h4 id="选择重传"><a href="#选择重传" class="headerlink" title="选择重传"></a>选择重传</h4>
-          
+          TCP是在不可靠的端到端网络协议（IP）之上实现的可靠数据传输协议
+可靠数据传输的原理完全可靠信道上的可靠数据传输：rdt1.0
+rdt发送方只有一个状态，通过rdt_send(data)从较高层接收数据，产生分组，并将分组发送到信道中后，状态又跳回到等待上传调用的状态
+rdt接收方只有一个状态，通
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/06/[网络安全]TCP/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2763,24 +1206,20 @@ class JoinThread extends Thread {
       
         
           
-            <h2 id="SYNFlood型DDos攻击检测与防御研究"><a href="#SYNFlood型DDos攻击检测与防御研究" class="headerlink" title="SYNFlood型DDos攻击检测与防御研究"></a>SYNFlood型DDos攻击检测与防御研究</h2><p>Linux系统增加Netfilter防火墙功能，在IP层内提供了另外5个插入点，非常容易捕获并处理网络数据包</p>
-<p>防DDos攻击的系统特点：</p>
-<p>1、基于信息熵值得实时攻击检测</p>
-<p>2、黑白单过滤，减轻防御模块的工作任务</p>
-<p>3、协议分析</p>
-<p>4、基于SYN Cookie技术的SYN Flood攻击防御模块</p>
-<p>5、自学习子系统，包含蜜罐系统和数据挖掘系统，蜜罐系统旁路手机网络异常流量，通过数据挖掘生成防御规则动态更新异常检测阈值、黑白名单列表和协议分析规则，调整后续攻击响应策略</p>
-<h2 id="Linux包捕获机制"><a href="#Linux包捕获机制" class="headerlink" title="Linux包捕获机制"></a>Linux包捕获机制</h2><p>DDos防御系统最基本的功能之一就是对网络数据包进行处理，因此需要捕获数据包并分析过滤，Linux系统环境下数据获取有两种方式：</p>
-<ul>
-<li>通过内核防火墙Netfilter/Iptables获取</li>
-<li>通过包捕获机制Libpcap旁路获取</li>
-</ul>
-<p>选择：正常情况下使用Netfilter/Iptables，会增加不必要的系统开销，因此在正常网络流量环境下，采用Libpcap旁路获取数据包形式</p>
-<p>Libpcap是Unix/Linux平台下的网络数据包捕获函数宝，而在Windows系统下有相应的Winpcap库</p>
-<h2 id="攻击检测算法与SYN-Cookie算法研究"><a href="#攻击检测算法与SYN-Cookie算法研究" class="headerlink" title="攻击检测算法与SYN Cookie算法研究"></a>攻击检测算法与SYN Cookie算法研究</h2><p>基于TCP协议的攻击占了DDos攻击的绝大多数，而SYN Flood攻击又在TCP攻击中扮演着最重要的角色，当前防御SYN Flood攻击最流行的方法是使用SYN Proxy和SYN Cookie</p>
-<p>DDos攻击防御系统检测阶段的任务就是要在攻击分组到来时及时向防御系统发出警报，从而使防御系统能在短时间做出反应，开启防御策略，实施分组过滤</p>
-
-          
+          SYNFlood型DDos攻击检测与防御研究Linux系统增加Netfilter防火墙功能，在IP层内提供了另外5个插入点，非常容易捕获并处理网络数据包
+防DDos攻击的系统特点：
+1、基于信息熵值得实时攻击检测
+2、黑白单过滤，减轻防御模块的工作任务
+3、协议分析
+4、基于SYN Cookie技术
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/30/[网络安全]DOS文献/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2912,12 +1351,16 @@ class JoinThread extends Thread {
       
         
           
-            <h2 id="类-实例"><a href="#类-实例" class="headerlink" title="类-实例"></a>类-实例</h2><p>instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。</p>
-<p>形象地：自身实例或子类实例 instanceof 自身类返回true<br>例： String s=new String(“javaisland”);<br>    System.out.println(s instanceof String); //true </p>
-<h2 id="Class-实例"><a href="#Class-实例" class="headerlink" title="Class-实例"></a>Class-实例</h2><p>Class类的isInstance(Object obj)方法，obj是被测试的对象，如果obj是调用这个方法的class或接口 的实例，则返回true。这个方法是instanceof运算符的动态等价。<br>形象地：自身类.class.isInstance(自身实例或子类实例)返回true<br>例：String s=new String(“javaisland”);<br>    System.out.println(String.class.isInstance(s)); //true </p>
-<h2 id="Class-Class"><a href="#Class-Class" class="headerlink" title="Class-Class"></a>Class-Class</h2><p>Class类的isAssignableFrom(Class cls)方法，如果调用这个方法的class或接口 与 参数cls表示的类或接口相同，或者是参数cls表示的类或接口的父类，则返回true。<br>形象地：自身类.class.isAssignableFrom(自身类或子类.class)返回true<br>例：System.out.println(ArrayList.class.isAssignableFrom(Object.class));  //false<br>    System.out.println(Object.class.isAssignableFrom(ArrayList.class));  //true</p>
-
-          
+          类-实例instanceof运算符只被用于对象引用变量，检查左边的被测试对象是不是右边类或接口的实例化。如果被测对象是null值，则测试结果总是false。
+形象地：自身实例或子类实例 instanceof 自身类返回true例： String s=new String(“javaisland”);
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/24/[Java]instanceof, isinstance,isAssignableFrom的区别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3049,20 +1492,20 @@ class JoinThread extends Thread {
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：</p>
-<ul>
-<li>使用<bean>元素，实际上是让Spring执行无参或有参构造器</bean></li>
-<li>使用<property>元素，实际上是让Spring执行一次setter方法</property></li>
-</ul>
-<p>但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对象的Field等，而Spring也为这种语句提供了对应的配置语法：</p>
-<ul>
-<li>调用getter方法：使用PropertyPathFactoryBean</li>
-<li>调用类或对象的Filed值：使用FiledRetrievingFactoryBean</li>
-<li>调用普通方法：使用MethodInvokingFactoryBean</li>
-</ul>
-<p><a href="https://my.oschina.net/itblog/blog/206481" target="_blank" rel="external">https://my.oschina.net/itblog/blog/206481</a></p>
+          前言在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：
 
-          
+使用元素，实际上是让Spring执行无参或有参构造器
+使用元素，实际上是让Spring执行一次setter方法
+
+但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/10/[Spring]Spring中你不知道的注入方式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3194,123 +1637,16 @@ class JoinThread extends Thread {
       
         
           
-            <h2 id="Tomcat调用Servlet的流程"><a href="#Tomcat调用Servlet的流程" class="headerlink" title="Tomcat调用Servlet的流程"></a>Tomcat调用Servlet的流程</h2><ul>
-<li><p>Listener的初始化最早，Filter次之。他俩的初始化都是在容器启动完成之前初始化的。 Servlet没有初始化，原因是没有匹配的请求进来。 如果想要servlet自动初始化，需要在指定的servlet中配置<load-on-startup>参数，没有此标签，默认启动时servlet不进行初始化。 </load-on-startup></p>
-</li>
-<li><p>初始化的顺序跟Listener、Filter、Servlet在web.xml中的顺序无关。而多个Filter或多个Servlet的时候，谁的mapping在前面，谁先初始化。 </p>
-</li>
-<li><p>如果web.xml中配置了<context-param>，它用于向 ServletContext 提供键值对，即应用程序上下文信息。我们的 listener, filter 等在初始化时会用到这些上下文中的信息，context-param 配置节可写在任意位置，初始化顺序： context-param &gt; Listener &gt; Filter &gt; Servlet</context-param></p>
-</li>
-</ul>
-<h2 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h2><ul>
-<li>Filter的初始化方法在服务器启动时执行,过滤方法在请求发出后立即调用，可以过滤特定的URL</li>
-<li>过滤器的URL匹配遵从最大长度匹配原则</li>
-<li>一个URL匹配多个过滤器，<strong>按照filter-mapping配置节点的出现顺序</strong> 依次调用doFilter()</li>
-</ul>
-<p>过滤器链：</p>
-<p>参考：<a href="http://blog.sina.com.cn/s/blog_667ab8240101gfd6.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_667ab8240101gfd6.html</a></p>
-<p>有多个过滤器 filter1 filter2 filter3，组成一个过滤器链 FilterChain[filter1,filter2,filter3]</p>
-<p>如何做到过滤器的依次执行？<br>调用过滤器链的doFilter参数，获取下一个过滤器链，然后执行下一个Filter的方法</p>
-<font color="red"><strong>前置方法和后置方法的执行顺序？</strong></font>
-
-<p>1、前置方法按照过滤器的调用顺序因此按顺序执行<br>2、后置方法的顺序与前置方法相反，即后调用的过滤器的后置方法先执行<br>3、<strong>Chain.doFilter前的代码为访问Servlet前执行，Chain.doFilter后的代码访问Servlet后执行</strong>（分析源代码）</p>
-<p>1、下面是一个简单的时序图</p>
-<p><img src="http://i.imgur.com/J2JOzld.jpg" alt=""></p>
-<p>2、对上面时序图中用到的主要类进行分析</p>
-<p>1) ApplicationFilterChain类,有两个主要函数，下面是省略过的代码</p>
-<pre><code>public voiddoFilter(request, response) {//暴露在外面的调用接口
-    if( Globals.IS_SECURITY_ENABLED ) {
-          finalServletRequest req = request;
-          finalServletResponse res = response;
-          internalDoFilter(req,res);
-          return null;
-    } else {
-        internalDoFilter(request,response);
-    }
-}
-
-private voidinternalDoFilter(request, response) {
-    if (pos &lt; n) {//判断是否还有filter需要执行
-        ApplicationFilterConfig filterConfig = filters[pos++];
-        Filter filter = null;
-        filter = filterConfig.getFilter();
-        filter.doFilter(request, response, this);
-        return ; //执行过滤器方法时，不执行以下代码，当pos=n，即执行完所有filter后执行servlet
-    }
-
-    //filter执行完后，执行servlet
-     if ((request instanceofHttpServletRequest) &amp;&amp;(response instanceof HttpServletResponse)) {
-        servlet.service((HttpServletRequest) request,(HttpServletResponse)response);        
-}
-
-void addFilter(ApplicationFilterConfig filterConfig) {
-    if (n == filters.length) {
-        ApplicationFilterConfig[] newFilters =
-            new ApplicationFilterConfig[n + INCREMENT];
-        System.arraycopy(filters, 0, newFilters, 0, n);
-        filters = newFilters;
-    }
-    filters[n++] = filterConfig;
-}
-</code></pre><p>2) Servlet类的主要方法，以HttpServlet类为例，其主要方法是service(Request,Response)</p>
-<pre><code>public void service(ServletRequest req, ServletResponse res)
-    throws ServletException, IOException {
-    HttpServletRequest  request;
-    HttpServletResponse response;
-    try {
-        request = (HttpServletRequest) req;
-        response = (HttpServletResponse) res;
-    } catch (ClassCastException e) {
-        throw new ServletException(&quot;non-HTTP request or response&quot;);
-    }
-    service(request, response);//内部的方法
-}
-
-protected void service(HttpServletRequest , HttpServletResponse)
-    throws ServletException, IOException {
-    String method = req.getMethod();
-    if (method.equals(METHOD_GET)) {
-        long lastModified = getLastModified(req);
-        if (lastModified == -1) {
-            doGet(req, resp); //常用的方法
-        } else {
-            long ifModifiedSince;
-            try {
-                ifModifiedSince = req.getDateHeader(HEADER_IFMODSINCE);
-            } catch (IllegalArgumentException iae) {
-                   ifModifiedSince = -1;
-            }
-            if (ifModifiedSince &lt; (lastModified / 1000 * 1000)) {
-                maybeSetLastModified(resp, lastModified);
-                doGet(req, resp);
-            } else {
-                resp.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-            }
-        }
-    } else if (method.equals(METHOD_HEAD)) {
-        long lastModified = getLastModified(req);
-        maybeSetLastModified(resp, lastModified);
-        doHead(req, resp);
-    } else if (method.equals(METHOD_POST)) {
-        doPost(req, resp);//常用的方法
-    } else if (method.equals(METHOD_PUT)) {
-        doPut(req, resp);       
-    } else if (method.equals(METHOD_DELETE)) {
-        doDelete(req, resp);
-    } else if (method.equals(METHOD_OPTIONS)) {
-        doOptions(req,resp);
-    } else if (method.equals(METHOD_TRACE)) {
-        doTrace(req,resp);
-    } else {
-        String errMsg =lStrings.getString(&quot;http.method_not_implemented&quot;);
-        Object[] errArgs = new Object[1];
-        errArgs[0] = method;
-        errMsg = MessageFormat.format(errMsg, errArgs);
-        resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
-    }
-}
-</code></pre>
-          
+          Tomcat调用Servlet的流程
+Listener的初始化最早，Filter次之。他俩的初始化都是在容器启动完成之前初始化的。 Servlet没有初始化，原因是没有匹配的请求进来。 如果想要servlet自动初始化，需要在指定的servlet中配置参数，没有此标签，默认启动时servlet不进行
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/07/[Servlet]Tomcat操作Servlet流程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

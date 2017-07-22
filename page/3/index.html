@@ -205,6 +205,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -343,16 +353,20 @@
       
         
           
-            <p>缓存更新的套路</p>
-<p><a href="http://coolshell.cn/articles/17416.html/comment-page-2#comments" target="_blank" rel="external">http://coolshell.cn/articles/17416.html/comment-page-2#comments</a></p>
-<p>数据库缓存的几种方式</p>
-<p><a href="http://www.jdon.com/repository/cache.html" target="_blank" rel="external">http://www.jdon.com/repository/cache.html</a></p>
-<p>缓存级别与缓存更新问题</p>
-<p><a href="http://www.importnew.com/23967.html" target="_blank" rel="external">http://www.importnew.com/23967.html</a></p>
-<p>转：有關 Cache 的 read/write through/back/allocat</p>
-<p><a href="http://blog.sina.com.cn/s/blog_537bca2a0100eyl8.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_537bca2a0100eyl8.html</a></p>
-
-          
+          缓存更新的套路
+http://coolshell.cn/articles/17416.html/comment-page-2#comments
+数据库缓存的几种方式
+http://www.jdon.com/repository/cache.html
+缓存级别与缓存更新问题
+http://www.im
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/01/[Redis]缓存更新的设计模式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -484,51 +498,18 @@
       
         
           
-            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方</p>
-<p>如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1</p>
-<p><img src="http://i.imgur.com/KLZozPV.png" alt=""></p>
-<p>另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1</p>
-<h2 id="Tarjan-离线-算法"><a href="#Tarjan-离线-算法" class="headerlink" title="Tarjan(离线)算法"></a>Tarjan(离线)算法</h2><h3 id="原理（最浅显易懂的描述）"><a href="#原理（最浅显易懂的描述）" class="headerlink" title="原理（最浅显易懂的描述）"></a>原理（最浅显易懂的描述）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
-<p>用集合的角度去思考 LCA 问题：</p>
-<p>10 与 1，2，5，6 的 LCA 都为 1<br>10 与 3，7 的 LCA 都为 3<br>10 与 8，9，11 的 LCA 都为 8<br>10 与 10，12 的 LCA 都为 12</p>
-<p>Tarjan 算法可以批量查询，假设有求5，10的 LCA，3、10的LCA，9、10的LCA</p>
-<p>当 DFS 遍历到节点 10 时，查看查询语句中是否有与10相关的：<br>如果求 5、10 的 LCA，只要求当前5所在的集合的祖先就行了，结果就是8<br>如果求 3、10 的 LCA，只要求3所在集合的祖先就行了，结果是3<br>如果求 9、10 的 LCA，只要求9所在结合的祖先就行了，结果是8</p>
-<p>那么问题的关键就是 <font color="red"><strong>集合怎么表示，集合如何构建？</strong></font></p>
-<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>可以发现，当 <strong>一个数A</strong> 与 <strong>集合中的元素B</strong> 求 LCA 时，<font color="red">结果都是指向同一个祖先</font>，我们将设置一个数据结构将各个节点<strong>组成集合</strong>，并且能够根据集合中的点<strong>访问到祖先</strong>，可以使用 <strong>并查集</strong> 满足上述要求 。并查集维护了<strong>当前节点与父节点之间的关系，最终可以获得祖先节点</strong></p>
-<p><strong>并查集是当前节点与father节点的映射关系</strong>，是一个Key-Value的结构，可以用数组的下标和数组的值作为存储结构，按照上图左子树举个例子：</p>
-<p><img src="http://i.imgur.com/uP9FUsk.png" alt=""></p>
-<p>初始化的时候每个节点的父节点都是自己，如果<strong>当前节点的father就是自己本身</strong>，那么他就是集合的根节点</p>
-<p>并查集查集合根节点：</p>
-<pre><code>public int find(int x) {
-    int r = x;
-    while(father[r] != r){
-        r = father[r];
-    }
-    return r;
-}
-</code></pre><p>并查集基本介绍完毕，现在可以用并查集来表示集合了，并且找到集合的根节点，接下来的问题，<strong>哪些节点可以归为同一个集合？</strong></p>
-<h3 id="算法描述（思路）"><a href="#算法描述（思路）" class="headerlink" title="算法描述（思路）"></a>算法描述（思路）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
-<p>还是之前那张图，对于新搜索到的一个结点u，先创建由u构成的集合，再对u的每颗子树进行搜索，每搜索完一棵子树，将子节点归到集合u中</p>
-<p>1.任选一个点为根节点，从根节点开始。<br>2.遍历该点u所有子节点v，并标记这些子节点v已被访问过。<br>3.若是v还有子节点，返回2，否则下一步。<br>4.合并v到u上。<br>5.寻找与当前点u有询问关系的点v。<br>6.若是v已经被访问过了，则可以确认u和v的最近公共祖先为v被合并到的父亲节点a。</p>
-<p>伪代码</p>
-<pre><code>Tarjan(u)//marge和find为并查集合并函数和查找函数
-{
-    for each(u,v)    //访问所有u子节点v
-    {
-        Tarjan(v);        //继续往下遍历
-        marge(u,v);    //合并v到u上
-        标记v被访问过;
-    }
-    for each(u,e)    //访问所有和u有询问关系的e
-    {
-        如果e被访问过;
-        u,e的最近公共祖先为find(e);
-    }
-}
-</code></pre><h3 id="算法模拟"><a href="#算法模拟" class="headerlink" title="算法模拟"></a>算法模拟</h3><p><a href="http://www.cnblogs.com/JVxie/p/4854719.html" target="_blank" rel="external">http://www.cnblogs.com/JVxie/p/4854719.html</a></p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h2 id="OJ"><a href="#OJ" class="headerlink" title="OJ"></a>OJ</h2><p><a href="http://www.cnblogs.com/JVxie/p/4854719.html" target="_blank" rel="external">http://www.cnblogs.com/JVxie/p/4854719.html</a></p>
+          问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方
+如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1
 
-          
+另外，4 和 5 的最
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -660,15 +641,17 @@
       
         
           
-            <h2 id="找出合理的IP地址"><a href="#找出合理的IP地址" class="headerlink" title="找出合理的IP地址"></a>找出合理的IP地址</h2><p><img src="http://i.imgur.com/Z1YaNvX.png" alt=""></p>
-<p>另外，生成符合要求的IP地址可以用StringBuilder的insert方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">Given a string containing only digits, restore it by returning all possible valid IP address combinations.</div><div class="line">For example:</div><div class="line">Given&quot;25525511135&quot;,</div><div class="line">return[&quot;255.255.11.135&quot;, &quot;255.255.111.35&quot;]. (Order does not matter)</div><div class="line">**/</div><div class="line"></div><div class="line">import java.util.*;</div><div class="line"> </div><div class="line">public class Solution &#123;</div><div class="line">     </div><div class="line">    private boolean isValid(String s, int i, int j, int k)&#123;</div><div class="line">         </div><div class="line">        if ( k &lt; s.length() - 4 || k &gt; s.length() - 2)</div><div class="line">            return false; </div><div class="line">        else if ( isRange(s, 0, i + 1)</div><div class="line">                    &amp;&amp; isRange(s, i + 1, j + 1)</div><div class="line">                    &amp;&amp; isRange(s, j + 1, k + 1)</div><div class="line">                    &amp;&amp; isRange(s, k + 1, s.length()))</div><div class="line">            return true;</div><div class="line">         </div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    private boolean isRange(String s, int st, int end)&#123;</div><div class="line">         </div><div class="line">        int value = Integer.valueOf(s.substring(st, end));</div><div class="line">         </div><div class="line">        if ( end - st &gt; 1 &amp;&amp; s.charAt(st) == &apos;0&apos;)</div><div class="line">            return false;</div><div class="line">        if ( value &gt;= 0 &amp;&amp; value &lt;= 255)</div><div class="line">            return true;</div><div class="line">         </div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    private void storeIp(List&lt;String&gt; ipList, String s, int i, int j, int k)&#123;</div><div class="line">         </div><div class="line">        StringBuilder sb = new StringBuilder(s);</div><div class="line">         </div><div class="line">        sb.insert(i + 1, &quot;.&quot;);</div><div class="line">        sb.insert(j + 2, &quot;.&quot;);</div><div class="line">        sb.insert(k + 3, &quot;.&quot;);</div><div class="line">         </div><div class="line">        ipList.add(sb.toString());</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    public ArrayList&lt;String&gt; restoreIpAddresses(String s) &#123;</div><div class="line">         </div><div class="line">        ArrayList&lt;String&gt; ipList = new ArrayList&lt;&gt;();</div><div class="line">         </div><div class="line">        if (s.length() &lt; 4)</div><div class="line">            return ipList;</div><div class="line">         </div><div class="line">        for (int i = 0; i &lt; 3; i++)</div><div class="line">            for (int j = i + 1; j &lt; i + 4; j++)</div><div class="line">                for (int k = j + 1; k &lt; j + 4; k++)&#123;</div><div class="line">                     </div><div class="line">                    if (isValid(s, i, j, k))</div><div class="line">                        storeIp(ipList, s, i, j, k);</div><div class="line">                &#125;</div><div class="line">         </div><div class="line">        return ipList;     </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="链表相加"><a href="#链表相加" class="headerlink" title="链表相加"></a>链表相加</h2><p><a href="http://www.cnblogs.com/wuyuegb2312/p/3183214.html" target="_blank" rel="external">http://www.cnblogs.com/wuyuegb2312/p/3183214.html</a></p>
-<p>证明链表第一次相遇的位置在入口处：</p>
-<p>设p1在入口的时候，p2位于L处（入口处为0，顺时针增加）<br>设p1行走x后，p2行走2x后在第一次相遇点相遇，则：<br>x%R = (L + 2x)%r</p>
-<p>则：x = kR，L+2x=k’R =&gt;L + x = (k’-k)R，即L+x为R的倍数，x位于入口处</p>
-
-          
+          找出合理的IP地址
+另外，生成符合要求的IP地址可以用StringBuilder的insert方法
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -800,213 +783,15 @@
       
         
           
-            <h2 id="树状数组作用"><a href="#树状数组作用" class="headerlink" title="树状数组作用"></a>树状数组作用</h2><p>如果给定一个数组，<strong>要你求里面所有数的和</strong>，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当<strong>修改掉数组中的元素后，仍然要你求数组中某段元素的和</strong>，就显得麻烦了。所以我们就要用到树状数组，<strong>他的时间复杂度为O（lgn）</strong>，相比之下就快得多</p>
-<p>总结：初始复杂度是nlogn，<strong>频繁对于单点和区间修改和查询操作，时间复杂度都是log(n)</strong>，空间复杂度是n</p>
-<h2 id="树状数组结构图"><a href="#树状数组结构图" class="headerlink" title="树状数组结构图"></a>树状数组结构图</h2><p><img src="http://i.imgur.com/XXDc88F.jpg" alt=""></p>
-<p><strong>注意：下标从1开始，不要0</strong></p>
-<p>下面来分析一下上面那个图看能得出什么规律：</p>
-<p>c1（01） = a1<br>c2（10） = a1 + a2<br>c3（11） = a3<br>c4（100） = a1 + a2 + a3 + a4<br>c5（101） = a5<br>c6（110） = a5 + a6<br>c7（111） = a7<br>c8（1000） = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8<br>c9（1001） = a9<br>c10（1010） = a9 + a10<br>c11（1011） = a11<br>c12（1100） = a9 + a10 + a11 + a12<br>c13（1101） = a13<br>c14（1110） = a13 + a14<br>c15（1111） = a15<br>c16（10000） = a1 + a2 + a3 + a4 + a5 + ……. + a16<br>……</p>
-<font color="red"><strong>有公式：cn = a(n-a^k+1) + ……… + an（其中 k 为 n 的二进制表示中从右往左数的 0 的个数）</strong></font>
-
-<ul>
-<li>k 为 二进制数从右往左数 0 的个数，那么 a^k 为从右往左数第一个非零位到最低位表示的数值</li>
-<li>根据公式也可以看出a^k表示的cn由a^k个ai项相加</li>
-</ul>
-<p>那么，如何求 a^k 呢？求法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int lowbit(int x)</div><div class="line">&#123;</div><div class="line">	return x&amp;(-x);    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>lowbit（）获取整数 x 的二进制数值中，从低位开始的第一个非零位开始到最低位的数值，即 2^k 次方的值，表示ci由多少个ai相加</p>
-<p>1、<strong>求数组的和的算法如下：</strong></p>
-<p>（1）首先，令sum=0，转向第二步；<br>（2）接下来判断，如果 n&gt;0 的话，就令sum=sum+cn转向第三步，否则的话，终止算法，返回 sum 的值；<br>（3）n = n - lowbit（n）（将n的二进制表示的最后一个零删掉），回第二步。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int Sum(int n)&#123;</div><div class="line">	int sum = 0;</div><div class="line">	while(n &gt; 0)&#123;</div><div class="line">		sum += c[n];</div><div class="line">		n = n-lowbit(n);</div><div class="line">	&#125;    </div><div class="line">	return sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>c[n]维护区间a[n] - lowbit(n) + 1 ~ a[n] 的和，区间长度为lowbit(n)，数组求和即求a[1]~a[n]元素的和，<strong>树状数组下转变为区间和，区间间以lowbit(n)的间隔跳转</strong></p>
-<p>复杂度的话，lowbit（n）表示从右往左数第一个1到最低位的值，<strong>n - lowbit(n)相当于每次把最后一个1变为0</strong>，因为一个数二进制下只有log（n）位，所以<strong>复杂度是O(log(n))的</strong></p>
-<p>2、<strong>当数组中的元素有变更时，树状数组就发挥它的优势了，算法如下（修改为给某个节点 i 加上 x ）</strong></p>
-<p>（1）当 i&lt;=n 时，执行下一步；否则的话，算法结束;<br>（2）ci = ci+x ，i = i + lowbit（i）（在 i 的二进制表示的最后加零），返回第一步。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">void change(int i, int x)&#123;</div><div class="line">	while(i &lt;= n)&#123;</div><div class="line">		c[i] = c[i] + x;</div><div class="line">		i = i + lowbit(i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="树状数组求逆序数"><a href="#树状数组求逆序数" class="headerlink" title="树状数组求逆序数"></a>树状数组求逆序数</h3><p>所谓逆序数，就是指一个序列S[i]，统计处于序列的每个数的比这个数大并且排在它前面的数的数目，然后对于所有数，把这个数目加起来求和就是了。<br>比如 4 3 1 2<br>4第一个，所以数目为0<br>3的前面是4，大于3的数目为1<br>1的前面是4 3 ，大于1的数目为2<br>2的前面是4 3 1，大于2的数目为2<br>所以逆序数为1+2+2 = 5</p>
-<p>求逆序数的两种方法<br>常规方法是按照逆序数的规则做，结果复杂度是O(n*n)，一般来说，有两种快速的求逆序数的方法，分别是<strong>归并排序和树状数组法</strong></p>
-<p><strong>树状数组法</strong></p>
-<p>当数据的范围较小时，比如maxn=100000，那么我们可以开一个数组c[maxn]，来记录前面数据的出现情况，初始化为0；<strong>当数据a出现时，就令c[a]=1。</strong>这样的话，<strong>欲求某个数a的逆序数，只需要算出在当前状态下c[a+1,maxn]中有多少个1，因为这些位置的数在a之前出现且比a大。</strong><font color="red">但是若每添加一个数据a时，就得从a+1到maxn搜一遍，复杂度太高了，树状数组却能很好的解决<strong>区间多次求和</strong>这个问题</font>。同样开一个数组d[maxn]，初始化为0，d[i]记录下i结点所管辖范围内当前状态有多少个数；当添加数据a时，就向上更新d,这样一来，欲求a的逆序数时，只需要算<strong>sum(maxn)-sum(a)；sum(i)表示第i个位置之前出现了多少个1</strong></p>
-<p>举个例子：有5个数，分别为5 3 4 2 1，当读入数据a=5时，c为：0，0，0，0，1；d为：0，0，0，0，1；当读入数据a=3时，c为：0，0，1，0，1；d为：0，0，1，1，1；当读入数据a=4时，c为：0，0，1，1，1；d为：0，0，1，2，1；…………</p>
-<p>此思想的关键在于，<strong>读入数据的最大值为maxn，由于maxn较小，所以可以用数组来记录状态</strong>。当maxn较大时，直接开数组显然是不行了，这是的解决办法就是离散化。<strong>所谓离散化，就是将连续问题的解用一组离散要素来表征而近似求解的方法</strong>，这个定义太抽象了，还是举个例子吧。</p>
-<p>假如现在有一些数：1234 98756 123456 99999 56782，由于1234是第一小的数，所以num[1]=1;依此，有num[5]=2，num[2]=3，num[4]=4，num[3]=5;这样转化后并不影响原来数据的相对大小关系，何乐而不为呢！！！</p>
-<p>还有一点值得注意，当有数据0出现时，由于0&amp;0=0，无法更新，此时我们可以采取<font color="red"><strong>加一个数的方法将所有的数据都变成大于0的。</strong></font></p>
-<p>当maxn较小时直接开数组代码如下：</p>
-<pre><code>public class InverseNumber {
-
-    //索引0不存放数据
-    private int[] c = new int[10];
-
-    private int sum(int n) {
-        int sum = 0;
-        for (int i = n; i &gt; 0; i = i - lowbit(i)) {
-            sum += c[i];
-        }
-        return sum;
-    }
-
-    private void update(int i, int addVal) {
-        for (int j = i; j &lt; c.length; j += lowbit(j)) {
-            c[j] += addVal;
-        }
-    }
-
-    private int lowbit(int i) {
-        return i &amp; (-i);
-    }
-
-    /**
-     * 求序列的逆序数
-     * 有两种方式，1、对于每个数，计算当前位置之前比它大的数的个数，求和（树状数组法）
-     * 2、对于每个数，计算当前位置之后比它小的数的个数，求和
-     */
-    public int solve(int[] sequence) {
-        Arrays.fill(c, 0);
-        //初始化树状数组，因为要表示1~len，所以数组长度为len+1
-        int inverseNum = 0;
-        for (int i = 0; i &lt; sequence.length; i++) {
-            update(sequence[i], 1);
-            inverseNum = inverseNum + sum(c.length - 1) - sum(sequence[i]);
-        }
-        return inverseNum;
-    }
-
-    public static void main(String[] args) {
-        InverseNumber inverseNumber = new InverseNumber();
-        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 4, 5}) == 0);
-        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 5, 4}) == 1);
-        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 3, 5}) == 1);
-        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 5, 3}) == 2);
-        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 4, 3}) == 3);
-        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 3, 4}) == 2);
-        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 4, 5}) == 1);
-        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 5, 4}) == 2);
-        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 3, 5}) == 2);
-        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 5, 3}) == 3);
-        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 3, 4}) == 3);
-        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 4, 3}) == 4);
-    }
-}
-</code></pre><p>采用离散化求逆序数：</p>
-<pre>
-import java.util.*;
-
-public class Solution {
-
-    BinaryIndexedTree binaryIndexedTree;
-
-    class mapper {
-        int val;
-        int pos;
-
-        public mapper(int val, int pos) {
-            this.val = val;
-            this.pos = pos;
-        }
-    }
-
-    public int InversePairs(int[] array) {
-        //异常条件
-        if (array == null || array.length == 0) {
-            return 0;
-        }
-
-        //离散化，用mapper数组扩展array，记录了原数组的pos
-        mapper[] map = new mapper[array.length];
-        for (int i = 0; i < array.length; i++) {
-            map[i] = new mapper(array[i], i);
-        }
-        //按值升序排序，值相等按pos排序（元素相等时不影响逆序数计算）
-        Arrays.sort(map, new Comparator<mapper>() {
-            @Override
-            public int compare(mapper o1, mapper o2) {
-                if (o1.val != o2.val) {
-                    return o1.val - o2.val;
-                }
-                return o1.pos - o2.pos;
-            }
-        });
-        //离散后数组
-        int[] after = new int[array.length];
-        for (int i = 0; i < map.length; i++) {
-            //离散化关键，从小到大进行替换，根据pos找到原数组的位置
-            after[map[i].pos] = i + 1;//!!替换后不能出现0！！
-        }
-
-        /*for (int i = 0; i < map.length; i++) {
-            array[map[i].pos] = i + 1;
-        }*/
-
-        //构建树状数组
-        binaryIndexedTree = new BinaryIndexedTree(new int[after.length + 1]);
-
-        int inverseNum = 0;
-        for (int i = 0; i < after.length; i++) {
-            //数组下标为array[i]的值+1，并**计算在该数字插入前，之前已经插入比他大的个数**
-            binaryIndexedTree.update(after[i], 1);
-            //inverseNum += (i + 1 - binaryIndexedTree.sum(after[i]));
-            inverseNum = (inverseNum + (i + 1 - binaryIndexedTree.sum(after[i])) % 1000000007) % 1000000007;
-        }
-        return inverseNum;
-    }
-
-    public static void main(String[] args) {
-        Solution s = new Solution();
-        int[] array = {111111111, 222222222, 333333333, 444444444, 555555555, 666666666, 777777777, 0};
-        System.out.println(s.InversePairs(array));//7
-    }
-}
-
-/**
- * 树状数组工具类
- */
-class BinaryIndexedTree {
-
-    int[] c;
-
-    public BinaryIndexedTree(int[] a) {
-        c = new int[a.length];
-        //c[i] = a[i-lowbit(i)+1] + ... + a[i-1] +a[i],c[i]为a[i]前长度为lowbit(i)的和
-        for (int i = 1; i < c.length; i++) {
-            for (int j = i - lowbit(i) + 1; j <= i;="" j++)="" {="" c[i]="" +="a[j];" }="" system.out.println(arrays.tostring(c));="" 求1...x的值="" public="" int="" sum(int="" x)="" result="0;" for="" (int="" k="x;"> 0; k -= lowbit(k)) {
-            result += c[k];
-        }
-        return result;
-    }
-
-    //第x位的数字加上add
-    public void update(int x, int add) {
-        for (int k = x; k < c.length; k += lowbit(k)) {
-            c[k] += add;
-        }
-    }
-
-    //一个数二进制表示，从右往左数碰到的第一个1位开始，一直往右组成的数，如1100->100
-    private int lowbit(int x) {
-        return x & (-x);
-    }
-
-    public static void main(String[] args) {
-        int[] array = {0, 1, 2, 3, 4, 5};
-        BinaryIndexedTree b = new BinaryIndexedTree(array);
-        for (int i = 1; i < array.length; i++) {
-            System.out.println(b.sum(i));
-        }
-        b.update(3, 1);
-        System.out.println("更新后");
-        for (int i = 1; i < array.length; i++) {
-            System.out.println(b.sum(i));
-        }
-    }
-}
-</=></mapper></pre>
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>树状数组<br><a href="http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1" target="_blank" rel="external">http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1</a></p>
-<p>树状数组求逆序数的原理<br><a href="http://www.cnblogs.com/i-love-acm/p/3251036.html" target="_blank" rel="external">http://www.cnblogs.com/i-love-acm/p/3251036.html</a></p>
-<p>逆序数及其求法<br><a href="http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx" target="_blank" rel="external">http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx</a></p>
-
-          
+          树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn）
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/23/[数据结构与算法]3、树状数组/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1138,151 +923,26 @@ class BinaryIndexedTree {
       
         
           
-            <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p><img src="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p><strong>1、进程概念</strong></p>
-<p>进程几部分组成：</p>
-<ul>
-<li>进程控制块（PCB）：标识进程的存在，描述进程的执行状态</li>
-<li>程序段：能够被进程调度程序调度到CPU上执行的程序代码段</li>
-<li>数据段：进程中处理的原始数据或者计算的中间结果、结果数据</li>
-</ul>
-<p>进程控制块组成：</p>
-<ul>
-<li>进程标识符（PID）</li>
-<li>进程当前状态：就绪/执行/阻塞</li>
-<li>进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻塞队列</li>
-<li>程序和数据地址</li>
-<li>进程优先级</li>
-<li><strong>CPU现场保护</strong></li>
-<li>通信信息：记录进程执行过程中与别的进程发生的信息交换情况</li>
-<li>家族联系：进程创建子进程，形成进程家族树。PCB中指明了子进程和父进程的标识</li>
-<li>占有资源清单</li>
-</ul>
-<p>为什么PCB是进程存在的标志？<br>系统通过PCB对进程进行控制：1、当系统调度到某进程后，根据其PCB中保存的处理机状态信息，恢复运行的现场，并根据PCB中的程序和数据的内存地址，找到其程序和数据 2、 当进程暂停执行时，将处理机环境保存在PCB中 3、进程间同步、通信时都要访问PCB</p>
-<p><strong>2、进程状态与转换：</strong></p>
-<p>1、三种状态</p>
-<ul>
-<li>就绪：<strong>获得除处理器之外的所有资源</strong>，一旦获得处理器就立刻可以执行</li>
-<li>执行：进程在CPU上执行</li>
-<li>阻塞：由于发生某事件（例如IO等待）而无法执行下去</li>
-</ul>
-<p>就绪和阻塞的区别：<br>处于就绪状态，当分配处理器时，进程能够立刻执行；阻塞状态时，即使把处理器分配给该进程，它也无法进行</p>
-<p>2、进程状态的相互转换</p>
-<p><img src="http://i.imgur.com/M8giTeg.jpg" alt=""></p>
-<p>注意：线程进行阻塞状态后，若等到期望的事件发生，先进入就绪状态，等调度程序选中该进程时，进程才能执行</p>
-<p><strong>3、进程控制</strong></p>
-<p>进程的控制包括进程的<strong>创建、撤销、阻塞和唤醒</strong>，这些功能一般由<strong>操作系统的内核</strong>来实现</p>
-<p>操作系统内核：把一些与硬件紧密联系的模块，或运行频率较高的模块，以及许多公用的模块安排在靠近硬件的软件层次中，并使他们常驻内存，提高操作系统的效率</p>
-<p><strong>4、进程组织</strong></p>
-<p><strong>5、进程通信：共享存储系统、消息传递系统、管道通信</strong></p>
-<p><strong>6、进程概念与多线程模型</strong></p>
-<h3 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h3><p><strong>1、调度的基本概念</strong></p>
-<p><strong>2、调度时机、切换与过程</strong></p>
-<p><strong>3、调度的基本原则</strong></p>
-<p><strong>4、调度方式</strong></p>
-<p><strong>5、典型调度算法</strong></p>
-<h3 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h3><p><strong>1、进程同步的基本概念</strong></p>
-<p><strong>2、实现临界区互斥的基本方法</strong></p>
-<p><strong>3、信号量</strong></p>
-<p><strong>4、管程</strong></p>
-<p><strong>5、经典同步问题</strong></p>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p><strong>1、死锁概念</strong></p>
-<p><strong>2、死锁处理策略</strong></p>
-<p><strong>3、死锁预防</strong></p>
-<p><strong>4、死锁避免</strong></p>
-<h3 id="死锁检测和解除"><a href="#死锁检测和解除" class="headerlink" title="死锁检测和解除"></a>死锁检测和解除</h3><h2 id="中央处理器"><a href="#中央处理器" class="headerlink" title="中央处理器"></a>中央处理器</h2><p>CPU由运算器、控制器、寄存器及高速缓存组成</p>
-<p>CPU状态：<br>1、内核态：运行操作系统程序<br>2、用户态：运行用户程序</p>
-<p>CPU状态转换：<br>1、用户态——&gt;内核态：唯一途径是中断、异常、陷入机制<br>2、内核态——&gt;用户态：设置程序状态字PSW</p>
-<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p><strong>涉及到的对象：CPU、CPU正在处理的程序、事件、事件处理程序</strong></p>
-<p>定义：中断是CPU对某个事件的反应。CPU暂停正在执行的程序，保留现场自动转去执行事件的处理程序，完成后返回断点继续执行被打断的程序</p>
-<p>作用：</p>
-<p>1、支持CPU和设备之间的并行操作。当CPU启动设备进行输入输出后，设备可以独立工作，CPU转去处理其他事情。当设备完成输出/输出后，通过向CPU发中断报告此次输出/输出结果，让CPU决定如何处理以后的事情<br>2、CPU执行指令时异常的引入。如果执行指令时出现算术溢出，除零等异常，硬件改变CPU的执行流程，转到相应的错误处理程序或异常处理程序</p>
-<p>理解：</p>
-<p>1、小明在看书，这时候电话来了，小明把书签放在书上，然后去接电话，回来后继续从刚才那个地方开始看，这个是中断的概念<br>2、小明在看书，这时候有点口渴了，小明将书签放在书上，然后去喝口水，回来继续看书。口渴了相当于异常出现，去喝水相当于是异常处理程序</p>
-<p>事件：</p>
-<p><img src="http://i.imgur.com/D0psc3v.png" alt=""></p>
-<p>中断处理流程：</p>
-<p>CPU取出一条执行，并执行，如果检测到中断，获得中断码（处理器状态），并通过查中断向量表找到中断处理程序</p>
-<p><img src="http://i.imgur.com/VkjTF7C.png" alt=""></p>
-<p>中断向量表</p>
-<p>中断向量表是中断码（处理器状态）与中断处理程序的映射。执行过程中按照中断号的不同，通过中断向量表执行不同的中断处理程序</p>
-<p><img src="http://i.imgur.com/36ubms3.png" alt=""></p>
-<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>定义：系统在编程时可以调用操作系统的功能</p>
-<p>作用：<br>1、系统调用是操作系统提供给编程人员的唯一接口<br>2、使CPU的状态从用户态陷入内核态</p>
-<p>系统调用、库函数、API、内核函数之间的关系：</p>
-<p>应用程序可以直接执行系统调用，但一般应用调用调用C的函数库间接执行系统调用。C函数库是对系统调用的封装。内核函数中只是一部分开放出来允许开发人员进行调用</p>
-<p><img src="http://i.imgur.com/i5uHNlr.png" alt=""></p>
-<p>系统调用的执行过程：</p>
-<p>当CPU执行到特殊的<strong>陷入指令</strong>时</p>
-<p>1、中断/异常机制：硬件保护现场，通过查中断向量表将控制权转给<strong>系统调用总入口程序</strong><br>2、系统调用总入口程序：保存线程，将参数保存在内核的栈中，通过查系统调用表把控制权转给相应的系统调用处理<br>3、执行系统调用<br>4、恢复现场，返回用户程序</p>
-<h2 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h2><h3 id="内存划分"><a href="#内存划分" class="headerlink" title="内存划分"></a>内存划分</h3><p>内存划分有6种方式，这里只给出3种，另外3种页式、段式、段页式下面介绍</p>
-<p>1、单一连续区：一段时间内只有一个进程在内存，简单但内存利用率低<br>2、固定分区：把内存空间分割成若干区域，每个分区大小可以相同也可以不同，分区大小固定不变，每个分区只能装一个进程<br>3、可变分区：根据进程的需要，把内存空间空闲分割出一个分区，分配给该进程。缺点是在内存多次内存分配和回收后会留下很多碎片，可以采用紧缩技术解决（采用动态重定向方式时，只需要改变重定向寄存器地址）</p>
-<p>记录内存划分结果的<strong>数据结构</strong>：</p>
-<p>1、等长划分、单一内存：可以用位图表示，0表示空闲，1表示占用<br>2、不等长划分</p>
-<ul>
-<li>空闲区表，每个表项记录空闲的起始地址、长度、标志位（标志是否被分配）。内存回收时，设置标志为0，不进行前后内存合并时，采用空闲区表合适</li>
-<li>空闲块链，将表项用链表的方式连接起来。当内存回收合并前后内存块时，需要增加、删除表项，使用空闲块链表比较合适</li>
-</ul>
-<h3 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h3><p>当一个进程需要分配内存时，采用什么内存分配算法：</p>
-<p>1、首次适配：在空闲表中找到第一个满足进程要求的空闲区<br>2、下次适配：在上次找到的空闲去后接着查找<br>3、最佳适配：查找整个空闲区表，找到满足进程要求最小的空闲区</p>
-<p>内存分配案例：</p>
-<p>内存分配是需要维护两个表，分别是空闲区表和已分配表</p>
-<p><img src="http://i.imgur.com/BThn07F.png" alt=""></p>
-<h3 id="内存回收算法"><a href="#内存回收算法" class="headerlink" title="内存回收算法"></a>内存回收算法</h3><p>当某一块归还后，前后空闲空间合并，并修改内存空闲表，分为四种情况：</p>
-<p>1、上相邻<br>2、下相邻<br>3、上下都相邻<br>4、上下都不相邻</p>
-<h3 id="伙伴系统：经典的内存划分、分配、回收算法"><a href="#伙伴系统：经典的内存划分、分配、回收算法" class="headerlink" title="伙伴系统：经典的内存划分、分配、回收算法"></a>伙伴系统：经典的内存划分、分配、回收算法</h3><p>主要思想：将内存按照2的幂进行划分，组成若干空闲块链表；查找该链表找到能满足进程需求的最佳匹配块</p>
-<p>算法：<br>1、首先将整个可用空间看做一块<br>2、如果进程要求分配的大小大于可用空间的一半，小于剩余空间大小，则分配整个块。否则将块划分成两个大小相等的伙伴。一直划分下去，直到产生大于或等于分配大小的最小块</p>
-<h3 id="地址重定位"><a href="#地址重定位" class="headerlink" title="地址重定位"></a>地址重定位</h3><p>逻辑地址：<br>用户程序中采用的是相对地址的形式，其首地址为0，CPU执行过程中不能通过逻辑地址读取内存中的信息</p>
-<p>物理地址：<br>内存中存储单元的地址，可直接寻址</p>
-<p>定义：<br>CPU执行指令时，将用户程序中的逻辑地址转换为运行时可被直接寻址的物理地址，这一过程称为地址重定向</p>
-<p>动态重定向实现：</p>
-<p>CPU在执行指令时，逻辑地址加上重定向寄存器中的地址得到物理地址，可被直接寻址</p>
-<p><img src="http://i.imgur.com/wXDR6dP.png" alt=""></p>
-<h3 id="页式存储"><a href="#页式存储" class="headerlink" title="页式存储"></a>页式存储</h3><p>用户进程划分：</p>
-<ul>
-<li><strong>用户进程地址空间被划分成大小相等部分，称为页或者页面</strong>，从0开始编号</li>
-<li><strong>内存空间按相同大小划分成大小相等部分，称为块或内存块</strong>，从0开始编号</li>
-</ul>
-<p>内存分配：</p>
-<ul>
-<li>进程划分成若干页，以页为单位分配物理块</li>
-<li>逻辑相邻的页，物理上不一定相邻</li>
-</ul>
-<p>典型页面大小：4K</p>
-<p>页表：</p>
-<p><strong>页表记录了页号与物理块的对应关系，每个进程一个页表</strong></p>
-<p>逻辑地址：</p>
-<p><strong>逻辑地址 = 页号（20位） + 页内偏移（4K = 12位）</strong></p>
-<p><strong>CPU取得逻辑地址，自动划分为页号和页内地址，用页号在页表中查找到物理块，再加上页内地址拼接成物理地址，即物理地址=物理块号+页内便宜</strong></p>
-<h3 id="段式存储"><a href="#段式存储" class="headerlink" title="段式存储"></a>段式存储</h3><p>作业的地址空间被划分成若干段，如主程序段MAIN、子程序段X、数据段D及栈段S。每个段定义自己的逻辑信息，方便编程</p>
-<p>用户进程划分：</p>
-<ul>
-<li><strong>用户进程地址按程序自身的逻辑关系划分成若干个程序段</strong>，每个程序段都有一个段名</li>
-<li><strong>内存空间动态划分成若干长度不相同的区域，称为物理段</strong>，每个物理段由起始地址和长度确定</li>
-</ul>
-<p>内存分配：<br>以段为单位进行分配，每段在程序中占据连续空间，但各段之间可以不相邻</p>
-<p>段表：</p>
-<p>记录了<font color="red"><strong>段号与物理段首地址及长度</strong></font>的对应关系，<strong>每个进程一个段表</strong></p>
-<p><img src="http://i.imgur.com/2NI45Lm.png" alt=""></p>
-<p>逻辑地址：</p>
-<p><strong>逻辑地址 = 段号 + 段内偏移</strong></p>
-<p><strong>CPU取到逻辑地址后，用段号查找段表，得到该段在内存中的起始地址，与段内偏移地址计算出物理地址</strong></p>
-<h3 id="段页式存储★★★★★"><a href="#段页式存储★★★★★" class="headerlink" title="段页式存储★★★★★"></a>段页式存储★★★★★</h3><p>分页系统能有效提高内存的利用率，而分段系统能很好满足用户需求。段页式存储方式结合了两者的优点</p>
-<p>用户进程划分：</p>
-<ul>
-<li><strong>将用户进程划分为若干段，把每个段划分成若干页</strong></li>
-</ul>
-<p>内存划分：同页式存储管理方案</p>
-<p>内存分配：以页为单位进行分配</p>
-<p>段表：<br>用户进程划分为多个段，每个段表示一个逻辑地址区间；<strong>段表记录每一段表包括的逻辑地址范围，用页表地址和页表长度两个表示，引入页表长度防止寻址越界</strong>（段式存储中记录了物理段起始地址和长度，即段表记录的是起始地址+长度）</p>
-<p>页表：</p>
-<p><strong>段中的一段逻辑地址区间按照页式存储的方式</strong>，因此需要一张页表，记录页号与物理页的映射关系</p>
-<p>综上所述，使用段页式存储管理，<strong>一个进程有一张段表，多个页表</strong></p>
-<p>逻辑地址组成：</p>
-<p><img src="http://i.imgur.com/GPGvULF.png" alt=""></p>
-<p><strong>CPU取到逻辑地址后，获得该地址所在的段号，在段表中查询到页表的起始地址和长度(因为每个段对应一个页表，需要获得页表位置)；根据逻辑地址中的段内页号，查找页表读到该页所在的物理块号；最后用块号+页内地址构成物理地址</strong></p>
+          进程管理
+进程与线程1、进程概念
+进程几部分组成：
 
-          
+进程控制块（PCB）：标识进程的存在，描述进程的执行状态
+程序段：能够被进程调度程序调度到CPU上执行的程序代码段
+数据段：进程中处理的原始数据或者计算的中间结果、结果数据
+
+进程控制块组成：
+
+进程标识符（PID）
+进程当前状态：就绪/执行/阻
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/22/[操作系统]操作系统笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1414,17 +1074,17 @@ class BinaryIndexedTree {
       
         
           
-            <p>1、关闭139端口　　</p>
-<p>ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性”，再鼠标右击”本地连接”，选择”属性”。选择”TCP/IP协议/属性/高级”，进入”高级TCP/IP设置”对话框，选择”WINS”标签，勾选”禁用TCP/IP上的NETBIOS”一项，关闭NETBIOS.　　</p>
-<p>2、关闭445端口　　</p>
-<p>修改注册表，添加一个键值（HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\NetBT\Parameters）在右面的窗口建立一个SMBDeviceEnabled为DWORD类型键值为0这样就ok了。　　</p>
-<p>3、关闭3389端口　　</p>
-<p>在我的电脑上点右键选”属性”–&gt;”远程”，将里面的远程协助和远程桌面两个选项框里的勾去掉。　　（HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp）来到这里，找到PortNumber，十进制是3389的，你随意把它改成其它4个数字吧，我改成1314了。此外，还要禁用Telnet、Terminal Services这两个危险服务。　　</p>
-<p>4、关闭135的经过注册表更改　　</p>
-<p>（1）、HKEY_LOCAL_MACHINE→SOFTWARE→Microsoft→Ole→EnableDCOM的值改为”N”　　HKEY_LOCAL_MACHINE→SOFTWARE→Microsoft→Rpc→DCOM Protocols键值中删除”ncacn_ip_tcp”　　<br>（2）、此外，还需要确认是否停用了”Distributed Transaction Coordinator”此项服务。　　</p>
-<p>全部设置完成之后需要<strong>重启计算机</strong>，启动一下输入CMD，然后直接打入netstat -an这个命令，看端口是否已经全部关闭</p>
-
-          
+          1、关闭139端口　　
+ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性”，再鼠标右击”本地连接”，选择”属性”。选择”TCP/IP协议/属性/高级”，进入”高级TCP/IP设置”对话框，选择”WINS”标签，勾选”禁用TCP/IP上的NETBIOS”一项，关闭NETBIOS.　　
+2、
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1556,10 +1216,15 @@ class BinaryIndexedTree {
       
         
           
-            <p>/usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。<br>/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。<br>/opt：用户级的程序目录，可以理解为D:/Software，opt有可选的意思，这里可以用于放置第三方大型软件（或游戏），当你不需要时，直接rm -rf掉即可。在硬盘容量不够时，也可将/opt单独挂载到其他磁盘上使用。</p>
-<p><strong>个人习惯让软件包管理器来管理/usr目录，而把自定义的脚本(scripts)、软件放到/usr/local目录下面。/opt存放测试软件，用完就把目录删除即可</strong></p>
-
-          
+          /usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。/opt：用户级的程序目录，可以理解为D:/Soft
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/16/[Linux]Linux软件安装目录选择/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1691,10 +1356,17 @@ class BinaryIndexedTree {
       
         
           
-            <p>Nginx基本功能极速入门<br><a href="http://xxgblog.com/2015/05/17/nginx-start/" target="_blank" rel="external">http://xxgblog.com/2015/05/17/nginx-start/</a></p>
-<p>Gitlab 上nginx反向代理（下次继续研究）<br><a href="https://www.xiaohui.org/archives/1602.html" target="_blank" rel="external">https://www.xiaohui.org/archives/1602.html</a></p>
+          Nginx基本功能极速入门http://xxgblog.com/2015/05/17/nginx-start/
+Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archives/1602.html
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/16/[SSM]Nginx反向代理、负载均衡/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1826,25 +1498,17 @@ class BinaryIndexedTree {
       
         
           
-            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>之前安装的时候忘记了，是通过官网的教程，遇到问题再去网上找的方式安装成功的，可以参考一下文档</p>
-<p><a href="http://skyao.github.io/2015/02/16/git-gitlab-setup/" target="_blank" rel="external">http://skyao.github.io/2015/02/16/git-gitlab-setup/</a><br><a href="https://segmentfault.com/a/1190000002722631" target="_blank" rel="external">https://segmentfault.com/a/1190000002722631</a></p>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件位置：</p>
-<pre><code>/etc/gitlab/gitlab.rb
-</code></pre><p>配置生效：</p>
-<pre><code>sudo gitlab-ctl reconfigure
-</code></pre><p>Nginx 运行目录：</p>
-<pre><code>/opt/gitlab/embedded/sbin/nginx
-</code></pre><p>Nginx 配置文件(会被覆盖)：</p>
-<pre><code>/var/opt/gitlab/nginx/etc/nginx.conf
-</code></pre><p>在/var/opt/gitlab/nginx/etc/nginx.conf 开头处有这样的内容：</p>
-<pre><code># This file is managed by gitlab-ctl. Manual changes will be
-# erased! To change the contents below, edit /etc/gitlab/gitlab.rb
-# and run `sudo gitlab-ctl reconfigure`.
-</code></pre><p>配置文件引用文件：</p>
-<pre><code>/var/opt/gitlab/nginx/etc/gitlab-http.conf
-</code></pre><p>原来可以通过修改<strong>/etc/gitlab/gitlab.rb来配置</strong>，我再折腾一下。</p>
-
-          
+          安装之前安装的时候忘记了，是通过官网的教程，遇到问题再去网上找的方式安装成功的，可以参考一下文档
+http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/1190000002722631
+配置文件配置
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/16/[Git]Gitlab安装配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1976,48 +1640,15 @@ class BinaryIndexedTree {
       
         
           
-            <h2 id="Linux安装目录选择"><a href="#Linux安装目录选择" class="headerlink" title="Linux安装目录选择"></a>Linux安装目录选择</h2><p>/usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。<br>/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。<br>/opt：用户级的程序目录，可以理解为D:/Software，opt有可选的意思，这里可以用于放置第三方大型软件（或游戏），当你不需要时，直接rm -rf掉即可。在硬盘容量不够时，也可将/opt单独挂载到其他磁盘上使用。</p>
-<p><strong>个人习惯让软件包管理器来管理/usr目录，而把自定义的脚本(scripts)、软件放到/usr/local目录下面。/opt存放测试软件，用完就把目录删除即可</strong></p>
-<h2 id="Nexus安装"><a href="#Nexus安装" class="headerlink" title="Nexus安装"></a>Nexus安装</h2><p><strong>注意Nexus对JDK版本有要求</strong><br>博主环境：JDK1.6.45 ，nexus-2.4-bundle.tar.gz<br>Nexus所有版本下载地址：<a href="http://www.sonatype.org/nexus/archived" target="_blank" rel="external">http://www.sonatype.org/nexus/archived</a></p>
-<p>1、下载Nexus后，在/usr/local/下创建nexus目录<br>2、进入nexus目录，将下载文件nexus-2.4-bundle.tar.gz移动到该目录下，使用mv命令<br>3、tar -zxvf nexus-2.4-bundle.tar.gz节解压，会生成nexus-2.4.0-09、sonatype-work两个目录<br>4、编辑系统配置文件：vim /etc/profile，在文件的尾巴增加下面内容：</p>
-<pre><code># Nexus
-NEXUS_HOME=/usr/local/nexus-2.4.0-09
-export NEXUS_HOME
-RUN_AS_USER=root
-export RUN_AS_USER
-</code></pre><p>5、刷新配置：source /etc/profile<br>6、开放防火墙端口：</p>
-<ul>
-<li>添加规则：sudo iptables -I INPUT -p tcp -m tcp –dport 8081 -j ACCEPT</li>
-<li>保存规则：sudo /etc/rc.d/init.d/iptables save</li>
-<li>重启 iptables：sudo service iptables restart</li>
-</ul>
-<p>7、启动nexus，进入/usr/local/nexus/nexus-2.4.0-09/bin目录，执行./nexus start<br>8、访问<a href="http://115.159.84.37:8081/nexus" target="_blank" rel="external">http://115.159.84.37:8081/nexus</a></p>
-<p>参考：</p>
-<p><a href="https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/" target="_blank" rel="external">https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</a><br><a href="https://github.com/judasn/Linux-Tutorial/blob/master/Nexus-Install-And-Settings.md" target="_blank" rel="external">https://github.com/judasn/Linux-Tutorial/blob/master/Nexus-Install-And-Settings.md</a></p>
-<h2 id="配置nexus、添加自定义jar包"><a href="#配置nexus、添加自定义jar包" class="headerlink" title="配置nexus、添加自定义jar包"></a>配置nexus、添加自定义jar包</h2><p>仓库地址：</p>
-<pre><code>&lt;!-- 仓库地址 --&gt;
-&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;nexus&lt;/id&gt;
-        &lt;name&gt;Team Nexus Repository&lt;/name&gt;
-        &lt;url&gt;http://yourhostname:8081/nexus/content/groups/public&lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;
-</code></pre><p>jar包依赖：</p>
-<pre><code>&lt;!-- jar --&gt;
-&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;de.innosystec&lt;/groupId&gt;
-        &lt;artifactId&gt;java-unrar&lt;/artifactId&gt;
-        &lt;version&gt;0.5&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</code></pre><p><a href="https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/" target="_blank" rel="external">https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</a></p>
-<h2 id="我搭建的maven仓库"><a href="#我搭建的maven仓库" class="headerlink" title="我搭建的maven仓库"></a>我搭建的maven仓库</h2><p><a href="http://maven.qianmingxs.com:8081/nexus" target="_blank" rel="external">http://maven.qianmingxs.com:8081/nexus</a></p>
-<p>仓库地址：<a href="http://maven.qianmingxs.com:8081/nexus/content/groups/public" target="_blank" rel="external">http://maven.qianmingxs.com:8081/nexus/content/groups/public</a></p>
-<h2 id="Nexus配置、部署"><a href="#Nexus配置、部署" class="headerlink" title="Nexus配置、部署"></a>Nexus配置、部署</h2><p><a href="http://aijezdm915.iteye.com/blog/1335025" target="_blank" rel="external">http://aijezdm915.iteye.com/blog/1335025</a></p>
-
-          
+          Linux安装目录选择/usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。/opt：用户级的程序目录，可
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/16/[Maven]Linux下安装Nexus/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
