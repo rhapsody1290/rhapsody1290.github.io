@@ -1,20 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +72,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -93,31 +102,37 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://qianmingxs.com/page/2/"/>
 
 
-  <title> Mr.Qian's Home </title>
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>Mr.Qian's Home</title>
   
 
 
@@ -128,37 +143,49 @@
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Mr.Qian's Home</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -178,18 +205,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -199,7 +216,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -209,34 +226,13 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
@@ -251,13 +247,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/22/[分布式架构]Kafka分布式消息系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -265,38 +271,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/22/[分布式架构]Kafka分布式消息系统/" itemprop="url">
-                  Kafka分布式消息系统
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/22/[分布式架构]Kafka分布式消息系统/" itemprop="url">Kafka分布式消息系统</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-22T17:39:00+08:00" content="2017-06-22">
-              2017-06-22
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T17:39:00+08:00">
+                2017-06-22
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/分布式架构/" itemprop="url" rel="index">
                     <span itemprop="name">分布式架构</span>
                   </a>
@@ -304,32 +314,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/22/[分布式架构]Kafka分布式消息系统/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/22/[分布式架构]Kafka分布式消息系统/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -339,18 +343,17 @@
       
         
           
-          Kafka与Zoopkeeper关系
-ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或者某个代理故障失效时，ZooKeeper服务将通知生产者和消费者，生产者和消费者据此开始与其它代理协调工作
+            <p>Kafka与Zoopkeeper关系</p>
+<p>ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或者某个代理故障失效时，ZooKeeper服务将通知生产者和消费者，生产者和消费者据此开始与其它代理协调工作</p>
+<p><img src="http://i.imgur.com/2tJ9DsD.png" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.infoq.com/cn/articles/apache-kafka" target="_blank" rel="external">http://www.infoq.com/cn/articles/apache-kafka</a></p>
 
-参考http://www.infoq.com/cn/articles/ap
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/22/[分布式架构]Kafka分布式消息系统/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -368,6 +371,8 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -379,13 +384,23 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/20/[数据结构与算法]9、动态规划/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -393,38 +408,42 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/20/[数据结构与算法]9、动态规划/" itemprop="url">
-                  9、动态规划
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/20/[数据结构与算法]9、动态规划/" itemprop="url">9、动态规划</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-20T21:10:00+08:00" content="2017-06-20">
-              2017-06-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T21:10:00+08:00">
+                2017-06-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -432,32 +451,26 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/20/[数据结构与算法]9、动态规划/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/20/[数据结构与算法]9、动态规划/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -467,18 +480,120 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
       
         
           
-          动态规划入门https://mp.weixin.qq.com/s/0AgJmQNYAKzVOyigXiKQhA
-爬楼梯问题有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。
-思路：
-假设只差最后一步就走到第10级台阶，这个时候会出现几种情况
-          ...
+            <h2 id="动态规划入门"><a href="#动态规划入门" class="headerlink" title="动态规划入门"></a>动态规划入门</h2><p><a href="https://mp.weixin.qq.com/s/0AgJmQNYAKzVOyigXiKQhA" target="_blank" rel="external">https://mp.weixin.qq.com/s/0AgJmQNYAKzVOyigXiKQhA</a></p>
+<h2 id="爬楼梯问题"><a href="#爬楼梯问题" class="headerlink" title="爬楼梯问题"></a>爬楼梯问题</h2><p>有一座高度是10级台阶的楼梯，从下往上走，每跨一步只能向上1级或者2级台阶。要求用程序来求出一共有多少种走法。</p>
+<p>思路：</p>
+<p>假设<strong>只差最后一步就走到第10级台阶</strong>，这个时候会出现几种情况？当然是两种，因为每一步只许走一级或是两级台阶，第一种是从9级走到10级，第二种是从8级走到10级</p>
+<p>得到公式:</p>
+<pre><code>F（1）= 1
+F（2）= 2
+F（n） = F（n-1）+F(n-2)（n&gt;=3）
+</code></pre><p>方法一：递归解法</p>
+<pre><code>import java.util.*;
+public class Solution {
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/20/[数据结构与算法]9、动态规划/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    private int f(int n){
+        if(n &lt; 1){
+            return 0;
+        }
+        if(n == 1){
+            return 1;
+        }
+        if(n == 2){
+            return 2;
+        }
+        return f(n-1) + f(n-2);
+    }
+
+
+    public static void main(String[] args){
+        Solution s = new Solution();
+        System.out.println(s.f(10));//89
+    }
+}
+</code></pre><p>求递归的时间复杂度，分析递归方法所走过的路径，归纳成以下图：</p>
+<p><img src="http://i.imgur.com/qwLAhBn.png" alt=""></p>
+<p>这是一个二叉树，树的节点个数就是我们的递归方法所需要计算的次数，不难看出二叉树的高度是N-1，节点个数接近2的N-1次方，所以方法的时间复杂度可以近似得看做是<strong>O（2^N）</strong></p>
+<p>方法二：备忘录算法，暂存计算结果</p>
+<p><img src="http://i.imgur.com/EYrhYmb.png" alt=""></p>
+<p>递归图中有些相同的参数被计算了，越往下走，重复的越多，所以用缓存，创造一个哈希表存起来，当遇到相同的参数时，从哈希表中取出，不用重复计算了</p>
+<pre><code>import java.util.*;
+public class Solution {
+
+    Map&lt;Integer,Integer&gt; map = new HashMap&lt;Integer,Integer&gt;();
+
+    private int f(int n){
+        if(n &lt; 1){
+            return 0;
+        }
+        if(n == 1){
+            return 1;
+        }
+        if(n == 2){
+            return 2;
+        }
+        if(map.containsKey(n)){
+            return map.get(n);
+        }else{
+            int value = f(n-1) + f(n-2);
+            map.put(n, value);
+            return value;
+        }    
+
+    }
+
+
+    public static void main(String[] args){
+        Solution s = new Solution();
+        System.out.println(s.f(10));
+    }
+}
+</code></pre><p>这个算法只要计算F（1）到F（N），时间复杂度是O（N），哈希表中除了N-2个结果，所以空间复杂度也是O（N）</p>
+<p>方法三：动态规划求解</p>
+<p>自底向下进行迭代得到结果，画一下计算的表格：</p>
+<p><img src="http://i.imgur.com/SATiQzZ.png" alt=""></p>
+<p>F（3） = F（2） + F（1），即F（3）只依赖F（1）和F（2）</p>
+<p><img src="http://i.imgur.com/WGIjpmT.png" alt=""></p>
+<p>F（4） = F（3） + F（2），即F（4）只依赖F（3）和F（2）</p>
+<p>可见每一次迭代过程中，只需保留之前的两个状态，就可以推到出新的状态，不需要备忘录算法那样保留全部的子状态，这才是真正的动态规划的实现</p>
+<pre><code>import java.util.*;
+public class Solution {
+
+    private int f(int n){
+        if(n &lt; 1){
+            return 0;
+        }
+        if(n == 1){
+            return 1;
+        }
+        if(n == 2){
+            return 2;
+        }
+
+        int a = 1;
+        int b = 2;
+        for(int i  = 3; i &lt;= n; i++){
+            int t = a;
+            a = b;
+            b = t + b;
+        }
+        return b;
+    }
+
+
+    public static void main(String[] args){
+        Solution s = new Solution();
+        System.out.println(s.f(10));//89
+    }
+}
+</code></pre><p>时间复杂度是O（N），空间复杂度是O（1）</p>
+<h2 id="国王和金矿"><a href="#国王和金矿" class="headerlink" title="国王和金矿"></a>国王和金矿</h2>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -496,6 +611,8 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -507,13 +624,23 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/20/[mybatis]mybatis源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -521,38 +648,42 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/20/[mybatis]mybatis源码分析/" itemprop="url">
-                  mybatis源码分析
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/20/[mybatis]mybatis源码分析/" itemprop="url">mybatis源码分析</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-20T14:09:00+08:00" content="2017-06-20">
-              2017-06-20
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-20T14:09:00+08:00">
+                2017-06-20
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/mybatis/" itemprop="url" rel="index">
                     <span itemprop="name">mybatis</span>
                   </a>
@@ -560,32 +691,26 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/20/[mybatis]mybatis源码分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/20/[mybatis]mybatis源码分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -595,18 +720,56 @@ ZooKeeper用于管理、协调Kafka代理。当Kafka系统中新增了代理或�
       
         
           
-          摘自：http://blog.csdn.net/luanlouis/article/details/40422941
-mybatis优势
-面向接口编程，定义接口通过动态代理的方式生成一个mapper实例
-参数映射和动态SQL语句生成： 动态语句生成是 MyBatis 通过传入的参数值，使用 Ognl
-          ...
+            <p>摘自：<a href="http://blog.csdn.net/luanlouis/article/details/40422941" target="_blank" rel="external">http://blog.csdn.net/luanlouis/article/details/40422941</a></p>
+<h2 id="mybatis优势"><a href="#mybatis优势" class="headerlink" title="mybatis优势"></a>mybatis优势</h2><ul>
+<li>面向接口编程，定义接口通过动态代理的方式生成一个mapper实例</li>
+<li>参数映射和动态SQL语句生成： 动态语句生成是 MyBatis 通过传入的参数值，使用 Ognl 来动态地构造SQL语句；参数映射指的是对于Java 数据类型和jdbc数据类型之间的转换</li>
+<li>SQL语句的执行以及封装查询结果集成List</li>
+<li>事务管理、连接池管理机制、缓存机制、QL语句的配置方式</li>
+</ul>
+<h2 id="动态代理生成mapper"><a href="#动态代理生成mapper" class="headerlink" title="动态代理生成mapper"></a>动态代理生成mapper</h2><p>MyBatis和数据库的交互有两种方式：</p>
+<p>1、使用传统的MyBatis提供的API；</p>
+<p><img src="http://i.imgur.com/UjHifnz.png" alt=""></p>
+<p>创建一个和数据库打交道的SqlSession对象，然后根据Statement Id 和参数来操作数据库</p>
+<p>2、使用Mapper接口</p>
+<p><img src="http://i.imgur.com/k6RCXIh.png" alt=""></p>
+<p>根据 MyBatis 的配置规范配置好后，通过SqlSession.getMapper(XXXMapper.class) 方法，MyBatis 会根据相应的接口声明的方法信息，<strong>通过动态代理机制生成一个 Mapper 实例</strong>，我们使用Mapper 接口的某一个方法时，MyBatis 会根据这个方法的<strong>方法名和参数类型，确定Statement Id</strong>，底层还是通过SqlSession.select(“statementId”,parameterObject);或者SqlSession.update(“statementId”,parameterObject); 等 <strong>SqlSession 的增删改查方法来实现对数据库的操作</strong></p>
+<h2 id="SqlSession-的工作过程分析"><a href="#SqlSession-的工作过程分析" class="headerlink" title="SqlSession 的工作过程分析"></a>SqlSession 的工作过程分析</h2><p>1、开启一个数据库访问会话—创建SqlSession对象：</p>
+<pre><code>SqlSession sqlSession = factory.openSession();  
+</code></pre><p>MyBatis封装了对数据库的访问，把对数据库的会话和事务控制放到了SqlSession对象中。</p>
+<p>2、为SqlSession传递一个配置的Sql语句 的Statement Id和参数，然后返回结果：</p>
+<pre><code>List&lt;Employee&gt; result = sqlSession.selectList(&quot;com.louis.mybatis.dao.EmployeesMapper.selectByMinSalary&quot;,params);  
+</code></pre><p><strong>MyBatis在初始化的时候，会将MyBatis的配置信息全部加载到内存中，使用 org.apache.ibatis.session.Configuration 实例来维护</strong>。使用者可以使用sqlSession.getConfiguration() 方法来获取</p>
+<pre><code>&lt;select id=&quot;selectByMinSalary&quot; resultMap=&quot;BaseResultMap&quot; parameterType=&quot;java.util.Map&quot; &gt;  
+  select   
+    EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, SALARY  
+    from LOUIS.EMPLOYEES  
+    &lt;if test=&quot;min_salary != null&quot;&gt;  
+        where SALARY &lt; #{min_salary,jdbcType=DECIMAL}  
+    &lt;/if&gt;  
+&lt;/select&gt;  
+</code></pre><p>加载到内存中会生成一个对应的 <strong>MappedStatement</strong> 对象，然后会以key=”com.louis.mybatis.dao.EmployeesMapper.selectByMinSalary” ，value为MappedStatement对象的形式维护到Configuration的一个Map中。当以后需要使用的时候，只需要<strong>通过Id值来获取就可以了。</strong></p>
+<p>从上述的代码中我们可以看到SqlSession的职能是：</p>
+<p>SqlSession根据Statement ID, 在mybatis配置对象Configuration中获取到对应的MappedStatement对象，然后调用mybatis执行器来执行具体的操作。</p>
+<p><strong>SqlSession的作用：</strong></p>
+<p>作为MyBatis工作的主要顶层API，表示和<strong>数据库交互的会话</strong>，完成必要数据库<strong>增删改查</strong>功能</p>
+<p>3、MyBatis执行器Executor根据SqlSession传递的参数执行query()方法</p>
+<p>Executor.query()方法几经转折，最后会创建一个StatementHandler对象，然后将必要的参数传递给StatementHandler，使用StatementHandler来完成对数据库的查询，最终返回List结果集。</p>
+<p><strong>Executor的功能和作用是：</strong></p>
+<p>(1、根据传递的参数，<strong>完成SQL语句的动态解析</strong>，生成BoundSql对象，供StatementHandler使用；<br>(2、为查询创建<strong>缓存</strong>，以提高性能<br>(3、<strong>创建JDBC的Statement连接对象，传递给StatementHandler对象，返回List查询结果。</strong></p>
+<p>4、StatementHandler对象负责设置Statement对象中的查询参数、处理JDBC返回的resultSet，将resultSet加工为List 集合返回：</p>
+<p><strong>StatementHandler对象主要完成两个工作：</strong></p>
+<p>(1、对于JDBC的PreparedStatement类型的对象，创建的过程中，我们使用的是SQL语句字符串会包含若干个 ? 占位符，我们其后再<strong>对占位符进行设值</strong>。StatementHandler通过parameterize(statement)方法对Statement进行设值；<br>(2、StatementHandler通过List<e> query(Statement statement, ResultHandler resultHandler)方法来完成执行Statement，和<strong>将Statement对象返回的resultSet封装成List；</strong></e></p>
+<p>对StatementHandler的query分析：</p>
+<p>StatementHandler 的 List<e> query(Statement statement, ResultHandler resultHandler)方法的实现，是调用了ResultSetHandler的handleResultSets(Statement) 方法。<strong>ResultSetHandler的handleResultSets(Statement) 方法会将Statement语句执行后生成的resultSet 结果集转换成List<e> 结果集：</e></strong></e></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.cnblogs.com/luoxn28/p/5932648.html" target="_blank" rel="external">http://www.cnblogs.com/luoxn28/p/5932648.html</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/20/[mybatis]mybatis源码分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -624,6 +787,8 @@ mybatis优势
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -635,13 +800,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/15/[数据结构与算法]8、递归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -649,38 +824,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/15/[数据结构与算法]8、递归/" itemprop="url">
-                  8、递归
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/15/[数据结构与算法]8、递归/" itemprop="url">8、递归</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-15T20:30:00+08:00" content="2017-06-15">
-              2017-06-15
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T20:30:00+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -688,32 +867,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/15/[数据结构与算法]8、递归/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/15/[数据结构与算法]8、递归/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -723,15 +896,86 @@ mybatis优势
       
         
           
-          全排列OJ：https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&amp;tqId=11180&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&
-          ...
+            <h2 id="全排列"><a href="#全排列" class="headerlink" title="全排列"></a>全排列</h2><p>OJ：<a href="https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&amp;tqId=11180&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="external">https://www.nowcoder.com/practice/fe6b651b66ae47d7acce78ffdd9a96c7?tpId=13&amp;tqId=11180&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking</a></p>
+<p>求整个字符串的排序可以分成两份：</p>
+<ul>
+<li>首先求可能出现在第一个位置的字符。怎么做？把第一个字符和后面所有的字符交换</li>
+<li>固定第一个字符，求后面所有字符的全排列（后面也是步骤1的操作，所以是递归）</li>
+</ul>
+<p>注意事项：<br>1、为了保证不会重复，两个字符交换后，在子序列全排列完毕后，需要调换回来</p>
+<p>2、字符串中包含相同字符的，排列时不要重复输出。如果对aa进行，值输出aa<br>解决方法：在交换字符时，如果交换的字符和首字母一样，就跳过，即不对子序列进行全排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.Collections;</div><div class="line"></div><div class="line">public class Solution &#123;</div><div class="line"></div><div class="line">    ArrayList&lt;String&gt; result = new ArrayList&lt;String&gt;();</div><div class="line"></div><div class="line">    public ArrayList&lt;String&gt; Permutation(String str) &#123;</div><div class="line">        if(str == null || str.length() == 0)&#123;</div><div class="line">            return result;</div><div class="line">        &#125;</div><div class="line">        //划分子问题：固定第一个字符，然后对后面字符进行全排序</div><div class="line">        //做法：第一个字符分别于后面的字符交换，然后对后面字符递归全排序</div><div class="line">        char[] c = str.toCharArray();</div><div class="line">        doPermutation(c, 0, c.length - 1);</div><div class="line">        //坑爹，需要排序输出</div><div class="line">        Collections.sort(result);</div><div class="line">        return result;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void doPermutation(char[] c, int l, int r) &#123;</div><div class="line">        if(l &gt;= r)&#123;</div><div class="line">            result.add(new String(c));</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">            //重复的就不要交换了</div><div class="line">            if(i != l &amp;&amp; c[i] == c[l])&#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line">            //后面的字符与第一个交换</div><div class="line">            swap(c, l, i);</div><div class="line">            doPermutation(c, l + 1, r);</div><div class="line">            //记得交换回来</div><div class="line">            swap(c, i, l);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void swap(char[] c, int i, int j) &#123;</div><div class="line">        char t = c[i];</div><div class="line">        c[i] = c[j];</div><div class="line">        c[j] = t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Solution s = new Solution();</div><div class="line">        String str = &quot;abc&quot;;</div><div class="line">        System.out.println(s.Permutation(str));//abc,acb,bac,bca,cab和cba</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="根据先序遍历、中序遍历得到后序遍历"><a href="#根据先序遍历、中序遍历得到后序遍历" class="headerlink" title="根据先序遍历、中序遍历得到后序遍历"></a>根据先序遍历、中序遍历得到后序遍历</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><pre><code>    1
+   / \
+  2   3 
+ / \ / \
+4  5 6  7
+</code></pre><p>先序遍历的结果是 1 2 4 5 3 6 7<br><br>中序遍历的结果是 4 2 5 1 6 3 7<br><br>那么得到的中序遍历的结果应该是：4 5 2 6 7 3 1</p>
+<h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><p><img src="http://i.imgur.com/jPOSuRL.jpg" alt=""></p>
+<p>1、先序遍历序列和中序遍历序列可以确定一颗树</p>
+<p>2、先序遍历序列的第一个节点为根节点，之后的节点先是左子树节点，然后是右子树节点，左、右子树的序列分别都是连续的<br>如1 2 4 5 3 6 7，那么可以判断1是根节点；根据图观察 2 4 5 是左子树，3 6 7 是右子树；<strong>这需要利用中序遍历的结果才能判断哪些节点时左节点，哪些是右节点</strong></p>
+<p>3、中序遍历是先访问左子树，访问根，再访问右子树；由于已经根据先序遍历获得了根节点，在中序遍历中找到根节点可以确定哪些节点时属于左、右子树</p>
+<p>4、上述是树解析的过程，需要递归解析</p>
+<h3 id="设计："><a href="#设计：" class="headerlink" title="设计："></a>设计：</h3><p>1、自顶向下解析前序、中序序列，用如下四个参数记录，int[] pre, int pre_start, int pre_end, int[] mid, int mid_start, int mid_end</p>
+<p>2、解析过程：a、前序的第一个节点是root b、在中序中查找root，划分出左右子树 c、计算出子树的区间 <strong>d、对于新确定的子树，仍旧按照这种该方法解析，所以这是递归操作</strong></p>
+<p>3、先把1,2两步解析的架子打起来，然后考虑什么时候打印后序结果</p>
+<p>a、考虑叶子节点，他的左右节点都是null，为了程序的统一性，直到访问到null才递归结束，先访问左节点，再访问右节点，最后输出根，即子节点。所以判断条件是mid_end - mid_start &lt; 0，没有等于</p>
+<pre><code>if(mid_end - mid_start &lt; 0){
+    return;
+}
+</code></pre><p>b、对于叶子节点，解析左子树的DFS为空语句，解析右子树的DFS为空语句，然后这时候打印出叶子节点，即System.out.println(mid[partion]);在回溯的时候也是这个顺序；<strong>这个很难想象，可以先考虑叶子节点，然后再验证结果是否正确</strong></p>
+<pre><code>//解析左子树
+DFS(pre, pre_start + 1, pre_start + left_length, mid, mid_start, partion - 1);
+//解析右子树
+DFS(pre, pre_start + left_length + 1, pre_end, mid, partion + 1, mid_end);
+System.out.println(mid[partion]);
+</code></pre><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre><code> /**
+ * Created by qianming.qm on 2017/7/18.
+ */
+public class Solution {
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/15/[数据结构与算法]8、递归/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    //根据前序序列、中序序列解析一棵树，自顶向下
+    private void DFS(int[] pre, int pre_start, int pre_end, int[] mid, int mid_start, int mid_end) {
+        //遍历到叶子节点，这里要注意是小于0，即到了叶子节点时还不返回，直到叶子节点的两个null子节点时返回，然后回溯
+        if(mid_end - mid_start &lt; 0){
+            return;
+        }
+
+        int root = pre[pre_start];
+        int partion = -1;
+        for (int i = mid_start; i &lt;= mid_end; i++) {
+            if (mid[i] == root) {
+                partion = i;
+                break;
+            }
+        }
+        //左右子树序列长度
+        int left_length = partion - mid_start;
+        int right_length = mid_end - partion;
+
+        //解析左子树
+        DFS(pre, pre_start + 1, pre_start + left_length, mid, mid_start, partion - 1);
+        //解析右子树
+        DFS(pre, pre_start + left_length + 1, pre_end, mid, partion + 1, mid_end);
+        System.out.println(mid[partion]);
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] pre = {1, 2, 4, 5, 3, 6, 7};
+        int[] mid = {4, 2, 5, 1, 6, 3, 7};
+        s.DFS(pre, 0, pre.length - 1, mid, 0, mid.length - 1);//4 5 2 6 7 3 1
+    }
+
+
+}
+</code></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -749,6 +993,8 @@ mybatis优势
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -760,13 +1006,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/14/[数据结构与算法]7、稳定排序与不稳定排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -774,38 +1030,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/14/[数据结构与算法]7、稳定排序与不稳定排序/" itemprop="url">
-                  7、稳定排序与不稳定排序
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/14/[数据结构与算法]7、稳定排序与不稳定排序/" itemprop="url">7、稳定排序与不稳定排序</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-14T14:59:00+08:00" content="2017-06-14">
-              2017-06-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T14:59:00+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -813,32 +1073,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/14/[数据结构与算法]7、稳定排序与不稳定排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/14/[数据结构与算法]7、稳定排序与不稳定排序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -848,17 +1102,30 @@ mybatis优势
       
         
           
-          稳定排序和不稳定排序
-转自：http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html
-这几天笔试了好几次了，连续碰到一个关于常见排序算法稳定性判别的问题，往往还是多选，对于我以及和我一样拿不准的同学可不是一个能轻易下结论的
-          ...
+            <p>稳定排序和不稳定排序</p>
+<p>转自：<a href="http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html" target="_blank" rel="external">http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html</a></p>
+<p>这几天笔试了好几次了，连续碰到一个关于常见排序算法稳定性判别的问题，往往还是多选，对于我以及和我一样拿不准的同学可不是一个能轻易下结论的题目，当然如果你笔试之前已经记住了数据结构书上哪些是稳定的，哪些不是稳定的，做起来应该可以轻松搞定。本文是针对老是记不住这个或者想真正明白到底为什么是稳定或者不稳定的人准备的。</p>
+<p>首先，排序算法的稳定性大家应该都知道，通俗地讲就是能保证排序前2个相等的数其在序列的前后位置顺序和排序后它们两个的前后位置顺序相同。在简单形式化一下，如果Ai = Aj，Ai原来在位置前，排序后Ai还是要在Aj位置前。</p>
+<p>其次，说一下稳定性的好处。排序算法如果是稳定的，那么从一个键上排序，然后再从另一个键上排序，第一个键排序的结果可以为第二个键排序所用。基数排序就是这样，先按低位排序，逐次按高位排序，低位相同的元素其顺序再高位也相同时是不会改变的。另外，如果排序算法稳定，对基于比较的排序算法而言，元素交换的次数可能会少一些（个人感觉，没有证实）。</p>
+<p>回到主题，现在分析一下常见的排序算法的稳定性，每个都给出简单的理由。</p>
+<p><strong>(1)冒泡排序</strong></p>
+<p>冒泡排序就是把小的元素往前调或者把大的元素往后调。比较是相邻的两个元素比较，交换也发生在这两个元素之间。所以，如果两个元素相等，我想你是不会再无聊地把他们俩交换一下的；如果两个相等的元素没有相邻，那么即使通过前面的两两交换把两个相邻起来，这时候也不会交换，所以相同元素的前后顺序并没有改变，所以冒泡排序是一种稳定排序算法。</p>
+<p>(2)选择排序</p>
+<p>选择排序是给每个位置选择当前元素最小的，比如给第一个位置选择最小的，在剩余元素里面给第二个元素选择第二小的，依次类推，直到第n - 1个元素，第n个元素不用选择了，因为只剩下它一个最大的元素了。那么，在一趟选择，如果当前元素比一个元素小，而该小的元素又出现在一个和当前元素相等的元素后面，那么交换后稳定性就被破坏了。比较拗口，举个例子，序列5 8 5 2 9，我们知道第一遍选择第1个元素5会和2交换，那么原序列中2个5的相对前后顺序就被破坏了，所以选择排序不是一个稳定的排序算法。</p>
+<p><strong>(3)插入排序</strong><br>插入排序是在一个已经有序的小序列的基础上，一次插入一个元素。当然，刚开始这个有序的小序列只有1个元素，就是第一个元素。比较是从有序序列的末尾开始，也就是想要插入的元素和已经有序的最大者开始比起，如果比它大则直接插入在其后面，否则一直往前找直到找到它该插入的位置。如果碰见一个和插入元素相等的，那么插入元素把想插入的元素放在相等元素的后面。所以，相等元素的前后顺序没有改变，从原无序序列出去的顺序就是排好序后的顺序，所以插入排序是稳定的。</p>
+<p>(4)快速排序<br>快速排序有两个方向，左边的i下标一直往右走，当a[i] &lt;= a[center_index]，其中center_index是中枢元素的数组下标，一般取为数组第0个元素。而右边的j下标一直往左走，当a[j] &gt; a[center_index]。如果i和j都走不动了，i &lt;= j，交换a[i]和a[j],重复上面的过程，直到i &gt; j。 交换a[j]和a[center_index]，完成一趟快速排序。在中枢元素和a[j]交换的时候，很有可能把前面的元素的稳定性打乱，比如序列为5 3 3 4 3 8 9 10 11，现在中枢元素5和3（第5个元素，下标从1开始计）交换就会把元素3的稳定性打乱，所以快速排序是一个不稳定的排序算法，<strong>不稳定发生在中枢元素和a[j] 交换的时刻。</strong></p>
+<p><strong>(5)归并排序</strong><br>归并排序是把序列递归地分成短序列，递归出口是短序列只有1个元素（认为直接有序）或者2个序列（1次比较和交换），然后把各个有序的段序列合并成一个有序的长序列，不断合并直到原序列全部排好序。可以发现，在1个或2个元素时，1个元素不会交换，2个元素如果大小相等也没有人故意交换，这不会破坏稳定性。那么，在短的有序序列合并的过程中，稳定是是否受到破坏？没有，<strong>合并过程中我们可以保证如果两个当前元素相等时，我们把处在前面的序列的元素保存在结果序列的前面，这样就保证了稳定性</strong>。所以，归并排序也是稳定的排序算法。</p>
+<p>(6)基数排序<br>基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。有时候有些属性是有优先级顺序的，先按低优先级排序，再按高优先级排序，最后的次序就是高优先级高的在前，高优先级相同的低优先级高的在前。基数排序基于分别排序，分别收集，所以其是稳定的排序算法。</p>
+<p>(7)希尔排序(shell)<br>希尔排序是按照不同步长对元素进行插入排序，当刚开始元素很无序的时候，步长最大，所以插入排序的元素个数很少，速度很快；当元素基本有序了，步长很小， 插入排序对于有序的序列效率很高。所以，希尔排序的时间复杂度会比O(n^2)好一些。由于多次插入排序，我们知道一次插入排序是稳定的，不会改变相同元素的相对顺序，但在不同的插入排序过程中，相同的元素可能在各自的插入排序中移动，最后其稳定性就会被打乱，所以shell排序是不稳定的。</p>
+<p>(8)堆排序<br>我们知道堆的结构是节点i的孩子为2 <em> i和2 </em> i + 1节点，大顶堆要求父节点大于等于其2个子节点，小顶堆要求父节点小于等于其2个子节点。在一个长为n 的序列，堆排序的过程是从第n / 2开始和其子节点共3个值选择最大（大顶堆）或者最小（小顶堆），这3个元素之间的选择当然不会破坏稳定性。但当为n / 2 - 1， n / 2 - 2， … 1这些个父节点选择元素时，就会破坏稳定性。有可能第n / 2个父节点交换把后面一个元素交换过去了，而第n / 2 - 1个父节点把后面一个相同的元素没 有交换，那么这2个相同的元素之间的稳定性就被破坏了。所以，堆排序不是稳定的排序算法。</p>
+<p>综上，得出结论: 选择排序、快速排序、希尔排序、堆排序不是稳定的排序算法，而<strong>冒泡排序、插入排序、归并排序和基数排序</strong>是稳定的排序算法</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/14/[数据结构与算法]7、稳定排序与不稳定排序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -876,6 +1143,8 @@ mybatis优势
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -887,13 +1156,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/13/[数据库]4、数据库面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -901,38 +1180,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/13/[数据库]4、数据库面试题/" itemprop="url">
-                  4、数据库面试题
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/13/[数据库]4、数据库面试题/" itemprop="url">4、数据库面试题</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-13T23:55:00+08:00" content="2017-06-13">
-              2017-06-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T23:55:00+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -940,32 +1223,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/13/[数据库]4、数据库面试题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/13/[数据库]4、数据库面试题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -975,17 +1252,15 @@ mybatis优势
       
         
           
-          分页查询
-## 
+            <h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><p><img src="http://i.imgur.com/iUxof3t.png" alt=""></p>
+<p>## </p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/13/[数据库]4、数据库面试题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1003,6 +1278,8 @@ mybatis优势
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1014,13 +1291,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/13/[数据结构与算法]6、求逆序数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1028,38 +1315,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/13/[数据结构与算法]6、求逆序数/" itemprop="url">
-                  6、求逆序数
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/13/[数据结构与算法]6、求逆序数/" itemprop="url">6、求逆序数</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-13T21:13:00+08:00" content="2017-06-13">
-              2017-06-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T21:13:00+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -1067,32 +1358,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/13/[数据结构与算法]6、求逆序数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/13/[数据结构与算法]6、求逆序数/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1102,15 +1387,179 @@ mybatis优势
       
         
           
-          归并排序12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import java.util.*;public class Solution &#12
-          ...
+            <h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">import java.util.*;</div><div class="line"></div><div class="line">public class Solution &#123;</div><div class="line"></div><div class="line">    private int[] temp;</div><div class="line"></div><div class="line">    public void mergeSort(int[] a, int l, int r) &#123;</div><div class="line">        //递归结束</div><div class="line">        if (l &gt;= r) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        //防止溢出，或者也可以写int mid = l + (r - l) &gt;&gt;1 ，是1哦</div><div class="line">        int mid = l + (r - l) / 2;</div><div class="line">        //分治</div><div class="line">        mergeSort(a, l, mid);</div><div class="line">        mergeSort(a, mid + 1, r);</div><div class="line">        //两个有序数组l..mid，mid+1..r,合并成一个有序数组</div><div class="line">        merge(a, l, mid, r);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void merge(int[] a, int l, int mid, int r) &#123;</div><div class="line">        if (temp == null) &#123;</div><div class="line">            temp = new int[a.length];</div><div class="line">        &#125;</div><div class="line">        //先复制原数据至临时数组temp，接下来对temp进行操作，排序后覆写数组a</div><div class="line">        for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">            temp[i] = a[i];</div><div class="line">        &#125;</div><div class="line">        //双指针,不要忘记指针++</div><div class="line">        int lp = l, rp = mid + 1;</div><div class="line">        for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">            if (lp &gt; mid) &#123;</div><div class="line">                a[i] = temp[rp++];</div><div class="line">            &#125; else if (rp &gt; r) &#123;</div><div class="line">                a[i] = temp[lp++];</div><div class="line">            &#125; else &#123;</div><div class="line">                if (temp[lp] &lt; temp[rp]) &#123;</div><div class="line">                    a[i] = temp[lp++];</div><div class="line">                &#125; else &#123;</div><div class="line">                    a[i] = temp[rp++];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Solution s = new Solution();</div><div class="line">        int[] array = &#123;1, 2, 3, 4, 5, 6, 7, 0&#125;;</div><div class="line">        s.mergeSort(array, 0, array.length - 1);</div><div class="line">        for (int i = 0; i &lt; array.length; i++) &#123;</div><div class="line">            System.out.print(array[i] + &quot; &quot;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="归并排序的基础上求逆序数-推荐从后往前"><a href="#归并排序的基础上求逆序数-推荐从后往前" class="headerlink" title="归并排序的基础上求逆序数(推荐从后往前)"></a>归并排序的基础上求逆序数(推荐从后往前)</h2><p>OJ：<a href="https://www.nowcoder.com/practice/96bd6684e04a44eb80e6a68efc0ec6c5?tpId=13&amp;tqId=11188&amp;tPage=2&amp;rp=2&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking" target="_blank" rel="external">https://www.nowcoder.com/practice/96bd6684e04a44eb80e6a68efc0ec6c5?tpId=13&amp;tqId=11188&amp;tPage=2&amp;rp=2&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking</a></p>
+<p>1、两个有序数组从前往后合并成一个有序数组</p>
+<ul>
+<li>如果A&lt;=B，A指针往后移：因为A、B都是有序的，A&lt;=B之后的元素，相当于A与B之后的元素全部进行比较过</li>
+<li>如果A&gt;B，B指针往后移：B比A之后的元素都小，根据数组有序的特点，可以减少比较次数</li>
+</ul>
+<p>当A&gt;B时统计逆序数，B指针后移，此时A及A后面的元素组成逆序数对（A，B）、（A1，B）、（A2，B）…</p>
+<p>综上所述，从前往后归并，是根据在前面查找<strong>比他大</strong>的数的个数</p>
+<p>思考：从前往后合并，如果想要统计比A小的元素的个数？<br>见leetcode那题，当A&lt;=B时，需要移动lp时，记录count；当A&gt;=B时，count++</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">import java.util.*;</div><div class="line"></div><div class="line">public class Solution &#123;</div><div class="line"></div><div class="line">    private int[] temp;</div><div class="line">    private int inverseNum;</div><div class="line"></div><div class="line">    public int InversePairs(int[] array) &#123;</div><div class="line">        mergeSort(array, 0, array.length - 1);</div><div class="line">        return inverseNum;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void mergeSort(int[] a, int l, int r) &#123;</div><div class="line">        //递归结束</div><div class="line">        if (l == r) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        //防止溢出，或者也可以写int mid = l + (r - l) &gt;&gt;1 ，是1哦</div><div class="line">        int mid = l + (r - l) / 2;</div><div class="line">        //分治</div><div class="line">        mergeSort(a, l, mid);</div><div class="line">        mergeSort(a, mid + 1, r);</div><div class="line">        //两个有序数组l..mid，mid+1..r,合并成一个有序数组</div><div class="line">        merge(a, l, mid, r);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void merge(int[] a, int l, int mid, int r) &#123;</div><div class="line">        if (temp == null) &#123;</div><div class="line">            temp = new int[a.length];</div><div class="line">        &#125;</div><div class="line">        //先复制原数据至临时数组temp，接下来对temp进行操作，排序后覆写数组a</div><div class="line">        for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">            temp[i] = a[i];</div><div class="line">        &#125;</div><div class="line">        //双指针,不要忘记指针++</div><div class="line">        /*int lp = l, rp = mid + 1;</div><div class="line">        for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">            if (lp &gt; mid) &#123;</div><div class="line">                a[i] = temp[rp++];</div><div class="line">            &#125; else if (rp &gt; r) &#123;</div><div class="line">                a[i] = temp[lp++];</div><div class="line">            &#125; else &#123;</div><div class="line">                if (temp[lp] &lt; temp[rp]) &#123;</div><div class="line">                    a[i] = temp[lp++];</div><div class="line">                &#125; else &#123;</div><div class="line">                    a[i] = temp[rp++];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;*/</div><div class="line"></div><div class="line">        //注释归并的部分。求逆序数，左右两个数组的每个数都要进行比较！！</div><div class="line">        int lp = l, rp = mid + 1;</div><div class="line">        for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">            if (lp &gt; mid) &#123;</div><div class="line">                a[i] = temp[rp++];</div><div class="line">            &#125; else if (rp &gt; r) &#123;</div><div class="line">                a[i] = temp[lp++];</div><div class="line">            &#125; else &#123;</div><div class="line">                if (temp[lp] &lt; temp[rp]) &#123;</div><div class="line">                    a[i] = temp[lp++];</div><div class="line">                &#125; else if (temp[lp] &gt; temp[rp]) &#123;</div><div class="line">                    //3,4 1,2 如果1比3小,那么3,4都比1大</div><div class="line">                    inverseNum = (inverseNum + (mid - lp + 1)) % 1000000007;</div><div class="line">                    a[i] = temp[rp++];</div><div class="line">                &#125; else &#123;</div><div class="line">                    a[i] = temp[lp++];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    /*public static void main(String[] args) &#123;</div><div class="line">        Solution s = new Solution();</div><div class="line">        int[] array = &#123;1, 2, 3, 4, 5, 6, 7, 0, 1&#125;;</div><div class="line">        System.out.println(s.InversePairs(array));</div><div class="line">    &#125;*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、两个有序数组从后往前合并成一个有序数组</p>
+<ul>
+<li>如果A&gt;B，A指针往前移：因为A、B都是有序的，A&gt;B之前的元素，相当于A与B之前的元素全部进行比较过</li>
+<li>如果A&lt;=B，B指针往前移：B比A之前的元素都大，根据数组有序的特点，可以减少比较次数</li>
+</ul>
+<p>当A&gt;B时统计逆序数，A指针前移，此时B及B之前的元素组成逆序数对（A，B）、（A，B1）、（A，B2）…</p>
+<p>综上所述，从后往前归并，是根据在后面查找<strong>比他小</strong>的数的个数</p>
+<p>OJ:<a href="https://leetcode.com/problems/count-of-smaller-numbers-after-self/#/description" target="_blank" rel="external">https://leetcode.com/problems/count-of-smaller-numbers-after-self/#/description</a></p>
+<pre>
+import java.util.*;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/13/[数据结构与算法]6、求逆序数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+public class Solution {
+
+    private int[] nums;
+    private int[] new_indexs;
+    private List<integer> result = new ArrayList<integer>();
+
+    /**
+     * 对下标进行归并排序，原数组不变化
+     */
+    public List<integer> countSmaller(int[] nums) {
+        //初始化result
+        for (int i = 0; i < nums.length; i++) {
+            result.add(0);
+        }
+        //原数组的下标，对下标进行归并排序
+        int[] indexs = new int[nums.length];
+        for (int i = 0; i < indexs.length; i++) {
+            indexs[i] = i;
+        }
+        this.nums = nums;
+        mergeSort(indexs, 0, indexs.length - 1);
+        return result;
+    }
+
+    public void mergeSort(int[] indexs, int l, int r) {
+        //递归结束，必须是l>=r，如果数组为空会造成递归不停止
+        if (l >= r) {
+            return;
+        }
+        //防止溢出，或者也可以写int mid = l + (r - l) >>1 ，是1哦
+        int mid = l + (r - l) / 2;
+        //分治
+        mergeSort(indexs, l, mid);
+        mergeSort(indexs, mid + 1, r);
+        //两个有序数组l..mid，mid+1..r,合并成一个有序数组
+        merge(indexs, l, mid, r);
+    }
+
+    public void merge(int[] indexs, int l, int mid, int r) {
+        if (new_indexs == null) {
+            new_indexs = new int[indexs.length];
+        }
+        //先复制原数据至临时数组，接下来对temp进行操作，排序后覆写数组
+        for (int i = l; i <= r;="" i++)="" {="" new_indexs[i]="indexs[i];" }="" 注释归并的部分。求逆序数，左右两个数组的**每个数**都要进行比较！但是因为是数组是有序的，所以可以减少比较次数="" int="" lp="mid," rp="r;" <font="" color="red">for (int i = r; i >= l; i--) {
+            if (lp < l) {
+                indexs[i] = new_indexs[rp--];
+            } else if (rp < mid + 1) {
+                indexs[i] = new_indexs[lp--];
+            } else {
+                if (nums[new_indexs[lp]] > nums[new_indexs[rp]]) {
+                    //移动lp之前，统计比lp小的个数
+                    <font color="red">result.set(new_indexs[lp], result.get(new_indexs[lp]) + rp - mid);</font>
+                    indexs[i] = new_indexs[lp--];
+                } else {
+                    indexs[i] = new_indexs[rp--];
+                }
+            }
+        }
+    }
+
+
+    /*public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] array = {1, 9, 7, 8, 5};
+        System.out.println(s.countSmaller(array));//03110
+    }*/
+}
+</=></integer></integer></integer></pre>
+
+<h2 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h2><p>The basic idea is to do merge sort to nums[]. To record the result, we need to keep the index of each number in the original array. So instead of sort the number in nums, we sort the indexes of each number.<br>Example: nums = [5,2,6,1], indexes = [0,1,2,3]<br>After sort: indexes = [3,1,0,2]</p>
+<p>While doing the merge part, say that we are merging left[] and right[], left[] and right[] are already sorted.</p>
+<p>We keep a rightcount to record how many numbers from right[] we have added and keep an array count[] to record the result.</p>
+<p>When we move a number from <strong>right[]</strong> into the new sorted array, we <strong>increase rightcount by 1.</strong></p>
+<p>When we move a number from <strong>left[]</strong> into the new sorted array, we <strong>increase count[ index of the number ] by rightcount.</strong></p>
+<pre>
+import java.util.*;
+
+public class Solution {
+
+    private int[] nums;
+    private int[] new_indexs;
+    private List<integer> result = new ArrayList<integer>();
+
+    /**
+     * 对下标进行归并排序，原数组不变化
+     */
+    public List<integer> countSmaller(int[] nums) {
+        //初始化result
+        for (int i = 0; i < nums.length; i++) {
+            result.add(0);
+        }
+        //原数组的下标，对下标进行归并排序
+        int[] indexs = new int[nums.length];
+        for (int i = 0; i < indexs.length; i++) {
+            indexs[i] = i;
+        }
+        this.nums = nums;
+        mergeSort(indexs, 0, indexs.length - 1);
+        return result;
+    }
+
+    public void mergeSort(int[] indexs, int l, int r) {
+        //递归结束，必须是l>=r，如果数组为空会造成递归不停止
+        <font color="red">if (l >= r) {
+            return;
+        }</font>
+        //防止溢出，或者也可以写int mid = l + (r - l) >>1 ，是1哦
+        int mid = l + (r - l) / 2;
+        //分治
+        mergeSort(indexs, l, mid);
+        mergeSort(indexs, mid + 1, r);
+        //两个有序数组l..mid，mid+1..r,合并成一个有序数组
+        merge(indexs, l, mid, r);
+    }
+
+    public void merge(int[] indexs, int l, int mid, int r) {
+        if (new_indexs == null) {
+            new_indexs = new int[indexs.length];
+        }
+        //先复制原数据至临时数组，接下来对temp进行操作，排序后覆写数组
+        for (int i = l; i <= r;="" i++)="" {="" new_indexs[i]="indexs[i];" }="" 注释归并的部分。求逆序数，左右两个数组的**每个数**都要进行比较！但是因为是数组是有序的，所以可以减少比较次数="" int="" count="0;" lp="l," rp="mid" +="" 1;="" for="" (int="" i="l;" <="r;" if="" (lp=""> mid) {
+                indexs[i] = new_indexs[rp++];
+            } else if (rp > r) {
+                //lp移动的时候要加count
+                <font color="red">result.set(new_indexs[lp], result.get(new_indexs[lp]) + count);</font>
+                indexs[i] = new_indexs[lp++];
+            } else {
+                if (nums[new_indexs[lp]] <= nums[new_indexs[rp]])="" {="" 移动lp之前，统计比lp小的个数="" <font="" color="red">result.set(new_indexs[lp], result.get(new_indexs[lp]) + count);
+                    indexs[i] = new_indexs[lp++];
+                } else {
+                    <font color="red">count++;</font>
+                    indexs[i] = new_indexs[rp++];
+                }
+            }
+        }
+    }
+
+
+    /*public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] array = {1, 9, 7, 8, 5};
+        System.out.println(s.countSmaller(array));//03110
+    }*/
+}
+</=></=></integer></integer></integer></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1128,6 +1577,8 @@ mybatis优势
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1139,13 +1590,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/11/[分布式架构]一致性哈希算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1153,38 +1614,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/11/[分布式架构]一致性哈希算法/" itemprop="url">
-                  一致性哈希算法
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/11/[分布式架构]一致性哈希算法/" itemprop="url">一致性哈希算法</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-11T22:52:00+08:00" content="2017-06-11">
-              2017-06-11
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-11T22:52:00+08:00">
+                2017-06-11
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/分布式架构/" itemprop="url" rel="index">
                     <span itemprop="name">分布式架构</span>
                   </a>
@@ -1192,32 +1657,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/11/[分布式架构]一致性哈希算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/11/[分布式架构]一致性哈希算法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1227,16 +1686,50 @@ mybatis优势
       
         
           
-          一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的：
-1、环
-          ...
+            <h2 id="一致性哈希算法"><a href="#一致性哈希算法" class="headerlink" title="一致性哈希算法"></a>一致性哈希算法</h2><p>在分布式集群中，对机器的<strong>添加、删除，或者机器故障后自动脱离集群这些操作</strong>是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的：</p>
+<p><strong>1、环形Hash空间</strong></p>
+<p>按照常用的hash算法来<strong>将对应的key哈希到一个具有2^32次方个桶的空间中</strong>，即0~(2^32)-1的数字空间中。现在我们可以将这些数字头尾相连，想象成一个闭合的环形。如下图</p>
+<p><img src="http://i.imgur.com/pxLLjsA.png" alt=""></p>
+<p><strong>2、把数据通过一定的hash算法处理后映射到环上</strong></p>
+<p>现在我们将object1、object2、object3、object4四个对象通过特定的Hash函数计算出对应的key值，然后散列到Hash环上。如下图：</p>
+<pre><code>Hash(object1) = key1；
+Hash(object2) = key2；
+Hash(object3) = key3；
+Hash(object4) = key4；
+</code></pre><p><img src="http://i.imgur.com/UyMsKuP.png" alt=""></p>
+<p><strong>3、将机器通过hash算法映射到环上</strong></p>
+<p>在采用一致性哈希算法的分布式集群中将新的机器加入，其原理是通过使用与对象存储一样的Hash算法将机器也映射到环中（<strong>一般情况下对机器的hash计算是采用机器的IP或者机器唯一的别名作为输入值</strong>），然后<font color="red"><strong>以顺时针的方向计算，将所有对象存储到离自己最近的机器中。</strong></font></p>
+<p>假设现在有NODE1，NODE2，NODE3三台机器，通过Hash算法得到对应的KEY值，映射到环中，其示意图如下：</p>
+<pre><code>Hash(NODE1) = KEY1;
+Hash(NODE2) = KEY2;
+Hash(NODE3) = KEY3;
+</code></pre><p><img src="http://i.imgur.com/UHNzty7.png" alt=""></p>
+<p>通过上图可以看出对象与机器处于同一哈希空间中，这样按顺时针转动object1存储到了NODE1中，object3存储到了NODE2中，object2、object4存储到了NODE3中。在这样的部署环境中，hash环是不会变更的，因此，<strong>通过算出对象的hash值就能快速的定位到对应的机器中</strong>，这样就能找到对象真正的存储位置了。</p>
+<p><strong>机器的删除与添加</strong></p>
+<p>1、节点（机器）的删除</p>
+<p>如果NODE2出现故障被删除了，那么按照顺时针迁移的方法，object3将会被迁移到NODE3中，这样仅仅是object3的映射位置发生了变化，其它的对象没有任何的改动</p>
+<p><img src="http://i.imgur.com/MEVCYVI.png" alt=""></p>
+<p>2、节点（机器）的添加 </p>
+<p>如果往集群中添加一个新的节点NODE4，通过对应的哈希算法得到KEY4，并映射到环中</p>
+<p>通过按顺时针迁移的规则，<strong>那么object2被迁移到了NODE4中</strong>，其它对象还保持这原有的存储位置。</p>
+<p><img src="http://i.imgur.com/XxPL8q6.png" alt=""></p>
+<p>通过对节点的添加和删除的分析，一致性哈希算法在保持了单调性的同时，还是数据的迁移达到了最小，这样的算法对分布式集群来说是非常合适的，避免了大量数据迁移，减小了服务器的的压力。</p>
+<p><strong>虚拟主机是分布更加均匀</strong></p>
+<p>由于一致性hash算法采用对机器做hash，然后落在圆上，当节点较少时，有可能会出现这些机器节点是均匀分布的现象，这可以采用虚节点的方式来改进。例如现在有四个节点，直接按hash计算后，可能会出现某节点负责的区域更广，而其他区域更窄，<strong>虚节点的方式下则可划分为两百份，然后每五十个虚节点指向一个真实的节点机器</strong>，这样就可保证节点的均匀分布了。</p>
+<h2 id="Hash算法的好坏标准"><a href="#Hash算法的好坏标准" class="headerlink" title="Hash算法的好坏标准"></a>Hash算法的好坏标准</h2><p>判定哈希算法好坏的四个定义：</p>
+<p>1、平衡性(Balance)：平衡性是指<strong>哈希的结果能够尽可能分布到所有的缓冲中去</strong>，这样可以使得所有的缓冲空间都得到利用。很多哈希算法都能够满足这一条件。</p>
+<p>2、单调性(Monotonicity)：单调性是指如果已经有一些内容通过哈希分派到了相应的缓冲中，又有新的缓冲加入到系统中。哈希的结果应能够保证<strong>原有已分配的内容可以被映射到原有的或者新的缓冲中去</strong>，而不会被映射到旧的缓冲集合中的其他缓冲区。 </p>
+<p>理解：增加、删除机器时，必然造成缓存分布变化，对于变化的缓存部分，需要进行移动，<strong>保证通过新的Hash算法能够找到缓存数据</strong></p>
+<p>3、分散性(Spread)：在分布式环境中，终端有可能看不到所有的缓冲，而是只能看到其中的一部分。当终端希望通过哈希过程将内容映射到缓冲上时，由于不同终端所见的缓冲范围有可能不同，从而导致哈希的结果不一致，最终的结果是相同的内容被不同的终端映射到不同的缓冲区中。这种情况显然是应该避免的，因为它导致相同内容被存储到不同缓冲中去，降低了系统存储的效率。分散性的定义就是上述情况发生的严重程度。好的哈希算法应能够尽量避免不一致的情况发生，也就是尽量降低分散性。 </p>
+<p>理解：相同的内容应尽量被分配到同一个缓存区，否则同一个内容分布在多个地方，会存在数据不一致问题</p>
+<p>4、负载(Load)：负载问题实际上是从另一个角度看待分散性问题。既然不同的终端可能将相同的内容映射到不同的缓冲区中，那么对于一个特定的缓冲区而言，也可能被不同的用户映射为不同的内容。与分散性一样，这种情况也是应当避免的，因此好的哈希算法应能够尽量降低缓冲的负荷。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/11/[分布式架构]一致性哈希算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1254,6 +1747,8 @@ mybatis优势
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1265,13 +1760,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/11/[数据结构与算法]5、素数筛法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1279,38 +1784,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/11/[数据结构与算法]5、素数筛法/" itemprop="url">
-                  5、素数筛法
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/11/[数据结构与算法]5、素数筛法/" itemprop="url">5、素数筛法</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-11T10:03:00+08:00" content="2017-06-11">
-              2017-06-11
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-11T10:03:00+08:00">
+                2017-06-11
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -1318,32 +1827,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/11/[数据结构与算法]5、素数筛法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/11/[数据结构与算法]5、素数筛法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1353,15 +1856,91 @@ mybatis优势
       
         
           
-          判断一个数是否是素数，复杂度sqrt(n)1234567891011121314151617181920212223242526public class Demo&#123;	//判断一个数是否是素数	/** 为什么只需要判断[2,sqrt(n)]？	 ** 反证法，假设[2,sqrt(n)]不能整
-          ...
+            <h2 id="判断一个数是否是素数，复杂度sqrt-n"><a href="#判断一个数是否是素数，复杂度sqrt-n" class="headerlink" title="判断一个数是否是素数，复杂度sqrt(n)"></a>判断一个数是否是素数，复杂度sqrt(n)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public class Demo&#123;</div><div class="line"></div><div class="line">	//判断一个数是否是素数</div><div class="line">	/** 为什么只需要判断[2,sqrt(n)]？</div><div class="line">	 ** 反证法，假设[2,sqrt(n)]不能整除n，但存在一个数a属于(sqrt(n),n-1]能够整除n，即n = ak。</div><div class="line">	 ** 因为n = sqrt(n)*sqrt(n)，因为a &gt;= sqrt(n)，所以k&lt;=sqrt(n)。已知[2,sqrt(n)]不能整除n，矛盾。</div><div class="line">	 **/</div><div class="line">	public boolean isPrime(int n)&#123;</div><div class="line">		if(n &lt;= 1)&#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">		for(int i = 2; i*i &lt;= n; i++ )&#123;</div><div class="line">			if(n%i == 0)&#123;</div><div class="line">				return false;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return true;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args)&#123;</div><div class="line">		Demo d = new Demo();</div><div class="line">		for(int i = 0; i &lt; 50; i++)&#123;</div><div class="line">			System.out.println(i + &quot; &quot; + d.isPrime(i));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="埃氏筛法"><a href="#埃氏筛法" class="headerlink" title="埃氏筛法"></a>埃氏筛法</h2><p>令A为素数，则A*N（N&gt;1;N为自然数）都不是素数。<br>缺点是这种方法会造成重复筛除合数，影响效率，比如6会被2和3同时删除<br>时间复杂度：<font color="red"><strong>O（nloglogn）???求讨论</strong></font> </p>
+<pre>
+import java.util.*;
+public class Demo{
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/11/[数据结构与算法]5、素数筛法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    //找出1~N之间所有的素数
+    public List<integer> getPrime(int n){
+        //保存素数
+        List<integer> result = new LinkedList<integer>();
+        //下标为数字，true为素数，false为合数
+        boolean[] primes = new boolean[n+1];
+        //默认都是素数，然后一个个筛掉
+        for(int i = 0; i <= n;="" i++){="" primes[i]="true;" }="" 遍历候选数="" for(int="" i="2;" <="n;" if(primes[i]){="" result.add(i);="" 素数的倍数必然不是素数，j是2倍，3倍...="" j="i*2;" j+="i){//从j从i*i开始，因为之前i的倍数，已经被比i小的素数筛掉了，但是容易造成溢出，所以采用常规的方法，从2倍开始" primes[j]="false;" return="" result;="" public="" static="" void="" main(string[]="" args){="" demo="" d="new" demo();="" int="" n="1000000;" list<integer=""> primes = d.getPrime(n);
+        /*for(Integer s : primes){
+            System.out.println(s);
+        }*/
+        System.out.println(primes.size());//78498
+    }
+}
+</=></integer></integer></integer></pre>
+
+<h2 id="线性筛法–欧拉筛法★★★★★"><a href="#线性筛法–欧拉筛法★★★★★" class="headerlink" title="线性筛法–欧拉筛法★★★★★"></a>线性筛法–欧拉筛法★★★★★</h2><p>时间复杂度：O（n）<br>我们在用埃氏筛法的时候，有些合数会被重复筛去，所以会慢。<br>首先，我们要知道，任何合数都能表示成一系列素数的乘积，每个合数都有一个最小的<br>质因子，<font color="red"><strong>每个合数只被它的最小质因子筛去</strong></font>，时间就是线性的。 </p>
+<p>举个例子：</p>
+<p>2，3，4（2*2），5，6（2*3），7，8（2*4），9（3*3），10（2*5），11，12（2*6），13，14（2*7），15（2*5），16（2*8），17，18（2*9），19，20（2*10）….</p>
+<p>每个合数由它的最小质因子筛去，4由2筛去，6由2筛去，8由2筛去，9由3筛去；<br>注意到筛去的倍数是递增的，4是素数2的2倍，6是素数2的3倍，8是素数2的4倍，10是素数2的5倍…</p>
+<p>模拟一下，当倍数i = 2时，此时素数集合中有{2}，筛掉4<br>当倍数i = 3时，此时素数集合中有{2，3}，筛掉6，9<br>当倍数i = 4时，此时素数集合中有{2，3}，筛掉8，注意不筛掉12，因为12需要有素数2筛掉，而不是3</p>
+<pre>
+import java.util.*;
+public class Demo{
+
+    //找出1~N之间所有的素数
+    public List<integer> getPrime(int n){
+        //保存素数
+        List<integer> result = new LinkedList<integer>();
+        //下标为数字，true为素数，false为合数
+        boolean[] primes = new boolean[n+1];
+        //默认都是素数，然后一个个筛掉
+        for(int i = 0; i <= n;="" i++){="" primes[i]="true;" }="" 当前已经确认的素数集合中，筛除大小为<font="" color="red">素数的i倍的值，同时也<font color="red">遍历数字并判断当前数字是否是素数</font>
+        for(int i = 2; i <= n;="" i++){="" 如果还没有被筛除，则是素数="" if(primes[i]){="" result.add(i);="" }="" 遍历当前素数集合="" for(int="" j="0;" <="" result.size()="" &&="" <font="" color="red">result.get(j)*i <=n;< font=""> j++){
+                //素数的i倍筛掉
+                primes[result.get(j)*i] = false;
+                //如果倍数i在素数集合中存在因子，则result.get(j+1)*i这个数应该由result.get(j)筛除，而不是result.get(j+1)
+                //这行代码神奇地保证了每个合数只会被它的最小素因子筛掉，就把复杂度降到了O(N)
+                if(i % result.get(j) == 0){
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args){
+        Demo d = new Demo();
+        int n = 1000000;
+        List<integer> primes = d.getPrime(n);
+        /*for(Integer s : primes){
+            System.out.println(s);
+        }*/
+        System.out.println(primes.size());//78498
+    }
+}
+</integer></=n;<></=></=></integer></integer></integer></pre>
+
+<p>欧拉筛法就是这样实现的，代码主要体现在if（i%prime[j] == 0）break;<br>我们用prime数组来记录素数，prime里的数是单调递增的，当i能整除prime[j]时，那么i*prime[j+1]也肯定能被prime[j]的倍数筛掉。</p>
+<p>举例：<br>当 i = 4时，即筛除当前素数集合4倍的数，此时素数集合中有{2，3}<br>第一步筛选掉8（2*4），因为素数集合集合中存在i%j == 0，即4 % 2 = 0，停止循环<br><strong>因为如果不停止，下一步需要筛掉12（3<em>4），但是12可以表示成2</em>6，即12需要由2筛掉</strong></p>
+<p>QM总结：</p>
+<p>每个合数都可以表示为 n=p*k，p为这个数的最小质因子，k为倍数<br>如4=2*2， 6=2*3， 8=2*4<br>根据这个公式，筛掉合数有两种方式，固定p(即p在外层循环)，增加倍数k，<br>这个方法对于每个素数都要2倍，3倍…，里外两层循环。埃式筛法的做法，缺点就是合数会被多次筛掉</p>
+<p>第二种方式，固定倍数，即放在外层循环，范围从2-n，内部循环中取所有的素数，所以显然需要一个集合存储素数。</p>
+<p>每当判断一个数是素数，则将该数放入集合，每当固定一个倍数，遍历素数集合，素数与倍数相乘筛掉合数。<br>根据公式n=p*k，这样可以保证所有合数都被筛掉(证明1)</p>
+<p>那么如何保证每个合数被最小质因子筛掉？<br>即6应该被2*3 筛掉，而不是3*2<br>其实，当遍历到倍数2时，素数集合中还没有3，所以不能通过3*2的方式筛掉，只能到倍数3时，素数集合中有2，这时可以筛掉6<br>这其实是因为n=p*k，k大于等于p，p是最小素数</p>
+<p>但是对于12还是会同时被2*6，3*4筛掉，如何避免？考虑什么时候会被多次筛掉，当有多个质因子时，如30有。如30=2*15，3*10，5*6</p>
+<pre><code>if(i % result.get(j) = 0){
+    break;
+}
+</code></pre><p>这段话可以避免，30应该被2*15筛掉。但在遍历的过程中，先遍历到5*6，3*10，这个时候不应该筛掉，因为6，10中包含因子2，即i % result.get(j) = 0时需要break，等到倍数i增加，自然会将30筛掉，相当于延迟筛去</p>
+<p>break后会影响不能筛去所有素数吗？<br><strong>假设素数集合中有{a,b,c}，如果i%a ==0，需要break，那么b*i能够被后面筛掉吗？<br>可以，b*i 必须由a进行筛掉</strong></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.magicsite.cn/blog/Windows/cpp/cpp26717.html" target="_blank" rel="external">http://www.magicsite.cn/blog/Windows/cpp/cpp26717.html</a><br><a href="http://www.cnblogs.com/grubbyskyer/p/3852421.html" target="_blank" rel="external">http://www.cnblogs.com/grubbyskyer/p/3852421.html</a></p>
+
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1374,6 +1953,8 @@ mybatis优势
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1390,13 +1971,23 @@ mybatis优势
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/01/[Redis]缓存更新的设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1404,38 +1995,42 @@ mybatis优势
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/06/01/[Redis]缓存更新的设计模式/" itemprop="url">
-                  缓存更新的设计模式
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/06/01/[Redis]缓存更新的设计模式/" itemprop="url">缓存更新的设计模式</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-01T23:08:00+08:00" content="2017-06-01">
-              2017-06-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T23:08:00+08:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Redis/" itemprop="url" rel="index">
                     <span itemprop="name">Redis</span>
                   </a>
@@ -1443,32 +2038,26 @@ mybatis优势
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/01/[Redis]缓存更新的设计模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/01/[Redis]缓存更新的设计模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1478,20 +2067,21 @@ mybatis优势
       
         
           
-          缓存更新的套路
-http://coolshell.cn/articles/17416.html/comment-page-2#comments
-数据库缓存的几种方式
-http://www.jdon.com/repository/cache.html
-缓存级别与缓存更新问题
-http://www.im
-          ...
+            <p>缓存更新的套路</p>
+<p><a href="http://coolshell.cn/articles/17416.html/comment-page-2#comments" target="_blank" rel="external">http://coolshell.cn/articles/17416.html/comment-page-2#comments</a></p>
+<p>数据库缓存的几种方式</p>
+<p><a href="http://www.jdon.com/repository/cache.html" target="_blank" rel="external">http://www.jdon.com/repository/cache.html</a></p>
+<p>缓存级别与缓存更新问题</p>
+<p><a href="http://www.importnew.com/23967.html" target="_blank" rel="external">http://www.importnew.com/23967.html</a></p>
+<p>转：有關 Cache 的 read/write through/back/allocat</p>
+<p><a href="http://blog.sina.com.cn/s/blog_537bca2a0100eyl8.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_537bca2a0100eyl8.html</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/01/[Redis]缓存更新的设计模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1504,6 +2094,8 @@ http://www.im
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1545,31 +2137,39 @@ http://www.im
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="Mr.Qian" />
           <p class="site-author-name" itemprop="name">Mr.Qian</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">138</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1577,8 +2177,10 @@ http://www.im
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1599,7 +2201,12 @@ http://www.im
         
         
 
+        
+
+
       </section>
+
+      
 
       
 
@@ -1623,6 +2230,7 @@ http://www.im
   <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -1630,9 +2238,10 @@ http://www.im
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1640,9 +2249,13 @@ http://www.im
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1662,6 +2275,15 @@ http://www.im
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1687,181 +2309,59 @@ http://www.im
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-
-  
-    
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"rhapsody1290"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
   
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
 
 
 
+  
+
+
+
+
+
 
   
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = decodeURIComponent(data.url);
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
 
   
@@ -1873,6 +2373,8 @@ http://www.im
   
 
   
-<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+
+  
+
 </body>
 </html>

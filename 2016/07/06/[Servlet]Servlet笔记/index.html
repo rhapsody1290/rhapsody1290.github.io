@@ -1,20 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +72,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="JavaEE,Servlet," />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -139,31 +148,37 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://qianmingxs.com/2016/07/06/[Servlet]Servlet笔记/"/>
 
 
-  <title> Servlet笔记 | Mr.Qian's Home </title>
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>Servlet笔记 | Mr.Qian's Home</title>
   
 
 
@@ -174,35 +189,47 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Mr.Qian's Home</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -222,18 +249,8 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -243,7 +260,7 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -253,34 +270,13 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
@@ -295,49 +291,64 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/06/[Servlet]Servlet笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Servlet笔记
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">Servlet笔记</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-06T11:17:00+08:00" content="2016-07-06">
-              2016-07-06
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-06T11:17:00+08:00">
+                2016-07-06
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Servlet/" itemprop="url" rel="index">
                     <span itemprop="name">Servlet</span>
                   </a>
@@ -345,32 +356,26 @@ Enumeration&amp;lt;String&amp;gt; names = request.getHead">
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/06/[Servlet]Servlet笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/06/[Servlet]Servlet笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -2737,15 +2742,26 @@ public class MyRequestListener implements ServletRequestListener {
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
+
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/JavaEE/" rel="tag">#JavaEE</a>
+            <a href="/tags/JavaEE/" rel="tag"># JavaEE</a>
           
-            <a href="/tags/Servlet/" rel="tag">#Servlet</a>
+            <a href="/tags/Servlet/" rel="tag"># Servlet</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -2757,6 +2773,8 @@ public class MyRequestListener implements ServletRequestListener {
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -2788,10 +2806,6 @@ public class MyRequestListener implements ServletRequestListener {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/06/[Servlet]Servlet笔记/"
-           data-title="Servlet笔记" data-url="http://qianmingxs.com/2016/07/06/[Servlet]Servlet笔记/">
-      </div>
-    
   </div>
 
 
@@ -2808,6 +2822,7 @@ public class MyRequestListener implements ServletRequestListener {
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -2823,25 +2838,32 @@ public class MyRequestListener implements ServletRequestListener {
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="Mr.Qian" />
           <p class="site-author-name" itemprop="name">Mr.Qian</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">138</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -2849,8 +2871,10 @@ public class MyRequestListener implements ServletRequestListener {
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -2871,19 +2895,29 @@ public class MyRequestListener implements ServletRequestListener {
         
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用"><span class="nav-number">1.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要Servlet技术？"><span class="nav-number">2.</span> <span class="nav-text">为什么需要Servlet技术？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#servlet的介绍"><span class="nav-number">3.</span> <span class="nav-text">servlet的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat-和-servlet-在网络中的位置"><span class="nav-number">4.</span> <span class="nav-text">Tomcat 和 servlet 在网络中的位置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat三大功能"><span class="nav-number">4.1.</span> <span class="nav-text">Tomcat三大功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Servlet容器与Servlet关系★★★★★"><span class="nav-number">4.2.</span> <span class="nav-text">Servlet容器与Servlet关系★★★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web程序目录结构"><span class="nav-number">5.</span> <span class="nav-text">Web程序目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet工作流程★★★"><span class="nav-number">6.</span> <span class="nav-text">Servlet工作流程★★★</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题-请简述servlet的生命周期-工作流程"><span class="nav-number">7.</span> <span class="nav-text">面试题: 请简述servlet的生命周期(工作流程)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发Servlet程序"><span class="nav-number">8.</span> <span class="nav-text">开发Servlet程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#①实现servlet接口的方式"><span class="nav-number">8.1.</span> <span class="nav-text">①实现servlet接口的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">8.1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#②使用GenericServlet开发servlet（了解即可）"><span class="nav-number">8.2.</span> <span class="nav-text">②使用GenericServlet开发servlet（了解即可）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用GenericServlet"><span class="nav-number">8.2.1.</span> <span class="nav-text">为什么使用GenericServlet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GenericServlet完成的任务"><span class="nav-number">8.2.2.</span> <span class="nav-text">GenericServlet完成的任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GenericServlet原理"><span class="nav-number">8.2.3.</span> <span class="nav-text">GenericServlet原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开发步骤"><span class="nav-number">8.2.4.</span> <span class="nav-text">开发步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#③使用继承-HttpServlet-的方法来开发Serlvet"><span class="nav-number">8.3.</span> <span class="nav-text">③使用继承 HttpServlet 的方法来开发Serlvet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">8.3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开发步骤-1"><span class="nav-number">8.3.2.</span> <span class="nav-text">开发步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用myeclipse来开发servlet，IDEA类似"><span class="nav-number">9.</span> <span class="nav-text">使用myeclipse来开发servlet，IDEA类似</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用IDEA来开发Servlet程序"><span class="nav-number">10.</span> <span class="nav-text">使用IDEA来开发Servlet程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet的细节问题-映射、单例、通配符、自启动"><span class="nav-number">11.</span> <span class="nav-text">Servlet的细节问题[映射、单例、通配符、自启动]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#①-一个已经注册的Servlet可以被多次映射即"><span class="nav-number">11.1.</span> <span class="nav-text">① 一个已经注册的Servlet可以被多次映射即:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#②-映射一个servlet时候，可以多层，比如"><span class="nav-number">11.2.</span> <span class="nav-text">② 映射一个servlet时候，可以多层，比如</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#③-用通配符在servlet映射到URL中"><span class="nav-number">11.3.</span> <span class="nav-text">③ 用通配符在servlet映射到URL中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#④Servlet单例问题"><span class="nav-number">11.4.</span> <span class="nav-text">④Servlet单例问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#⑤servlet中的-lt-load-on-startup-gt-配置"><span class="nav-number">11.5.</span> <span class="nav-text">⑤servlet中的<load-on-startup>配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServletConfig对象"><span class="nav-number">12.</span> <span class="nav-text">ServletConfig对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServletContext★★★★★（包含读取文件路径）"><span class="nav-number">13.</span> <span class="nav-text">ServletContext★★★★★（包含读取文件路径）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用"><span class="nav-number">13.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContext的应用"><span class="nav-number">13.2.</span> <span class="nav-text">ServletContext的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取WEB应用的初始化参数"><span class="nav-number">13.2.1.</span> <span class="nav-text">获取WEB应用的初始化参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ServletContext实现跳转"><span class="nav-number">13.2.2.</span> <span class="nav-text">使用ServletContext实现跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取文件，和获取文件全路径"><span class="nav-number">13.2.3.</span> <span class="nav-text">读取文件，和获取文件全路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站计数器"><span class="nav-number">13.2.4.</span> <span class="nav-text">网站计数器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http请求消息头"><span class="nav-number">14.</span> <span class="nav-text">http请求消息头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http响应消息头"><span class="nav-number">15.</span> <span class="nav-text">http响应消息头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http响应的状态行"><span class="nav-number">16.</span> <span class="nav-text">http响应的状态行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http响应头应用★★★-防盗链、定时、文件下载、缓存"><span class="nav-number">17.</span> <span class="nav-text">http响应头应用★★★[防盗链、定时、文件下载、缓存]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#防盗链-Referer"><span class="nav-number">17.1.</span> <span class="nav-text">防盗链 - Referer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定时刷新Refresh使用"><span class="nav-number">17.2.</span> <span class="nav-text">定时刷新Refresh使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件下载-Content-Disposition"><span class="nav-number">17.3.</span> <span class="nav-text">文件下载 Content-Disposition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存讲解"><span class="nav-number">17.4.</span> <span class="nav-text">缓存讲解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpServletResponse的再说明"><span class="nav-number">18.</span> <span class="nav-text">HttpServletResponse的再说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数的传递方式sendRedirect-和session"><span class="nav-number">19.</span> <span class="nav-text">参数的传递方式sendRedirect()和session()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文乱码处理"><span class="nav-number">20.</span> <span class="nav-text">中文乱码处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#①表单form"><span class="nav-number">20.1.</span> <span class="nav-text">①表单form</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#②超链接"><span class="nav-number">20.2.</span> <span class="nav-text">②超链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#③sendRedirect-发生乱码"><span class="nav-number">20.3.</span> <span class="nav-text">③sendRedirect() 发生乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本低导致的乱码"><span class="nav-number">20.4.</span> <span class="nav-text">版本低导致的乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#★★★★返回浏览器显示乱码"><span class="nav-number">20.5.</span> <span class="nav-text">★★★★返回浏览器显示乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载提示框中文乱码"><span class="nav-number">20.6.</span> <span class="nav-text">下载提示框中文乱码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpServletRequest对象的详解"><span class="nav-number">21.</span> <span class="nav-text">HttpServletRequest对象的详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-和-uri-的区别"><span class="nav-number">22.</span> <span class="nav-text">url 和 uri 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求转发getRequestDispatcher"><span class="nav-number">23.</span> <span class="nav-text">请求转发getRequestDispatcher</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话技术cookie"><span class="nav-number">24.</span> <span class="nav-text">会话技术cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是会话"><span class="nav-number">24.1.</span> <span class="nav-text">什么是会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie的原理图"><span class="nav-number">24.2.</span> <span class="nav-text">cookie的原理图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建cookie"><span class="nav-number">24.3.</span> <span class="nav-text">创建cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取cookie"><span class="nav-number">24.4.</span> <span class="nav-text">读取cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie的小结★★★"><span class="nav-number">24.5.</span> <span class="nav-text">cookie的小结★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例-保存上次登录时间★★★"><span class="nav-number">24.6.</span> <span class="nav-text">举例 - 保存上次登录时间★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie的细节★★★"><span class="nav-number">24.7.</span> <span class="nav-text">cookie的细节★★★</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话技术session（生成验证码）"><span class="nav-number">25.</span> <span class="nav-text">会话技术session（生成验证码）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#session有什么用"><span class="nav-number">25.1.</span> <span class="nav-text">session有什么用?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session工作原理图"><span class="nav-number">25.2.</span> <span class="nav-text">session工作原理图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session基本使用"><span class="nav-number">25.3.</span> <span class="nav-text">session基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session小结"><span class="nav-number">25.4.</span> <span class="nav-text">session小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session的更深入理解"><span class="nav-number">25.5.</span> <span class="nav-text">session的更深入理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成验证码案例"><span class="nav-number">25.6.</span> <span class="nav-text">生成验证码案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IE上购买商品后关闭，再打开IE，要求上次的商品还在"><span class="nav-number">25.7.</span> <span class="nav-text">IE上购买商品后关闭，再打开IE，要求上次的商品还在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ie禁用cookie后使用session的方法"><span class="nav-number">25.8.</span> <span class="nav-text">ie禁用cookie后使用session的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie-vs-session"><span class="nav-number">26.</span> <span class="nav-text">cookie vs session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的位置"><span class="nav-number">26.1.</span> <span class="nav-text">存在的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全性"><span class="nav-number">26.2.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络传输量"><span class="nav-number">26.3.</span> <span class="nav-text">网络传输量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">26.4.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用原则"><span class="nav-number">26.5.</span> <span class="nav-text">使用原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器-Filter"><span class="nav-number">27.</span> <span class="nav-text">过滤器 Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤器链-FilterChain"><span class="nav-number">27.1.</span> <span class="nav-text">过滤器链 FilterChain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防盗链Filter"><span class="nav-number">27.2.</span> <span class="nav-text">防盗链Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符编码-Filter"><span class="nav-number">27.3.</span> <span class="nav-text">字符编码 Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义"><span class="nav-number">27.3.1.</span> <span class="nav-text">自定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-mvc自带"><span class="nav-number">27.3.2.</span> <span class="nav-text">Spring mvc自带</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常捕捉-Filter"><span class="nav-number">27.4.</span> <span class="nav-text">异常捕捉 Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容替换-Filter"><span class="nav-number">27.5.</span> <span class="nav-text">内容替换 Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GZIP-压缩-Filter"><span class="nav-number">27.6.</span> <span class="nav-text">GZIP 压缩 Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像水印-Filter"><span class="nav-number">27.7.</span> <span class="nav-text">图像水印 Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容替换、GZIP、图像水印-Filter-总结★★★★★★"><span class="nav-number">27.8.</span> <span class="nav-text">内容替换、GZIP、图像水印 Filter 总结★★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存-Filter"><span class="nav-number">27.9.</span> <span class="nav-text">缓存 Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSLT-转换-Filter"><span class="nav-number">27.10.</span> <span class="nav-text">XSLT 转换 Filter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监听器-Listener"><span class="nav-number">28.</span> <span class="nav-text">监听器 Listener</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Listener使用"><span class="nav-number">28.1.</span> <span class="nav-text">Listener使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现Listener接口"><span class="nav-number">28.1.1.</span> <span class="nav-text">实现Listener接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Listener配置"><span class="nav-number">28.1.2.</span> <span class="nav-text">Listener配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listener的分类★★★★★★"><span class="nav-number">28.2.</span> <span class="nav-text">Listener的分类★★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#监听对象的创建与销毁"><span class="nav-number">28.2.1.</span> <span class="nav-text">监听对象的创建与销毁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例：监听Session、request、servletContext"><span class="nav-number">28.2.2.</span> <span class="nav-text">实例：监听Session、request、servletContext</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监听对象的属性变化"><span class="nav-number">28.2.3.</span> <span class="nav-text">监听对象的属性变化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监听Session内的对象"><span class="nav-number">28.2.4.</span> <span class="nav-text">监听Session内的对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listener使用案例"><span class="nav-number">28.3.</span> <span class="nav-text">Listener使用案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单态登录"><span class="nav-number">28.3.1.</span> <span class="nav-text">单态登录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Listener方式实现"><span class="nav-number">28.3.1.1.</span> <span class="nav-text">Listener方式实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自己的实现"><span class="nav-number">28.3.1.2.</span> <span class="nav-text">自己的实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示在线用户"><span class="nav-number">28.3.2.</span> <span class="nav-text">显示在线用户</span></a></li></ol></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -2906,6 +2940,7 @@ public class MyRequestListener implements ServletRequestListener {
   <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -2913,9 +2948,10 @@ public class MyRequestListener implements ServletRequestListener {
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -2923,9 +2959,13 @@ public class MyRequestListener implements ServletRequestListener {
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -2945,6 +2985,15 @@ public class MyRequestListener implements ServletRequestListener {
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2970,51 +3019,48 @@ public class MyRequestListener implements ServletRequestListener {
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"rhapsody1290"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
 
   
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
   
 
 
@@ -3023,132 +3069,9 @@ public class MyRequestListener implements ServletRequestListener {
 
 
   
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = decodeURIComponent(data.url);
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
 
   
@@ -3160,6 +3083,8 @@ public class MyRequestListener implements ServletRequestListener {
   
 
   
-<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+
+  
+
 </body>
 </html>

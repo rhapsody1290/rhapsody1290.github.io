@@ -1,20 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +72,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -93,31 +102,37 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://qianmingxs.com/page/5/"/>
 
 
-  <title> Mr.Qian's Home </title>
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>Mr.Qian's Home</title>
   
 
 
@@ -128,37 +143,49 @@
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Mr.Qian's Home</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -178,18 +205,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -199,7 +216,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -209,34 +226,13 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
@@ -251,13 +247,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/15/[mybatis]mybatis generator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -265,38 +271,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/15/[mybatis]mybatis generator/" itemprop="url">
-                  mybatis generator
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/15/[mybatis]mybatis generator/" itemprop="url">mybatis generator</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-15T12:39:00+08:00" content="2017-04-15">
-              2017-04-15
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T12:39:00+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/mybatis/" itemprop="url" rel="index">
                     <span itemprop="name">mybatis</span>
                   </a>
@@ -304,32 +314,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/15/[mybatis]mybatis generator/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/15/[mybatis]mybatis generator/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -339,17 +343,78 @@
       
         
           
-          详细说明http://blog.csdn.net/isea533/article/details/42102297
-generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOC
-          ...
+            <p>详细说明<br><a href="http://blog.csdn.net/isea533/article/details/42102297" target="_blank" rel="external">http://blog.csdn.net/isea533/article/details/42102297</a></p>
+<h2 id="generatorConfig-xml"><a href="#generatorConfig-xml" class="headerlink" title="generatorConfig.xml"></a>generatorConfig.xml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration
+        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
+&lt;generatorConfiguration&gt;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/15/[mybatis]mybatis generator/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    &lt;!-- 指定数据连接驱动jar地址 --&gt;
+    &lt;classPathEntry location=&quot;D:\IDEA\workspace\mk_wechat_app\app\lib\sqljdbc-3.0.jar&quot; /&gt;
+
+    &lt;!-- 一个数据库一个contex，使用flat，一个表对应一个实体类 --&gt;
+    &lt;context id=&quot;Tables&quot; targetRuntime=&quot;MyBatis3&quot; defaultModelType=&quot;flat&quot;&gt;
+
+        &lt;!-- 注释 --&gt;
+        &lt;commentGenerator&gt;
+            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;&lt;!-- 是否取消注释 --&gt;
+            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt; &lt;!-- 是否生成注释代时间戳 --&gt;
+        &lt;/commentGenerator&gt;
+
+        &lt;!--定义如何连接目标数据库--&gt;
+        &lt;jdbcConnection driverClass=&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;
+                        connectionURL=&quot;jdbc:sqlserver://121.12.155.196:1433;databaseName=DBERPDG&quot;
+                        userId=&quot;sa&quot;
+                        password=&quot;1qaz@WSX&quot;&gt;
+        &lt;/jdbcConnection&gt;
+
+        &lt;!-- 生成实体类地址 --&gt;
+        &lt;javaModelGenerator targetPackage=&quot;com.mk.domain&quot; targetProject=&quot;src/main/java&quot;&gt;
+            &lt;!--是否使用子包--&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+            &lt;!--任何字符串属性的setter方法将调用trim方法--&gt;
+            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;
+        &lt;/javaModelGenerator&gt;
+
+        &lt;!-- 生成xml文件 --&gt;
+        &lt;sqlMapGenerator targetPackage=&quot;mapper&quot;  targetProject=&quot;src/main/resources&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+        &lt;/sqlMapGenerator&gt;
+
+        &lt;!--DAO--&gt;
+        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.mk.mapper&quot;
+                             targetProject=&quot;src/main/java&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot; /&gt;
+        &lt;/javaClientGenerator&gt;
+
+        &lt;!--tableName：指定要生成的表名，可以使用SQL通配符匹配多个表。
+        例如要生成全部的表，可以按如下配置：&lt;table tableName=&quot;%&quot; /&gt;--&gt;
+        &lt;table tableName=&quot;Partner_Info_Tab&quot; enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot; enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot;&gt;
+            &lt;!--Cloudscape、DB2、DB2_MF、Derby、HSQLDB、Informix、MySql、SqlServer、SYBASE--&gt;
+            &lt;generatedKey column=&quot;Partner_No&quot; sqlStatement=&quot;SqlServer&quot;/&gt;
+        &lt;/table&gt;
+
+    &lt;/context&gt;
+&lt;/generatorConfiguration&gt;
+</code></pre><h2 id="pom"><a href="#pom" class="headerlink" title="pom"></a>pom</h2><pre><code>&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;!--Mybatis Generator插件--&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;1.3.0&lt;/version&gt;
+        &lt;/plugin&gt;
+
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -367,6 +432,8 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -378,13 +445,23 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Maven]Maven插件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -392,38 +469,42 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Maven]Maven插件/" itemprop="url">
-                  Maven插件
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Maven]Maven插件/" itemprop="url">Maven插件</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T21:49:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T21:49:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Maven/" itemprop="url" rel="index">
                     <span itemprop="name">Maven</span>
                   </a>
@@ -431,32 +512,26 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Maven]Maven插件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Maven]Maven插件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -466,22 +541,46 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
         
           
-          war打包war打包时添加第三方的jar包，如下图所示将lib目录下的jar包作为依赖
-
-配置如下：
-&lt;build&gt;
+            <h2 id="war打包"><a href="#war打包" class="headerlink" title="war打包"></a>war打包</h2><p>war打包时添加第三方的jar包，如下图所示将lib目录下的jar包作为依赖</p>
+<p><img src="http://i.imgur.com/NMiYvVs.png" alt=""></p>
+<p>配置如下：</p>
+<pre><code>&lt;build&gt;
     &lt;plugins&gt;
         &lt;!--war打包--&gt;
         &lt;plugin&gt;
-            &lt
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Maven]Maven插件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.1.1&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;webResources&gt;
+                    &lt;resource&gt;
+                        &lt;directory&gt;${project.basedir}/lib&lt;/directory&gt;
+                        &lt;targetPath&gt;WEB-INF/lib&lt;/targetPath&gt;
+                        &lt;filtering&gt;false&lt;/filtering&gt;
+                        &lt;includes&gt;
+                            &lt;include&gt;**/*.jar&lt;/include&gt;
+                        &lt;/includes&gt;
+                    &lt;/resource&gt;
+                &lt;/webResources&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre><p>引入本地依赖：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.microsoft.sqlserver&lt;/groupId&gt;
+    &lt;artifactId&gt;sqljdbc&lt;/artifactId&gt;
+    &lt;version&gt;3.0&lt;/version&gt;
+    &lt;scope&gt;system&lt;/scope&gt;
+    &lt;systemPath&gt;${project.basedir}/lib/sqljdbc-3.0.jar&lt;/systemPath&gt;
+&lt;/dependency&gt;
+</code></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -499,6 +598,8 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -510,13 +611,23 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -524,38 +635,42 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/" itemprop="url">
-                  Intellij IDEA创建 Web 项目
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/" itemprop="url">Intellij IDEA创建 Web 项目</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T19:56:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T19:56:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Servlet/" itemprop="url" rel="index">
                     <span itemprop="name">Servlet</span>
                   </a>
@@ -563,32 +678,26 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -598,21 +707,128 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
         
           
-          快速构建 Web 项目打开IDEA，新建Project，左边菜单栏选择 Maven，直接点 Next
+            <h2 id="快速构建-Web-项目"><a href="#快速构建-Web-项目" class="headerlink" title="快速构建 Web 项目"></a>快速构建 Web 项目</h2><p>打开IDEA，新建Project，左边菜单栏选择 Maven，直接点 Next</p>
+<p><img src="http://i.imgur.com/VKZroBL.png" alt=""></p>
+<p>选择GroupId和ArtifactId</p>
+<p><img src="http://i.imgur.com/89qQ4Tx.png" alt=""></p>
+<p>选择项目名称，默认会填上工程位置、模块姓名等，直接点Finsh</p>
+<p><img src="http://i.imgur.com/1B1iP1d.png" alt=""></p>
+<p>进入到工程的主页面，注意到右上角跳出是否导入Maven，一般直接选择Auto_Import，这样在POM文件中添加依赖的时候，可以直接导入jar包</p>
+<p><img src="http://i.imgur.com/nC0KdOK.png" alt="4"></p>
+<p>现在已经完成普通Maven项目的创建，接下来将要把他变成一个Web项目，只需要在工程名字上右键，选择Add Frame Support</p>
+<p><img src="http://i.imgur.com/caLOyrH.png" alt="5"></p>
+<p>选择Web Application，并勾选创建Web.xml</p>
+<p><img src="http://i.imgur.com/nhGocyN.png" alt="6"></p>
+<p>在工程目录上看到新添加了一个web的文件夹，而且注意到文件夹的图标和普通文件夹的图标不一样，这个文件夹是web的根目录</p>
+<p><img src="http://i.imgur.com/gwXjx1M.png" alt="7"></p>
+<p>但是根据Maven规范，定义web根目录默认是在main文件夹下，而且以webapp命名。所以下图所示，将web文件夹重命名为webapp，而且移动到main文件夹下</p>
+<p><img src="http://i.imgur.com/tMcsc6w.png" alt="8"></p>
+<p>打开pom.xml文件，指定工程的打包方式为war，当把该文件放到web容器下（可以是tomcat，也可以是jetty等）直接可以运行web程序</p>
+<p>在build文件下，加入 Jetty 插件，个人觉得使用Jetty插件的好处是可以在不下载外部服务器的情况下，直接在IDEA中运行程序</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
-选择GroupId和ArtifactId
+    &lt;groupId&gt;com.qianmingxs&lt;/groupId&gt;
+    &lt;artifactId&gt;Demo&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
 
-选择项目名称，默认会填上工程位置、模块姓名等，直接点Finsh
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.mortbay.jetty&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-jetty-plugin&lt;/artifactId&gt;
+                &lt;version&gt;6.1.21&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;!-- 多少秒进行一次热部署 --&gt;
+                    &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
+                    &lt;!--端口--&gt;
+                    &lt;connectors&gt;
+                        &lt;connector implementation=&quot;org.mortbay.jetty.nio.SelectChannelConnector&quot;&gt;
+                            &lt;port&gt;8080&lt;/port&gt;
+                            &lt;maxIdleTime&gt;60000&lt;/maxIdleTime&gt;
+                        &lt;/connector&gt;
+                    &lt;/connectors&gt;
+                    &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
+                    &lt;!--根目录，建议/--&gt;
+                    &lt;contextPath&gt;/&lt;/contextPath&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre><p><img src="http://i.imgur.com/5rB4b99.png" alt="9"></p>
+<p>打开IDEA中的Maven操作窗口，Plugins-jetty-jetty:run，直接双击就可以启动jetty容器，运行web程序，从控制台也可以看到应用程序在8080端口启动</p>
+<p>如果想要进入<strong>调试模式</strong>，在jetty：run上右键选择 Debug 即可</p>
+<p><img src="http://i.imgur.com/cMLRzrz.png" alt="10"></p>
+<p>在浏览器上输入localhost:8080，可以看到程序正常运行；如果在jetty文件中设置的contextPath不为path，运行的url应为localhost:8080/YourContextpath/</p>
+<p><img src="http://i.imgur.com/ZtFol1O.png" alt="11"></p>
+<p>jetty：run-war和jetty：run功能差不多，在运行jetty：run-war的时候会先将web工程打包，然后执行war。</p>
+<p><img src="http://i.imgur.com/pDTb6B7.png" alt="12"></p>
+<p>打包后的war在功能目录中target目录中</p>
+<p><img src="http://i.imgur.com/cTzERfo.png" alt="13"></p>
+<h2 id="使用Tomcat插件"><a href="#使用Tomcat插件" class="headerlink" title="使用Tomcat插件"></a>使用Tomcat插件</h2><p>在插件中加入tomcat插件即可</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
 
-进入到工程的主页面，注意到右上角跳出是否导入Maven，一般直接选择Auto_Impo
-          ...
+    &lt;groupId&gt;com.qianmingxs&lt;/groupId&gt;
+    &lt;artifactId&gt;Demo&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Servlet]Intellij IDEA创建 Web 项目/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+                &lt;artifactId&gt;tomcat-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;1.1&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;path&gt;/&lt;/path&gt;
+                    &lt;port&gt;8080&lt;/port&gt;
+                    &lt;uriEncoding&gt;UTF-8&lt;/uriEncoding&gt;
+                    &lt;server&gt;tomcat6&lt;/server&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre><p>简要说明一下：</p>
+<p>path是访问应用的路径<br>port是 tomcat 的端口号<br>uriEncoding URL按UTF-8进行编码，这样就解决了中文参数乱码。<br>Server指定tomcat名称</p>
+<h2 id="IDEA-引入自定义jar包"><a href="#IDEA-引入自定义jar包" class="headerlink" title="IDEA 引入自定义jar包"></a>IDEA 引入自定义jar包</h2><p>之后可以在 Project Structure 的 Modules - Dependencies看到添加的lib文件，或者可以在Project Structure - Libraries看到添加的lib文件</p>
+<p>移除lib文件需要在上述两个位置中进行移除</p>
+<p><img src="http://i.imgur.com/AUPqNZY.png" alt=""></p>
+<h2 id="war打包工具"><a href="#war打包工具" class="headerlink" title="war打包工具"></a>war打包工具</h2><p>可以向用户自定义的文件打包到web目录下，下面给出了一个将用户自定义的lib文件打包到WEB-INF目录下</p>
+<pre><code>&lt;!--war打包--&gt;
+&lt;plugin&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+    &lt;version&gt;2.1.1&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;webResources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;${project.basedir}/lib&lt;/directory&gt;
+                &lt;targetPath&gt;WEB-INF/lib&lt;/targetPath&gt;
+                &lt;filtering&gt;false&lt;/filtering&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.jar&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+        &lt;/webResources&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+</code></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -625,6 +841,8 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -641,13 +859,23 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -655,38 +883,42 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/" itemprop="url">
-                  Linux视频教程第20讲.Linux启动过程分析
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/" itemprop="url">Linux视频教程第20讲.Linux启动过程分析</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T10:44:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T10:44:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -694,32 +926,26 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -729,16 +955,20 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
         
           
-          BIOS就是在开机的时候，计算机系统会主动执行的第一个程序了！
-接下来 BIOS 会去分析计算机里面有哪些储存设备，我们以硬盘为例，BIOS 会依据使用者的设定去获得能够开机的硬盘，并且到该硬盘里面去读取第一个扇区的 MBR 位置。 MBR 这个仅有 446 bytes 的硬盘容量里面会放置最基本的
-          ...
+            <p>BIOS就是在开机的时候，计算机系统会主动执行的第一个程序了！</p>
+<p>接下来 BIOS 会去分析计算机里面有哪些储存设备，我们以硬盘为例，BIOS 会依据使用者的设定去获得<strong>能够开机的硬盘</strong>，并且到该硬盘里面去读取<strong>第一个扇区的 MBR 位置</strong>。 MBR 这个仅有 446 bytes 的硬盘容量里面会放置最基本的<strong>开机管理程序</strong>，此时 BIOS就功成圆满，而接下来就是 MBR 内的开机管理程序的工作了。</p>
+<p>这个开机管理程序的目的是在<strong>加载(load)核心档案</strong>，由于开机管理程序是操作系统在安装的时候所提供的，所以他会认识硬盘内的文件系统格式，因此就能够读取核心档案， 然后接下来就是核心档案的工作，开机管理程序也功成圆满，之后就是大家所知道的操作系统的任务啦！</p>
+<p>简单的说，整个开机流程到操作系统之前的动作应该是这样的：</p>
+<p>1、BIOS：开机主动执行的程序，会认识第一个可开机的装置；<br>2、MBR：第一个可开机装置的第一个扇区内的主要启动记录区块，内含开机管理程序；<br>3、开机管理程序(boot loader)：一支可读取核心档案来执行的软件；<br>4、核心档案：开始操作系统的功能…</p>
+<h2 id="linux启动过程"><a href="#linux启动过程" class="headerlink" title="linux启动过程"></a>linux启动过程</h2><p>linux系统的启动过程如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">a) BIOS自检 </div><div class="line">b) 启动GRUB/LILO </div><div class="line">c) 运行linux内核并检测硬件</div><div class="line">d) 运行系统的第一个进程init</div><div class="line">e) init读取系统引导配置文件/etc/inittab中的信息进行初始化 </div><div class="line">f) /etc/rc.d/rc.sysinit系统初始化脚本</div><div class="line">g) /etc/rc.d/rcX.d/[KS] * -根据运行级别X配置服务</div><div class="line">    a) 终止以&quot;K&quot;开头的服务 b) 启动以&quot;S&quot;开头的服务 </div><div class="line">h) /etc/rc.d/rc.local执行本地特殊配置 </div><div class="line">i) 其他特殊服务</div></pre></td></tr></table></figure>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Linux]Linux视频教程第20讲.Linux启动过程分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -751,6 +981,8 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -767,13 +999,23 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Linux]Linux视频教程第19讲.补充linux重要内容find alias/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -781,38 +1023,42 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第19讲.补充linux重要内容find alias/" itemprop="url">
-                  Linux视频教程第19讲.补充Linux重要内容find alias
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第19讲.补充linux重要内容find alias/" itemprop="url">Linux视频教程第19讲.补充Linux重要内容find alias</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T10:37:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T10:37:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -820,32 +1066,26 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Linux]Linux视频教程第19讲.补充linux重要内容find alias/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Linux]Linux视频教程第19讲.补充linux重要内容find alias/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -855,18 +1095,43 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
         
           
-          运行级别init [0123456]，指定系统运行级别，类似windows的正常运行模式或安全模式
-12345670：关机 1：单用户2：多用户状态没有网络服务 3：多用户状态有网络服务 4：系统未使用保留给用户 5：图形界面 6：系统重启
-常用运行级别是3和5，要修改默认的运行级别可改文件
-1/e
-          ...
+            <h2 id="运行级别"><a href="#运行级别" class="headerlink" title="运行级别"></a>运行级别</h2><p>init [0123456]，指定系统运行级别，类似windows的正常运行模式或安全模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">0：关机 </div><div class="line">1：单用户</div><div class="line">2：多用户状态没有网络服务 </div><div class="line">3：多用户状态有网络服务 </div><div class="line">4：系统未使用保留给用户 </div><div class="line">5：图形界面 </div><div class="line">6：系统重启</div></pre></td></tr></table></figure>
+<p>常用运行级别是3和5，要修改默认的运行级别可改文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/inittab的id:5:initdefault:</div></pre></td></tr></table></figure>
+<p>这一行中的数字</p>
+<p>##常用命令</p>
+<h3 id="ln-建立符号连接-和windows的快捷方式"><a href="#ln-建立符号连接-和windows的快捷方式" class="headerlink" title="ln 建立符号连接(和windows的快捷方式)"></a><strong>ln 建立符号连接(和windows的快捷方式)</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a) ln –s 源目标</div><div class="line">b) ln –s /etc/inittab inittab #（inittab指向实际文件/etc/inittab）</div></pre></td></tr></table></figure>
+<h3 id="搜索文件及目录——find"><a href="#搜索文件及目录——find" class="headerlink" title="搜索文件及目录——find"></a><strong>搜索文件及目录——find</strong></h3><p>在Linux中，因为文件系统是以级别式的结构组成的，所以要在整个系统中找到特定的文件和目录并不是件容易的事。而“find”命令可以解决上述问题。 </p>
+<p>1、在特定的目录下搜索并显示指定名称的文件和目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /root/ -name Hello.java    #查找文件</div></pre></td></tr></table></figure>
+<p>2、搜索一段时间内被存取/变更的文件或目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">find /home –amin -10 十分钟内存取的文件和目录 </div><div class="line">find /home -amin +10 十分钟前存取的文件和目录</div><div class="line">find /home –atime -10 十小时内存取的文件和目录 </div><div class="line">find /home –cmin -10 十分钟内更改过的文件和目录 </div><div class="line">find /home –ctime -10 十小时前更改过的文件和目录 </div><div class="line">find /home –size +10k 意思是说查找/home目录下大小为10k的文件</div></pre></td></tr></table></figure>
+<h3 id="shell使用"><a href="#shell使用" class="headerlink" title="shell使用"></a><strong>shell使用</strong></h3><p>shell脚本文件：</p>
+<pre>
+a) 是一个文本文件
+b) 命令的集合 
+c) 有执行的权限 
+d) 执行方式（./文件名）
+</pre>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Linux]Linux视频教程第19讲.补充linux重要内容find alias/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+<p><strong>profile文件</strong></p>
+<p>profile文件主要是用于配置环境变量</p>
+<p><img src="http://img.blog.csdn.net/20151227194314714" alt="这里写图片描述"></p>
+<p><strong>用户登录后自动执行的shell脚本文件</strong></p>
+<p>配置 .bashrc 文件可以指定某些程序在用户登录的时候就自动启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如：/home/tomcat/bin/startup.sh start</div></pre></td></tr></table></figure>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><p>a) 命令：alias显示系统当前定义的所有alias<br>b)去别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alias llh=&apos;ls -l /home&apos;</div><div class="line">alias lm = &apos;-al | more&apos;</div></pre></td></tr></table></figure>
+<p>c)去别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ualias lm</div></pre></td></tr></table></figure>
+
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -879,6 +1144,8 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -895,13 +1162,23 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Linux]Linux视频教程第18讲.ssh安装.配置.使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -909,38 +1186,42 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第18讲.ssh安装.配置.使用/" itemprop="url">
-                  Linux视频教程第18讲.ssh安装.配置.使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第18讲.ssh安装.配置.使用/" itemprop="url">Linux视频教程第18讲.ssh安装.配置.使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T10:36:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T10:36:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -948,32 +1229,26 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Linux]Linux视频教程第18讲.ssh安装.配置.使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Linux]Linux视频教程第18讲.ssh安装.配置.使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -983,16 +1258,15 @@ generatorConfig.xml&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&
       
         
           
-          概述ssh（secure shell）是一款集远程操作linux和进行文件上传和下载的软件，在软件公司几乎所有的linux程序员都会使用ssh。安全、方便是它最大的特点
-linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22。在windows系统上安装SSH客户端，集成了secur
-          ...
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>ssh（secure shell）是一款集远程操作linux和进行文件上传和下载的软件，在软件公司几乎所有的linux程序员都会使用ssh。安全、方便是它最大的特点</p>
+<p>linux上默认安装ssh服务，且默认是启动的sshd，<strong>监听的端口是22</strong>。在windows系统上安装SSH客户端，集成了secureCRT与FTP的作用，确保windows linux网络畅通，就是windows能ping通</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Linux]Linux视频教程第18讲.ssh安装.配置.使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1005,6 +1279,8 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1021,13 +1297,23 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Linux]Linux视频教程第17讲.mysql安装.配置.使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1035,38 +1321,42 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第17讲.mysql安装.配置.使用/" itemprop="url">
-                  Linux视频教程第17讲.mysql安装.配置.使用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第17讲.mysql安装.配置.使用/" itemprop="url">Linux视频教程第17讲.mysql安装.配置.使用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T10:32:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T10:32:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -1074,32 +1364,26 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Linux]Linux视频教程第17讲.mysql安装.配置.使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Linux]Linux视频教程第17讲.mysql安装.配置.使用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1109,15 +1393,57 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
         
           
-          概述http://www.greensoftcode.net/techntxt/20112911325655007025安装教程http://m.sogou.com/web/uID=NsZTT-9VbVa3FHjJ/v=5/type=1/sp=3/ct=160216001911/keyword=li
-          ...
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><a href="http://www.greensoftcode.net/techntxt/20112911325655007025" target="_blank" rel="external">http://www.greensoftcode.net/techntxt/20112911325655007025</a><br>安装教程<br><a href="http://m.sogou.com/web/uID=NsZTT-9VbVa3FHjJ/v=5/type=1/sp=3/ct=160216001911/keyword=linux+mysql%E5%85%8D%E5%AE%89%E8%A3%85/id=14027a77-47bf-467c-bdf4-f1f60458878f/sec=Yw8xhdD_JJCJYpZI3fALVg../tc?pg=webz&amp;clk=24&amp;url=http%3A%2F%2Fwww.faceye.net%2Fsearch%2F117071.html&amp;f=0&amp;id=14027a77-47bf-467c-bdf4-f1f60458878f&amp;pid=sogou-apps-4ff6fa96179cdc28&amp;dp=1&amp;lxg=NGRhZm9wYWtuMDxqMT86bWs7bWk4bWkla2dlJmlmbHpnYWwmanpnf3tteiU%2FJT8mMSVrfTUlbmk1&amp;key=linux+mysql%E5%85%8D%E5%AE%89%E8%A3%85&amp;pno=3&amp;g_ut=3&amp;wml=0&amp;w=1347&amp;mcv=361&amp;pcl=288,4187&amp;sed=0&amp;ml=28&amp;sct=38" target="_blank" rel="external">http://m.sogou.com/web/uID=NsZTT-9VbVa3FHjJ/v=5/type=1/sp=3/ct=160216001911/keyword=linux+mysql%E5%85%8D%E5%AE%89%E8%A3%85/id=14027a77-47bf-467c-bdf4-f1f60458878f/sec=Yw8xhdD_JJCJYpZI3fALVg../tc?pg=webz&amp;clk=24&amp;url=http%3A%2F%2Fwww.faceye.net%2Fsearch%2F117071.html&amp;f=0&amp;id=14027a77-47bf-467c-bdf4-f1f60458878f&amp;pid=sogou-apps-4ff6fa96179cdc28&amp;dp=1&amp;lxg=NGRhZm9wYWtuMDxqMT86bWs7bWk4bWkla2dlJmlmbHpnYWwmanpnf3tteiU%2FJT8mMSVrfTUlbmk1&amp;key=linux+mysql%E5%85%8D%E5%AE%89%E8%A3%85&amp;pno=3&amp;g_ut=3&amp;wml=0&amp;w=1347&amp;mcv=361&amp;pcl=288,4187&amp;sed=0&amp;ml=28&amp;sct=38</a><br>mysql数据库在linux下可以充分发挥威力，mysql数据库越来越受到软件公司的青睐，为什么呢？</p>
+<p>免费、跨平台、轻、支持多并发</p>
+<p>在北京很多软件公司属于创业型的中、小公司，从节约成本的角度考虑，mysql特别适合中、小项目</p>
+<h2 id="mysql安装"><a href="#mysql安装" class="headerlink" title="mysql安装"></a>mysql安装</h2><p>ps:安装之前查看是否已经安装mysql，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm –qa mysql</div></pre></td></tr></table></figure>
+<p>如果有就删除之</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">rpm –e mysql</div><div class="line">rpm –e -–nodeps mysql 强制删除</div><div class="line"></div><div class="line">yum remove  mysql mysql-server mysql-libs mysql-server;</div><div class="line">find / -name mysql 将找到的相关东西delete掉；</div><div class="line">rpm -qa|grep mysql(查询出来的东东yum remove掉)</div></pre></td></tr></table></figure>
+<p>1、准备安装文件，copy到/usr/local下<br>2、把安装文件解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf mysql-5.5.47-linux2.6-x86_64.tar.gz</div></pre></td></tr></table></figure>
+<p>3、重命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mv mysql-5.5.47-linux2.6-x86_64 mysql</div></pre></td></tr></table></figure>
+<p>4、创建mysql组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd mysql</div></pre></td></tr></table></figure>
+<p>5、创建mysql用户，并放入到mysql组中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">useradd -g mysql mysql</div></pre></td></tr></table></figure>
+<p>6、关键步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">a) 进入mysql文件夹，执行如下命令来初始化数据库</div><div class="line">scripts/mysql_install_db --user=mysql</div><div class="line">b) 修改文件的所有者(数据库是重要文件，不希望拥有者是普通用户)</div><div class="line">chown ‐R root .</div><div class="line">c)修改date文件夹的所有者(数据文件夹需要普通用户能够操作)</div><div class="line">chown ‐R mysql data</div><div class="line">d) 改变用户组</div><div class="line">chgrp ‐R mysql .</div><div class="line">说明：“.”点号代表当前目录及文件</div></pre></td></tr></table></figure>
+<p>7、启动mysql </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/mysqld_safe –-user=mysql &amp; </div><div class="line">&amp;表示以后台的方式启动</div></pre></td></tr></table></figure>
+<p>ctrl+c退出，检查一下进程，netstat ‐anp，查看监听端口是3306的是不是打开了</p>
+<p><strong>出现问题pid file /var/run/mysqld/mysqld.pid ended</strong><br><a href="http://www.csdn123.com/html/exception/646/646216_646212_646218.htm" target="_blank" rel="external">http://www.csdn123.com/html/exception/646/646216_646212_646218.htm</a></p>
+<p>8、如何进入mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd bin</div><div class="line">./mysql ‐u root ‐p回车</div></pre></td></tr></table></figure>
+<p>9、mysql修改密码</p>
+<p><a href="http://www.cnblogs.com/daizhuacai/archive/2013/01/17/2865138.html" target="_blank" rel="external">http://www.cnblogs.com/daizhuacai/archive/2013/01/17/2865138.html</a></p>
+<p>10、添加环境变量</p>
+<p>如果希望在任何一个目录下都可以进入mysql，则需在用户变量/root/.bash_profile中添加路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">a) env | more</div><div class="line">查看path中是否指定mysql 路径</div><div class="line">b) 进入/root下，查看到.bash_profile 存放用户变量 </div><div class="line">c) vi进入.bash_profile，在path后面加上 /home/mysql/bin/</div><div class="line">d) logout一下，再登录输入</div><div class="line">mysql ‐uroot ‐proot</div><div class="line">此时root用户可以在任意目录输入命令就可以进入mysql了</div><div class="line"></div><div class="line">如果需要所有用户都能在任意位置可以输入命令，则需要修改/etc/profile的PATH</div></pre></td></tr></table></figure>
+<p>11、设置mysql开机自动启动</p>
+<p>参考<a href="http://blog.sina.com.cn/s/blog_6ccd0a11010175ri.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_6ccd0a11010175ri.html</a><br><a href="http://blog.163.com/longsu2010@yeah/blog/static/173612348201111710850381/" target="_blank" rel="external">http://blog.163.com/longsu2010@yeah/blog/static/173612348201111710850381/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cp support-files/mysql.server /etc/init.d/mysqld</div><div class="line">chkconfig --add mysqld    #将mysqld加到启动服务列表里</div><div class="line">运行命令“chkconfig --list”查看系统服务</div><div class="line">chkconfig mysqld on     #mysql.server开机启动</div><div class="line">chkconfig mysqld off    #该命令关闭了mysql开机启动</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p>12、多种启动方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">一、启动</div><div class="line">1、使用 service 启动：service mysqld start</div><div class="line">2、使用 mysqld 脚本启动：/etc/inint.d/mysqld start</div><div class="line">3、使用 safe_mysqld 启动：safe_mysqld&amp;</div><div class="line">二、停止</div><div class="line">1、使用 service 启动：service mysqld stop</div><div class="line">2、使用 mysqld 脚本启动：/etc/inint.d/mysqld stop</div><div class="line">3、mysqladmin shutdown</div><div class="line">三、重启</div><div class="line">1、使用 service 启动：service mysqld restart</div><div class="line">2、使用 mysqld 脚本启动：/etc/inint.d/mysqld restart</div></pre></td></tr></table></figure>
+<h2 id="Mysql测试"><a href="#Mysql测试" class="headerlink" title="Mysql测试"></a>Mysql测试</h2><p>测试mysql数据库是否可以在linux下正确使用</p>
+<p>a) 建立数据库和表 </p>
+<p>b) 加入部分数据</p>
+<p>c) 编写一个ShowUser.java文件，在控制台显示用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import java.sql.*;</div><div class="line">public class MysqlTest&#123;</div><div class="line">    public static void main(String[] args)&#123;</div><div class="line">        try&#123;</div><div class="line">            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div><div class="line">            Connection con = DriverManager.getConnection(&quot;jdbc:mysql://127.0.0.1:3306/Demo?user=root&amp;password=root&quot;);</div><div class="line">            Statement sm = con.createStatement();</div><div class="line">            ResultSet rs = sm.executeQuery(&quot;select * from users&quot;);</div><div class="line">            while(rs.next())&#123;</div><div class="line">                System.out.println(rs.getString(2));</div><div class="line">            &#125;</div><div class="line">        &#125;catch(Exception e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Note：特别注意mysql的驱动要存放的位置，放在jdk的主目录下的/jre/lib/ext/ </p>
+<h2 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h2><p>备份：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./mysqldump ‐u root ‐p密码 数据库名 &gt; /home/data.bak</div></pre></td></tr></table></figure>
+<p>恢复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql ‐u root ‐p密码 数据库名 &lt; /home/data.bak</div></pre></td></tr></table></figure>
+<p>Note：‐p和密码之间没有空格,在恢复数据库的时候，你需要建立一个空数据库！</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Linux]Linux视频教程第17讲.mysql安装.配置.使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1130,6 +1456,8 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1146,13 +1474,23 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/13/[Linux]Linux视频教程第16讲.监控网络状态/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1160,38 +1498,42 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第16讲.监控网络状态/" itemprop="url">
-                  Linux视频教程第16讲.监控网络状态
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/13/[Linux]Linux视频教程第16讲.监控网络状态/" itemprop="url">Linux视频教程第16讲.监控网络状态</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-13T10:29:00+08:00" content="2017-04-13">
-              2017-04-13
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-13T10:29:00+08:00">
+                2017-04-13
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -1199,32 +1541,26 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/13/[Linux]Linux视频教程第16讲.监控网络状态/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/13/[Linux]Linux视频教程第16讲.监控网络状态/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1234,17 +1570,21 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
         
           
-          显示网络统计信息的命令 netstat此命令用来显示整个系统目前的网络情况。例如目前的连接、数据包传递数据、或是路由表内容，此命令直接输入即可使用
-1netstat ‐anp        #显示网络端口及监听该端口的进程号
-检测主机连接命令ping是一种网络检测工具，它主要是用检测远程主机是否正常
-          ...
+            <h2 id="显示网络统计信息的命令-netstat"><a href="#显示网络统计信息的命令-netstat" class="headerlink" title="显示网络统计信息的命令 netstat"></a>显示网络统计信息的命令 netstat</h2><p>此命令用来显示整个系统目前的网络情况。例如目前的连接、数据包传递数据、或是路由表内容，此命令直接输入即可使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat ‐anp        #显示网络端口及监听该端口的进程号</div></pre></td></tr></table></figure>
+<h2 id="检测主机连接命令ping"><a href="#检测主机连接命令ping" class="headerlink" title="检测主机连接命令ping"></a>检测主机连接命令ping</h2><p>是一种网络检测工具，它主要是用检测远程主机是否正常，或是两部主机间的介质是否为断、网线是否脱落或网卡故障</p>
+<h2 id="显示数据包经过历程命令traceroute（追踪路由）"><a href="#显示数据包经过历程命令traceroute（追踪路由）" class="headerlink" title="显示数据包经过历程命令traceroute（追踪路由）"></a>显示数据包经过历程命令traceroute（追踪路由）</h2><p>此命令可以直接输入使用，用来检测数据包在网络上传输的过程，从本机到远程的主机完整路径，帮助管理员解决问题</p>
+<h2 id="显示路由表-route"><a href="#显示路由表-route" class="headerlink" title="显示路由表 route"></a>显示路由表 route</h2><p>路由最大的功能就是转发</p>
+<p>所谓路由是指将数据由来源网络送往目的网络的操作。在大型网络中，路由是非常复杂的，因为数据包在抵目的地时，可能经过的节点有很多，路由表是存储在路由器或一些其他链接设置上的窗体。其中记录着了到指定目的的网络路径，以及这些路径的相关数值</p>
+<p>此命令可以直接输入使用，来查看本机路由的情况 每个路由器都有一个路由表，显示最近的路由表</p>
+<p>类似于古代的信使，驿站</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/13/[Linux]Linux视频教程第16讲.监控网络状态/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1257,6 +1597,8 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1273,13 +1615,23 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第15讲.进程的介绍和管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1287,38 +1639,42 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第15讲.进程的介绍和管理/" itemprop="url">
-                  Linux视频教程第15讲.进程的介绍和管理
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第15讲.进程的介绍和管理/" itemprop="url">Linux视频教程第15讲.进程的介绍和管理</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-12T23:49:00+08:00" content="2017-04-12">
-              2017-04-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T23:49:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -1326,32 +1682,26 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/12/[Linux]Linux视频教程第15讲.进程的介绍和管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/12/[Linux]Linux视频教程第15讲.进程的介绍和管理/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1361,18 +1711,118 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
         
           
-          概述
-在Linux 中，每个执行的程序都称为一个进程，每一个进程都分配一个ID号 
-每一个进程，都会对应一个父进程，而这个父进程可以复制多个子进程，例如www服务器
-每个进程都可能以两种方式存在的:前台与后台。所谓前台进程就是用户目前的屏幕上可以进行操作的，后台进程则是实际在操作，但由于屏幕上无法看
-          ...
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>在Linux 中，每个执行的程序都称为一个进程，每一个进程都分配一个ID号 </li>
+<li>每一个进程，都会对应一个父进程，而这个父进程可以复制多个子进程，例如www服务器</li>
+<li>每个进程都可能以两种方式存在的:<strong>前台与后台</strong>。所谓前台进程就是用户目前的屏幕上可以进行操作的，后台进程则是实际在操作，但由于屏幕上无法看到的进程，通常使用后台方式执行</li>
+<li>一般系统的服务都是以后台进程的方式存在，而且都会常驻在系统中，直到关机才停止进程</li>
+</ol>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><p>进程：就是正在执行的程序<br>线程：轻量级的进程</p>
+<p>进程有独立的地址空间，线程没有<br>线程不能独立存在，它是由进程创建（Linux下用fork函数，Java里用Thread或实现Runnable）</p>
+<h2 id="进程的管理"><a href="#进程的管理" class="headerlink" title="进程的管理"></a>进程的管理</h2><p>ps命令是用来查看目前系统中，有哪些正在执行，以及它们执行的情况，可以不加任何参数，显示详细的进程信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">使用案例：</div><div class="line">a) ps ‐a：显示当前终端的所有进程信息 </div><div class="line">b) ps ‐u：以用户的格式显示进程信息 </div><div class="line">c) ps ‐x：显示后台进程运行的参数 </div><div class="line">d) pa –aux【看的全面，信息也全面】 #1号进程是所有进程的父进程</div></pre></td></tr></table></figure>
+<pre><code>各列的解释：
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/12/[Linux]Linux视频教程第15讲.进程的介绍和管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+USER 进程的用户；
+PID   进程的ID；
+%CPU   进程占用的CPU百分比；
+%MEM  占用内存的百分比；
+VSZ     该进程使用的虚拟内存量（KB）；
+RSS     该进程占用的固定内存量（KB）；
+TTY     该进程在哪个终端上运行（登陆者的终端位置），若与终端无关，则显示（？）。若为pts/0等，则表示由网络连接主机进程；
+START   该进程被触发启动时间；
+TIME      该进程实际使用CPU运行的时间；
+COMMAND   命令的名称和参数；
+
+STAT状态位常见的状态字符
+D 无法中断的休眠状态（通常 IO 的进程）；
+R 正在运行可中在队列中可过行的；
+S 处于休眠状态；
+T 停止或被追踪；
+W 进入内存交换 （从内核2.6开始无效）；
+X 死掉的进程  （基本很少见）；
+Z 僵尸进程；
+&lt; 优先级高的进程；
+N 优先级较低的进程；
+L 有些页被锁进内存；
+s 进程的领导者（在它之下有子进程）；
+l 多进程的（使用 CLONE_THREAD, 类似 NPTL pthreads）；
++ 位于后台的进程组；
+</code></pre><h2 id="终止进程"><a href="#终止进程" class="headerlink" title="终止进程"></a>终止进程</h2><p>若是某个进程执行一半需要停止时，或是已消了很大的系统资源时，此时可以考虑停止该进程，使用kill命令来完成此项任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">kill 进程号         #终止某个进程</div><div class="line">kill -9 进程号      #强制关闭</div><div class="line">killall            #杀死此进程和所有其子进程</div></pre></td></tr></table></figure>
+<p>##动态监控进程</p>
+<p>top命令与ps命令很相似。它们都用来显示正在执行的进程。top与ps最大的不同之处，<strong>在于top在执行一段时间可以更新正在运行的进程</strong></p>
+<h3 id="top显示选项解释"><a href="#top显示选项解释" class="headerlink" title="top显示选项解释"></a>top显示选项解释</h3><p><img src="http://img.blog.csdn.net/20151226153756930" alt="这里写图片描述"></p>
+<pre>
+03:32:58当前系统时间 1:52，表示系统启动了多久
+
+1 user，当前登录到Linux上的用户数
+
+load average：0.00 0.00 0.00，三个数分别代表不同时间段的系统平均负载（一分钟、五分钟、以及十五分钟），当前系统负载情况，一般来说，参数越小，系统运行的越轻松，当平均数>0.6时，系统就很紧张了
+
+Task：
+38 processes，进程总数；
+2 running，正在运行的进程数；
+79sleeping：睡眠的进程数；
+0 zombie：僵尸进程数（这个进程没有用了，还占用资源，比如父进程来不及收回子进程）
+
+CPU：
+2.0 us：用户空间占用CPU百分比
+0.0 sy：    内核空间占用CPU百分比
+0.0 ni：用户进程空间内改变过优先级的进程占用CPU百分比
+97.7 id：空闲CPU百分比
+0.3 wa：等待输入输出的CPU时间百分比
+0.0 hi：硬件中断所占百分比
+0.0 st：软件中断所占百分比
+
+Kib Mem:
+1017216 total：物理内存总量
+343660 free：空闲内存总量
+97692 used：使用的物理内存总量
+575864 buffers：用作内核缓存的内存量
+
+Kib Swap: 
+2097148k total：交换区总量
+192772k free：空闲交换区总量
+0 used：使用的交换区总量
+
+PID ： 进程id
+PPID ： 父进程id
+USER ： 进程所有者的用户名
+PR ： 优先级
+NI ： nice值。负值表示高优先级，正值表示低优先级
+RES：进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA
+S：进程状态
+
+    D=不可中断的睡眠状态
+    R=运行
+    S=睡眠
+    T=跟踪/停止
+    Z=僵尸进程
+
+%CPU：上次更新到现在的CPU时间占用百分比
+%MEM：进程使用的物理内存百分比
+TIME+：进程使用的CPU时间总计，单位1/100秒
+COMMAND
+命令名/命令行
+
+</pre>
+
+<h3 id="监视特定用户"><a href="#监视特定用户" class="headerlink" title="监视特定用户"></a>监视特定用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">top：输入此命令，按回车键，查看执行的进程 </div><div class="line">然后输入&quot;u&quot;回车，再输入用户名，即可</div></pre></td></tr></table></figure>
+<h3 id="终止指定的用户"><a href="#终止指定的用户" class="headerlink" title="终止指定的用户"></a>终止指定的用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">top：输入此命令，按回车键，查看执行的进程</div><div class="line">k：然后输入&quot;k&quot;回车，再输入要结束的进程ID号</div></pre></td></tr></table></figure>
+<h3 id="指定系统状态更新的时间"><a href="#指定系统状态更新的时间" class="headerlink" title="指定系统状态更新的时间"></a>指定系统状态更新的时间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">top ‐d 10：指定系统更新进程的时间为10秒</div></pre></td></tr></table></figure>
+<h3 id="设置系统时间"><a href="#设置系统时间" class="headerlink" title="设置系统时间"></a>设置系统时间</h3><p>date命令：显示系统的时间，可以在直接输入”date”命令来查看系统的时间 </p>
+<p>利用date命令来更改系统的时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">date MMDDHHMMCCYY.SS：月月日日时时分分年年.秒秒</div></pre></td></tr></table></figure>
+<h3 id="查看月历"><a href="#查看月历" class="headerlink" title="查看月历"></a>查看月历</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cal 3 2002：查看2002年3月的月历</div></pre></td></tr></table></figure>
+<h2 id="查看年历"><a href="#查看年历" class="headerlink" title="查看年历"></a>查看年历</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cal 2008：查看2008的年历</div></pre></td></tr></table></figure>
+
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1385,6 +1835,8 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1401,13 +1853,23 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1415,38 +1877,42 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/" itemprop="url">
-                  Linux视频教程第14讲.crontab详解
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/" itemprop="url">Linux视频教程第14讲.crontab详解</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-12T23:40:00+08:00" content="2017-04-12">
-              2017-04-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T23:40:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -1454,32 +1920,26 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1489,17 +1949,26 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       
         
           
-          概述任务调度：是指系统在某个时间执行的特定的命令或程序系统工作：有些重要的工作必须周而复始地执行，如病毒扫描等个别用户工作：个别用户可能希望执行某些程序
-命令设置系统级任务调度：/etc/crontab 文件上编写调度任务设置个人任务调度，执行crontab ‐e命令，接着输入任务到调度文件
-调度文
-          ...
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>任务调度：是指系统在某个时间执行的特定的命令或程序<br>系统工作：有些重要的工作必须周而复始地执行，如病毒扫描等<br>个别用户工作：个别用户可能希望执行某些程序</p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p>设置系统级任务调度：/etc/crontab 文件上编写调度任务<br>设置个人任务调度，执行crontab ‐e命令，接着输入任务到调度文件</p>
+<h3 id="调度文件的规则"><a href="#调度文件的规则" class="headerlink" title="调度文件的规则"></a>调度文件的规则</h3><p><img src="http://img.blog.csdn.net/20151226141249322" alt="这里写图片描述"></p>
+<p>[案例] 希望每天凌晨2：00去执行 date &gt;&gt; /home/mydate2，可以在crontab ‐e中加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0 2 * * * date &gt;&gt; /home/mydate2</div></pre></td></tr></table></figure>
+<p>[案例]希望每分钟去执行：在crontab ‐e中加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* * * * * date &gt;&gt; /home/mydate2</div></pre></td></tr></table></figure>
+<h3 id="调度多个任务"><a href="#调度多个任务" class="headerlink" title="调度多个任务"></a>调度多个任务</h3><p>1、在crontab ‐e中直接写多个命令（不推荐）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">* * * * * date &gt;&gt; /home/mydate2 </div><div class="line">* * * * * * cp /home/mydate2 /root</div></pre></td></tr></table></figure>
+<p>缺点：所有任务按列表的方式进行写入，不能方便的管理</p>
+<p>2、可以把所有的任务，写入到一个可执行文件（shell编程）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">1. vi mytask.sh，写入</div><div class="line">* * * * * date &gt;&gt; /home/mydate2 </div><div class="line">* * * * * cp /home/mydate2 /root)</div><div class="line">2. chmod 744 mytask.sh （默认不具有执行权限，只有rw-）</div><div class="line">3. crontab中写入</div><div class="line">* * * * /root/mytask.sh</div><div class="line">开始执行命令</div><div class="line"></div><div class="line">说明：.sh表示shell文件，chmod 修改权限，必须要有X的权限</div></pre></td></tr></table></figure>
+<p>##终止任务调度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">crontab ‐r：终止任务调度(删除所有) ，若只需删除一个，则进入文件删除保存</div><div class="line">crontab ‐l：列出当前有哪些任务调度</div></pre></td></tr></table></figure></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/12/[Linux]Linux视频教程第14讲.crontab详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1512,6 +1981,8 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1553,31 +2024,39 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="Mr.Qian" />
           <p class="site-author-name" itemprop="name">Mr.Qian</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">138</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1585,8 +2064,10 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1607,7 +2088,12 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
         
         
 
+        
+
+
       </section>
+
+      
 
       
 
@@ -1631,6 +2117,7 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
   <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -1638,9 +2125,10 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1648,9 +2136,13 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1670,6 +2162,15 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1695,181 +2196,59 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-
-  
-    
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"rhapsody1290"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
   
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
 
 
 
+  
+
+
+
+
+
 
   
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = decodeURIComponent(data.url);
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
 
   
@@ -1881,6 +2260,8 @@ linux上默认安装ssh服务，且默认是启动的sshd，监听的端口是22
   
 
   
-<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+
+  
+
 </body>
 </html>

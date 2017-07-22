@@ -1,20 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +72,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="JavaEE,Spring," />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -130,31 +139,37 @@ spring中重要概念★★★★★b">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://qianmingxs.com/2016/07/15/[Spring]Spring笔记/"/>
 
 
-  <title> Spring笔记 | Mr.Qian's Home </title>
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>Spring笔记 | Mr.Qian's Home</title>
   
 
 
@@ -165,35 +180,47 @@ spring中重要概念★★★★★b">
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Mr.Qian's Home</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -213,18 +240,8 @@ spring中重要概念★★★★★b">
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -234,7 +251,7 @@ spring中重要概念★★★★★b">
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -244,34 +261,13 @@ spring中重要概念★★★★★b">
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
@@ -286,49 +282,64 @@ spring中重要概念★★★★★b">
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/15/[Spring]Spring笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Spring笔记
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">Spring笔记</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-15T08:51:00+08:00" content="2016-07-15">
-              2016-07-15
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-15T08:51:00+08:00">
+                2016-07-15
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Spring/" itemprop="url" rel="index">
                     <span itemprop="name">Spring</span>
                   </a>
@@ -336,32 +347,26 @@ spring中重要概念★★★★★b">
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/15/[Spring]Spring笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/[Spring]Spring笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1556,15 +1561,26 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
+
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/JavaEE/" rel="tag">#JavaEE</a>
+            <a href="/tags/JavaEE/" rel="tag"># JavaEE</a>
           
-            <a href="/tags/Spring/" rel="tag">#Spring</a>
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -1577,10 +1593,12 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
             
           </div>
 
+          <span class="post-nav-divider"></span>
+
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/29/[Java]java中的事件监听是怎样实现随时监听的/" rel="prev" title="java中的事件监听是怎样实现随时监听的">
-                java中的事件监听是怎样实现随时监听的 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/29/[Java]Java面向对象编程的四大特征/" rel="prev" title="Java面向对象编程的四大特征">
+                Java面向对象编程的四大特征 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1607,10 +1625,6 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/15/[Spring]Spring笔记/"
-           data-title="Spring笔记" data-url="http://qianmingxs.com/2016/07/15/[Spring]Spring笔记/">
-      </div>
-    
   </div>
 
 
@@ -1627,6 +1641,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -1642,25 +1657,32 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="Mr.Qian" />
           <p class="site-author-name" itemprop="name">Mr.Qian</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">138</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1668,8 +1690,10 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1690,19 +1714,29 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
         
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring是什么"><span class="nav-number">1.</span> <span class="nav-text">Spring是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring中重要概念★★★★★"><span class="nav-number">2.</span> <span class="nav-text">spring中重要概念★★★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean"><span class="nav-number">2.1.</span> <span class="nav-text">bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制反转"><span class="nav-number">2.2.</span> <span class="nav-text">控制反转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.3.</span> <span class="nav-text">依赖注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring在程序中的位置"><span class="nav-number">3.</span> <span class="nav-text">Spring在程序中的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring快速入门"><span class="nav-number">4.</span> <span class="nav-text">Spring快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#github"><span class="nav-number">4.1.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引入依赖"><span class="nav-number">4.2.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建组件"><span class="nav-number">4.3.</span> <span class="nav-text">创建组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml中配置bean"><span class="nav-number">4.4.</span> <span class="nav-text">applicationContext.xml中配置bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得bean并调用方法"><span class="nav-number">4.5.</span> <span class="nav-text">获得bean并调用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring运行原理图"><span class="nav-number">5.</span> <span class="nav-text">Spring运行原理图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring接口编程"><span class="nav-number">6.</span> <span class="nav-text">Spring接口编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML配置文件"><span class="nav-number">7.</span> <span class="nav-text">XML配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种获取ApplicationContext对象引用的方法"><span class="nav-number">8.</span> <span class="nav-text">三种获取ApplicationContext对象引用的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两个获取bean的方式★★★"><span class="nav-number">9.</span> <span class="nav-text">两个获取bean的方式★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从ApplicationContex应用上下文容器中获取bean"><span class="nav-number">9.1.</span> <span class="nav-text">从ApplicationContex应用上下文容器中获取bean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本模式创建一个bean实例★★★★★"><span class="nav-number">9.1.1.</span> <span class="nav-text">基本模式创建一个bean实例★★★★★</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂模式创建一个bean实例"><span class="nav-number">9.1.2.</span> <span class="nav-text">工厂模式创建一个bean实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从bean工厂容器中获取bean"><span class="nav-number">9.2.</span> <span class="nav-text">从bean工厂容器中获取bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">9.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean的生命周期"><span class="nav-number">10.</span> <span class="nav-text">bean的生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean装配的细节"><span class="nav-number">11.</span> <span class="nav-text">bean装配的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注入的写法★"><span class="nav-number">11.1.</span> <span class="nav-text">注入的写法★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的作用域scope"><span class="nav-number">11.2.</span> <span class="nav-text">bean的作用域scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何给集合类型注入值"><span class="nav-number">11.3.</span> <span class="nav-text">如何给集合类型注入值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部bean"><span class="nav-number">11.4.</span> <span class="nav-text">内部bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承配置"><span class="nav-number">11.5.</span> <span class="nav-text">继承配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过构造函数注入值★★★"><span class="nav-number">11.6.</span> <span class="nav-text">通过构造函数注入值★★★</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过参数名传递参数"><span class="nav-number">11.6.1.</span> <span class="nav-text">通过参数名传递参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过指数方式传递参数"><span class="nav-number">11.6.2.</span> <span class="nav-text">通过指数方式传递参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化bean和销毁bean的时候执行某个方法"><span class="nav-number">11.7.</span> <span class="nav-text">初始化bean和销毁bean的时候执行某个方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解装配Bean"><span class="nav-number">12.</span> <span class="nav-text">注解装配Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入context名称空间，并配置扫描包"><span class="nav-number">12.1.</span> <span class="nav-text">引入context名称空间，并配置扫描包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">12.2.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入-1"><span class="nav-number">12.3.</span> <span class="nav-text">依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单类型数据注入"><span class="nav-number">12.3.1.</span> <span class="nav-text">简单类型数据注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂对象类型数据注入"><span class="nav-number">12.3.2.</span> <span class="nav-text">复杂对象类型数据注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动装配bean的属性值"><span class="nav-number">13.</span> <span class="nav-text">自动装配bean的属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#byName的用法"><span class="nav-number">13.1.</span> <span class="nav-text">byName的用法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#byType的用法"><span class="nav-number">13.2.</span> <span class="nav-text">byType的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor的用法"><span class="nav-number">13.3.</span> <span class="nav-text">constructor的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autodetect的用法"><span class="nav-number">13.4.</span> <span class="nav-text">autodetect的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defualt"><span class="nav-number">13.5.</span> <span class="nav-text">defualt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#no-不自动装配"><span class="nav-number">13.6.</span> <span class="nav-text">no: 不自动装配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用spring的特殊bean-完成分散配置"><span class="nav-number">14.</span> <span class="nav-text">使用spring的特殊bean,完成分散配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP编程"><span class="nav-number">15.</span> <span class="nav-text">AOP编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP技术的实现原理"><span class="nav-number">15.1.</span> <span class="nav-text">AOP技术的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP底层实现"><span class="nav-number">15.2.</span> <span class="nav-text">AOP底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDK动态代理"><span class="nav-number">15.2.1.</span> <span class="nav-text">JDK动态代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cglib动态代理机制"><span class="nav-number">15.2.2.</span> <span class="nav-text">Cglib动态代理机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-AOP"><span class="nav-number">15.2.3.</span> <span class="nav-text">Spring AOP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-AOP三种配置详细介绍"><span class="nav-number">15.3.</span> <span class="nav-text">Spring AOP三种配置详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于代理的经典AOP"><span class="nav-number">15.3.1.</span> <span class="nav-text">基于代理的经典AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤"><span class="nav-number">15.3.1.1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通知类型"><span class="nav-number">15.3.1.2.</span> <span class="nav-text">通知类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传统AOP切面编程"><span class="nav-number">15.3.2.</span> <span class="nav-text">传统AOP切面编程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AspectJ切入点"><span class="nav-number">15.3.2.1.</span> <span class="nav-text">AspectJ切入点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#步骤-1"><span class="nav-number">15.3.2.2.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspectJ-AOP切面编程"><span class="nav-number">15.3.3.</span> <span class="nav-text">AspectJ AOP切面编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AspcetJ注解驱动的切面★★★★★★★★★"><span class="nav-number">15.3.4.</span> <span class="nav-text">@AspcetJ注解驱动的切面★★★★★★★★★</span></a></li></ol></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -1725,6 +1759,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
   <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -1732,9 +1767,10 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1742,9 +1778,13 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1764,6 +1804,15 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1789,51 +1838,48 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
+  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"rhapsody1290"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
 
   
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
   
 
 
@@ -1842,132 +1888,9 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
 
 
   
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = decodeURIComponent(data.url);
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
 
   
@@ -1979,6 +1902,8 @@ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframew
   
 
   
-<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+
+  
+
 </body>
 </html>

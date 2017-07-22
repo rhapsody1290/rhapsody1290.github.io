@@ -1,20 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +72,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -93,31 +102,37 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://qianmingxs.com/page/7/"/>
 
 
-  <title> Mr.Qian's Home </title>
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>Mr.Qian's Home</title>
   
 
 
@@ -128,37 +143,49 @@
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Mr.Qian's Home</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -178,18 +205,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -199,7 +216,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -209,34 +226,13 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
@@ -251,13 +247,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -265,38 +271,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/12/[Linux]Linux常用命令/" itemprop="url">
-                  Linux常用命令
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/12/[Linux]Linux常用命令/" itemprop="url">Linux常用命令</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-12T20:45:00+08:00" content="2017-04-12">
-              2017-04-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T20:45:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -304,32 +314,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/12/[Linux]Linux常用命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/12/[Linux]Linux常用命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -339,23 +343,98 @@
       
         
           
-          Linux命令缩写，方便记忆
-http://blog.chinaunix.net/uid-27164517-id-3299073.html
-开发者常用指令
+            <p>Linux命令缩写，方便记忆</p>
+<p><a href="http://blog.chinaunix.net/uid-27164517-id-3299073.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-27164517-id-3299073.html</a></p>
+<h2 id="开发者常用指令"><a href="#开发者常用指令" class="headerlink" title="开发者常用指令"></a>开发者常用指令</h2><pre>
 
 netstat -anp | grep 8080 #查询端口
 route #路由表
 tracert #路由追踪
 ps -aux #进程列表
-k
-          ...
+kill -9 pid #杀进程
+top
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/12/[Linux]Linux常用命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+env                     #查看环境变量
+/etc/profile 和 ~/.bash_profile #系统整体配置文件（系统/个人用户）
+ehoc $PATH              #PATH路径
+
+ifconfig                #在linux/unix查看ip的命令
+
+df - h                  #查看Linux系统分区具体情况
+df -h /etc              #查看/etc底下可用的磁盘容量以易读的容量格式显示
+
+crontab -e              #任务调度
+
+ls -a                   #显示隐藏文件
+ls -l                   #列表显示
+
+du -h --max-depth=1     #查看文件夹大小
+
+cat Hello.txt | grep "pattern" #搜索字符串
+grep -n "pattern" file1 file2  #文件中查找，显示行数，可以在多个文件
+
+tar -zxvf libpcap-1.3.0.tar.gz  #解压
+zip aa.zip 文件名               #压缩
+
+./configure，make，make install #Linux下编译安装源代码三个步骤
+rpm ‐ivh RPM包全路径名称        #安装包到当前系统
+rpm -ivh url --replacepkgs      #重新安装软件
+rpm ‐e RPM包的名称              #删除
+
+sudo 命令 / sudo su     #管理员权限
+
+#文件操作
+
+mkdir   folder          #建立文件夹
+touch   filename        #新建文件
+rmdir   folder          #删除空目录
+rm filename             #删除文件
+rm -rf 目录名字          #删除文件夹 -r下递归-f强行删除
+cp file1 file2          #拷贝
+cp -r dir1 dir2         #递归复制命令（复制子目录信息）
+find /root/ -name Hello.java    #查找文件[不常用，速度慢，执行在硬盘中搜索，时间在文件权限那里]
+</pre>
+
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">cd ~                    #跳转到用户主目录</div><div class="line">tab                     #文件名自动提示</div><div class="line">pwd                     #查看当前目录</div><div class="line">reset                   #清屏</div><div class="line">clear                   #清屏</div><div class="line">ctrl + alt + T          #终端，需在首选项-快捷键中设置</div><div class="line"></div><div class="line">env                     #查看环境变量</div><div class="line">/etc/profile            #系统整体配置文件</div><div class="line">~/.bash_profile或~/.bash_login或~/.profile  #个人设定</div><div class="line">ehoc $PATH              #PATH路径</div><div class="line"></div><div class="line">ls                      #文件列表</div><div class="line">ls -a                   #显示隐藏文件</div><div class="line">ls -l                   #列表显示</div><div class="line">ls -al &lt;path&gt;           #查看path路径下的文件列表</div><div class="line">ls -ld /tmp             #查看目录的权限</div><div class="line"></div><div class="line">|                       #管道命令</div><div class="line">&gt;                       #管道定向，双箭头&gt;&gt;追加到文件结尾</div><div class="line">less                    #u，d，space，b</div><div class="line">more                    #空格下一页，shift+PageUp上一页[more name]</div><div class="line">cat xxx | more</div><div class="line"></div><div class="line">grep xxx #搜索字符串</div><div class="line">grep -n &quot;System&quot; file1 file2 #查找，显示行数</div><div class="line"></div><div class="line">tar -zxvf libpcap-1.3.0.tar.gz  #解压</div><div class="line">zip aa.zip 文件名</div><div class="line"></div><div class="line">mount /mnt/cdrom        #挂载光驱 </div><div class="line">unmount /mnt/cdrom      #卸载光驱</div><div class="line"></div><div class="line">ifconfig                #在linux/unix查看ip的命令</div><div class="line"></div><div class="line">df - h                  #查看Linux系统分区具体情况</div><div class="line">df -h /etc              #查看/etc底下可用的磁盘容量以易读的容量格式显示</div><div class="line"></div><div class="line">crontab -e              #任务调度</div></pre></td></tr></table></figure>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"># 安装二进制文件</div><div class="line">vim README/INSTALL      #安装前参阅安装说明</div><div class="line">./configure --help      #查看可用参数</div><div class="line">./configure --prefix=/usr/local/xxx</div><div class="line"></div><div class="line">#检查环境，创建makefile文件</div><div class="line">make clean              #根据makefile清理一下环境</div><div class="line">make                    #根据makefile进行编译</div><div class="line">make insatll            #根据makefile进行安装</div><div class="line"></div><div class="line"># rpm</div><div class="line">rpm ‐q 软件包名             #查询软件包是否安装</div><div class="line">rpm -qi rpm包               #列出该软件的详细信息</div><div class="line">rpm -ql  rpm包  #列出该软件所有的文件与目录所在的完整文件名</div><div class="line">rpm -qc rpm包               #查询配置文件</div><div class="line">rpm -qf 配置文件             #查询配置文件是哪个软件的</div><div class="line">rpm -qa                     #已安装的软件名称</div><div class="line"></div><div class="line">rpm ‐ivh RPM包全路径名称     #安装包到当前系统</div><div class="line">rpm -ivh url --replacepkgs  #重新安装软件</div><div class="line">rpm ‐e RPM包的名称          #删除</div><div class="line">rpm ‐e ‐‐nodeps samba      #强制删除 </div><div class="line">rpm ‐Uvh RPM包全路径名     #升级，未安装的文件也会直接安装</div><div class="line">rpm - Fvh                 #升级，未安装的不安装</div><div class="line"></div><div class="line">rpm - V 软件              #该软件的档案被更动过，会列出来</div><div class="line">rpm -Va                  #列出系统上所有可能被更动的档案</div><div class="line">rpm -Vp 文件名            #列出该软件内可能被更动过的文件</div><div class="line">rpm -Vf                  #某个文件是否被更动过</div><div class="line"></div><div class="line"># yum</div><div class="line">yun install 软件        #安装软件</div><div class="line">yum update 软件         #升级软件</div><div class="line">yum remove 软件         #移除软件</div><div class="line">yum list    软件        #可用列表</div></pre></td></tr></table></figure>
+<p>##文件操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">mkdir   folder          #建立文件夹</div><div class="line">touch   filename        #新建文件</div><div class="line"></div><div class="line">rmdir   folder          #删除空目录</div><div class="line">rm filename             #删除文件</div><div class="line">rm -rf 目录名字          #删除文件夹 -r下递归-f强行删除</div><div class="line">rm -i bashrc*           #利用通配符删除bashrc开头的文件   </div><div class="line"></div><div class="line">mv test.log test1.txt   #文件改名</div><div class="line">mv -i log1.txt log2.txt #将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</div><div class="line">mv test1.txt test3      #移动文件</div><div class="line">mv log1.txt log2.txt log3.txt test3 #将文件log1.txt,log2.txt,log3.txt移动到目录test3中。 </div><div class="line"></div><div class="line">cp file1 file2          #拷贝</div><div class="line">cp -i file1 file2       #文件是否覆盖提醒</div><div class="line">cp -a file1 file2       #相当于-dpR,保持文件的连接(d),保持原文件的属性(p)并作递归处理(R)</div><div class="line">cp -p file1 file2       #连同文件的属性一起复制过去，而非使用默认属性</div><div class="line">cp -r dir1 dir2         #递归复制命令（复制子目录信息）</div><div class="line">cp -rf dir1 dir2        #拷贝文件夹，不提示是否覆盖</div><div class="line"></div><div class="line">whereis &lt;文件或目录&gt;    #查找文件</div><div class="line">locate &lt;文件或目录&gt;     #查找包含该字符的文件或目录，updatedb更新数据库</div><div class="line">find /root/ -name Hello.java    #查找文件[不常用，速度慢，执行在硬盘中搜索，时间在文件权限那里]</div><div class="line"></div><div class="line">ln –s /etc/inittab inittab #（inittab指向实际文件/etc/inittab） #ln 建立符号连接(和windows的快捷方式)</div></pre></td></tr></table></figure></p>
+<p>##系统管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">shutdown -h now         #立即进行关机(管理员root才可以) </div><div class="line">shutdown -r now         #现在重新启动计算机 </div><div class="line">rebot                   #重启</div><div class="line">halt                    #关机</div><div class="line">logout                  #注销</div><div class="line"></div><div class="line">chkconfig               #系统服务</div><div class="line">netstat -anp | grep 8080 #查询端口</div><div class="line">route #路由表</div><div class="line">tracert #路由追踪</div><div class="line">ps -aux #进程列表</div><div class="line">kill -9 pid #杀进程</div><div class="line"></div><div class="line">sudo 命令 / sudo su     #管理员权限</div><div class="line">exit                    #退出当前用户</div><div class="line">su - test               #切换普通用户</div><div class="line">su或su -                #切换回root</div><div class="line"></div><div class="line">//python</div><div class="line">sudo pip install -r requirements.txt</div><div class="line"></div><div class="line">#系统服务</div><div class="line">service mysqld start    #启动mysql数据库</div><div class="line">service mysqld stop     #停止</div><div class="line">service mysqld status   #查看状态</div><div class="line"></div><div class="line">chkconfig --list        #查看系统服务</div><div class="line">chkconfig mysqld on      #添加到开机启动</div><div class="line">chkconfig mydql off     #关闭开机启动</div><div class="line"></div><div class="line">#防火墙</div><div class="line">service   iptables status   #查询防火墙状态</div><div class="line">service   iptables stop     #停止防火墙</div><div class="line">service   iptables start    #启动防火墙</div><div class="line">service   iptables restart  #重启防火墙</div><div class="line">chkconfig   iptables off    #永久关闭防火墙</div><div class="line">chkconfig   iptables on     #永久关闭后启用</div><div class="line">更改过滤规则 1、vim /etc/sysconfig/iptables 2、添加过滤规则 3、service iptables restart 重启</div></pre></td></tr></table></figure></p>
+<p>##vim操作<br>p336<br>一般模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">- 移动光标</div><div class="line">hjkl                    #左下上右</div><div class="line">ctrl + f                #屏幕向下一页，相当与Page Down★</div><div class="line">ctrl + b                #屏幕向上一页，相当于Page Up★</div><div class="line">ctrl + d                #屏幕向下半页</div><div class="line">ctrl + u                #屏幕向上移动半页</div><div class="line">0或[home]               #移动到这一行的最前面字符处★</div><div class="line">$或[end]                #移动到这一行的最后面字符★</div><div class="line">nG                      #n为数字，移动到文档第n行★</div><div class="line"></div><div class="line">- 搜索</div><div class="line">/pattern               #向下寻找和pattern匹配的内容★</div><div class="line">?pattern               #向上寻找和pattern匹配的内容</div><div class="line">:noh                    #取消高亮</div><div class="line">字母n或N                #向前或向后继续寻找</div><div class="line"></div><div class="line">- 替换</div><div class="line">:n1,n2s/word1/word2/g   #n1与n2行之间用word2替换word1★</div><div class="line">:1,$s/word1/word2/g     #从第一行到最后一行寻找word1，替换为word2★</div><div class="line">:1,$s/word1/word2/gc    #第一行到最后一行寻找word1，替换为word2，替换前提示用户确认★</div><div class="line"></div><div class="line">- 删除 </div><div class="line">x,X                     #x向后删一个字符，X向前删★</div><div class="line">dd                      #删除一行★</div><div class="line"></div><div class="line">- 复制粘帖      </div><div class="line">yy                      #复制光标那一行★</div><div class="line">p，P                    #p下一行粘帖，P上一行</div><div class="line">u                       #复原前一个动作</div><div class="line">ctrl+r                  #重做上一个动作</div><div class="line">.                       #重复前一个动作</div></pre></td></tr></table></figure></p>
+<p>编辑模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">i,I     #i光标处插入，I所在行第一个非空字符插入</div><div class="line">a,A     #a光标所下一个字符插入，行最后一个字符插入</div><div class="line">o,O     #光标所在下一行插入新的一行，O上一行</div></pre></td></tr></table></figure></p>
+<p>指令列模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">:w      #将编辑的数据写入硬盘文件</div><div class="line">:w!     #强行写入</div><div class="line">:q      #离开vi</div><div class="line">:q!     #强制离开，不保存</div><div class="line">:wq     #储存离开</div><div class="line">:w filename #另存为</div><div class="line">！&lt;command&gt;            #执行shell命令</div></pre></td></tr></table></figure></p>
+<p>分页器命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">字母u和d                #分页器向上、向下翻动半页</div><div class="line">空格、b                 #分页器向下翻一页，向上翻一页</div><div class="line">字母j和k                #向下翻一行，上翻一行</div><div class="line">左箭头、右箭头           #行截断，向左向右滚动</div></pre></td></tr></table></figure></p>
+<p>其他：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">:1,$d                   #全部删除</div><div class="line">v,V,ctrl+v              #字符选择,行选择，区块选择</div><div class="line">y                       #反白的地方复制</div><div class="line">d                       #反白的地方删除</div></pre></td></tr></table></figure></p>
+<p>##linux的用户、权限管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># 用户</div><div class="line">useradd 用户名   #添加用户，root权限，home会出现一个文件夹</div><div class="line">passwd  用户名   #为新用户设密码</div><div class="line">userdel 用户名   #删除用户</div><div class="line">a) 【案例】userdel xiaoming #删除用户但保存用户主目录 </div><div class="line">b) 【案例】userdel ‐r xiaoming #删除用户以及用户主目录</div><div class="line"></div><div class="line">cat /etc/passwd     #查看Linux下所有用户信息</div><div class="line">用户：密码：用户ID：组ID：用户主目录：shell解释器</div><div class="line"></div><div class="line">logout           #当前用户退出 </div><div class="line">who am i         #当前用户是谁</div><div class="line"></div><div class="line"># 用户组</div><div class="line">groupadd policeman   #添加组，只能在root用户下操作</div><div class="line">cat /etc/group  #查看所有组</div><div class="line">useradd –g 组名 用户名  #创建用户，并添加到指定组</div><div class="line">usermod -g 组名 用户名 #把一个用户移值到另一个组</div><div class="line"></div><div class="line"># 操作</div><div class="line">chmod 777 文件名     #用户所在组、其他组都能进行读、写、执行</div><div class="line">chown 用户名 文件名   #修改文件所有者</div><div class="line">chown ‐R root ./abc   #改变abc这个目录及其下面所有的文件和目录的所有者是root</div><div class="line">chgrp 组名 文件名   #修改文件所有组</div><div class="line"></div><div class="line">umask  #文件预设权限，为文件或文件夹建立时默认的权限，umask -S以符号类型的方式显示</div></pre></td></tr></table></figure></p>
+<p>##压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#gzip常用用法</div><div class="line">gzip    文件名             #压缩文件，并删除源文件，后缀gz</div><div class="line">gzip -d     xxx.gz                  #解压</div><div class="line"></div><div class="line">#bzip2常用用法</div><div class="line">bzip2压缩比比gzip还要好，后缀bz2</div><div class="line">bzip2   文件名                      #压缩</div><div class="line">bzip2 -d 压缩名                     #解压</div><div class="line">bzcat   压缩名                      #查看压缩包</div><div class="line"></div><div class="line">#zip常用用法</div><div class="line">zip aa.zip 文件名1 文件名2          #压缩文件</div><div class="line">zip –r aa.zip 文件夹路径            #压缩文件夹</div><div class="line">zip file.zip * -x file             #将不需要压缩的文件排除在外  </div><div class="line"></div><div class="line">unzip file.zip                     #直接解压缩文件</div><div class="line">unzip file.zip –x file2            #除了file2文件外，其他的文件都解压缩</div><div class="line">unzip –Z file.zip                  #查看file.zip压缩包的内容。也可以使用“-l”、“-v”来查看压缩包的内容</div><div class="line"></div><div class="line">zip -d test1.zip test.MYI #删除压缩文件test1.zip中test.MYI文件</div><div class="line">zip -m test1.zip test. MYI #向压缩文件中test1.zip中添加test. MYI文件</div><div class="line"></div><div class="line">#打包指令tar</div><div class="line">p307</div><div class="line">-j 透过bzip2压缩，档名取为*.tar.bz2</div><div class="line">-z 透过gzip压缩，档名趣味*.tar.gz</div><div class="line"></div><div class="line">tar -jcvf filename.tar.bz2 要被压缩的档案或目录 #压缩</div><div class="line">tar -jtvf filename.tar.bz2  #查询</div><div class="line">tar -jxvf filename.tar.bz2  #解压缩</div><div class="line"></div><div class="line">tar -jxvf filename.tar.bz2 -C /tmp #-C解压目录</div><div class="line">tar -jzxf filename.tar.bz2 待解开档名   #解开单一档案</div><div class="line">tar -jcvf filename.tar.bz2 --exluce=etc* #不包含默写档案</div><div class="line"></div><div class="line">tar -zpcvf /root/etc.tar.gz /etc    </div><div class="line">tar -jpcvf /root/etc.tar.bz2 /etc</div><div class="line">#备份etc,p保留原本档案的权限与属性</div></pre></td></tr></table></figure></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><pre><code>.bash_profile 位于主目录下，它为系统的每个用户设置环境信息
+**/etc/ 中 profile 主要是配置环境变量**
+
+配置 .bashrc 文件可以指定某些程序在用户登录的时候就自动启动。
+</code></pre><p>##命令集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">date        #日期</div><div class="line">cal         #日历</div><div class="line">bc          #计算器</div><div class="line">ctrl + D    #文字输入结束</div></pre></td></tr></table></figure>
+<p>##命令专题<br>命令init [0123456]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">指定系统运行级别，类似windows的正常运行模式或安全模式 </div><div class="line"></div><div class="line">0：关机 </div><div class="line">1：单用户</div><div class="line">2：多用户状态没有网络服务 </div><div class="line">3：多用户状态有网络服务[常用]</div><div class="line">4：系统未使用保留给用户 </div><div class="line">5：图形界面 </div><div class="line">6：系统重启</div><div class="line"></div><div class="line">常用运行级别是3和5，要修改默认的运行级别可改文件 /etc/inittab的id:5:initdefault:这一行中的数字</div><div class="line"></div><div class="line">切换用户：输入su切换用户或者logout</div><div class="line"></div><div class="line">FAQ：不小心设置了6，导致系统启动-重启-启动循环，怎么办？ </div><div class="line"></div><div class="line">1. 在进入grub引导界面时，在数秒的时候，请输入 e </div><div class="line">2. 然后选中第二行(kernel)，输入e</div><div class="line">3. 在出现的界面里，输入1【1表示单用户级别】(6.5中测试是输入single，最终显示的是quiet single)，1的前面需要加一个空格，单用户模式既可以修改模式，又可以修改密码，Enter </div><div class="line">4. 返回后，按b，重新启动</div><div class="line"></div><div class="line">注意：用运行级别1可以绕过ROOT密码，不需要密码就可以用，用passwd就OK</div></pre></td></tr></table></figure></p>
+<hr>
+<p>配置文件被更改</p>
+<p>如：<img src="http://www.th7.cn/d/file/p/2014/11/04/74a34c1bdf612bbcc05bd30c3a5647ed.png" alt="此处输入图片的描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">最前面的八个信息是：</div><div class="line">    S ：(file Size differs) 档案的容量大小是否被改变</div><div class="line">    M ：(Mode differs) 档案的类型戒档案的属性 (rwx) 是否被改变？如是否可执行等参数已被改变</div><div class="line">    5 ：(MD5 sum differs) MD5 这一种纹码的内容已经不同</div><div class="line">    D ：(Device major/minor number mis-match) 装置的主/次代码已经改变</div><div class="line">    L ：(readLink(2) path mis-match) Link 路径已被改变</div><div class="line">    U ：(User ownership differs) 档案的所属人已被改变</div><div class="line">    G ：(Group ownership differs) 档案的所属群组已被改变</div><div class="line">    T ：(mTime differs) 档案的建立时间已被改变</div><div class="line"></div><div class="line">第二排的意思是：</div><div class="line">    c ：配置文件 (config file)</div><div class="line">    d ：文件数据文件 (documentation)</div><div class="line">    g ：鬼档案～通常是该档案丌被某个软件所包吨，较少发生！(ghost file)</div><div class="line">    l ：许可证文件 (license file)</div><div class="line">    r ：自述文件 (read me)</div></pre></td></tr></table></figure></p>
+<hr>
+<p>##shell使用</p>
+<p>shell脚本文件：</p>
+<pre>
+a) 是一个文本文件
+b) 命令的集合 
+c) 有执行的权限 
+d) 执行方式（./文件名）
+</pre>
+
+<p><strong>profile文件</strong><br>profile文件主要是用于配置环境变量<br><img src="http://img.blog.csdn.net/20151227194314714" alt="这里写图片描述"></p>
+<p><strong>用户登录后自动执行的shell脚本文件</strong><br>配置.bashrc文件可以指定某些程序在用户登录的时候就自动启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如：/home/tomcat/bin/startup.sh start</div></pre></td></tr></table></figure></p>
+
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -373,6 +452,8 @@ k
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -384,13 +465,23 @@ k
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -398,38 +489,42 @@ k
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/" itemprop="url">
-                  Linux视频教程第1讲.基础介绍
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/" itemprop="url">Linux视频教程第1讲.基础介绍</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-12T20:42:00+08:00" content="2017-04-12">
-              2017-04-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T20:42:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -437,32 +532,26 @@ k
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -472,27 +561,51 @@ k
       
         
           
-          linux的初步介绍吉祥物：小企鹅（想起小时侯被企鹅咬了一口），芬生学生创建，微软反LINUX广告（四个变形动物）
-linux的特点优点
-
-免费的/开源 
-支持多线程/多用户 
-安全性好
-对内存和文件管理优越
-
-缺点
-
-操作相对困难
-
-linux的历史1960时期左右，MIT，即麻省理工学院有一台电
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h2 id="linux的初步介绍"><a href="#linux的初步介绍" class="headerlink" title="linux的初步介绍"></a>linux的初步介绍</h2><p>吉祥物：小企鹅（想起小时侯被企鹅咬了一口），芬生学生创建，微软反LINUX广告（四个变形动物）</p>
+<h2 id="linux的特点"><a href="#linux的特点" class="headerlink" title="linux的特点"></a>linux的特点</h2><p>优点</p>
+<ul>
+<li>免费的/开源 </li>
+<li>支持多线程/多用户 </li>
+<li>安全性好</li>
+<li>对内存和文件管理优越</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>操作相对困难</li>
+</ul>
+<h2 id="linux的历史"><a href="#linux的历史" class="headerlink" title="linux的历史"></a>linux的历史</h2><p>1960时期左右，MIT，即麻省理工学院有一台电脑，使用分时操作系统，只能同时允许30个人通过终端登录</p>
+<p>1965年，MIT、GE、Bell实验室，决定将30 -&gt; 300个人分时系统，multis计划，即火星计划</p>
+<p>1969年，火星计划失败。但Bell的Ken Thompson（C语言设计者）开发了一个file server system[文件系统]，在Bell实验室很受欢迎</p>
+<p>在Dennis Ritchie的加入下，1973年，unix诞生，开源，源码内核共享</p>
+<p>各个大公司看到了商机，认为Unix未来会有很大的前景，在源代码基础上进行开发</p>
+<ul>
+<li>IBM：AIX </li>
+<li>Sun：Solaris </li>
+<li>HP： HP unix </li>
+<li>伯克利分校：BSD</li>
+</ul>
+<p>minix系统出现（也是跟上述操作系统一样），麻雀虽小，五脏俱全</p>
+<p>Linus Torvalds，芬兰读书，拥有PC 386，1991年计划把minix移植到pc上（商用的只能放在特定的机器上），1994发布linux 1.0版 [linux is not unix]，完全没有桌面</p>
+<p>Linux内核代码也是开源的，一些公司看到些商机</p>
+<ul>
+<li>redhat红帽子</li>
+<li>s.u.s.e</li>
+<li>红旗linux（中国）</li>
+</ul>
+<h2 id="linux的第一次接触"><a href="#linux的第一次接触" class="headerlink" title="linux的第一次接触"></a>linux的第一次接触</h2><p>###关机命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">shutdown-h now  #立即进行关机(管理员root才可以) </div><div class="line">shutdown -r now #现在重新启动计算机 </div><div class="line">reboot          #现在重新启动计算机</div></pre></td></tr></table></figure>
+<p>###进入图形桌面 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">startx</div></pre></td></tr></table></figure>
+<p>###用户登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">输入用户名密码</div><div class="line"></div><div class="line">登录时尽量少用root账户登录，因为它是系统管理员，最大的权限，难免操作失误。</div><div class="line">可以利用普通用户登录，登录后再用&quot;su -&quot;命令来切换成系统管理员身份</div></pre></td></tr></table></figure>
+<p>###用户注销</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在提示符下输入logout即可，快捷键ctrl+D</div></pre></td></tr></table></figure>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -510,6 +623,8 @@ linux的历史1960时期左右，MIT，即麻省理工学院有一台电
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -521,13 +636,23 @@ linux的历史1960时期左右，MIT，即麻省理工学院有一台电
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第0讲.开山篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -535,38 +660,42 @@ linux的历史1960时期左右，MIT，即麻省理工学院有一台电
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第0讲.开山篇/" itemprop="url">
-                  Linux视频教程第0讲.开山篇
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/12/[Linux]Linux视频教程第0讲.开山篇/" itemprop="url">Linux视频教程第0讲.开山篇</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-12T20:36:00+08:00" content="2017-04-12">
-              2017-04-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T20:36:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -574,32 +703,26 @@ linux的历史1960时期左右，MIT，即麻省理工学院有一台电
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/12/[Linux]Linux视频教程第0讲.开山篇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/12/[Linux]Linux视频教程第0讲.开山篇/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -609,17 +732,49 @@ linux的历史1960时期左右，MIT，即麻省理工学院有一台电
       
         
           
-          笔记：http://www.mianfeiwendang.com/doc/72c0f2fc1581313161f5e306
-为什么学习Linuxlinux是一个开源、免费的操作系统，其稳定性、安全性、处理多并发已经得到业界的认可，目前很多中型，大型甚至是巨型项目都在使用linux
-Linux发行版市
-          ...
+            <p>笔记：<a href="http://www.mianfeiwendang.com/doc/72c0f2fc1581313161f5e306" target="_blank" rel="external">http://www.mianfeiwendang.com/doc/72c0f2fc1581313161f5e306</a></p>
+<h2 id="为什么学习Linux"><a href="#为什么学习Linux" class="headerlink" title="为什么学习Linux"></a>为什么学习Linux</h2><p>linux是一个开源、免费的操作系统，其稳定性、安全性、处理多并发已经得到业界的认可，目前很多中型，大型甚至是巨型项目都在使用linux</p>
+<h2 id="Linux发行版"><a href="#Linux发行版" class="headerlink" title="Linux发行版"></a>Linux发行版</h2><p>市面上有很多Linux发行版：redhat 、红旗linux、ubuntu、suse、fedora，它们的<strong>内核</strong>都是一样的（Note：linux其实是一个统称，就比如面条是一个统称，可以有哨子面、阳春面、打卤面等）</p>
+<h2 id="linux-for-工作"><a href="#linux-for-工作" class="headerlink" title="linux for 工作"></a>linux for 工作</h2><ul>
+<li>linux系统管理员 - -linux系统的维护、配置等</li>
+<li>linux程序员 - - 需c/c++、java，php、jsp… </li>
+</ul>
+<p>细分———linux软件工程师（PC） linux嵌入式开发（单片机、芯片）</p>
+<h2 id="如何学习linux"><a href="#如何学习linux" class="headerlink" title="如何学习linux"></a>如何学习linux</h2><ul>
+<li>第一阶段：linux平台上的开发，包括vi，gcc，gdb，make，jdk，tomcat，mysql等和linux基本操作</li>
+<li>第二阶段：加厚c语言功底《c专家编程》或是java语言</li>
+<li>第三阶段：学习unix环境高级编程《unix环境高级编程》</li>
+<li>第四阶段：linux应用系统开发/linux嵌入式开发</li>
+</ul>
+<h2 id="内容讲解"><a href="#内容讲解" class="headerlink" title="内容讲解"></a>内容讲解</h2><p>基础部分</p>
+<ul>
+<li>linux基础知识 </li>
+<li>linux常用命令80个 </li>
+<li>linux分区/vi/权限…</li>
+</ul>
+<p>实用部分 </p>
+<ul>
+<li>Samba安装与配置 </li>
+<li>linux网络环境配置 </li>
+<li>crontab使用 </li>
+<li>jdk/apache/mysql/ssh/rpm安装与配置 </li>
+<li>linux下java网络编程 </li>
+<li>shell初步介绍 </li>
+<li>Samba安装与配置</li>
+</ul>
+<p>推荐书籍</p>
+<ul>
+<li>《鸟哥的Linux的私房菜基础学习篇》鸟哥、许伟、林彩娥等编著</li>
+<li>《Linux编程从入门到精通》宫虎波编著 </li>
+<li>《Linux内核完全剖析》赵炯编著</li>
+</ul>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/12/[Linux]Linux视频教程第0讲.开山篇/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -637,6 +792,8 @@ Linux发行版市
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -648,13 +805,23 @@ Linux发行版市
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/11/[Spring MVC]消息转换机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -662,38 +829,42 @@ Linux发行版市
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/11/[Spring MVC]消息转换机制/" itemprop="url">
-                  消息转换机制
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/11/[Spring MVC]消息转换机制/" itemprop="url">消息转换机制</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-11T22:06:00+08:00" content="2017-04-11">
-              2017-04-11
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-11T22:06:00+08:00">
+                2017-04-11
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Spring-MVC/" itemprop="url" rel="index">
                     <span itemprop="name">Spring MVC</span>
                   </a>
@@ -701,32 +872,26 @@ Linux发行版市
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/11/[Spring MVC]消息转换机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/11/[Spring MVC]消息转换机制/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -736,18 +901,20 @@ Linux发行版市
       
         
           
-          源码分析：http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html
-HttpMessageConverter接口就是Spring提供的http消息转换接口
+            <p>源码分析：<br><a href="http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html" target="_blank" rel="external">http://www.cnblogs.com/fangjian0423/p/springMVC-xml-json-convert.html</a></p>
+<p>HttpMessageConverter接口就是Spring提供的http消息转换接口</p>
+<p><img src="http://i.imgur.com/UXOcuk9.png" alt=""></p>
+<p>1、对Http请求报文进行抽象，通过HttpInputMessage的getBody()方法获得输入流，通过HttpOutputMessag的getBody()方法获得输出流<br>2、消息转换器的最高层次的接口抽象：HttpMessageConverter<br>3、根据@RequestBody注解选择适当的HttpMessageConverter实现类来将请求参数解析到string变量中</p>
+<p>开启注解驱动：<code>&lt;mvc:annotation-driven/&gt;</code>后实例化了RequestMappingHandlerMapping，RequestMappingHandlerAdapter等诸多类。</p>
+<p>RequestMappingHandlerMapping处理请求映射的，处理@RequestMapping跟请求地址之间的关系。</p>
+<p>RequestMappingHandlerAdapter是请求处理的适配器，将会处理注解和准备handler方法中的参数（RequestMappingHandlerAdapter中的HttpMessageConverter完成Http请求体中的数据到Handler参数的映射）</p>
 
-1、对Http请求报文进行抽象，通过HttpInputMes
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/11/[Spring MVC]消息转换机制/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -765,6 +932,8 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -776,13 +945,23 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/10/[数据库]1、数据库连接池原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -790,38 +969,42 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/10/[数据库]1、数据库连接池原理/" itemprop="url">
-                  1、数据库连接池原理
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/10/[数据库]1、数据库连接池原理/" itemprop="url">1、数据库连接池原理</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-10T20:36:00+08:00" content="2017-04-10">
-              2017-04-10
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T20:36:00+08:00">
+                2017-04-10
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据库/" itemprop="url" rel="index">
                     <span itemprop="name">数据库</span>
                   </a>
@@ -829,32 +1012,26 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/10/[数据库]1、数据库连接池原理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/10/[数据库]1、数据库连接池原理/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -864,24 +1041,123 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
       
         
           
-          早期我们怎么进行数据库操作一般来说，Java应用程序访问数据库的过程是：
+            <h2 id="早期我们怎么进行数据库操作"><a href="#早期我们怎么进行数据库操作" class="headerlink" title="早期我们怎么进行数据库操作"></a>早期我们怎么进行数据库操作</h2><p>一般来说，Java应用程序访问数据库的过程是：</p>
+<ul>
+<li>加载驱动</li>
+<li>建立连接</li>
+<li>创建Statement对象</li>
+<li>执行sql语句</li>
+<li>处理结果集</li>
+<li>关闭连接</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class JDBCTest &#123;</div><div class="line">	public static void main(String[] args) throws ClassNotFoundException, SQLException &#123;</div><div class="line">		//1、加载驱动</div><div class="line">		Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div><div class="line">		//2、建立连接</div><div class="line">		Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/audit&quot;, &quot;root&quot;, &quot;root&quot;);</div><div class="line">		//3、创建Statement对象</div><div class="line">		PreparedStatement statement = connection.prepareStatement(&quot;select * from audit_user where userID = ?&quot;);</div><div class="line">		statement.setString(1, &quot;8aec28d9515c673301515c7966700001&quot;);</div><div class="line">		//4、执行sql语句</div><div class="line">		ResultSet resultSet = statement.executeQuery();</div><div class="line">		//5、处理结果集</div><div class="line">		while(resultSet.next())&#123;</div><div class="line">			System.out.println(resultSet.getString(&quot;userName&quot;));</div><div class="line">		&#125;</div><div class="line">		//6、关闭连接</div><div class="line">		resultSet.close();</div><div class="line">		statement.close();</div><div class="line">		connection.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>存在的问题：</p>
+<ul>
+<li><p>首先，<strong>每一次web请求都要建立一次数据库连接，建立连接是一个费时的活动</strong>，每次都得花费0.05s～1s的时间，而且系统还要分配内存资源。这个时间对于一次或几次数据库操作，或许感觉不出系统有多大的开销。可是对于现在的web应用，尤其是大型电子商务网站，同时有几百人甚至几千人在线是很正常的事。在这种情况下，频繁的进行数据库连接操作势必占用很多的系统资源，网站的响应速度必定下降，严重的甚至会造成服务器的崩溃。不是危言耸听，这就是制约某些电子商务网站发展的技术瓶颈问题。</p>
+</li>
+<li><p>其次，<strong>对于每一次数据库连接，使用完后都得断开。</strong>否则，如果程序出现异常而未能关闭，将会导致数据库系统中的<strong>内存泄漏</strong>，最终将不得不重启数据库。还有，这种开发不能控制被创建的连接对象数，系统资源会被毫无顾及的分配出去，如连接过多，也可能导致内存泄漏，服务器崩溃。</p>
+</li>
+</ul>
+<p>上述的用户查询案例，如果同时有1000人访问，就会不断的有数据库连接、断开操作</p>
+<p><img src="http://i.imgur.com/C3Ps0ly.png" alt=""></p>
+<p>通过上面的分析，我们可以看出来，”数据库连接”是一种稀缺的资源，为了保障网站的正常使用，应该对其进行妥善管理。其实我们查询完数据库后，如果不关闭连接，而是暂时存放起来，当别人使用时，把这个连接给他们使用。就避免了一次建立数据库连接和断开的操作时间消耗。原理如下：</p>
+<p><img src="http://i.imgur.com/hJnhxUG.png" alt=""></p>
+<h2 id="技术演进出来的数据库连接池"><a href="#技术演进出来的数据库连接池" class="headerlink" title="技术演进出来的数据库连接池"></a>技术演进出来的数据库连接池</h2><p>由上面的分析可以看出，问题的根源就在于对数据库连接资源的低效管理。我们知道，对于共享资源，有一个很著名的设计模式：<strong>资源池（resource pool）</strong>。该模式正是为了解决资源的频繁分配﹑释放所造成的问题。为解决上述问题，可以采用数据库连接池技术。数据库连接池的基本思想就是为数据库连接建立一个”缓冲池”。<strong>预先在缓冲池中放入一定数量的连接，当需要建立数据库连接时，只需从”缓冲池”中取出一个，使用完毕之后再放回去</strong>。</p>
+<p>我们可以通过<strong>设定连接池最大连接数来防止系统无尽的与数据库连接</strong>。更为重要的是我们可以通过连接池的管理机制<strong>监视数据库的连接的数量</strong>﹑使用情况，为系统开发﹑测试及性能调整提供依据。</p>
+<p>我们自己尝试开发一个连接池，来为上面的查询业务提供数据库连接服务：</p>
+<ul>
+<li>编写 class 实现 IConnectionPool 接口，实现从 getConnection 和 release 方法</li>
+<li>在 class 构造器一次性创建10个连接，将连接保存 LinkedList 中</li>
+<li>实现 getConnection，从 LinkedList 中返回一个连接</li>
+<li>提供将连接放回连接池中方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * 自定义连接池</div><div class="line">  */</div><div class="line">public class SimpleConnectionPool implements IConnectionPool&#123;</div><div class="line"></div><div class="line">	private Queue&lt;Connection&gt; connections = new LinkedList&lt;Connection&gt;();</div><div class="line">	</div><div class="line">	public SimpleConnectionPool() throws ClassNotFoundException, SQLException&#123;</div><div class="line">		//加载驱动</div><div class="line">		Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</div><div class="line">		//创建连接</div><div class="line">		for(int i = 0; i &lt; 10; i++)&#123;</div><div class="line">			Connection connection = DriverManager.getConnection(&quot;jdbc:mysql:///audit&quot;, &quot;root&quot;, &quot;root&quot;);</div><div class="line">			connections.add(connection);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	//从连接池中获取连接</div><div class="line">	@Override</div><div class="line">	public Connection getConnection() &#123;</div><div class="line">		return connections.poll();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//释放连接</div><div class="line">	@Override</div><div class="line">	public void release(Connection connection) &#123;</div><div class="line">		connections.add(connection);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public static void main(String[] args) throws ClassNotFoundException, SQLException &#123;</div><div class="line">		IConnectionPool pool = new SimpleConnectionPool();</div><div class="line">		//测试是否是10个数据库连接对象</div><div class="line">		Set&lt;Connection&gt; sets = new HashSet&lt;Connection&gt;();</div><div class="line">		//模拟100个用户创建连接和释放连接</div><div class="line">		for(int i = 0; i &lt; 100;i++)&#123;</div><div class="line">			Connection connection = pool.getConnection();</div><div class="line">			sets.add(connection);</div><div class="line">			System.out.println(connection);</div><div class="line">			pool.release(connection);</div><div class="line">		&#125;</div><div class="line">		System.out.println(sets.size());//10</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用连接池重构我们的用户查询函数   </p>
+<pre>
+/**
+ * 使用连接池重构访问数据库
+ */
+public class Test2 {
+    public static void main(String[] args) throws ClassNotFoundException,
+            SQLException {
+        // 1、建立连接池
+        SimpleConnectionPool pool = new SimpleConnectionPool();
+        for (int i = 0; i < 100; i++) {
+            // 2、建立连接
+            <font color="red">Connection connection = pool.getConnection();</font>
+            System.out.println(connection);
+            // 3、创建Statement对象
+            PreparedStatement statement = connection.prepareStatement("select * from audit_user where userID = ?");
+            statement.setString(1, "8aec28d9515c673301515c7966700001");
+            // 4、执行sql语句
+            ResultSet resultSet = statement.executeQuery();
+            // 5、处理结果集
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("userName"));
+            }
+            // 6、关闭连接
+            resultSet.close();
+            statement.close();
+            <font color="red">pool.release(connection);</font>
+        }
+    }
+}
+</pre>
 
-加载驱动
-建立连接
-创建Statement对象
-执行sql语句
-处理结果集
-关闭连接
+<p>如果不使用连接池，不断与数据库建立连接，当超出数据库的最大连接数后会报 Too Many 连接错误</p>
+<p>这就是数据库连接池的原理，它大大提供了数据库连接的利用率，减小了内存吞吐的开销。我们在开发过程中，就不需要再关心数据库连接的问题，自然有数据库连接池帮助我们处理，这回放心了吧。但连接池需要考虑的问题不仅仅如此，下面我们就看看还有哪些问题需要考虑。</p>
+<h2 id="连接池还要考虑更多的问题"><a href="#连接池还要考虑更多的问题" class="headerlink" title="连接池还要考虑更多的问题"></a>连接池还要考虑更多的问题</h2><p>1、并发问题</p>
+<p>为了使连接管理服务具有最大的通用性，必须考虑多线程环境，即并发问题。这个问题相对比较好解决，因为java语言自身提供了对并发管理的支持，使用synchronized关键字即可确保线程是同步的。使用方法为直接在类方法前面加上synchronized关键字，如：</p>
+<pre><code>public synchronized Connection getConnection（）
+</code></pre><p>2、多数据库服务器和多用户</p>
+<p>对于大型的企业级应用，常常需要同时连接不同的数据库（如连接Oracle和sybase）。如何连接不同的数据库呢？我们采用的策略是：<strong>设计一个符合单例模式的连接池管理类</strong></p>
+<ul>
+<li>在连接池管理类的唯一实例被创建时<strong>读取一个资源文件</strong>，其中资源文件中存放着<strong>多个数据库的url地址等信息</strong></li>
+<li>根据资源文件提供的信息，<strong>创建多个连接池类的实例</strong>，每一个实例都是一个特定数据库的连接池。连接池管理类实例为<strong>每个连接池实例取一个名字</strong>，通过不同的名字来管理不同的连接池。</li>
+</ul>
+<p>对于同一个数据库有多个用户使用不同的名称和密码访问的情况，也可以通过资源文件处理，即在资源文件中设置多个具有相同url地址，但具有不同用户名和密码的数据库连接信息。</p>
+<p>3、事务处理</p>
+<p>我们知道，事务具有原子性，此时要求对数据库的操作符合”all-all-nothing”原则，即<strong>对于一组sql语句要么全做，要么全不做。</strong></p>
+<p>在 Java 语言中，<strong>Connection 类本身提供了对事务的支持，可以通过设置 Connection 的 autocommit 属性为 false，然后显式的调用commit或rollback方法来实现</strong>。但要高效的进行connection复用，就必须提供相应的事务支持机制。<font color="red">可采用每一个事务独占一个连接来实现</font>，这种方法可以大大降低事务管理的复杂性（使用ThreadLocal实现线程范围内的单例，每个线程一个）</p>
+<pre>
+/**
+ * 事务显示提交，出现异常回滚；
+ * 事务中的sql语句要么全部执行，要不全部不执行
+ */ 
+connection.setAutoCommit(false);
+try {
+    int result = statement.executeUpdate();//成功
+    int a = 1/0;//异常
+    connection.commit();
+} catch (Exception e) {
+    e.printStackTrace();
+    connection.rollback();
+}
+</pre>
 
-123456789101112131415161718192021public class JDBCTest &#123;	public
-          ...
+<p>4、连接池的分配与释放★★★</p>
+<p>连接池的分配与释放，对系统的性能有很大的影响。合理的分配与释放，可以提高连接的复用度，从而降低建立新连接的开销，同时还可以加快用户的访问速度。</p>
+<p>对于连接的管理可使用空闲池。即把已经创建但尚未分配出去的连接按创建时间存放到一个空闲池中。</p>
+<ul>
+<li>每当用户请求一个连接时，<strong>系统首先检查空闲池内有没有空闲连接</strong>。如果有就把建立时间最长（通过容器的顺序存放实现）的那个连接分配给他（实际是先做连接是否有效的判断，如果可用就分配给用户，如不可用就把这个连接从空闲池删掉，重新检测空闲池是否还有连接）；</li>
+<li>如果没有则检查当前所开<strong>连接池是否达到连接池所允许的最大连接数（maxconn）</strong>，如果没有达到，就<strong>新建一个连接</strong>，如果已经达到，<strong>就等待一定的时间（timeout）</strong>。</li>
+<li>如果在等待的时间内有连接被释放出来就可以把这个连接<strong>分配给等待的用户</strong>，如果等待时间超过预定时间timeout 则<strong>返回空值（null）</strong>。</li>
+<li>系统对已经分配出去正在使用的连接只做计数，当使用完后再返还给空闲池。对于空闲连接的状态，可开辟专门的线程定时检测，这样会花费一定的系统开销，但可以保证较快的响应速度。也可采取不开辟专门线程，只是在分配前检测的方法。</li>
+</ul>
+<p>5、连接池的配置与维护</p>
+<p>连接池中到底应该放置多少连接，才能使系统的性能最佳？<strong>系统可采取设置最小连接数（minconn）和最大连接数（maxconn）来控制连接池中的连接。最小连接数是系统启动时连接池所创建的连接数。</strong>如果创建过多，则系统启动就慢，但创建后系统的响应速度会很快；如果创建过少，则系统启动的很快，响应起来却慢。这样，可以在开发时，设置较小的最小连接数，开发起来会快，而在系统实际使用时设置较大的，因为这样对访问客户来说速度会快些。最大连接数是连接池中允许连接的最大数目，具体设置多少，要看系统的访问量，可通过反复测试，找到最佳点。</p>
+<p>如何确保连接池中的最小连接数呢？有动态和静态两种策略。动态即每隔一定时间就对连接池进行检测，如果发现连接数量小于最小连接数，则补充相应数量的新连接以保证连接池的正常运转。静态是发现空闲连接不够时再去检查。</p>
+<h2 id="实际开发中有成熟的开源连接池供我们使用"><a href="#实际开发中有成熟的开源连接池供我们使用" class="headerlink" title="实际开发中有成熟的开源连接池供我们使用"></a>实际开发中有成熟的开源连接池供我们使用</h2><p>理解了连接池的原理就可以了，没有必要什么都从头写一遍，那样会花费很多时间，并且性能及稳定性也不一定满足要求。事实上，已经存在很多流行的性能优良的第三方数据库连接池jar包供我们使用。如：</p>
+<p>1.Apache commons-dbcp 连接池<br>下载：<a href="http://commons.apache.org/proper/commons-dbcp/" target="_blank" rel="external">http://commons.apache.org/proper/commons-dbcp/</a></p>
+<p>2.c3p0 数据库连接池<br>下载：<a href="http://sourceforge.net/projects/c3p0/" target="_blank" rel="external">http://sourceforge.net/projects/c3p0/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://blog.csdn.net/shuaihj/article/details/14223015" target="_blank" rel="external">http://blog.csdn.net/shuaihj/article/details/14223015</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/10/[数据库]1、数据库连接池原理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -899,6 +1175,8 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -910,13 +1188,23 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/09/[Git]协作开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -924,38 +1212,42 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/09/[Git]协作开发/" itemprop="url">
-                  协作开发
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/09/[Git]协作开发/" itemprop="url">协作开发</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-09T13:20:00+08:00" content="2017-04-09">
-              2017-04-09
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T13:20:00+08:00">
+                2017-04-09
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Git/" itemprop="url" rel="index">
                     <span itemprop="name">Git</span>
                   </a>
@@ -963,32 +1255,26 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/09/[Git]协作开发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/09/[Git]协作开发/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -998,17 +1284,15 @@ HttpMessageConverter接口就是Spring提供的http消息转换接口
       
         
           
-          Gitlab多人协作开发
-http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
+            <p>Gitlab多人协作开发</p>
+<p><a href="http://herry2013git.blog.163.com/blog/static/219568011201341111240751/" target="_blank" rel="external">http://herry2013git.blog.163.com/blog/static/219568011201341111240751/</a></p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/09/[Git]协作开发/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1026,6 +1310,8 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1037,13 +1323,23 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/09/[JVM]JVM的符号引用和直接引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1051,38 +1347,42 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/09/[JVM]JVM的符号引用和直接引用/" itemprop="url">
-                  JVM的符号引用和直接引用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/09/[JVM]JVM的符号引用和直接引用/" itemprop="url">JVM的符号引用和直接引用</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-09T10:20:00+08:00" content="2017-04-09">
-              2017-04-09
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T10:20:00+08:00">
+                2017-04-09
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/JVM/" itemprop="url" rel="index">
                     <span itemprop="name">JVM</span>
                   </a>
@@ -1090,32 +1390,26 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/09/[JVM]JVM的符号引用和直接引用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/09/[JVM]JVM的符号引用和直接引用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1125,16 +1419,16 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
       
         
           
-          http://www.cnblogs.com/shinubi/articles/6116993.html
-符号引用（Symbolic References）：符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能够无歧义的定位到目标即可。例如，在Class文件中它以CONST
-          ...
+            <p><a href="http://www.cnblogs.com/shinubi/articles/6116993.html" target="_blank" rel="external">http://www.cnblogs.com/shinubi/articles/6116993.html</a></p>
+<h2 id="符号引用（Symbolic-References）："><a href="#符号引用（Symbolic-References）：" class="headerlink" title="符号引用（Symbolic References）："></a>符号引用（Symbolic References）：</h2><p>符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能够无歧义的定位到目标即可。例如，在Class文件中它以CONSTANT_Class_info、CONSTANT_Fieldref_info、CONSTANT_Methodref_info等类型的常量出现。符号引用与虚拟机的内存布局无关，引用的目标并不一定加载到内存中。在Java中，一个java类将会编译成一个class文件。在编译时，java类并不知道所引用的类的实际地址，因此只能使用符号引用来代替。比如org.simple.People类引用了org.simple.Language类，在编译时People类并不知道Language类的实际内存地址，因此只能使用符号org.simple.Language（假设是这个，当然实际中是由类似于CONSTANT_Class_info的常量来表示的）来表示Language类的地址。各种虚拟机实现的内存布局可能有所不同，但是它们能接受的符号引用都是一致的，因为符号引用的字面量形式明确定义在Java虚拟机规范的Class文件格式中。</p>
+<h2 id="直接引用："><a href="#直接引用：" class="headerlink" title="直接引用："></a>直接引用：</h2><p>直接引用可以是<br>（1）直接指向目标的指针（比如，指向“类型”【Class对象】、类变量、类方法的直接引用可能是指向方法区的指针）<br>（2）相对偏移量（比如，指向实例变量、实例方法的直接引用都是偏移量）<br>（3）一个能间接定位到目标的句柄<br>直接引用是和虚拟机的布局相关的，同一个符号引用在不同的虚拟机实例上翻译出来的直接引用一般不会相同。如果有了直接引用，那引用的目标必定已经被加载入内存中了。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/09/[JVM]JVM的符号引用和直接引用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1152,6 +1446,8 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1163,13 +1459,23 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/01/[JVM]JVM性能调优/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1177,38 +1483,42 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/04/01/[JVM]JVM性能调优/" itemprop="url">
-                  JVM性能调优
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/04/01/[JVM]JVM性能调优/" itemprop="url">JVM性能调优</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-01T18:20:00+08:00" content="2017-04-01">
-              2017-04-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-01T18:20:00+08:00">
+                2017-04-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/JVM/" itemprop="url" rel="index">
                     <span itemprop="name">JVM</span>
                   </a>
@@ -1216,32 +1526,26 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/04/01/[JVM]JVM性能调优/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/01/[JVM]JVM性能调优/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1251,24 +1555,225 @@ http://herry2013git.blog.163.com/blog/static/219568011201341111240751/
       
         
           
-          jps列出正在运行的虚拟机进程
-使用案例：
-jps -l
-语法：
-jps [-option] [hostid]
-q    只输出LVMID，省略主类的名称
+            <h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>列出正在运行的虚拟机进程</p>
+<p>使用案例：</p>
+<pre><code>jps -l
+</code></pre><p>语法：</p>
+<p>jps [-option] [hostid]</p>
+<pre><code>q    只输出LVMID，省略主类的名称
 m    输出main method的参数
 l    输出完全的包名，应用主类名，jar的完全路径名
 v    输出jvm参数
-jstat监视虚
-          ...
+</code></pre><h2 id="jstat"><a href="#jstat" class="headerlink" title="jstat"></a>jstat</h2><p>监视虚拟机运行状态信息</p>
+<p>监控堆使用率，每秒显示一次</p>
+<pre><code>jstat -gcutil 25444 1000 
+</code></pre><p>监控堆容量的变化，每秒显示一次</p>
+<pre><code>jstat -gc 25444 1000
+</code></pre><p>语法结构：</p>
+<pre><code>Usage: 
+jstat -help|-options
+jstat -&lt;option&gt; [-t] [-h&lt;lines&gt;] &lt;vmid&gt; [&lt;interval&gt; [&lt;count&gt;]]
+</code></pre><p>参数解释：</p>
+<p>C:capacity U：usage</p>
+<pre><code>Options — 选项，我们一般使用** -gcutil** 查看gc 情况
+vmid    — VM 的进程号，即当前运行的java 进程号
+interval– 间隔时间，单位为秒或者毫秒
+count   — 打印次数，如果缺省则打印无数次
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/01/[JVM]JVM性能调优/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+S0  — Heap 上的 Survivor space 0 区已使用空间的百分比 
+S1  — Heap 上的 Survivor space 1 区已使用空间的百分比 
+E   — Heap 上的 Eden space 区已使用空间的百分比 
+O   — Heap 上的 Old space 区已使用空间的百分比 
+P   — Perm space 区已使用空间的百分比 
+YGC — 从应用程序启动到采样时发生 Young GC 的次数 
+YGCT– 从应用程序启动到采样时 Young GC 所用的时间( 单位秒 )
+FGC — 从应用程序启动到采样时发生 Full GC 的次数 
+FGCT– 从应用程序启动到采样时 Full GC 所用的时间( 单位秒 )
+GCT — 从应用程序启动到采样时用于垃圾回收的总时间( 单位秒)
+
+S0C：年轻代中第一个survivor（幸存区）的容量 (字节) 
+S1C：年轻代中第二个survivor（幸存区）的容量 (字节) 
+S0U：年轻代中第一个survivor（幸存区）目前已使用空间 (字节) 
+S1U：年轻代中第二个survivor（幸存区）目前已使用空间 (字节) 
+EC：年轻代中Eden（伊甸园）的容量 (字节) 
+EU：年轻代中Eden（伊甸园）目前已使用空间 (字节) 
+OC：Old代的容量 (字节) 
+OU：Old代目前已使用空间 (字节) 
+PC：Perm(持久代)的容量 (字节) 
+PU：Perm(持久代)目前已使用空间 (字节) 
+</code></pre><p>jstat的option参数：</p>
+<pre><code>-class：统计class loader行为信息
+-compile：统计编译行为信息
+-gc：统计jdk gc时heap信息
+-gccapacity：统计不同的generations（不知道怎么翻译好，包括新生区，老年区，permanent区）相应的heap容量情况
+-gccause：统计gc的情况，（同-gcutil）和引起gc的事件
+-gcnew：统计gc时，新生代的情况
+-gcnewcapacity：统计gc时，新生代heap容量
+-gcold：统计gc时，老年区的情况
+-gcoldcapacity：统计gc时，老年区heap容量
+-gcpermcapacity：统计gc时，permanent区heap容量
+-gcutil：统计gc时，heap情况
+-printcompilation：不知道干什么的，一直没用过。
+</code></pre><h2 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h2><p>jmap（Memory Map for Java）命令用于生成堆转储快照（一般称为heapdump或dump文件）。如果不使用jmap命令，想要获取Java堆转储快照还有一些比较”暴力”的手段：</p>
+<ul>
+<li>可以使用<code>-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=C:\</code>参数，可以让虚拟机在OOM异常出现之后自动生成dump文件</li>
+<li>通过-XX:+HeapDumpOnCtrlBreak参数则可以使用[Ctrl]+[Break]键让虚拟机生成dump文件</li>
+<li>在Linux系统下通过Kill -3命令发送进程退出信号”恐吓”一下虚拟机，也能拿到dump文件。</li>
+</ul>
+<p>使用案例，详细参数见案例说明：</p>
+<pre><code>jmap -heap pid #查看进程堆内存使用情况，包括使用的GC算法、堆配置参数和各代中堆内存使用情况
+jmap -histo[:live] pid #查看堆内存中的对象数目、大小统计直方图，如果带上live则只统计活对象
+jmap -dump:format=b,file=eclipse.bin 7240 #生成Java程序dump快照文件
+</code></pre><p>语法：</p>
+<pre><code>jmap [ -option ] &lt;pid&gt;
+</code></pre><p>option参数：</p>
+<pre><code>dump    生成堆存储快照，格式为：-dump:[live, ]format=b, file=&lt;filename&gt;，live说明是否只dump出存活的对象。
+heap    显示java堆详细信息，如使用那种回收器、参数配置、分代状况等。
+histo    显示堆中对象统计信息，包括类、实例数量、合计容量。
+</code></pre><p>案例说明：</p>
+<pre><code>C:\Users\Asus&gt;jmap -heap 10416 | more
+Attaching to process ID 10416, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 20.45-b01
+
+using thread-local object allocation. #使用本地线程分配缓存
+Parallel GC with 4 thread(s) # 并行垃圾回收，4个线程
+
+Heap Configuration: #堆设置
+   MinHeapFreeRatio = 40 #GC后，如果发现空闲堆内存占到整个预估堆内存的40%，则放大堆内存的预估最大值，但不超过固定最大值。
+   MaxHeapFreeRatio = 70 #GC后，如果发现空闲堆内存占到整个预估堆内存的70%，则收缩堆内存预估最大值。什么是预估堆内存？1、预估堆内存是堆大小动态调控的重要选项之一 2、堆内存预估最大值一定小于或等于固定最大值(-Xmx指定的数值) 3、前者会根据使用情况动态调大或缩小，以提高GC回收的效率。
+   MaxHeapSize      = 2124414976 (2026.0MB)
+   NewSize          = 1310720 (1.25MB)
+   MaxNewSize       = 17592186044415 MB
+   OldSize          = 5439488 (5.1875MB)
+   NewRatio         = 2 #新生代和老年代占用比例，-XX:NewRatio=2设置
+   SurvivorRatio    = 8 # Eden和一块Survivor的大小比例是8：1，新生代采用复制算法，垃圾回收时将Eden和一块Survivor中存活的对象复制到另一块Survivor中，并清空上一块Survivor。因此新生代可用容量为90%（80%+10%），10%的Survivor总是空的
+   PermSize         = 21757952 (20.75MB)
+   MaxPermSize      = 85983232 (82.0MB)
+
+Heap Usage:
+PS Young Generation
+Eden Space:
+   capacity = 49020928 (46.75MB)
+   used     = 30167344 (28.769821166992188MB)
+   free     = 18853584 (17.980178833007812MB)
+   61.53972442137366% used
+From Space:
+   capacity = 4325376 (4.125MB)
+   used     = 376912 (0.3594512939453125MB)
+   free     = 3948464 (3.7655487060546875MB)
+   8.713970762310606% used
+To Space:
+   capacity = 5898240 (5.625MB)
+   used     = 0 (0.0MB)
+   free     = 5898240 (5.625MB)
+   0.0% used
+PS Old Generation
+   capacity = 88473600 (84.375MB)
+   used     = 56496112 (53.87889099121094MB)
+   free     = 31977488 (30.496109008789062MB)
+   63.85646339699074% used
+PS Perm Generation
+   capacity = 21757952 (20.75MB)
+   used     = 10613560 (10.121879577636719MB)
+   free     = 11144392 (10.628120422363281MB)
+   48.78014254282756% used
+</code></pre><h2 id="jstack：Java堆栈跟踪工具"><a href="#jstack：Java堆栈跟踪工具" class="headerlink" title="jstack：Java堆栈跟踪工具"></a>jstack：Java堆栈跟踪工具</h2><h2 id="垃圾收集器选择（交互优先、吞吐量优先）"><a href="#垃圾收集器选择（交互优先、吞吐量优先）" class="headerlink" title="垃圾收集器选择（交互优先、吞吐量优先）"></a>垃圾收集器选择（交互优先、吞吐量优先）</h2><p>1、ParNew + CMS</p>
+<p>需要与<strong>用户交互</strong>的程序，良好的响应速度能提升用户的体验</p>
+<p>配置：</p>
+<pre><code>java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:ParallelGCThreads=20 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
+-XX:+UseConcMarkSweepGC：设置年老代为并发收集。测试中配置这个以后，-XX:NewRatio=4的配置失效了，原因不明。所以，此时年轻代大小最好用-Xmn设置。
+-XX:+UseParNewGC: 设置年轻代为并行收集。可与CMS收集同时使用。JDK5.0以上，JVM会根据系统配置自行设置，所以无需再设置此值。
+
+java -Xmx3550m -Xms3550m -Xmn2g -Xss128k -XX:+UseConcMarkSweepGC -XX:CMSFullGCsBeforeCompaction=5 -XX:+UseCMSCompactAtFullCollection
+-XX:CMSFullGCsBeforeCompaction：由于并发收集器不对内存空间进行压缩、整理，所以运行一段时间以后会产生“碎片”，使得运行效率降低。此值设置运行多少次GC以后对内存空间进行压缩、整理。
+-XX:+UseCMSCompactAtFullCollection：打开对年老代的压缩。可能会影响性能，但是可以消除碎片
+</code></pre><p>2、Parallel Scavenge + Paralle Old</p>
+<p>后台任务，<strong>吞吐量优先</strong>，最高效率地利用 CPU 时间，尽快地完成程序的运算任务</p>
+<p>典型配置：</p>
+<pre><code>java -server -Xms3800m -Xmx3800m -Xmn2g -Xss128k -XX:+UseParallelOldGC -XX:ParallelGCThreads=4 -XX:GCTimeRatio=99 -XX:+UseAdaptiveSizePolicy
+-XX:+UseAdaptiveSizePolicy：设置此选项后，并行收集器会自动选择年轻代区大小和相应的Survivor区比例，以达到目标系统规定的最低相应时间或者收集频率等，此值建议使用并行收集器时，一直打开。
+</code></pre><p>垃圾收集器介绍：</p>
+<p>Parallel Scavenge 收集器的目标则是达到一个<strong>可控制的吞吐量（Throughput）</strong>。所谓吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量 = 运行用户代码时间 /（运行用户代码时间 + 垃圾收集时间），虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</p>
+<p>由于与吞吐量关系密切，Parallel Scavenge收集器也经常被称为<strong>“吞吐量优先”</strong>收集器。</p>
+<p>该垃圾收集器，是JAVA虚拟机在 Server 模式下的默认值，使用 <strong>Server</strong> 模式后，Java虚拟机使用 <strong>Parallel Scavenge收集器（新生代）+ Serial Old收集器（老年代）</strong> 的收集器组合进行内存回收。</p>
+<font color="red"><strong>参数说明：</strong></font>
+
+<p>重要的参数有三个，其中两个参数用于<strong>精确控制吞吐量</strong>，分别是控制最大垃圾收集停顿时间的<strong>-XX:MaxGCPauseMillis</strong>参数及直接设置吞吐量大小的 <strong>-XX:GCTimeRatio</strong> 参数。另外一个是 <strong>UseAdaptiveSizePolicy</strong> 开关参数。</p>
+<p><strong>MaxGCPauseMillis</strong> 参数允许的值是一个大于0的毫秒数，收集器将尽力保证内存回收花费的时间不超过设定值。不过大家不要异想天开地认为如果把这个参数的值设置得稍小一点就能使得系统的垃圾收集速度变得更快，GC停顿时间缩短是以牺牲吞吐量和新生代空间来换取的：系统把新生代调小一些，收集300MB新生代肯定比收集500MB快吧，这也直接导致垃圾收集发生得<strong>更频繁一些，停顿间隔减少</strong>，原来10秒收集一次、每次停顿100毫秒，现在变成5秒收集一次、每次停顿70毫秒。<strong>停顿时间的确在下降，但吞吐量也降下来了。</strong></p>
+<p><strong>GCTimeRatio</strong> 参数的值应当是一个大于0小于100的整数，<strong>是用户线程时间与垃圾收集时间比率</strong>。如果把此参数设置为19，那允许的最大GC时间就占总时间的5%（即1 /（1+19）），<strong>默认值为99</strong>，就是允许最大1%（即1 /（1+99））的垃圾收集时间，经过计算<strong>GCTimeRation = 吞吐量/(1-吞吐量)</strong>，如要求吞吐量为99%，则GCTimeRatio = 0.99/（1-0.99） = 99，吞吐量95%，GCTimeRatio = 0.95/(1-0.95) = 19</p>
+<p><strong>-XX:+UseAdaptiveSizePolicy</strong> 是一个开关参数，当这个参数打开之后，就<strong>不需要手工指定新生代的大小（-Xmn）、Eden与Survivor区的比例（-XX:SurvivorRatio）、晋升老年代对象年龄（-XX:PretenureSizeThreshold）等细节参数了</strong>，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或最大的吞吐量，这种调节方式称为GC自适应的调节策略（GC Ergonomics）。</p>
+<p>如果对于收集器运作原理不太了解，<strong>手工优化存在困难</strong>的时候，使用Parallel Scavenge收集器能够配合自适应调节策略，把内存管理的调优任务交给虚拟机去完成，也是一个不错的选择。只需要把<strong>基本的内存数据</strong>设置好（如-Xmx设置最大堆），然后使用 <strong>MaxGCPauseMillis </strong>参数（更关注最大停顿时间）或 <strong>GCTimeRatio</strong> 参数（更关注吞吐量）给虚拟机设立一个优化目标，那具体细节参数的调节工作就由虚拟机完成了。自适应调节策略也是Parallel Scavenge收集器与ParNew收集器的一个重要区别。</p>
+<h2 id="GC-相关参数总结"><a href="#GC-相关参数总结" class="headerlink" title="GC 相关参数总结"></a>GC 相关参数总结</h2><p>1、与串行回收器相关的参数</p>
+<pre>
+-XX:+UseSerialGC:虚拟机运行在 Client 模式下的默认值，打开此开关后，使用 Serial + Serial Old 的收集器组合进行内存回收
+-XX:SurvivorRatio: 新生代中 Eden 区域与 Survivor 区域的容量比值，默认为 8，代表 Eden：Survivor = 8 : 1
+-XX:PretenureSizeThreshold:设置大对象直接进入老年代的阈值。当对象的大小超过这个值时，将直接在老年代分配。
+-XX:MaxTenuringThreshold:设置对象进入老年代的年龄的最大值。每一次 Minor GC 后，对象年龄就加 1。任何大于这个年龄的对象，一定会进入老年代。
+-XX:+HandlePromotionFailure:是否允许分配担保失败。即老年代的剩余空间不足以应付新生代的整个 Eden 和 Survivor 区的所有对象都存活的极端情况，java5以前是默认关闭，java6后默认启用
+</pre>
+
+<p>2、与并行 GC 相关的参数</p>
+<pre>
+-XX:+UseParNewGC: 打开此开关后，使用 ParNew + Serial Old 收集器组合进行内存回收
+-XX:+UserParallelGC:虚拟机运行在 Server 模式下的默认值，打开此开关后，使用 Parallel Scavenge + Serial Old （PS MarkSweep）的收集器组合进行内存回收
+-XX:+UseParallelOldGC: 打开此开关后，使用 Parallel Scavenge + Parallel Old 的收集器组合进行内存回收
+-XX:ParallelGCThreads：设置用于垃圾回收的线程数。通常情况下可以和 CPU 数量相等。但在 CPU 数量比较多的情况下，设置相对较小的数值也是合理的。
+-XX:MaxGCPauseMills：设置最大垃圾收集停顿时间。它的值是一个大于 0 的整数。收集器在工作时，会调整 Java 堆大小或者其他一些参数，尽可能地把停顿时间控制在 MaxGCPauseMills 以内。仅在使用 Parallel Scavenge 收集器时生效
+-XX:GCTimeRatio:设置吞吐量大小，它的值是一个 0-100 之间的整数。假设 GCTimeRatio 的值为 n（用户线程时间与垃圾回收时间的比值），那么系统将花费不超过 1/(1+n) 的时间用于垃圾收集。仅在使用 Parallel Scavenge 收集器时生效
+-XX:+UseAdaptiveSizePolicy:打开自适应 GC 策略。在这种模式下，新生代的大小，eden 和 survivor 的比例、晋升老年代的对象年龄等参数会被自动调整，以达到在堆大小、吞吐量和停顿时间之间的平衡点。
+</pre>
+
+<p>3、与 CMS 回收器相关的参数</p>
+<pre>
+-XX:+UseConcMarkSweepGC: 打开此开关后，使用 ParNew + CMS + Serial Old 的收集器组合进行内存回收。Serial Old 收集器作为 CMS 收集器出现 Concurrent Mode Failure 失败后的后备收集器使用
+-XX:+ParallelCMSThreads: 设定 CMS 的线程数量。
+-XX:+CMSInitiatingOccupancyFraction:设置 CMS 收集器在老年代空间被使用多少后触发，默认为 68%。仅在使用 CMS 收集器时生效
+-XX:+UseFullGCsBeforeCompaction:设定进行多少次 CMS 垃圾回收后，进行一次内存压缩。仅在使用 CMS 收集器时生效
+-XX:+CMSClassUnloadingEnabled:允许对类元数据进行回收。
+-XX:+CMSParallelRemarkEndable:启用并行重标记。
+-XX:CMSInitatingPermOccupancyFraction:当永久区占用率达到这一百分比后，启动 CMS 回收 (前提是-XX:+CMSClassUnloadingEnabled 激活了)。
+-XX:UseCMSInitatingOccupancyOnly:表示只在到达阈值的时候，才进行 CMS 回收。
+-XX:+CMSIncrementalMode:使用增量模式，比较适合单 CPU。
+</pre>
+
+<p>4、与 G1 回收器相关的参数</p>
+<pre>
+-XX:+UseG1GC：使用 G1 回收器。
+-XX:+UnlockExperimentalVMOptions:允许使用实验性参数。
+-XX:+MaxGCPauseMills:设置最大垃圾收集停顿时间。
+-XX:+GCPauseIntervalMills:设置停顿间隔时间。
+</pre>
+
+<p>5、其他参数</p>
+<pre>
+-XX:+DisableExplicitGC: 禁用显示 GC。
+</pre>
+
+<p>6、堆设置</p>
+<pre>
+-Xms:初始堆大小
+-Xmx:最大堆大小
+-XX:NewSize=n:设置年轻代大小
+-XX:NewRatio=n:设置年轻代和年老代的比值。如:为3，表示年轻代与年老代比值为1：3，年轻代占整个年轻代年老代和的1/4
+-XX:SurvivorRatio=n:年轻代中Eden区与两个Survivor区的比值。注意Survivor区有两个。如：3，表示Eden：Survivor=3：2，一个Survivor区占整个年轻代的1/5
+-XX:MaxPermSize=n:设置持久代大小
+</pre>
+
+<p>7、垃圾回收统计信息</p>
+<pre>
+-XX:+PrintGC
+-XX:+PrintGCDetails
+-XX:+PrintGCTimeStamps
+-Xloggc:filename
+</pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1286,6 +1791,8 @@ jstat监视虚
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1297,13 +1804,23 @@ jstat监视虚
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/03/27/[mybatis]Mybatis - 动态SQL语句/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1311,38 +1828,42 @@ jstat监视虚
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/" itemprop="url">
-                  Mybatis - 动态SQL语句
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/" itemprop="url">Mybatis - 动态SQL语句</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-27T13:03:00+08:00" content="2017-03-27">
-              2017-03-27
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T13:03:00+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/mybatis/" itemprop="url" rel="index">
                     <span itemprop="name">mybatis</span>
                   </a>
@@ -1350,32 +1871,26 @@ jstat监视虚
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/27/[mybatis]Mybatis - 动态SQL语句/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1385,17 +1900,84 @@ jstat监视虚
       
         
           
-          多条件组合查询多条件组合查询时，根据用户的输入不为空的条件，查询出符合条件的数据。比如用户可以有三个筛选条件：name，sex，password
-1、如果输入了name、sex、password，则对应的sql语句是
-select * from user where name = ? and sex
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/27/[mybatis]Mybatis - 动态SQL语句/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <h2 id="多条件组合查询"><a href="#多条件组合查询" class="headerlink" title="多条件组合查询"></a>多条件组合查询</h2><p>多条件组合查询时，根据用户的输入不为空的条件，查询出符合条件的数据。比如用户可以有三个筛选条件：name，sex，password</p>
+<p>1、如果输入了name、sex、password，则对应的sql语句是</p>
+<pre><code>select * from user where name = ? and sex = ? and password = ?
+</code></pre><p>2、如果输入了name，sex，对应的sql语句是</p>
+<pre><code>select * from user where name = ? and sex = ?
+</code></pre><p>3、如果输入了name，对应的sql语句是</p>
+<pre><code>select * from user where name = ?
+</code></pre><p>这时候就需要进行动态sql语句拼装</p>
+<pre><code>String name = &quot;qm&quot;;
+String sex = &quot;男&quot;;
+String password = &quot;123&quot;;
+StringBuilder sql = new StringBuilder(&quot;select * from user where 1 == 1&quot;);
+if(name != null &amp;&amp; !name.trim().equals(&quot;&quot;)){
+    sql.append(&quot; and name = ?&quot;);
+}
+if(sex != null &amp;&amp; !sex.trim().equals(&quot;&quot;)){
+    sql.append(&quot; and sex = ?&quot;);
+}
+if(password != null &amp;&amp; !password.trim().equals(&quot;&quot;)){
+    sql.append(&quot; and password = ?&quot;);
+}
+System.out.println(sql);
+</code></pre><p>输出结果：</p>
+<pre><code>select * from user where 1 == 1 and name = ? and sex = ? and password = ?
+</code></pre><h2 id="动态SQL语句"><a href="#动态SQL语句" class="headerlink" title="动态SQL语句"></a>动态SQL语句</h2><p><a href="http://limingnihao.iteye.com/blog/782190" target="_blank" rel="external">http://limingnihao.iteye.com/blog/782190</a></p>
+<h3 id="where-if-的查询语句"><a href="#where-if-的查询语句" class="headerlink" title="where + if 的查询语句"></a>where + if 的查询语句</h3><p>如果name或sex为null，此语句很可能报错或查询结果为空。此时我们使用if动态sql语句先进行判断，如果值为null或等于空字符串，我们就不进行此条件的判断，增加灵活性。</p>
+<p>where标签会知道如果它包含的标签中有返回值的话，它就插入一个where。此外，如果标签返回的内容是以AND 或 OR 开头的，则它会剔除掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;getUser&quot; resultMap=&quot;User&quot;&gt;  </div><div class="line">	select * from t_user</div><div class="line">	&lt;where&gt;</div><div class="line">		&lt;if test=&quot;name !=null &quot;&gt;  </div><div class="line">	        name = #&#123;name&#125;</div><div class="line">	    &lt;/if&gt;  </div><div class="line">	    &lt;if test=&quot;sex != null and sex != &apos;&apos; &quot;&gt;  </div><div class="line">	        and sex = #&#123;sex&#125;  </div><div class="line">	    &lt;/if&gt; </div><div class="line">	&lt;/where&gt;</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure>
+<h3 id="if-set-的更新语句"><a href="#if-set-的更新语句" class="headerlink" title="if + set 的更新语句"></a>if + set 的更新语句</h3><p>当update语句中没有使用if标签时，如果有一个参数为null，都会导致错误。<br>当在update语句中使用if标签时，如果前面的if没有执行，则或导致逗号多余错误。使用set标签可以将动态的配置 SET 关键字，和<strong>剔除追加到条件末尾的任何不相关的逗号</strong>。</p>
+<p>使用if+set标签修改后，如果某项为null则不进行更新，而是保持数据库原值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;update id=&quot;updateUser&quot; &gt;  </div><div class="line">    update user  </div><div class="line">    &lt;set&gt;  </div><div class="line">        &lt;if test=&quot;name != null and name != &apos;&apos; &quot;&gt;  </div><div class="line">            name = #&#123;name&#125;,  </div><div class="line">        &lt;/if&gt;  </div><div class="line">        &lt;if test=&quot;sex != null and sex != &apos;&apos; &quot;&gt;  </div><div class="line">            sex = #&#123;sex&#125; </div><div class="line">        &lt;/if&gt;  </div><div class="line">    &lt;/set&gt;  </div><div class="line">    where id = #&#123;id&#125;;      </div><div class="line">&lt;/update&gt;</div></pre></td></tr></table></figure>
+<h3 id="if-trim-代替-where-set-标签"><a href="#if-trim-代替-where-set-标签" class="headerlink" title="if + trim 代替 where/set 标签"></a>if + trim 代替 where/set 标签</h3><p>trim是更灵活的去处多余关键字的标签，他可以实践where和set的效果。</p>
+<h3 id="choose-when-otherwise"><a href="#choose-when-otherwise" class="headerlink" title="choose (when, otherwise)"></a>choose (when, otherwise)</h3><p>choose标签是按顺序判断其内部when标签中的test条件出否成立，如果有<strong>一个成立，则choose结束</strong>。当choose中所有when的条件都不满则时，则执行otherwise中的sql。类似于Java 的switch 语句，choose为switch，when为case，otherwise则为default。</p>
+<p>例如下面例子，同样把所有可以限制的条件都写上，方面使用。choose会从上到下选择一个when标签的test为true的sql执行。安全考虑，我们使用where将choose包起来，放置关键字多于错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;getUser&quot; resultType=&quot;User&quot;&gt;  </div><div class="line">    SELECT * from t_user</div><div class="line">    &lt;where&gt;  </div><div class="line">        &lt;choose&gt;  </div><div class="line">            &lt;when test=&quot;name !=null &quot;&gt;  </div><div class="line">                name = #&#123;name&#125; </div><div class="line">            &lt;/when &gt;  </div><div class="line">            &lt;when test=&quot;sex != null and sex != &apos;&apos; &quot;&gt;  </div><div class="line">                and sex = #&#123;sex&#125;  </div><div class="line">            &lt;/when &gt;</div><div class="line">            &lt;otherwise&gt;  </div><div class="line">				and time &gt;=#&#123;data&#125;</div><div class="line">            &lt;/otherwise&gt;  </div><div class="line">        &lt;/choose&gt;  </div><div class="line">    &lt;/where&gt;    </div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure>
+<h2 id="获取自增的id的值"><a href="#获取自增的id的值" class="headerlink" title="获取自增的id的值"></a>获取自增的id的值</h2><pre><code>&lt;!--keyColumn：主键列的名字
+    keyProperty:主键的实体对应的属性名--&gt;
+&lt;insert id = &quot;adduser&quot; useGeneratedKeys = &quot;true&quot; keyColumn = &quot;id&quot; keyProperty=&quot;id&quot;&gt;&lt;/insert&gt;
+</code></pre><h2 id="传递多个参数（JavaBean、Map）"><a href="#传递多个参数（JavaBean、Map）" class="headerlink" title="传递多个参数（JavaBean、Map）"></a>传递多个参数（JavaBean、Map）</h2><p><strong>Map传递多个参数</strong>，parameterType 可以是别名或完全限定名，map或者java.util.Map，这两个都是可以的，<strong>直接在占位符中输入Map的key即可</strong></p>
+<p>XML文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlogByMap&quot; parameterType=&quot;map&quot; resultType=&quot;Blog&quot;&gt; </div><div class="line">	select t.ID, t.title, t.content </div><div class="line">	FROM blog t </div><div class="line">	where t.title = #&#123;h_title&#125; </div><div class="line">	and t.content =#&#123;h_content&#125; </div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public void testSelectByMap() &#123; </div><div class="line">	SqlSession session = sqlSessionFactory.openSession(); </div><div class="line">	Map&lt;String, Object&gt; param=new HashMap&lt;String, Object&gt;(); </div><div class="line">	param.put(&quot;h_title&quot;, &quot;oracle&quot;); </div><div class="line">	param.put(&quot;h_content&quot;, &quot;使用序列&quot;); </div><div class="line">	Blog blog = (Blog)session.selectOne(&quot;cn.enjoylife.BlogMapper.selectBlogByMap&quot;,param); </div><div class="line">	session.close(); </div><div class="line">	System.out.println(&quot;blog title:&quot;+blog.getTitle()); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>通过JavaBean传递多个参数</strong>，直接在占位符中输入实体的属性值</p>
+<p>XML<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;select id=&quot;selectBlogByBean&quot; parameterType=&quot;Blog&quot; resultType=&quot;Blog&quot;&gt;</div><div class="line">	select t.ID, t.title, t.content</div><div class="line">	from blog t</div><div class="line">	wheret.title = #&#123;title&#125;</div><div class="line">	and t.content =#&#123;content&#125; </div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<p>测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public void testSelectByBean() &#123; </div><div class="line">SqlSession session = sqlSessionFactory.openSession(); </div><div class="line">Blog blog=new Blog(); </div><div class="line">blog.setTitle(&quot;oracle&quot;); </div><div class="line">blog.setContent(&quot;使用序列！&quot;); </div><div class="line">Blog newBlog = (Blog)session.selectOne(&quot;cn.enjoylife.BlogMapper.selectBlogByBean&quot;,blog); </div><div class="line">session.close(); </div><div class="line">System.out.println(&quot;new Blog ID:&quot;+newBlog.getId());</div></pre></td></tr></table></figure></p>
+<h2 id="的用法及传入多个参数"><a href="#的用法及传入多个参数" class="headerlink" title="#{}的用法及传入多个参数"></a>#{}的用法及传入多个参数</h2><ul>
+<li><code>#{}</code> 存在mapper.xml中的sql语句部分，标识该位置可以接受参数信息，<strong><em>相当于?占位符</em></strong></li>
+<li>传入的参数和参数名无关，问题：如果有多个参数该怎么办？</li>
+</ul>
+<p><img src="http://i.imgur.com/T5wdiqe.png" alt=""></p>
+<p>方法一：使用0，1……自然数取出对应的数据，0表示第一个参数</p>
+<pre><code>select * from tb_user where user_name = #{0} and password = #{1}
+</code></pre><p>方法二：使用param1，param2……param1表示第一个参数</p>
+<pre><code>select * from tb_user where user_name = #{param1} and password = #{param2}
+</code></pre><p><strong><em>方法三（常用）：在方法的定义上使用@param为传入的参数定义一个名字</em></strong></p>
+<ul>
+<li>在UserMapper接口中声明函数login，使用@param为每个参数定义一个名字</li>
+</ul>
+<pre><code>public User login(@Param(&quot;username&quot;) String username, @Param(&quot;password&quot;) String password);
+</code></pre><ul>
+<li>sql语句在#{}中填入定义的名字</li>
+</ul>
+<pre><code>select * from tb_user where user_name = #{username} and password = #{password}
+</code></pre><ul>
+<li>测试</li>
+</ul>
+<pre><code>@Test
+public void testLogin(){
+    User user = userMapper.login(&quot;zhangsan&quot;,&quot;123456&quot;);
+    System.out.println(user);
+}
+</code></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1408,6 +1990,8 @@ select * from user where name = ? and sex
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1424,13 +2008,23 @@ select * from user where name = ? and sex
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/03/26/[Java]Java集合 - 对map集合进行排序/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1438,38 +2032,42 @@ select * from user where name = ? and sex
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/03/26/[Java]Java集合 - 对map集合进行排序/" itemprop="url">
-                  对map集合进行排序
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/03/26/[Java]Java集合 - 对map集合进行排序/" itemprop="url">对map集合进行排序</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-26T23:14:00+08:00" content="2017-03-26">
-              2017-03-26
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T23:14:00+08:00">
+                2017-03-26
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Java/" itemprop="url" rel="index">
                     <span itemprop="name">Java</span>
                   </a>
@@ -1477,32 +2075,26 @@ select * from user where name = ? and sex
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/26/[Java]Java集合 - 对map集合进行排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/[Java]Java集合 - 对map集合进行排序/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1512,18 +2104,43 @@ select * from user where name = ? and sex
       
         
           
-          转载：http://www.cnblogs.com/chenssy/p/3264214.html
-对map集合进行排序
-今天做统计时需要对X轴的地区按照地区代码（areaCode）进行排序，由于在构建XMLData使用的map来进行数据统计的，所以在统计过程中就需要对map进行排序。
-简单介绍Map
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/26/[Java]Java集合 - 对map集合进行排序/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <p>转载：<a href="http://www.cnblogs.com/chenssy/p/3264214.html" target="_blank" rel="external">http://www.cnblogs.com/chenssy/p/3264214.html</a></p>
+<p>对map集合进行排序</p>
+<p>今天做统计时需要对X轴的地区按照地区代码（areaCode）进行排序，由于在构建XMLData使用的map来进行数据统计的，所以在统计过程中就需要对map进行排序。</p>
+<h2 id="简单介绍Map"><a href="#简单介绍Map" class="headerlink" title="简单介绍Map"></a>简单介绍Map</h2><p>在讲解Map排序之前，我们先来稍微了解下map。map是键值对的集合接口，它的实现类主要包括：HashMap,TreeMap,Hashtable以及LinkedHashMap等。其中这四者的区别如下（简单介绍）：</p>
+<p>HashMap：我们最常用的Map，它根据key的HashCode 值来存储数据,根据key可以直接获取它的Value，同时它具有很快的访问速度。HashMap<strong>最多只允许一条记录的key值为Null</strong>(多条会覆盖);允许多条记录的Value为 Null。<strong>非同步</strong>的。</p>
+<p>TreeMap: 能够把它保存的记录<strong>根据key排序</strong>,默认是按升序排序，也可以指定排序的<strong>比较器</strong>，当用Iterator 遍历TreeMap时，得到的记录是排过序的。<strong>TreeMap 不允许key的值为null</strong>。<strong>非同步</strong>的。</p>
+<p>Hashtable: 与 HashMap类似，不同的是:<strong>key和value的值均不允许为null</strong>;<strong>继承Dictionary类</strong>，它支持<strong>线程的同步</strong>，即任一时刻只有一个线程能写Hashtable，因此也导致了Hashtale在写入时会比较慢。</p>
+<p>LinkedHashMap: 保存了记录的插入顺序，在用Iterator遍历LinkedHashMap时，先得到的记录肯定是先插入的.在遍历的时候会比HashMap慢。key和value均允许为空，非同步的。</p>
+<h2 id="Map排序"><a href="#Map排序" class="headerlink" title="Map排序"></a>Map排序</h2><h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>TreeMap默认是升序的，如果我们需要改变排序方式，则需要使用比较器：Comparator。</p>
+<p>Comparator可以对集合对象或者数组进行排序的比较器接口，实现该接口的public compare(T o1,To2)方法即可实现排序，该方法主要是根据第一个参数o1,小于、等于或者大于o2分别返回负整数、0或者正整数。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class TreeMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;(</div><div class="line">                new Comparator&lt;String&gt;() &#123;</div><div class="line">                    public int compare(String obj1, String obj2) &#123;</div><div class="line">                        // 降序排序</div><div class="line">                        return obj2.compareTo(obj1);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        </div><div class="line">        Set&lt;String&gt; keySet = map.keySet();</div><div class="line">        Iterator&lt;String&gt; iter = keySet.iterator();</div><div class="line">        while (iter.hasNext()) &#123;</div><div class="line">            String key = iter.next();</div><div class="line">            System.out.println(key + &quot;:&quot; + map.get(key));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<pre><code>d:ddddd 
+c:ccccc 
+b:bbbbb 
+a:aaaaa
+</code></pre><p>上面例子是对根据TreeMap的key值来进行排序的，但是有时我们需要根据TreeMap的value来进行排序。对value排序我们就需要借助于Collections的sort(List<t> list, Comparator&lt;? super T&gt; c)方法，该方法根据指定比较器产生的顺序对指定列表进行排序。但是有一个前提条件，那就是所有的元素都必须能够根据所提供的比较器来进行比较。如下：</t></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class TreeMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;();</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        </div><div class="line">        //这里将map.entrySet()转换成list</div><div class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = new ArrayList&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</div><div class="line">        //然后通过比较器来实现排序</div><div class="line">        Collections.sort(list,new Comparator&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</div><div class="line">            //升序排序</div><div class="line">            public int compare(Entry&lt;String, String&gt; o1,</div><div class="line">                    Entry&lt;String, String&gt; o2) &#123;</div><div class="line">                return o1.getValue().compareTo(o2.getValue());</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        for(Map.Entry&lt;String,String&gt; mapping:list)&#123; </div><div class="line">               System.out.println(mapping.getKey()+&quot;:&quot;+mapping.getValue()); </div><div class="line">          &#125; </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果</p>
+<pre><code>a:aaaaa 
+b:bbbbb 
+c:ccccc 
+d:ddddd
+</code></pre><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>我们都是HashMap的值是没有顺序的，他是按照key的HashCode来实现的。对于这个无序的HashMap我们要怎么来实现排序呢？参照TreeMap的value排序，我们一样的也可以实现HashMap的排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class HashMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        </div><div class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = new ArrayList&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</div><div class="line">        Collections.sort(list,new Comparator&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</div><div class="line">            //升序排序</div><div class="line">            public int compare(Entry&lt;String, String&gt; o1,</div><div class="line">                    Entry&lt;String, String&gt; o2) &#123;</div><div class="line">                return o1.getValue().compareTo(o2.getValue());</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        for(Map.Entry&lt;String,String&gt; mapping:list)&#123; </div><div class="line">               System.out.println(mapping.getKey()+&quot;:&quot;+mapping.getValue()); </div><div class="line">          &#125; </div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果</p>
+<pre><code>a:aaaaa 
+b:bbbbb 
+c:ccccc 
+d:ddddd
+</code></pre>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1536,6 +2153,8 @@ select * from user where name = ? and sex
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1577,31 +2196,39 @@ select * from user where name = ? and sex
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="Mr.Qian" />
           <p class="site-author-name" itemprop="name">Mr.Qian</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">138</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1609,8 +2236,10 @@ select * from user where name = ? and sex
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1631,7 +2260,12 @@ select * from user where name = ? and sex
         
         
 
+        
+
+
       </section>
+
+      
 
       
 
@@ -1655,6 +2289,7 @@ select * from user where name = ? and sex
   <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -1662,9 +2297,10 @@ select * from user where name = ? and sex
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1672,9 +2308,13 @@ select * from user where name = ? and sex
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1694,6 +2334,15 @@ select * from user where name = ? and sex
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1719,181 +2368,59 @@ select * from user where name = ? and sex
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-
-  
-    
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"rhapsody1290"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
   
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
 
 
 
+  
+
+
+
+
+
 
   
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = decodeURIComponent(data.url);
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
 
   
@@ -1905,6 +2432,8 @@ select * from user where name = ? and sex
   
 
   
-<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+
+  
+
 </body>
 </html>

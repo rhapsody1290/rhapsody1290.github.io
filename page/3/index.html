@@ -1,20 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +72,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -93,31 +102,37 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http://qianmingxs.com/page/3/"/>
 
 
-  <title> Mr.Qian's Home </title>
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>Mr.Qian's Home</title>
   
 
 
@@ -128,37 +143,49 @@
 
 
 
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Mr.Qian's Home</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-  <p class="site-subtitle"></p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -178,18 +205,8 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -199,7 +216,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -209,34 +226,13 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
-  
 </nav>
+
+
 
  </div>
     </header>
@@ -251,13 +247,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -265,38 +271,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/" itemprop="url">
-                  4、LCA 最近公共祖先问题
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/" itemprop="url">4、LCA 最近公共祖先问题</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-26T10:03:00+08:00" content="2017-05-26">
-              2017-05-26
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T10:03:00+08:00">
+                2017-05-26
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -304,32 +314,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -339,18 +343,56 @@
       
         
           
-          问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方
-如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1
+            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方</p>
+<p>如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1</p>
+<p><img src="http://i.imgur.com/KLZozPV.png" alt=""></p>
+<p>另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1</p>
+<h2 id="Tarjan-离线-算法"><a href="#Tarjan-离线-算法" class="headerlink" title="Tarjan(离线)算法"></a>Tarjan(离线)算法</h2><h3 id="原理（最浅显易懂的描述）"><a href="#原理（最浅显易懂的描述）" class="headerlink" title="原理（最浅显易懂的描述）"></a>原理（最浅显易懂的描述）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
+<p>用集合的角度去思考 LCA 问题：</p>
+<p>10 与 1，2，5，6 的 LCA 都为 1<br>10 与 3，7 的 LCA 都为 3<br>10 与 8，9，11 的 LCA 都为 8<br>10 与 10，12 的 LCA 都为 12</p>
+<p>Tarjan 算法可以批量查询，假设有求5，10的 LCA，3、10的LCA，9、10的LCA</p>
+<p>当 DFS 遍历到节点 10 时，查看查询语句中是否有与10相关的：<br>如果求 5、10 的 LCA，只要求当前5所在的集合的祖先就行了，结果就是8<br>如果求 3、10 的 LCA，只要求3所在集合的祖先就行了，结果是3<br>如果求 9、10 的 LCA，只要求9所在结合的祖先就行了，结果是8</p>
+<p>那么问题的关键就是 <font color="red"><strong>集合怎么表示，集合如何构建？</strong></font></p>
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>可以发现，当 <strong>一个数A</strong> 与 <strong>集合中的元素B</strong> 求 LCA 时，<font color="red">结果都是指向同一个祖先</font>，我们将设置一个数据结构将各个节点<strong>组成集合</strong>，并且能够根据集合中的点<strong>访问到祖先</strong>，可以使用 <strong>并查集</strong> 满足上述要求 。并查集维护了<strong>当前节点与父节点之间的关系，最终可以获得祖先节点</strong></p>
+<p><strong>并查集是当前节点与father节点的映射关系</strong>，是一个Key-Value的结构，可以用数组的下标和数组的值作为存储结构，按照上图左子树举个例子：</p>
+<p><img src="http://i.imgur.com/uP9FUsk.png" alt=""></p>
+<p>初始化的时候每个节点的父节点都是自己，如果<strong>当前节点的father就是自己本身</strong>，那么他就是集合的根节点</p>
+<p>并查集查集合根节点：</p>
+<pre><code>public int find(int x) {
+    int r = x;
+    while(father[r] != r){
+        r = father[r];
+    }
+    return r;
+}
+</code></pre><p>并查集基本介绍完毕，现在可以用并查集来表示集合了，并且找到集合的根节点，接下来的问题，<strong>哪些节点可以归为同一个集合？</strong></p>
+<h3 id="算法描述（思路）"><a href="#算法描述（思路）" class="headerlink" title="算法描述（思路）"></a>算法描述（思路）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
+<p>还是之前那张图，对于新搜索到的一个结点u，先创建由u构成的集合，再对u的每颗子树进行搜索，每搜索完一棵子树，将子节点归到集合u中</p>
+<p>1.任选一个点为根节点，从根节点开始。<br>2.遍历该点u所有子节点v，并标记这些子节点v已被访问过。<br>3.若是v还有子节点，返回2，否则下一步。<br>4.合并v到u上。<br>5.寻找与当前点u有询问关系的点v。<br>6.若是v已经被访问过了，则可以确认u和v的最近公共祖先为v被合并到的父亲节点a。</p>
+<p>伪代码</p>
+<pre><code>Tarjan(u)//marge和find为并查集合并函数和查找函数
+{
+    for each(u,v)    //访问所有u子节点v
+    {
+        Tarjan(v);        //继续往下遍历
+        marge(u,v);    //合并v到u上
+        标记v被访问过;
+    }
+    for each(u,e)    //访问所有和u有询问关系的e
+    {
+        如果e被访问过;
+        u,e的最近公共祖先为find(e);
+    }
+}
+</code></pre><h3 id="算法模拟"><a href="#算法模拟" class="headerlink" title="算法模拟"></a>算法模拟</h3><p><a href="http://www.cnblogs.com/JVxie/p/4854719.html" target="_blank" rel="external">http://www.cnblogs.com/JVxie/p/4854719.html</a></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h2 id="OJ"><a href="#OJ" class="headerlink" title="OJ"></a>OJ</h2><p><a href="http://www.cnblogs.com/JVxie/p/4854719.html" target="_blank" rel="external">http://www.cnblogs.com/JVxie/p/4854719.html</a></p>
 
-另外，4 和 5 的最
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -368,6 +410,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -379,13 +423,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/23/[数据结构与算法]3、树状数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -393,38 +447,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" itemprop="url">
-                  1、Leetcode 简单题
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/23/[数据结构与算法]3、树状数组/" itemprop="url">3、树状数组</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-23T22:37:00+08:00" content="2017-05-23">
-              2017-05-23
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T22:37:00+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -432,32 +490,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/23/[数据结构与算法]1、Leetcode 简单题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -467,17 +519,218 @@
       
         
           
-          找出合理的IP地址
-另外，生成符合要求的IP地址可以用StringBuilder的insert方法
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545
-          ...
+            <h2 id="树状数组作用"><a href="#树状数组作用" class="headerlink" title="树状数组作用"></a>树状数组作用</h2><p>如果给定一个数组，<strong>要你求里面所有数的和</strong>，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当<strong>修改掉数组中的元素后，仍然要你求数组中某段元素的和</strong>，就显得麻烦了。所以我们就要用到树状数组，<strong>他的时间复杂度为O（lgn）</strong>，相比之下就快得多</p>
+<p>总结：初始复杂度是nlogn，<strong>频繁对于单点和区间修改和查询操作，时间复杂度都是log(n)</strong>，空间复杂度是n</p>
+<h2 id="树状数组结构图"><a href="#树状数组结构图" class="headerlink" title="树状数组结构图"></a>树状数组结构图</h2><p><img src="http://i.imgur.com/XXDc88F.jpg" alt=""></p>
+<p><strong>注意：下标从1开始，不要0</strong></p>
+<p>下面来分析一下上面那个图看能得出什么规律：</p>
+<p>c1（01） = a1<br>c2（10） = a1 + a2<br>c3（11） = a3<br>c4（100） = a1 + a2 + a3 + a4<br>c5（101） = a5<br>c6（110） = a5 + a6<br>c7（111） = a7<br>c8（1000） = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8<br>c9（1001） = a9<br>c10（1010） = a9 + a10<br>c11（1011） = a11<br>c12（1100） = a9 + a10 + a11 + a12<br>c13（1101） = a13<br>c14（1110） = a13 + a14<br>c15（1111） = a15<br>c16（10000） = a1 + a2 + a3 + a4 + a5 + ……. + a16<br>……</p>
+<font color="red"><strong>有公式：cn = a(n-a^k+1) + ……… + an（其中 k 为 n 的二进制表示中从右往左数的 0 的个数）</strong></font>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+<ul>
+<li>k 为 二进制数从右往左数 0 的个数，那么 a^k 为从右往左数第一个非零位到最低位表示的数值</li>
+<li>根据公式也可以看出a^k表示的cn由a^k个ai项相加</li>
+</ul>
+<p>那么，如何求 a^k 呢？求法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int lowbit(int x)</div><div class="line">&#123;</div><div class="line">	return x&amp;(-x);    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>lowbit（）获取整数 x 的二进制数值中，从低位开始的第一个非零位开始到最低位的数值，即 2^k 次方的值，表示ci由多少个ai相加</p>
+<p>1、<strong>求数组的和的算法如下：</strong></p>
+<p>（1）首先，令sum=0，转向第二步；<br>（2）接下来判断，如果 n&gt;0 的话，就令sum=sum+cn转向第三步，否则的话，终止算法，返回 sum 的值；<br>（3）n = n - lowbit（n）（将n的二进制表示的最后一个零删掉），回第二步。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int Sum(int n)&#123;</div><div class="line">	int sum = 0;</div><div class="line">	while(n &gt; 0)&#123;</div><div class="line">		sum += c[n];</div><div class="line">		n = n-lowbit(n);</div><div class="line">	&#125;    </div><div class="line">	return sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>c[n]维护区间a[n] - lowbit(n) + 1 ~ a[n] 的和，区间长度为lowbit(n)，数组求和即求a[1]~a[n]元素的和，<strong>树状数组下转变为区间和，区间间以lowbit(n)的间隔跳转</strong></p>
+<p>复杂度的话，lowbit（n）表示从右往左数第一个1到最低位的值，<strong>n - lowbit(n)相当于每次把最后一个1变为0</strong>，因为一个数二进制下只有log（n）位，所以<strong>复杂度是O(log(n))的</strong></p>
+<p>2、<strong>当数组中的元素有变更时，树状数组就发挥它的优势了，算法如下（修改为给某个节点 i 加上 x ）</strong></p>
+<p>（1）当 i&lt;=n 时，执行下一步；否则的话，算法结束;<br>（2）ci = ci+x ，i = i + lowbit（i）（在 i 的二进制表示的最后加零），返回第一步。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">void change(int i, int x)&#123;</div><div class="line">	while(i &lt;= n)&#123;</div><div class="line">		c[i] = c[i] + x;</div><div class="line">		i = i + lowbit(i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="树状数组求逆序数"><a href="#树状数组求逆序数" class="headerlink" title="树状数组求逆序数"></a>树状数组求逆序数</h3><p>所谓逆序数，就是指一个序列S[i]，统计处于序列的每个数的比这个数大并且排在它前面的数的数目，然后对于所有数，把这个数目加起来求和就是了。<br>比如 4 3 1 2<br>4第一个，所以数目为0<br>3的前面是4，大于3的数目为1<br>1的前面是4 3 ，大于1的数目为2<br>2的前面是4 3 1，大于2的数目为2<br>所以逆序数为1+2+2 = 5</p>
+<p>求逆序数的两种方法<br>常规方法是按照逆序数的规则做，结果复杂度是O(n*n)，一般来说，有两种快速的求逆序数的方法，分别是<strong>归并排序和树状数组法</strong></p>
+<p><strong>树状数组法</strong></p>
+<p>当数据的范围较小时，比如maxn=100000，那么我们可以开一个数组c[maxn]，来记录前面数据的出现情况，初始化为0；<strong>当数据a出现时，就令c[a]=1。</strong>这样的话，<strong>欲求某个数a的逆序数，只需要算出在当前状态下c[a+1,maxn]中有多少个1，因为这些位置的数在a之前出现且比a大。</strong><font color="red">但是若每添加一个数据a时，就得从a+1到maxn搜一遍，复杂度太高了，树状数组却能很好的解决<strong>区间多次求和</strong>这个问题</font>。同样开一个数组d[maxn]，初始化为0，d[i]记录下i结点所管辖范围内当前状态有多少个数；当添加数据a时，就向上更新d,这样一来，欲求a的逆序数时，只需要算<strong>sum(maxn)-sum(a)；sum(i)表示第i个位置之前出现了多少个1</strong></p>
+<p>举个例子：有5个数，分别为5 3 4 2 1，当读入数据a=5时，c为：0，0，0，0，1；d为：0，0，0，0，1；当读入数据a=3时，c为：0，0，1，0，1；d为：0，0，1，1，1；当读入数据a=4时，c为：0，0，1，1，1；d为：0，0，1，2，1；…………</p>
+<p>此思想的关键在于，<strong>读入数据的最大值为maxn，由于maxn较小，所以可以用数组来记录状态</strong>。当maxn较大时，直接开数组显然是不行了，这是的解决办法就是离散化。<strong>所谓离散化，就是将连续问题的解用一组离散要素来表征而近似求解的方法</strong>，这个定义太抽象了，还是举个例子吧。</p>
+<p>假如现在有一些数：1234 98756 123456 99999 56782，由于1234是第一小的数，所以num[1]=1;依此，有num[5]=2，num[2]=3，num[4]=4，num[3]=5;这样转化后并不影响原来数据的相对大小关系，何乐而不为呢！！！</p>
+<p>还有一点值得注意，当有数据0出现时，由于0&amp;0=0，无法更新，此时我们可以采取<font color="red"><strong>加一个数的方法将所有的数据都变成大于0的。</strong></font></p>
+<p>当maxn较小时直接开数组代码如下：</p>
+<pre><code>public class InverseNumber {
+
+    //索引0不存放数据
+    private int[] c = new int[10];
+
+    private int sum(int n) {
+        int sum = 0;
+        for (int i = n; i &gt; 0; i = i - lowbit(i)) {
+            sum += c[i];
+        }
+        return sum;
+    }
+
+    private void update(int i, int addVal) {
+        for (int j = i; j &lt; c.length; j += lowbit(j)) {
+            c[j] += addVal;
+        }
+    }
+
+    private int lowbit(int i) {
+        return i &amp; (-i);
+    }
+
+    /**
+     * 求序列的逆序数
+     * 有两种方式，1、对于每个数，计算当前位置之前比它大的数的个数，求和（树状数组法）
+     * 2、对于每个数，计算当前位置之后比它小的数的个数，求和
+     */
+    public int solve(int[] sequence) {
+        Arrays.fill(c, 0);
+        //初始化树状数组，因为要表示1~len，所以数组长度为len+1
+        int inverseNum = 0;
+        for (int i = 0; i &lt; sequence.length; i++) {
+            update(sequence[i], 1);
+            inverseNum = inverseNum + sum(c.length - 1) - sum(sequence[i]);
+        }
+        return inverseNum;
+    }
+
+    public static void main(String[] args) {
+        InverseNumber inverseNumber = new InverseNumber();
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 4, 5}) == 0);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 5, 4}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 3, 5}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 5, 3}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 4, 3}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 3, 4}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 4, 5}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 5, 4}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 3, 5}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 5, 3}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 3, 4}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 4, 3}) == 4);
+    }
+}
+</code></pre><p>采用离散化求逆序数：</p>
+<pre>
+import java.util.*;
+
+public class Solution {
+
+    BinaryIndexedTree binaryIndexedTree;
+
+    class mapper {
+        int val;
+        int pos;
+
+        public mapper(int val, int pos) {
+            this.val = val;
+            this.pos = pos;
+        }
+    }
+
+    public int InversePairs(int[] array) {
+        //异常条件
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
+        //离散化，用mapper数组扩展array，记录了原数组的pos
+        mapper[] map = new mapper[array.length];
+        for (int i = 0; i < array.length; i++) {
+            map[i] = new mapper(array[i], i);
+        }
+        //按值升序排序，值相等按pos排序（元素相等时不影响逆序数计算）
+        Arrays.sort(map, new Comparator<mapper>() {
+            @Override
+            public int compare(mapper o1, mapper o2) {
+                if (o1.val != o2.val) {
+                    return o1.val - o2.val;
+                }
+                return o1.pos - o2.pos;
+            }
+        });
+        //离散后数组
+        int[] after = new int[array.length];
+        for (int i = 0; i < map.length; i++) {
+            //离散化关键，从小到大进行替换，根据pos找到原数组的位置
+            after[map[i].pos] = i + 1;//!!替换后不能出现0！！
+        }
+
+        /*for (int i = 0; i < map.length; i++) {
+            array[map[i].pos] = i + 1;
+        }*/
+
+        //构建树状数组
+        binaryIndexedTree = new BinaryIndexedTree(new int[after.length + 1]);
+
+        int inverseNum = 0;
+        for (int i = 0; i < after.length; i++) {
+            //数组下标为array[i]的值+1，并**计算在该数字插入前，之前已经插入比他大的个数**
+            binaryIndexedTree.update(after[i], 1);
+            //inverseNum += (i + 1 - binaryIndexedTree.sum(after[i]));
+            inverseNum = (inverseNum + (i + 1 - binaryIndexedTree.sum(after[i])) % 1000000007) % 1000000007;
+        }
+        return inverseNum;
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] array = {111111111, 222222222, 333333333, 444444444, 555555555, 666666666, 777777777, 0};
+        System.out.println(s.InversePairs(array));//7
+    }
+}
+
+/**
+ * 树状数组工具类
+ */
+class BinaryIndexedTree {
+
+    int[] c;
+
+    public BinaryIndexedTree(int[] a) {
+        c = new int[a.length];
+        //c[i] = a[i-lowbit(i)+1] + ... + a[i-1] +a[i],c[i]为a[i]前长度为lowbit(i)的和
+        for (int i = 1; i < c.length; i++) {
+            for (int j = i - lowbit(i) + 1; j <= i;="" j++)="" {="" c[i]="" +="a[j];" }="" system.out.println(arrays.tostring(c));="" 求1...x的值="" public="" int="" sum(int="" x)="" result="0;" for="" (int="" k="x;"> 0; k -= lowbit(k)) {
+            result += c[k];
+        }
+        return result;
+    }
+
+    //第x位的数字加上add
+    public void update(int x, int add) {
+        for (int k = x; k < c.length; k += lowbit(k)) {
+            c[k] += add;
+        }
+    }
+
+    //一个数二进制表示，从右往左数碰到的第一个1位开始，一直往右组成的数，如1100->100
+    private int lowbit(int x) {
+        return x & (-x);
+    }
+
+    public static void main(String[] args) {
+        int[] array = {0, 1, 2, 3, 4, 5};
+        BinaryIndexedTree b = new BinaryIndexedTree(array);
+        for (int i = 1; i < array.length; i++) {
+            System.out.println(b.sum(i));
+        }
+        b.update(3, 1);
+        System.out.println("更新后");
+        for (int i = 1; i < array.length; i++) {
+            System.out.println(b.sum(i));
+        }
+    }
+}
+</=></mapper></pre>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>树状数组<br><a href="http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1" target="_blank" rel="external">http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1</a></p>
+<p>树状数组求逆序数的原理<br><a href="http://www.cnblogs.com/i-love-acm/p/3251036.html" target="_blank" rel="external">http://www.cnblogs.com/i-love-acm/p/3251036.html</a></p>
+<p>逆序数及其求法<br><a href="http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx" target="_blank" rel="external">http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx</a></p>
+
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -495,6 +748,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -506,13 +761,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/23/[数据结构与算法]1、Leetcode 简单题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -520,38 +785,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/23/[数据结构与算法]3、树状数组/" itemprop="url">
-                  3、树状数组
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" itemprop="url">1、Leetcode 简单题</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-23T22:37:00+08:00" content="2017-05-23">
-              2017-05-23
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T22:37:00+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
                     <span itemprop="name">数据结构与算法</span>
                   </a>
@@ -559,32 +828,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/23/[数据结构与算法]3、树状数组/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/23/[数据结构与算法]3、树状数组/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -594,15 +857,20 @@
       
         
           
-          树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn）
-          ...
+            <h2 id="找出合理的IP地址"><a href="#找出合理的IP地址" class="headerlink" title="找出合理的IP地址"></a>找出合理的IP地址</h2><p><img src="http://i.imgur.com/Z1YaNvX.png" alt=""></p>
+<p>另外，生成符合要求的IP地址可以用StringBuilder的insert方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">Given a string containing only digits, restore it by returning all possible valid IP address combinations.</div><div class="line">For example:</div><div class="line">Given&quot;25525511135&quot;,</div><div class="line">return[&quot;255.255.11.135&quot;, &quot;255.255.111.35&quot;]. (Order does not matter)</div><div class="line">**/</div><div class="line"></div><div class="line">import java.util.*;</div><div class="line"> </div><div class="line">public class Solution &#123;</div><div class="line">     </div><div class="line">    private boolean isValid(String s, int i, int j, int k)&#123;</div><div class="line">         </div><div class="line">        if ( k &lt; s.length() - 4 || k &gt; s.length() - 2)</div><div class="line">            return false; </div><div class="line">        else if ( isRange(s, 0, i + 1)</div><div class="line">                    &amp;&amp; isRange(s, i + 1, j + 1)</div><div class="line">                    &amp;&amp; isRange(s, j + 1, k + 1)</div><div class="line">                    &amp;&amp; isRange(s, k + 1, s.length()))</div><div class="line">            return true;</div><div class="line">         </div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    private boolean isRange(String s, int st, int end)&#123;</div><div class="line">         </div><div class="line">        int value = Integer.valueOf(s.substring(st, end));</div><div class="line">         </div><div class="line">        if ( end - st &gt; 1 &amp;&amp; s.charAt(st) == &apos;0&apos;)</div><div class="line">            return false;</div><div class="line">        if ( value &gt;= 0 &amp;&amp; value &lt;= 255)</div><div class="line">            return true;</div><div class="line">         </div><div class="line">        return false;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    private void storeIp(List&lt;String&gt; ipList, String s, int i, int j, int k)&#123;</div><div class="line">         </div><div class="line">        StringBuilder sb = new StringBuilder(s);</div><div class="line">         </div><div class="line">        sb.insert(i + 1, &quot;.&quot;);</div><div class="line">        sb.insert(j + 2, &quot;.&quot;);</div><div class="line">        sb.insert(k + 3, &quot;.&quot;);</div><div class="line">         </div><div class="line">        ipList.add(sb.toString());</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    public ArrayList&lt;String&gt; restoreIpAddresses(String s) &#123;</div><div class="line">         </div><div class="line">        ArrayList&lt;String&gt; ipList = new ArrayList&lt;&gt;();</div><div class="line">         </div><div class="line">        if (s.length() &lt; 4)</div><div class="line">            return ipList;</div><div class="line">         </div><div class="line">        for (int i = 0; i &lt; 3; i++)</div><div class="line">            for (int j = i + 1; j &lt; i + 4; j++)</div><div class="line">                for (int k = j + 1; k &lt; j + 4; k++)&#123;</div><div class="line">                     </div><div class="line">                    if (isValid(s, i, j, k))</div><div class="line">                        storeIp(ipList, s, i, j, k);</div><div class="line">                &#125;</div><div class="line">         </div><div class="line">        return ipList;     </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="链表相加"><a href="#链表相加" class="headerlink" title="链表相加"></a>链表相加</h2><p><a href="http://www.cnblogs.com/wuyuegb2312/p/3183214.html" target="_blank" rel="external">http://www.cnblogs.com/wuyuegb2312/p/3183214.html</a></p>
+<p>证明链表第一次相遇的位置在入口处：</p>
+<p>设p1在入口的时候，p2位于L处（入口处为0，顺时针增加）<br>设p1行走x后，p2行走2x后在第一次相遇点相遇，则：<br>x%R = (L + 2x)%r</p>
+<p>则：x = kR，L+2x=k’R =&gt;L + x = (k’-k)R，即L+x为R的倍数，x位于入口处</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/23/[数据结构与算法]3、树状数组/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -620,6 +888,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -631,13 +901,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/22/[操作系统]操作系统笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -645,38 +925,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/22/[操作系统]操作系统笔记/" itemprop="url">
-                  操作系统笔记
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/22/[操作系统]操作系统笔记/" itemprop="url">操作系统笔记</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-22T19:22:00+08:00" content="2017-05-22">
-              2017-05-22
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T19:22:00+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/操作系统/" itemprop="url" rel="index">
                     <span itemprop="name">操作系统</span>
                   </a>
@@ -684,32 +968,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/22/[操作系统]操作系统笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/22/[操作系统]操作系统笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -719,26 +997,156 @@
       
         
           
-          进程管理
-进程与线程1、进程概念
-进程几部分组成：
+            <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p><img src="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p><strong>1、进程概念</strong></p>
+<p>进程几部分组成：</p>
+<ul>
+<li>进程控制块（PCB）：标识进程的存在，描述进程的执行状态</li>
+<li>程序段：能够被进程调度程序调度到CPU上执行的程序代码段</li>
+<li>数据段：进程中处理的原始数据或者计算的中间结果、结果数据</li>
+</ul>
+<p>进程控制块组成：</p>
+<ul>
+<li>进程标识符（PID）</li>
+<li>进程当前状态：就绪/执行/阻塞</li>
+<li>进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻塞队列</li>
+<li>程序和数据地址</li>
+<li>进程优先级</li>
+<li><strong>CPU现场保护</strong></li>
+<li>通信信息：记录进程执行过程中与别的进程发生的信息交换情况</li>
+<li>家族联系：进程创建子进程，形成进程家族树。PCB中指明了子进程和父进程的标识</li>
+<li>占有资源清单</li>
+</ul>
+<p>为什么PCB是进程存在的标志？<br>系统通过PCB对进程进行控制：1、当系统调度到某进程后，根据其PCB中保存的处理机状态信息，恢复运行的现场，并根据PCB中的程序和数据的内存地址，找到其程序和数据 2、 当进程暂停执行时，将处理机环境保存在PCB中 3、进程间同步、通信时都要访问PCB</p>
+<p><strong>2、进程状态与转换：</strong></p>
+<p>1、三种状态</p>
+<ul>
+<li>就绪：<strong>获得除处理器之外的所有资源</strong>，一旦获得处理器就立刻可以执行</li>
+<li>执行：进程在CPU上执行</li>
+<li>阻塞：由于发生某事件（例如IO等待）而无法执行下去</li>
+</ul>
+<p>就绪和阻塞的区别：<br>处于就绪状态，当分配处理器时，进程能够立刻执行；阻塞状态时，即使把处理器分配给该进程，它也无法进行</p>
+<p>2、进程状态的相互转换</p>
+<p><img src="http://i.imgur.com/M8giTeg.jpg" alt=""></p>
+<p>注意：线程进行阻塞状态后，若等到期望的事件发生，先进入就绪状态，等调度程序选中该进程时，进程才能执行</p>
+<p><strong>3、进程控制</strong></p>
+<p>进程的控制包括进程的<strong>创建、撤销、阻塞和唤醒</strong>，这些功能一般由<strong>操作系统的内核</strong>来实现</p>
+<p>操作系统内核：把一些与硬件紧密联系的模块，或运行频率较高的模块，以及许多公用的模块安排在靠近硬件的软件层次中，并使他们常驻内存，提高操作系统的效率</p>
+<p><strong>4、进程组织</strong></p>
+<p><strong>5、进程通信：共享存储系统、消息传递系统、管道通信</strong></p>
+<p><strong>6、进程概念与多线程模型</strong></p>
+<h3 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h3><p><strong>1、调度的基本概念</strong></p>
+<p><strong>2、调度时机、切换与过程</strong></p>
+<p><strong>3、调度的基本原则</strong></p>
+<p><strong>4、调度方式</strong></p>
+<p><strong>5、典型调度算法</strong></p>
+<h3 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h3><p><strong>1、进程同步的基本概念</strong></p>
+<p><strong>2、实现临界区互斥的基本方法</strong></p>
+<p><strong>3、信号量</strong></p>
+<p><strong>4、管程</strong></p>
+<p><strong>5、经典同步问题</strong></p>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p><strong>1、死锁概念</strong></p>
+<p><strong>2、死锁处理策略</strong></p>
+<p><strong>3、死锁预防</strong></p>
+<p><strong>4、死锁避免</strong></p>
+<h3 id="死锁检测和解除"><a href="#死锁检测和解除" class="headerlink" title="死锁检测和解除"></a>死锁检测和解除</h3><h2 id="中央处理器"><a href="#中央处理器" class="headerlink" title="中央处理器"></a>中央处理器</h2><p>CPU由运算器、控制器、寄存器及高速缓存组成</p>
+<p>CPU状态：<br>1、内核态：运行操作系统程序<br>2、用户态：运行用户程序</p>
+<p>CPU状态转换：<br>1、用户态——&gt;内核态：唯一途径是中断、异常、陷入机制<br>2、内核态——&gt;用户态：设置程序状态字PSW</p>
+<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p><strong>涉及到的对象：CPU、CPU正在处理的程序、事件、事件处理程序</strong></p>
+<p>定义：中断是CPU对某个事件的反应。CPU暂停正在执行的程序，保留现场自动转去执行事件的处理程序，完成后返回断点继续执行被打断的程序</p>
+<p>作用：</p>
+<p>1、支持CPU和设备之间的并行操作。当CPU启动设备进行输入输出后，设备可以独立工作，CPU转去处理其他事情。当设备完成输出/输出后，通过向CPU发中断报告此次输出/输出结果，让CPU决定如何处理以后的事情<br>2、CPU执行指令时异常的引入。如果执行指令时出现算术溢出，除零等异常，硬件改变CPU的执行流程，转到相应的错误处理程序或异常处理程序</p>
+<p>理解：</p>
+<p>1、小明在看书，这时候电话来了，小明把书签放在书上，然后去接电话，回来后继续从刚才那个地方开始看，这个是中断的概念<br>2、小明在看书，这时候有点口渴了，小明将书签放在书上，然后去喝口水，回来继续看书。口渴了相当于异常出现，去喝水相当于是异常处理程序</p>
+<p>事件：</p>
+<p><img src="http://i.imgur.com/D0psc3v.png" alt=""></p>
+<p>中断处理流程：</p>
+<p>CPU取出一条执行，并执行，如果检测到中断，获得中断码（处理器状态），并通过查中断向量表找到中断处理程序</p>
+<p><img src="http://i.imgur.com/VkjTF7C.png" alt=""></p>
+<p>中断向量表</p>
+<p>中断向量表是中断码（处理器状态）与中断处理程序的映射。执行过程中按照中断号的不同，通过中断向量表执行不同的中断处理程序</p>
+<p><img src="http://i.imgur.com/36ubms3.png" alt=""></p>
+<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>定义：系统在编程时可以调用操作系统的功能</p>
+<p>作用：<br>1、系统调用是操作系统提供给编程人员的唯一接口<br>2、使CPU的状态从用户态陷入内核态</p>
+<p>系统调用、库函数、API、内核函数之间的关系：</p>
+<p>应用程序可以直接执行系统调用，但一般应用调用调用C的函数库间接执行系统调用。C函数库是对系统调用的封装。内核函数中只是一部分开放出来允许开发人员进行调用</p>
+<p><img src="http://i.imgur.com/i5uHNlr.png" alt=""></p>
+<p>系统调用的执行过程：</p>
+<p>当CPU执行到特殊的<strong>陷入指令</strong>时</p>
+<p>1、中断/异常机制：硬件保护现场，通过查中断向量表将控制权转给<strong>系统调用总入口程序</strong><br>2、系统调用总入口程序：保存线程，将参数保存在内核的栈中，通过查系统调用表把控制权转给相应的系统调用处理<br>3、执行系统调用<br>4、恢复现场，返回用户程序</p>
+<h2 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h2><h3 id="内存划分"><a href="#内存划分" class="headerlink" title="内存划分"></a>内存划分</h3><p>内存划分有6种方式，这里只给出3种，另外3种页式、段式、段页式下面介绍</p>
+<p>1、单一连续区：一段时间内只有一个进程在内存，简单但内存利用率低<br>2、固定分区：把内存空间分割成若干区域，每个分区大小可以相同也可以不同，分区大小固定不变，每个分区只能装一个进程<br>3、可变分区：根据进程的需要，把内存空间空闲分割出一个分区，分配给该进程。缺点是在内存多次内存分配和回收后会留下很多碎片，可以采用紧缩技术解决（采用动态重定向方式时，只需要改变重定向寄存器地址）</p>
+<p>记录内存划分结果的<strong>数据结构</strong>：</p>
+<p>1、等长划分、单一内存：可以用位图表示，0表示空闲，1表示占用<br>2、不等长划分</p>
+<ul>
+<li>空闲区表，每个表项记录空闲的起始地址、长度、标志位（标志是否被分配）。内存回收时，设置标志为0，不进行前后内存合并时，采用空闲区表合适</li>
+<li>空闲块链，将表项用链表的方式连接起来。当内存回收合并前后内存块时，需要增加、删除表项，使用空闲块链表比较合适</li>
+</ul>
+<h3 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h3><p>当一个进程需要分配内存时，采用什么内存分配算法：</p>
+<p>1、首次适配：在空闲表中找到第一个满足进程要求的空闲区<br>2、下次适配：在上次找到的空闲去后接着查找<br>3、最佳适配：查找整个空闲区表，找到满足进程要求最小的空闲区</p>
+<p>内存分配案例：</p>
+<p>内存分配是需要维护两个表，分别是空闲区表和已分配表</p>
+<p><img src="http://i.imgur.com/BThn07F.png" alt=""></p>
+<h3 id="内存回收算法"><a href="#内存回收算法" class="headerlink" title="内存回收算法"></a>内存回收算法</h3><p>当某一块归还后，前后空闲空间合并，并修改内存空闲表，分为四种情况：</p>
+<p>1、上相邻<br>2、下相邻<br>3、上下都相邻<br>4、上下都不相邻</p>
+<h3 id="伙伴系统：经典的内存划分、分配、回收算法"><a href="#伙伴系统：经典的内存划分、分配、回收算法" class="headerlink" title="伙伴系统：经典的内存划分、分配、回收算法"></a>伙伴系统：经典的内存划分、分配、回收算法</h3><p>主要思想：将内存按照2的幂进行划分，组成若干空闲块链表；查找该链表找到能满足进程需求的最佳匹配块</p>
+<p>算法：<br>1、首先将整个可用空间看做一块<br>2、如果进程要求分配的大小大于可用空间的一半，小于剩余空间大小，则分配整个块。否则将块划分成两个大小相等的伙伴。一直划分下去，直到产生大于或等于分配大小的最小块</p>
+<h3 id="地址重定位"><a href="#地址重定位" class="headerlink" title="地址重定位"></a>地址重定位</h3><p>逻辑地址：<br>用户程序中采用的是相对地址的形式，其首地址为0，CPU执行过程中不能通过逻辑地址读取内存中的信息</p>
+<p>物理地址：<br>内存中存储单元的地址，可直接寻址</p>
+<p>定义：<br>CPU执行指令时，将用户程序中的逻辑地址转换为运行时可被直接寻址的物理地址，这一过程称为地址重定向</p>
+<p>动态重定向实现：</p>
+<p>CPU在执行指令时，逻辑地址加上重定向寄存器中的地址得到物理地址，可被直接寻址</p>
+<p><img src="http://i.imgur.com/wXDR6dP.png" alt=""></p>
+<h3 id="页式存储"><a href="#页式存储" class="headerlink" title="页式存储"></a>页式存储</h3><p>用户进程划分：</p>
+<ul>
+<li><strong>用户进程地址空间被划分成大小相等部分，称为页或者页面</strong>，从0开始编号</li>
+<li><strong>内存空间按相同大小划分成大小相等部分，称为块或内存块</strong>，从0开始编号</li>
+</ul>
+<p>内存分配：</p>
+<ul>
+<li>进程划分成若干页，以页为单位分配物理块</li>
+<li>逻辑相邻的页，物理上不一定相邻</li>
+</ul>
+<p>典型页面大小：4K</p>
+<p>页表：</p>
+<p><strong>页表记录了页号与物理块的对应关系，每个进程一个页表</strong></p>
+<p>逻辑地址：</p>
+<p><strong>逻辑地址 = 页号（20位） + 页内偏移（4K = 12位）</strong></p>
+<p><strong>CPU取得逻辑地址，自动划分为页号和页内地址，用页号在页表中查找到物理块，再加上页内地址拼接成物理地址，即物理地址=物理块号+页内便宜</strong></p>
+<h3 id="段式存储"><a href="#段式存储" class="headerlink" title="段式存储"></a>段式存储</h3><p>作业的地址空间被划分成若干段，如主程序段MAIN、子程序段X、数据段D及栈段S。每个段定义自己的逻辑信息，方便编程</p>
+<p>用户进程划分：</p>
+<ul>
+<li><strong>用户进程地址按程序自身的逻辑关系划分成若干个程序段</strong>，每个程序段都有一个段名</li>
+<li><strong>内存空间动态划分成若干长度不相同的区域，称为物理段</strong>，每个物理段由起始地址和长度确定</li>
+</ul>
+<p>内存分配：<br>以段为单位进行分配，每段在程序中占据连续空间，但各段之间可以不相邻</p>
+<p>段表：</p>
+<p>记录了<font color="red"><strong>段号与物理段首地址及长度</strong></font>的对应关系，<strong>每个进程一个段表</strong></p>
+<p><img src="http://i.imgur.com/2NI45Lm.png" alt=""></p>
+<p>逻辑地址：</p>
+<p><strong>逻辑地址 = 段号 + 段内偏移</strong></p>
+<p><strong>CPU取到逻辑地址后，用段号查找段表，得到该段在内存中的起始地址，与段内偏移地址计算出物理地址</strong></p>
+<h3 id="段页式存储★★★★★"><a href="#段页式存储★★★★★" class="headerlink" title="段页式存储★★★★★"></a>段页式存储★★★★★</h3><p>分页系统能有效提高内存的利用率，而分段系统能很好满足用户需求。段页式存储方式结合了两者的优点</p>
+<p>用户进程划分：</p>
+<ul>
+<li><strong>将用户进程划分为若干段，把每个段划分成若干页</strong></li>
+</ul>
+<p>内存划分：同页式存储管理方案</p>
+<p>内存分配：以页为单位进行分配</p>
+<p>段表：<br>用户进程划分为多个段，每个段表示一个逻辑地址区间；<strong>段表记录每一段表包括的逻辑地址范围，用页表地址和页表长度两个表示，引入页表长度防止寻址越界</strong>（段式存储中记录了物理段起始地址和长度，即段表记录的是起始地址+长度）</p>
+<p>页表：</p>
+<p><strong>段中的一段逻辑地址区间按照页式存储的方式</strong>，因此需要一张页表，记录页号与物理页的映射关系</p>
+<p>综上所述，使用段页式存储管理，<strong>一个进程有一张段表，多个页表</strong></p>
+<p>逻辑地址组成：</p>
+<p><img src="http://i.imgur.com/GPGvULF.png" alt=""></p>
+<p><strong>CPU取到逻辑地址后，获得该地址所在的段号，在段表中查询到页表的起始地址和长度(因为每个段对应一个页表，需要获得页表位置)；根据逻辑地址中的段内页号，查找页表读到该页所在的物理块号；最后用块号+页内地址构成物理地址</strong></p>
 
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/22/[操作系统]操作系统笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -756,6 +1164,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -767,13 +1177,23 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -781,38 +1201,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/" itemprop="url">
-                  win7系统关闭135、137、138、139、445端口方法
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/" itemprop="url">win7系统关闭135、137、138、139、445端口方法</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-19T17:23:00+08:00" content="2017-05-19">
-              2017-05-19
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T17:23:00+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/网络安全/" itemprop="url" rel="index">
                     <span itemprop="name">网络安全</span>
                   </a>
@@ -820,32 +1244,26 @@
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -855,17 +1273,22 @@
       
         
           
-          1、关闭139端口　　
-ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性”，再鼠标右击”本地连接”，选择”属性”。选择”TCP/IP协议/属性/高级”，进入”高级TCP/IP设置”对话框，选择”WINS”标签，勾选”禁用TCP/IP上的NETBIOS”一项，关闭NETBIOS.　　
-2、
-          ...
+            <p>1、关闭139端口　　</p>
+<p>ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性”，再鼠标右击”本地连接”，选择”属性”。选择”TCP/IP协议/属性/高级”，进入”高级TCP/IP设置”对话框，选择”WINS”标签，勾选”禁用TCP/IP上的NETBIOS”一项，关闭NETBIOS.　　</p>
+<p>2、关闭445端口　　</p>
+<p>修改注册表，添加一个键值（HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\NetBT\Parameters）在右面的窗口建立一个SMBDeviceEnabled为DWORD类型键值为0这样就ok了。　　</p>
+<p>3、关闭3389端口　　</p>
+<p>在我的电脑上点右键选”属性”–&gt;”远程”，将里面的远程协助和远程桌面两个选项框里的勾去掉。　　（HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp）来到这里，找到PortNumber，十进制是3389的，你随意把它改成其它4个数字吧，我改成1314了。此外，还要禁用Telnet、Terminal Services这两个危险服务。　　</p>
+<p>4、关闭135的经过注册表更改　　</p>
+<p>（1）、HKEY_LOCAL_MACHINE→SOFTWARE→Microsoft→Ole→EnableDCOM的值改为”N”　　HKEY_LOCAL_MACHINE→SOFTWARE→Microsoft→Rpc→DCOM Protocols键值中删除”ncacn_ip_tcp”　　<br>（2）、此外，还需要确认是否停用了”Distributed Transaction Coordinator”此项服务。　　</p>
+<p>全部设置完成之后需要<strong>重启计算机</strong>，启动一下输入CMD，然后直接打入netstat -an这个命令，看端口是否已经全部关闭</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -883,6 +1306,8 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -894,13 +1319,23 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/16/[Linux]Linux软件安装目录选择/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -908,38 +1343,42 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/16/[Linux]Linux软件安装目录选择/" itemprop="url">
-                  Linux软件安装目录选择
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/16/[Linux]Linux软件安装目录选择/" itemprop="url">Linux软件安装目录选择</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-16T22:00:00+08:00" content="2017-05-16">
-              2017-05-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T22:00:00+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Linux/" itemprop="url" rel="index">
                     <span itemprop="name">Linux</span>
                   </a>
@@ -947,32 +1386,26 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/16/[Linux]Linux软件安装目录选择/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/16/[Linux]Linux软件安装目录选择/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -982,15 +1415,15 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
       
         
           
-          /usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。/opt：用户级的程序目录，可以理解为D:/Soft
-          ...
+            <p>/usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。<br>/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。<br>/opt：用户级的程序目录，可以理解为D:/Software，opt有可选的意思，这里可以用于放置第三方大型软件（或游戏），当你不需要时，直接rm -rf掉即可。在硬盘容量不够时，也可将/opt单独挂载到其他磁盘上使用。</p>
+<p><strong>个人习惯让软件包管理器来管理/usr目录，而把自定义的脚本(scripts)、软件放到/usr/local目录下面。/opt存放测试软件，用完就把目录删除即可</strong></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/16/[Linux]Linux软件安装目录选择/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1008,6 +1441,8 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1019,13 +1454,23 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/16/[SSM]Nginx反向代理、负载均衡/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1033,38 +1478,42 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/16/[SSM]Nginx反向代理、负载均衡/" itemprop="url">
-                  Nginx反向代理、负载均衡
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/16/[SSM]Nginx反向代理、负载均衡/" itemprop="url">Nginx反向代理、负载均衡</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-16T21:28:00+08:00" content="2017-05-16">
-              2017-05-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T21:28:00+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/SSM/" itemprop="url" rel="index">
                     <span itemprop="name">SSM</span>
                   </a>
@@ -1072,32 +1521,26 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/16/[SSM]Nginx反向代理、负载均衡/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/16/[SSM]Nginx反向代理、负载均衡/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1107,17 +1550,15 @@ ipc和RPC漏洞存在于此。鼠标右击”网络邻居”，选择”属性�
       
         
           
-          Nginx基本功能极速入门http://xxgblog.com/2015/05/17/nginx-start/
-Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archives/1602.html
+            <p>Nginx基本功能极速入门<br><a href="http://xxgblog.com/2015/05/17/nginx-start/" target="_blank" rel="external">http://xxgblog.com/2015/05/17/nginx-start/</a></p>
+<p>Gitlab 上nginx反向代理（下次继续研究）<br><a href="https://www.xiaohui.org/archives/1602.html" target="_blank" rel="external">https://www.xiaohui.org/archives/1602.html</a></p>
 
           
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/16/[SSM]Nginx反向代理、负载均衡/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1135,6 +1576,8 @@ Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archi
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1146,13 +1589,23 @@ Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archi
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/16/[Git]Gitlab安装配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1160,38 +1613,42 @@ Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archi
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/16/[Git]Gitlab安装配置/" itemprop="url">
-                  Gitlab安装配置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/16/[Git]Gitlab安装配置/" itemprop="url">Gitlab安装配置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-16T20:28:00+08:00" content="2017-05-16">
-              2017-05-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T20:28:00+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Git/" itemprop="url" rel="index">
                     <span itemprop="name">Git</span>
                   </a>
@@ -1199,32 +1656,26 @@ Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archi
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/16/[Git]Gitlab安装配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/16/[Git]Gitlab安装配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1234,17 +1685,30 @@ Gitlab 上nginx反向代理（下次继续研究）https://www.xiaohui.org/archi
       
         
           
-          安装之前安装的时候忘记了，是通过官网的教程，遇到问题再去网上找的方式安装成功的，可以参考一下文档
-http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/1190000002722631
-配置文件配置
-          ...
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>之前安装的时候忘记了，是通过官网的教程，遇到问题再去网上找的方式安装成功的，可以参考一下文档</p>
+<p><a href="http://skyao.github.io/2015/02/16/git-gitlab-setup/" target="_blank" rel="external">http://skyao.github.io/2015/02/16/git-gitlab-setup/</a><br><a href="https://segmentfault.com/a/1190000002722631" target="_blank" rel="external">https://segmentfault.com/a/1190000002722631</a></p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件位置：</p>
+<pre><code>/etc/gitlab/gitlab.rb
+</code></pre><p>配置生效：</p>
+<pre><code>sudo gitlab-ctl reconfigure
+</code></pre><p>Nginx 运行目录：</p>
+<pre><code>/opt/gitlab/embedded/sbin/nginx
+</code></pre><p>Nginx 配置文件(会被覆盖)：</p>
+<pre><code>/var/opt/gitlab/nginx/etc/nginx.conf
+</code></pre><p>在/var/opt/gitlab/nginx/etc/nginx.conf 开头处有这样的内容：</p>
+<pre><code># This file is managed by gitlab-ctl. Manual changes will be
+# erased! To change the contents below, edit /etc/gitlab/gitlab.rb
+# and run `sudo gitlab-ctl reconfigure`.
+</code></pre><p>配置文件引用文件：</p>
+<pre><code>/var/opt/gitlab/nginx/etc/gitlab-http.conf
+</code></pre><p>原来可以通过修改<strong>/etc/gitlab/gitlab.rb来配置</strong>，我再折腾一下。</p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/16/[Git]Gitlab安装配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1262,6 +1726,8 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1273,13 +1739,23 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/16/[Maven]Linux下安装Nexus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1287,38 +1763,42 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/16/[Maven]Linux下安装Nexus/" itemprop="url">
-                  Linux下安装Nexus
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/16/[Maven]Linux下安装Nexus/" itemprop="url">Linux下安装Nexus</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-16T10:06:00+08:00" content="2017-05-16">
-              2017-05-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T10:06:00+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Maven/" itemprop="url" rel="index">
                     <span itemprop="name">Maven</span>
                   </a>
@@ -1326,32 +1806,26 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/16/[Maven]Linux下安装Nexus/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/16/[Maven]Linux下安装Nexus/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1361,15 +1835,53 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
       
         
           
-          Linux安装目录选择/usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。/opt：用户级的程序目录，可
-          ...
+            <h2 id="Linux安装目录选择"><a href="#Linux安装目录选择" class="headerlink" title="Linux安装目录选择"></a>Linux安装目录选择</h2><p>/usr：系统级的目录，可以理解为C:/Windows/，/usr/lib理解为C:/Windows/System32。<br>/usr/local：用户级的程序目录，可以理解为C:/Progrem Files/。用户自己编译的软件默认会安装到这个目录下。<br>/opt：用户级的程序目录，可以理解为D:/Software，opt有可选的意思，这里可以用于放置第三方大型软件（或游戏），当你不需要时，直接rm -rf掉即可。在硬盘容量不够时，也可将/opt单独挂载到其他磁盘上使用。</p>
+<p><strong>个人习惯让软件包管理器来管理/usr目录，而把自定义的脚本(scripts)、软件放到/usr/local目录下面。/opt存放测试软件，用完就把目录删除即可</strong></p>
+<h2 id="Nexus安装"><a href="#Nexus安装" class="headerlink" title="Nexus安装"></a>Nexus安装</h2><p><strong>注意Nexus对JDK版本有要求</strong><br>博主环境：JDK1.6.45 ，nexus-2.4-bundle.tar.gz<br>Nexus所有版本下载地址：<a href="http://www.sonatype.org/nexus/archived" target="_blank" rel="external">http://www.sonatype.org/nexus/archived</a></p>
+<p>1、下载Nexus后，在/usr/local/下创建nexus目录<br>2、进入nexus目录，将下载文件nexus-2.4-bundle.tar.gz移动到该目录下，使用mv命令<br>3、tar -zxvf nexus-2.4-bundle.tar.gz节解压，会生成nexus-2.4.0-09、sonatype-work两个目录<br>4、编辑系统配置文件：vim /etc/profile，在文件的尾巴增加下面内容：</p>
+<pre><code># Nexus
+NEXUS_HOME=/usr/local/nexus-2.4.0-09
+export NEXUS_HOME
+RUN_AS_USER=root
+export RUN_AS_USER
+</code></pre><p>5、刷新配置：source /etc/profile<br>6、开放防火墙端口：</p>
+<ul>
+<li>添加规则：sudo iptables -I INPUT -p tcp -m tcp –dport 8081 -j ACCEPT</li>
+<li>保存规则：sudo /etc/rc.d/init.d/iptables save</li>
+<li>重启 iptables：sudo service iptables restart</li>
+</ul>
+<p>7、启动nexus，进入/usr/local/nexus/nexus-2.4.0-09/bin目录，执行./nexus start<br>8、访问<a href="http://115.159.84.37:8081/nexus" target="_blank" rel="external">http://115.159.84.37:8081/nexus</a></p>
+<p>参考：</p>
+<p><a href="https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/" target="_blank" rel="external">https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</a><br><a href="https://github.com/judasn/Linux-Tutorial/blob/master/Nexus-Install-And-Settings.md" target="_blank" rel="external">https://github.com/judasn/Linux-Tutorial/blob/master/Nexus-Install-And-Settings.md</a></p>
+<h2 id="配置nexus、添加自定义jar包"><a href="#配置nexus、添加自定义jar包" class="headerlink" title="配置nexus、添加自定义jar包"></a>配置nexus、添加自定义jar包</h2><p>仓库地址：</p>
+<pre><code>&lt;!-- 仓库地址 --&gt;
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;nexus&lt;/id&gt;
+        &lt;name&gt;Team Nexus Repository&lt;/name&gt;
+        &lt;url&gt;http://yourhostname:8081/nexus/content/groups/public&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+</code></pre><p>jar包依赖：</p>
+<pre><code>&lt;!-- jar --&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;de.innosystec&lt;/groupId&gt;
+        &lt;artifactId&gt;java-unrar&lt;/artifactId&gt;
+        &lt;version&gt;0.5&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre><p><a href="https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/" target="_blank" rel="external">https://tianweili.github.io/2015/03/17/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8nexus%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</a></p>
+<h2 id="我搭建的maven仓库"><a href="#我搭建的maven仓库" class="headerlink" title="我搭建的maven仓库"></a>我搭建的maven仓库</h2><p><a href="http://maven.qianmingxs.com:8081/nexus" target="_blank" rel="external">http://maven.qianmingxs.com:8081/nexus</a></p>
+<p>仓库地址：<a href="http://maven.qianmingxs.com:8081/nexus/content/groups/public" target="_blank" rel="external">http://maven.qianmingxs.com:8081/nexus/content/groups/public</a></p>
+<h2 id="Nexus配置、部署"><a href="#Nexus配置、部署" class="headerlink" title="Nexus配置、部署"></a>Nexus配置、部署</h2><p><a href="http://aijezdm915.iteye.com/blog/1335025" target="_blank" rel="external">http://aijezdm915.iteye.com/blog/1335025</a></p>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/16/[Maven]Linux下安装Nexus/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1382,6 +1894,8 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1398,13 +1912,23 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/10/[JDK源码阅读]HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
 
     
       <header class="post-header">
@@ -1412,38 +1936,42 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2017/05/10/[JDK源码阅读]HashMap/" itemprop="url">
-                  HashMap
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2017/05/10/[JDK源码阅读]HashMap/" itemprop="url">HashMap</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-10T21:50:00+08:00" content="2017-05-10">
-              2017-05-10
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T21:50:00+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/JDK源码阅读/" itemprop="url" rel="index">
                     <span itemprop="name">JDK源码阅读</span>
                   </a>
@@ -1451,32 +1979,26 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
 
                 
                 
-
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/05/10/[JDK源码阅读]HashMap/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/10/[JDK源码阅读]HashMap/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
           
 
           
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1486,17 +2008,350 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
       
         
           
-          存储结构
-从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表
-1234567891011121314transient Entry&lt;K,V&gt;[] table;  static class Entry&lt;K,V&gt; implements Map.En
-          ...
+            <h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><p><img src="http://i.imgur.com/nYCSoQg.png" alt=""></p>
+<p>从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">transient Entry&lt;K,V&gt;[] table;  </div><div class="line">static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;  </div><div class="line">	final K key;     //键</div><div class="line">	V value;         //值</div><div class="line">	Entry&lt;K,V&gt; next; //指向下一个节点  </div><div class="line">	int hash;        //散列值</div><div class="line">	</div><div class="line">	Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;  </div><div class="line">		value = v;  </div><div class="line">		next = n;  </div><div class="line">		key = k;  </div><div class="line">		hash = h;  </div><div class="line">	&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HashMap有一个属性是Entry的数组table。Entry就是table数组中的元素，Map.Entry保存一个键值对<br>和这个键值对持有指向下一个键值对的引用，如此就构成了链表了</p>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>一些属性：</p>
+<ul>
+<li>capacity：数组的长度，默认是16</li>
+<li>loadFactor：HashMap元素的个数除以数组的长度，当元素个数大于threshold时，需要扩容。默认负载因子是0.75</li>
+<li>threashold：数组的长度乘以负载因子，当元素大于threshold时，需要扩容。默认threshold = 16*0.75 = 12</li>
+<li>size：HashMap中元素的个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">/**根据指定容量和负载因子构造HashMap*/   </div><div class="line">public HashMap(int initialCapacity, float loadFactor) &#123;  </div><div class="line">    if (initialCapacity &lt; 0)  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +  </div><div class="line">                                           initialCapacity);  </div><div class="line">	/**</div><div class="line">	 * 数组最大容量是 static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30，即32位最大2的整数次</div><div class="line">	 * 如果传入初始容量太大，真实设置的的最大</div><div class="line">	 */</div><div class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)  </div><div class="line">        initialCapacity = MAXIMUM_CAPACITY;  </div><div class="line">    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +  </div><div class="line">                                           loadFactor);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 找到大于给出的初始容量的2的乘方</div><div class="line">	 */</div><div class="line">    // Find a power of 2 &gt;= initialCapacity  </div><div class="line">    int capacity = 1;  </div><div class="line">    while (capacity &lt; initialCapacity)  </div><div class="line">        capacity &lt;&lt;= 1;  </div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 负载因子是链表的长度除以数组的长度，当链表的长度大于threshold时，需要扩容</div><div class="line">	 */</div><div class="line">    this.loadFactor = loadFactor;  </div><div class="line">    threshold = (int)Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 初始化 Entry 数组</div><div class="line">	 */</div><div class="line">    table = new Entry[capacity];  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 空函数，子类可扩展</div><div class="line">	 */</div><div class="line">    init();  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">/**根据指定的容量和默认的负载因子构造HashMap*/  </div><div class="line">public HashMap(int initialCapacity) &#123;  </div><div class="line">    this(initialCapacity, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">//默认的空的构造器  </div><div class="line">public HashMap() &#123;  </div><div class="line">    this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line">/**通过指定一个Map对象进行构造*/  </div><div class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;  </div><div class="line">    this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,  </div><div class="line">                  DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);  </div><div class="line">    putAllForCreate(m);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="PUT方法"><a href="#PUT方法" class="headerlink" title="PUT方法"></a>PUT方法</h2><p>当存入的key是null的时候将调用putForNUllKey方法，暂时将这段逻辑放一边，看key不为null的情况。先调用了hash(int h)方法获取了一个hash值。<br><br></p>
+<font color="red"><strong>遍历table[i]上的元素，如果存在键相等，则替换它的值。否则以头插法的方式插入链表</strong></font>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/10/[JDK源码阅读]HashMap/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+<p>之后判断size是否到达了需要扩充table数组容量的界限并让size自增1，如果达到了则调用resize(int capacity)方法将数组容量拓展为原来的两倍。</p>
+<pre>
+public V put(K key, V value) {  
+    // HashMap允许存放null键和null值。  
+    // 当key为null时，调用putForNullKey方法，将value放置在数组第一个位置。  
+    if (key == null)  
+        return putForNullKey(value);  
+    <font color="red">// 根据key的keyCode重新计算hash值。 </font> 
+    int hash = hash(key);//注意这里的实现是jdk1.7和以前的版本有区别的  
+    <font color="red">// 搜索指定hash值在对应table中的索引。</font>  
+    int i = indexFor(hash, table.length);  
+    // 如果 i 索引处的 Entry 不为 null，通过循环不断遍历 e 元素的下一个元素。如果键的Hash值一样，而且equal相等  
+    for (Entry<k,v> e = table[i]; e != null; e = e.next) {  
+        Object k;  
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {  
+            V oldValue = e.value;  
+            e.value = value;  
+            e.recordAccess(this);  
+            return oldValue;  
+        }  
+    }  
+    // 如果i索引处的Entry为null，表明此处还没有Entry。  
+    modCount++;  
+    // 将key、value添加到i索引处。  
+    addEntry(hash, key, value, i);  
+    return null;  
+}  
+
+/**
+ * <font color="red">采用头插法，即使头结点是空也没有关系！！</font>
+ * 数组上的元素为刚插入的节点
+ */
+void addEntry(int hash, K key, V value, int bucketIndex) {
+    Entry<k,v> e = table[bucketIndex];
+    table[bucketIndex] = new Entry<k,v>(hash, key, value, e);
+    if (size++ >= threshold)
+        resize(2 * table.length);
+}
+</k,v></k,v></k,v></pre>
+
+<p><strong>为什么要进行两次Hash？</strong></p>
+<p>防止质量较差的哈希函数带来过多的冲突（碰撞）问题。Java中int值占4个字节，即32位。根据这32位值进行移位、异或运算得到一个值。</p>
+<p><strong>如何确定元素在数组的位置？</strong></p>
+<pre><code>static int indexFor(int h, int length) {
+    return h &amp; (length-1);     
+}
+</code></pre><p>这样可以保证结果的最大值是length-1，而且均匀分布在数组中，异或的操作效率比取余的效率高</p>
+<p><strong>HashMap中如何判断两个键相等？</strong></p>
+<p>两个对象的HashCode相等， 而且equals相等。所以如果使用对象的作为键，需要重写HashCode和equals方法</p>
+<p>String已经重写了HashCode，String中的数据结构是char[] s，Hash 值的计算方法是 s[0]<em>31^(n-1) + s[1]</em>31^(n-2) + ….. + s[0]*31^0</p>
+<p>可以采用迭代的方法计算：h = h * 31 + s[i]</p>
+<pre><code>int h = 0;
+for(int i = 0; i &lt; n; i++){
+    h = h * 31 + s[i];
+}
+</code></pre><p><strong>链表扩容</strong></p>
+<p>当链表内元素大于threashold时，新建一个新的数组，数组长度变成原来的两倍，并将原来的元素复制到新数组上</p>
+<pre>
+void resize(int newCapacity) {
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+    // 这个if块表明，如果容量已经到达允许的最大值，即MAXIMUN_CAPACITY，则不再拓展容量，而将装载拓展的界限值设为计算机允许的最大值。
+    // 不会再触发resize方法，而是不断的向map中添加内容，即table数组中的链表可以不断变长，但数组长度不再改变
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    // 创建新数组，容量为指定的容量
+    Entry[] newTable = new Entry[newCapacity];
+    transfer(newTable);
+    table = newTable;
+    // 设置下一次需要调整数组大小的界限
+    threshold = (int)(newCapacity * loadFactor);
+}
+</pre>
+
+<p>将old数组上的元素复制到新数组上的操作在transfer上完成，主要步骤是：</p>
+<ul>
+<li>遍历原来的Entry数组</li>
+<li>遍历链表</li>
+<li>将链表元素依次按照插入到新的数组中(头插法)，<font color="red"><strong>链表反置</strong></font></li>
+</ul>
+<pre>
+void transfer(Entry[] newTable) {
+    // 保留原数组的引用到src中，
+    Entry[] src = table;
+    // 新容量使新数组的长度
+    int newCapacity = newTable.length;
+    // 遍历原数组
+    for (int j = 0; j < src.length; j++) {
+        // 获取元素e
+        Entry<k,v> e = src[j];
+        if (e != null) {
+            // 将原数组中的元素置为null
+            src[j] = null;
+            // 遍历原数组中j位置指向的链表
+            do {
+                Entry<k,v> next = e.next;
+                // 根据新的容量计算e在新数组中的位置
+                int i = indexFor(e.hash, newCapacity);
+                // 将e插入到newTable[i]指向的链表的头部
+                e.next = newTable[i];
+                newTable[i] = e;
+                e = next;
+            } while (e != null);
+        }
+    }
+}
+</k,v></k,v></pre>
+
+<p><strong>HashMap允许键null、值null，怎么处理？</strong></p>
+<p>从源码可以看到，key为null的对象放在数组<strong>索引0的位置</strong>。<strong>put的方式和put普通元素一样</strong>，首先遍历链表，是否有相同key的元素，如果有则替换并返回原来的值。否则头插入的方式将元素插入链表</p>
+<pre>
+private V putForNullKey(V value) {
+    for (Entry<k,v> e = table[0]; e != null; e = e.next) {
+        if (e.key == null) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+    modCount++;
+    addEntry(0, null, value, 0);
+    return null;
+}
+</k,v></pre>
+
+<h2 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法"></a>GET方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">	/**</div><div class="line">	 * 如果key为null，从table[0]所在的链表进行搜索，如果存在元素且元素的key为null，返回元素的值；如果之前没有传入key为null的元素，那么返回null</div><div class="line">	 */</div><div class="line">    if (key == null)</div><div class="line">        return getForNullKey();</div><div class="line">    int hash = hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</div><div class="line">            return e.value;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该方法分为key为null和不为null两块。先看不为null的情况。先获取key的hash值，之后通过hash值及table.length获取key对应的table数组的索引，遍历索引的链表，所找到key相同的元素，则返回元素的value，否者返回null。不为null的情况调用了getForNullKey()方法。</p>
+<pre><code>private V getForNullKey() {
+    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) {
+        if (e.key == null)
+            return e.value;
+    }
+    return null;
+}
+</code></pre><p>参考：<a href="http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html" target="_blank" rel="external">http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html</a></p>
+<h2 id="containsKey"><a href="#containsKey" class="headerlink" title="containsKey"></a>containsKey</h2><p>containsKey(Object key)方法很简单，只是判断getEntry(key)的结果是否为null，是则返回false，否返回true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getEntry(key) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>getEntry(Object key)也没什么内容，只是根据key对应的hash值计算在table数组中的索引位置，然后遍历该链表判断是否存在相同的key值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final Entry&lt;K,V&gt; getEntry(Object key) &#123;</div><div class="line">    int hash = (key == null) ? 0 : hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp;</div><div class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return e;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="containsValue"><a href="#containsValue" class="headerlink" title="containsValue"></a>containsValue</h2><p>判断一个value是否存在比判断key是否存在还要简单，就是遍历所有元素判断是否有相等的值。这里分为两种情况处理，value为null何不为null的情况，但内容差不多，只是判断相等的方式不同。</p>
+<pre>
+public boolean containsValue(Object value) {
+    if (value == null)
+            return containsNullValue();
+
+    Entry[] tab = table;
+    for (int i = 0; i < tab.length ; i++)
+        for (Entry e = tab[i] ; e != null ; e = e.next)
+            <font color="red">if (value.equals(e.value))</font>
+                return true;
+    return false;
+}
+
+private boolean containsNullValue() {
+    Entry[] tab = table;
+    for (int i = 0; i < tab.length ; i++)
+        for (Entry e = tab[i] ; e != null ; e = e.next)
+            <font color="red">if (e.value == null)</font>
+                return true;
+    return false;
+}
+</pre>
+
+<h2 id="remove-Object-key"><a href="#remove-Object-key" class="headerlink" title="remove(Object key)"></a>remove(Object key)</h2><pre><code>public V remove(Object key) {
+    Entry&lt;K,V&gt; e = removeEntryForKey(key);
+    return (e == null ? null : e.value);
+}
+</code></pre><p>看这个方法，removeEntryKey(key)的返回结果应该是被移除的元素，如果不存在这个元素则返回为null。remove方法根据removeEntryKey返回的结果e是否为null返回null或e.value。</p>
+<pre>
+final Entry<k,v> removeEntryForKey(Object key) {
+    int hash = (key == null) ? 0 : hash(key.hashCode());
+    int i = indexFor(hash, table.length);
+    Entry<k,v> prev = table[i];
+    Entry<k,v> e = prev;
+
+    while (e != null) {
+        Entry<k,v> next = e.next;
+        Object k;
+        if (e.hash == hash &&
+            ((k = e.key) == key || (key != null && key.equals(k)))) {
+            modCount++;
+            size--;
+            <font color="red">//临界情况，如果是第一个节点</font>
+            if (prev == e)
+                table[i] = next;
+            else
+                prev.next = next;
+            e.recordRemoval(this);
+            return e;
+        }
+        prev = e;
+        e = next;
+    }
+
+    return e;
+}
+</k,v></k,v></k,v></k,v></pre>
+
+<p>删除节点需要两个指针pre和e，next可以不需要吧？</p>
+<h2 id="HashMap产生死锁的原因"><a href="#HashMap产生死锁的原因" class="headerlink" title="HashMap产生死锁的原因"></a>HashMap产生死锁的原因</h2><p>调用 PUT 函数时，当 HashMap 中的元素大于 Threshold 时，会调用 Resize 函数进行扩容，数组长度增大一倍，整个过程如下：</p>
+<ol>
+<li>对索引数组中的元素遍历</li>
+<li>对链表上的每一个节点遍历：用 next 取得要转移那个元素的下一个，将 e 转移到新 Hash 表的头部，因为可能有元素，所以先将 e.next 指向新 Hash 表的第一个元素（如果是第一次就是 null)，这时候新 Hash 的第一个元素是 e，但是 Hash 指向的却是 e 没转移时候的第一个，所以需要将 Hash 表的第一个元素指向 e</li>
+<li>循环2，直到链表节点全部转移</li>
+<li>循环1，直到所有索引数组全部转移 </li>
+</ol>
+<p>经过这几步，我们会发现<strong>链表转移的时候是逆序的</strong>。假如转移前链表顺序是1-&gt;2-&gt;3，那么转移后就会变成3-&gt;2-&gt;1。这时候就有点头绪了，死锁问题不就是因为1-&gt;2的同时2-&gt;1造成的吗？所以，<strong>HashMap 的死锁问题就出在这个transfer()函数上。</strong></p>
+<pre>
+public V put(K key, V value) {
+    if (table == EMPTY_TABLE) {
+    inflateTable(threshold);
+    }
+    if (key == null)
+        return putForNullKey(value);
+    int hash = hash(key);
+    int i = indexFor(hash, table.length);
+    //如果该 key 存在，就替换旧值
+    for (Entry<k,v> e = table[i]; e != null; e = e.next) {
+        Object k;
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+
+    modCount++;
+    //如果没有这个 key，就插入一个新元素！跟进去看看
+    addEntry(hash, key, value, i);
+    return null;
+}
+
+void addEntry(int hash, K key, V value, int bucketIndex) {
+    //查看当前的size是否超过了我们设定的阈值threshold，如果超过，需要resize
+    if ((size >= threshold) && (null != table[bucketIndex])) {
+        resize(2 * table.length);
+        hash = (null != key) ? hash(key) : 0;
+        bucketIndex = indexFor(hash, table.length);
+    }
+    createEntry(hash, key, value, bucketIndex);
+}
+
+//新建一个更大尺寸的hash表，把数据从老的Hash表中迁移到新的Hash表中。
+void resize(int newCapacity) {
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    //创建一个新的 Hash 表
+    Entry[] newTable = new Entry[newCapacity];
+    //转移！！！！跟进去
+    transfer(newTable, initHashSeedAsNeeded(newCapacity));
+    table = newTable;
+    threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
+}
+
+<font color="red">//高能预警！！！！重点全在这个函数中</font>
+void transfer(Entry[] newTable, boolean rehash) {
+    int newCapacity = newTable.length;
+    for (Entry<k,v> e : table) {
+        while(null != e) {
+            Entry<k,v> next = e.next;
+            if (rehash) {
+                e.hash = null == e.key ? 0 : hash(e.key);
+            }
+            int i = indexFor(e.hash, newCapacity);
+            e.next = newTable[i];
+            newTable[i] = e;
+            e = next;
+        }
+    }
+}
+</k,v></k,v></k,v></pre>
+
+<p>下面着重分析一下transfer方法，精简后得到如下代码★★★★★：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">while(null != e) &#123;</div><div class="line">	//因为是单链表，如果要转移头指针，一定要保存下一个结点，不然转移后链表就丢了</div><div class="line">	Entry&lt;K,V&gt; next = e.next;</div><div class="line">	//e 要插入到链表的头部，所以要先用 e.next 指向新的 Hash 表第一个元素</div><div class="line">	e.next = newTable[i];</div><div class="line">	//将新 Hash 表的头指针指向 e</div><div class="line">	newTable[i] = e;</div><div class="line">	//转移 e 的下一个结点 </div><div class="line">	e = next;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>死锁原因重现</strong></p>
+<p>假设这里有两个线程同时执行了 put() 操作，并进入了 transfer() 环节，现在假设线程1的工作情况如下代码所示，而线程2完成了整个 transfer() 过程，所以就完成了 rehash。</p>
+<pre>
+while(null != e) {
+    <font color="red">Entry<k,v> next = e.next; //线程1执行到这里被调度挂起了</k,v></font>
+    e.next = newTable[i];
+    newTable[i] = e;
+    e = next;
+}
+</pre>
+
+<p>那么现在的状态：</p>
+<p><img src="http://i.imgur.com/8PFB2wW.png" alt=""></p>
+<p>从上面的图我们可以看到，因为线程1的 e 指向了 key(3)，而 next 指向了 key(7)，在线程2 rehash 后，就指向了线程2 rehash 后的链表。</p>
+<p>然后线程1被唤醒了，执行：</p>
+<p>第一步 </p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p>链表状态如下图：</p>
+<p><img src="http://i.imgur.com/GbZgrGm.png" alt=""></p>
+<p>第二步</p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p>链表状态如下：</p>
+<p><img src="http://i.imgur.com/AlWEfbc.jpg" alt=""></p>
+<p>第三步</p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p><img src="http://i.imgur.com/Yk3AC54.jpg" alt=""></p>
+<p>很明显，环形链表出现了！！当然，现在还没有事情，因为下一个节点是 null，所以transfer()就完成了，等put()的其余过程搞定后，HashMap 的底层实现就是线程1的新 Hash 表了。</p>
+<p><strong>没错，put()过程虽然造成了环形链表，但是它没有发生错误。它静静的等待着get()这个冤大头的到来。</strong></p>
+<p>现在程序被执行了一个hashMap.get(11)，这时候会调用getEntry()，这个函数就是去找对应索引的链表中有没有这个 key。然后。。。。悲剧了</p>
+<p>因为 HashMap 为了性能考虑，没有使用锁机制。所以就是非线程安全的，而 ConcurrentHashMap 使用了锁机制，所以是线程安全的。<strong>要并发就使用 ConcurrentHashMap</strong></p>
+<p>参考：<a href="http://blog.csdn.net/luxia_24/article/details/52344367" target="_blank" rel="external">http://blog.csdn.net/luxia_24/article/details/52344367</a></p>
+
+          
         
+      
+    </div>
+
+    <div>
       
     </div>
 
@@ -1509,6 +2364,8 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
     </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1550,31 +2407,39 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
                alt="Mr.Qian" />
           <p class="site-author-name" itemprop="name">Mr.Qian</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">138</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">138</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1582,8 +2447,10 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1604,7 +2471,12 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
         
         
 
+        
+
+
       </section>
+
+      
 
       
 
@@ -1628,6 +2500,7 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
   <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
 </div>
 
+
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
@@ -1635,9 +2508,10 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1645,9 +2519,13 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1667,6 +2545,15 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1692,181 +2579,59 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-
-  
-    
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"rhapsody1290"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
   
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
 
 
 
+  
+
+
+
+
+
 
   
-  
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
 
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
 
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = false;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = decodeURIComponent(data.url);
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title >= 0 || index_content >= 0 ){
-                                isMatch = true;
-								if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            } 
-							
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
 
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
 
 
   
@@ -1878,6 +2643,8 @@ http://skyao.github.io/2015/02/16/git-gitlab-setup/https://segmentfault.com/a/11
   
 
   
-<script type="text/javascript" src="/js/src/[qianmingxs]baidu_auto_post.js"></script>
+
+  
+
 </body>
 </html>
