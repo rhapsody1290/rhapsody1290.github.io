@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="用户管理系统系统框架【需改造】存在的问题   　　LoginClServlet中太过臃肿，既有业务逻辑，又有对数据库的操作，后期难以进行维护  指导思想① 业务逻辑代码和界面分离② 把常用的代码(对数据库的连接和操作)封装到工具类SqlHelper【有时也称为DAO，数据访问对象，是对数据库进行操作】 具体的方法①    每一张表对应一个domain类(表示数据)，还要对应一个Service类（表">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA分层思想">
+<meta property="og:url" content="http://qianmingxs.com/2016/07/08/[Java]JAVA分层思想/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="用户管理系统系统框架【需改造】存在的问题   　　LoginClServlet中太过臃肿，既有业务逻辑，又有对数据库的操作，后期难以进行维护  指导思想① 业务逻辑代码和界面分离② 把常用的代码(对数据库的连接和操作)封装到工具类SqlHelper【有时也称为DAO，数据访问对象，是对数据库进行操作】 具体的方法①    每一张表对应一个domain类(表示数据)，还要对应一个Service类（表">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20160611213134633">
+<meta property="og:image" content="http://img.blog.csdn.net/20160611212436607">
+<meta property="og:image" content="http://i.imgur.com/DDiJspS.png">
+<meta property="og:image" content="http://i.imgur.com/j26engw.png">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA分层思想">
+<meta name="twitter:description" content="用户管理系统系统框架【需改造】存在的问题   　　LoginClServlet中太过臃肿，既有业务逻辑，又有对数据库的操作，后期难以进行维护  指导思想① 业务逻辑代码和界面分离② 把常用的代码(对数据库的连接和操作)封装到工具类SqlHelper【有时也称为DAO，数据访问对象，是对数据库进行操作】 具体的方法①    每一张表对应一个domain类(表示数据)，还要对应一个Service类（表">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160611213134633">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2016/07/08/[Java]JAVA分层思想/"/>
+
+
+
+
+
+  <title>JAVA分层思想 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/08/[Java]JAVA分层思想/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JAVA分层思想</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-08T14:49:00+08:00">
+                2016-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="用户管理系统系统框架【需改造】"><a href="#用户管理系统系统框架【需改造】" class="headerlink" title="用户管理系统系统框架【需改造】"></a>用户管理系统系统框架【需改造】</h2><p><strong><em>存在的问题</em></strong>  </p>
+<p>　　LoginClServlet中太过臃肿，既有业务逻辑，又有对数据库的操作，后期难以进行维护</p>
+<p><img src="http://img.blog.csdn.net/20160611213134633" alt="这里写图片描述"></p>
+<h2 id="指导思想"><a href="#指导思想" class="headerlink" title="指导思想"></a>指导思想</h2><p>① 业务逻辑代码和界面分离<br>② 把常用的代码(对数据库的连接和操作)封装到工具类SqlHelper【有时也称为DAO，数据访问对象，是对数据库进行操作】</p>
+<h2 id="具体的方法"><a href="#具体的方法" class="headerlink" title="具体的方法"></a>具体的方法</h2><p>①    每一张表对应一个<font color="red">domain类</font>(表示数据)，还要对应一个<font color="red">Service类</font>（表示操作）<br>比如 users 表 对应 Users 类(domain 类)，UserService类(该类会封装对users表的各种操作)</p>
+<p>每个表对应一个domain对象和Service类，将关系模型转化为对象模型（如下图），实际上这里体现出数据和操作分离的思想<br>② view负责与用户进行交互，并将数据传递给controller<br>③ controller接收view中传递的数据，进行数据校验，并调用service方法，根据返回结果的不同跳转到不同的显示页面</p>
+<p><img src="http://img.blog.csdn.net/20160611212436607" alt="这里写图片描述"></p>
+<h2 id="改造后系统框架"><a href="#改造后系统框架" class="headerlink" title="改造后系统框架"></a>改造后系统框架</h2><p><img src="http://i.imgur.com/DDiJspS.png" alt=""></p>
+<ul>
+<li>web层，structs位于web层，体现MVC的数据输入、数据处理、数据显示分离，当然web层需要调用service层中的方法完成数据处理。显示页面为MVC中的V，控制器为MVC中的C</li>
+<li>model层可以划分为业务层（service）、DAO层、数据持久层，这里强调一下，在一个项目中不一定全部有，可以根据实际情况选择</li>
+<li>hiberate（orm框架），处于数据持久层，主要解决关系模型和对象模型之间的阻抗，体现oop</li>
+</ul>
+<p><strong><em>详细文档</em></strong>  </p>
+<p><a href="https://github.com/rhapsody1290/servlet_study_usersmanager_MVC_change/blob/master/doc/%E5%88%86%E5%B1%82.xls" target="_blank" rel="external">https://github.com/rhapsody1290/servlet_study_usersmanager_MVC_change/blob/master/doc/%E5%88%86%E5%B1%82.xls</a></p>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><p><strong><em>完成分页的mvc模式改写</em></strong><br>　　首先在UsersService类中添加方法getUsersByPage,然后再<br><strong><em>为什么要返回ArrayList ,而不是我们想到 ResultSet?</em></strong><br>　　1. ArrayList 中封装 User对象，更加符合面向对象的编程方式  OOP<br>　　2. 我们通过Resulst-&gt;User对象-&gt;ArrayList这样ArrayList和 Resultset没有关系，就可以及时关闭数据库资源</p>
+<hr>
+<pre><code>//按照分页来获取用户列表
+public ArrayList&lt;Users&gt; getUsersByPage(int pageNow, int pageSize){
+    ArrayList&lt;Users&gt; al = new ArrayList&lt;Users&gt;();
+
+    ResultSet rs = SqlHelper.executeQuery(&quot;select * from users limit &quot; +
+            (pageNow - 1) * pageSize + &quot;,&quot; + pageSize, null);
+    try {
+        while(rs.next()){
+            Users user = new Users();
+            user.setId(rs.getInt(&quot;id&quot;));
+            user.setUsername(rs.getString(&quot;username&quot;));
+            user.setEmail(rs.getString(&quot;email&quot;));
+            user.setGrade(rs.getInt(&quot;grade&quot;));
+            user.setPasswd(rs.getString(&quot;passwd&quot;));
+            al.add(user);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        SqlHelper.close(rs,SqlHelper.getPs(),SqlHelper.getCt());
+    }
+    return al;
+}
+</code></pre><h2 id="Web-Service-DAO（数据访问层）大讨论"><a href="#Web-Service-DAO（数据访问层）大讨论" class="headerlink" title="Web-Service-DAO（数据访问层）大讨论"></a>Web-Service-DAO（数据访问层）大讨论</h2><p>　　mvc规定我们应该怎样去开发软件（把数据输入，数据处理，数据显示分离）<br>　　web(jsp V/Servlet C)-servie(M)-dao(M)这是一种mvc的具体实现<br>　　web(jsp V/Servlet C)-service(M)开发方式也是一种具体的实现</p>
+<p><img src="http://i.imgur.com/j26engw.png" alt=""></p>
+<ul>
+<li>举个例子，UserService.java中只包含业务逻辑，UserBean.java为数据对象，而对数据库的操作放在UserDao.java中</li>
+<li>这种分层的好处是使数据和操作分离</li>
+<li>将整个model层分为service层和dao层（数据访问层）</li>
+<li>若UserService中业务需要对多张表进行操作，可以通过多个DAO的组合操作来实现</li>
+<li>但在实际项目中，很多持久化逻辑本身就是业务逻辑（比如增加一个用户，增加用户信息到数据库时持久化逻辑，增加用户是业务逻辑），省略DAO层有时候更方便，更实用</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/08/[Java]Java基础常用/" rel="next" title="Java基础常用">
+                <i class="fa fa-chevron-left"></i> Java基础常用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/13/[Java]Java中配置文件放在哪里/" rel="prev" title="Java中配置文件放在哪里">
+                Java中配置文件放在哪里 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户管理系统系统框架【需改造】"><span class="nav-number">1.</span> <span class="nav-text">用户管理系统系统框架【需改造】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指导思想"><span class="nav-number">2.</span> <span class="nav-text">指导思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体的方法"><span class="nav-number">3.</span> <span class="nav-text">具体的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改造后系统框架"><span class="nav-number">4.</span> <span class="nav-text">改造后系统框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#举个例子"><span class="nav-number">5.</span> <span class="nav-text">举个例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Service-DAO（数据访问层）大讨论"><span class="nav-number">6.</span> <span class="nav-text">Web-Service-DAO（数据访问层）大讨论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

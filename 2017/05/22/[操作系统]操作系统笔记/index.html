@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="操作系统," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="进程管理 进程与线程1、进程概念 进程几部分组成：  进程控制块（PCB）：标识进程的存在，描述进程的执行状态 程序段：能够被进程调度程序调度到CPU上执行的程序代码段 数据段：进程中处理的原始数据或者计算的中间结果、结果数据  进程控制块组成：  进程标识符（PID） 进程当前状态：就绪/执行/阻塞 进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统笔记">
+<meta property="og:url" content="http://qianmingxs.com/2017/05/22/[操作系统]操作系统笔记/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="进程管理 进程与线程1、进程概念 进程几部分组成：  进程控制块（PCB）：标识进程的存在，描述进程的执行状态 程序段：能够被进程调度程序调度到CPU上执行的程序代码段 数据段：进程中处理的原始数据或者计算的中间结果、结果数据  进程控制块组成：  进程标识符（PID） 进程当前状态：就绪/执行/阻塞 进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://i.imgur.com/M8giTeg.jpg">
+<meta property="og:image" content="http://i.imgur.com/D0psc3v.png">
+<meta property="og:image" content="http://i.imgur.com/VkjTF7C.png">
+<meta property="og:image" content="http://i.imgur.com/36ubms3.png">
+<meta property="og:image" content="http://i.imgur.com/i5uHNlr.png">
+<meta property="og:image" content="http://i.imgur.com/BThn07F.png">
+<meta property="og:image" content="http://i.imgur.com/wXDR6dP.png">
+<meta property="og:image" content="http://i.imgur.com/2NI45Lm.png">
+<meta property="og:image" content="http://i.imgur.com/GPGvULF.png">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统笔记">
+<meta name="twitter:description" content="进程管理 进程与线程1、进程概念 进程几部分组成：  进程控制块（PCB）：标识进程的存在，描述进程的执行状态 程序段：能够被进程调度程序调度到CPU上执行的程序代码段 数据段：进程中处理的原始数据或者计算的中间结果、结果数据  进程控制块组成：  进程标识符（PID） 进程当前状态：就绪/执行/阻塞 进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/05/22/[操作系统]操作系统笔记/"/>
+
+
+
+
+
+  <title>操作系统笔记 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/22/[操作系统]操作系统笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T19:22:00+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p><img src="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><p><strong>1、进程概念</strong></p>
+<p>进程几部分组成：</p>
+<ul>
+<li>进程控制块（PCB）：标识进程的存在，描述进程的执行状态</li>
+<li>程序段：能够被进程调度程序调度到CPU上执行的程序代码段</li>
+<li>数据段：进程中处理的原始数据或者计算的中间结果、结果数据</li>
+</ul>
+<p>进程控制块组成：</p>
+<ul>
+<li>进程标识符（PID）</li>
+<li>进程当前状态：就绪/执行/阻塞</li>
+<li>进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻塞队列</li>
+<li>程序和数据地址</li>
+<li>进程优先级</li>
+<li><strong>CPU现场保护</strong></li>
+<li>通信信息：记录进程执行过程中与别的进程发生的信息交换情况</li>
+<li>家族联系：进程创建子进程，形成进程家族树。PCB中指明了子进程和父进程的标识</li>
+<li>占有资源清单</li>
+</ul>
+<p>为什么PCB是进程存在的标志？<br>系统通过PCB对进程进行控制：1、当系统调度到某进程后，根据其PCB中保存的处理机状态信息，恢复运行的现场，并根据PCB中的程序和数据的内存地址，找到其程序和数据 2、 当进程暂停执行时，将处理机环境保存在PCB中 3、进程间同步、通信时都要访问PCB</p>
+<p><strong>2、进程状态与转换：</strong></p>
+<p>1、三种状态</p>
+<ul>
+<li>就绪：<strong>获得除处理器之外的所有资源</strong>，一旦获得处理器就立刻可以执行</li>
+<li>执行：进程在CPU上执行</li>
+<li>阻塞：由于发生某事件（例如IO等待）而无法执行下去</li>
+</ul>
+<p>就绪和阻塞的区别：<br>处于就绪状态，当分配处理器时，进程能够立刻执行；阻塞状态时，即使把处理器分配给该进程，它也无法进行</p>
+<p>2、进程状态的相互转换</p>
+<p><img src="http://i.imgur.com/M8giTeg.jpg" alt=""></p>
+<p>注意：线程进行阻塞状态后，若等到期望的事件发生，先进入就绪状态，等调度程序选中该进程时，进程才能执行</p>
+<p><strong>3、进程控制</strong></p>
+<p>进程的控制包括进程的<strong>创建、撤销、阻塞和唤醒</strong>，这些功能一般由<strong>操作系统的内核</strong>来实现</p>
+<p>操作系统内核：把一些与硬件紧密联系的模块，或运行频率较高的模块，以及许多公用的模块安排在靠近硬件的软件层次中，并使他们常驻内存，提高操作系统的效率</p>
+<p><strong>4、进程组织</strong></p>
+<p><strong>5、进程通信：共享存储系统、消息传递系统、管道通信</strong></p>
+<p><strong>6、进程概念与多线程模型</strong></p>
+<h3 id="处理器调度"><a href="#处理器调度" class="headerlink" title="处理器调度"></a>处理器调度</h3><p><strong>1、调度的基本概念</strong></p>
+<p><strong>2、调度时机、切换与过程</strong></p>
+<p><strong>3、调度的基本原则</strong></p>
+<p><strong>4、调度方式</strong></p>
+<p><strong>5、典型调度算法</strong></p>
+<h3 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h3><p><strong>1、进程同步的基本概念</strong></p>
+<p><strong>2、实现临界区互斥的基本方法</strong></p>
+<p><strong>3、信号量</strong></p>
+<p><strong>4、管程</strong></p>
+<p><strong>5、经典同步问题</strong></p>
+<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p><strong>1、死锁概念</strong></p>
+<p><strong>2、死锁处理策略</strong></p>
+<p><strong>3、死锁预防</strong></p>
+<p><strong>4、死锁避免</strong></p>
+<h3 id="死锁检测和解除"><a href="#死锁检测和解除" class="headerlink" title="死锁检测和解除"></a>死锁检测和解除</h3><h2 id="中央处理器"><a href="#中央处理器" class="headerlink" title="中央处理器"></a>中央处理器</h2><p>CPU由运算器、控制器、寄存器及高速缓存组成</p>
+<p>CPU状态：<br>1、内核态：运行操作系统程序<br>2、用户态：运行用户程序</p>
+<p>CPU状态转换：<br>1、用户态——&gt;内核态：唯一途径是中断、异常、陷入机制<br>2、内核态——&gt;用户态：设置程序状态字PSW</p>
+<h2 id="中断"><a href="#中断" class="headerlink" title="中断"></a>中断</h2><p><strong>涉及到的对象：CPU、CPU正在处理的程序、事件、事件处理程序</strong></p>
+<p>定义：中断是CPU对某个事件的反应。CPU暂停正在执行的程序，保留现场自动转去执行事件的处理程序，完成后返回断点继续执行被打断的程序</p>
+<p>作用：</p>
+<p>1、支持CPU和设备之间的并行操作。当CPU启动设备进行输入输出后，设备可以独立工作，CPU转去处理其他事情。当设备完成输出/输出后，通过向CPU发中断报告此次输出/输出结果，让CPU决定如何处理以后的事情<br>2、CPU执行指令时异常的引入。如果执行指令时出现算术溢出，除零等异常，硬件改变CPU的执行流程，转到相应的错误处理程序或异常处理程序</p>
+<p>理解：</p>
+<p>1、小明在看书，这时候电话来了，小明把书签放在书上，然后去接电话，回来后继续从刚才那个地方开始看，这个是中断的概念<br>2、小明在看书，这时候有点口渴了，小明将书签放在书上，然后去喝口水，回来继续看书。口渴了相当于异常出现，去喝水相当于是异常处理程序</p>
+<p>事件：</p>
+<p><img src="http://i.imgur.com/D0psc3v.png" alt=""></p>
+<p>中断处理流程：</p>
+<p>CPU取出一条执行，并执行，如果检测到中断，获得中断码（处理器状态），并通过查中断向量表找到中断处理程序</p>
+<p><img src="http://i.imgur.com/VkjTF7C.png" alt=""></p>
+<p>中断向量表</p>
+<p>中断向量表是中断码（处理器状态）与中断处理程序的映射。执行过程中按照中断号的不同，通过中断向量表执行不同的中断处理程序</p>
+<p><img src="http://i.imgur.com/36ubms3.png" alt=""></p>
+<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>定义：系统在编程时可以调用操作系统的功能</p>
+<p>作用：<br>1、系统调用是操作系统提供给编程人员的唯一接口<br>2、使CPU的状态从用户态陷入内核态</p>
+<p>系统调用、库函数、API、内核函数之间的关系：</p>
+<p>应用程序可以直接执行系统调用，但一般应用调用调用C的函数库间接执行系统调用。C函数库是对系统调用的封装。内核函数中只是一部分开放出来允许开发人员进行调用</p>
+<p><img src="http://i.imgur.com/i5uHNlr.png" alt=""></p>
+<p>系统调用的执行过程：</p>
+<p>当CPU执行到特殊的<strong>陷入指令</strong>时</p>
+<p>1、中断/异常机制：硬件保护现场，通过查中断向量表将控制权转给<strong>系统调用总入口程序</strong><br>2、系统调用总入口程序：保存线程，将参数保存在内核的栈中，通过查系统调用表把控制权转给相应的系统调用处理<br>3、执行系统调用<br>4、恢复现场，返回用户程序</p>
+<h2 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h2><h3 id="内存划分"><a href="#内存划分" class="headerlink" title="内存划分"></a>内存划分</h3><p>内存划分有6种方式，这里只给出3种，另外3种页式、段式、段页式下面介绍</p>
+<p>1、单一连续区：一段时间内只有一个进程在内存，简单但内存利用率低<br>2、固定分区：把内存空间分割成若干区域，每个分区大小可以相同也可以不同，分区大小固定不变，每个分区只能装一个进程<br>3、可变分区：根据进程的需要，把内存空间空闲分割出一个分区，分配给该进程。缺点是在内存多次内存分配和回收后会留下很多碎片，可以采用紧缩技术解决（采用动态重定向方式时，只需要改变重定向寄存器地址）</p>
+<p>记录内存划分结果的<strong>数据结构</strong>：</p>
+<p>1、等长划分、单一内存：可以用位图表示，0表示空闲，1表示占用<br>2、不等长划分</p>
+<ul>
+<li>空闲区表，每个表项记录空闲的起始地址、长度、标志位（标志是否被分配）。内存回收时，设置标志为0，不进行前后内存合并时，采用空闲区表合适</li>
+<li>空闲块链，将表项用链表的方式连接起来。当内存回收合并前后内存块时，需要增加、删除表项，使用空闲块链表比较合适</li>
+</ul>
+<h3 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h3><p>当一个进程需要分配内存时，采用什么内存分配算法：</p>
+<p>1、首次适配：在空闲表中找到第一个满足进程要求的空闲区<br>2、下次适配：在上次找到的空闲去后接着查找<br>3、最佳适配：查找整个空闲区表，找到满足进程要求最小的空闲区</p>
+<p>内存分配案例：</p>
+<p>内存分配是需要维护两个表，分别是空闲区表和已分配表</p>
+<p><img src="http://i.imgur.com/BThn07F.png" alt=""></p>
+<h3 id="内存回收算法"><a href="#内存回收算法" class="headerlink" title="内存回收算法"></a>内存回收算法</h3><p>当某一块归还后，前后空闲空间合并，并修改内存空闲表，分为四种情况：</p>
+<p>1、上相邻<br>2、下相邻<br>3、上下都相邻<br>4、上下都不相邻</p>
+<h3 id="伙伴系统：经典的内存划分、分配、回收算法"><a href="#伙伴系统：经典的内存划分、分配、回收算法" class="headerlink" title="伙伴系统：经典的内存划分、分配、回收算法"></a>伙伴系统：经典的内存划分、分配、回收算法</h3><p>主要思想：将内存按照2的幂进行划分，组成若干空闲块链表；查找该链表找到能满足进程需求的最佳匹配块</p>
+<p>算法：<br>1、首先将整个可用空间看做一块<br>2、如果进程要求分配的大小大于可用空间的一半，小于剩余空间大小，则分配整个块。否则将块划分成两个大小相等的伙伴。一直划分下去，直到产生大于或等于分配大小的最小块</p>
+<h3 id="地址重定位"><a href="#地址重定位" class="headerlink" title="地址重定位"></a>地址重定位</h3><p>逻辑地址：<br>用户程序中采用的是相对地址的形式，其首地址为0，CPU执行过程中不能通过逻辑地址读取内存中的信息</p>
+<p>物理地址：<br>内存中存储单元的地址，可直接寻址</p>
+<p>定义：<br>CPU执行指令时，将用户程序中的逻辑地址转换为运行时可被直接寻址的物理地址，这一过程称为地址重定向</p>
+<p>动态重定向实现：</p>
+<p>CPU在执行指令时，逻辑地址加上重定向寄存器中的地址得到物理地址，可被直接寻址</p>
+<p><img src="http://i.imgur.com/wXDR6dP.png" alt=""></p>
+<h3 id="页式存储"><a href="#页式存储" class="headerlink" title="页式存储"></a>页式存储</h3><p>用户进程划分：</p>
+<ul>
+<li><strong>用户进程地址空间被划分成大小相等部分，称为页或者页面</strong>，从0开始编号</li>
+<li><strong>内存空间按相同大小划分成大小相等部分，称为块或内存块</strong>，从0开始编号</li>
+</ul>
+<p>内存分配：</p>
+<ul>
+<li>进程划分成若干页，以页为单位分配物理块</li>
+<li>逻辑相邻的页，物理上不一定相邻</li>
+</ul>
+<p>典型页面大小：4K</p>
+<p>页表：</p>
+<p><strong>页表记录了页号与物理块的对应关系，每个进程一个页表</strong></p>
+<p>逻辑地址：</p>
+<p><strong>逻辑地址 = 页号（20位） + 页内偏移（4K = 12位）</strong></p>
+<p><strong>CPU取得逻辑地址，自动划分为页号和页内地址，用页号在页表中查找到物理块，再加上页内地址拼接成物理地址，即物理地址=物理块号+页内便宜</strong></p>
+<h3 id="段式存储"><a href="#段式存储" class="headerlink" title="段式存储"></a>段式存储</h3><p>作业的地址空间被划分成若干段，如主程序段MAIN、子程序段X、数据段D及栈段S。每个段定义自己的逻辑信息，方便编程</p>
+<p>用户进程划分：</p>
+<ul>
+<li><strong>用户进程地址按程序自身的逻辑关系划分成若干个程序段</strong>，每个程序段都有一个段名</li>
+<li><strong>内存空间动态划分成若干长度不相同的区域，称为物理段</strong>，每个物理段由起始地址和长度确定</li>
+</ul>
+<p>内存分配：<br>以段为单位进行分配，每段在程序中占据连续空间，但各段之间可以不相邻</p>
+<p>段表：</p>
+<p>记录了<font color="red"><strong>段号与物理段首地址及长度</strong></font>的对应关系，<strong>每个进程一个段表</strong></p>
+<p><img src="http://i.imgur.com/2NI45Lm.png" alt=""></p>
+<p>逻辑地址：</p>
+<p><strong>逻辑地址 = 段号 + 段内偏移</strong></p>
+<p><strong>CPU取到逻辑地址后，用段号查找段表，得到该段在内存中的起始地址，与段内偏移地址计算出物理地址</strong></p>
+<h3 id="段页式存储★★★★★"><a href="#段页式存储★★★★★" class="headerlink" title="段页式存储★★★★★"></a>段页式存储★★★★★</h3><p>分页系统能有效提高内存的利用率，而分段系统能很好满足用户需求。段页式存储方式结合了两者的优点</p>
+<p>用户进程划分：</p>
+<ul>
+<li><strong>将用户进程划分为若干段，把每个段划分成若干页</strong></li>
+</ul>
+<p>内存划分：同页式存储管理方案</p>
+<p>内存分配：以页为单位进行分配</p>
+<p>段表：<br>用户进程划分为多个段，每个段表示一个逻辑地址区间；<strong>段表记录每一段表包括的逻辑地址范围，用页表地址和页表长度两个表示，引入页表长度防止寻址越界</strong>（段式存储中记录了物理段起始地址和长度，即段表记录的是起始地址+长度）</p>
+<p>页表：</p>
+<p><strong>段中的一段逻辑地址区间按照页式存储的方式</strong>，因此需要一张页表，记录页号与物理页的映射关系</p>
+<p>综上所述，使用段页式存储管理，<strong>一个进程有一张段表，多个页表</strong></p>
+<p>逻辑地址组成：</p>
+<p><img src="http://i.imgur.com/GPGvULF.png" alt=""></p>
+<p><strong>CPU取到逻辑地址后，获得该地址所在的段号，在段表中查询到页表的起始地址和长度(因为每个段对应一个页表，需要获得页表位置)；根据逻辑地址中的段内页号，查找页表读到该页所在的物理块号；最后用块号+页内地址构成物理地址</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/19/[网络安全]win7系统关闭135、137、138、139、445端口方法/" rel="next" title="win7系统关闭135、137、138、139、445端口方法">
+                <i class="fa fa-chevron-left"></i> win7系统关闭135、137、138、139、445端口方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" rel="prev" title="1、Leetcode 简单题">
+                1、Leetcode 简单题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程管理"><span class="nav-number">1.</span> <span class="nav-text">进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程与线程"><span class="nav-number">1.1.</span> <span class="nav-text">进程与线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器调度"><span class="nav-number">1.2.</span> <span class="nav-text">处理器调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步与互斥"><span class="nav-number">1.3.</span> <span class="nav-text">同步与互斥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁"><span class="nav-number">1.4.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁检测和解除"><span class="nav-number">1.5.</span> <span class="nav-text">死锁检测和解除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中央处理器"><span class="nav-number">2.</span> <span class="nav-text">中央处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断"><span class="nav-number">3.</span> <span class="nav-text">中断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用"><span class="nav-number">4.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储管理"><span class="nav-number">5.</span> <span class="nav-text">存储管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存划分"><span class="nav-number">5.1.</span> <span class="nav-text">内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配"><span class="nav-number">5.2.</span> <span class="nav-text">内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收算法"><span class="nav-number">5.3.</span> <span class="nav-text">内存回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伙伴系统：经典的内存划分、分配、回收算法"><span class="nav-number">5.4.</span> <span class="nav-text">伙伴系统：经典的内存划分、分配、回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址重定位"><span class="nav-number">5.5.</span> <span class="nav-text">地址重定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页式存储"><span class="nav-number">5.6.</span> <span class="nav-text">页式存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段式存储"><span class="nav-number">5.7.</span> <span class="nav-text">段式存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段页式存储★★★★★"><span class="nav-number">5.8.</span> <span class="nav-text">段页式存储★★★★★</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

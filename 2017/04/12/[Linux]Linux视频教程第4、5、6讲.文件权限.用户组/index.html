@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="用户组在Linux中的每个用户必须属于一个组，不能独立于组外。在Linux中每个文件有所有者、所在组、其它组的概念 所有者 一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者用ls ‐ahl命令可以看到文件的所有者也可以使用chown 用户名文件名来修改文件的所有者 文件所在组 当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组用ls ‐ahl命令可以看到文件的所在组 也可">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux视频教程第4、5、6讲.文件权限.用户组">
+<meta property="og:url" content="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第4、5、6讲.文件权限.用户组/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="用户组在Linux中的每个用户必须属于一个组，不能独立于组外。在Linux中每个文件有所有者、所在组、其它组的概念 所有者 一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者用ls ‐ahl命令可以看到文件的所有者也可以使用chown 用户名文件名来修改文件的所有者 文件所在组 当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组用ls ‐ahl命令可以看到文件的所在组 也可">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20160211221716925">
+<meta property="og:image" content="http://img.blog.csdn.net/20160404154355875">
+<meta property="og:image" content="http://img.blog.csdn.net/20160404161157245">
+<meta property="og:image" content="http://img.blog.csdn.net/20160404154501110">
+<meta property="og:image" content="http://img.blog.csdn.net/20160404164411648">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux视频教程第4、5、6讲.文件权限.用户组">
+<meta name="twitter:description" content="用户组在Linux中的每个用户必须属于一个组，不能独立于组外。在Linux中每个文件有所有者、所在组、其它组的概念 所有者 一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者用ls ‐ahl命令可以看到文件的所有者也可以使用chown 用户名文件名来修改文件的所有者 文件所在组 当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组用ls ‐ahl命令可以看到文件的所在组 也可">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160211221716925">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第4、5、6讲.文件权限.用户组/"/>
+
+
+
+
+
+  <title>Linux视频教程第4、5、6讲.文件权限.用户组 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux视频教程第4、5、6讲.文件权限.用户组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux视频教程第4、5、6讲.文件权限.用户组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T21:14:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><p>在Linux中的<strong>每个用户必须属于一个组</strong>，不能独立于组外。在Linux中每个文件有所有者、所在组、其它组的概念</p>
+<p><strong>所有者</strong></p>
+<p>一般为文件的创建者，谁创建了该文件，就天然的成为该文件的所有者<br>用ls ‐ahl命令可以看到文件的所有者<br>也可以使用chown 用户名文件名来修改文件的所有者</p>
+<p><strong>文件所在组</strong></p>
+<p>当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组<br>用ls ‐ahl命令可以看到文件的所在组</p>
+<p>也可以使用chgrp组名文件名来修改文件所在的组 </p>
+<p><strong>其它组</strong></p>
+<p>除开文件的所有者和所在组的用户外，系统的其它用户都是文件的其它组</p>
+<h2 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h2><p><img src="http://img.blog.csdn.net/20160211221716925" alt="这里写图片描述"></p>
+<pre>
+10个字符确定不同用户能对文件干什么
+
+<font color="blue">第一个字符代表文件（-）、目录（d），链接（l）</font>
+[b]则表示为装置文件里面的可供储存的接口讴备(可随机存取装置)
+[c]则表示为装置文件里面的串行端口讴备，例如键盘、鼠标(一次性读取装置)
+
+其余字符每3个一组（rwx），读（r）、写（w）、执行（x）
+
+第一组rwx：文件所有者的权限是读、写和执行
+第二组rw-：与文件所有者同一组的用户的权限是读、写但不能执行
+第三组r--：不与文件所有者同组的其他用户的权限是读不能写和执行
+
+也可用数字表示为：r=4，w=2，x=1 因此rwx=4+2+1=7 注意：最大权限777
+
+注意：
+● 文件夹x为进入文件下的权限
+● <font color="blue">开放目录给任何人浏览时，应该至少也要给予r及x的权限</font>
+● x在目录当中是与"能否进入该目录"有关，至于那个w则具有相当重要的权限，因为他可以让使用者删除、更新、新建档案或目录
+</pre>
+
+<h2 id="文件预设权限"><a href="#文件预设权限" class="headerlink" title="文件预设权限"></a>文件预设权限</h2><pre><code>鸟哥Linux私房菜 p223
+
+查询的方式有两种，一种是直接输入umask，看到数字形态的权限设置分数；另一种则是加入-S(Symbolic)选项，就会以符号类型的方式来显示出权限
+
+文件预设没有x权限，即只有rw两个选项，最大666分，-rw-rw-rw-
+目录默认所有权限均开放，即777分，drwxrwxrwx
+
+umask的分数指的是默认值减掉的权限。r=4，w=2，x=1。要拿掉写的权限，输入2，拿掉度的权限，输入4等
+例，umask为022，所以user没有拿掉任何权限，group与others权限拿掉2，也就是w权限，所以，建立文件时权限为-rw-r--r--，建立文件夹时drwxr-xr-x
+
+专题制作，要求同一组的用户能够修改，只要umask 002就行
+</code></pre><h2 id="档案特殊权限"><a href="#档案特殊权限" class="headerlink" title="档案特殊权限"></a>档案特殊权限</h2><p><img src="http://img.blog.csdn.net/20160404154355875" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160404161157245" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20160404154501110" alt="这里写图片描述"></p>
+<pre><code>档案的重要权限除了rwx（读、写、执行），还有其他特殊权限（s跟t）。s和t权限的意义与系统的帐号（第十四章）及系统的程序（第十七章）相关。
+
+s这个表示根据出现位置的不同，可分为SUID和SGID：
+
+1、s标志出现在档案拥有者的x权限上时，如passwd，称为Set UID，简称SUID的特殊权限。SUID的限制和功能：
+    ● 仅对二进制程序有效
+    ● 执行者对该程序具有x的可执行权限★★★
+    ● 本权限仅在该程序的运行时 ★★★
+    ● 执行者将具有程序拥有者的权限 ★★★
+    （自己的话：用户对二进制程序有可执行权利，在程序运行时，暂时获得该程序拥有者的权限）
+
+问题：所有帐号密码都记录在/etc/shadow，这个档案只有root可以修改，但个人用户的帐号显然能够修改自己的密码，问什么？
+答：passwd是一个二进制程序，个人用户对/usr/bin/passwd有x权限，用户在执行passwd的过程中，会暂时获得程序所有者[root]的权限的，对密码进行修改
+
+2、s标志出现在文件所在组的x权限上时，成为Set GID，SGID的功能：
+    ● SGID对二进制程序有用
+    ● 程序执行者对该程序有x权限
+    ● 执行者在执行过程中会获得该程序群组的支持
+
+当使用个人账户去执行locate时，会取得slocate群组的支持，就能够读取mlocate.db
+
+3、SBIT，Stick Bit仅对当前目录有效，作用：
+    ● 当用户对于此目录具有w、x权限
+    ● 当用户在该目录下建立档案或目录时，仅自己与root有权利删除该档案
+
+/tep任何人都能够在/tmp内新增、修改档案，但仅文件的建立者或root能够删除该文件
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">SUID、SGID、SBIT权限设定</div><div class="line"></div><div class="line">设定的方法是在原先数字更改权限方式前再加上一个数字</div><div class="line">● SUID 4</div><div class="line">● SGID 2</div><div class="line">● SBIT 1</div><div class="line"></div><div class="line">例将一个文件权限设为[-rws r-x r-x]，这里s标志出现在文件所有者的x权限位置，所以是SUID</div><div class="line">chmod 4755 # 加入SUID</div><div class="line">chmod 6755 # 加入SUID和SGID</div><div class="line">chmod 1755 # 加入SBIT</div><div class="line">chmod 7666 # 出现-rwSrwSrwT，因为下达7666，user、group、other都没有x权限，那么这个S、T代表空（因为SUID是文件执行时，获得文件所有者的权限，但连文件所有者都无法执行了，哪来的权限给其他人使用）</div></pre></td></tr></table></figure>
+<h2 id="权限与指令的关系"><a href="#权限与指令的关系" class="headerlink" title="权限与指令的关系"></a>权限与指令的关系</h2><pre><code>1、进入目录：
+    可用命令如cd，用户对这个目录至少需要x权限，如果还要在这个目录利用ls查阅文件名，用户还需要对这个目录具有r权限
+2、在目录中读取一个文件
+    可使用指令cat，more，less等，用户对这个目录至少需要x权限，对文件需要有r权限
+3、修改一个文件
+    使用vim编辑器等，需要对该文件的目录有x权限，对文件有r和w权限
+4、进入某个目录并执行该目录下的某个指令
+    用户对目录有x权限，对该文件有x权限
+</code></pre><h2 id="atime、mtime、ctime"><a href="#atime、mtime、ctime" class="headerlink" title="atime、mtime、ctime"></a>atime、mtime、ctime</h2><p>时间参数意义</p>
+<p><img src="http://img.blog.csdn.net/20160404164411648" alt="这里写图片描述"></p>
+<pre><code>● +4代表大于等于5天前的文件 find /var -mtime +4
+● -4代表小于等于四天内的文件 find /var -mtime -4
+● 4代表4-5那一天的文件 find /var -mtime 4
+</code></pre><p>差别 </p>
+<pre><code>● ctime是指change time
+● mtime, 就是modify time
+
+mtime和ctime的区别在于，只有修改了文件的内容，才会更新文件的mtime，而对文件更名，修改文件的属主等操作，只会更新ctime。
+
+举例说明: 对文件进行mv操作，mtime不变，ctime更新；编辑文件内容，mtime和ctime同时修改。其他操作的影响，可以自己试验。但是我发现对文件执行touch操作，会同时修改mtime和ctime，所以具体修改哪个时间，还取决于不同命令自己的实现；
+
+atime, 这个就是每次查看文件内容的时候会更新。比如cat操作，而ls操作是不会更新的。
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/12/[Linux]Linux视频教程第3讲.用户管理.目录结构/" rel="next" title="Linux视频教程第3讲.用户管理.目录结构">
+                <i class="fa fa-chevron-left"></i> Linux视频教程第3讲.用户管理.目录结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/[Linux]Linux视频教程第7讲.J2EE环境配置/" rel="prev" title="Linux视频教程第7讲.J2EE环境配置">
+                Linux视频教程第7讲.J2EE环境配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户组"><span class="nav-number">1.</span> <span class="nav-text">用户组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限"><span class="nav-number">2.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件预设权限"><span class="nav-number">3.</span> <span class="nav-text">文件预设权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#档案特殊权限"><span class="nav-number">4.</span> <span class="nav-text">档案特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限与指令的关系"><span class="nav-number">5.</span> <span class="nav-text">权限与指令的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atime、mtime、ctime"><span class="nav-number">6.</span> <span class="nav-text">atime、mtime、ctime</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Token," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="为什么要身份验证可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！ 但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求访问其他服务器接口的时候，还得再验证一下，否则的话用户就可以跳过登录页面，">
+<meta name="keywords" content="Token">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Token 的身份验证">
+<meta property="og:url" content="http://qianmingxs.com/2016/10/11/[Java]基于Token的身份验证/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="为什么要身份验证可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！ 但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求访问其他服务器接口的时候，还得再验证一下，否则的话用户就可以跳过登录页面，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于 Token 的身份验证">
+<meta name="twitter:description" content="为什么要身份验证可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！ 但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求访问其他服务器接口的时候，还得再验证一下，否则的话用户就可以跳过登录页面，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2016/10/11/[Java]基于Token的身份验证/"/>
+
+
+
+
+
+  <title>基于 Token 的身份验证 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/10/11/[Java]基于Token的身份验证/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于 Token 的身份验证</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-11T10:50:00+08:00">
+                2016-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="为什么要身份验证"><a href="#为什么要身份验证" class="headerlink" title="为什么要身份验证"></a>为什么要身份验证</h2><p>可能你会说，不是有登录接口吗，输入用户名、密码，身份验证通过就可以跳到下一个页面，很简单啊！</p>
+<p>但是，HTTP 是一种没有状态的协议，也就是它并不知道用户是否已经登录验证过。这里我们把用户看成是客户端（可以是浏览器、Android、IOS等），客户端使用用户名还有密码通过了身份验证，不过下回这个客户端再发送请求访问其他服务器接口的时候，还得再验证一下，<font color="red"><strong>否则的话用户就可以跳过登录页面，直接访问其他服务器接口，登录就失去了意义</strong></font></p>
+<h2 id="传统身份验证方法"><a href="#传统身份验证方法" class="headerlink" title="传统身份验证方法"></a>传统身份验证方法</h2><p>Cookie+Session的存在主要是为了解决HTTP这一无状态协议下服务器如何识别用户的问题。当用户请求登录的时候，如果验证通过，<font color="red"><strong>在服务端创建一个session</strong></font>，session中记录一下登录的用户信息，<font color="red"><strong>然后把这个session的 sessionid 号发送给客户端</strong></font>，客户端收到以后把这个 sessionid 号存储在 Cookie 里，<font color="red"><strong>下次这个用户再向服务端发送请求的时候带着这个 Cookie</strong></font> ，这样服务端会根据 Cookie 里的sessionid恢复session，<font color="red"><strong>看看session中是否存有用户信息</strong></font>，如果是，说明用户已经通过了身份验证，就把用户请求的数据返回给客户端</p>
+<p>上面说的就是 Session，我们需要在服务端存储为登录的用户生成的 Session ，这些 Session 可能会存储在内存，磁盘，或者数据库里。我们可能需要在服务端创建一个守护程序定期的去清理过期的 Session</p>
+<h2 id="基于-Token-的身份验证方法"><a href="#基于-Token-的身份验证方法" class="headerlink" title="基于 Token 的身份验证方法"></a>基于 Token 的身份验证方法</h2><p>使用基于 Token 的身份验证方法，<strong>在服务端不需要存储用户的登录记录</strong>。大概的流程是这样的：</p>
+<p>1、客户端使用用户名和密码请求登录<br>2、服务端收到请求，去验证用户名与密码<br>3、验证成功后，服务端会签发一个 Token，再把这个 Token 发送给客户端<br>4、客户端收到 Token 以后可以把它存储起来，比如放在 Cookie 里或者 Local Storage 里<br>5、客户端每次向服务端请求资源的时候需要带着服务端签发的 Token<br>6、服务端收到请求，然后去验证客户端请求里面带着的 Token，如果验证成功，就向客户端返回请求的数据</p>
+<p>比起传统的身份验证方法，Token 扩展性更强，也更安全点，非常适合用在 Web 应用或者移动应用上</p>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>实施 Token 验证的方法挺多的，还有一些标准方法，比如 JWT，读作：jot，表示：JSON Web Tokens 。JWT 标准的 Token 有三个部分：</p>
+<ul>
+<li>header</li>
+<li>payload</li>
+<li>signature</li>
+</ul>
+<p><strong>中间用点分隔开</strong>，并且都会使用 Base64 编码，所以真正的 Token 看起来像这样：</p>
+<pre>
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9<font color="red" style="font-weight:bold">.</font>eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ<font color="red" style="font-weight:bold">.</font>SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc
+</pre>
+
+<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p><strong>header</strong> 部分主要是两部分内容，一个是 Token 的类型，另一个是使用的算法，比如下面类型就是 JWT，使用的算法是 HS256。</p>
+<pre><code>{
+    &quot;typ&quot;: &quot;JWT&quot;,
+    &quot;alg&quot;: &quot;HS256&quot;
+}
+</code></pre><p>上面的内容要用 Base64 的形式编码一下，所以就变成这样：</p>
+<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+</code></pre><h3 id="Payload"><a href="#Payload" class="headerlink" title="Payload"></a>Payload</h3><p>Payload 里面是 Token 的具体内容，这些内容里面有一些是标准字段，你也可以添加其它需要的内容。下面是标准字段：</p>
+<ul>
+<li>iss：Issuer，发行者</li>
+<li>sub：Subject，主题</li>
+<li>aud：Audience，观众</li>
+<li>exp：Expiration time，过期时间</li>
+<li>nbf：Not before</li>
+<li>iat：Issued at，发行时间</li>
+<li>jti：JWT ID</li>
+</ul>
+<p>比如下面这个 Payload ，用到了 iss 发行人，还有 exp 过期时间。另外还有两个自定义的字段，一个是 name ，还有一个是 admin 。</p>
+<pre><code>{
+    &quot;iss&quot;: &quot;ninghao.net&quot;,
+    &quot;exp&quot;: &quot;1438955445&quot;,
+    &quot;name&quot;: &quot;wanghao&quot;,
+    &quot;admin&quot;: true
+}
+</code></pre><p>使用 Base64 编码以后就变成了这个样子：</p>
+<pre><code>eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ
+</code></pre><h3 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h3><p>JWT 的最后一部分是 Signature ，这部分内容有三个部分，先是用 Base64 编码的 header.payload ，再用加密算法加密一下，加密的时候要放进去一个 Secret ，这个相当于是一个密码，<strong>这个密码秘密地存储在服务端</strong>。</p>
+<ul>
+<li>header</li>
+<li>payload</li>
+<li>secret</li>
+</ul>
+<pre><code>var encodedString = base64UrlEncode(header) + &quot;.&quot; + base64UrlEncode(payload); 
+HMACSHA256(encodedString, &apos;secret&apos;);
+</code></pre><p>处理完成以后看起来像这样：</p>
+<pre><code>SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc
+</code></pre><p>最后这个在服务端生成并且要发送给客户端的 Token 看起来像这样：</p>
+<pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJuaW5naGFvLm5ldCIsImV4cCI6IjE0Mzg5NTU0NDUiLCJuYW1lIjoid2FuZ2hhbyIsImFkbWluIjp0cnVlfQ.SwyHTEx_RQppr97g4J5lKXtabJecpejuef8AqKYMAJc
+</code></pre><p>客户端收到这个 Token 以后把它存储下来，下回向服务端发送请求的时候就带着这个 Token 。服务端收到这个 Token ，然后进行验证，通过以后就会返回给客户端想要的资源</p>
+<h2 id="JWT库下载"><a href="#JWT库下载" class="headerlink" title="JWT库下载"></a>JWT库下载</h2><p>官网下载<br><a href="https://jwt.io/#libraries-io" target="_blank" rel="external">https://jwt.io/#libraries-io</a></p>
+<h3 id="JJWT"><a href="#JJWT" class="headerlink" title="JJWT"></a>JJWT</h3><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+    &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
+    &lt;version&gt;0.7.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h4 id="生成token"><a href="#生成token" class="headerlink" title="生成token"></a>生成token</h4><pre><code>import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.crypto.MacProvider;
+import java.security.Key;
+
+// We need a signing key, so we&apos;ll create one just for this example. Usually the key would be read from your application configuration instead.
+Key key = MacProvider.generateKey();
+
+String compactJws = Jwts.builder()
+  .setSubject(&quot;Joe&quot;)
+  .signWith(SignatureAlgorithm.HS512, key)
+  .compact();
+</code></pre><h4 id="校验token"><a href="#校验token" class="headerlink" title="校验token"></a>校验token</h4><p>1、判断JWT是否有效<br>2、JWT中个数据是否正确，比如判断Subject是否为Joe</p>
+<pre><code>try {
+
+    Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws);    
+    //OK, we can trust this JWT
+
+} catch (SignatureException e) {
+
+    //don&apos;t trust the JWT!
+}
+</code></pre><h2 id="参考文件"><a href="#参考文件" class="headerlink" title="参考文件"></a>参考文件</h2><p>基于 Token 的身份验证(<a href="http://ninghao.net/blog/2834" target="_blank" rel="external">http://ninghao.net/blog/2834</a>)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Token/" rel="tag"># Token</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/11/[网络安全]运输层/" rel="next" title="运输层">
+                <i class="fa fa-chevron-left"></i> 运输层
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/13/[JDK源码阅读]JDK源码阅读/" rel="prev" title="JDK源码阅读">
+                JDK源码阅读 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要身份验证"><span class="nav-number">1.</span> <span class="nav-text">为什么要身份验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传统身份验证方法"><span class="nav-number">2.</span> <span class="nav-text">传统身份验证方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于-Token-的身份验证方法"><span class="nav-number">3.</span> <span class="nav-text">基于 Token 的身份验证方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JWT"><span class="nav-number">4.</span> <span class="nav-text">JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#header"><span class="nav-number">4.1.</span> <span class="nav-text">header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Payload"><span class="nav-number">4.2.</span> <span class="nav-text">Payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signature"><span class="nav-number">4.3.</span> <span class="nav-text">Signature</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JWT库下载"><span class="nav-number">5.</span> <span class="nav-text">JWT库下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JJWT"><span class="nav-number">5.1.</span> <span class="nav-text">JJWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖"><span class="nav-number">5.1.1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成token"><span class="nav-number">5.1.2.</span> <span class="nav-text">生成token</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#校验token"><span class="nav-number">5.1.3.</span> <span class="nav-text">校验token</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文件"><span class="nav-number">6.</span> <span class="nav-text">参考文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaEE,Tomcat," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Tomcat的目录结构文件 bin: 启动和关闭tomcat的bat文件 conf: 配置文件      --&amp;gt;server.xml : 该文件用于配置和 server 相关的信息, 比如 tomcat启动端口后,配置Host,  配置Context 即web应用      --&amp;gt;web.xml : 该文件配置与 web应用(web应用就相当于是一个 web站点)     --&amp;gt;">
+<meta name="keywords" content="JavaEE,Tomcat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat笔记">
+<meta property="og:url" content="http://qianmingxs.com/2016/07/06/[Tomcat]Tomcat笔记/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="Tomcat的目录结构文件 bin: 启动和关闭tomcat的bat文件 conf: 配置文件      --&amp;gt;server.xml : 该文件用于配置和 server 相关的信息, 比如 tomcat启动端口后,配置Host,  配置Context 即web应用      --&amp;gt;web.xml : 该文件配置与 web应用(web应用就相当于是一个 web站点)     --&amp;gt;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/Dp2gPgS.png">
+<meta property="og:image" content="http://i.imgur.com/UJt4wAM.png">
+<meta property="og:image" content="http://i.imgur.com/7cYZp67.png">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tomcat笔记">
+<meta name="twitter:description" content="Tomcat的目录结构文件 bin: 启动和关闭tomcat的bat文件 conf: 配置文件      --&amp;gt;server.xml : 该文件用于配置和 server 相关的信息, 比如 tomcat启动端口后,配置Host,  配置Context 即web应用      --&amp;gt;web.xml : 该文件配置与 web应用(web应用就相当于是一个 web站点)     --&amp;gt;">
+<meta name="twitter:image" content="http://i.imgur.com/Dp2gPgS.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2016/07/06/[Tomcat]Tomcat笔记/"/>
+
+
+
+
+
+  <title>Tomcat笔记 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/07/06/[Tomcat]Tomcat笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Tomcat笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-06T10:14:00+08:00">
+                2016-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">Tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Tomcat的目录结构文件"><a href="#Tomcat的目录结构文件" class="headerlink" title="Tomcat的目录结构文件"></a>Tomcat的目录结构文件</h2><p><img src="http://i.imgur.com/Dp2gPgS.png" alt=""></p>
+<pre><code>bin: 启动和关闭tomcat的bat文件
+conf: 配置文件 
+    --&gt;server.xml : 该文件用于配置和 server 相关的信息, 比如 tomcat启动端口后,配置Host,  配置Context 即web应用 
+    --&gt;web.xml : 该文件配置与 web应用(web应用就相当于是一个 web站点)
+    --&gt;tomcat-users.xml: 该文件用户配置tomcat 的用户密码 和 权限
+lib目录: 该目录放置运行tomcat 运行需要的jar包
+logs目录：存放日志, 当我们需要去查看日志的时候，很有用!,当我们启动tomcat错误时候，可以查询信息.
+webapps目录: 该目录下，放置我们的web应用(web 站点)
+work: 工作目录: 该目录用于存放jsp被访问后 生成的对应的 server文件 和.class文件
+</code></pre><h2 id="首页面设置及目录规范结构"><a href="#首页面设置及目录规范结构" class="headerlink" title="首页面设置及目录规范结构"></a>首页面设置及目录规范结构</h2><p><img src="http://i.imgur.com/UJt4wAM.png" alt=""></p>
+<p><em>配置访问首目录</em></p>
+<pre><code>①在web文件夹下配置WEB-INF文件夹
+②在 web.xml 文件中添加配置的代码:
+  &lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;hello1.html&lt;/welcome-file&gt;
+  &lt;/welcome-file-list&gt;
+③通过http://localhost:8088/web1来访问hello1.html
+</code></pre><p><em>目录结构</em></p>
+<pre><code>web-inf目录下的 classes目录将来是存放 class文件
+lib 目录将来时存放 jar文件
+web.xml 配置当前这个web应用的信息.
+</code></pre><h2 id="Tomcat体系"><a href="#Tomcat体系" class="headerlink" title="Tomcat体系"></a>Tomcat体系</h2><p><img src="http://i.imgur.com/7cYZp67.png" alt=""></p>
+<p><strong><em>理解服务、引擎、host（主机）、Web应用[Context]概念</em></strong></p>
+<ul>
+<li>查看Tomcat中的server.xml文件，最外面节点为Server，Service下一个节点服务<code>&lt;Service name = &quot;Catalina&quot;&gt;</code>，所以我们有时把Tomcat服务叫做Catalina服务。</li>
+<li>服务下有引擎（engine）<code>&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;localhost&quot;&gt;</code>，它可以管理多个主机host。</li>
+<li>主机下有多个Web应用[Context]</li>
+<li>与引擎并列的有连接器（connector），有支持不同类型协议（http、https等）的连接器。不同协议使用不同的连接器    </li>
+</ul>
+<h2 id="配置默认主机"><a href="#配置默认主机" class="headerlink" title="配置默认主机"></a>配置默认主机</h2><p>　　当我们在浏览器中输入<a href="http://127.0.0.1:8080/web应用，引擎是如何知道用户要访问那个`主机`下的web应用？答：配置一个默认主机" target="_blank" rel="external">http://127.0.0.1:8080/web应用，引擎是如何知道用户要访问那个`主机`下的web应用？答：配置一个默认主机</a></p>
+<pre><code>在tomcat/conf/server.xml 文件
+&lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;主机名&quot;&gt;
+
+默认是localhost，即在webapps目录下，查找web应用
+&lt;Host name=&quot;localhost&quot;  appBase=&quot;webapps&quot;
+            unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;
+            xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt;
+</code></pre><h2 id="配置域名-host"><a href="#配置域名-host" class="headerlink" title="配置域名[host]"></a>配置域名[host]</h2><p><em>步骤：</em></p>
+<pre><code>(1) 在C:\WINDOWS\system32\drivers\etc 下的host文件 添加127.0.0.1 www.sina.com.cn[浏览器向Tomcat发送请求，但Tomcat认为自己不是www.sina.com，可以拒绝，所以需添加主机名]
+(2) 在tomcat 的server.xml文件添加主机名 
+&lt;Host name=&quot;www.sina.com&quot; appBase=&quot;d:\web3”&gt;
+    &lt;Context path=&quot;/&quot; docBase=&quot;d:\web3&quot; /&gt;
+&lt;/Host&gt;
+(3) 在d:\web3 加入了一个 /WEB-INF/web.xml 把 hello2.html设为首页面
+如果连端口都不希望带，则可以吧tomcat的启动端口设为80即可.
+(4) 重启生效
+</code></pre><h2 id="CATALINA-BASE与CATALINA-HOME的区别"><a href="#CATALINA-BASE与CATALINA-HOME的区别" class="headerlink" title="CATALINA_BASE与CATALINA_HOME的区别"></a>CATALINA_BASE与CATALINA_HOME的区别</h2><ul>
+<li>CATALINA_HOME是Tomcat的<strong><em>安装目录</em></strong>，CATALINA_BASE是Tomcat的<strong><em>工作目录</em></strong></li>
+<li>如果我们想要运行Tomcat的多个实例，但是不想安装多个Tomcat软件副本。那么我们可以配置多个工作目录，每个运行实例独占一个工作目录，但是共享同一个安装目录</li>
+<li>Tomcat每个运行实例需要使用自己的conf、logs、temp、webapps、work和shared目录，因此CATALINA_BASE就指向这些目录。 而其他目录主要包括了Tomcat的二进制文件和脚本，CATALINA_HOME就指向这些目录</li>
+</ul>
+<h2 id="Tomcat管理虚拟目录-context"><a href="#Tomcat管理虚拟目录-context" class="headerlink" title="Tomcat管理虚拟目录[context]"></a>Tomcat管理虚拟目录[context]</h2><p><em>需求</em></p>
+<p>当我们把 web 应用放到 webapps目录，tomcat会自动管理，如果我们希望tomcat可以管理其它目录下的web应用?　　-&gt; 虚拟目录配置</p>
+<p>假设我在d盘有一个web应用文件夹web2</p>
+<p><em>步骤</em></p>
+<pre><code>1、找到server.xml文件
+2、编辑host节点，在Host节点中添加Context
+    在server.xml中添加：&lt;Context path=&quot;/myweb2&quot; docBase=&quot;d:\web2&quot;/&gt;
+    myweb2：是访问时输入的web名,实际取出的是web2中的资源（★★★★url与文件夹有映射关系）
+    &quot;d:\web2&quot;：web应用文件夹在计算机中绝对路径
+实际访问时输入的地址：http://localhost:8088/myweb2/hello2.html
+</code></pre><h2 id="定义上下文"><a href="#定义上下文" class="headerlink" title="定义上下文"></a>定义上下文</h2><h3 id="显式定义"><a href="#显式定义" class="headerlink" title="显式定义"></a>显式定义</h3><p>1、在Tomcat的conf/Catalina/localhost目录下创建一个XML文件。例如把一个commerce.xml文件放在conf/Catalina/localhost目录下，那么应用程序的上下文路径就是commerce，下面给出一个范例：</p>
+<pre><code>&lt;Context docBase=&quot;C://apps/commerce&quot; reloadable=&quot;true&quot;/&gt;
+</code></pre><p>docBase是必要的属性，用来定义应用程序的位置；reloadable属性是可选的，如果值为true，一旦应用程序中Java类文件或者其他资源有增加、减少或者更新，Tomcat都会侦测到，就会重新加载应用程序</p>
+<p>2、在Tomcat的conf/server.xml文件中添加一个Context元素[同Tomcat管理虚拟目录]</p>
+<pre><code>&lt;Host name=&quot;localhost&quot;  appBase=&quot;webapps&quot;
+            unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;
+            xmlValidation=&quot;false&quot; xmlNamespaceAware=&quot;false&quot;&gt;
+
+    &lt;Context path = &quot;/commerce&quot; docBase=&quot;C:/apps/commerce&quot; reloadable=&quot;true&quot; /&gt; 
+
+&lt;/Host&gt;
+</code></pre><h3 id="隐式定义"><a href="#隐式定义" class="headerlink" title="隐式定义"></a>隐式定义</h3><p>通过将一个war文件或者整个应用程序复制到Tomcat的webapps目录下，就可以隐式地部署应用程序</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaEE/" rel="tag"># JavaEE</a>
+          
+            <a href="/tags/Tomcat/" rel="tag"># Tomcat</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/06/[设计模式]设计模式的艺术之道笔记/" rel="next" title="设计模式的艺术之道笔记">
+                <i class="fa fa-chevron-left"></i> 设计模式的艺术之道笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/06/[Servlet]Servlet笔记/" rel="prev" title="Servlet笔记">
+                Servlet笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat的目录结构文件"><span class="nav-number">1.</span> <span class="nav-text">Tomcat的目录结构文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#首页面设置及目录规范结构"><span class="nav-number">2.</span> <span class="nav-text">首页面设置及目录规范结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat体系"><span class="nav-number">3.</span> <span class="nav-text">Tomcat体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置默认主机"><span class="nav-number">4.</span> <span class="nav-text">配置默认主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置域名-host"><span class="nav-number">5.</span> <span class="nav-text">配置域名[host]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CATALINA-BASE与CATALINA-HOME的区别"><span class="nav-number">6.</span> <span class="nav-text">CATALINA_BASE与CATALINA_HOME的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat管理虚拟目录-context"><span class="nav-number">7.</span> <span class="nav-text">Tomcat管理虚拟目录[context]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义上下文"><span class="nav-number">8.</span> <span class="nav-text">定义上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显式定义"><span class="nav-number">8.1.</span> <span class="nav-text">显式定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式定义"><span class="nav-number">8.2.</span> <span class="nav-text">隐式定义</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

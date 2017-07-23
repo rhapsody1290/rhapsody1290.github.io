@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="输入Scanner in = new Scanner(System.in); Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些  Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:  构造函数                 BigInteger(String val)">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法4笔记">
+<meta property="og:url" content="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="输入Scanner in = new Scanner(System.in); Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些  Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:  构造函数                 BigInteger(String val)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/GDFtowZ.png">
+<meta property="og:updated_time" content="2017-07-22T05:36:09.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法4笔记">
+<meta name="twitter:description" content="输入Scanner in = new Scanner(System.in); Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些  Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:  构造函数                 BigInteger(String val)">
+<meta name="twitter:image" content="http://i.imgur.com/GDFtowZ.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/"/>
+
+
+
+
+
+  <title>算法4笔记 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法4笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-08T19:07:00+08:00">
+                2016-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><pre><code>Scanner in = new Scanner(System.in);
+Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些 
+</code></pre><p>Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:</p>
+<pre>
+构造函数
+                <font color="red">BigInteger(String val)</font>
+                将 BigInteger 的十进制字符串表示形式转换为 BigInteger。
+返回值              成员函数
+<font color="red">String          next(String pattern)</font>
+                    如果下一个标记与从指定字符串构造的模式匹配，则返回下一个标记,
+                    如果参数为空,就是读取一个字符串
+BigDecimal      nextBigDecimal()
+                    将输入信息的下一个标记    +扫描为一个 BigDecimal。
+BigInteger      nextBigInteger()
+                    将输入信息的下一个标记扫描为一个 BigInteger。
+boolean         nextBoolean()
+                    扫描解释为一个布尔值的输入标记并返回该值。
+byte            nextByte()
+                    将输入信息的下一个标记扫描为一个 byte。
+double          nextDouble()
+                    将输入信息的下一个标记扫描为一个 double。
+float           nextFloat()
+                    将输入信息的下一个标记扫描为一个 float。
+<font color="red">int             nextInt()</font>
+                    将输入信息的下一个标记扫描为一个 int。
+<font color="red">String          nextLine()</font>
+                    此扫描器执行当前行，并返回跳过的输入信息。
+long            nextLong()
+                    将输入信息的下一个标记扫描为一个 long。
+short           nextShort()
+</pre>
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>System.out.print(); // cout &lt;&lt; …;
+System.out.println(); // cout &lt;&lt; … &lt;&lt; endl;
+System.out.printf(); // 与C中的printf用法类似.
+</code></pre><pre>
+例：
+System.out.printf("%d%10.5f\n", a, b); // 输入b为字宽为10，右对齐，保留小数点后5位，<font color="red">四舍五入</font>.
+</pre>
+
+
+<p>规格化的输出：</p>
+<pre><code>函数：
+// 这里0指一位数字，#指除0以外的数字(如果是0，则不显示),四舍五入.
+DecimalFormat fd = new DecimalFormat(&quot;#.00#&quot;);
+DecimalFormat gd = new DecimalFormat(&quot;0.000&quot;);
+System.out.println(&quot;x =&quot; + fd.format(x));
+System.out.println(&quot;x =&quot; + gd.format(x))
+</code></pre><p>DecimalFormat详细：</p>
+<p>符号含义：</p>
+<pre><code>0 一个数字
+# 一个数字，不包括 0
+. 小数的分隔符的占位符
+, 分组分隔符的占位符
+; 分隔格式。
+- 缺省负数前缀。
+% 乘以 100 和作为百分比显示
+? 乘以 1000 和作为千进制货币符显示；用货币符号代替；如果双写，用
+国际货币符号代替。如果出现在一个模式中，用货币十进制分隔符代
+替十进制分隔符。
+X 前缀或后缀中使用的任何其它字符，用来引用前缀或后缀中的特殊字符。
+</code></pre><p>例子：    </p>
+<pre><code>public class TestNumberFormat {
+    public static void main(String[] args) {
+
+        double pi = 3.1415926;
+
+        // 取一位整数:3
+        System.out.println(new DecimalFormat(&quot;0&quot;).format(pi));
+
+        // 取一位整数和两位小数:3.14
+        System.out.println(new DecimalFormat(&quot;0.00&quot;).format(pi));
+
+        // 取两位整数和三位小数，整数不足部分以0填补:03.142
+        System.out.println(new DecimalFormat(&quot;00.000&quot;).format(pi));
+
+        // 取所有整数部分:3
+        System.out.println(new DecimalFormat(&quot;#&quot;).format(pi));
+
+        // 以百分比方式计数，并取两位小数:314.16%
+        System.out.println(new DecimalFormat(&quot;#.##%&quot;).format(pi));
+
+        long c = 299792458;
+
+        //显示为科学计数法，并取五位小数:2.99792E8
+        System.out.println(new DecimalFormat(&quot;#.#####E0&quot;).format(c));
+
+        //显示为两位整数的科学计数法，并取四位小数:29.9792E7 
+        System.out.println(new DecimalFormat(&quot;00.####E0&quot;).format(c));
+
+        //每三位以逗号进行分隔:299,792,458
+        System.out.println(new DecimalFormat(&quot;,###&quot;).format(c));
+
+        //将格式嵌入文本
+        System.out.println(new DecimalFormat(&quot;光速大小为每秒,###米。&quot;).format(c));
+
+        System.out.println(&quot;**************************************************&quot;);
+
+        double d = 299792458.546;
+
+        System.out.println(new DecimalFormat(&quot;#.00&quot;).format(d));
+    }
+}
+</code></pre><h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><pre><code>String st = Integer.toString(num, base); // 把num当做10进制的数转成base进制的st(base &lt;= 35).
+Integer.toHexString(255)//ff，16进制
+int num = Integer.parseInt(st, base); // 把st当做base进制，转成10进制的int(parseInt有两个参数,第一个为要转的字符串,第二个为说明是什么进制). 
+BigInterget m = new BigInteger(st, base); // st是字符串，base是st的进制.
+</code></pre><p>1、如果要将一个大数以2进制形式读入 可以使用 <code>cin.nextBigInteger(2);</code><br>当然也可以使用其他进制方式读入；<br>2、如果要将一个大数转换成其他进制形式的字符串 使用 <code>cin.toString(2);</code> //将它转换成2进制表示的字符串</p>
+<h2 id="Arrays-sort-Collections-sort"><a href="#Arrays-sort-Collections-sort" class="headerlink" title="Arrays.sort / Collections.sort"></a>Arrays.sort / Collections.sort</h2><h3 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h3><p>在 JDK 类库中，有一部分类实现了 Comparable 接口，如 Integer、Double 和 String 等。<br>Comparable 接口有一个 <code>comparTo(Object o)</code> 方法，它返回整数类型</p>
+<ul>
+<li>如果返回值为0，则表示 x 和 y 相等</li>
+<li>如果返回值大于0，则表示 x 大于 y</li>
+<li>如果返回值小于0，则表示 x 小于 y</li>
+</ul>
+<p>TreeSet 集合调用对象的 compareTo() 方法比较集合中的大小，注意了不是 TreeSet 调用它自己的 comparTo() 方法而是<strong>它调用集合中对象的 comparTo() 方法</strong>。TreeSet类本身并没有实现 Comparable 接口，然后<font color="red"><strong>进行升序排列</strong></font>，这种方式称为自然排序。</p>
+<p>JDK类库中实现了Comparable接口的一些类的排序方式 </p>
+<ul>
+<li>BigDecimal、BigInteger、Byte、Double、Float、Integer、Long、Short排序方式按数字大小排序</li>
+<li>Character 按字符的 Unicode 值的数字大小排序</li>
+<li>String 按字符中字符的 Unicode 值排序</li>
+</ul>
+<p>这里一定要灰常注意:使用自然排序时只能向集合中加入同类型的对象，并且这些对象的类必须实现<strong>Comparable</strong>接口</p>
+<pre>
+public class Solution {
+
+    public static void main(String[] args) {
+        Set<customer> set = new TreeSet<customer>();
+        Customer customer1 = new Customer("Tom", 17);
+        Customer customer2 = new Customer("Tom", 16);
+        Customer customer3 = new Customer("Som", 16);
+        set.add(customer1);
+        set.add(customer2);
+        set.add(customer3);
+        System.out.println(set);
+    }
+
+    public static class Customer implements Comparable {
+        private String name;
+        private int age;
+
+        public Customer(String name, int age) {
+            this.age = age;
+            this.name = name;
+        }
+
+<font color="red">
+        @Override
+        public int compareTo(Object o) {
+            if(o == null || !(o instanceof Customer)){
+                throw new IllegalArgumentException("对象必须是Customer");
+            }
+            Customer other = (Customer) o;
+            //先按姓名升序排序，如果姓名相等跳过
+            if (!this.name.equals(other.name)) {
+                return name.compareTo(other.name);
+            }
+            //再按年龄升序排序，如果年龄相等跳过
+            if (this.age != other.age) {
+                return age - other.age;
+            }
+            //相等
+            return 0;
+        }
+</font>
+        @Override
+        public String toString() {
+            return "Customer{" +
+                    "age=" + age +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+    }
+}
+
+</customer></customer></pre>
+
+<h3 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h3><p>TreeSet 按照 Customer 对象的 name 属性进行降序排列，然后按照 age 降序，可以先创建一个实现Comparator接口的类 </p>
+<pre>
+public class Solution {
+
+    public static void main(String[] args) {
+        <font color="red">Set<customer> set = new TreeSet<customer>(new CustomerComparator());</customer></customer></font>
+        Customer customer1 = new Customer("Tom", 17);
+        Customer customer2 = new Customer("Tom", 16);
+        Customer customer3 = new Customer("Som", 16);
+        set.add(customer1);
+        set.add(customer2);
+        set.add(customer3);
+        System.out.println(set);
+        //结果：[Customer{age=17, name='Tom'}, Customer{age=16, name='Tom'}, Customer{age=16, name='Som'}]
+    }
+
+<font color="red">
+    public static class CustomerComparator implements Comparator<customer> {
+
+        @Override
+        public int compare(Customer c1, Customer c2) {
+            /*1、如果Customer实现了Comparable接口，直接调用compareTo方法
+            return c1.compareTo(c2);*/
+
+            //2、自定义比较方法，降序
+            if (!c1.name.equals(c2.name)) {
+                return -c1.name.compareTo(c2.name);
+            }
+            if (c1.age != c2.age) {
+                return -(c1.age - c2.age);
+            }
+
+            return 0;
+        }
+    }
+</customer></font>
+}
+</pre>
+
+<h3 id="升序、逆序理解★★★★★"><a href="#升序、逆序理解★★★★★" class="headerlink" title="升序、逆序理解★★★★★"></a>升序、逆序理解★★★★★</h3><p>如果给定两个数A、B，按照<strong>数字大小</strong>进行排序，并且<strong>以A为基准与B比较</strong>，得到以下表达式：</p>
+<ul>
+<li>if ( A &gt; B ) return 1</li>
+<li>if ( A &lt; B ) return -1</li>
+<li>if ( A = B ) return 0</li>
+</ul>
+<p>三个表达式可以总结为：return A - B</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Integer[] a = &#123;1, 4, 2, 3, 5&#125;;</div><div class="line">        Arrays.sort(a, new Comparator&lt;Integer&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public int compare(Integer o1, Integer o2) &#123;</div><div class="line">                return o1 - o2;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        System.out.println(Arrays.toString(a));//[1, 2, 3, 4, 5]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>这样会按照升序排序</strong></p>
+<p>如果是逆序，直接在升序的基础上<strong>加上负号</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Integer[] a = &#123;1, 4, 2, 3, 5&#125;;</div><div class="line">        Arrays.sort(a, new Comparator&lt;Integer&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public int compare(Integer o1, Integer o2) &#123;</div><div class="line">                return -(o1 - o2);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        System.out.println(Arrays.toString(a));//[5, 4, 3, 2, 1]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>这样会按照逆序排序</strong></p>
+<p><strong>进一步抽象：</strong></p>
+<p>如果给定两个元素A、B，<strong>按照一定规则</strong>进行排序，并且<strong>以A为基准与B比较</strong>，得到以下表达式：</p>
+<ul>
+<li>A在什么情况下大于B return 1</li>
+<li>A在什么情况下小于B return -1</li>
+<li>A在什么情况下等于B return 0</li>
+</ul>
+<p>之后会按照定义A、B之间的关系，得到升序的结果</p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>1、如果 Java 类重新定义了 equals 方法,那么这个类也必须重新定义 hashCode() 方法,并且保证当两个对象用 equals 方法比较结果为 true 时,这两个对象的 hashCode() 方法的返回值相等</p>
+<p>2、如果 Java 类实现了 Comparable 接口，那么这个类应该从新定义 compareTo()、equals()和hashCode()方法，保证 compareTo() 和 equals() 方法采用相同的比较规则来比较两个对象是否相等，并且保证当两个对象用 equals() 方法比较的结果为 true 时,这两个对象的 hashCode() 方法的返回值相等.</p>
+<p>3、HashSet 和 HashMap 具有较好的性能，是 Set 和 Map 首选实现类，只有在需要<strong>排序</strong>的场合，才考虑使用 TreeSet 和 TreeMap。LinkedList 和 ArrayList各有优缺点，如果经常对元素执行插入和删除操作，那么可以用 LinkedList，如果经常随机访问元素，那么可以用ArrayList</p>
+<p>Arrays.fill()<br>Arrays.sort()<br>Arrays.binarySearch()  </p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>先按第一列升序排序，再按第二列降序排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int[][] a = &#123;&#123;3,3&#125;,&#123;2,2&#125;,&#123;1,1&#125;,&#123;4,1&#125;,&#123;4,2&#125;,&#123;4,3&#125;&#125;;</div><div class="line">        int m = a.length;</div><div class="line">        int n = a[0].length;</div><div class="line"></div><div class="line">        System.out.println(&quot;排序前&quot;);</div><div class="line">        print(a);</div><div class="line">        Arrays.sort(a, new Comparator&lt;int[]&gt;() &#123;</div><div class="line">            @Override</div><div class="line">            public int compare(int[] o1, int[] o2) &#123;</div><div class="line">                /**</div><div class="line">                 * 先按第一列升序排序，再按第二列降序排序</div><div class="line">                 */</div><div class="line">                //第一列升序</div><div class="line">                if(o1[0] != o2[0])&#123;</div><div class="line">                    return o1[0] - o2[0];</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                //第二列降序</div><div class="line">                if(o1[1] != o2[1])&#123;</div><div class="line">                    return -(o1[1] - o2[1]);</div><div class="line">                &#125;</div><div class="line">                return 0;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        System.out.println(&quot;排序后&quot;);</div><div class="line">        print(a);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void print(int[][] a) &#123;</div><div class="line">        int m = a.length;</div><div class="line">        int n = a[0].length;</div><div class="line">        for (int i = 0; i &lt; m; i++) &#123;</div><div class="line">            for (int j = 0; j &lt; n; j++) &#123;</div><div class="line">                System.out.print(a[i][j] + &quot; &quot;);</div><div class="line">            &#125;</div><div class="line">            System.out.println();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结果：</p>
+<pre><code>排序前
+3 3 
+2 2 
+1 1 
+4 1 
+4 2 
+4 3 
+排序后
+1 1 
+2 2 
+3 3 
+4 3 
+4 2 
+4 1 
+</code></pre><p>集合中元素实现Comparable进行<strong>升序排序</strong>，先按照姓名升序排序，再按照年龄顺序排序</p>
+<pre><code>public class Solution {
+
+    public static void main(String[] args) {
+        List&lt;Customer&gt; lists = new ArrayList&lt;Customer&gt;();
+        lists.add(new Customer(&quot;Tom&quot;, 17));
+        lists.add(new Customer(&quot;Tom&quot;, 16));
+        lists.add(new Customer(&quot;Som&quot;, 16));
+        lists.add(new Customer(&quot;Rom&quot;, 17));
+        //排序
+        Collections.sort(lists);
+        //输出
+        System.out.println(lists);//[Customer{age=17, name=&apos;Rom&apos;}, Customer{age=16, name=&apos;Som&apos;}, Customer{age=16, name=&apos;Tom&apos;}, Customer{age=17, name=&apos;Tom&apos;}]
+    }
+
+    public static class Customer implements Comparable {
+        private String name;
+        private int age;
+
+        public Customer(String name, int age) {
+            this.age = age;
+            this.name = name;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            if(o == null || !(o instanceof Customer)){
+                throw new IllegalArgumentException(&quot;对象必须是Customer&quot;);
+            }
+            Customer other = (Customer) o;
+            //先按姓名升序排序，如果姓名相等跳过
+            if (!this.name.equals(other.name)) {
+                return name.compareTo(other.name);
+            }
+            //再按年龄升序排序，如果年龄相等跳过
+            if (this.age != other.age) {
+                return age - other.age;
+            }
+            //相等
+            return 0;
+        }
+
+        @Override
+        public String toString() {
+            return &quot;Customer{&quot; +
+                    &quot;age=&quot; + age +
+                    &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +
+                    &apos;}&apos;;
+        }
+    }
+}
+</code></pre><p><strong>逆序排序</strong></p>
+<pre><code>Collections.sort(lists,Collections.&lt;Customer&gt;reverseOrder());
+</code></pre><p>原理：</p>
+<pre><code>public int compare(Comparable&lt;Object&gt; c1, Comparable&lt;Object&gt; c2) {
+    return c2.compareTo(c1);
+}
+</code></pre><p><strong>自定义排序方法</strong></p>
+<pre><code>Collections.sort(lists,new CustomerComparator());
+
+public class CustomerComparator implements Comparator&lt;Customer&gt; {
+
+    @Override
+    public int compare(Customer c1, Customer c2) {
+        //先按name升序，再按age降序
+        if (!c1.name.equals(c2.name)) {
+            return c1.name.compareTo(c2.name);
+        }
+        if (c1.age != c2.age) {
+            return -(c1.age - c2.age);
+        }
+
+        return 0;
+    }
+}
+</code></pre><h3 id="Map排序"><a href="#Map排序" class="headerlink" title="Map排序"></a>Map排序</h3><p>TreeMap传入Comparator，按键排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;(</div><div class="line">	new Comparator&lt;String&gt;() &#123;</div><div class="line">	    public int compare(String obj1, String obj2) &#123;</div><div class="line">	        // 降序排序</div><div class="line">	        return obj2.compareTo(obj1);</div><div class="line">	    &#125;</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p><strong>还有一种通用的排序方法</strong>，调用Map.entrySet()得到Set<map.entry<k,v>&gt;集合，然后转化为ArrayList，调用Collection的Sort方法进行排序，可以自由选择根据Key还是根据Value进行排序</map.entry<k,v></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class HashMapTest &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();</div><div class="line">        map.put(&quot;c&quot;, &quot;ccccc&quot;);</div><div class="line">        map.put(&quot;a&quot;, &quot;aaaaa&quot;);</div><div class="line">        map.put(&quot;b&quot;, &quot;bbbbb&quot;);</div><div class="line">        map.put(&quot;d&quot;, &quot;ddddd&quot;);</div><div class="line">        </div><div class="line">        List&lt;Map.Entry&lt;String,String&gt;&gt; list = new ArrayList&lt;Map.Entry&lt;String,String&gt;&gt;(map.entrySet());</div><div class="line">        Collections.sort(list,new Comparator&lt;Map.Entry&lt;String,String&gt;&gt;() &#123;</div><div class="line">            //升序排序</div><div class="line">            public int compare(Entry&lt;String, String&gt; o1,</div><div class="line">                    Entry&lt;String, String&gt; o2) &#123;</div><div class="line">                return o1.getValue().compareTo(o2.getValue());</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        for(Map.Entry&lt;String,String&gt; mapping:list)&#123; </div><div class="line">               System.out.println(mapping.getKey()+&quot;:&quot;+mapping.getValue()); </div><div class="line">          &#125; </div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="高精度"><a href="#高精度" class="headerlink" title="高精度"></a>高精度</h2><h3 id="Bignteger"><a href="#Bignteger" class="headerlink" title="Bignteger"></a>Bignteger</h3><pre>
+返回值                   成员函数
+BigInteger              add(BigInteger val)
+                        返回其值为 (this + val) 的 BigInteger。 
+
+BigInteger              subtract(BigInteger val)
+                        返回其值为 (this - val) 的 BigInteger。
+
+BigInteger              multiply(BigInteger val)
+                        返回其值为 (this * val) 的 BigInteger。
+
+BigInteger              divide(BigInteger val)
+                        返回其值为 (this / val) 的 BigInteger。
+
+BigInteger              mod(BigInteger m)
+                        返回其值为 (this mod m) 的 BigInteger。
+
+int                     compareTo(BigInteger val)
+                           将此 BigInteger 与指定的 BigInteger 进行比较。
+                        如果和val相等返回0,小于返回-1,大于返回1
+
+BigInteger              pow(int exponent)
+                        返回其值为 (this exponent) 的 BigInteger。
+
+String                  toString()
+                        返回此 BigInteger 的十进制字符串表示形式。
+
+String                  toString(int radix)
+                        返回此 BigInteger 的给定基数的字符串表示形式。
+
+static BigInteger       valueOf(long val)
+                        返回其值等于指定 long 的值的 BigInteger。
+
+BigInteger              gcd(BigInteger val)
+                        返回一个 BigInteger，其值是 abs(this) 和 abs(val) 的最大公约数。
+
+BigInteger              abs()
+                        返回其值是此 BigInteger 的绝对值的 BigInteger。
+
+int                     hashCode()
+                        返回此 BigInteger 的哈希码。
+
+boolean                 isProbablePrime(int certainty)
+                        如果此 BigInteger 可能为素数，则返回 true，如果它一定为合数，则返回 false。
+
+BigInteger              nextProbablePrime()
+                        返回大于此 BigInteger 的可能为素数的第一个整数。
+
+int                     signum()
+                        返回此 BigInteger 的正负号函数。
+
+除了以上成员函数,BigInteger还有几个非常常用的属性
+
+BigInteger.ZERO             BigInteger 的常量 0。
+BigInteger.ONE              BigInteger 的常量 1。
+BigInteger.TEN              BigInteger 的常量 10。
+</pre>
+
+<h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3><pre><code>返回值                   成员函数
+BigDecimal              add(BigDecimal augend)
+                        返回一个 BigDecimal，其值为 (this + augend)。
+
+BigDecimal              subtract(BigDecimal subtrahend)
+                        返回一个 BigDecimal，其值为 (this - subtrahend)。
+
+BigDecimal              multiply(BigDecimal multiplicand)
+                        返回一个 BigDecimal，其值为 (this × multiplicand).
+
+BigDecimal              divide(BigDecimal divisor)
+                        返回一个 BigDecimal，其值为 (this / divisor).
+
+BigDecimal              pow(int n)
+                        返回其值为 (thisn) 的 BigDecimal，准确计算该幂，使其具有无限精度。
+
+int                     compareTo(BigDecimal val)
+                        将此 BigDecimal 与指定的 BigDecimal 比较。
+
+static BigDecimal       valueOf(double val)
+                        使用 Double.toString(double) 方法提供的 double 规范的字符串
+                        表示形式将 double 转换为 BigDecimal。
+
+BigDecimal              stripTrailingZeros()
+                        返回数值上等于此小数，但从该表示形式移除所有尾部零的 BigDecimal。
+
+String                  toPlainString()
+                        返回不带指数字段的此 BigDecimal 的字符串表示形式。
+
+String                  toString()
+                        返回此 BigDecimal 的字符串表示形式，如果需要指数，则使用科学记数法。
+
+BigDecimal              abs()
+                        返回 BigDecimal，其值为此 BigDecimal 的绝对值，其标度为 this.scale()。
+
+int                     hashCode()
+                        返回此 BigDecimal 的哈希码。
+
+int                     signum()
+                        返回此 BigDecimal 的正负号函数。
+BigInteger的三个重要属性,BigDecimal同样也有,这里就不再复述了.
+</code></pre><h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><pre>
+返回值                   成员函数
+char                    charAt(int index)
+                        返回指定索引处的 char 值。
+
+char[]                  <font color="red">toCharArray() </font>
+                        将此字符串转换为一个新的字符数组。 
+
+String                  substring(int beginIndex)
+                        返回一个新的字符串，它是此字符串的一个子字符串。
+
+String                  substring(int beginIndex, int endIndex)
+                        返回一个新字符串，它是此字符串的一个子字符串。
+
+int                     length()
+                        返回此字符串的长度。
+
+String                  toLowerCase()
+                        使用默认语言环境的规则将此 String 中的所有字符都转换为小写。
+
+String                  toUpperCase()
+                        使用默认语言环境的规则将此 String 中的所有字符都转换为大写。
+
+int                     compareTo(String anotherString)
+                        按字典顺序比较两个字符串。
+
+String                  concat(String str)
+                        将指定字符串联到此字符串的结尾。
+
+boolean                 contains(CharSequence s)
+                        当且仅当此字符串包含 char 值的指定序列时，才返回 true。
+
+int                     hashCode()
+                        返回此字符串的哈希码。
+
+boolean                 startsWith(String prefix)
+                        测试此字符串是否以指定的前缀开始。
+
+boolean                 endsWith(String suffix)
+                        测试此字符串是否以指定的后缀结束。
+
+String                  trim()
+                        返回字符串的副本，忽略前导空白和尾部空白。
+</pre>
+
+<h2 id="书本源代码"><a href="#书本源代码" class="headerlink" title="书本源代码"></a>书本源代码</h2><p><a href="http://algs4.cs.princeton.edu/code/" target="_blank" rel="external">http://algs4.cs.princeton.edu/code/</a></p>
+<h2 id="算法与数据结构课程介绍"><a href="#算法与数据结构课程介绍" class="headerlink" title="算法与数据结构课程介绍"></a>算法与数据结构课程介绍</h2><ul>
+<li>算法是解决问题的方法</li>
+<li>数据结构是存储数据的方法</li>
+</ul>
+<h3 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h3><p><img src="http://i.imgur.com/GDFtowZ.png" alt=""></p>
+<p>第一部分内容：</p>
+<ul>
+<li>基本数据类型（栈stack、队列queue、背包bag、并查集union-find、优先队列priority queue）</li>
+<li>排序方法（快排quicksort、归并mergesort、堆排序heapsort、基数排序radix sorts）</li>
+<li>查找（二叉排序树BST、binary search trees，红黑二叉排序树，red-black BST、哈希表hash table）</li>
+</ul>
+<p>第二部分内容：</p>
+<ul>
+<li>图算法（BFS、DFS、Prim、Kruskal、Dijkstra）</li>
+<li>字符串（KMP、regular expressions，TST、Huffman、LZW）</li>
+<li>高级算法（B-tree、suffix array，maxflow）</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>算法4 1.1 1.2</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><ul>
+<li>递归总有一个最简单的情况——方法的第一条语句总是一个包含return的条件语句</li>
+<li>递归调用总是去尝试解决一个<strong><em>规模更小的子问题</em></strong>，这样递归才能收敛到最简单的情况</li>
+<li>递归调用的父问题和尝试解决的子问题之间<strong><em>不应该有交集</em></strong>，比如两个子问题各自操作的数组部分是不同的</li>
+</ul>
+<h2 id="欧几里德算法"><a href="#欧几里德算法" class="headerlink" title="欧几里德算法"></a>欧几里德算法</h2><h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p>计算两个<strong><em>非负整数</em></strong> p和q的最大公约数：若q是0，则最大公约数是p；否则p除以q得到余数r，p和q的最大公约数即为q和r的最大公约数</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>保证p和q为非负，<strong><em>p和q的大小无要求</em></strong></p>
+<pre><code>public static int gcd(int p, int q){
+    if(q == 0) return p;
+    return gcd(q, p%q);
+}
+</code></pre><h2 id="判断一个数是否是素数"><a href="#判断一个数是否是素数" class="headerlink" title="判断一个数是否是素数"></a>判断一个数是否是素数</h2><ul>
+<li>如果一个数只能被除了1和本身的数整除，那个这个数就是素数</li>
+<li>遍历从2开始，不大于N的平方根，<strong><em>注意是&lt;=</em></strong></li>
+<li>2是最小的素数，小于2的数字肯定不是素数</li>
+</ul>
+<pre><code>public static boolean isPrime(int N){
+    if(N &lt; 2) return false;
+    for(int i = 2; i*i &lt;= N; i++)
+        if(N % i == 0) return false;
+    return true;
+}
+</code></pre><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>固定长度栈</p>
+<pre><code>public class FixedCapacityStack&lt;Item&gt;{
+
+    private Item[] items;
+    //top指向栈顶元素后一位，top = 0表示空栈，也表示栈中元素个数
+    private Integer top;
+
+    public FixedCapacityStack(Integer cap){
+        items = (Item[]) new Object[cap];
+        top = 0;
+    }
+
+    public void push(Item item){
+        items[top++] = item;
+    }
+
+    public Item pop(){
+        return items[--top];
+    }
+
+    public Integer size(){
+        return top;
+    }
+
+    public boolean isEmpty(){
+        return top == 0;
+    }
+
+    public void traverse(){
+        for(int i = 0; i &lt; top; i++){
+            System.out.print(items[i] + &quot; &quot;);
+        }
+        System.out.println();
+    }
+}
+</code></pre><p>算法1.1 下压（LIFO）栈（能够动态调整数组大小的实现）</p>
+<pre><code>public class ResizingArrayStack&lt;Item&gt;{
+
+    private Item[] items = (Item[]) new Object[1];
+    //top指向栈顶元素后一位，top = 0表示空栈，也表示栈中元素个数
+    private Integer top = 0;
+
+    public void push(Item item){
+        //栈满了
+        if(top == items.length){
+            resize(2*items.length);
+        }
+        items[top++] = item;
+    }
+
+    public Item pop(){
+        Item item = items[--top];
+        //避免对象游离
+        items[top] = null;
+        //减少长度，使用率不会低于1/4
+        if(top &gt; 0 &amp;&amp; top == items.length/4) resize(items.length/2);
+        return item;
+    }
+
+    public void resize(Integer length){
+        Item[] temp = (Item[]) new Object[length];
+        //赋值
+        for(int i = 0; i &lt; top; i++){
+            temp[i] = items[i];
+        }
+        items = temp;
+    }
+
+    public Integer size(){
+        return top;
+    }
+
+    public boolean isEmpty(){
+        return top == 0;
+    }
+
+    public void traverse(){
+        for(int i = 0; i &lt; top; i++){
+            System.out.print(items[i] + &quot; &quot;);
+        }
+        System.out.println();
+    }
+}
+</code></pre><p>算法1.2 下压堆栈（链表实现）</p>
+<pre><code>public class Stack&lt;Item&gt; {
+    private Node top = null;
+    private Integer N = 0;
+
+    private class Node{
+        //定义了节点的嵌套类
+        Item item;
+        Node next;
+    }
+
+    public void push(Item item){
+        Node old = top;
+        top = new Node();
+        top.item = item;
+        top.next = old;
+        N++;
+    }
+
+    public Item pop(){
+        Item item = top.item;
+        top = top.next;
+        N--;
+        return item;
+    }
+
+    public Integer size(){
+        return N;
+    }
+
+    public boolean isEmpty(){
+        return N == 0;//或top == null
+    }
+
+    public void traverse(){
+        Node p = top;
+        while(p != null){
+            System.out.print(p.item + &quot; &quot;);
+            p = p.next;
+        }
+        System.out.println();
+    }
+}
+</code></pre><h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>算法1.3 先进先出队列</p>
+<pre><code>public class Queue&lt;Item&gt; {
+    //队头
+    private Node first;
+    //队尾
+    private Node last;
+    //元素个数
+    private int N;
+
+    private class Node{
+        private Item item;
+        private Node next;
+    }
+
+    public void enqueue(Item item){
+        Node old = last;
+        last = new Node();
+        last.item = item;
+        last.next = null;
+        //队列为空时处理first指针
+        if(isEmpty())
+            first = last;
+        else
+            old.next = last;
+        N++;
+    }
+
+    public Item dequeue(){
+        Item item = first.item;
+        first = first.next;
+        //队列为空时处理last指针
+        if(isEmpty())
+            last = null;
+        N--;
+        return item;
+    }
+
+    public boolean isEmpty(){
+        return first == null;
+    }
+
+    public Integer size(){
+        return N;
+    }
+
+    public void traverse(){
+        Node p = first;
+        while(p != null){
+            System.out.print(p.item + &quot; &quot;);
+            p = p.next;
+        }
+        System.out.println();
+    }
+}
+</code></pre><h2 id="排序方法"><a href="#排序方法" class="headerlink" title="排序方法"></a>排序方法</h2><p>选择排序</p>
+<pre><code>int[] a = {5, 4, 3, 2, 1};
+int n = a.length;
+for (int i = 0; i &lt; n - 1; i++) {
+    int min = i;
+    for (int j = i + 1; j &lt; n; j++) {
+        //min为下标，不要搞错
+        if (a[j] &lt; a[min]) {
+            min = j;
+        }
+    }
+    if (min != i) {
+        int t = a[min];
+        a[min] = a[i];
+        a[i] = t;
+    }
+}
+System.out.println(Arrays.toString(a));
+</code></pre><p>插入排序</p>
+<pre><code>int[] a = {5, 4, 3, 2, 1};
+int n = a.length;
+//1 ~ n-1，执行n-1次
+for (int i = 1; i &lt; n; i++) {
+    int j = i - 1;
+    int t = a[i];
+    //j &gt;=0 要放在前面
+    while (j &gt;= 0 &amp;&amp; t &lt; a[j]) {
+        a[j + 1] = a[j];
+        j--;
+    }
+    a[j + 1] = t;
+}
+System.out.println(Arrays.toString(a));
+</code></pre><p>冒泡排序</p>
+<pre><code>int[] a = {5, 4, 3, 2, 1};
+int n = a.length;
+for (int i = 0; i &lt; n - 1; i++) {
+    //j的范围为从n-2 ~ 0
+    for (int j = 0; j &lt; n - 1 - i; j++) {
+        if (a[j] &gt; a[j + 1]) {
+            int t = a[j];
+            a[j] = a[j + 1];
+            a[j + 1] = t;
+        }
+    }
+}
+System.out.println(Arrays.toString(a));
+</code></pre><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序是一种基于分治技术的排序算法，思想核心是选择一个基准元素X将待排序元素分成两个子序列，使得一个子序列中的元素均小于等于X,而另一个子序列中的元素均大于X,处于其终端所处在的位置上。</p>
+<p>或者你也可以打个比喻，想象一下，假设r为主元素，J元素为前方开路元素,和主元素进行比较，如果大于主元素则继续开路 ，如果小于主元素则I元素加1之后和J元素交换之后，J元素继续开路直到最后。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public class QUICKSORT &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int[] a = &#123;10,9,8,7,6,5,4,4,3,2,1,0,-1,-2,-3&#125;;</div><div class="line">        quicksort(a, 0, a.length - 1);</div><div class="line">        System.out.println(Arrays.toString(a));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void quicksort(int[] a, int p, int q) &#123;</div><div class="line">        if (p &lt; q) &#123;</div><div class="line">            int r = partition(a, p, q);</div><div class="line">            quicksort(a, p, r - 1);</div><div class="line">            quicksort(a, r + 1, q);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static int partition(int[] a, int p, int q) &#123;</div><div class="line">        int i = p - 1;</div><div class="line">        for (int j = p; j &lt; q; j++) &#123;</div><div class="line">            //注意是&lt;=</div><div class="line">            if (a[j] &lt;= a[q]) &#123;</div><div class="line">                swap(a, ++i, j);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        swap(a, ++i, q);</div><div class="line">        return i;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void swap(int[] a, int i, int j) &#123;</div><div class="line">        int temp = a[i];</div><div class="line">        a[i] = a[j];</div><div class="line">        a[j] = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><pre><code>public class MergeSort extends SortTemplate {
+
+    Comparable[] copy = new Comparable[50];
+
+    @Override
+    public void sort() {
+        doMergeSort(a, 0, a.length-1);
+    }
+
+    private void doMergeSort(Comparable[] a, int low, int high) {
+        if (low &lt; high) {
+            int mid = low + (high - low) / 2;
+            doMergeSort(a, low, mid);
+            doMergeSort(a, mid + 1, high);
+            merge(a, low, mid, high);
+        }
+    }
+
+    private void merge(Comparable[] a, int low, int mid, int high) {
+        int i = low, j = mid + 1;
+        for(int t = low; t &lt;= high;t++){
+            copy[t] = a[t];
+        }
+        for (int k = low; k &lt;= high; k++) {
+            if (i &gt; mid) {
+                a[k] = copy[j++];
+            } else if (j &gt; high) {
+                a[k] = copy[i++];
+            } else if (copy[i].compareTo(copy[j]) &lt; 0) {
+                a[k] = copy[i++];
+            } else {
+                a[k] = copy[j++];
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Comparable[] a = new Integer[]{1, 2, 3, 1, 2, 3, 4};
+        MergeSort s = new MergeSort();
+        s.merge(a, 0, 2, a.length - 1);
+    }
+}
+</code></pre><h2 id="全排序"><a href="#全排序" class="headerlink" title="全排序"></a>全排序</h2><h3 id="不去重递归"><a href="#不去重递归" class="headerlink" title="不去重递归"></a>不去重递归</h3><p>全排列可以看做固定前i位，对第i+1位之后的再进行全排列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public class Solution&lt;T&gt; &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Solution&lt;Character&gt; s = new Solution&lt;Character&gt;();</div><div class="line">        Character[] a = &#123;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;&#125;;</div><div class="line">        s.permutation(a, 0, a.length - 1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void permutation(T[] a, int l, int r) &#123;</div><div class="line">        if (l == r) &#123;</div><div class="line">            for (int i = 0; i &lt; a.length; i++) &#123;</div><div class="line">                System.out.print(a[i]);</div><div class="line">            &#125;</div><div class="line">            System.out.println();</div><div class="line">        &#125; else &#123;</div><div class="line">            for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">                swap(a, i, l);//把第i个和第l进行交换  </div><div class="line">                permutation(a, l + 1, r);</div><div class="line">                swap(a, i, l);//交换回来</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void swap(T[] a, int i, int l) &#123;</div><div class="line">        T t = a[i];</div><div class="line">        a[i] = a[l];</div><div class="line">        a[l] = t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="全排列的去重递归算法"><a href="#全排列的去重递归算法" class="headerlink" title="全排列的去重递归算法"></a>全排列的去重递归算法</h3><p>序列有时候可能有重复的字符，当需要输出去重全排列时，就可以采取以下方法：<br>当第i位与i+n位交换时，i到i+n位中不能有与i+n位相同的字符<br>比如说23560678,当第三位5与第六位6交换时，中间不能有6，这里有6所以不进行交换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">public class Solution&lt;T&gt; &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        Solution&lt;Character&gt; s = new Solution&lt;Character&gt;();</div><div class="line">        Character[] a = &#123;&apos;a&apos;, &apos;a&apos;, &apos;c&apos;, &apos;d&apos;&#125;;</div><div class="line">        s.permutation(a, 0, a.length - 1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void permutation(T[] a, int l, int r) &#123;</div><div class="line">        if (l == r) &#123;</div><div class="line">            for (int i = 0; i &lt; a.length; i++) &#123;</div><div class="line">                System.out.print(a[i]);</div><div class="line">            &#125;</div><div class="line">            System.out.println();</div><div class="line">        &#125; else &#123;</div><div class="line">            for (int i = l; i &lt;= r; i++) &#123;</div><div class="line">                if (comparesub(a, l, i)) &#123;</div><div class="line">                    swap(a, i, l);</div><div class="line">                    permutation(a, l + 1, r);</div><div class="line">                    swap(a, i, l);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //比较函数,[l,i)中是否有与i的值相等得数</div><div class="line">    private boolean comparesub(T[] a, int l, int i) &#123;</div><div class="line">        for (int k = l; k &lt; i; k++) &#123;</div><div class="line">            if(a[k] == a[i])&#123;</div><div class="line">                return false;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void swap(T[] a, int i, int l) &#123;</div><div class="line">        T t = a[i];</div><div class="line">        a[i] = a[l];</div><div class="line">        a[l] = t;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="二维动态规划（未编程实现，下次看的时候弄）"><a href="#二维动态规划（未编程实现，下次看的时候弄）" class="headerlink" title="二维动态规划（未编程实现，下次看的时候弄）"></a>二维动态规划（未编程实现，下次看的时候弄）</h3><pre><code>度度熊最近对全排列特别感兴趣,对于1到n的一个排列,度度熊发现可以在中间根据大小关系插入合适的大于和小于符号(即 &apos;&gt;&apos; 和 &apos;&lt;&apos; )使其成为一个合法的不等式数列。但是现在度度熊手中只有k个小于符号即(&apos;&lt;&apos;&apos;)和n-k-1个大于符号(即&apos;&gt;&apos;),度度熊想知道对于1至n任意的排列中有多少个排列可以使用这些符号使其为合法的不等式数列。 
+输入描述:
+输入包括一行,包含两个整数n和k(k &lt; n ≤ 1000)
+输出描述:
+输出满足条件的排列数,答案对2017取模。
+</code></pre><p>解析：</p>
+<p>当有1～n-1个数字的全排列，增加数字n后，进行全排列，全排列的过程可以看做将数字n插入到1~n-1数字中间</p>
+<p>插入一个数字n后可能会使小于号的个数发生变化，比如数字1，2，增加数字3。如果是312，小于号数字没有变化；如果是123，小于号数字增加1</p>
+<p>所以满足条件的个数的变化与 长度和小于号的个数相关</p>
+<p><strong>先考虑长度：</strong><br>当长度增加1时，长度的变化但是结果的变化可以用dp[i]、dp[i-1]的变化表示，其中i表示当前长度，dp[i]表示满足条件的结果。即下标是状态，数组值是结果</p>
+<p><strong>再考虑小于号个数：</strong><br>只考虑长度是一维动态规划，再考虑小于号的个数就是二维动态规划，并在一维的基础上修改，求 dp[i][?] 与 dp[i-1][?] 之间的关系</p>
+<p>当长度增加1时，小于号的个数可能不变，也可能增加1，所以上述公式可以转化为dp[i][j]与dp[i-1][j]、dp[i-1][j-1]之间的关系  </p>
+<p>dp[i][j]表示长度为i，小于号为j时，满足条件的个数</p>
+<p><strong>公式解释</strong>，用的来说是比较长度为i和长度i-1之间的关系，即dp[i]与dp[i-1]之间的关系，还需增加小于号的变化，添加状态值j，长度加1后j可能不变，也可能增加，最终结果为求dp[i][j]与dp[i-1][j]、dp[i-1][j-1]之间的关系 </p>
+<p>比如1<3>2<br>✔ 将数字4放在最左边，因为4比所有数字都大，会引入一个大于号，小于号不变<br>✔将数字4放在最右边，因为4比所有数字都大会引入一个小于号<br>✔放在中间<br>☞ 如果放在小于号的位置，1<4>3&gt;2，小于号不变，会新增一个大于号<br>☞ 如果放在大于号的位置1<3<4>2，大于号不变，会增加一个小于号</3<4></4></3></p>
+<p>dp[i][j]与dp[i-1][j]数量的变化，对应上述小于号数量不变的情况，即放在最左边和放在小于号的位置，即dp[i][j]=(j+1)*dp[i-1][j]</p>
+<p>dp[i][j]与dp[i-1][j-1]数量的变化，对应上述小于号增加1的情况，即放在最右边和放在大于号的位置。有i-1个数有i-2个符号，有i-2-(j-1)个大于号，即i-j-1个大于号，再加上放在最右边的1个，有i-j种放法，即dp[i][j]=(i-j)*dp[i-1][j-1]</p>
+<p>两种情况汇总</p>
+<ul>
+<li>dp[i][j]=(j+1)*dp[i-1][j]</li>
+<li>dp[i][j]=(i-j)*dp[i-1][j-1]</li>
+</ul>
+<p>合并为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dp[i][j]=(j+1)*dp[i-1][j] + (i-j)*dp[i-1][j-1]</div></pre></td></tr></table></figure>
+<p>编程：<br>新建一个dp[n+1][n]数组，数组长度可以是1~n，小于号个数可以是0~n-1</p>
+<p>初始值，长度为2<br>dp[2][1]=1，dp[2][0]=1，注意数组每一行的和为长度为n的全排列数</p>
+<p>那么求dp[3][0]，dp[3][1]，dp[3][2]<br>按照公式分别是2，1+2 ，1</p>
+<p>dp[4][0] dp[4][1] dp[4][2] dp[4][3]<br>按公式分别是2 6+6 =12 3+6 = 9 1</p>
+<p>最终结果是dp[n][k]</p>
+<p>我做的结果是列举了全部状态，复杂度n<em>n，可以降为n</em>k</p>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><h2 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h2><p>参考：<a href="http://www.cnblogs.com/nullzx/p/6624731.html" target="_blank" rel="external">http://www.cnblogs.com/nullzx/p/6624731.html</a></p>
+<p>索引优先队列三个数组的引出：</p>
+<p>优先队列只能取队头元素，不能直接访问队列中的对象。索引优先队列可以通过<strong>索引快速访问</strong>列表中的对象，并保持整个元素还是以<strong>最小堆</strong>的方式存储。</p>
+<p>每个操作对应pq、qp和element数组的变化</p>
+<p>代码：</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/08/[SSM]IDEA在编辑时提示could not autowire/" rel="next" title="IDEA在编辑时提示could not autowire">
+                <i class="fa fa-chevron-left"></i> IDEA在编辑时提示could not autowire
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/11/[网络安全]运输层/" rel="prev" title="运输层">
+                运输层 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入"><span class="nav-number">1.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出"><span class="nav-number">2.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进制转换"><span class="nav-number">3.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays-sort-Collections-sort"><span class="nav-number">4.</span> <span class="nav-text">Arrays.sort / Collections.sort</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparable"><span class="nav-number">4.1.</span> <span class="nav-text">Comparable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparator"><span class="nav-number">4.2.</span> <span class="nav-text">Comparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升序、逆序理解★★★★★"><span class="nav-number">4.3.</span> <span class="nav-text">升序、逆序理解★★★★★</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范"><span class="nav-number">4.4.</span> <span class="nav-text">规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">4.5.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map排序"><span class="nav-number">4.6.</span> <span class="nav-text">Map排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高精度"><span class="nav-number">5.</span> <span class="nav-text">高精度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bignteger"><span class="nav-number">5.1.</span> <span class="nav-text">Bignteger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigDecimal"><span class="nav-number">5.2.</span> <span class="nav-text">BigDecimal</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">6.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#书本源代码"><span class="nav-number">7.</span> <span class="nav-text">书本源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法与数据结构课程介绍"><span class="nav-number">8.</span> <span class="nav-text">算法与数据结构课程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#课程内容"><span class="nav-number">8.1.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">8.2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">8.3.</span> <span class="nav-text">递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-number">9.</span> <span class="nav-text">欧几里德算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述"><span class="nav-number">9.1.</span> <span class="nav-text">算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">9.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断一个数是否是素数"><span class="nav-number">10.</span> <span class="nav-text">判断一个数是否是素数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">10.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列"><span class="nav-number">10.2.</span> <span class="nav-text">队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序方法"><span class="nav-number">11.</span> <span class="nav-text">排序方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速排序"><span class="nav-number">12.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归并排序"><span class="nav-number">13.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全排序"><span class="nav-number">14.</span> <span class="nav-text">全排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不去重递归"><span class="nav-number">14.1.</span> <span class="nav-text">不去重递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全排列的去重递归算法"><span class="nav-number">14.2.</span> <span class="nav-text">全排列的去重递归算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划"><span class="nav-number">15.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二维动态规划（未编程实现，下次看的时候弄）"><span class="nav-number">15.1.</span> <span class="nav-text">二维动态规划（未编程实现，下次看的时候弄）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优先队列"><span class="nav-number">16.</span> <span class="nav-text">优先队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引优先队列"><span class="nav-number">17.</span> <span class="nav-text">索引优先队列</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

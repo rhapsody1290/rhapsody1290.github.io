@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Linux命令缩写，方便记忆 http://blog.chinaunix.net/uid-27164517-id-3299073.html 开发者常用指令  netstat -anp | grep 8080 #查询端口 route #路由表 tracert #路由追踪 ps -aux #进程列表 kill -9 pid #杀进程 top  env                     #查看环境">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令">
+<meta property="og:url" content="http://qianmingxs.com/2017/04/12/[Linux]Linux常用命令/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="Linux命令缩写，方便记忆 http://blog.chinaunix.net/uid-27164517-id-3299073.html 开发者常用指令  netstat -anp | grep 8080 #查询端口 route #路由表 tracert #路由追踪 ps -aux #进程列表 kill -9 pid #杀进程 top  env                     #查看环境">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.th7.cn/d/file/p/2014/11/04/74a34c1bdf612bbcc05bd30c3a5647ed.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20151227194314714">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux常用命令">
+<meta name="twitter:description" content="Linux命令缩写，方便记忆 http://blog.chinaunix.net/uid-27164517-id-3299073.html 开发者常用指令  netstat -anp | grep 8080 #查询端口 route #路由表 tracert #路由追踪 ps -aux #进程列表 kill -9 pid #杀进程 top  env                     #查看环境">
+<meta name="twitter:image" content="http://www.th7.cn/d/file/p/2014/11/04/74a34c1bdf612bbcc05bd30c3a5647ed.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/04/12/[Linux]Linux常用命令/"/>
+
+
+
+
+
+  <title>Linux常用命令 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/04/12/[Linux]Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux常用命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T20:45:00+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux命令缩写，方便记忆</p>
+<p><a href="http://blog.chinaunix.net/uid-27164517-id-3299073.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-27164517-id-3299073.html</a></p>
+<h2 id="开发者常用指令"><a href="#开发者常用指令" class="headerlink" title="开发者常用指令"></a>开发者常用指令</h2><pre>
+
+netstat -anp | grep 8080 #查询端口
+route #路由表
+tracert #路由追踪
+ps -aux #进程列表
+kill -9 pid #杀进程
+top
+
+env                     #查看环境变量
+/etc/profile 和 ~/.bash_profile #系统整体配置文件（系统/个人用户）
+ehoc $PATH              #PATH路径
+
+ifconfig                #在linux/unix查看ip的命令
+
+df - h                  #查看Linux系统分区具体情况
+df -h /etc              #查看/etc底下可用的磁盘容量以易读的容量格式显示
+
+crontab -e              #任务调度
+
+ls -a                   #显示隐藏文件
+ls -l                   #列表显示
+
+du -h --max-depth=1     #查看文件夹大小
+
+cat Hello.txt | grep "pattern" #搜索字符串
+grep -n "pattern" file1 file2  #文件中查找，显示行数，可以在多个文件
+
+tar -zxvf libpcap-1.3.0.tar.gz  #解压
+zip aa.zip 文件名               #压缩
+
+./configure，make，make install #Linux下编译安装源代码三个步骤
+rpm ‐ivh RPM包全路径名称        #安装包到当前系统
+rpm -ivh url --replacepkgs      #重新安装软件
+rpm ‐e RPM包的名称              #删除
+
+sudo 命令 / sudo su     #管理员权限
+
+#文件操作
+
+mkdir   folder          #建立文件夹
+touch   filename        #新建文件
+rmdir   folder          #删除空目录
+rm filename             #删除文件
+rm -rf 目录名字          #删除文件夹 -r下递归-f强行删除
+cp file1 file2          #拷贝
+cp -r dir1 dir2         #递归复制命令（复制子目录信息）
+find /root/ -name Hello.java    #查找文件[不常用，速度慢，执行在硬盘中搜索，时间在文件权限那里]
+</pre>
+
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">cd ~                    #跳转到用户主目录</div><div class="line">tab                     #文件名自动提示</div><div class="line">pwd                     #查看当前目录</div><div class="line">reset                   #清屏</div><div class="line">clear                   #清屏</div><div class="line">ctrl + alt + T          #终端，需在首选项-快捷键中设置</div><div class="line"></div><div class="line">env                     #查看环境变量</div><div class="line">/etc/profile            #系统整体配置文件</div><div class="line">~/.bash_profile或~/.bash_login或~/.profile  #个人设定</div><div class="line">ehoc $PATH              #PATH路径</div><div class="line"></div><div class="line">ls                      #文件列表</div><div class="line">ls -a                   #显示隐藏文件</div><div class="line">ls -l                   #列表显示</div><div class="line">ls -al &lt;path&gt;           #查看path路径下的文件列表</div><div class="line">ls -ld /tmp             #查看目录的权限</div><div class="line"></div><div class="line">|                       #管道命令</div><div class="line">&gt;                       #管道定向，双箭头&gt;&gt;追加到文件结尾</div><div class="line">less                    #u，d，space，b</div><div class="line">more                    #空格下一页，shift+PageUp上一页[more name]</div><div class="line">cat xxx | more</div><div class="line"></div><div class="line">grep xxx #搜索字符串</div><div class="line">grep -n &quot;System&quot; file1 file2 #查找，显示行数</div><div class="line"></div><div class="line">tar -zxvf libpcap-1.3.0.tar.gz  #解压</div><div class="line">zip aa.zip 文件名</div><div class="line"></div><div class="line">mount /mnt/cdrom        #挂载光驱 </div><div class="line">unmount /mnt/cdrom      #卸载光驱</div><div class="line"></div><div class="line">ifconfig                #在linux/unix查看ip的命令</div><div class="line"></div><div class="line">df - h                  #查看Linux系统分区具体情况</div><div class="line">df -h /etc              #查看/etc底下可用的磁盘容量以易读的容量格式显示</div><div class="line"></div><div class="line">crontab -e              #任务调度</div></pre></td></tr></table></figure>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"># 安装二进制文件</div><div class="line">vim README/INSTALL      #安装前参阅安装说明</div><div class="line">./configure --help      #查看可用参数</div><div class="line">./configure --prefix=/usr/local/xxx</div><div class="line"></div><div class="line">#检查环境，创建makefile文件</div><div class="line">make clean              #根据makefile清理一下环境</div><div class="line">make                    #根据makefile进行编译</div><div class="line">make insatll            #根据makefile进行安装</div><div class="line"></div><div class="line"># rpm</div><div class="line">rpm ‐q 软件包名             #查询软件包是否安装</div><div class="line">rpm -qi rpm包               #列出该软件的详细信息</div><div class="line">rpm -ql  rpm包  #列出该软件所有的文件与目录所在的完整文件名</div><div class="line">rpm -qc rpm包               #查询配置文件</div><div class="line">rpm -qf 配置文件             #查询配置文件是哪个软件的</div><div class="line">rpm -qa                     #已安装的软件名称</div><div class="line"></div><div class="line">rpm ‐ivh RPM包全路径名称     #安装包到当前系统</div><div class="line">rpm -ivh url --replacepkgs  #重新安装软件</div><div class="line">rpm ‐e RPM包的名称          #删除</div><div class="line">rpm ‐e ‐‐nodeps samba      #强制删除 </div><div class="line">rpm ‐Uvh RPM包全路径名     #升级，未安装的文件也会直接安装</div><div class="line">rpm - Fvh                 #升级，未安装的不安装</div><div class="line"></div><div class="line">rpm - V 软件              #该软件的档案被更动过，会列出来</div><div class="line">rpm -Va                  #列出系统上所有可能被更动的档案</div><div class="line">rpm -Vp 文件名            #列出该软件内可能被更动过的文件</div><div class="line">rpm -Vf                  #某个文件是否被更动过</div><div class="line"></div><div class="line"># yum</div><div class="line">yun install 软件        #安装软件</div><div class="line">yum update 软件         #升级软件</div><div class="line">yum remove 软件         #移除软件</div><div class="line">yum list    软件        #可用列表</div></pre></td></tr></table></figure>
+<p>##文件操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">mkdir   folder          #建立文件夹</div><div class="line">touch   filename        #新建文件</div><div class="line"></div><div class="line">rmdir   folder          #删除空目录</div><div class="line">rm filename             #删除文件</div><div class="line">rm -rf 目录名字          #删除文件夹 -r下递归-f强行删除</div><div class="line">rm -i bashrc*           #利用通配符删除bashrc开头的文件   </div><div class="line"></div><div class="line">mv test.log test1.txt   #文件改名</div><div class="line">mv -i log1.txt log2.txt #将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</div><div class="line">mv test1.txt test3      #移动文件</div><div class="line">mv log1.txt log2.txt log3.txt test3 #将文件log1.txt,log2.txt,log3.txt移动到目录test3中。 </div><div class="line"></div><div class="line">cp file1 file2          #拷贝</div><div class="line">cp -i file1 file2       #文件是否覆盖提醒</div><div class="line">cp -a file1 file2       #相当于-dpR,保持文件的连接(d),保持原文件的属性(p)并作递归处理(R)</div><div class="line">cp -p file1 file2       #连同文件的属性一起复制过去，而非使用默认属性</div><div class="line">cp -r dir1 dir2         #递归复制命令（复制子目录信息）</div><div class="line">cp -rf dir1 dir2        #拷贝文件夹，不提示是否覆盖</div><div class="line"></div><div class="line">whereis &lt;文件或目录&gt;    #查找文件</div><div class="line">locate &lt;文件或目录&gt;     #查找包含该字符的文件或目录，updatedb更新数据库</div><div class="line">find /root/ -name Hello.java    #查找文件[不常用，速度慢，执行在硬盘中搜索，时间在文件权限那里]</div><div class="line"></div><div class="line">ln –s /etc/inittab inittab #（inittab指向实际文件/etc/inittab） #ln 建立符号连接(和windows的快捷方式)</div></pre></td></tr></table></figure></p>
+<p>##系统管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">shutdown -h now         #立即进行关机(管理员root才可以) </div><div class="line">shutdown -r now         #现在重新启动计算机 </div><div class="line">rebot                   #重启</div><div class="line">halt                    #关机</div><div class="line">logout                  #注销</div><div class="line"></div><div class="line">chkconfig               #系统服务</div><div class="line">netstat -anp | grep 8080 #查询端口</div><div class="line">route #路由表</div><div class="line">tracert #路由追踪</div><div class="line">ps -aux #进程列表</div><div class="line">kill -9 pid #杀进程</div><div class="line"></div><div class="line">sudo 命令 / sudo su     #管理员权限</div><div class="line">exit                    #退出当前用户</div><div class="line">su - test               #切换普通用户</div><div class="line">su或su -                #切换回root</div><div class="line"></div><div class="line">//python</div><div class="line">sudo pip install -r requirements.txt</div><div class="line"></div><div class="line">#系统服务</div><div class="line">service mysqld start    #启动mysql数据库</div><div class="line">service mysqld stop     #停止</div><div class="line">service mysqld status   #查看状态</div><div class="line"></div><div class="line">chkconfig --list        #查看系统服务</div><div class="line">chkconfig mysqld on      #添加到开机启动</div><div class="line">chkconfig mydql off     #关闭开机启动</div><div class="line"></div><div class="line">#防火墙</div><div class="line">service   iptables status   #查询防火墙状态</div><div class="line">service   iptables stop     #停止防火墙</div><div class="line">service   iptables start    #启动防火墙</div><div class="line">service   iptables restart  #重启防火墙</div><div class="line">chkconfig   iptables off    #永久关闭防火墙</div><div class="line">chkconfig   iptables on     #永久关闭后启用</div><div class="line">更改过滤规则 1、vim /etc/sysconfig/iptables 2、添加过滤规则 3、service iptables restart 重启</div></pre></td></tr></table></figure></p>
+<p>##vim操作<br>p336<br>一般模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">- 移动光标</div><div class="line">hjkl                    #左下上右</div><div class="line">ctrl + f                #屏幕向下一页，相当与Page Down★</div><div class="line">ctrl + b                #屏幕向上一页，相当于Page Up★</div><div class="line">ctrl + d                #屏幕向下半页</div><div class="line">ctrl + u                #屏幕向上移动半页</div><div class="line">0或[home]               #移动到这一行的最前面字符处★</div><div class="line">$或[end]                #移动到这一行的最后面字符★</div><div class="line">nG                      #n为数字，移动到文档第n行★</div><div class="line"></div><div class="line">- 搜索</div><div class="line">/pattern               #向下寻找和pattern匹配的内容★</div><div class="line">?pattern               #向上寻找和pattern匹配的内容</div><div class="line">:noh                    #取消高亮</div><div class="line">字母n或N                #向前或向后继续寻找</div><div class="line"></div><div class="line">- 替换</div><div class="line">:n1,n2s/word1/word2/g   #n1与n2行之间用word2替换word1★</div><div class="line">:1,$s/word1/word2/g     #从第一行到最后一行寻找word1，替换为word2★</div><div class="line">:1,$s/word1/word2/gc    #第一行到最后一行寻找word1，替换为word2，替换前提示用户确认★</div><div class="line"></div><div class="line">- 删除 </div><div class="line">x,X                     #x向后删一个字符，X向前删★</div><div class="line">dd                      #删除一行★</div><div class="line"></div><div class="line">- 复制粘帖      </div><div class="line">yy                      #复制光标那一行★</div><div class="line">p，P                    #p下一行粘帖，P上一行</div><div class="line">u                       #复原前一个动作</div><div class="line">ctrl+r                  #重做上一个动作</div><div class="line">.                       #重复前一个动作</div></pre></td></tr></table></figure></p>
+<p>编辑模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">i,I     #i光标处插入，I所在行第一个非空字符插入</div><div class="line">a,A     #a光标所下一个字符插入，行最后一个字符插入</div><div class="line">o,O     #光标所在下一行插入新的一行，O上一行</div></pre></td></tr></table></figure></p>
+<p>指令列模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">:w      #将编辑的数据写入硬盘文件</div><div class="line">:w!     #强行写入</div><div class="line">:q      #离开vi</div><div class="line">:q!     #强制离开，不保存</div><div class="line">:wq     #储存离开</div><div class="line">:w filename #另存为</div><div class="line">！&lt;command&gt;            #执行shell命令</div></pre></td></tr></table></figure></p>
+<p>分页器命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">字母u和d                #分页器向上、向下翻动半页</div><div class="line">空格、b                 #分页器向下翻一页，向上翻一页</div><div class="line">字母j和k                #向下翻一行，上翻一行</div><div class="line">左箭头、右箭头           #行截断，向左向右滚动</div></pre></td></tr></table></figure></p>
+<p>其他：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">:1,$d                   #全部删除</div><div class="line">v,V,ctrl+v              #字符选择,行选择，区块选择</div><div class="line">y                       #反白的地方复制</div><div class="line">d                       #反白的地方删除</div></pre></td></tr></table></figure></p>
+<p>##linux的用户、权限管理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># 用户</div><div class="line">useradd 用户名   #添加用户，root权限，home会出现一个文件夹</div><div class="line">passwd  用户名   #为新用户设密码</div><div class="line">userdel 用户名   #删除用户</div><div class="line">a) 【案例】userdel xiaoming #删除用户但保存用户主目录 </div><div class="line">b) 【案例】userdel ‐r xiaoming #删除用户以及用户主目录</div><div class="line"></div><div class="line">cat /etc/passwd     #查看Linux下所有用户信息</div><div class="line">用户：密码：用户ID：组ID：用户主目录：shell解释器</div><div class="line"></div><div class="line">logout           #当前用户退出 </div><div class="line">who am i         #当前用户是谁</div><div class="line"></div><div class="line"># 用户组</div><div class="line">groupadd policeman   #添加组，只能在root用户下操作</div><div class="line">cat /etc/group  #查看所有组</div><div class="line">useradd –g 组名 用户名  #创建用户，并添加到指定组</div><div class="line">usermod -g 组名 用户名 #把一个用户移值到另一个组</div><div class="line"></div><div class="line"># 操作</div><div class="line">chmod 777 文件名     #用户所在组、其他组都能进行读、写、执行</div><div class="line">chown 用户名 文件名   #修改文件所有者</div><div class="line">chown ‐R root ./abc   #改变abc这个目录及其下面所有的文件和目录的所有者是root</div><div class="line">chgrp 组名 文件名   #修改文件所有组</div><div class="line"></div><div class="line">umask  #文件预设权限，为文件或文件夹建立时默认的权限，umask -S以符号类型的方式显示</div></pre></td></tr></table></figure></p>
+<p>##压缩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#gzip常用用法</div><div class="line">gzip    文件名             #压缩文件，并删除源文件，后缀gz</div><div class="line">gzip -d     xxx.gz                  #解压</div><div class="line"></div><div class="line">#bzip2常用用法</div><div class="line">bzip2压缩比比gzip还要好，后缀bz2</div><div class="line">bzip2   文件名                      #压缩</div><div class="line">bzip2 -d 压缩名                     #解压</div><div class="line">bzcat   压缩名                      #查看压缩包</div><div class="line"></div><div class="line">#zip常用用法</div><div class="line">zip aa.zip 文件名1 文件名2          #压缩文件</div><div class="line">zip –r aa.zip 文件夹路径            #压缩文件夹</div><div class="line">zip file.zip * -x file             #将不需要压缩的文件排除在外  </div><div class="line"></div><div class="line">unzip file.zip                     #直接解压缩文件</div><div class="line">unzip file.zip –x file2            #除了file2文件外，其他的文件都解压缩</div><div class="line">unzip –Z file.zip                  #查看file.zip压缩包的内容。也可以使用“-l”、“-v”来查看压缩包的内容</div><div class="line"></div><div class="line">zip -d test1.zip test.MYI #删除压缩文件test1.zip中test.MYI文件</div><div class="line">zip -m test1.zip test. MYI #向压缩文件中test1.zip中添加test. MYI文件</div><div class="line"></div><div class="line">#打包指令tar</div><div class="line">p307</div><div class="line">-j 透过bzip2压缩，档名取为*.tar.bz2</div><div class="line">-z 透过gzip压缩，档名趣味*.tar.gz</div><div class="line"></div><div class="line">tar -jcvf filename.tar.bz2 要被压缩的档案或目录 #压缩</div><div class="line">tar -jtvf filename.tar.bz2  #查询</div><div class="line">tar -jxvf filename.tar.bz2  #解压缩</div><div class="line"></div><div class="line">tar -jxvf filename.tar.bz2 -C /tmp #-C解压目录</div><div class="line">tar -jzxf filename.tar.bz2 待解开档名   #解开单一档案</div><div class="line">tar -jcvf filename.tar.bz2 --exluce=etc* #不包含默写档案</div><div class="line"></div><div class="line">tar -zpcvf /root/etc.tar.gz /etc    </div><div class="line">tar -jpcvf /root/etc.tar.bz2 /etc</div><div class="line">#备份etc,p保留原本档案的权限与属性</div></pre></td></tr></table></figure></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><pre><code>.bash_profile 位于主目录下，它为系统的每个用户设置环境信息
+**/etc/ 中 profile 主要是配置环境变量**
+
+配置 .bashrc 文件可以指定某些程序在用户登录的时候就自动启动。
+</code></pre><p>##命令集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">date        #日期</div><div class="line">cal         #日历</div><div class="line">bc          #计算器</div><div class="line">ctrl + D    #文字输入结束</div></pre></td></tr></table></figure>
+<p>##命令专题<br>命令init [0123456]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">指定系统运行级别，类似windows的正常运行模式或安全模式 </div><div class="line"></div><div class="line">0：关机 </div><div class="line">1：单用户</div><div class="line">2：多用户状态没有网络服务 </div><div class="line">3：多用户状态有网络服务[常用]</div><div class="line">4：系统未使用保留给用户 </div><div class="line">5：图形界面 </div><div class="line">6：系统重启</div><div class="line"></div><div class="line">常用运行级别是3和5，要修改默认的运行级别可改文件 /etc/inittab的id:5:initdefault:这一行中的数字</div><div class="line"></div><div class="line">切换用户：输入su切换用户或者logout</div><div class="line"></div><div class="line">FAQ：不小心设置了6，导致系统启动-重启-启动循环，怎么办？ </div><div class="line"></div><div class="line">1. 在进入grub引导界面时，在数秒的时候，请输入 e </div><div class="line">2. 然后选中第二行(kernel)，输入e</div><div class="line">3. 在出现的界面里，输入1【1表示单用户级别】(6.5中测试是输入single，最终显示的是quiet single)，1的前面需要加一个空格，单用户模式既可以修改模式，又可以修改密码，Enter </div><div class="line">4. 返回后，按b，重新启动</div><div class="line"></div><div class="line">注意：用运行级别1可以绕过ROOT密码，不需要密码就可以用，用passwd就OK</div></pre></td></tr></table></figure></p>
+<hr>
+<p>配置文件被更改</p>
+<p>如：<img src="http://www.th7.cn/d/file/p/2014/11/04/74a34c1bdf612bbcc05bd30c3a5647ed.png" alt="此处输入图片的描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">最前面的八个信息是：</div><div class="line">    S ：(file Size differs) 档案的容量大小是否被改变</div><div class="line">    M ：(Mode differs) 档案的类型戒档案的属性 (rwx) 是否被改变？如是否可执行等参数已被改变</div><div class="line">    5 ：(MD5 sum differs) MD5 这一种纹码的内容已经不同</div><div class="line">    D ：(Device major/minor number mis-match) 装置的主/次代码已经改变</div><div class="line">    L ：(readLink(2) path mis-match) Link 路径已被改变</div><div class="line">    U ：(User ownership differs) 档案的所属人已被改变</div><div class="line">    G ：(Group ownership differs) 档案的所属群组已被改变</div><div class="line">    T ：(mTime differs) 档案的建立时间已被改变</div><div class="line"></div><div class="line">第二排的意思是：</div><div class="line">    c ：配置文件 (config file)</div><div class="line">    d ：文件数据文件 (documentation)</div><div class="line">    g ：鬼档案～通常是该档案丌被某个软件所包吨，较少发生！(ghost file)</div><div class="line">    l ：许可证文件 (license file)</div><div class="line">    r ：自述文件 (read me)</div></pre></td></tr></table></figure></p>
+<hr>
+<p>##shell使用</p>
+<p>shell脚本文件：</p>
+<pre>
+a) 是一个文本文件
+b) 命令的集合 
+c) 有执行的权限 
+d) 执行方式（./文件名）
+</pre>
+
+<p><strong>profile文件</strong><br>profile文件主要是用于配置环境变量<br><img src="http://img.blog.csdn.net/20151227194314714" alt="这里写图片描述"></p>
+<p><strong>用户登录后自动执行的shell脚本文件</strong><br>配置.bashrc文件可以指定某些程序在用户登录的时候就自动启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如：/home/tomcat/bin/startup.sh start</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/12/[Linux]Linux视频教程第1讲.基础介绍/" rel="next" title="Linux视频教程第1讲.基础介绍">
+                <i class="fa fa-chevron-left"></i> Linux视频教程第1讲.基础介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/[Linux]Linux视频教程第2讲. VI编辑器的使用/" rel="prev" title="Linux视频教程第2讲. VI编辑器的使用">
+                Linux视频教程第2讲. VI编辑器的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发者常用指令"><span class="nav-number">1.</span> <span class="nav-text">开发者常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用"><span class="nav-number">2.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件安装"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">4.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

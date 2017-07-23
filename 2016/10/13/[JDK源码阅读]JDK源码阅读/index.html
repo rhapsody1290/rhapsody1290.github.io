@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JDK," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath(); BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类OutputStream类有三个write方法 public abstract void write">
+<meta name="keywords" content="JDK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK源码阅读">
+<meta property="og:url" content="http://qianmingxs.com/2016/10/13/[JDK源码阅读]JDK源码阅读/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath(); BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类OutputStream类有三个write方法 public abstract void write">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/nYCSoQg.png">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDK源码阅读">
+<meta name="twitter:description" content="文件IO//类加载根目录String parent = getClass().getClassLoader().getResource(“”).getPath(); BufferedOutputStream要介绍BufferedOutputStream，我们先了解一下OutputStream类抽象类OutputStream类有三个write方法 public abstract void write">
+<meta name="twitter:image" content="http://i.imgur.com/nYCSoQg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2016/10/13/[JDK源码阅读]JDK源码阅读/"/>
+
+
+
+
+
+  <title>JDK源码阅读 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/10/13/[JDK源码阅读]JDK源码阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JDK源码阅读</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-13T09:00:00+08:00">
+                2016-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JDK源码阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">JDK源码阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h2><p>//类加载根目录<br>String parent = getClass().getClassLoader().getResource(“”).getPath();</p>
+<h3 id="BufferedOutputStream"><a href="#BufferedOutputStream" class="headerlink" title="BufferedOutputStream"></a>BufferedOutputStream</h3><p>要介绍BufferedOutputStream，我们先了解一下OutputStream类<br>抽象类OutputStream类有三个write方法</p>
+<pre><code>public abstract void write(int b)
+public void write(byte b[])
+public void write(byte b[], int off, int len)
+</code></pre><p>由上面我们可以看出第一个write方法是让子类覆盖的，而第二个人write（byte b[]）方法源代码如下</p>
+<pre><code>public void write(byte b[]) throws IOException {
+    write(b, 0, b.length);
+}
+</code></pre><p>所以可见最后处理还是调用第三个方法write(byte b[],int off,int len)，该方法源码如下：</p>
+<pre><code>public void write(byte b[], int off, int len) throws IOException {
+    if (b == null) {
+        throw new NullPointerException();
+    } else if ((off &lt; 0) || (off &gt; b.length) || (len &lt; 0) ||
+               ((off + len) &gt; b.length) || ((off + len) &lt; 0)) {
+        throw new IndexOutOfBoundsException();
+    } else if (len == 0) {
+        return;
+    }
+    for (int i = 0 ; i &lt; len ; i++) {
+    //注意这儿，这儿其实调用前面的抽象方法write（int b）,同时还发生了自动转型
+        write(b[off + i]);
+    }
+}
+</code></pre><p>我们先不看抽象方法是如何实现的，<strong>也就是说OutputStream也具有缓存器功能，我们可以将要写入到流中的数据写到一个byte[] buf数组中，然后调用write(byte b[])或者write(byte b[], int off, int len)也可以</strong>，那为什么还要BufferedInputStream类干什么呢，他们有什么区别呢。同时我们知道BufferedInputStream类中还有一个flush()方法，在OutputStream流中没有flush()方法，这又是为什么呢？flush()是不是必须的呢，接下来看一下BufferedOutputStream类；</p>
+<p>首先，BufferedOutput将OutputStream类对象作为一个构造方法的参数的。<br>首先看一下 BufferedOutputStream 类源代码</p>
+<pre><code>public class BufferedOutputStream extends FilterOutputStream {
+
+    //这儿定义了一个byte[]数组，用来充当缓存器  
+    protected byte buf[]; 
+    //这个变量是重点，他就是用来记录当前缓存器中的字节数量的
+    protected int count; 
+    //我们初始化创建一个对象的时候给了这个buf这个数组8192个字节.
+    public BufferedOutputStream(OutputStream out) {
+        this(out, 8192);
+    }
+
+    public BufferedOutputStream(OutputStream out, int size) {
+        super(out);
+        if (size &lt;= 0) {
+            throw new IllegalArgumentException(&quot;Buffer size &lt;= 0&quot;);
+        }
+      // 这儿创建一个给定大小的数组对象来充当缓存器
+        buf = new byte[size];
+    }
+
+    public synchronized void write(int b) throws IOException {
+        if (count &gt;= buf.length) {
+            flushBuffer();
+        }
+        buf[count++] = (byte)b;
+    }
+
+    //该方法是重点    
+    public synchronized void write(byte b[], int off, int len) throws IOException {
+        //如果传进来的数组长度大于buf 数组的长度，则直接调用OutputStream对象的write方法。
+        if (len &gt;= buf.length) {
+
+            flushBuffer();
+            out.write(b, off, len);
+            return;
+        }
+        //验证BufferedOutputStream 类中buf剩下的空间能否装得下传进来的数组。如果不能则先将当前buf数组中数据写入底层io流中
+        if (len &gt; buf.length - count) {
+            flushBuffer();
+        }
+        //该处是重点，如果在当前BufferedOutputStream 类中buf数组没有满，则将传进来的数组复制到当前类对象buf数组中，同时更新count的值。
+        System.arraycopy(b, off, buf, count, len);
+        count += len;
+   //调用flushBuffer方法也就是将不满8192个字节数组中的数据发送出去。同时将count置零。
+    private void flushBuffer() throws IOException {
+        if (count &gt; 0) {
+            out.write(buf, 0, count);
+            count = 0;
+        }
+    }
+
+    //强制将buf数据中未满8192个字节的数据写入底层io中。
+    public synchronized void flush() throws IOException {
+        flushBuffer();
+        out.flush();
+    }
+}
+</code></pre><p>结论： </p>
+<p>OutputStream的缓存器（数组）与BufferedOutputStream中类的缓存器（数组）本质是一样的，只是BufferedOutputStream类中将要写入到底层io流中的数据先 <strong>凑个整</strong>，然后再一起写入底层io流中，这样就大大<strong>节省了io操作</strong>，大大提高了io利用率，写一次io是很费资源的。这样也出现了一个问题，假设向硬盘中写入一个文件，文件最后数据比默认值8192个字节小，则BufferOutputStream就不会将这些数据写入底层io流中，造成文件缺失，因此就<strong>需要在close()前调用flush（）方法，强制将还没有装满buf数组的数据写入底层io中</strong>。同时也可以看出节点流是不用flush()方法的，而一般的处理流都会采用固定buf这种方式的，比如常用的PrintWriter里面其实操作的就是一个BufferedWriter对象，因此也需要调用flush（）方法来刷新，因为默认是不刷新的。</p>
+<p>引用：<a href="http://m.blog.csdn.net/article/details?id=51355523" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=51355523</a></p>
+<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><h3 id="copyOf"><a href="#copyOf" class="headerlink" title="copyOf"></a>copyOf</h3><pre>
+<font color="red">//复制原来的数组，长度为newLength</font>
+public static <t> T[] copyOf(T[] original, int newLength) {
+    return (T[]) copyOf(original, newLength, original.getClass());
+}
+
+public static <t,u> T[] copyOf(U[] original, int newLength, Class<? extends T[]> newType) {
+    T[] copy = ((Object)newType == (Object)Object[].class)
+        ? (T[]) new Object[newLength]
+        : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+    <font color="red">//将original复制到copy中，从originnal的0开始，copy的0开始，长度为newLength</font>
+    System.arraycopy(original, 0, copy, 0,
+                     Math.min(original.length, newLength));
+    return copy;
+}
+</t,u></t></pre>
+
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><pre>
+<font color="red">//from包括，toIndex不包括</font>
+public static void sort(int[] a, int fromIndex, int toIndex) {
+    rangeCheck(a.length, fromIndex, toIndex);
+    sort1(a, fromIndex, toIndex-fromIndex);
+}
+</pre>
+
+<h3 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h3><pre>
+public static boolean equals(int[] a, int[] a2) {
+    if (a==a2)
+        return true;
+    if (a==null || a2==null)
+        return false;
+
+    int length = a.length;
+    if (a2.length != length)
+        return false;
+
+    for (int i=0; i<length; i++)="" if="" (a[i]="" !="a2[i])" return="" false;="" true;="" }="" <="" pre="">
+
+<h3 id="asList"><a href="#asList" class="headerlink" title="asList"></a>asList</h3><pre>
+public static <t> List<t> asList(T... a) {
+<font color="red">//生成的是内部类的ArrayList</font>
+return new ArrayList<t>(a);
+}
+
+<font color="red">//内部类，add、remove没有重写（改动了数组的长度），get、set重写了（不改动数组的长度）</font>
+private static class ArrayList<e> extends AbstractList<e>
+implements RandomAccess, java.io.Serializable
+{
+    private static final long serialVersionUID = -2764017481108945198L;
+    private final E[] a;
+
+    ArrayList(E[] array) {
+        if (array==null)
+            throw new NullPointerException();
+        a = array;
+    }
+
+    public int size() {
+        return a.length;
+    }
+
+    public Object[] toArray() {
+        return a.clone();
+    }
+
+    public <t> T[] toArray(T[] a) {
+        int size = size();
+        if (a.length < size)
+            return Arrays.copyOf(this.a, size,
+                     (Class<? extends T[]>) a.getClass());
+        System.arraycopy(this.a, 0, a, 0, size);
+        if (a.length > size)
+            a[size] = null;
+        return a;
+    }
+
+    public E get(int index) {
+        return a[index];
+    }
+
+    public E set(int index, E element) {
+        E oldValue = a[index];
+        a[index] = element;
+        return oldValue;
+    }
+
+    public int indexOf(Object o) {
+        if (o==null) {
+            for (int i=0; i<a.length; i++)="" if="" (a[i]="=null)" return="" i;="" }="" else="" {="" for="" (int="" i="0;" i<a.length;="" (o.equals(a[i]))="" -1;="" public="" boolean="" contains(object="" o)="" indexof(o)="" !="-1;" <="" pre="">
+
+<h2 id="判断两个对象是否相等"><a href="#判断两个对象是否相等" class="headerlink" title="判断两个对象是否相等"></a>判断两个对象是否相等</h2><h3 id="判断两个对象是否相等代码"><a href="#判断两个对象是否相等代码" class="headerlink" title="判断两个对象是否相等代码"></a>判断两个对象是否相等代码</h3><pre><code>public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Employee employee = (Employee) o;
+
+    if (id != null ? !id.equals(employee.id) : employee.id != null) return false;
+    if (name != null ? !name.equals(employee.name) : employee.name != null) return false;
+    if (email != null ? !email.equals(employee.email) : employee.email != null) return false;
+    if (hiredate != null ? !hiredate.equals(employee.hiredate) : employee.hiredate != null) return false;
+
+    return true;
+}
+</code></pre><p>其中Employee有如下属性：</p>
+<pre><code>public class Employee {
+    private Integer id;
+    private String name;
+    private String email;
+    private Date hiredate;
+}
+</code></pre><h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>判断两个对象是否相等的原则：<strong><em>对象类型相同</em></strong>，而且<strong><em>属性值全部相等</em></strong></p>
+<p>1、如果两个对象地址相等，两个对象一定相等</p>
+<pre><code>if( this == o ) return true;
+</code></pre><p>2、两个对象类型不相等，两个一定不相等</p>
+<pre><code>if( getClass() != o.getClass() ) return false;
+养成一个好习惯，在使用对象前判断对象o是否为空
+考虑到如果比较对象o为空null，但当前对象this必然不为null，不相等，可以结合起来：
+if( o == null || getClass() != o.getClass() ) return false;
+</code></pre><p>3、如果两个对象所有属性相等，两个对象才相等，否则判定为不相等</p>
+<pre><code>类型强转:Employee employee = (Employee) o;
+如果属性不相等，return false
+if( !id.equals(employee.id) ) return false;
+同样，需要判断id是否为空。如果id为空，不能使用equals作为判断方法，如下
+if( id == null &amp;&amp; employee.id != null || id != null &amp;&amp; !id.equals(employee.id) ) return false;
+使用三目运算符让代码更加优雅：
+if( id != null ? !id.equals(employee.id) : employee.id != null) return false
+</code></pre><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><p><img src="http://i.imgur.com/nYCSoQg.png" alt=""></p>
+<p>从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">transient Entry&lt;K,V&gt;[] table;  </div><div class="line">static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;  </div><div class="line">	final K key;     //键</div><div class="line">	V value;         //值</div><div class="line">	Entry&lt;K,V&gt; next; //指向下一个节点  </div><div class="line">	int hash;        //散列值</div><div class="line">	</div><div class="line">	Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;  </div><div class="line">		value = v;  </div><div class="line">		next = n;  </div><div class="line">		key = k;  </div><div class="line">		hash = h;  </div><div class="line">	&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HashMap有一个属性是Entry的数组table。Entry就是table数组中的元素，Map.Entry保存一个键值对<br>和这个键值对持有指向下一个键值对的引用，如此就构成了链表了</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>一些属性：</p>
+<ul>
+<li>capacity：数组的长度，默认是16</li>
+<li>loadFactor：HashMap元素的个数除以数组的长度，当元素个数大于threshold时，需要扩容。默认负载因子是0.75</li>
+<li>threashold：数组的长度乘以负载因子，当元素大于threshold时，需要扩容。默认threshold = 16*0.75 = 12</li>
+<li>size：HashMap中元素的个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">/**根据指定容量和负载因子构造HashMap*/   </div><div class="line">public HashMap(int initialCapacity, float loadFactor) &#123;  </div><div class="line">    if (initialCapacity &lt; 0)  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +  </div><div class="line">                                           initialCapacity);  </div><div class="line">	/**</div><div class="line">	 * 数组最大容量是 static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30，即32位最大2的整数次</div><div class="line">	 * 如果传入初始容量太大，真实设置的的最大</div><div class="line">	 */</div><div class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)  </div><div class="line">        initialCapacity = MAXIMUM_CAPACITY;  </div><div class="line">    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +  </div><div class="line">                                           loadFactor);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 找到大于给出的初始容量的2的乘方</div><div class="line">	 */</div><div class="line">    // Find a power of 2 &gt;= initialCapacity  </div><div class="line">    int capacity = 1;  </div><div class="line">    while (capacity &lt; initialCapacity)  </div><div class="line">        capacity &lt;&lt;= 1;  </div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 负载因子是链表的长度除以数组的长度，当链表的长度大于threshold时，需要扩容</div><div class="line">	 */</div><div class="line">    this.loadFactor = loadFactor;  </div><div class="line">    threshold = (int)Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 初始化 Entry 数组</div><div class="line">	 */</div><div class="line">    table = new Entry[capacity];  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 空函数，子类可扩展</div><div class="line">	 */</div><div class="line">    init();  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">/**根据指定的容量和默认的负载因子构造HashMap*/  </div><div class="line">public HashMap(int initialCapacity) &#123;  </div><div class="line">    this(initialCapacity, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">//默认的空的构造器  </div><div class="line">public HashMap() &#123;  </div><div class="line">    this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line">/**通过指定一个Map对象进行构造*/  </div><div class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;  </div><div class="line">    this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,  </div><div class="line">                  DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);  </div><div class="line">    putAllForCreate(m);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="PUT方法"><a href="#PUT方法" class="headerlink" title="PUT方法"></a>PUT方法</h3><p>当存入的key是null的时候将调用putForNUllKey方法，暂时将这段逻辑放一边，看key不为null的情况。先调用了hash(int h)方法获取了一个hash值。<br><br></p>
+<font color="red"><strong>遍历table[i]上的元素，如果存在键相等，则替换它的值。否则以头插法的方式插入链表</strong></font>
+
+<p>之后判断size是否到达了需要扩充table数组容量的界限并让size自增1，如果达到了则调用resize(int capacity)方法将数组容量拓展为原来的两倍。</p>
+<pre>
+public V put(K key, V value) {  
+    // HashMap允许存放null键和null值。  
+    // 当key为null时，调用putForNullKey方法，将value放置在数组第一个位置。  
+    if (key == null)  
+        return putForNullKey(value);  
+    <font color="red">// 根据key的keyCode重新计算hash值。 </font> 
+    int hash = hash(key);//注意这里的实现是jdk1.7和以前的版本有区别的  
+    <font color="red">// 搜索指定hash值在对应table中的索引。</font>  
+    int i = indexFor(hash, table.length);  
+    // 如果 i 索引处的 Entry 不为 null，通过循环不断遍历 e 元素的下一个元素。如果键的Hash值一样，而且equal相等  
+    for (Entry<k,v> e = table[i]; e != null; e = e.next) {  
+        Object k;  
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {  
+            V oldValue = e.value;  
+            e.value = value;  
+            e.recordAccess(this);  
+            return oldValue;  
+        }  
+    }  
+    // 如果i索引处的Entry为null，表明此处还没有Entry。  
+    modCount++;  
+    // 将key、value添加到i索引处。  
+    addEntry(hash, key, value, i);  
+    return null;  
+}  
+
+/**
+ * <font color="red">采用头插法，即使头结点是空也没有关系！！</font>
+ * 数组上的元素为刚插入的节点
+ */
+void addEntry(int hash, K key, V value, int bucketIndex) {
+    Entry<k,v> e = table[bucketIndex];
+    table[bucketIndex] = new Entry<k,v>(hash, key, value, e);
+    if (size++ >= threshold)
+        resize(2 * table.length);
+}
+</k,v></k,v></k,v></pre>
+
+<p><strong>为什么要进行两次Hash？</strong></p>
+<p>防止质量较差的哈希函数带来过多的冲突（碰撞）问题。Java中int值占4个字节，即32位。根据这32位值进行移位、异或运算得到一个值。</p>
+<p><strong>如何确定元素在数组的位置？</strong></p>
+<pre><code>static int indexFor(int h, int length) {
+    return h &amp; (length-1);     
+}
+</code></pre><p>这样可以保证结果的最大值是length-1，而且均匀分布在数组中，异或的操作效率比取余的效率高</p>
+<p><strong>HashMap中如何判断两个键相等？</strong></p>
+<p>两个对象的HashCode相等， 而且equals相等。所以如果使用对象的作为键，需要重写HashCode和equals方法</p>
+<p>String已经重写了HashCode，String中的数据结构是char[] s，Hash 值的计算方法是 s[0]<em>31^(n-1) + s[1]</em>31^(n-2) + ….. + s[0]*31^0</p>
+<p>可以采用迭代的方法计算：h = h * 31 + s[i]</p>
+<pre><code>int h = 0;
+for(int i = 0; i &lt; n; i++){
+    h = h * 31 + s[i];
+}
+</code></pre><p><strong>链表扩容</strong></p>
+<p>当链表内元素大于threashold时，新建一个新的数组，数组长度变成原来的两倍，并将原来的元素复制到新数组上</p>
+<pre>
+void resize(int newCapacity) {
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+    // 这个if块表明，如果容量已经到达允许的最大值，即MAXIMUN_CAPACITY，则不再拓展容量，而将装载拓展的界限值设为计算机允许的最大值。
+    // 不会再触发resize方法，而是不断的向map中添加内容，即table数组中的链表可以不断变长，但数组长度不再改变
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    // 创建新数组，容量为指定的容量
+    Entry[] newTable = new Entry[newCapacity];
+    transfer(newTable);
+    table = newTable;
+    // 设置下一次需要调整数组大小的界限
+    threshold = (int)(newCapacity * loadFactor);
+}
+</pre>
+
+<p>将old数组上的元素复制到新数组上的操作在transfer上完成，主要步骤是：</p>
+<ul>
+<li>遍历原来的Entry数组</li>
+<li>遍历链表</li>
+<li>将链表元素依次按照插入到新的数组中(头插法)，<font color="red"><strong>链表反置</strong></font></li>
+</ul>
+<pre>
+void transfer(Entry[] newTable) {
+    // 保留原数组的引用到src中，
+    Entry[] src = table;
+    // 新容量使新数组的长度
+    int newCapacity = newTable.length;
+    // 遍历原数组
+    for (int j = 0; j < src.length; j++) {
+        // 获取元素e
+        Entry<k,v> e = src[j];
+        if (e != null) {
+            // 将原数组中的元素置为null
+            src[j] = null;
+            // 遍历原数组中j位置指向的链表
+            do {
+                Entry<k,v> next = e.next;
+                // 根据新的容量计算e在新数组中的位置
+                int i = indexFor(e.hash, newCapacity);
+                // 将e插入到newTable[i]指向的链表的头部
+                e.next = newTable[i];
+                newTable[i] = e;
+                e = next;
+            } while (e != null);
+        }
+    }
+}
+</k,v></k,v></pre>
+
+<p><strong>HashMap允许键null、值null，怎么处理？</strong></p>
+<p>从源码可以看到，key为null的对象放在数组<strong>索引0的位置</strong>。<strong>put的方式和put普通元素一样</strong>，首先遍历链表，是否有相同key的元素，如果有则替换并返回原来的值。否则头插入的方式将元素插入链表</p>
+<pre>
+private V putForNullKey(V value) {
+    for (Entry<k,v> e = table[0]; e != null; e = e.next) {
+        if (e.key == null) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+    modCount++;
+    addEntry(0, null, value, 0);
+    return null;
+}
+</k,v></pre>
+
+<h3 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法"></a>GET方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">	/**</div><div class="line">	 * 如果key为null，从table[0]所在的链表进行搜索，如果存在元素且元素的key为null，返回元素的值；如果之前没有传入key为null的元素，那么返回null</div><div class="line">	 */</div><div class="line">    if (key == null)</div><div class="line">        return getForNullKey();</div><div class="line">    int hash = hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</div><div class="line">            return e.value;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该方法分为key为null和不为null两块。先看不为null的情况。先获取key的hash值，之后通过hash值及table.length获取key对应的table数组的索引，遍历索引的链表，所找到key相同的元素，则返回元素的value，否者返回null。不为null的情况调用了getForNullKey()方法。</p>
+<pre><code>private V getForNullKey() {
+    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) {
+        if (e.key == null)
+            return e.value;
+    }
+    return null;
+}
+</code></pre><p>参考：<a href="http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html" target="_blank" rel="external">http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html</a></p>
+<h3 id="containsKey"><a href="#containsKey" class="headerlink" title="containsKey"></a>containsKey</h3><p>containsKey(Object key)方法很简单，只是判断getEntry(key)的结果是否为null，是则返回false，否返回true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getEntry(key) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>getEntry(Object key)也没什么内容，只是根据key对应的hash值计算在table数组中的索引位置，然后遍历该链表判断是否存在相同的key值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final Entry&lt;K,V&gt; getEntry(Object key) &#123;</div><div class="line">    int hash = (key == null) ? 0 : hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp;</div><div class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return e;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="containsValue"><a href="#containsValue" class="headerlink" title="containsValue"></a>containsValue</h3><p>判断一个value是否存在比判断key是否存在还要简单，就是遍历所有元素判断是否有相等的值。这里分为两种情况处理，value为null何不为null的情况，但内容差不多，只是判断相等的方式不同。</p>
+<pre>
+public boolean containsValue(Object value) {
+    if (value == null)
+            return containsNullValue();
+
+    Entry[] tab = table;
+    for (int i = 0; i < tab.length ; i++)
+        for (Entry e = tab[i] ; e != null ; e = e.next)
+            <font color="red">if (value.equals(e.value))</font>
+                return true;
+    return false;
+}
+
+private boolean containsNullValue() {
+    Entry[] tab = table;
+    for (int i = 0; i < tab.length ; i++)
+        for (Entry e = tab[i] ; e != null ; e = e.next)
+            <font color="red">if (e.value == null)</font>
+                return true;
+    return false;
+}
+</pre>
+
+<h3 id="remove-Object-key"><a href="#remove-Object-key" class="headerlink" title="remove(Object key)"></a>remove(Object key)</h3><pre><code>public V remove(Object key) {
+    Entry&lt;K,V&gt; e = removeEntryForKey(key);
+    return (e == null ? null : e.value);
+}
+</code></pre><p>看这个方法，removeEntryKey(key)的返回结果应该是被移除的元素，如果不存在这个元素则返回为null。remove方法根据removeEntryKey返回的结果e是否为null返回null或e.value。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">final Entry&lt;K,V&gt; removeEntryForKey(Object key) &#123;</div><div class="line">    int hash = (key == null) ? 0 : hash(key.hashCode());</div><div class="line">    int i = indexFor(hash, table.length);</div><div class="line">    Entry&lt;K,V&gt; prev = table[i];</div><div class="line">    Entry&lt;K,V&gt; e = prev;</div><div class="line"></div><div class="line">    while (e != null) &#123;</div><div class="line">        Entry&lt;K,V&gt; next = e.next;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp;</div><div class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k)))) &#123;</div><div class="line">            modCount++;</div><div class="line">            size--;</div><div class="line">            if (prev == e)</div><div class="line">                table[i] = next;</div><div class="line">            else</div><div class="line">                prev.next = next;</div><div class="line">            e.recordRemoval(this);</div><div class="line">            return e;</div><div class="line">        &#125;</div><div class="line">        prev = e;</div><div class="line">        e = next;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return e;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</a.length;></t></e></e></t></t></t></pre></length;></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JDK/" rel="tag"># JDK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/11/[Java]基于Token的身份验证/" rel="next" title="基于 Token 的身份验证">
+                <i class="fa fa-chevron-left"></i> 基于 Token 的身份验证
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/17/[SSM]Shiro笔记/" rel="prev" title="Shiro笔记">
+                Shiro笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件IO"><span class="nav-number">1.</span> <span class="nav-text">文件IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BufferedOutputStream"><span class="nav-number">1.1.</span> <span class="nav-text">BufferedOutputStream</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays"><span class="nav-number">2.</span> <span class="nav-text">Arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copyOf"><span class="nav-number">2.1.</span> <span class="nav-text">copyOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">2.2.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">2.3.</span> <span class="nav-text">equals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asList"><span class="nav-number">2.4.</span> <span class="nav-text">asList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断两个对象是否相等"><span class="nav-number">3.</span> <span class="nav-text">判断两个对象是否相等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断两个对象是否相等代码"><span class="nav-number">3.1.</span> <span class="nav-text">判断两个对象是否相等代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码解析"><span class="nav-number">3.2.</span> <span class="nav-text">代码解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">4.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储结构"><span class="nav-number">4.1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造方法"><span class="nav-number">4.2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PUT方法"><span class="nav-number">4.3.</span> <span class="nav-text">PUT方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET方法"><span class="nav-number">4.4.</span> <span class="nav-text">GET方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#containsKey"><span class="nav-number">4.5.</span> <span class="nav-text">containsKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#containsValue"><span class="nav-number">4.6.</span> <span class="nav-text">containsValue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remove-Object-key"><span class="nav-number">4.7.</span> <span class="nav-text">remove(Object key)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,Log4j," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="依赖&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;     &amp;lt;version&amp;gt;1.2.17&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt;     &amp;lt;gr">
+<meta name="keywords" content="Java,Log4j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log4j笔记">
+<meta property="og:url" content="http://qianmingxs.com/2016/08/08/[Java]Log4j笔记/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="依赖&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;     &amp;lt;version&amp;gt;1.2.17&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt;     &amp;lt;gr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/8ZkEHMI.png">
+<meta property="og:image" content="http://i.imgur.com/5z0m4oX.png">
+<meta property="og:image" content="http://i.imgur.com/0GvNDWm.png">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Log4j笔记">
+<meta name="twitter:description" content="依赖&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt;     &amp;lt;version&amp;gt;1.2.17&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt;     &amp;lt;gr">
+<meta name="twitter:image" content="http://i.imgur.com/8ZkEHMI.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2016/08/08/[Java]Log4j笔记/"/>
+
+
+
+
+
+  <title>Log4j笔记 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/08/08/[Java]Log4j笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Log4j笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-08T00:00:00+08:00">
+                2016-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;log4j&lt;/groupId&gt;
+    &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+    &lt;version&gt;1.2.17&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;commons-logging&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
+    &lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h2><p>1、新建一个JAva工程，导入包log4j-1.2.17.jar，整个工程最终目录如下</p>
+<p><img src="http://i.imgur.com/8ZkEHMI.png" alt=""></p>
+<p>2、src同级创建并设置log4j.properties</p>
+<pre><code>### 设置###
+log4j.rootLogger = debug,stdout,D,E
+
+### 输出信息到控制抬 ###
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern = %d{yyyy-MM-dd HH:mm:ss,SSS} [%p] method:%l%n%m%n
+
+### 输出DEBUG级别以上的日志到=E://logs/error.log ###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = E://logs/log.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = DEBUG 
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+
+### 输出ERROR级别以上的日志到=E://logs/error.log ###
+log4j.appender.E = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.E.File =E://logs/error.log 
+log4j.appender.E.Append = true
+log4j.appender.E.Threshold = ERROR 
+log4j.appender.E.layout = org.apache.log4j.PatternLayout
+log4j.appender.E.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+</code></pre><p>3、设置日志内容</p>
+<pre><code>package com.mucfc;
+import org.apache.log4j.Logger;
+/**
+ *@author linbingwen
+ *@2015年5月18日9:14:21
+ */
+public class Test {
+    private static Logger logger = Logger.getLogger(Test.class);  
+
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+        // System.out.println(&quot;This is println message.&quot;);  
+
+        // 记录debug级别的信息  
+        logger.debug(&quot;This is debug message.&quot;);  
+        // 记录info级别的信息  
+        logger.info(&quot;This is info message.&quot;);  
+        // 记录error级别的信息  
+        logger.error(&quot;This is error message.&quot;);  
+    }  
+
+}
+</code></pre><h2 id="Log4j的架构"><a href="#Log4j的架构" class="headerlink" title="Log4j的架构"></a>Log4j的架构</h2><p>Log4j由三个重要的组件构成：</p>
+<ul>
+<li>日志写入器：控制日志信息的优先级，日志信息的优先级从高到低有ERROR、WARN、 INFO、DEBUG</li>
+<li>日志输出终端：指定了日志将打印到控制台还是文件中</li>
+<li>日志布局模式：控制日志信息的输出格式</li>
+</ul>
+<p><img src="http://i.imgur.com/5z0m4oX.png" alt=""></p>
+<p>Logger类是日志包的核心，Logger的名称是大小写敏感的，并且名称之间有继承关系。子名由父名做前缀，用点号”.”分隔，如x.y是x.y.z的父亲Logger。</p>
+<h2 id="Log4j基本使用方法"><a href="#Log4j基本使用方法" class="headerlink" title="Log4j基本使用方法"></a>Log4j基本使用方法</h2><h3 id="定义配置文件"><a href="#定义配置文件" class="headerlink" title="定义配置文件"></a>定义配置文件</h3><p><strong><em>1、配置根Logger，其语法为：</em></strong></p>
+<pre><code>log4j.rootLogger = [ level ] , appenderName, appenderName, …
+</code></pre><ul>
+<li>level是日志记录的优先级，Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG。通过在这里定义的级别，您可以控制到应用程序中相应级别的日志信息的开关。比如在这里定义了INFO级别，则应用程序中所有DEBUG级别的日志信息将不被打印出来</li>
+<li>appenderName就是指日志信息输出到哪个地方。您可以同时指定多个输出目的地</li>
+</ul>
+<p><strong><em>2.配置日志信息输出目的地Appender，其语法为：</em></strong></p>
+<pre><code>log4j.appender.appenderName = org.apache.log4j.DailyRollingFileAppender
+</code></pre><p>其中，Log4j提供的appender有以下几种：</p>
+<ul>
+<li>org.apache.log4j.ConsoleAppender（控制台），  </li>
+<li>org.apache.log4j.FileAppender（文件），  </li>
+<li>org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件），  </li>
+<li>org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件），  </li>
+<li>org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）</li>
+</ul>
+<p><strong><em>3.配置日志信息的格式（布局），其语法为：</em></strong></p>
+<pre><code>log4j.appender.appenderName.layout = org.apache.log4j.PatternLayout
+</code></pre><p>其中，Log4j提供的layout有以e几种：</p>
+<ul>
+<li>org.apache.log4j.HTMLLayout（以HTML表格形式布局），  </li>
+<li>org.apache.log4j.PatternLayout（可以灵活地指定布局模式），  </li>
+<li>org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），  </li>
+<li>org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）</li>
+</ul>
+<h3 id="在代码中使用Log4j"><a href="#在代码中使用Log4j" class="headerlink" title="在代码中使用Log4j"></a>在代码中使用Log4j</h3><p><strong><em>1.得到记录器</em></strong></p>
+<pre><code>static Logger logger = Logger.getLogger(Class clazz)；//在某对象中，用该对象所属的类作为参数
+</code></pre><p><strong><em>2.读取配置文件()</em></strong></p>
+<pre><code>PropertyConfigurator.configure ( String configFilename) ：读取使用Java的特性文件编写的配置文件
+</code></pre><p>例如：</p>
+<pre><code>PropertyConfigurator.configure(&quot;config/properties/log4j.properties&quot;);
+</code></pre><p>在项目下面建立一个文件夹名为config即可，这是标准写法。注意log4j默认的相对路径是工程下面，非src或者bin</p>
+<p><strong><em>3.插入记录信息（格式化日志信息）</em></strong></p>
+<pre><code>Logger.debug ( Object message ) ;  
+Logger.info ( Object message ) ;  
+Logger.warn ( Object message ) ;  
+Logger.error ( Object message ) ;
+</code></pre><h3 id="配置文件相对路径"><a href="#配置文件相对路径" class="headerlink" title="配置文件相对路径"></a>配置文件相对路径</h3><pre><code>log4j.appender.R.File=${user.dir}/logs/log.log
+</code></pre><h2 id="commons-logging-和-log4j-之间的关系"><a href="#commons-logging-和-log4j-之间的关系" class="headerlink" title="commons-logging 和 log4j 之间的关系"></a>commons-logging 和 log4j 之间的关系</h2><h3 id="Log4j与通用日志包commons-logging的结合使用"><a href="#Log4j与通用日志包commons-logging的结合使用" class="headerlink" title="Log4j与通用日志包commons-logging的结合使用"></a>Log4j与通用日志包commons-logging的结合使用</h3><p>其实commons-logging中<strong><em>默认都支持</em></strong> Log4j，因此只要同时加载commons-logging包和log4j包，可以不用配置即可用在应用中使用commons-logging的接口方法。    </p>
+<p>当然，标准的应用的是需要的配置，如果你log4j则这个配置是可选的。下面我说明如何通过配置文件来组合commons-logging和log4j。</p>
+<p>配置文件内容很简单，就指定一个日志实现类即可，下面是个示例文件commons-logging.properties：</p>
+<pre><code>org.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger
+org.apache.commons.logging.LogFactory=org.apache.commons.logging.impl.LogFactoryImpl
+</code></pre><h3 id="commons-logging-和-log4j-之间的关系-1"><a href="#commons-logging-和-log4j-之间的关系-1" class="headerlink" title="commons-logging 和 log4j 之间的关系"></a>commons-logging 和 log4j 之间的关系</h3><p>我们在做项目时，日志的记录是必不可少的一项任务，而我们通常是使用 apache 的 log4j 日志管理工具。然而，在项目中，我们经常会看到两个 jar 包：commons-logging.jar 和 log4j.jar。为什么我们在使用 log4j 的同时还要引入 commons-logging.jar 呢，或者说不用 commons-logging.jar 可不可以，这两者之间到底是怎么的一种关系呢？ </p>
+<p>作为记录日志的工具，它至少应该包含如下几个组成部分(组件)： </p>
+<ol>
+<li>Logger<br> 记录器组件负责产生日志，并能够对日志信息进行分类筛选，控制什么样的日志应该被输出，什么样的日志应该被忽略。它还有一个重要的属性 － 日志级别。不管何种日志记录工具，大概包含了如下几种日志级别：DEBUG, INFO, WARN, ERROR 和 FATAL。 </li>
+<li>Level<br> 日志级别组件。 </li>
+<li>Appender<br> 日志记录工具基本上通过 Appender 组件来输出到目的地的，一个 Appender 实例就表示了一个输出的目的地。 </li>
+<li>Layout<br> Layout 组件负责格式化输出的日志信息，一个 Appender 只能有一个 Layout。 </li>
+</ol>
+<p>我们再来看看 log4j.jar，打开 jar 包，我们可以看到 Logger.class(Logger)，Level.class(Level), FileAppender.class(Appender)， HTMLLayout.class(Layout)。其它的我们先忽略不看，这几个字节码文件正好是记录日志必不可少的几个组件。 </p>
+<p>接下来看看 commons-logging 中的 org.apache.commons.logging.Log.java 源码： </p>
+<pre><code>package org.apache.commons.logging;  
+public interface Log {  
+    public boolean isDebugEnabled();  
+    public boolean isErrorEnabled();  
+    public boolean isFatalEnabled();  
+    public boolean isInfoEnabled();  
+    public boolean isTraceEnabled();  
+    public boolean isWarnEnabled();  
+    public void trace(Object message);  
+    public void trace(Object message, Throwable t);  
+    public void debug(Object message);  
+    public void debug(Object message, Throwable t);  
+    public void info(Object message);  
+    public void info(Object message, Throwable t);  
+    public void warn(Object message);  
+    public void warn(Object message, Throwable t);  
+    public void error(Object message);  
+    public void error(Object message, Throwable t);  
+    public void fatal(Object message);  
+    public void fatal(Object message, Throwable t);  
+}  
+</code></pre><p>很显然，只要实现了 Log 接口，它就是一个名副其实的 Logger 组件，也验证了 Logger 组件具有日志级别的属性。继续看 commons-logging org.apache.commons.logging.impl 包下的几个类的源码片段： </p>
+<pre><code>package org.apache.commons.logging.impl;  
+
+import org.apache.commons.logging.Log;  
+import org.apache.log4j.Logger;  
+import org.apache.log4j.Priority;  
+import org.apache.log4j.Level;  
+import ......  
+
+public class Log4JLogger implements Log, Serializable {  
+    // 对 org.apache.commons.logging.Log 的实现  
+    ......  
+}  
+
+------------------------------------------------------------------  
+
+package org.apache.commons.logging.impl;  
+
+import org.apache.commons.logging.Log;  
+import java.io.Serializable;  
+import java.util.logging.Level;  
+import java.util.logging.Logger;  
+
+public class Jdk14Logger implements Log, Serializable {  
+     // 对 org.apache.commons.logging.Log 的实现  
+    ......  
+}  
+</code></pre><p>好了，分析到这里，我们应该知道，<font color="red">真正的记录日志的工具是 log4j 和 sun 公司提供的日志工具。而 commons-logging 把这两个(实际上，在 org.apache.commons.logging.impl 包下，commons-logging 仅仅为我们封装了 log4j 和 sun logger)记录日志的工具重新封装了一遍(Log4JLogger.java 和 Jdk14Logger.java)，可以认为 org.apache.commons.logging.Log 是个傀儡，它只是提供了对外的统一接口。因此我们只要能拿到 org.apache.commons.logging.Log，而不用关注到底使用的是 log4j 还是 sun logger。</font>正如我们经常在项目中这样写： </p>
+<pre><code>// Run 是我们自己写的类，LogFactory 是一个专为提供 Log 的工厂(abstract class)  
+private static final Log logger = LogFactory.getLog(Run.class);  
+</code></pre><p>既然如此，我们向构建路径加了 commons-logging.jar 和 log4j.jar 两个 jar 包，那我们的应用程序到底使用的 log4j 还是 sun logger 呢？我们能不能认为由于加了 log4j.jar 包，就认为系统使用的就是 log4j 呢？事实上当然不是这样的，那我还认为我正在使用 jdk 而认为系统使用的是 sun logger 呢。使用 Spring 的朋友可以在 web.xml 中看到如下 listener 片段： </p>
+<pre><code>&lt;listener&gt;  
+    &lt;listener-class&gt;org.springframework.web.util.Log4jConfigListener&lt;/listener-class&gt;  
+&lt;/listener&gt;  
+</code></pre><p>这是由 Spring 为我们提供的实现了标准的 servlet api 中的 javax.servlet.ServletContextListener 接口，用于在 web 容器启动时做一些初始化操作。我们逐层进入 Spring 的源码，可以看到如下代码： </p>
+<pre><code>Log4jConfigurer.initLogging(location, refreshInterval);  
+</code></pre><p>终于找到了 org.springframework.util.Log4jConfigurer，这正是 log4j 提供给我们的初始化日志的类。至此，我们终于明白了我们系统的的确确使用的是 log4j 的日志工具。 </p>
+<p>可是问题又来了，org.apache.commons.logging.Log 和 org.apache.log4j.Logger 这两个类，通过包名我们可以发现它们都是 apache 的项目，既然如下，为何要动如此大的动作搞两个东西(指的是 commons-logging 和 log4j)出来呢？事实上，在 sun 开发 logger 前，apache 项目已经开发了功能强大的 log4j 日志工具，并向 sun 推荐将其纳入到 jdk 的一部分，可是 sun 拒绝了 apache 的提议，sun 后来自己开发了一套记录日志的工具。可是现在的开源项目都使用的是 <font color="red"><strong><em>log4j</em></strong></font>，log4j 已经成了事实上的标准，但由于又有一部分开发者在使用 <font color="red"><strong><em>sun logger</em></strong></font>，因此 apache 才推出 commons-logging，<font color="red"><strong><em>使得我们不必关注我们正在使用何种日志工具</em></strong></font>。</p>
+<h2 id="slf4j-api、slf4j-log4j12以及log4j之间的关系"><a href="#slf4j-api、slf4j-log4j12以及log4j之间的关系" class="headerlink" title="slf4j-api、slf4j-log4j12以及log4j之间的关系"></a>slf4j-api、slf4j-log4j12以及log4j之间的关系</h2><p>几乎在每个jar包里都可以看到log4j的身影，在多个子工程构成项目中，slf4j相关的冲突时不时就跳出来让你不爽，那么slf4j-api、slf4j-log4j12还有log4j是什么关系？ </p>
+<p><strong><em>slf4j:Simple Logging Facade for Java，为java提供的简单日志Facade。</em></strong>Facade门面，更底层一点说就是<strong>接口</strong>。<font color="red"><strong><em>它允许用户以自己的喜好，在工程中通过slf4j接入不同的日志系统</em></strong></font>。更直观一点，slf4j是个数据线，一端嵌入程序，另一端链接日志系统，从而实现将程序中的信息导入到日志系统并记录。</p>
+<p>因此slf4j入口就是众多接口的集合，它不负责具体的日志实现，只在编译时负责寻找合适的日志系统进行绑定。具体有哪些接口，全部都定义在slf4j-api中。查看slf4j-api源码就可以发现，里面除了public final class LoggerFactory类之外，都是接口定义。因此slf4j-api本质就是一个接口定义。</p>
+<p>下图比较清晰的描述了它们之间的关系，例子为当系统采用log4j作为日志框架实现的调用关系：</p>
+<p><img src="http://i.imgur.com/0GvNDWm.png" alt=""></p>
+<p>①首先系统包含slf4j-api作为日志接入的接口。<font color="red">compile时slf4j-api中public final class LoggerFactor类中private final static void bind()方法会寻找具体的日志实现类绑定，主要通过StaticLoggerBinder.getSingleton()的语句调用。</font></p>
+<p>②slf4j-log4j12是链接slf4j-api和log4j中间的适配器。它实现了slf4j-apiz中StaticLoggerBinder接口，从而使得在编译时绑定的是slf4j-log4j12的getSingleton()方法。</p>
+<p>③log4j是具体的日志系统。通过slf4j-log4j12初始化Log4j，达到最终日志的输出。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://www.codeceo.com/article/log4j-usage.html" target="_blank" rel="external">http://www.codeceo.com/article/log4j-usage.html</a><br><a href="http://blog.csdn.net/hpf911/article/details/5852127" target="_blank" rel="external">http://blog.csdn.net/hpf911/article/details/5852127</a><br><a href="http://www.tuicool.com/articles/U7ZjUni" target="_blank" rel="external">http://www.tuicool.com/articles/U7ZjUni</a><br><a href="http://zachary-guo.iteye.com/blog/361177" target="_blank" rel="external">http://zachary-guo.iteye.com/blog/361177</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Log4j/" rel="tag"># Log4j</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/04/[网络安全]Dos攻击原理及防御/" rel="next" title="Dos攻击原理及防御">
+                <i class="fa fa-chevron-left"></i> Dos攻击原理及防御
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/09/[Java]命令行编译Java程序/" rel="prev" title="命令行编译Java程序">
+                命令行编译Java程序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖"><span class="nav-number">1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速入门"><span class="nav-number">2.</span> <span class="nav-text">快速入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log4j的架构"><span class="nav-number">3.</span> <span class="nav-text">Log4j的架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log4j基本使用方法"><span class="nav-number">4.</span> <span class="nav-text">Log4j基本使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义配置文件"><span class="nav-number">4.1.</span> <span class="nav-text">定义配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在代码中使用Log4j"><span class="nav-number">4.2.</span> <span class="nav-text">在代码中使用Log4j</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件相对路径"><span class="nav-number">4.3.</span> <span class="nav-text">配置文件相对路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#commons-logging-和-log4j-之间的关系"><span class="nav-number">5.</span> <span class="nav-text">commons-logging 和 log4j 之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Log4j与通用日志包commons-logging的结合使用"><span class="nav-number">5.1.</span> <span class="nav-text">Log4j与通用日志包commons-logging的结合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#commons-logging-和-log4j-之间的关系-1"><span class="nav-number">5.2.</span> <span class="nav-text">commons-logging 和 log4j 之间的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slf4j-api、slf4j-log4j12以及log4j之间的关系"><span class="nav-number">6.</span> <span class="nav-text">slf4j-api、slf4j-log4j12以及log4j之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

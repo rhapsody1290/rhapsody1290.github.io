@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JDK," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="存储结构 从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表 1234567891011121314transient Entry&amp;lt;K,V&amp;gt;[] table;  static class Entry&amp;lt;K,V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt; &amp;#123;  	final K key;     //键	V val">
+<meta name="keywords" content="JDK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HashMap">
+<meta property="og:url" content="http://qianmingxs.com/2017/05/10/[JDK源码阅读]HashMap/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="存储结构 从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表 1234567891011121314transient Entry&amp;lt;K,V&amp;gt;[] table;  static class Entry&amp;lt;K,V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt; &amp;#123;  	final K key;     //键	V val">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/nYCSoQg.png">
+<meta property="og:image" content="http://i.imgur.com/8PFB2wW.png">
+<meta property="og:image" content="http://i.imgur.com/GbZgrGm.png">
+<meta property="og:image" content="http://i.imgur.com/AlWEfbc.jpg">
+<meta property="og:image" content="http://i.imgur.com/Yk3AC54.jpg">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HashMap">
+<meta name="twitter:description" content="存储结构 从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表 1234567891011121314transient Entry&amp;lt;K,V&amp;gt;[] table;  static class Entry&amp;lt;K,V&amp;gt; implements Map.Entry&amp;lt;K,V&amp;gt; &amp;#123;  	final K key;     //键	V val">
+<meta name="twitter:image" content="http://i.imgur.com/nYCSoQg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/05/10/[JDK源码阅读]HashMap/"/>
+
+
+
+
+
+  <title>HashMap | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/10/[JDK源码阅读]HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HashMap</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T21:50:00+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JDK源码阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">JDK源码阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h2><p><img src="http://i.imgur.com/nYCSoQg.png" alt=""></p>
+<p>从图中可以看出 HashMap 的底层就是一个数组结构，数组中的每一项又是一个链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">transient Entry&lt;K,V&gt;[] table;  </div><div class="line">static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;  </div><div class="line">	final K key;     //键</div><div class="line">	V value;         //值</div><div class="line">	Entry&lt;K,V&gt; next; //指向下一个节点  </div><div class="line">	int hash;        //散列值</div><div class="line">	</div><div class="line">	Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;  </div><div class="line">		value = v;  </div><div class="line">		next = n;  </div><div class="line">		key = k;  </div><div class="line">		hash = h;  </div><div class="line">	&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>HashMap有一个属性是Entry的数组table。Entry就是table数组中的元素，Map.Entry保存一个键值对<br>和这个键值对持有指向下一个键值对的引用，如此就构成了链表了</p>
+<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>一些属性：</p>
+<ul>
+<li>capacity：数组的长度，默认是16</li>
+<li>loadFactor：HashMap元素的个数除以数组的长度，当元素个数大于threshold时，需要扩容。默认负载因子是0.75</li>
+<li>threashold：数组的长度乘以负载因子，当元素大于threshold时，需要扩容。默认threshold = 16*0.75 = 12</li>
+<li>size：HashMap中元素的个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">/**根据指定容量和负载因子构造HashMap*/   </div><div class="line">public HashMap(int initialCapacity, float loadFactor) &#123;  </div><div class="line">    if (initialCapacity &lt; 0)  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +  </div><div class="line">                                           initialCapacity);  </div><div class="line">	/**</div><div class="line">	 * 数组最大容量是 static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30，即32位最大2的整数次</div><div class="line">	 * 如果传入初始容量太大，真实设置的的最大</div><div class="line">	 */</div><div class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)  </div><div class="line">        initialCapacity = MAXIMUM_CAPACITY;  </div><div class="line">    if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))  </div><div class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +  </div><div class="line">                                           loadFactor);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 找到大于给出的初始容量的2的乘方</div><div class="line">	 */</div><div class="line">    // Find a power of 2 &gt;= initialCapacity  </div><div class="line">    int capacity = 1;  </div><div class="line">    while (capacity &lt; initialCapacity)  </div><div class="line">        capacity &lt;&lt;= 1;  </div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 负载因子是链表的长度除以数组的长度，当链表的长度大于threshold时，需要扩容</div><div class="line">	 */</div><div class="line">    this.loadFactor = loadFactor;  </div><div class="line">    threshold = (int)Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 初始化 Entry 数组</div><div class="line">	 */</div><div class="line">    table = new Entry[capacity];  </div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 空函数，子类可扩展</div><div class="line">	 */</div><div class="line">    init();  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">/**根据指定的容量和默认的负载因子构造HashMap*/  </div><div class="line">public HashMap(int initialCapacity) &#123;  </div><div class="line">    this(initialCapacity, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">//默认的空的构造器  </div><div class="line">public HashMap() &#123;  </div><div class="line">    this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);  </div><div class="line">&#125;  </div><div class="line">/**通过指定一个Map对象进行构造*/  </div><div class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;  </div><div class="line">    this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,  </div><div class="line">                  DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);  </div><div class="line">    putAllForCreate(m);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="PUT方法"><a href="#PUT方法" class="headerlink" title="PUT方法"></a>PUT方法</h2><p>当存入的key是null的时候将调用putForNUllKey方法，暂时将这段逻辑放一边，看key不为null的情况。先调用了hash(int h)方法获取了一个hash值。<br><br></p>
+<font color="red"><strong>遍历table[i]上的元素，如果存在键相等，则替换它的值。否则以头插法的方式插入链表</strong></font>
+
+<p>之后判断size是否到达了需要扩充table数组容量的界限并让size自增1，如果达到了则调用resize(int capacity)方法将数组容量拓展为原来的两倍。</p>
+<pre>
+public V put(K key, V value) {  
+    // HashMap允许存放null键和null值。  
+    // 当key为null时，调用putForNullKey方法，将value放置在数组第一个位置。  
+    if (key == null)  
+        return putForNullKey(value);  
+    <font color="red">// 根据key的keyCode重新计算hash值。 </font> 
+    int hash = hash(key);//注意这里的实现是jdk1.7和以前的版本有区别的  
+    <font color="red">// 搜索指定hash值在对应table中的索引。</font>  
+    int i = indexFor(hash, table.length);  
+    // 如果 i 索引处的 Entry 不为 null，通过循环不断遍历 e 元素的下一个元素。如果键的Hash值一样，而且equal相等  
+    for (Entry<k,v> e = table[i]; e != null; e = e.next) {  
+        Object k;  
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {  
+            V oldValue = e.value;  
+            e.value = value;  
+            e.recordAccess(this);  
+            return oldValue;  
+        }  
+    }  
+    // 如果i索引处的Entry为null，表明此处还没有Entry。  
+    modCount++;  
+    // 将key、value添加到i索引处。  
+    addEntry(hash, key, value, i);  
+    return null;  
+}  
+
+/**
+ * <font color="red">采用头插法，即使头结点是空也没有关系！！</font>
+ * 数组上的元素为刚插入的节点
+ */
+void addEntry(int hash, K key, V value, int bucketIndex) {
+    Entry<k,v> e = table[bucketIndex];
+    table[bucketIndex] = new Entry<k,v>(hash, key, value, e);
+    if (size++ >= threshold)
+        resize(2 * table.length);
+}
+</k,v></k,v></k,v></pre>
+
+<p><strong>为什么要进行两次Hash？</strong></p>
+<p>防止质量较差的哈希函数带来过多的冲突（碰撞）问题。Java中int值占4个字节，即32位。根据这32位值进行移位、异或运算得到一个值。</p>
+<p><strong>如何确定元素在数组的位置？</strong></p>
+<pre><code>static int indexFor(int h, int length) {
+    return h &amp; (length-1);     
+}
+</code></pre><p>这样可以保证结果的最大值是length-1，而且均匀分布在数组中，异或的操作效率比取余的效率高</p>
+<p><strong>HashMap中如何判断两个键相等？</strong></p>
+<p>两个对象的HashCode相等， 而且equals相等。所以如果使用对象的作为键，需要重写HashCode和equals方法</p>
+<p>String已经重写了HashCode，String中的数据结构是char[] s，Hash 值的计算方法是 s[0]<em>31^(n-1) + s[1]</em>31^(n-2) + ….. + s[0]*31^0</p>
+<p>可以采用迭代的方法计算：h = h * 31 + s[i]</p>
+<pre><code>int h = 0;
+for(int i = 0; i &lt; n; i++){
+    h = h * 31 + s[i];
+}
+</code></pre><p><strong>链表扩容</strong></p>
+<p>当链表内元素大于threashold时，新建一个新的数组，数组长度变成原来的两倍，并将原来的元素复制到新数组上</p>
+<pre>
+void resize(int newCapacity) {
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+    // 这个if块表明，如果容量已经到达允许的最大值，即MAXIMUN_CAPACITY，则不再拓展容量，而将装载拓展的界限值设为计算机允许的最大值。
+    // 不会再触发resize方法，而是不断的向map中添加内容，即table数组中的链表可以不断变长，但数组长度不再改变
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    // 创建新数组，容量为指定的容量
+    Entry[] newTable = new Entry[newCapacity];
+    transfer(newTable);
+    table = newTable;
+    // 设置下一次需要调整数组大小的界限
+    threshold = (int)(newCapacity * loadFactor);
+}
+</pre>
+
+<p>将old数组上的元素复制到新数组上的操作在transfer上完成，主要步骤是：</p>
+<ul>
+<li>遍历原来的Entry数组</li>
+<li>遍历链表</li>
+<li>将链表元素依次按照插入到新的数组中(头插法)，<font color="red"><strong>链表反置</strong></font></li>
+</ul>
+<pre>
+void transfer(Entry[] newTable) {
+    // 保留原数组的引用到src中，
+    Entry[] src = table;
+    // 新容量使新数组的长度
+    int newCapacity = newTable.length;
+    // 遍历原数组
+    for (int j = 0; j < src.length; j++) {
+        // 获取元素e
+        Entry<k,v> e = src[j];
+        if (e != null) {
+            // 将原数组中的元素置为null
+            src[j] = null;
+            // 遍历原数组中j位置指向的链表
+            do {
+                Entry<k,v> next = e.next;
+                // 根据新的容量计算e在新数组中的位置
+                int i = indexFor(e.hash, newCapacity);
+                // 将e插入到newTable[i]指向的链表的头部
+                e.next = newTable[i];
+                newTable[i] = e;
+                e = next;
+            } while (e != null);
+        }
+    }
+}
+</k,v></k,v></pre>
+
+<p><strong>HashMap允许键null、值null，怎么处理？</strong></p>
+<p>从源码可以看到，key为null的对象放在数组<strong>索引0的位置</strong>。<strong>put的方式和put普通元素一样</strong>，首先遍历链表，是否有相同key的元素，如果有则替换并返回原来的值。否则头插入的方式将元素插入链表</p>
+<pre>
+private V putForNullKey(V value) {
+    for (Entry<k,v> e = table[0]; e != null; e = e.next) {
+        if (e.key == null) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+    modCount++;
+    addEntry(0, null, value, 0);
+    return null;
+}
+</k,v></pre>
+
+<h2 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法"></a>GET方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">	/**</div><div class="line">	 * 如果key为null，从table[0]所在的链表进行搜索，如果存在元素且元素的key为null，返回元素的值；如果之前没有传入key为null的元素，那么返回null</div><div class="line">	 */</div><div class="line">    if (key == null)</div><div class="line">        return getForNullKey();</div><div class="line">    int hash = hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</div><div class="line">            return e.value;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该方法分为key为null和不为null两块。先看不为null的情况。先获取key的hash值，之后通过hash值及table.length获取key对应的table数组的索引，遍历索引的链表，所找到key相同的元素，则返回元素的value，否者返回null。不为null的情况调用了getForNullKey()方法。</p>
+<pre><code>private V getForNullKey() {
+    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) {
+        if (e.key == null)
+            return e.value;
+    }
+    return null;
+}
+</code></pre><p>参考：<a href="http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html" target="_blank" rel="external">http://www.cnblogs.com/hzmark/archive/2012/12/24/HashMap.html</a></p>
+<h2 id="containsKey"><a href="#containsKey" class="headerlink" title="containsKey"></a>containsKey</h2><p>containsKey(Object key)方法很简单，只是判断getEntry(key)的结果是否为null，是则返回false，否返回true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public boolean containsKey(Object key) &#123;</div><div class="line">    return getEntry(key) != null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>getEntry(Object key)也没什么内容，只是根据key对应的hash值计算在table数组中的索引位置，然后遍历该链表判断是否存在相同的key值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">final Entry&lt;K,V&gt; getEntry(Object key) &#123;</div><div class="line">    int hash = (key == null) ? 0 : hash(key.hashCode());</div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</div><div class="line">         e != null;</div><div class="line">         e = e.next) &#123;</div><div class="line">        Object k;</div><div class="line">        if (e.hash == hash &amp;&amp;</div><div class="line">            ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">            return e;</div><div class="line">    &#125;</div><div class="line">    return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="containsValue"><a href="#containsValue" class="headerlink" title="containsValue"></a>containsValue</h2><p>判断一个value是否存在比判断key是否存在还要简单，就是遍历所有元素判断是否有相等的值。这里分为两种情况处理，value为null何不为null的情况，但内容差不多，只是判断相等的方式不同。</p>
+<pre>
+public boolean containsValue(Object value) {
+    if (value == null)
+            return containsNullValue();
+
+    Entry[] tab = table;
+    for (int i = 0; i < tab.length ; i++)
+        for (Entry e = tab[i] ; e != null ; e = e.next)
+            <font color="red">if (value.equals(e.value))</font>
+                return true;
+    return false;
+}
+
+private boolean containsNullValue() {
+    Entry[] tab = table;
+    for (int i = 0; i < tab.length ; i++)
+        for (Entry e = tab[i] ; e != null ; e = e.next)
+            <font color="red">if (e.value == null)</font>
+                return true;
+    return false;
+}
+</pre>
+
+<h2 id="remove-Object-key"><a href="#remove-Object-key" class="headerlink" title="remove(Object key)"></a>remove(Object key)</h2><pre><code>public V remove(Object key) {
+    Entry&lt;K,V&gt; e = removeEntryForKey(key);
+    return (e == null ? null : e.value);
+}
+</code></pre><p>看这个方法，removeEntryKey(key)的返回结果应该是被移除的元素，如果不存在这个元素则返回为null。remove方法根据removeEntryKey返回的结果e是否为null返回null或e.value。</p>
+<pre>
+final Entry<k,v> removeEntryForKey(Object key) {
+    int hash = (key == null) ? 0 : hash(key.hashCode());
+    int i = indexFor(hash, table.length);
+    Entry<k,v> prev = table[i];
+    Entry<k,v> e = prev;
+
+    while (e != null) {
+        Entry<k,v> next = e.next;
+        Object k;
+        if (e.hash == hash &&
+            ((k = e.key) == key || (key != null && key.equals(k)))) {
+            modCount++;
+            size--;
+            <font color="red">//临界情况，如果是第一个节点</font>
+            if (prev == e)
+                table[i] = next;
+            else
+                prev.next = next;
+            e.recordRemoval(this);
+            return e;
+        }
+        prev = e;
+        e = next;
+    }
+
+    return e;
+}
+</k,v></k,v></k,v></k,v></pre>
+
+<p>删除节点需要两个指针pre和e，next可以不需要吧？</p>
+<h2 id="HashMap产生死锁的原因"><a href="#HashMap产生死锁的原因" class="headerlink" title="HashMap产生死锁的原因"></a>HashMap产生死锁的原因</h2><p>调用 PUT 函数时，当 HashMap 中的元素大于 Threshold 时，会调用 Resize 函数进行扩容，数组长度增大一倍，整个过程如下：</p>
+<ol>
+<li>对索引数组中的元素遍历</li>
+<li>对链表上的每一个节点遍历：用 next 取得要转移那个元素的下一个，将 e 转移到新 Hash 表的头部，因为可能有元素，所以先将 e.next 指向新 Hash 表的第一个元素（如果是第一次就是 null)，这时候新 Hash 的第一个元素是 e，但是 Hash 指向的却是 e 没转移时候的第一个，所以需要将 Hash 表的第一个元素指向 e</li>
+<li>循环2，直到链表节点全部转移</li>
+<li>循环1，直到所有索引数组全部转移 </li>
+</ol>
+<p>经过这几步，我们会发现<strong>链表转移的时候是逆序的</strong>。假如转移前链表顺序是1-&gt;2-&gt;3，那么转移后就会变成3-&gt;2-&gt;1。这时候就有点头绪了，死锁问题不就是因为1-&gt;2的同时2-&gt;1造成的吗？所以，<strong>HashMap 的死锁问题就出在这个transfer()函数上。</strong></p>
+<pre>
+public V put(K key, V value) {
+    if (table == EMPTY_TABLE) {
+    inflateTable(threshold);
+    }
+    if (key == null)
+        return putForNullKey(value);
+    int hash = hash(key);
+    int i = indexFor(hash, table.length);
+    //如果该 key 存在，就替换旧值
+    for (Entry<k,v> e = table[i]; e != null; e = e.next) {
+        Object k;
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+            V oldValue = e.value;
+            e.value = value;
+            e.recordAccess(this);
+            return oldValue;
+        }
+    }
+
+    modCount++;
+    //如果没有这个 key，就插入一个新元素！跟进去看看
+    addEntry(hash, key, value, i);
+    return null;
+}
+
+void addEntry(int hash, K key, V value, int bucketIndex) {
+    //查看当前的size是否超过了我们设定的阈值threshold，如果超过，需要resize
+    if ((size >= threshold) && (null != table[bucketIndex])) {
+        resize(2 * table.length);
+        hash = (null != key) ? hash(key) : 0;
+        bucketIndex = indexFor(hash, table.length);
+    }
+    createEntry(hash, key, value, bucketIndex);
+}
+
+//新建一个更大尺寸的hash表，把数据从老的Hash表中迁移到新的Hash表中。
+void resize(int newCapacity) {
+    Entry[] oldTable = table;
+    int oldCapacity = oldTable.length;
+    if (oldCapacity == MAXIMUM_CAPACITY) {
+        threshold = Integer.MAX_VALUE;
+        return;
+    }
+    //创建一个新的 Hash 表
+    Entry[] newTable = new Entry[newCapacity];
+    //转移！！！！跟进去
+    transfer(newTable, initHashSeedAsNeeded(newCapacity));
+    table = newTable;
+    threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
+}
+
+<font color="red">//高能预警！！！！重点全在这个函数中</font>
+void transfer(Entry[] newTable, boolean rehash) {
+    int newCapacity = newTable.length;
+    for (Entry<k,v> e : table) {
+        while(null != e) {
+            Entry<k,v> next = e.next;
+            if (rehash) {
+                e.hash = null == e.key ? 0 : hash(e.key);
+            }
+            int i = indexFor(e.hash, newCapacity);
+            e.next = newTable[i];
+            newTable[i] = e;
+            e = next;
+        }
+    }
+}
+</k,v></k,v></k,v></pre>
+
+<p>下面着重分析一下transfer方法，精简后得到如下代码★★★★★：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">while(null != e) &#123;</div><div class="line">	//因为是单链表，如果要转移头指针，一定要保存下一个结点，不然转移后链表就丢了</div><div class="line">	Entry&lt;K,V&gt; next = e.next;</div><div class="line">	//e 要插入到链表的头部，所以要先用 e.next 指向新的 Hash 表第一个元素</div><div class="line">	e.next = newTable[i];</div><div class="line">	//将新 Hash 表的头指针指向 e</div><div class="line">	newTable[i] = e;</div><div class="line">	//转移 e 的下一个结点 </div><div class="line">	e = next;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>死锁原因重现</strong></p>
+<p>假设这里有两个线程同时执行了 put() 操作，并进入了 transfer() 环节，现在假设线程1的工作情况如下代码所示，而线程2完成了整个 transfer() 过程，所以就完成了 rehash。</p>
+<pre>
+while(null != e) {
+    <font color="red">Entry<k,v> next = e.next; //线程1执行到这里被调度挂起了</k,v></font>
+    e.next = newTable[i];
+    newTable[i] = e;
+    e = next;
+}
+</pre>
+
+<p>那么现在的状态：</p>
+<p><img src="http://i.imgur.com/8PFB2wW.png" alt=""></p>
+<p>从上面的图我们可以看到，因为线程1的 e 指向了 key(3)，而 next 指向了 key(7)，在线程2 rehash 后，就指向了线程2 rehash 后的链表。</p>
+<p>然后线程1被唤醒了，执行：</p>
+<p>第一步 </p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p>链表状态如下图：</p>
+<p><img src="http://i.imgur.com/GbZgrGm.png" alt=""></p>
+<p>第二步</p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p>链表状态如下：</p>
+<p><img src="http://i.imgur.com/AlWEfbc.jpg" alt=""></p>
+<p>第三步</p>
+<pre><code>Entry&lt;K,V&gt; next = e.next;
+e.next = newTable[i];
+newTable[i] = e;
+e = next;
+</code></pre><p><img src="http://i.imgur.com/Yk3AC54.jpg" alt=""></p>
+<p>很明显，环形链表出现了！！当然，现在还没有事情，因为下一个节点是 null，所以transfer()就完成了，等put()的其余过程搞定后，HashMap 的底层实现就是线程1的新 Hash 表了。</p>
+<p><strong>没错，put()过程虽然造成了环形链表，但是它没有发生错误。它静静的等待着get()这个冤大头的到来。</strong></p>
+<p>现在程序被执行了一个hashMap.get(11)，这时候会调用getEntry()，这个函数就是去找对应索引的链表中有没有这个 key。然后。。。。悲剧了</p>
+<p>因为 HashMap 为了性能考虑，没有使用锁机制。所以就是非线程安全的，而 ConcurrentHashMap 使用了锁机制，所以是线程安全的。<strong>要并发就使用 ConcurrentHashMap</strong></p>
+<p>参考：<a href="http://blog.csdn.net/luxia_24/article/details/52344367" target="_blank" rel="external">http://blog.csdn.net/luxia_24/article/details/52344367</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JDK/" rel="tag"># JDK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/07/[Maven]Maven 添加本地 jar 包/" rel="next" title="Maven 添加本地 jar 包">
+                <i class="fa fa-chevron-left"></i> Maven 添加本地 jar 包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/16/[Maven]Linux下安装Nexus/" rel="prev" title="Linux下安装Nexus">
+                Linux下安装Nexus <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储结构"><span class="nav-number">1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造方法"><span class="nav-number">2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUT方法"><span class="nav-number">3.</span> <span class="nav-text">PUT方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET方法"><span class="nav-number">4.</span> <span class="nav-text">GET方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containsKey"><span class="nav-number">5.</span> <span class="nav-text">containsKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containsValue"><span class="nav-number">6.</span> <span class="nav-text">containsValue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-Object-key"><span class="nav-number">7.</span> <span class="nav-text">remove(Object key)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap产生死锁的原因"><span class="nav-number">8.</span> <span class="nav-text">HashMap产生死锁的原因</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

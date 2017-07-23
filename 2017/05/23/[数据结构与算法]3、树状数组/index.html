@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn），相比之下就快得多 总结：初始复杂度是nlogn，频繁对于单点和区间修改和查询操作，时间复杂度都是l">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3、树状数组">
+<meta property="og:url" content="http://qianmingxs.com/2017/05/23/[数据结构与算法]3、树状数组/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn），相比之下就快得多 总结：初始复杂度是nlogn，频繁对于单点和区间修改和查询操作，时间复杂度都是l">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/XXDc88F.jpg">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3、树状数组">
+<meta name="twitter:description" content="树状数组作用如果给定一个数组，要你求里面所有数的和，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当修改掉数组中的元素后，仍然要你求数组中某段元素的和，就显得麻烦了。所以我们就要用到树状数组，他的时间复杂度为O（lgn），相比之下就快得多 总结：初始复杂度是nlogn，频繁对于单点和区间修改和查询操作，时间复杂度都是l">
+<meta name="twitter:image" content="http://i.imgur.com/XXDc88F.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/05/23/[数据结构与算法]3、树状数组/"/>
+
+
+
+
+
+  <title>3、树状数组 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/05/23/[数据结构与算法]3、树状数组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">3、树状数组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T22:37:00+08:00">
+                2017-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="树状数组作用"><a href="#树状数组作用" class="headerlink" title="树状数组作用"></a>树状数组作用</h2><p>如果给定一个数组，<strong>要你求里面所有数的和</strong>，一般都会想到累加。但是当那个数组很大的时候，累加就显得太耗时了，时间复杂度为O(n)，并且采用累加的方法还有一个局限，那就是，当<strong>修改掉数组中的元素后，仍然要你求数组中某段元素的和</strong>，就显得麻烦了。所以我们就要用到树状数组，<strong>他的时间复杂度为O（lgn）</strong>，相比之下就快得多</p>
+<p>总结：初始复杂度是nlogn，<strong>频繁对于单点和区间修改和查询操作，时间复杂度都是log(n)</strong>，空间复杂度是n</p>
+<h2 id="树状数组结构图"><a href="#树状数组结构图" class="headerlink" title="树状数组结构图"></a>树状数组结构图</h2><p><img src="http://i.imgur.com/XXDc88F.jpg" alt=""></p>
+<p><strong>注意：下标从1开始，不要0</strong></p>
+<p>下面来分析一下上面那个图看能得出什么规律：</p>
+<p>c1（01） = a1<br>c2（10） = a1 + a2<br>c3（11） = a3<br>c4（100） = a1 + a2 + a3 + a4<br>c5（101） = a5<br>c6（110） = a5 + a6<br>c7（111） = a7<br>c8（1000） = a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8<br>c9（1001） = a9<br>c10（1010） = a9 + a10<br>c11（1011） = a11<br>c12（1100） = a9 + a10 + a11 + a12<br>c13（1101） = a13<br>c14（1110） = a13 + a14<br>c15（1111） = a15<br>c16（10000） = a1 + a2 + a3 + a4 + a5 + ……. + a16<br>……</p>
+<font color="red"><strong>有公式：cn = a(n-a^k+1) + ……… + an（其中 k 为 n 的二进制表示中从右往左数的 0 的个数）</strong></font>
+
+<ul>
+<li>k 为 二进制数从右往左数 0 的个数，那么 a^k 为从右往左数第一个非零位到最低位表示的数值</li>
+<li>根据公式也可以看出a^k表示的cn由a^k个ai项相加</li>
+</ul>
+<p>那么，如何求 a^k 呢？求法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int lowbit(int x)</div><div class="line">&#123;</div><div class="line">	return x&amp;(-x);    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>lowbit（）获取整数 x 的二进制数值中，从低位开始的第一个非零位开始到最低位的数值，即 2^k 次方的值，表示ci由多少个ai相加</p>
+<p>1、<strong>求数组的和的算法如下：</strong></p>
+<p>（1）首先，令sum=0，转向第二步；<br>（2）接下来判断，如果 n&gt;0 的话，就令sum=sum+cn转向第三步，否则的话，终止算法，返回 sum 的值；<br>（3）n = n - lowbit（n）（将n的二进制表示的最后一个零删掉），回第二步。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">int Sum(int n)&#123;</div><div class="line">	int sum = 0;</div><div class="line">	while(n &gt; 0)&#123;</div><div class="line">		sum += c[n];</div><div class="line">		n = n-lowbit(n);</div><div class="line">	&#125;    </div><div class="line">	return sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>c[n]维护区间a[n] - lowbit(n) + 1 ~ a[n] 的和，区间长度为lowbit(n)，数组求和即求a[1]~a[n]元素的和，<strong>树状数组下转变为区间和，区间间以lowbit(n)的间隔跳转</strong></p>
+<p>复杂度的话，lowbit（n）表示从右往左数第一个1到最低位的值，<strong>n - lowbit(n)相当于每次把最后一个1变为0</strong>，因为一个数二进制下只有log（n）位，所以<strong>复杂度是O(log(n))的</strong></p>
+<p>2、<strong>当数组中的元素有变更时，树状数组就发挥它的优势了，算法如下（修改为给某个节点 i 加上 x ）</strong></p>
+<p>（1）当 i&lt;=n 时，执行下一步；否则的话，算法结束;<br>（2）ci = ci+x ，i = i + lowbit（i）（在 i 的二进制表示的最后加零），返回第一步。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">void change(int i, int x)&#123;</div><div class="line">	while(i &lt;= n)&#123;</div><div class="line">		c[i] = c[i] + x;</div><div class="line">		i = i + lowbit(i);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="树状数组求逆序数"><a href="#树状数组求逆序数" class="headerlink" title="树状数组求逆序数"></a>树状数组求逆序数</h3><p>所谓逆序数，就是指一个序列S[i]，统计处于序列的每个数的比这个数大并且排在它前面的数的数目，然后对于所有数，把这个数目加起来求和就是了。<br>比如 4 3 1 2<br>4第一个，所以数目为0<br>3的前面是4，大于3的数目为1<br>1的前面是4 3 ，大于1的数目为2<br>2的前面是4 3 1，大于2的数目为2<br>所以逆序数为1+2+2 = 5</p>
+<p>求逆序数的两种方法<br>常规方法是按照逆序数的规则做，结果复杂度是O(n*n)，一般来说，有两种快速的求逆序数的方法，分别是<strong>归并排序和树状数组法</strong></p>
+<p><strong>树状数组法</strong></p>
+<p>当数据的范围较小时，比如maxn=100000，那么我们可以开一个数组c[maxn]，来记录前面数据的出现情况，初始化为0；<strong>当数据a出现时，就令c[a]=1。</strong>这样的话，<strong>欲求某个数a的逆序数，只需要算出在当前状态下c[a+1,maxn]中有多少个1，因为这些位置的数在a之前出现且比a大。</strong><font color="red">但是若每添加一个数据a时，就得从a+1到maxn搜一遍，复杂度太高了，树状数组却能很好的解决<strong>区间多次求和</strong>这个问题</font>。同样开一个数组d[maxn]，初始化为0，d[i]记录下i结点所管辖范围内当前状态有多少个数；当添加数据a时，就向上更新d,这样一来，欲求a的逆序数时，只需要算<strong>sum(maxn)-sum(a)；sum(i)表示第i个位置之前出现了多少个1</strong></p>
+<p>举个例子：有5个数，分别为5 3 4 2 1，当读入数据a=5时，c为：0，0，0，0，1；d为：0，0，0，0，1；当读入数据a=3时，c为：0，0，1，0，1；d为：0，0，1，1，1；当读入数据a=4时，c为：0，0，1，1，1；d为：0，0，1，2，1；…………</p>
+<p>此思想的关键在于，<strong>读入数据的最大值为maxn，由于maxn较小，所以可以用数组来记录状态</strong>。当maxn较大时，直接开数组显然是不行了，这是的解决办法就是离散化。<strong>所谓离散化，就是将连续问题的解用一组离散要素来表征而近似求解的方法</strong>，这个定义太抽象了，还是举个例子吧。</p>
+<p>假如现在有一些数：1234 98756 123456 99999 56782，由于1234是第一小的数，所以num[1]=1;依此，有num[5]=2，num[2]=3，num[4]=4，num[3]=5;这样转化后并不影响原来数据的相对大小关系，何乐而不为呢！！！</p>
+<p>还有一点值得注意，当有数据0出现时，由于0&amp;0=0，无法更新，此时我们可以采取<font color="red"><strong>加一个数的方法将所有的数据都变成大于0的。</strong></font></p>
+<p>当maxn较小时直接开数组代码如下：</p>
+<pre><code>public class InverseNumber {
+
+    //索引0不存放数据
+    private int[] c = new int[10];
+
+    private int sum(int n) {
+        int sum = 0;
+        for (int i = n; i &gt; 0; i = i - lowbit(i)) {
+            sum += c[i];
+        }
+        return sum;
+    }
+
+    private void update(int i, int addVal) {
+        for (int j = i; j &lt; c.length; j += lowbit(j)) {
+            c[j] += addVal;
+        }
+    }
+
+    private int lowbit(int i) {
+        return i &amp; (-i);
+    }
+
+    /**
+     * 求序列的逆序数
+     * 有两种方式，1、对于每个数，计算当前位置之前比它大的数的个数，求和（树状数组法）
+     * 2、对于每个数，计算当前位置之后比它小的数的个数，求和
+     */
+    public int solve(int[] sequence) {
+        Arrays.fill(c, 0);
+        //初始化树状数组，因为要表示1~len，所以数组长度为len+1
+        int inverseNum = 0;
+        for (int i = 0; i &lt; sequence.length; i++) {
+            update(sequence[i], 1);
+            inverseNum = inverseNum + sum(c.length - 1) - sum(sequence[i]);
+        }
+        return inverseNum;
+    }
+
+    public static void main(String[] args) {
+        InverseNumber inverseNumber = new InverseNumber();
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 4, 5}) == 0);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 3, 5, 4}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 3, 5}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 4, 5, 3}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 4, 3}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 2, 5, 3, 4}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 4, 5}) == 1);
+        System.out.println(inverseNumber.solve(new int[]{1, 3, 2, 5, 4}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 3, 5}) == 2);
+        System.out.println(inverseNumber.solve(new int[]{1, 4, 2, 5, 3}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 3, 4}) == 3);
+        System.out.println(inverseNumber.solve(new int[]{1, 5, 2, 4, 3}) == 4);
+    }
+}
+</code></pre><p>采用离散化求逆序数：</p>
+<pre>
+import java.util.*;
+
+public class Solution {
+
+    BinaryIndexedTree binaryIndexedTree;
+
+    class mapper {
+        int val;
+        int pos;
+
+        public mapper(int val, int pos) {
+            this.val = val;
+            this.pos = pos;
+        }
+    }
+
+    public int InversePairs(int[] array) {
+        //异常条件
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
+        //离散化，用mapper数组扩展array，记录了原数组的pos
+        mapper[] map = new mapper[array.length];
+        for (int i = 0; i < array.length; i++) {
+            map[i] = new mapper(array[i], i);
+        }
+        //按值升序排序，值相等按pos排序（元素相等时不影响逆序数计算）
+        Arrays.sort(map, new Comparator<mapper>() {
+            @Override
+            public int compare(mapper o1, mapper o2) {
+                if (o1.val != o2.val) {
+                    return o1.val - o2.val;
+                }
+                return o1.pos - o2.pos;
+            }
+        });
+        //离散后数组
+        int[] after = new int[array.length];
+        for (int i = 0; i < map.length; i++) {
+            //离散化关键，从小到大进行替换，根据pos找到原数组的位置
+            after[map[i].pos] = i + 1;//!!替换后不能出现0！！
+        }
+
+        /*for (int i = 0; i < map.length; i++) {
+            array[map[i].pos] = i + 1;
+        }*/
+
+        //构建树状数组
+        binaryIndexedTree = new BinaryIndexedTree(new int[after.length + 1]);
+
+        int inverseNum = 0;
+        for (int i = 0; i < after.length; i++) {
+            //数组下标为array[i]的值+1，并**计算在该数字插入前，之前已经插入比他大的个数**
+            binaryIndexedTree.update(after[i], 1);
+            //inverseNum += (i + 1 - binaryIndexedTree.sum(after[i]));
+            inverseNum = (inverseNum + (i + 1 - binaryIndexedTree.sum(after[i])) % 1000000007) % 1000000007;
+        }
+        return inverseNum;
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] array = {111111111, 222222222, 333333333, 444444444, 555555555, 666666666, 777777777, 0};
+        System.out.println(s.InversePairs(array));//7
+    }
+}
+
+/**
+ * 树状数组工具类
+ */
+class BinaryIndexedTree {
+
+    int[] c;
+
+    public BinaryIndexedTree(int[] a) {
+        c = new int[a.length];
+        //c[i] = a[i-lowbit(i)+1] + ... + a[i-1] +a[i],c[i]为a[i]前长度为lowbit(i)的和
+        for (int i = 1; i < c.length; i++) {
+            for (int j = i - lowbit(i) + 1; j <= i;="" j++)="" {="" c[i]="" +="a[j];" }="" system.out.println(arrays.tostring(c));="" 求1...x的值="" public="" int="" sum(int="" x)="" result="0;" for="" (int="" k="x;"> 0; k -= lowbit(k)) {
+            result += c[k];
+        }
+        return result;
+    }
+
+    //第x位的数字加上add
+    public void update(int x, int add) {
+        for (int k = x; k < c.length; k += lowbit(k)) {
+            c[k] += add;
+        }
+    }
+
+    //一个数二进制表示，从右往左数碰到的第一个1位开始，一直往右组成的数，如1100->100
+    private int lowbit(int x) {
+        return x & (-x);
+    }
+
+    public static void main(String[] args) {
+        int[] array = {0, 1, 2, 3, 4, 5};
+        BinaryIndexedTree b = new BinaryIndexedTree(array);
+        for (int i = 1; i < array.length; i++) {
+            System.out.println(b.sum(i));
+        }
+        b.update(3, 1);
+        System.out.println("更新后");
+        for (int i = 1; i < array.length; i++) {
+            System.out.println(b.sum(i));
+        }
+    }
+}
+</=></mapper></pre>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>树状数组<br><a href="http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1" target="_blank" rel="external">http://m.baidu.com/from=1086k/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40320_1002%2Cta%40iphone_2_5.1_2_6.0/baiduid=99806F566512D4B5CD2F1444260EE0C9/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&amp;lid=7403775788561080468&amp;order=5&amp;fm=alop&amp;tj=www_normal_5_0_10_title&amp;vit=osres&amp;m=8&amp;srd=1&amp;cltj=cloud_title&amp;asres=1&amp;nt=wnor&amp;title=%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E6%9E%AB%E5%8F%B6%E9%A3%98%E6%B3%AA-%E5%8D%9A%E5%AE%A2%E5%9B%AD&amp;dict=30&amp;w_qd=IlPT2AEptyoA_ykz841awPKuClNUeYW&amp;sec=21209&amp;di=21497407b0f1efff&amp;bdenc=1&amp;tch=124.264.223.898.1.220&amp;nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASDfuLnyJG6CwdoS4csxNaT0u3mRU7xJ_r0dmpWknznuPdPbhgK3AHBAQfApiNNbWVS7&amp;eqid=66bf7eda51d220001000000359231e3f&amp;wd=&amp;clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1495474296937%2C%22sig%22%3A%22567989%22%2C%22xpath%22%3A%22div-a-h3%22%7D&amp;sfOpen=1</a></p>
+<p>树状数组求逆序数的原理<br><a href="http://www.cnblogs.com/i-love-acm/p/3251036.html" target="_blank" rel="external">http://www.cnblogs.com/i-love-acm/p/3251036.html</a></p>
+<p>逆序数及其求法<br><a href="http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx" target="_blank" rel="external">http://www.cppblog.com/bennycen/archive/2011/11/17/160369.aspx</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" rel="next" title="1、Leetcode 简单题">
+                <i class="fa fa-chevron-left"></i> 1、Leetcode 简单题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/" rel="prev" title="4、LCA 最近公共祖先问题">
+                4、LCA 最近公共祖先问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组作用"><span class="nav-number">1.</span> <span class="nav-text">树状数组作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树状数组结构图"><span class="nav-number">2.</span> <span class="nav-text">树状数组结构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树状数组求逆序数"><span class="nav-number">3.1.</span> <span class="nav-text">树状数组求逆序数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

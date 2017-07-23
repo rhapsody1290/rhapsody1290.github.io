@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="题目：全排列例如ABC，全排列的结果是ABC、ACB、BAC、BCA、CAB、CBA 递归穷举1、穷举，遍历出所有结果。因为对于长度为n的字符串，需要n层for循环，代码没法写，所以需要利用递归实现 for(int i = 0; i &amp;lt; str.length(); i++){     for(int i = 0; i &amp;lt; str.length(); i++){         for(">
+<meta name="keywords" content="算法,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10、全排列（DFS+剪枝）">
+<meta property="og:url" content="http://qianmingxs.com/2017/06/28/[数据结构与算法]10、全排列（DFS+剪枝）/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="题目：全排列例如ABC，全排列的结果是ABC、ACB、BAC、BCA、CAB、CBA 递归穷举1、穷举，遍历出所有结果。因为对于长度为n的字符串，需要n层for循环，代码没法写，所以需要利用递归实现 for(int i = 0; i &amp;lt; str.length(); i++){     for(int i = 0; i &amp;lt; str.length(); i++){         for(">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/9IPlcrP.jpg">
+<meta property="og:image" content="http://i.imgur.com/C15NY78.jpg">
+<meta property="og:image" content="http://i.imgur.com/vfH34t6.jpg">
+<meta property="og:image" content="http://i.imgur.com/jv61CWg.jpg">
+<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10、全排列（DFS+剪枝）">
+<meta name="twitter:description" content="题目：全排列例如ABC，全排列的结果是ABC、ACB、BAC、BCA、CAB、CBA 递归穷举1、穷举，遍历出所有结果。因为对于长度为n的字符串，需要n层for循环，代码没法写，所以需要利用递归实现 for(int i = 0; i &amp;lt; str.length(); i++){     for(int i = 0; i &amp;lt; str.length(); i++){         for(">
+<meta name="twitter:image" content="http://i.imgur.com/9IPlcrP.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/06/28/[数据结构与算法]10、全排列（DFS+剪枝）/"/>
+
+
+
+
+
+  <title>10、全排列（DFS+剪枝） | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/28/[数据结构与算法]10、全排列（DFS+剪枝）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">10、全排列（DFS+剪枝）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T09:17:00+08:00">
+                2017-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="题目：全排列"><a href="#题目：全排列" class="headerlink" title="题目：全排列"></a>题目：全排列</h2><p>例如ABC，全排列的结果是ABC、ACB、BAC、BCA、CAB、CBA</p>
+<h2 id="递归穷举"><a href="#递归穷举" class="headerlink" title="递归穷举"></a>递归穷举</h2><p>1、穷举，遍历出所有结果。因为对于长度为n的字符串，<strong>需要n层for循环，代码没法写</strong>，所以需要利用递归实现</p>
+<pre><code>for(int i = 0; i &lt; str.length(); i++){
+    for(int i = 0; i &lt; str.length(); i++){
+        for(int i = 0; i &lt; str.length(); i++){
+            .....长度为n的字符串需要写n个for，代码没法写了
+        }
+    }
+}
+</code></pre><p>写成递归的形式：</p>
+<pre><code>public void DFS(int step) {
+
+    //递归结束
+    if(step &gt;= str.length()){
+        return;
+    }
+
+    for (int i = 0; i &lt; str.length(); i++) {
+        System.out.println(str.charAt(i));
+        DFS(step + 1);//进去都是for循环，和多个嵌套for一样，要注意结束点
+    }
+}
+</code></pre><p>遍历结果：</p>
+<p>a、a、a、b、c、b、a、b、c、c、a、b、c<br>b、a、a、b、c、b、a、b、c、c、a、b、c<br>c、a、a、b、c、b、a、b、c、c、a、b、c</p>
+<p>参照画的图，结果一致：</p>
+<p><img src="http://i.imgur.com/9IPlcrP.jpg" alt=""></p>
+<h2 id="记录路径"><a href="#记录路径" class="headerlink" title="记录路径"></a>记录路径</h2><p>还是以循环的形式考虑，这个很容易理解</p>
+<pre><code>List&lt;Integer&gt; path = new LinkedList&lt;Integer&gt;();
+for (int i = 0; i &lt; str.length(); i++) {
+    path.add(i);
+    for (int j = 0; j &lt; str.length(); j++) {
+        path.add(j);
+        for (int k = 0; k &lt; str.length(); k++) {
+            path.add(k);
+            //输出
+            System.out.println(path);
+            path.remove(path.size() - 1);
+        }
+        path.remove(path.size() - 1);
+    }
+    path.remove(path.size() - 1);
+}
+</code></pre><p>输出结果：</p>
+<pre><code>[0, 0, 0]
+[0, 0, 1]
+[0, 0, 2]
+[0, 1, 0]
+[0, 1, 1]
+[0, 1, 2]
+[0, 2, 0]
+[0, 2, 1]
+[0, 2, 2]
+[1, 0, 0]
+[1, 0, 1]
+[1, 0, 2]
+[1, 1, 0]
+[1, 1, 1]
+[1, 1, 2]
+[1, 2, 0]
+[1, 2, 1]
+[1, 2, 2]
+[2, 0, 0]
+[2, 0, 1]
+[2, 0, 2]
+[2, 1, 0]
+[2, 1, 1]
+[2, 1, 2]
+[2, 2, 0]
+[2, 2, 1]
+[2, 2, 2]
+</code></pre><p>现在改成递归的方式应该很容易了吧，<strong>你知道哪里应该add，哪里应该remove了</strong></p>
+<pre><code>public class Permutation {
+
+    String str;
+    List&lt;Integer&gt; path = new LinkedList&lt;Integer&gt;();
+
+    public void DFS(int step) {
+
+        if (step &gt;= str.length()) {
+            return;
+        }
+
+        for (int i = 0; i &lt; str.length(); i++) {
+            path.add(i);
+            if(path.size() == str.length()){
+                System.out.println(path);
+            }
+            DFS(step + 1);
+            path.remove(path.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = &quot;abc&quot;;
+        Permutation s = new Permutation();
+        s.str = str;
+        s.DFS(0);
+    }
+
+}
+</code></pre><p>有个问题：输出是放在DFS（step + 1）前还是后面？</p>
+<pre><code>if(path.size() == str.length()){
+    System.out.println(path);
+}
+</code></pre><p>如果到达<strong>最后一层</strong>循环，这个DFS（step+1）相当于<strong>空函数！！</strong>，所以<strong>输出放在DFS(step + 1)前或者后都一样</strong></p>
+<pre><code>for (int i = 0; i &lt; str.length(); i++) {
+    //System.out.println(str.charAt(i));
+    path.add(i);
+    if(path.size() == str.length()){
+        System.out.println(path);
+    }
+    DFS(step + 1);
+    path.remove(path.size() - 1);
+}
+</code></pre><h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><p><img src="http://i.imgur.com/C15NY78.jpg" alt=""></p>
+<p>红色描绘的路径是符合条件的全排列，观察后发现：</p>
+<ul>
+<li><strong>访问的路径节点之前已经存在</strong>，那么就需要剪枝</li>
+<li>路径刚才我们已经保存了，所以可以做到</li>
+</ul>
+<p>加入节点前需要判断这个节点是否已经存在</p>
+<pre><code>if(path.contains(i)){
+    continue;
+}
+</code></pre><h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p>递归完整版</p>
+<pre><code>public class Permutation {
+
+    String str;
+    List&lt;Integer&gt; path = new LinkedList&lt;Integer&gt;();
+
+    public void DFS(int step) {
+
+        if (step &gt;= str.length()) {
+            return;
+        }
+
+        for (int i = 0; i &lt; str.length(); i++) {
+            if(path.contains(i)){
+                continue;
+            }
+            path.add(i);
+            //输出
+            if(path.size() == str.length()){
+                //System.out.println(path);
+                for(Integer t : path){
+                    System.out.print(str.charAt(t) + &quot; &quot;);
+                }
+                System.out.println();
+            }
+            DFS(step + 1);
+            path.remove(path.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = &quot;abc&quot;;
+        Permutation s = new Permutation();
+        s.str = str;
+        s.DFS(0);
+    }
+
+}
+</code></pre><p>循环完整版</p>
+<pre><code>List&lt;Integer&gt; path = new LinkedList&lt;Integer&gt;();
+    for (int i = 0; i &lt; str.length(); i++) {
+        if(path.contains(i)){
+            continue;
+        }
+        path.add(i);
+        for (int j = 0; j &lt; str.length(); j++) {
+            if(path.contains(j)){
+                continue;
+            }
+            path.add(j);
+            for (int k = 0; k &lt; str.length(); k++) {
+                if(path.contains(k)){
+                    continue;
+                }
+
+                path.add(k);
+                //输出
+                //System.out.println(path);
+                for(Integer t : path){
+                    System.out.print(str.charAt(t) + &quot; &quot;);
+                }
+                System.out.println();
+
+                path.remove(path.size() - 1);
+            }
+            path.remove(path.size() - 1);
+        }
+        path.remove(path.size() - 1);
+    }
+}
+</code></pre><h2 id="如果有重复"><a href="#如果有重复" class="headerlink" title="如果有重复"></a>如果有重复</h2><p>如果输入aac，将会输出</p>
+<pre><code>a a c 
+a c a 
+a a c 
+a c a 
+c a a 
+c a a 
+</code></pre><p>有重复，为什么？为了区分用a1，a2表示</p>
+<p>下图为按照未重复的时候的结果进行遍历、剪枝，打钩的即为需要保留的元素，与程序运行的一致</p>
+<p><img src="http://i.imgur.com/vfH34t6.jpg" alt=""></p>
+<p>下图中圈出来的路径需要被剪去，思考一下有什么特征？</p>
+<p><img src="http://i.imgur.com/jv61CWg.jpg" alt=""></p>
+<pre><code>a2、a1、c
+a2、c、a1
+c、a2、a1
+</code></pre><p><strong>如果之前路径有相同的元素（这里是判断值相等，刚才是判断下标是否相等），而且当前下标比之前的小，则剪去</strong></p>
+<p>代码如下：</p>
+<pre><code>//重复元素
+boolean flag = false;
+for(Integer t : path){
+    if(str.charAt(t) == str.charAt(i) &amp;&amp; i &lt; t){
+        flag = true;
+        break;
+    }
+}
+if(flag){
+    continue;
+}
+</code></pre><p>完整代码：</p>
+<pre><code>public class Permutation {
+
+    String str;
+    List&lt;Integer&gt; path = new LinkedList&lt;Integer&gt;();
+
+    public void DFS(int step) {
+
+        if (step &gt;= str.length()) {
+            return;
+        }
+
+        for (int i = 0; i &lt; str.length(); i++) {
+            if(path.contains(i)){
+                continue;
+            }
+
+            //重复元素
+            boolean flag = false;
+            for(Integer t : path){
+                if(str.charAt(t) == str.charAt(i) &amp;&amp; i &lt; t){
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag){
+                continue;
+            }
+
+            path.add(i);
+            //输出
+            if(path.size() == str.length()){
+                //System.out.println(path);
+                for(Integer t : path){
+                    System.out.print(str.charAt(t) + &quot; &quot;);
+                }
+                System.out.println();
+            }
+            DFS(step + 1);
+            path.remove(path.size() - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = &quot;aaaa&quot;;
+        Permutation s = new Permutation();
+        s.str = str;
+        s.DFS(0);
+
+    }
+
+}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/27/[Java并发编程]ConcurrentHashMap★★★（Happen Before、Volatile）/" rel="next" title="ConcurrentHashMap★★★（Happen Before、Volatile）">
+                <i class="fa fa-chevron-left"></i> ConcurrentHashMap★★★（Happen Before、Volatile）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/28/[数据结构与算法]11、迷宫问题-最短路径/" rel="prev" title="11、迷宫问题-最短路径">
+                11、迷宫问题-最短路径 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目：全排列"><span class="nav-number">1.</span> <span class="nav-text">题目：全排列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归穷举"><span class="nav-number">2.</span> <span class="nav-text">递归穷举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录路径"><span class="nav-number">3.</span> <span class="nav-text">记录路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#剪枝"><span class="nav-number">4.</span> <span class="nav-text">剪枝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">5.</span> <span class="nav-text">完整代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果有重复"><span class="nav-number">6.</span> <span class="nav-text">如果有重复</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
