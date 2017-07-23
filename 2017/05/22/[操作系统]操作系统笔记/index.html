@@ -93,36 +93,14 @@
 
 
 
-<meta name="description" content="进程管理
-进程与线程1、进程概念
-进程几部分组成：
-
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻塞
-进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta name="description" content="进程管理 进程与线程1、进程概念 进程几部分组成：  进程控制块（PCB）：标识进程的存在，描述进程的执行状态 程序段：能够被进程调度程序调度到CPU上执行的程序代码段 数据段：进程中处理的原始数据或者计算的中间结果、结果数据  进程控制块组成：  进程标识符（PID） 进程当前状态：就绪/执行/阻塞 进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统笔记">
 <meta property="og:url" content="http://qianmingxs.com/2017/05/22/[操作系统]操作系统笔记/index.html">
-<meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="进程管理
-进程与线程1、进程概念
-进程几部分组成：
-
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻塞
-进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="进程管理 进程与线程1、进程概念 进程几部分组成：  进程控制块（PCB）：标识进程的存在，描述进程的执行状态 程序段：能够被进程调度程序调度到CPU上执行的程序代码段 数据段：进程中处理的原始数据或者计算的中间结果、结果数据  进程控制块组成：  进程标识符（PID） 进程当前状态：就绪/执行/阻塞 进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://i.imgur.com/M8giTeg.jpg">
 <meta property="og:image" content="http://i.imgur.com/D0psc3v.png">
@@ -136,19 +114,7 @@
 <meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统笔记">
-<meta name="twitter:description" content="进程管理
-进程与线程1、进程概念
-进程几部分组成：
-
-进程控制块（PCB）：标识进程的存在，描述进程的执行状态
-程序段：能够被进程调度程序调度到CPU上执行的程序代码段
-数据段：进程中处理的原始数据或者计算的中间结果、结果数据
-
-进程控制块组成：
-
-进程标识符（PID）
-进程当前状态：就绪/执行/阻塞
-进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
+<meta name="twitter:description" content="进程管理 进程与线程1、进程概念 进程几部分组成：  进程控制块（PCB）：标识进程的存在，描述进程的执行状态 程序段：能够被进程调度程序调度到CPU上执行的程序代码段 数据段：进程中处理的原始数据或者计算的中间结果、结果数据  进程控制块组成：  进程标识符（PID） 进程当前状态：就绪/执行/阻塞 进程队列指针：记录PCB队列中下一个PCB的地址。系统中可能会组织多个PCB队列，如就绪队列、阻">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170331235858705?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXEzNjkyMDExOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -631,8 +597,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/23/[数据结构与算法]1、Leetcode 简单题/" rel="prev" title="1、Leetcode 简单题">
-                1、Leetcode 简单题 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/23/[数据结构与算法]3、树状数组/" rel="prev" title="3、树状数组">
+                3、树状数组 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

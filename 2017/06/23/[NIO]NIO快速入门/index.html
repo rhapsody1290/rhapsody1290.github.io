@@ -93,35 +93,19 @@
 
 
 
-<meta name="description" content="为什么需要NIO1、Java I/O是阻塞的，当线程调用read（）或write（）时，线程是阻塞的，直到数据读取、写入完毕，在此期间线程不能再干其他任何事情了。
-2、这种方式对于小规模的程序非常方便，但是对于存在大量并发连接的时候，需要为每一个连接建立一个线程来操作，这种做法存在以下缺陷：
-
-并发数与线程数成正比，线程是宝贵的系统资源，当线程数过大会导致系统的性能急剧下降，并发量有限
-
-
-NIO">
+<meta name="description" content="为什么需要NIO1、Java I/O是阻塞的，当线程调用read（）或write（）时，线程是阻塞的，直到数据读取、写入完毕，在此期间线程不能再干其他任何事情了。 2、这种方式对于小规模的程序非常方便，但是对于存在大量并发连接的时候，需要为每一个连接建立一个线程来操作，这种做法存在以下缺陷：  并发数与线程数成正比，线程是宝贵的系统资源，当线程数过大会导致系统的性能急剧下降，并发量有限   NIO">
+<meta name="keywords" content="NIO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NIO快速入门">
 <meta property="og:url" content="http://qianmingxs.com/2017/06/23/[NIO]NIO快速入门/index.html">
-<meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="为什么需要NIO1、Java I/O是阻塞的，当线程调用read（）或write（）时，线程是阻塞的，直到数据读取、写入完毕，在此期间线程不能再干其他任何事情了。
-2、这种方式对于小规模的程序非常方便，但是对于存在大量并发连接的时候，需要为每一个连接建立一个线程来操作，这种做法存在以下缺陷：
-
-并发数与线程数成正比，线程是宝贵的系统资源，当线程数过大会导致系统的性能急剧下降，并发量有限
-
-
-NIO">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="为什么需要NIO1、Java I/O是阻塞的，当线程调用read（）或write（）时，线程是阻塞的，直到数据读取、写入完毕，在此期间线程不能再干其他任何事情了。 2、这种方式对于小规模的程序非常方便，但是对于存在大量并发连接的时候，需要为每一个连接建立一个线程来操作，这种做法存在以下缺陷：  并发数与线程数成正比，线程是宝贵的系统资源，当线程数过大会导致系统的性能急剧下降，并发量有限   NIO">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/BYMk6vz.png">
 <meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NIO快速入门">
-<meta name="twitter:description" content="为什么需要NIO1、Java I/O是阻塞的，当线程调用read（）或write（）时，线程是阻塞的，直到数据读取、写入完毕，在此期间线程不能再干其他任何事情了。
-2、这种方式对于小规模的程序非常方便，但是对于存在大量并发连接的时候，需要为每一个连接建立一个线程来操作，这种做法存在以下缺陷：
-
-并发数与线程数成正比，线程是宝贵的系统资源，当线程数过大会导致系统的性能急剧下降，并发量有限
-
-
-NIO">
+<meta name="twitter:description" content="为什么需要NIO1、Java I/O是阻塞的，当线程调用read（）或write（）时，线程是阻塞的，直到数据读取、写入完毕，在此期间线程不能再干其他任何事情了。 2、这种方式对于小规模的程序非常方便，但是对于存在大量并发连接的时候，需要为每一个连接建立一个线程来操作，这种做法存在以下缺陷：  并发数与线程数成正比，线程是宝贵的系统资源，当线程数过大会导致系统的性能急剧下降，并发量有限   NIO">
 <meta name="twitter:image" content="http://i.imgur.com/BYMk6vz.png">
 
 

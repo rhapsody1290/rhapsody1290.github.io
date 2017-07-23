@@ -93,22 +93,18 @@
 
 
 
-<meta name="description" content="设计的时候需要考虑的几点 
-
-首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
+<meta name="description" content="设计的时候需要考虑的几点   首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
+<meta name="keywords" content="连接池,动态代理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2、动态代理的连接池">
 <meta property="og:url" content="http://qianmingxs.com/2017/05/01/[数据库]2、动态代理的连接池/index.html">
-<meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="设计的时候需要考虑的几点 
-
-首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="设计的时候需要考虑的几点   首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2、动态代理的连接池">
-<meta name="twitter:description" content="设计的时候需要考虑的几点 
-
-首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
+<meta name="twitter:description" content="设计的时候需要考虑的几点   首先是数据库连接的存储，要能很容易的管理和获取数据库连接，将数据库连接分为两部分，一部分是空闲池，一部分是正在使用的数据库连接，使用 LinkedList 实现栈来存储空闲的数据库连接，（优势在于每一次获取到的连接都是新的连接，这样的连接基本上都是可用的，基本上不会发生连接不可用导致重新再去获取连接的操作），使用 LinkedList 实现队列来存储正在使用中数据库连">
 
 
 

@@ -93,16 +93,14 @@
 
 
 
-<meta name="description" content="结构
-Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。
-并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
+<meta name="description" content="结构 Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。 并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ConcurrentHashMap★★★（Happen Before、Volatile）">
 <meta property="og:url" content="http://qianmingxs.com/2017/06/27/[Java并发编程]ConcurrentHashMap★★★（Happen Before、Volatile）/index.html">
-<meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="结构
-Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。
-并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="结构 Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。 并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/8TDvzvH.jpg">
 <meta property="og:image" content="http://i.imgur.com/4BLoPBR.png">
 <meta property="og:image" content="http://i.imgur.com/jzXlXZm.jpg">
@@ -113,9 +111,7 @@ Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁
 <meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConcurrentHashMap★★★（Happen Before、Volatile）">
-<meta name="twitter:description" content="结构
-Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。
-并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
+<meta name="twitter:description" content="结构 Segment 类继承于 ReentrantLock 类，从而使得 Segment 对象能充当锁的角色。每个 Segment 对象用来守护其（成员对象 table 中）包含的若干个桶。 并发读写考虑1、非结构性修改操作只是更改某个 HashEntry 的 value 域的值。由于对 Volatile 变量的写入操作将与随后对这个变量的读操作进行同步。当一个写线程修改了某个 HashEntry">
 <meta name="twitter:image" content="http://i.imgur.com/8TDvzvH.jpg">
 
 

@@ -93,16 +93,14 @@
 
 
 
-<meta name="description" content="一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的：
-1、环形Hash空间
-按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即0~">
+<meta name="description" content="一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的： 1、环形Hash空间 按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即0~">
+<meta name="keywords" content="一致性哈希算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一致性哈希算法">
 <meta property="og:url" content="http://qianmingxs.com/2017/06/11/[分布式架构]一致性哈希算法/index.html">
-<meta property="og:site_name" content="Mr.Qian's Home">
-<meta property="og:description" content="一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的：
-1、环形Hash空间
-按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即0~">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的： 1、环形Hash空间 按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即0~">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/pxLLjsA.png">
 <meta property="og:image" content="http://i.imgur.com/UyMsKuP.png">
 <meta property="og:image" content="http://i.imgur.com/UHNzty7.png">
@@ -111,9 +109,7 @@
 <meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一致性哈希算法">
-<meta name="twitter:description" content="一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的：
-1、环形Hash空间
-按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即0~">
+<meta name="twitter:description" content="一致性哈希算法在分布式集群中，对机器的添加、删除，或者机器故障后自动脱离集群这些操作是分布式集群管理最基本的功能。如果采用常用的hash(object)%N算法，那么在有机器添加或者删除后，很多原有的数据就无法找到了，这样严重的违反了单调性原则。接下来主要讲解一下一致性哈希算法是如何设计的： 1、环形Hash空间 按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即0~">
 <meta name="twitter:image" content="http://i.imgur.com/pxLLjsA.png">
 
 
