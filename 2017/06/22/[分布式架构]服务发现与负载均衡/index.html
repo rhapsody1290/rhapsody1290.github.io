@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法,数据结构," />
+  <meta name="keywords" content="负载均衡," />
 
 
 
@@ -93,20 +93,21 @@
 
 
 
-<meta name="description" content="题目从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，要求最短路径  几个重点0、广度优先搜索找到的是最短路径 上次提交的层次遍历就是广度优先搜索 //层次遍历模版 Queue&amp;lt;TreeNode&amp;gt; queue = new LinkedList&amp;lt;TreeNode&amp;gt;(); //将根元素放入队列 queue.offer(root); while(!queue.is">
-<meta name="keywords" content="算法,数据结构">
+<meta name="description" content="集中式负载均衡网络架构 1、在客户端和服务提供者之间有一个独立的负载均衡，通常采用Nginx负载均衡服务器 2、负载均衡维护了所有服务的地址映射表，通常由运维配置注册，当客户端调用某个目标服务时，它向负载均衡发起请求，由负载均衡以某种策略(比如Round-Robin)做负载均衡后将请求转发到目标服务 3、服务提供方的变更对客户端来说是透明的，客户端只需要关注和负载均衡服务器的交互 负载均衡算法A、">
+<meta name="keywords" content="负载均衡">
 <meta property="og:type" content="article">
-<meta property="og:title" content="11、迷宫问题-最短路径">
-<meta property="og:url" content="http://qianmingxs.com/2017/06/28/[数据结构与算法]11、迷宫问题-最短路径/index.html">
+<meta property="og:title" content="服务发现与负载均衡">
+<meta property="og:url" content="http://qianmingxs.com/2017/06/22/[分布式架构]服务发现与负载均衡/index.html">
 <meta property="og:site_name" content="Mr.Qian&#39;s Home">
-<meta property="og:description" content="题目从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，要求最短路径  几个重点0、广度优先搜索找到的是最短路径 上次提交的层次遍历就是广度优先搜索 //层次遍历模版 Queue&amp;lt;TreeNode&amp;gt; queue = new LinkedList&amp;lt;TreeNode&amp;gt;(); //将根元素放入队列 queue.offer(root); while(!queue.is">
+<meta property="og:description" content="集中式负载均衡网络架构 1、在客户端和服务提供者之间有一个独立的负载均衡，通常采用Nginx负载均衡服务器 2、负载均衡维护了所有服务的地址映射表，通常由运维配置注册，当客户端调用某个目标服务时，它向负载均衡发起请求，由负载均衡以某种策略(比如Round-Robin)做负载均衡后将请求转发到目标服务 3、服务提供方的变更对客户端来说是透明的，客户端只需要关注和负载均衡服务器的交互 负载均衡算法A、">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.imgur.com/ztTNOdD.jpg">
-<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta property="og:image" content="http://i.imgur.com/aXsJMVC.png">
+<meta property="og:image" content="http://i.imgur.com/vh9Xco5.png">
+<meta property="og:updated_time" content="2017-08-06T07:21:51.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="11、迷宫问题-最短路径">
-<meta name="twitter:description" content="题目从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，要求最短路径  几个重点0、广度优先搜索找到的是最短路径 上次提交的层次遍历就是广度优先搜索 //层次遍历模版 Queue&amp;lt;TreeNode&amp;gt; queue = new LinkedList&amp;lt;TreeNode&amp;gt;(); //将根元素放入队列 queue.offer(root); while(!queue.is">
-<meta name="twitter:image" content="http://i.imgur.com/ztTNOdD.jpg">
+<meta name="twitter:title" content="服务发现与负载均衡">
+<meta name="twitter:description" content="集中式负载均衡网络架构 1、在客户端和服务提供者之间有一个独立的负载均衡，通常采用Nginx负载均衡服务器 2、负载均衡维护了所有服务的地址映射表，通常由运维配置注册，当客户端调用某个目标服务时，它向负载均衡发起请求，由负载均衡以某种策略(比如Round-Robin)做负载均衡后将请求转发到目标服务 3、服务提供方的变更对客户端来说是透明的，客户端只需要关注和负载均衡服务器的交互 负载均衡算法A、">
+<meta name="twitter:image" content="http://i.imgur.com/aXsJMVC.png">
 
 
 
@@ -134,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2017/06/28/[数据结构与算法]11、迷宫问题-最短路径/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2017/06/22/[分布式架构]服务发现与负载均衡/"/>
 
 
 
 
 
-  <title>11、迷宫问题-最短路径 | Mr.Qian's Home</title>
+  <title>服务发现与负载均衡 | Mr.Qian's Home</title>
   
 
 
@@ -307,7 +308,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/28/[数据结构与算法]11、迷宫问题-最短路径/">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/06/22/[分布式架构]服务发现与负载均衡/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Qian">
@@ -324,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">11、迷宫问题-最短路径</h1>
+          <h1 class="post-title" itemprop="name headline">服务发现与负载均衡</h1>
         
 
         <div class="post-meta">
@@ -336,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-28T20:30:00+08:00">
-                2017-06-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-22T17:39:00+08:00">
+                2017-06-22
               </time>
             
 
@@ -359,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/分布式架构/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式架构</span>
                   </a>
                 </span>
 
@@ -393,113 +394,28 @@
       
 
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>从（0，0）开始，目的地是（5，7），0表示可以走，1表示不可走，要求最短路径</p>
-<p><img src="http://i.imgur.com/ztTNOdD.jpg" alt=""></p>
-<h2 id="几个重点"><a href="#几个重点" class="headerlink" title="几个重点"></a>几个重点</h2><p>0、广度优先搜索找到的是最短路径</p>
-<p>上次提交的层次遍历就是广度优先搜索</p>
-<pre><code>//层次遍历模版
-Queue&lt;TreeNode&gt; queue = new LinkedList&lt;TreeNode&gt;();
-//将根元素放入队列
-queue.offer(root);
-while(!queue.isEmpty()){
-    //从队头取出元素，并访问
-    TreeNode node = queue.poll();
-    result.add(node.val);
-    //将左右节点放入队列
-    if(node.left != null){
-        queue.offer(node.left);
-    }
-    if(node.right != null){
-        queue.offer(node.right);
-    }
-}
-</code></pre><p>1、运行8个方向：上、右上、右、右下、下、左下、左、左上</p>
-<pre><code>int[] x = {0, 1, 1, 1, 0, -1, -1, -1};
-int[] y = {1, 1, 0, -1, -1, -1, 0, 1};
-</code></pre><p>2、记录已经访问过</p>
-<p>0表示可以访问，访问之后变成1，这样每个点只被访问一下</p>
-<p>3、如何记录路径</p>
-<pre><code>Point[][] pre = new Point[map.length][map[0].length];
-</code></pre><p>一个二维数组，（i，j）记录上一个路径</p>
-<p>4、注意点：</p>
-<p>开始节点访问之后，记得标注为1</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
+        <h2 id="集中式负载均衡"><a href="#集中式负载均衡" class="headerlink" title="集中式负载均衡"></a>集中式负载均衡</h2><h3 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h3><p><img src="http://i.imgur.com/aXsJMVC.png" alt=""></p>
+<p>1、在客户端和服务提供者之间有一个独立的负载均衡，通常采用Nginx负载均衡服务器</p>
+<p>2、负载均衡维护了所有服务的地址映射表，通常由运维配置注册，当客户端调用某个目标服务时，它向负载均衡发起请求，由负载均衡以某种策略(比如Round-Robin)做负载均衡后将请求转发到目标服务</p>
+<p>3、服务提供方的变更对客户端来说是透明的，客户端只需要关注和负载均衡服务器的交互</p>
+<h3 id="负载均衡算法"><a href="#负载均衡算法" class="headerlink" title="负载均衡算法"></a>负载均衡算法</h3><p>A、随机算法</p>
+<p>算法描述：随机产生一个数，人为划定在数字位于某个区间，将请求转发到哪个服务提供方</p>
+<p>评论：<strong>随机算法是我们最最最最最最常用的算法，绝大多数情况都使用他。</strong>首先，从概率上讲，它能保证我们的请求基本是分散的，从而达到我们想要的均衡效果；其次，他又是无状态的，不需要维持上一次的选择状态，也不需要均衡因子等等。总体上，方便实惠又好用，我们一直用他！</p>
+<p>B、轮训算法（Round-Robin）</p>
+<p>算法描述：轮训算法就像是挨个数数一样（123-123-123……），一个个的轮着来。需要维护一个指针 idx，当一个请求来的时候，我们就把指针对应的机器选取出来，并且指针加一，挪到下一个位置。</p>
+<p>这样能保证每个机器的负载均衡，如果想人为得控制不同主机的访问量，可以给两台机器做个排序的数组：array = [ABBABBABBB]，人为控制主机的访问量</p>
+<p>C、一致哈希算法</p>
+<p>将[0,2^32)所有的整数投射到一个圆上，然后再将你的机器的唯一编码（比如：IP）通过hash运算得到的整数也投射到这个圆上（Node-A、Node-B）。如果一个请求来了，就将这个请求的唯一编码（比如：用户id）通过hash算法运算得到的整数也投射到这个圆上（request-1、request-2），通过顺时针方向，找到第一个对应的机器</p>
+<p><img src="http://i.imgur.com/vh9Xco5.png" alt=""></p>
+<p>实际上，一致Hash要解决的是两个问题：</p>
+<p><strong>1、散列的不变性</strong>：就是同一个请求（比如：同一个用户id，源地址）尽量的落入到一台机器，不要因为时间等其他原因，落入到不同的机器上了；<br><strong>2、异常以后的分散性：</strong>当某些机器坏掉（或者增加机器），原来落到同一台机器的请求（比如：用户id为1，101，201），尽量分散到其他机器，不要都落入其他某一台机器。这样对于系统的冲击和影响最小。</p>
+<p><strong>一致Hash算法用的最多的场景，就是分配cache服务。</strong>将某一个用户的数据缓存在固定的某台服务器上，那么我们基本上就不用多台机器都缓存同样的数据，这样对我们提高缓存利用率有极大的帮助。</p>
+<p>不过硬币都是有两面的，一致Hash也不例外。当某台机器出问题以后，这台机器上的cache失效，原先压倒这台机器上的请求，就会压到其他机器上。由于其他机器原先没有这些请求的缓存，就有可能直接将请求压到数据库上，造成数据库瞬间压力增大。如果压力很大的话，有可能直接把数据库压垮。</p>
+<p><strong>所以，在考虑用一致Hash算法的时候，一定要估计一下如果有机器宕掉后，后端系统是否能承受对应的压力。如果不能，则建议浪费一点内存利用率，使用随机算法。</strong></p>
+<h3 id="健康检查"><a href="#健康检查" class="headerlink" title="健康检查"></a>健康检查</h3><p>他的作用就是对所有的服务进行存活和健康检测，看是否需要提供给负载均衡做选择。<strong>如果一台机器的服务出现了问题，健康检查就会将这台机器从服务列表中去掉，让负载均衡算法看不到这台机器的存在。</strong></p>
+<h3 id="客户端如何发现负载均衡"><a href="#客户端如何发现负载均衡" class="headerlink" title="客户端如何发现负载均衡"></a>客户端如何发现负载均衡</h3><p><strong>通常的做法是通过DNS，运维人员为服务配置一个DNS域名，这个域名指向集中式负载均衡。</strong>方案实现简单，在负载均衡上也容易做集中式的访问控制，这一方案目前还是业界主流</p>
+<h3 id="负载均衡单点问题"><a href="#负载均衡单点问题" class="headerlink" title="负载均衡单点问题"></a>负载均衡单点问题</h3><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.v4.cc/News-938747.html" target="_blank" rel="external">http://www.v4.cc/News-938747.html</a></p>
 
-public class Solution {
-
-    public void BFS(int[][] map, Point start, Point end) {
-        //基于当前节点上一个路径
-        Point[][] pre = new Point[map.length][map[0].length];
-        pre[start.x][start.y] = start;
-        //队列
-        Queue&lt;Point&gt; queue = new LinkedList&lt;Point&gt;();
-        queue.offer(start);
-        map[start.x][start.y] = 1;
-        //遍历方向
-        int[] x = {0, 1, 1, 1, 0, -1, -1, -1};
-        int[] y = {1, 1, 0, -1, -1, -1, 0, 1};
-
-        while (!queue.isEmpty()) {
-            Point current = queue.poll();
-            //8个方向遍历
-            for (int i = 0; i &lt; x.length; i++) {
-                //判断是否越界，是否已经访问
-                Point next = new Point(current.x + x[i], current.y + y[i]);
-                //达到目录
-                if (next.x == end.x &amp;&amp; next.y == end.y) {
-                    System.out.println(next);
-                    for (Point t = current; current != pre[current.x][current.y]; current = pre[current.x][current.y]) {
-                        System.out.println(current);
-                    }
-                    System.out.println(start);
-                    return;
-                }
-
-                if (next.x &gt;= 0 &amp;&amp; next.x &lt;= end.x &amp;&amp; next.y &gt;= 0 &amp;&amp; next.y &lt;= end.y
-                        &amp;&amp; map[next.x][next.y] == 0) {//0表示可以访问
-                    queue.offer(next);
-                    map[next.x][next.y] = 1;//标记已经访问过了
-                    pre[next.x][next.y] = current;//记录路径
-                }
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        int[][] map = {
-                {0, 1, 0, 1, 0, 0, 0, 1},
-                {1, 0, 0, 1, 1, 0, 1, 0},
-                {0, 1, 1, 0, 0, 1, 1, 1},
-                {1, 0, 0, 1, 1, 0, 0, 1},
-                {1, 0, 0, 0, 1, 1, 0, 1},
-                {0, 1, 1, 1, 0, 0, 0, 0}
-        };
-        Solution s = new Solution();
-        s.BFS(map, new Point(0, 0), new Point(map.length - 1, map[0].length - 1));
-    }
-}
-
-class Point {
-    int x;
-    int y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public String toString() {
-        return &quot;Point{&quot; +
-                &quot;x=&quot; + x +
-                &quot;, y=&quot; + y +
-                &apos;}&apos;;
-    }
-}
-</code></pre>
       
     </div>
 
@@ -528,9 +444,7 @@ class Point {
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
-          
-            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+            <a href="/tags/负载均衡/" rel="tag"># 负载均衡</a>
           
         </div>
       
@@ -543,8 +457,8 @@ class Point {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/28/[数据结构与算法]10、全排列（DFS+剪枝）/" rel="next" title="10、全排列（DFS+剪枝）">
-                <i class="fa fa-chevron-left"></i> 10、全排列（DFS+剪枝）
+              <a href="/2017/06/20/[数据结构与算法]9、动态规划/" rel="next" title="9、动态规划">
+                <i class="fa fa-chevron-left"></i> 9、动态规划
               </a>
             
           </div>
@@ -553,8 +467,8 @@ class Point {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/28/[数据结构与算法]11、深度优先搜索、广度优先搜索/" rel="prev" title="11、深度优先搜索、广度优先搜索">
-                11、深度优先搜索、广度优先搜索 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/22/[分布式架构]Kafka分布式消息系统/" rel="prev" title="Kafka分布式消息系统">
+                Kafka分布式消息系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,7 +542,7 @@ class Point {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">139</span>
+                <span class="site-state-item-count">142</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -650,7 +564,7 @@ class Point {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -685,7 +599,7 @@ class Point {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个重点"><span class="nav-number">2.</span> <span class="nav-text">几个重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#集中式负载均衡"><span class="nav-number">1.</span> <span class="nav-text">集中式负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络架构"><span class="nav-number">1.1.</span> <span class="nav-text">网络架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡算法"><span class="nav-number">1.2.</span> <span class="nav-text">负载均衡算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#健康检查"><span class="nav-number">1.3.</span> <span class="nav-text">健康检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端如何发现负载均衡"><span class="nav-number">1.4.</span> <span class="nav-text">客户端如何发现负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡单点问题"><span class="nav-number">1.5.</span> <span class="nav-text">负载均衡单点问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

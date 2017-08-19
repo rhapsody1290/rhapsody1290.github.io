@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="事务ACID属性 原子性（Atomicity）：事务是一个原子操作单元，其对数据的修改，要么全都执行，要么全都不执行。 一致性（Consistent）：在事务开始和完成时，数据都必须保持一致状态（如转账钱不会少）。这意味着所有相关的数据规则都必须应用于事务的修改，以保持数据的完整性；事务结束时，所有的内部数据结构（如B树索引或双向链表）也都必须是正确的。 隔离性（Isolation）：并发事务之间">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4、Mysql面试题.">
+<meta property="og:url" content="http://qianmingxs.com/2017/07/29/[数据库]4、Mysql面试题/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="事务ACID属性 原子性（Atomicity）：事务是一个原子操作单元，其对数据的修改，要么全都执行，要么全都不执行。 一致性（Consistent）：在事务开始和完成时，数据都必须保持一致状态（如转账钱不会少）。这意味着所有相关的数据规则都必须应用于事务的修改，以保持数据的完整性；事务结束时，所有的内部数据结构（如B树索引或双向链表）也都必须是正确的。 隔离性（Isolation）：并发事务之间">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i.imgur.com/B36Axmn.png">
+<meta property="og:image" content="http://i.imgur.com/iUxof3t.png">
+<meta property="og:updated_time" content="2017-08-06T07:21:51.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4、Mysql面试题.">
+<meta name="twitter:description" content="事务ACID属性 原子性（Atomicity）：事务是一个原子操作单元，其对数据的修改，要么全都执行，要么全都不执行。 一致性（Consistent）：在事务开始和完成时，数据都必须保持一致状态（如转账钱不会少）。这意味着所有相关的数据规则都必须应用于事务的修改，以保持数据的完整性；事务结束时，所有的内部数据结构（如B树索引或双向链表）也都必须是正确的。 隔离性（Isolation）：并发事务之间">
+<meta name="twitter:image" content="http://i.imgur.com/B36Axmn.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/07/29/[数据库]4、Mysql面试题/"/>
+
+
+
+
+
+  <title>4、Mysql面试题. | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/07/29/[数据库]4、Mysql面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">4、Mysql面试题.</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T20:13:00+08:00">
+                2017-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="事务ACID属性"><a href="#事务ACID属性" class="headerlink" title="事务ACID属性"></a>事务ACID属性</h2><ul>
+<li>原子性（Atomicity）：事务是一个原子操作单元，其对数据的修改，要么全都执行，要么全都不执行。</li>
+<li>一致性（Consistent）：在事务开始和完成时，数据都必须保持一致状态（如转账钱不会少）。这意味着所有相关的数据规则都必须应用于事务的修改，以保持数据的完整性；事务结束时，所有的内部数据结构（如B树索引或双向链表）也都必须是正确的。</li>
+<li>隔离性（Isolation）：并发事务之间互相影响的程度，适当的破坏一致性来提升性能与并行度。数据库系统提供一定的隔离机制，保证事务在不受外部并发操作影响的“独立”环境执行。这意味着事务处理过程中的中间状态对外部是不可见的，反之亦然。</li>
+<li>持久性（Durable）：事务完成之后，它对于数据的修改是永久性的，即使出现系统故障也能够保持。</li>
+</ul>
+<p>一致性理解：</p>
+<p>数据操作后前后一致，A账户增加100，B账户就减少100，总数没少，一致的<br>专业术语是：状态A，经过事务的操作B，转移到状态C，B的操作完全应用在A上，产生的结果B是准确得<br>准确是指什么准确<br>不是有可能操作B中断，这些异常，可能B的操作是加10，但是分为10个+1的中间操作，但是操作B中断了<br>可能 A 经过操作B 得到结果C 是 +1，而不是+10</p>
+<p><strong>一致性要求保证操作B的中间结果对外是不可见的</strong><br>要不就是全部执行，要不就不执行<br>就回到刚才那里例子，银行转账<br>这不还是原子性么……<br>原子性是一致性的保障哈<br>原子性、一致性和持久性是通过redo 和 undo 日志文件实现的<br>所以你看他们的实现都在一起</p>
+<h2 id="事务隔离等级"><a href="#事务隔离等级" class="headerlink" title="事务隔离等级"></a>事务隔离等级</h2><p><strong>并发时出现的问题及解决方案</strong></p>
+<p><img src="http://i.imgur.com/B36Axmn.png" alt=""></p>
+<p><strong>事务隔离级别选择</strong></p>
+<p>1、事务隔离级别越严格，并发副作用越小，对系统的性能影响越大，因为事务隔离实质上使事务在一定程度上”串行化”执行，与并发是矛盾的<br>2、不同的应用对读一致性和隔离程度是不同的，比如许多应用对”不可重复读”和”幻影读”并不敏感，可能更关注数据并发访问能力</p>
+<h2 id="Mysql默认事务隔离等级"><a href="#Mysql默认事务隔离等级" class="headerlink" title="Mysql默认事务隔离等级"></a>Mysql默认事务隔离等级</h2><p>innoDB是MySQL默认的存储引擎，默认的隔离级别是RR，并且在RR的隔离级别下更进一步，<strong>通过多版本并发控制（MVCC，Multiversion Concurrency Control ）解决不可重复读问题，加上间隙锁（也就是并发控制）解决幻读问题。</strong>因此innoDB的RR隔离级别其实实现了串行化级别的效果，而且保留了比较好的并发性能。</p>
+<h2 id="如何实现事务隔离"><a href="#如何实现事务隔离" class="headerlink" title="如何实现事务隔离"></a>如何实现事务隔离</h2><p>1、读取数据前，加锁（悲观锁）<br>2、不加任何锁，在数据请求点生成一个快照，并用这个快照来提供一定级别的一致性读取（乐观锁）</p>
+<h2 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h2><p>MVCC是一种多版本并发控制机制</p>
+<p>锁机制可以控制并发操作，但是其系统开销较大，而MVCC可以在大多数情况下代替行级锁，使用MVCC，能降低其系统开销</p>
+<p>InnoDB 的 MVCC，是通过在每行记录后面保存两个隐藏的列来实现的，这两个列，<strong>分别保存了这个行的创建时间，一个保存的是行的删除时间。</strong>这里存储的并不是实际的时间值，而是系统版本号(可以理解为事务的ID)，没开始一个新的事务，系统版本号就会自动递增，事务开始时刻的系统版本号会作为事务的ID。</p>
+<p>SELECT<br>1、InnoDB只会查找版本早于当前事务版本的数据行(也就是,行的系统版本号小于或等于事务的系统版本<br>2、行的删除版本要么未定义,要么大于当前事务版本号,这可以确保事务读取到的行，在事务开始之前未被删除. </p>
+<p>DELETE<br>InnoDB会为删除的每一行保存当前系统的版本号(事务的ID)作为删除标识. </p>
+<p>UPDATE<br>InnoDB执行UPDATE，实际上是<strong>新插入了一行记录</strong>，并保存其创建时间为当前事务的ID，<strong>同时保存当前事务ID到要UPDATE的行的删除时间.</strong></p>
+<p>详细：<br><a href="http://blog.csdn.net/whoamiyang/article/details/51901888" target="_blank" rel="external">http://blog.csdn.net/whoamiyang/article/details/51901888</a></p>
+<h2 id="InnoDB和MyISAM区别"><a href="#InnoDB和MyISAM区别" class="headerlink" title="InnoDB和MyISAM区别"></a>InnoDB和MyISAM区别</h2><p>MySQL数据库分为Innodb和Myisam两类。两者最主要的区别是：<strong>Innodb支持事务处理、外键和行级锁.而MyISAM不支持，所以如果CUD比较频繁或要求事务一致性的，使用Innodb比较好，反之使用Myisam比较好。</strong>具体区别如下：</p>
+<p>1、索引：MyISAM的索引和数据是分开的，并且索引是有压缩的，而Innodb是索引和数据放在一起，且没有使用压缩，因而Innodb比MyISAM体积更大。MyISAM每张表都包括三种文件：表定义文件（.frm）、数据文件（.myd)和索引文件（.myi)，而Innodb通常许多表保存在同一个文件中。此外，如果表数据非常大，通常也使用MyISAM。<br>2、InnoDB不支持FULLTEXT类型的索引。<br>3、对于AUTO_INCREMENT类型的字段，InnoDB中必须单独建索引，而在MyISAM中可以和其他字段一起建立联合索引。<br>4、没有where的SELECT COUNT(*)：MyISAM始终保留一张表的行数，因此这条语句几乎瞬间就可以执行完，而Innodb会一行行的累加。<br>5、锁：MyISAM表锁，Innodb行锁</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><p>1、普通索引</p>
+<p>这是最基本的索引，它没有任何限制，比如上文中为title字段创建的索引就是一个普通索引，MyIASM中默认的BTREE类型的索引，也是我们大多数情况下用到的索引。</p>
+<p>2、唯一索引</p>
+<p>与普通索引类似，不同的就是：索引列的值必须唯一，但允许有空值（注意和主键不同）。如果是组合索引，则列值的组合必须唯一，创建方法和普通索引类似。</p>
+<p>3、全文索引（FULLTEXT）</p>
+<p>MySQL从3.23.23版开始支持全文索引和全文检索，FULLTEXT索引仅可用于 MyISAM 表；他们可以从CHAR、VARCHAR或TEXT列中作为CREATE TABLE语句的一部分被创建，或是随后使用ALTER TABLE 或CREATE INDEX被添加。////对于较大的数据集，将你的资料输入一个没有FULLTEXT索引的表中，然后创建索引，其速度比把资料输入现有FULLTEXT索引的速度更为快。不过切记对于大容量的数据表，生成全文索引是一个非常消耗时间非常消耗硬盘空间的做法。</p>
+<h3 id="单列索引、多列索引"><a href="#单列索引、多列索引" class="headerlink" title="单列索引、多列索引"></a>单列索引、多列索引</h3><p><strong>单列索引</strong></p>
+<p>考虑使用索引的主要有两种类型的列：在Where子句中出现的列，在join子句中出现的列</p>
+<p>那么，我们是否可以简单地认为应该索引Where子句和join子句中出现的每一个列呢？差不多如此，但并不完全。我们还必须考虑到对列进行比较的操作符类型。MySQL只有对以下操作符才使用索引：&lt;，&lt;=，=，&gt;，&gt;=，BETWEEN，IN，以及某些时候的LIKE。</p>
+<p><strong>多列索引</strong></p>
+<p><strong>多个单列索引与单个多列索引的查询效果不同</strong>，因为执行查询时，MySQL只能使用一个索引，会从多个索引中选择一个限制最为严格的索引。</p>
+<pre><code>Select peopleid  
+FROM people   
+Where firstname=&apos;Mike&apos;   
+      AND lastname=&apos;Sullivan&apos; AND age=17;  
+</code></pre><p>为了提高搜索效率，我们需要考虑运用多列索引。如果为firstname、lastname和age这三个列创建一个多列索引，MySQL只需一次检索就能够找出正确的结果</p>
+<p><strong>多列索引中最左前缀（Leftmost Prefixing）</strong></p>
+<p>现在我们有一个firstname、lastname、age列上的多列索引，我们称这个索引为fname_lname_age。当搜索条件是以下各种列的组合时，MySQL将使用fname_lname_age索引：</p>
+<pre><code>firstname，lastname，age
+firstname，lastname
+firstname
+</code></pre><p><strong>详细：</strong><br><a href="http://greatwqs.iteye.com/blog/1897118" target="_blank" rel="external">http://greatwqs.iteye.com/blog/1897118</a></p>
+<h3 id="聚簇索引和非聚簇索引"><a href="#聚簇索引和非聚簇索引" class="headerlink" title="聚簇索引和非聚簇索引"></a>聚簇索引和非聚簇索引</h3><p><strong>聚集索引</strong></p>
+<p>1、表中行的物理存储顺序按照”索引键值顺序排列”，该索引称为”聚集索引”<br>2、每个表只能有一个聚集索引，因为数据只能按照一种方法进行排序。但该索引可以包含多个列（组合索引），就像电话簿按姓氏和名字进行组织一样<br>3、聚簇索引的叶节点就是数据节点</p>
+<p>优点：<br>聚集索引对于那些经常要<strong>搜索范围值</strong>的列特别有效。使用聚集索引找到包含第一个值的行后，便可以确保包含后续索引值的行在物理相邻。</p>
+<p><strong>非聚集索引</strong></p>
+<p>1、索引中索引的<strong>逻辑顺序</strong>与磁盘上行的<strong>物理存储</strong>顺序不同（目录纯粹是目录，正文纯粹是正文的排序方式称为”非聚集索引”，查找记录时需要通过目录索引找到正文）<br>2、非聚簇索引的叶节点仍然是索引节点，只不过有一个指针指向对应的数据块</p>
+<p><strong>总结</strong></p>
+<p>1、<strong>聚簇索引的叶节点就是数据节点。而非聚簇索引的叶节点仍然是索引节点，只不过有一个指针指向对应的数据块</strong></p>
+<p>2、聚簇索引能提高多行检索的速度，而非聚簇索引对于单行的检索很快</p>
+<p>详细：</p>
+<p><a href="http://www.cnblogs.com/aspnethot/articles/1504082.html" target="_blank" rel="external">http://www.cnblogs.com/aspnethot/articles/1504082.html</a></p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<h3 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h3><p>1、何时使用聚集索引或非聚集索引？<br>2、索引不会包含有NULL值的列，使用默认值<br>3、使用短索引</p>
+<h2 id="什么情况下设置了索引但无法使用，索引无效"><a href="#什么情况下设置了索引但无法使用，索引无效" class="headerlink" title="什么情况下设置了索引但无法使用，索引无效"></a>什么情况下设置了索引但无法使用，索引无效</h2><p>1) 以”%”开头的LIKE语句，模糊匹配：红色标识位置的百分号会导致相关列的索引无法使用<br>2) Or语句前后没有同时使用索引<br>3) 数据类型出现隐式转化（如varchar不加单引号的话可能会自动转换为int型，会使索引无效，产生全表扫描。）<br>4) 在索引列上使用IS NULL 或IS NOT NULL操作。索引是不索引空值的，所以这样的操作不能使用索引，可以用其他的办法处理，例如：数字类型，判断大于0，字符串类型设置一个默认值，判断是否等于默认值即可<br>5) 在索引字段上使用not，&lt;&gt;，!=，eg&lt;&gt; 操作符（不等于）：不等于操作符是永远不会用到索引的，因此对它的处理只会产生全表扫描。 用其它相同功能的操作运算代替，如 a&lt;&gt;0 改为 a&gt;0 or a&lt;0<br>6) 对索引字段进行计算操作</p>
+<h1 id="7-在索引字段上使用函数"><a href="#7-在索引字段上使用函数" class="headerlink" title="7) 在索引字段上使用函数"></a>7) 在索引字段上使用函数</h1><h2 id="Mysql-日志"><a href="#Mysql-日志" class="headerlink" title="Mysql 日志"></a>Mysql 日志</h2><p>事务的隔离用是通过锁机制实现的，原子性、一致性和持久性是通过redo 和 undo 日志文件实现的</p>
+<p><strong>概述</strong></p>
+<p>1、当开始一个事务时候，会纪录该事务的一个日志序列号<br>2、当事务执行时候，在写数据之前，需要先写日志，这种方式称为预写日志方式WAL（Write-Ahead Logging）。<br>3、undo记录了数据在事务开始之前的值，当事务执行失败或者ROLLBACK时可以通过undo记录的值来恢复数据 =&gt; 缺点：单纯使用undo保证原子性和持久性需要在事务提交之前将数据写到磁盘，浪费大量I/O。<br>4、引入redo日志记录数据修改后的值，可以避免数据在事务提交之前必须写入到磁盘的需求，减少I/O。</p>
+<p><strong>undo</strong></p>
+<p>undo记录了数据在事务开始之前的值，当事务执行失败或者ROLLBACK时可以通过undo记录的值来恢复数据。例如 AA和BB的初始值分别为3，5。</p>
+<pre><code>A 事务开始
+B 记录AA=3到undo_buf
+C 修改AA=1
+D 记录BB=5到undo_buf
+E 修改BB=7
+F 将undo_buf写到undo(磁盘)
+G 将data_buf写到datafile(磁盘)
+H 事务提交
+</code></pre><p>如果事务在F之前崩溃由于数据还没写入磁盘，所以数据不会被破坏。<br>如果事务在G之前崩溃或者回滚则可以根据undo恢复到初始状态。<br>数据在任务提交之前写到磁盘保证了持久性。<br>但是单纯使用undo保证原子性和持久性需要在事务提交之前将数据写到磁盘，浪费大量I/O。</p>
+<p><strong>思考题：为什么要将undo_buf写到磁盘，而不是直接执行G</strong></p>
+<p>如果G崩溃如果不将undo写入磁盘就没法回滚，所以需要进行undo的持续化，所以使用undo来保证原子性和持久性会大量浪费IO，主要体现在多谢了undo的操作</p>
+<p><strong>redo：</strong></p>
+<p>引入redo日志记录数据修改后的值，可以避免数据在事务提交之前必须写入到磁盘的需求，减少I/O。<br>通过undo保证事务的原子性，redo保证持久性。 </p>
+<pre><code>A 事务开始
+B 记录AA=3到undo_buf
+C 修改AA=1 记录redo_buf
+D 记录BB=5到undo_buf
+E 修改BB=7 记录redo_buf
+F 将redo_buf写到redo（磁盘）
+G 事务提交
+</code></pre><p>F之前崩溃由于所有数据都在内存，恢复后重新冲磁盘载入之前的数据，数据没有被破坏。<br>FG之间的崩溃可以使用redo来恢复。<br>G之前的回滚都可以使用undo来完成。</p>
+<p><strong>两个概念</strong></p>
+<p>1、崩溃：操作失败，开机后需要继续执行<br>2、回滚：取消之前的执行结果<br>然后用redo可以解决崩溃问题<br>用undo可以回滚</p>
+<p>qm总结：<br>1、undo：宕机恢复时，如果undo日志没有commit，则进行回滚<br>操作步骤：持久化undo日志，数据库持久化，commit<br>缺点：commit前完成数据持久化，同步IO</p>
+<p>2、redo：宕机恢复时，如果redo日志已经commit，将数据库数据持久化到磁盘<br>操作步骤：持久化redo日志，commit之后在适当时间进行数据库持久化<br>优点：解决同步IO</p>
+<p>3、undo/redo：事务执行时持久化undo/redo日志，宕机恢复时，如果没有commit，则利用undo回滚；如果已经commit，则恢复执行redo操作，持久化到磁盘</p>
+<p>详细：<br><a href="http://blog.csdn.net/sk199048/article/details/50596092" target="_blank" rel="external">http://blog.csdn.net/sk199048/article/details/50596092</a><br><a href="http://blog.csdn.net/mchdba/article/details/12242685" target="_blank" rel="external">http://blog.csdn.net/mchdba/article/details/12242685</a><br><a href="http://blog.chinaunix.net/uid-20196318-id-3812190.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-20196318-id-3812190.html</a></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>63b271e37efb23df61727e260c18db29cb801183</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><p><img src="http://i.imgur.com/iUxof3t.png" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>从特性说起，漫谈MySQL中的事务及其实现<br><a href="http://dbaplus.cn/news-11-515-1.html?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="external">http://dbaplus.cn/news-11-515-1.html?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/[数据结构与算法]13、交互字符串使之有序的最小次数/" rel="next" title="11、交互字符串使之有序的最小次数">
+                <i class="fa fa-chevron-left"></i> 11、交互字符串使之有序的最小次数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/20/[数据结构与算法]14、判断是否是平衡二叉树/" rel="prev" title="判断是否是平衡二叉树">
+                判断是否是平衡二叉树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">142</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务ACID属性"><span class="nav-number">1.</span> <span class="nav-text">事务ACID属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务隔离等级"><span class="nav-number">2.</span> <span class="nav-text">事务隔离等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql默认事务隔离等级"><span class="nav-number">3.</span> <span class="nav-text">Mysql默认事务隔离等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现事务隔离"><span class="nav-number">4.</span> <span class="nav-text">如何实现事务隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVCC"><span class="nav-number">5.</span> <span class="nav-text">MVCC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InnoDB和MyISAM区别"><span class="nav-number">6.</span> <span class="nav-text">InnoDB和MyISAM区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">7.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引类型"><span class="nav-number">7.1.</span> <span class="nav-text">索引类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单列索引、多列索引"><span class="nav-number">7.2.</span> <span class="nav-text">单列索引、多列索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚簇索引和非聚簇索引"><span class="nav-number">7.3.</span> <span class="nav-text">聚簇索引和非聚簇索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引优化"><span class="nav-number">7.4.</span> <span class="nav-text">索引优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么情况下设置了索引但无法使用，索引无效"><span class="nav-number">8.</span> <span class="nav-text">什么情况下设置了索引但无法使用，索引无效</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-在索引字段上使用函数"><span class="nav-number"></span> <span class="nav-text">7) 在索引字段上使用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql-日志"><span class="nav-number">1.</span> <span class="nav-text">Mysql 日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页查询"><span class="nav-number">2.</span> <span class="nav-text">分页查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
