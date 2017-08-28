@@ -97,12 +97,12 @@
 <meta name="keywords" content="算法,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法4笔记">
-<meta property="og:url" content="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/index.html">
+<meta property="og:url" content="http://qianmingxs.com/2016/10/08/[数据结构与算法]0、算法4笔记/index.html">
 <meta property="og:site_name" content="Mr.Qian&#39;s Home">
 <meta property="og:description" content="输入Scanner in = new Scanner(System.in); Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些  Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:  构造函数                 BigInteger(String val)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/GDFtowZ.png">
-<meta property="og:updated_time" content="2017-07-22T05:36:09.275Z">
+<meta property="og:updated_time" content="2017-08-28T09:22:15.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法4笔记">
 <meta name="twitter:description" content="输入Scanner in = new Scanner(System.in); Scanner cin = new Scanner(new BufferedInputStream(System.in)); //加Buffer可能会快一些  Scanner类提供了非常丰富的成员函数来负责读取各种数据类型:  构造函数                 BigInteger(String val)">
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/"/>
+  <link rel="canonical" href="http://qianmingxs.com/2016/10/08/[数据结构与算法]0、算法4笔记/"/>
 
 
 
@@ -307,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/10/08/[数据结构与算法]算法4笔记/">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2016/10/08/[数据结构与算法]0、算法4笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Qian">
@@ -1219,7 +1219,21 @@ System.out.println(Arrays.toString(a));
 <p>dp[4][0] dp[4][1] dp[4][2] dp[4][3]<br>按公式分别是2 6+6 =12 3+6 = 9 1</p>
 <p>最终结果是dp[n][k]</p>
 <p>我做的结果是列举了全部状态，复杂度n<em>n，可以降为n</em>k</p>
-<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><h2 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h2><p>参考：<a href="http://www.cnblogs.com/nullzx/p/6624731.html" target="_blank" rel="external">http://www.cnblogs.com/nullzx/p/6624731.html</a></p>
+<h2 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h2><pre><code>public static void main(String[] args) {
+    Queue&lt;Integer&gt; queue = new PriorityQueue&lt;Integer&gt;(10, new Comparator&lt;Integer&gt;() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
+        }
+    });
+    for(int i = 0; i&lt; 100; i++){
+        queue.add(i);
+    }
+    for(int i = 0; i &lt; 10.; i++){
+        System.out.println(queue.poll());
+    }
+}
+</code></pre><h2 id="索引优先队列"><a href="#索引优先队列" class="headerlink" title="索引优先队列"></a>索引优先队列</h2><p>参考：<a href="http://www.cnblogs.com/nullzx/p/6624731.html" target="_blank" rel="external">http://www.cnblogs.com/nullzx/p/6624731.html</a></p>
 <p>索引优先队列三个数组的引出：</p>
 <p>优先队列只能取队头元素，不能直接访问队列中的对象。索引优先队列可以通过<strong>索引快速访问</strong>列表中的对象，并保持整个元素还是以<strong>最小堆</strong>的方式存储。</p>
 <p>每个操作对应pq、qp和element数组的变化</p>
@@ -1353,7 +1367,7 @@ System.out.println(Arrays.toString(a));
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">144</span>
+                <span class="site-state-item-count">145</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
