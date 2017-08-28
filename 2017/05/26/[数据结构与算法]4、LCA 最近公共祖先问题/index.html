@@ -93,22 +93,22 @@
 
 
 
-<meta name="description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 Tarjan(离线)算法原理（最">
+<meta name="description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 转化成求两个链表的第一个交点思考">
 <meta name="keywords" content="LCA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4、LCA 最近公共祖先问题">
 <meta property="og:url" content="http://qianmingxs.com/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/index.html">
 <meta property="og:site_name" content="Mr.Qian&#39;s Home">
-<meta property="og:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 Tarjan(离线)算法原理（最">
+<meta property="og:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 转化成求两个链表的第一个交点思考">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/KLZozPV.png">
 <meta property="og:image" content="http://i.imgur.com/BXMZV63.png">
 <meta property="og:image" content="http://i.imgur.com/uP9FUsk.png">
 <meta property="og:image" content="http://i.imgur.com/BXMZV63.png">
-<meta property="og:updated_time" content="2017-07-19T07:22:25.000Z">
+<meta property="og:updated_time" content="2017-08-28T08:57:30.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4、LCA 最近公共祖先问题">
-<meta name="twitter:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 Tarjan(离线)算法原理（最">
+<meta name="twitter:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 转化成求两个链表的第一个交点思考">
 <meta name="twitter:image" content="http://i.imgur.com/KLZozPV.png">
 
 
@@ -400,6 +400,202 @@
 <p>如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1</p>
 <p><img src="http://i.imgur.com/KLZozPV.png" alt=""></p>
 <p>另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1</p>
+<h2 id="转化成求两个链表的第一个交点"><a href="#转化成求两个链表的第一个交点" class="headerlink" title="转化成求两个链表的第一个交点"></a>转化成求两个链表的第一个交点</h2><p>思考：</p>
+<p>1、深度优先搜索模板</p>
+<p>注意递归结束条件</p>
+<pre><code>public void DFS(TreeNode root) {
+    if (root == null) {
+        return;
+    }
+    DFS(root.left);
+    DFS(root.right);
+}
+</code></pre><p>2、增加路径</p>
+<ul>
+<li>第一次访问节点的时候将元素添加到栈中</li>
+<li>访问完左右节点后，将该元素弹出</li>
+<li>什么时候输出结果？访问到叶子节点时输出完整路径root.left=null&amp;&amp;root.right= null</li>
+<li>输出结果放在什么位置？可以是第一次访问节点、访问左节点后、访问右节点后，一般在第一次访问时，在将元素放入栈之后输出</li>
+</ul>
+<pre><code>public void DFS(TreeNode root, List&lt;Integer&gt; path, int key) {
+    if (root == null) {
+        return;
+    }
+    path.add(root.val);
+    if (root.left == null &amp;&amp; root.right == null) {
+        System.out.println(path);
+    }
+    DFS(root.left, path, key);
+    DFS(root.right, path, key);
+    path.remove(path.size() - 1);
+}
+</code></pre><p>3、如果找到路径后，停止搜索，输出路径</p>
+<ul>
+<li>返回值：是否找到目标节点true/false</li>
+<li><p>如果左边没有找到（返回false），继续搜索右边；如果左边找到了（返回true），不需要搜索右边。<strong>停止递归的关键是：如果找到元素后，不再进行递归深入</strong></p>
+<p>  boolean find = DFS(root.left, path, key) || DFS(root.right, path, key);</p>
+</li>
+<li><p>本来只要return find即可，但是对于true/false，对于true，不需要pop（）路径，直接return true；如果是false，则需要pop（）当前元素</p>
+</li>
+<li>为什么add不用根据返回值控制？只要递归不深入，不会调用add方法</li>
+</ul>
+<pre><code>import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 树的结构
+ * 1
+ * /\
+ * 2 3
+ * / \ /\
+ * 4 5 6 7
+ */
+public class Solution {
+
+
+    public boolean DFS(TreeNode root, List&lt;Integer&gt; path, int key) {
+        if (root == null) {
+            return false;
+        }
+        path.add(root.val);
+        //如果找到目标节点后就不需要向下搜索，并且需要一个状态值向上传递，然每层循环都停止搜索
+        if (root.val == key) {
+            return true;
+        }
+        //左边必须搜索，左边如果搜索到了，则右边可以不搜索（关键）
+        boolean find = DFS(root.left, path, key) || DFS(root.right, path, key);
+        //如果找到了直接返回
+        if (find) {
+            return true;
+        } else {//没找到，需要将当前节点弹出，并且返回false
+            path.remove(path.size() - 1);
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        TreeNode t4 = new TreeNode(4, null, null);
+        TreeNode t5 = new TreeNode(5, null, null);
+        TreeNode t6 = new TreeNode(6, null, null);
+        TreeNode t7 = new TreeNode(7, null, null);
+        TreeNode t2 = new TreeNode(2, t4, t5);
+        TreeNode t3 = new TreeNode(3, t6, t7);
+        TreeNode root = new TreeNode(1, t2, t3);
+        Solution s = new Solution();
+        List&lt;Integer&gt; path = new ArrayList&lt;Integer&gt;();
+        s.DFS(root, path, 3);
+        System.out.println(path);
+    }
+
+}
+</code></pre><p><br></p>
+<font color="red"><strong>关键点：</strong></font>
+
+<ul>
+<li>找到之后返回true</li>
+<li>如果左边找到了，不需要找右边</li>
+<li>如果已经找到了，不需要remove路径；没找到需要移出路径</li>
+</ul>
+<p>4、最近公共祖先</p>
+<pre><code>import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 树的结构
+ * 1
+ * /\
+ * 2 3
+ * / \ /\
+ * 4 5 6 7
+ */
+public class Solution {
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || p == null || q == null) {
+            return null;
+        }
+
+        List&lt;TreeNode&gt; path1 = new ArrayList&lt;TreeNode&gt;();
+        List&lt;TreeNode&gt; path2 = new ArrayList&lt;TreeNode&gt;();
+
+        boolean find1 = DFS(root, path1, p);
+        boolean find2 = DFS(root, path2, q);
+
+        TreeNode result = null;
+        if (find1 &amp;&amp; find2) {
+            int n = Math.min(path1.size(), path2.size());
+            for (int i = 0; i &lt; n; i++) {
+                if (path1.get(i).val == path2.get(i).val) {
+                    result = path1.get(i);
+                }else{
+                    break;
+                }
+            }
+            return result;
+        } else {
+            return null;
+        }
+    }
+
+    //找路径
+    public boolean DFS(TreeNode root, List&lt;TreeNode&gt; path, TreeNode key) {
+        if (root == null) {
+            return false;
+        }
+        path.add(root);
+        if (root == key) {
+            return true;
+        }
+        boolean find = DFS(root.left, path, key) || DFS(root.right, path, key);
+        if (find) {
+            return true;
+        } else {
+            path.remove(path.size() - 1);
+            return false;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        TreeNode t4 = new TreeNode(4, null, null);
+        TreeNode t5 = new TreeNode(5, null, null);
+        TreeNode t6 = new TreeNode(6, null, null);
+        TreeNode t7 = new TreeNode(7, null, null);
+        TreeNode t2 = new TreeNode(2, t4, t5);
+        TreeNode t3 = new TreeNode(3, t6, t7);
+        TreeNode root = new TreeNode(1, t2, t3);
+        Solution s = new Solution();
+        System.out.println(s.lowestCommonAncestor(root,t2,t4));
+    }
+
+}
+</code></pre><p>参考<a href="http://www.acmerblog.com/lca-lowest-common-ancestor-5574.html" target="_blank" rel="external">http://www.acmerblog.com/lca-lowest-common-ancestor-5574.html</a></p>
+<h2 id="遍历一次"><a href="#遍历一次" class="headerlink" title="遍历一次"></a>遍历一次</h2><pre><code>public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    //异常输入
+    if(root == null || p == null || q == null){
+        return null;
+    }
+    //两个节点在同一侧
+    if(root == p || root == q){
+        return root;
+    }
+    //在不同侧
+    TreeNode left = lowestCommonAncestor(root.left, p, q);
+    TreeNode right = lowestCommonAncestor(root.right, p, q);
+    if(left != null &amp;&amp; right != null){
+        return root;
+    }
+    if(left != null){
+        return left;
+    }
+    if(right != null){
+        return right;
+    }
+    return null;
+}
+</code></pre><p>时间复杂度为O(n)，但是上面的方法还是有所局限的，必须保证两个要查找的节点n1和n2都出现在树中。如果n1不在树中，则会返回n2为LCA，理想答案应该为NULL。要解决这个问题，<strong>可以先查找下n1和n2是否出现在树中</strong>，然后加几个判断即可。</p>
+<p>参考：</p>
+<p><a href="http://www.acmerblog.com/lca-lowest-common-ancestor-5574.html" target="_blank" rel="external">http://www.acmerblog.com/lca-lowest-common-ancestor-5574.html</a></p>
 <h2 id="Tarjan-离线-算法"><a href="#Tarjan-离线-算法" class="headerlink" title="Tarjan(离线)算法"></a>Tarjan(离线)算法</h2><h3 id="原理（最浅显易懂的描述）"><a href="#原理（最浅显易懂的描述）" class="headerlink" title="原理（最浅显易懂的描述）"></a>原理（最浅显易懂的描述）</h3><p><img src="http://i.imgur.com/BXMZV63.png" alt=""></p>
 <p>用集合的角度去思考 LCA 问题：</p>
 <p>10 与 1，2，5，6 的 LCA 都为 1<br>10 与 3，7 的 LCA 都为 3<br>10 与 8，9，11 的 LCA 都为 8<br>10 与 10，12 的 LCA 都为 12</p>
@@ -623,7 +819,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan-离线-算法"><span class="nav-number">2.</span> <span class="nav-text">Tarjan(离线)算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理（最浅显易懂的描述）"><span class="nav-number">2.1.</span> <span class="nav-text">原理（最浅显易懂的描述）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-number">2.2.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述（思路）"><span class="nav-number">2.3.</span> <span class="nav-text">算法描述（思路）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法模拟"><span class="nav-number">2.4.</span> <span class="nav-text">算法模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">2.5.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OJ"><span class="nav-number">3.</span> <span class="nav-text">OJ</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转化成求两个链表的第一个交点"><span class="nav-number">2.</span> <span class="nav-text">转化成求两个链表的第一个交点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历一次"><span class="nav-number">3.</span> <span class="nav-text">遍历一次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan-离线-算法"><span class="nav-number">4.</span> <span class="nav-text">Tarjan(离线)算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理（最浅显易懂的描述）"><span class="nav-number">4.1.</span> <span class="nav-text">原理（最浅显易懂的描述）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-number">4.2.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述（思路）"><span class="nav-number">4.3.</span> <span class="nav-text">算法描述（思路）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法模拟"><span class="nav-number">4.4.</span> <span class="nav-text">算法模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.5.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OJ"><span class="nav-number">5.</span> <span class="nav-text">OJ</span></a></li></ol></div>
             
 
           </div>
