@@ -93,22 +93,22 @@
 
 
 
-<meta name="description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 转化成求两个链表的第一个交点思考">
+<meta name="description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 Leetcodehttps://">
 <meta name="keywords" content="LCA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4、LCA 最近公共祖先问题">
 <meta property="og:url" content="http://qianmingxs.com/2017/05/26/[数据结构与算法]4、LCA 最近公共祖先问题/index.html">
 <meta property="og:site_name" content="Mr.Qian&#39;s Home">
-<meta property="og:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 转化成求两个链表的第一个交点思考">
+<meta property="og:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 Leetcodehttps://">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/KLZozPV.png">
 <meta property="og:image" content="http://i.imgur.com/BXMZV63.png">
 <meta property="og:image" content="http://i.imgur.com/uP9FUsk.png">
 <meta property="og:image" content="http://i.imgur.com/BXMZV63.png">
-<meta property="og:updated_time" content="2017-08-28T08:57:30.964Z">
+<meta property="og:updated_time" content="2017-08-28T09:12:09.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="4、LCA 最近公共祖先问题">
-<meta name="twitter:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 转化成求两个链表的第一个交点思考">
+<meta name="twitter:description" content="问题描述最近公共祖先问题可以将树从下往上看，两个目标节点到树的根节点组成的两条链表，求两条链表第一次相遇的地方 如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&amp;gt;1、4——&amp;gt;2——&amp;gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1  另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1 Leetcodehttps://">
 <meta name="twitter:image" content="http://i.imgur.com/KLZozPV.png">
 
 
@@ -400,6 +400,7 @@
 <p>如下图所示，求3，4的公共祖先，则目标节点到根的链表分别是：3——&gt;1、4——&gt;2——&gt;1，两条链表第一次相遇的地方是1，那么最近公共祖先就是1</p>
 <p><img src="http://i.imgur.com/KLZozPV.png" alt=""></p>
 <p>另外，4 和 5 的最近公共祖先是2，5和3的最近公共祖先是1，2和1的最近公共祖先是1</p>
+<h2 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h2><p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/" target="_blank" rel="external">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/</a></p>
 <h2 id="转化成求两个链表的第一个交点"><a href="#转化成求两个链表的第一个交点" class="headerlink" title="转化成求两个链表的第一个交点"></a>转化成求两个链表的第一个交点</h2><p>思考：</p>
 <p>1、深度优先搜索模板</p>
 <p>注意递归结束条件</p>
@@ -819,7 +820,7 @@ public class Solution {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转化成求两个链表的第一个交点"><span class="nav-number">2.</span> <span class="nav-text">转化成求两个链表的第一个交点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历一次"><span class="nav-number">3.</span> <span class="nav-text">遍历一次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan-离线-算法"><span class="nav-number">4.</span> <span class="nav-text">Tarjan(离线)算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理（最浅显易懂的描述）"><span class="nav-number">4.1.</span> <span class="nav-text">原理（最浅显易懂的描述）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-number">4.2.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述（思路）"><span class="nav-number">4.3.</span> <span class="nav-text">算法描述（思路）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法模拟"><span class="nav-number">4.4.</span> <span class="nav-text">算法模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.5.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OJ"><span class="nav-number">5.</span> <span class="nav-text">OJ</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Leetcode"><span class="nav-number">2.</span> <span class="nav-text">Leetcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转化成求两个链表的第一个交点"><span class="nav-number">3.</span> <span class="nav-text">转化成求两个链表的第一个交点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历一次"><span class="nav-number">4.</span> <span class="nav-text">遍历一次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarjan-离线-算法"><span class="nav-number">5.</span> <span class="nav-text">Tarjan(离线)算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理（最浅显易懂的描述）"><span class="nav-number">5.1.</span> <span class="nav-text">原理（最浅显易懂的描述）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-number">5.2.</span> <span class="nav-text">并查集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法描述（思路）"><span class="nav-number">5.3.</span> <span class="nav-text">算法描述（思路）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法模拟"><span class="nav-number">5.4.</span> <span class="nav-text">算法模拟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">5.5.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OJ"><span class="nav-number">6.</span> <span class="nav-text">OJ</span></a></li></ol></div>
             
 
           </div>
