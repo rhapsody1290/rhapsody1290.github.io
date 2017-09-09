@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试题," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="synchronized 和 lock 的区别1、synchronized在JVM层面上实现，隐式加锁、释放锁，执行完同步代码或者出现异常都会自动释放锁，lock是代码显式加锁，释放锁，如果要保证锁定一定会被释放，就必须将unLock()放到finally{}中 2、ReentrantLock 拥有 Synchronized 相同的并发性和内存语义，此外还多锁投票，定时锁等候和中断锁等候；   线">
+<meta name="keywords" content="面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程面试题">
+<meta property="og:url" content="http://qianmingxs.com/2017/09/04/[Java并发编程]Java多线程面试题/index.html">
+<meta property="og:site_name" content="Mr.Qian&#39;s Home">
+<meta property="og:description" content="synchronized 和 lock 的区别1、synchronized在JVM层面上实现，隐式加锁、释放锁，执行完同步代码或者出现异常都会自动释放锁，lock是代码显式加锁，释放锁，如果要保证锁定一定会被释放，就必须将unLock()放到finally{}中 2、ReentrantLock 拥有 Synchronized 相同的并发性和内存语义，此外还多锁投票，定时锁等候和中断锁等候；   线">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-07T16:35:06.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java多线程面试题">
+<meta name="twitter:description" content="synchronized 和 lock 的区别1、synchronized在JVM层面上实现，隐式加锁、释放锁，执行完同步代码或者出现异常都会自动释放锁，lock是代码显式加锁，释放锁，如果要保证锁定一定会被释放，就必须将unLock()放到finally{}中 2、ReentrantLock 拥有 Synchronized 相同的并发性和内存语义，此外还多锁投票，定时锁等候和中断锁等候；   线">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'PERBMK758D',
+      apiKey: 'bb735480ebfad21cf22f48a7a44c066a',
+      indexName: 'Hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qianmingxs.com/2017/09/04/[Java并发编程]Java多线程面试题/"/>
+
+
+
+
+
+  <title>Java多线程面试题 | Mr.Qian's Home</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.Qian's Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://qianmingxs.com/2017/09/04/[Java并发编程]Java多线程面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Qian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.Qian's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java多线程面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T20:15:00+08:00">
+                2017-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java并发编程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="synchronized-和-lock-的区别"><a href="#synchronized-和-lock-的区别" class="headerlink" title="synchronized 和 lock 的区别"></a>synchronized 和 lock 的区别</h2><p>1、synchronized在JVM层面上实现，<strong>隐式加锁、释放锁</strong>，执行完同步代码或者出现异常都会自动释放锁，<strong>lock是代码显式加锁，释放锁</strong>，如果要保证锁定一定会被释放，就必须将unLock()放到finally{}中</p>
+<p>2、ReentrantLock 拥有 Synchronized 相同的并发性和内存语义，此外还多<strong>锁投票，定时锁等候和中断锁等候</strong>；</p>
+<p>  线程A和B都要获取对象O的锁定，假设A获取了对象O锁，B将等待A释放对O的锁定，<br>  如果使用 synchronized ，如果A不释放，B将一直等下去，不能被中断<br>  如果 使用ReentrantLock，如果A不释放，可以使B在等待了足够长的时间以后，中断等待，而干别的事情</p>
+<p>3、在资源竞争不是很激烈的情况下，Synchronized的<strong>性能</strong>要优于ReetrantLock，但是在资源竞争很激烈的情况下，Synchronized的性能会下降几十倍，但是ReetrantLock的性能能维持常态</p>
+<h2 id="悲观锁和乐观锁"><a href="#悲观锁和乐观锁" class="headerlink" title="悲观锁和乐观锁"></a>悲观锁和乐观锁</h2><p>1、悲观锁(Pessimistic Lock), 顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁<br>2、乐观锁(Optimistic Lock), 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以<strong>不会上锁</strong>，但是在<strong>更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号、预期值等机制</strong></p>
+<p>两种锁各有优缺点，不可认为一种好于另一种，像<strong>乐观锁适用于写比较少的情况下，即冲突真的很少发生</strong>的时候，这样可以省去了锁的开销，加大了系统的整个吞吐量。但如果<strong>经常产生冲突</strong>，上层应用会不断的进行retry，这样反倒是降低了性能，所以这种情况下用悲观锁就比较合适。</p>
+<h2 id="乐观锁怎么实现（自旋锁和轻量级锁的机制）"><a href="#乐观锁怎么实现（自旋锁和轻量级锁的机制）" class="headerlink" title="乐观锁怎么实现（自旋锁和轻量级锁的机制）"></a>乐观锁怎么实现（自旋锁和轻量级锁的机制）</h2><h2 id="数据库乐观锁实现"><a href="#数据库乐观锁实现" class="headerlink" title="数据库乐观锁实现"></a>数据库乐观锁实现</h2><p>使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据</p>
+<h2 id="CAS机制"><a href="#CAS机制" class="headerlink" title="CAS机制"></a>CAS机制</h2><p>CAS 操作包含三个操作数 —— 内存位置（V）、预期原值（A）和新值(B)。<strong>如果内存位置的值与预期原值相匹配</strong>，那么处理器会自动将该位置值更新为新值。否则，处理器不做任何操作。无论哪种情况，它都会在 CAS 指令之前返回该位置的值。</p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="线程池的好处"><a href="#线程池的好处" class="headerlink" title="线程池的好处"></a>线程池的好处</h3><p>1、减少在创建和销毁线程上所花的时间以及系统资源的开销<br>2、方便线程资源的管理<br>3、Executor框架把任务的提交和执行进行解耦，只需要定义好任务，然后提交给线程池，而不用关心该任务是如何执行、被哪个线程执行，以及什么时候执行</p>
+<h3 id="线程池的流程"><a href="#线程池的流程" class="headerlink" title="线程池的流程"></a>线程池的流程</h3><ul>
+<li>线程池在启动的时候初使化一定数量的线程</li>
+<li>有任务过来的时候，先检测初使化的线程还有空的没有，如果有就取一个线程执行任务；没有就再看当前运行中的线程数是不是已经达到了最大数，如果没有，就新分配一个线程去处理；但如果已经达到了最大数，任务就只有等待了</li>
+</ul>
+<h3 id="四种线程池"><a href="#四种线程池" class="headerlink" title="四种线程池"></a>四种线程池</h3><p><strong>newCachedThreadPool</strong> </p>
+<ul>
+<li>线程池中如果有闲置的线程将重用，没有可用的线程，则创建一个新线程并添加到池中（无上限）</li>
+<li>自动回收不使用的线程（终止并从缓存中移除那些已有 60 秒钟未被使用的线程）</li>
+</ul>
+<p><strong>newFixedThreadPool</strong> 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待<br><strong>newScheduledThreadPool</strong> 创建一个定长线程池，支持定时及周期性任务执行<br><strong>newSingleThreadExecutor</strong> 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行</p>
+<h3 id="new-Thread-与-newSingleThreadPool-的区别"><a href="#new-Thread-与-newSingleThreadPool-的区别" class="headerlink" title="new Thread 与 newSingleThreadPool 的区别"></a>new Thread 与 newSingleThreadPool 的区别</h3><ul>
+<li>对于单个、确定的任务，使用new Thread</li>
+<li>如果线程异常结束，newSingleThreadPool会重新创建一个新的线程继续执行任务，更可靠</li>
+<li>对于多个任务，并且要求FIFO执行，使用SingleThreadPool</li>
+</ul>
+<p>因为执行多任务，new Thread 无法复用线程，需要频繁的创建、销毁线程，耗费系统资源</p>
+<p>对于单一确定的任务，使用SingleThreadPool效率比new Thread低，因为SingleThreadPool需要维护任务队列等其他开销</p>
+<p>参考：<a href="http://bbs.csdn.net/topics/391830535" target="_blank" rel="external">http://bbs.csdn.net/topics/391830535</a></p>
+<h3 id="JAVA-线程池的实现原理"><a href="#JAVA-线程池的实现原理" class="headerlink" title="JAVA 线程池的实现原理"></a>JAVA 线程池的实现原理</h3><p><a href="http://www.jianshu.com/p/87bff5cc8d8c" target="_blank" rel="external">http://www.jianshu.com/p/87bff5cc8d8c</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/28/[数据结构与算法]16、快速排序/" rel="next" title="16、快速排序.">
+                <i class="fa fa-chevron-left"></i> 16、快速排序.
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Mr.Qian" />
+          <p class="site-author-name" itemprop="name">Mr.Qian</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">146</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized-和-lock-的区别"><span class="nav-number">1.</span> <span class="nav-text">synchronized 和 lock 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#悲观锁和乐观锁"><span class="nav-number">2.</span> <span class="nav-text">悲观锁和乐观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乐观锁怎么实现（自旋锁和轻量级锁的机制）"><span class="nav-number">3.</span> <span class="nav-text">乐观锁怎么实现（自旋锁和轻量级锁的机制）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库乐观锁实现"><span class="nav-number">4.</span> <span class="nav-text">数据库乐观锁实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS机制"><span class="nav-number">5.</span> <span class="nav-text">CAS机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池"><span class="nav-number">6.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的好处"><span class="nav-number">6.1.</span> <span class="nav-text">线程池的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池的流程"><span class="nav-number">6.2.</span> <span class="nav-text">线程池的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四种线程池"><span class="nav-number">6.3.</span> <span class="nav-text">四种线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new-Thread-与-newSingleThreadPool-的区别"><span class="nav-number">6.4.</span> <span class="nav-text">new Thread 与 newSingleThreadPool 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA-线程池的实现原理"><span class="nav-number">6.5.</span> <span class="nav-text">JAVA 线程池的实现原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Qian</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

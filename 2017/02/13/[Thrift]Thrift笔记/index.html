@@ -103,7 +103,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/C0VlbYX.png">
 <meta property="og:image" content="https://i.imgur.com/xgi40Dl.jpg">
-<meta property="og:updated_time" content="2017-09-03T14:39:07.385Z">
+<meta property="og:updated_time" content="2017-09-03T14:39:16.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thrift笔记">
 <meta name="twitter:description" content="Thrift 优点1、跨语言2、可扩展，简洁的四层接口抽象，每一层都可以独立的扩展增强或替换3、二进制的编解码方式和NIO的底层传输为它提供了不错的性能 四层接口抽象+——————————————-+| Server || (single-threaded, event-driven etc) |+——————————————-+| Processor || (compiler generated">
@@ -490,7 +490,7 @@
 <p>MainReactor就是Accept线程, 用于监听客户端连接, SubReactor采用IO事件线程(多个), 主要负责对所有客户端的IO读写事件进行处理. 而Worker工作线程主要用于处理每个rpc请求的handler回调处理(这部分是同步的)。因此其也是Half-Sync/Half-Async（半异步-半同步）的 。</p>
 <p>TThreadedSelectorServer模式对于大部分应用场景性能都不会差，因为其有一个专门的线程AcceptThread用于处理新连接请求，因此能够及时响应大量并发连接请求；另外它将网络I/O操作分散到多个SelectorThread线程中来完成，因此能够快速对网络I/O进行读写操作，能够很好地应对网络I/O较多的情况。</p>
 <h2 id="QM总结"><a href="#QM总结" class="headerlink" title="QM总结"></a>QM总结</h2><p><img src="https://i.imgur.com/xgi40Dl.jpg" alt=""></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.cnblogs.com/exceptioneye/p/4945073.html" target="_blank" rel="external">http://www.cnblogs.com/exceptioneye/p/4945073.html</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>由浅入深了解Thrift之服务模型和序列化机制<br><a href="http://www.cnblogs.com/exceptioneye/p/4945073.html" target="_blank" rel="external">http://www.cnblogs.com/exceptioneye/p/4945073.html</a></p>
 <p><a href="http://calvin1978.blogcn.com/articles/apache-thrift.html" target="_blank" rel="external">http://calvin1978.blogcn.com/articles/apache-thrift.html</a></p>
 
       
@@ -619,7 +619,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">145</span>
+                <span class="site-state-item-count">146</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -641,7 +641,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">87</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
