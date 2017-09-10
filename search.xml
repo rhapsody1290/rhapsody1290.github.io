@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[17、求异或为0的区间个数]]></title>
-    <url>%2F2017%2F09%2F10%2F%5B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%5D17%E3%80%81%E6%B1%82%E5%BC%82%E6%88%96%E4%B8%BA0%E7%9A%84%E5%8C%BA%E9%97%B4%E4%B8%AA%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[题目在序列中进行划分，要求每个区间内的元素异或结果为0，求满足的区间数 思路1、记录前缀异或和，并放入set中保存2、如果当前计算的异或和出现在set中，说明存在一段区间满足异或为0，count++，set清空3、如果遇到0，直接count++，set清空（QM认为，没有验证） 对于一个序列a[0]、a[1]….a[j]，如果存在一个连续区间a[i]..a[j]的异或值为0，那么a[0]..a[j]的异或值为a[0]..a[i-1] 如1、2、3、2、3，因为 2^3^2^3 的值为0，我们想要找到这个区间当计算到1^2^3^2^3时得到的结果是1，而且存在1，则说明存在一个区间，满足异或值为0 代码import java.util.*; public class Main { public static void main(String[] args) { Scanner in = new Scanner(System.in); int n = in.nextInt(); int res = 0, count = 0; Set&lt;Integer&gt; array = new HashSet(); array.add(res); for (int j = 0; j &lt; n; j++) { res = res ^ (in.nextInt()); if (array.contains(res)) { count++; array.clear(); } array.add(res); System.out.println(array); } System.out.print(count); } }]]></content>
+    <title><![CDATA[18、丑数]]></title>
+    <url>%2F2017%2F09%2F10%2F%5B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%5D18%E3%80%81%E4%B8%91%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[题目 思路1是第一个丑数，可以通过将已知的丑数，分别乘以2，乘以3，乘以5推出下一个丑数 最简单的思路是将已经生成的所有丑数，全部乘以2，乘以3，乘以5，取最小的，将会是下一个丑数 如何优化？ 分别保存乘以2，乘以3，乘以5后将会大于当前最大丑数的丑数位置，设为p2、p3、p5，初始化时为1，1，1 取min（2 result[p2]，3 result[p3]，5 * result[p5]），并且移动p2、p3、p5的位置 代码public class Main { public static void main(String[] args) { Scanner in = new Scanner(System.in); int index = in.nextInt(); if (index == 0) { System.out.println(0); } int[] result = new int[index + 1]; //1是第一个丑数 result[1] = 1; //2的 int p2 = 1; int p3 = 1; int p5 = 1; //第2个~第n个丑数 for (int i = 2; i &lt;= index; i++) { int tmp = Math.min(2 * result[p2], 3 * result[p3]); result[i] = Math.min(tmp, 5 * result[p5]); if (2 * result[p2] &lt;= result[i]) p2++; if (3 * result[p3] &lt;= result[i]) p3++; if (5 * result[p5] &lt;= result[i]) p5++; } System.out.println(result[index]); } }]]></content>
       <categories>
         <category>数据结构与算法</category>
       </categories>
@@ -14,7 +14,7 @@
   </entry>
   <entry>
     <title><![CDATA[17、求异或为0的区间个数]]></title>
-    <url>%2F2017%2F09%2F10%2F%5B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%5D17%E3%80%81%E6%B1%82%E5%BC%82%E6%88%96%E4%B8%BA0%E7%9A%84%E5%8C%BA%E9%97%B4%E4%B8%AA%E6%95%B0%20-%20%E5%89%AF%E6%9C%AC%2F</url>
+    <url>%2F2017%2F09%2F10%2F%5B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%5D17%E3%80%81%E6%B1%82%E5%BC%82%E6%88%96%E4%B8%BA0%E7%9A%84%E5%8C%BA%E9%97%B4%E4%B8%AA%E6%95%B0%2F</url>
     <content type="text"><![CDATA[题目在序列中进行划分，要求每个区间内的元素异或结果为0，求满足的区间数 思路1、记录前缀异或和，并放入set中保存2、如果当前计算的异或和出现在set中，说明存在一段区间满足异或为0，count++，set清空3、如果遇到0，直接count++，set清空（QM认为，没有验证） 对于一个序列a[0]、a[1]….a[j]，如果存在一个连续区间a[i]..a[j]的异或值为0，那么a[0]..a[j]的异或值为a[0]..a[i-1] 如1、2、3、2、3，因为 2^3^2^3 的值为0，我们想要找到这个区间当计算到1^2^3^2^3时得到的结果是1，而且存在1，则说明存在一个区间，满足异或值为0 代码import java.util.*; public class Main { public static void main(String[] args) { Scanner in = new Scanner(System.in); int n = in.nextInt(); int res = 0, count = 0; Set&lt;Integer&gt; array = new HashSet(); array.add(res); for (int j = 0; j &lt; n; j++) { res = res ^ (in.nextInt()); if (array.contains(res)) { count++; array.clear(); } array.add(res); System.out.println(array); } System.out.print(count); } }]]></content>
       <categories>
         <category>数据结构与算法</category>
