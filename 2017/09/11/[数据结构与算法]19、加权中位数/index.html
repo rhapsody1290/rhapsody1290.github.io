@@ -93,19 +93,19 @@
 
 
 
-<meta name="description" content="题目 推导仓储的位置　　　　　　　　1，2，3，……，n权重（仓库中的物品数量）　w1，w2，w3，……，wn d(x，y)表示仓库x与仓库y之间的距离 现将仓库的位置选在i，总的移动代价是Li L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n) L[i-1] = w1·d(i-1,1) + w2·d(i-1,2) + ... + wn·d(i-1,n)">
+<meta name="description" content="题目 方法一：推导仓储的位置　　　　　　　　1，2，3，……，n权重（仓库中的物品数量）　w1，w2，w3，……，wn d(x，y)表示仓库x与仓库y之间的距离 现将仓库的位置选在i，总的移动代价是Li L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n) L[i-1] = w1·d(i-1,1) + w2·d(i-1,2) + ... + wn·d(i-">
 <meta name="keywords" content="算法,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="19、加权中位数">
 <meta property="og:url" content="http://qianmingxs.com/2017/09/11/[数据结构与算法]19、加权中位数/index.html">
 <meta property="og:site_name" content="Mr.Qian&#39;s Home">
-<meta property="og:description" content="题目 推导仓储的位置　　　　　　　　1，2，3，……，n权重（仓库中的物品数量）　w1，w2，w3，……，wn d(x，y)表示仓库x与仓库y之间的距离 现将仓库的位置选在i，总的移动代价是Li L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n) L[i-1] = w1·d(i-1,1) + w2·d(i-1,2) + ... + wn·d(i-1,n)">
+<meta property="og:description" content="题目 方法一：推导仓储的位置　　　　　　　　1，2，3，……，n权重（仓库中的物品数量）　w1，w2，w3，……，wn d(x，y)表示仓库x与仓库y之间的距离 现将仓库的位置选在i，总的移动代价是Li L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n) L[i-1] = w1·d(i-1,1) + w2·d(i-1,2) + ... + wn·d(i-">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/RKP9r1y.png">
-<meta property="og:updated_time" content="2017-09-11T05:28:00.469Z">
+<meta property="og:updated_time" content="2017-09-11T08:08:34.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="19、加权中位数">
-<meta name="twitter:description" content="题目 推导仓储的位置　　　　　　　　1，2，3，……，n权重（仓库中的物品数量）　w1，w2，w3，……，wn d(x，y)表示仓库x与仓库y之间的距离 现将仓库的位置选在i，总的移动代价是Li L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n) L[i-1] = w1·d(i-1,1) + w2·d(i-1,2) + ... + wn·d(i-1,n)">
+<meta name="twitter:description" content="题目 方法一：推导仓储的位置　　　　　　　　1，2，3，……，n权重（仓库中的物品数量）　w1，w2，w3，……，wn d(x，y)表示仓库x与仓库y之间的距离 现将仓库的位置选在i，总的移动代价是Li L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n) L[i-1] = w1·d(i-1,1) + w2·d(i-1,2) + ... + wn·d(i-">
 <meta name="twitter:image" content="https://i.imgur.com/RKP9r1y.png">
 
 
@@ -394,7 +394,7 @@
 
       
         <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="https://i.imgur.com/RKP9r1y.png" width="500px"></p>
-<h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>仓储的位置　　　　　　　　1，2，3，……，n<br>权重（仓库中的物品数量）　w1，w2，w3，……，wn</p>
+<h2 id="方法一：推导"><a href="#方法一：推导" class="headerlink" title="方法一：推导"></a>方法一：推导</h2><p>仓储的位置　　　　　　　　1，2，3，……，n<br>权重（仓库中的物品数量）　w1，w2，w3，……，wn</p>
 <p>d(x，y)表示仓库x与仓库y之间的距离</p>
 <p>现将仓库的位置选在i，总的移动代价是Li</p>
 <pre><code>L[i] = w1·d(i,1) + w2·d(i,2) + .... + wn·d(i,n)
@@ -420,7 +420,10 @@ w1·[d(i,1) - d(i-1,1)] + w2·[d(i,2) - d(i-1,2)] +
 <pre><code>L[i] - 2L[i-1] + L[i-2] = 2·wi-1
 </code></pre><p>整理得：</p>
 <pre><code>L[i] = 2L[i-1] -L[i-2] + 2·wi-1 = 2·(L[i-1] + wi-1) + L[i-2]
-</code></pre>
+</code></pre><p>得到递推式后，算出所有的值，然后取最小值，复杂度O(n)</p>
+<h2 id="方法二：加权中位数"><a href="#方法二：加权中位数" class="headerlink" title="方法二：加权中位数"></a>方法二：加权中位数</h2><p><a href="http://www.xuebuyuan.com/853325.html" target="_blank" rel="external">http://www.xuebuyuan.com/853325.html</a></p>
+<h2 id="求两个有序数组的中位数-算法导论"><a href="#求两个有序数组的中位数-算法导论" class="headerlink" title="求两个有序数组的中位数-算法导论"></a>求两个有序数组的中位数-算法导论</h2><p><a href="http://www.acmerblog.com/median-of-two-sorted-arrays-5967.html" target="_blank" rel="external">http://www.acmerblog.com/median-of-two-sorted-arrays-5967.html</a></p>
+
       
     </div>
 
@@ -602,7 +605,7 @@ w1·[d(i,1) - d(i-1,1)] + w2·[d(i,2) - d(i-1,2)] +
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推导"><span class="nav-number">2.</span> <span class="nav-text">推导</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：推导"><span class="nav-number">2.</span> <span class="nav-text">方法一：推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：加权中位数"><span class="nav-number">3.</span> <span class="nav-text">方法二：加权中位数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求两个有序数组的中位数-算法导论"><span class="nav-number">4.</span> <span class="nav-text">求两个有序数组的中位数-算法导论</span></a></li></ol></div>
             
 
           </div>
